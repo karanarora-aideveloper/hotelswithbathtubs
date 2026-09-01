@@ -1,0 +1,675 @@
+- generic [active] [ref=f1e1]:
+  - navigation [ref=f1e2]:
+    - link "Hotels With Bathtubs Verified Premium Suites & Jacuzzis" [ref=f1e3] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f1e18]:
+        - generic [ref=f1e19]: Hotels With Bathtubs
+        - paragraph [ref=f1e20]: Verified Premium Suites & Jacuzzis
+    - generic [ref=f1e21]:
+      - link "Destinations" [ref=f1e22] [cursor=pointer]:
+        - /url: /#destinations
+      - link "Travel Guides" [ref=f1e23] [cursor=pointer]:
+        - /url: /blog
+      - link "Verification" [ref=f1e24] [cursor=pointer]:
+        - /url: /#verification
+      - link "FAQs" [ref=f1e25] [cursor=pointer]:
+        - /url: /#faq
+      - link "Browse 60+ Cities" [ref=f1e26] [cursor=pointer]:
+        - /url: /#destinations
+  - main [ref=f1e27]:
+    - generic [ref=f1e28]:
+      - generic [ref=f1e29]:
+        - link "Home" [ref=f1e30] [cursor=pointer]:
+          - /url: /
+        - text: › Blog
+      - generic [ref=f1e31]:
+        - heading "Travel Blog & Inspiration" [level=1] [ref=f1e32]
+        - paragraph [ref=f1e33]: Discover our curated destination guides, romance tips, and recommendations for the finest hotels with private bathtubs & jacuzzis.
+      - generic [ref=f1e34]:
+        - link "2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Article →" [ref=f1e35] [cursor=pointer]:
+          - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+          - generic [ref=f1e36]:
+            - paragraph [ref=f1e37]: 2026-08-22
+            - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=2] [ref=f1e38]
+            - paragraph [ref=f1e39]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+            - generic [ref=f1e40]: Read Full Article →
+        - link "2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Article →" [ref=f1e41] [cursor=pointer]:
+          - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+          - generic [ref=f1e42]:
+            - paragraph [ref=f1e43]: 2026-08-22
+            - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=2] [ref=f1e44]
+            - paragraph [ref=f1e45]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+            - generic [ref=f1e46]: Read Full Article →
+        - link "2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Article →" [ref=f1e47] [cursor=pointer]:
+          - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+          - generic [ref=f1e48]:
+            - paragraph [ref=f1e49]: 2026-08-22
+            - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=2] [ref=f1e50]
+            - paragraph [ref=f1e51]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+            - generic [ref=f1e52]: Read Full Article →
+        - link "2026-08-22 Top 12 Best Honeymoon Places in India with Private Jacuzzis & Bathtubs (2026) Discover the best honeymoon places in India featuring private in-room bathtubs and outdoor jacuzzis. From snowy Shimla and Manali retreats to misty Munnar tea hills and royal Udaipur palaces. Read Full Article →" [ref=f1e53] [cursor=pointer]:
+          - /url: /blog/best-honeymoon-places-in-india-with-private-jacuzzis
+          - generic [ref=f1e54]:
+            - paragraph [ref=f1e55]: 2026-08-22
+            - heading "Top 12 Best Honeymoon Places in India with Private Jacuzzis & Bathtubs (2026)" [level=2] [ref=f1e56]
+            - paragraph [ref=f1e57]: Discover the best honeymoon places in India featuring private in-room bathtubs and outdoor jacuzzis. From snowy Shimla and Manali retreats to misty Munnar tea hills and royal Udaipur palaces.
+            - generic [ref=f1e58]: Read Full Article →
+        - link "2026-08-21 Jacuzzi Resorts in Manali & Munnar Planning your honeymoon in the mountains? Explore top-rated hill station resorts with private in-room jacuzzis and mountain-view bathtubs in Manali and Munnar. Read Full Article →" [ref=f1e59] [cursor=pointer]:
+          - /url: /blog/manali-munnar-honeymoon-jacuzzi-resorts
+          - generic [ref=f1e60]:
+            - paragraph [ref=f1e61]: 2026-08-21
+            - heading "Jacuzzi Resorts in Manali & Munnar" [level=2] [ref=f1e62]
+            - paragraph [ref=f1e63]: Planning your honeymoon in the mountains? Explore top-rated hill station resorts with private in-room jacuzzis and mountain-view bathtubs in Manali and Munnar.
+            - generic [ref=f1e64]: Read Full Article →
+        - link "2026-08-21 Romantic Bathtub Hotels in Kolkata Looking for romantic hotels with bathtubs in Kolkata? From opulent 5-star suites with deep soaking tubs to couple-friendly boutique stays near Park Street and Rajarhat, here is your verified guide. Read Full Article →" [ref=f1e65] [cursor=pointer]:
+          - /url: /blog/kolkata-hotels-with-bathtub-couples-guide
+          - generic [ref=f1e66]:
+            - paragraph [ref=f1e67]: 2026-08-21
+            - heading "Romantic Bathtub Hotels in Kolkata" [level=2] [ref=f1e68]
+            - paragraph [ref=f1e69]: Looking for romantic hotels with bathtubs in Kolkata? From opulent 5-star suites with deep soaking tubs to couple-friendly boutique stays near Park Street and Rajarhat, here is your verified guide.
+            - generic [ref=f1e70]: Read Full Article →
+        - link "2026-08-21 Bathtub Hotels Near Delhi Airport Searching for couple-friendly hotels with bathtubs or jacuzzis near Delhi IGI Airport / Mahipalpur? We break down verified properties like Hotel Ramhan Palace, Inaya Suites, and Aerocity luxury hotels. Read Full Article →" [ref=f1e71] [cursor=pointer]:
+          - /url: /blog/delhi-mahipalpur-hotels-with-bathtub-jacuzzi
+          - generic [ref=f1e72]:
+            - paragraph [ref=f1e73]: 2026-08-21
+            - heading "Bathtub Hotels Near Delhi Airport" [level=2] [ref=f1e74]
+            - paragraph [ref=f1e75]: Searching for couple-friendly hotels with bathtubs or jacuzzis near Delhi IGI Airport / Mahipalpur? We break down verified properties like Hotel Ramhan Palace, Inaya Suites, and Aerocity luxury hotels.
+            - generic [ref=f1e76]: Read Full Article →
+        - link "August 20, 2026 Luxury Hotels With Unique Bathtub Discover the world's most extraordinary in-room bathtub experiences, from snow-capped Himalayan mountain views to royal Rajasthani palace marble soaking suites. Read Full Article →" [ref=f1e77] [cursor=pointer]:
+          - /url: /blog/luxury-hotels-unique-bathtub-experiences-panoramic-views-designer-tubs
+          - generic [ref=f1e78]:
+            - paragraph [ref=f1e79]: August 20, 2026
+            - heading "Luxury Hotels With Unique Bathtub" [level=2] [ref=f1e80]
+            - paragraph [ref=f1e81]: Discover the world's most extraordinary in-room bathtub experiences, from snow-capped Himalayan mountain views to royal Rajasthani palace marble soaking suites.
+            - generic [ref=f1e82]: Read Full Article →
+        - link "August 20, 2026 Confirm Your Hotel Has a Bathtub Follow this 6-step verification checklist to guarantee your hotel room includes a genuine private in-room bathtub or jacuzzi before you pay. Read Full Article →" [ref=f1e83] [cursor=pointer]:
+          - /url: /blog/hotel-bathtub-booking-checklist-how-to-confirm-before-booking
+          - generic [ref=f1e84]:
+            - paragraph [ref=f1e85]: August 20, 2026
+            - heading "Confirm Your Hotel Has a Bathtub" [level=2] [ref=f1e86]
+            - paragraph [ref=f1e87]: Follow this 6-step verification checklist to guarantee your hotel room includes a genuine private in-room bathtub or jacuzzi before you pay.
+            - generic [ref=f1e88]: Read Full Article →
+        - link "2026-08-20 Hotels with Bathtub in Manali Discover the ultimate relaxation in the Himalayas. We've handpicked the top Manali hotels with bathtub and jacuzzi options for a perfect snowy getaway. Read Full Article →" [ref=f1e89] [cursor=pointer]:
+          - /url: /blog/manali-hotels-with-bathtub
+          - generic [ref=f1e90]:
+            - paragraph [ref=f1e91]: 2026-08-20
+            - heading "Hotels with Bathtub in Manali" [level=2] [ref=f1e92]
+            - paragraph [ref=f1e93]: Discover the ultimate relaxation in the Himalayas. We've handpicked the top Manali hotels with bathtub and jacuzzi options for a perfect snowy getaway.
+            - generic [ref=f1e94]: Read Full Article →
+        - link "2026-08-19 NYC Hotels with Soaking Tubs Escape the city hustle. Discover the best NYC hotels with deep soaking tubs, offering skyline views, private jacuzzis, and ultimate Manhattan luxury. Read Full Article →" [ref=f1e95] [cursor=pointer]:
+          - /url: /blog/nyc-hotels-with-soaking-tubs
+          - generic [ref=f1e96]:
+            - paragraph [ref=f1e97]: 2026-08-19
+            - heading "NYC Hotels with Soaking Tubs" [level=2] [ref=f1e98]
+            - paragraph [ref=f1e99]: Escape the city hustle. Discover the best NYC hotels with deep soaking tubs, offering skyline views, private jacuzzis, and ultimate Manhattan luxury.
+            - generic [ref=f1e100]: Read Full Article →
+        - link "2026-08-19 Las Vegas Hotels with Jacuzzi Suites Planning a Vegas trip? Discover the best Las Vegas hotels with a jacuzzi in the room. From the Strip to downtown, find the ultimate romantic suites. Read Full Article →" [ref=f1e101] [cursor=pointer]:
+          - /url: /blog/las-vegas-hotels-with-jacuzzi-in-room
+          - generic [ref=f1e102]:
+            - paragraph [ref=f1e103]: 2026-08-19
+            - heading "Las Vegas Hotels with Jacuzzi Suites" [level=2] [ref=f1e104]
+            - paragraph [ref=f1e105]: Planning a Vegas trip? Discover the best Las Vegas hotels with a jacuzzi in the room. From the Strip to downtown, find the ultimate romantic suites.
+            - generic [ref=f1e106]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtubs in London Planning a romantic weekend in the UK? Discover the best boutique and luxury hotels with bathtubs in London, featuring classic clawfoot designs. Read Full Article →" [ref=f1e107] [cursor=pointer]:
+          - /url: /blog/hotels-with-bathtubs-in-london
+          - generic [ref=f1e108]:
+            - paragraph [ref=f1e109]: 2026-08-19
+            - heading "Hotels with Bathtubs in London" [level=2] [ref=f1e110]
+            - paragraph [ref=f1e111]: Planning a romantic weekend in the UK? Discover the best boutique and luxury hotels with bathtubs in London, featuring classic clawfoot designs.
+            - generic [ref=f1e112]: Read Full Article →
+        - link "2026-08-19 Dubai Hotels with Private Jacuzzi Experience ultimate luxury in the Middle East. Discover the best Dubai hotels with private jacuzzis, offering stunning skyline and ocean views. Read Full Article →" [ref=f1e113] [cursor=pointer]:
+          - /url: /blog/dubai-hotels-with-private-jacuzzi
+          - generic [ref=f1e114]:
+            - paragraph [ref=f1e115]: 2026-08-19
+            - heading "Dubai Hotels with Private Jacuzzi" [level=2] [ref=f1e116]
+            - paragraph [ref=f1e117]: Experience ultimate luxury in the Middle East. Discover the best Dubai hotels with private jacuzzis, offering stunning skyline and ocean views.
+            - generic [ref=f1e118]: Read Full Article →
+        - link "2026-08-19 Bali Villas with Pool and Bathtub Planning a honeymoon in Bali? Discover the most romantic villas featuring private plunge pools and spectacular outdoor flower bathtubs. Read Full Article →" [ref=f1e119] [cursor=pointer]:
+          - /url: /blog/bali-villas-private-pool-bathtub
+          - generic [ref=f1e120]:
+            - paragraph [ref=f1e121]: 2026-08-19
+            - heading "Bali Villas with Pool and Bathtub" [level=2] [ref=f1e122]
+            - paragraph [ref=f1e123]: Planning a honeymoon in Bali? Discover the most romantic villas featuring private plunge pools and spectacular outdoor flower bathtubs.
+            - generic [ref=f1e124]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtub in Rishikesh Combine spirituality with absolute luxury. Find the best hotels with bathtubs in Rishikesh offering stunning views of the Ganges and the Himalayan foothills. Read Full Article →" [ref=f1e125] [cursor=pointer]:
+          - /url: /blog/hotel-with-bathtub-in-rishikesh
+          - generic [ref=f1e126]:
+            - paragraph [ref=f1e127]: 2026-08-19
+            - heading "Hotels with Bathtub in Rishikesh" [level=2] [ref=f1e128]
+            - paragraph [ref=f1e129]: Combine spirituality with absolute luxury. Find the best hotels with bathtubs in Rishikesh offering stunning views of the Ganges and the Himalayan foothills.
+            - generic [ref=f1e130]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtub in Lucknow Experience Nawabi luxury. Discover the top hotels with bathtubs in Lucknow, featuring private jacuzzis and deep soaking tubs for the perfect couple's staycation. Read Full Article →" [ref=f1e131] [cursor=pointer]:
+          - /url: /blog/hotel-with-bathtub-in-lucknow
+          - generic [ref=f1e132]:
+            - paragraph [ref=f1e133]: 2026-08-19
+            - heading "Hotels with Bathtub in Lucknow" [level=2] [ref=f1e134]
+            - paragraph [ref=f1e135]: Experience Nawabi luxury. Discover the top hotels with bathtubs in Lucknow, featuring private jacuzzis and deep soaking tubs for the perfect couple's staycation.
+            - generic [ref=f1e136]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtub in Kolkata Looking for a luxury or romantic staycation? Discover the best boutique hotels with bathtubs in Kolkata, perfect for couples and weekend getaways. Read Full Article →" [ref=f1e137] [cursor=pointer]:
+          - /url: /blog/hotel-with-bathtub-in-kolkata
+          - generic [ref=f1e138]:
+            - paragraph [ref=f1e139]: 2026-08-19
+            - heading "Hotels with Bathtub in Kolkata" [level=2] [ref=f1e140]
+            - paragraph [ref=f1e141]: Looking for a luxury or romantic staycation? Discover the best boutique hotels with bathtubs in Kolkata, perfect for couples and weekend getaways.
+            - generic [ref=f1e142]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtub in Jaipur Discover the best hotels with bathtubs in Jaipur for a romantic couple's getaway. Explore luxury heritage properties and budget-friendly jacuzzi suites. Read Full Article →" [ref=f1e143] [cursor=pointer]:
+          - /url: /blog/hotel-with-bathtub-in-jaipur
+          - generic [ref=f1e144]:
+            - paragraph [ref=f1e145]: 2026-08-19
+            - heading "Hotels with Bathtub in Jaipur" [level=2] [ref=f1e146]
+            - paragraph [ref=f1e147]: Discover the best hotels with bathtubs in Jaipur for a romantic couple's getaway. Explore luxury heritage properties and budget-friendly jacuzzi suites.
+            - generic [ref=f1e148]: Read Full Article →
+        - link "2026-08-19 Hotels with Bathtub in Gurgaon Planning a quick weekend escape from Delhi? Discover the best couple-friendly hotels with bathtubs in Gurgaon for a luxurious and romantic staycation. Read Full Article →" [ref=f1e149] [cursor=pointer]:
+          - /url: /blog/hotel-with-bathtub-in-gurgaon
+          - generic [ref=f1e150]:
+            - paragraph [ref=f1e151]: 2026-08-19
+            - heading "Hotels with Bathtub in Gurgaon" [level=2] [ref=f1e152]
+            - paragraph [ref=f1e153]: Planning a quick weekend escape from Delhi? Discover the best couple-friendly hotels with bathtubs in Gurgaon for a luxurious and romantic staycation.
+            - generic [ref=f1e154]: Read Full Article →
+        - link "2026-08-18 How to Verify Hotel Amenities Learn how to verify hotel amenities are real before booking. Avoid fake jacuzzis, misleading photos, and false claims. Expert tips to confirm amenities across 3 platforms. Read Full Article →" [ref=f1e155] [cursor=pointer]:
+          - /url: /blog/verify-hotel-amenities-accurate-booking
+          - generic [ref=f1e156]:
+            - paragraph [ref=f1e157]: 2026-08-18
+            - heading "How to Verify Hotel Amenities" [level=2] [ref=f1e158]
+            - paragraph [ref=f1e159]: Learn how to verify hotel amenities are real before booking. Avoid fake jacuzzis, misleading photos, and false claims. Expert tips to confirm amenities across 3 platforms.
+            - generic [ref=f1e160]: Read Full Article →
+        - link "2026-08-18 Honeymoon Freestanding Bathtub Hotels Discover honeymoon hotels with freestanding bathtubs in India. Romantic baths for two, verified luxury amenities, perfect for newlyweds and couples. Read Full Article →" [ref=f1e161] [cursor=pointer]:
+          - /url: /blog/honeymoon-hotels-freestanding-bathtubs-india
+          - generic [ref=f1e162]:
+            - paragraph [ref=f1e163]: 2026-08-18
+            - heading "Honeymoon Freestanding Bathtub Hotels" [level=2] [ref=f1e164]
+            - paragraph [ref=f1e165]: Discover honeymoon hotels with freestanding bathtubs in India. Romantic baths for two, verified luxury amenities, perfect for newlyweds and couples.
+            - generic [ref=f1e166]: Read Full Article →
+        - link "2026-08-18 Romantic Budget Hotels in India Plan an affordable romantic getaway in India with verified luxury hotels under ₹30,000/night. Tips for couples on a budget wanting genuine bathtub/jacuzzi amenities. Read Full Article →" [ref=f1e167] [cursor=pointer]:
+          - /url: /blog/budget-romantic-getaway-india
+          - generic [ref=f1e168]:
+            - paragraph [ref=f1e169]: 2026-08-18
+            - heading "Romantic Budget Hotels in India" [level=2] [ref=f1e170]
+            - paragraph [ref=f1e171]: Plan an affordable romantic getaway in India with verified luxury hotels under ₹30,000/night. Tips for couples on a budget wanting genuine bathtub/jacuzzi amenities.
+            - generic [ref=f1e172]: Read Full Article →
+        - link "2026-08-18 Jacuzzi Hotels in India for Couples Discover the best hotels with private jacuzzi rooms for couples in India. Triple-verified across MakeMyTrip, Agoda & Booking.com. Authentic luxury with guaranteed amenities. Read Full Article →" [ref=f1e173] [cursor=pointer]:
+          - /url: /blog/best-hotels-private-jacuzzi-couples-india
+          - generic [ref=f1e174]:
+            - paragraph [ref=f1e175]: 2026-08-18
+            - heading "Jacuzzi Hotels in India for Couples" [level=2] [ref=f1e176]
+            - paragraph [ref=f1e177]: Discover the best hotels with private jacuzzi rooms for couples in India. Triple-verified across MakeMyTrip, Agoda & Booking.com. Authentic luxury with guaranteed amenities.
+            - generic [ref=f1e178]: Read Full Article →
+        - 'link "August 10, 2026 Goa Private Jacuzzi Villas Goa is synonymous with beaches, nightlife, and tropical vacations. But for couples seeking a romantic and secluded retreat, Goa hides a spectacular secret: it is home to some of the finest private jacuzzi villas in India. Read Full Article →" [ref=f1e179] [cursor=pointer]':
+          - /url: /blog/why-goa-is-the-ultimate-destination-for-private-jacuzzi-villas
+          - generic [ref=f1e180]:
+            - paragraph [ref=f1e181]: August 10, 2026
+            - heading "Goa Private Jacuzzi Villas" [level=2] [ref=f1e182]
+            - paragraph [ref=f1e183]: "Goa is synonymous with beaches, nightlife, and tropical vacations. But for couples seeking a romantic and secluded retreat, Goa hides a spectacular secret: it is home to some of the finest private jacuzzi villas in India."
+            - generic [ref=f1e184]: Read Full Article →
+        - link "August 12, 2026 Romantic Bathtub Hotels in Bhopal Bhopal, the city of lakes, offers a surprisingly rich array of luxury and heritage hotels perfect for a romantic escape. Whether you are a local couple looking for a weekend staycation or traveling from afar, booking a room with a private bathtub is the best way to experience the city's regal charm. Read Full Article →" [ref=f1e185] [cursor=pointer]:
+          - /url: /blog/top-romantic-hotels-with-bathtubs-in-bhopal-for-couples
+          - generic [ref=f1e186]:
+            - paragraph [ref=f1e187]: August 12, 2026
+            - heading "Romantic Bathtub Hotels in Bhopal" [level=2] [ref=f1e188]
+            - paragraph [ref=f1e189]: Bhopal, the city of lakes, offers a surprisingly rich array of luxury and heritage hotels perfect for a romantic escape. Whether you are a local couple looking for a weekend staycation or traveling from afar, booking a room with a private bathtub is the best way to experience the city's regal charm.
+            - generic [ref=f1e190]: Read Full Article →
+        - link "July 28, 2026 Why Couples Need a Spa Bath Retreat In today's hyper-connected world, couples are finding it increasingly difficult to disconnect from work and connect with each other. This is why booking a spa bath retreat—specifically a hotel room with a private jacuzzi or deep soaking tub—is more than just a luxury; it is a psychological necessity. Read Full Article →" [ref=f1e191] [cursor=pointer]:
+          - /url: /blog/the-psychology-of-relaxation-why-couples-need-a-spa-bath-retreat
+          - generic [ref=f1e192]:
+            - paragraph [ref=f1e193]: July 28, 2026
+            - heading "Why Couples Need a Spa Bath Retreat" [level=2] [ref=f1e194]
+            - paragraph [ref=f1e195]: In today's hyper-connected world, couples are finding it increasingly difficult to disconnect from work and connect with each other. This is why booking a spa bath retreat—specifically a hotel room with a private jacuzzi or deep soaking tub—is more than just a luxury; it is a psychological necessity.
+            - generic [ref=f1e196]: Read Full Article →
+        - link "August 8, 2026 Mumbai Hotels with Deep Soaking Tubs In the non-stop hustle of Mumbai, finding a quiet moment can seem impossible. For couples living in the city, escaping the noise and chaos is essential. You don't need to fly out of town to find peace; you just need to book the right staycation. Here is a guide to the best luxury hotels in Mumbai featuring deep soaking tubs. Read Full Article →" [ref=f1e197] [cursor=pointer]:
+          - /url: /blog/mumbai-staycations-best-luxury-hotels-with-deep-soaking-tubs
+          - generic [ref=f1e198]:
+            - paragraph [ref=f1e199]: August 8, 2026
+            - heading "Mumbai Hotels with Deep Soaking Tubs" [level=2] [ref=f1e200]
+            - paragraph [ref=f1e201]: In the non-stop hustle of Mumbai, finding a quiet moment can seem impossible. For couples living in the city, escaping the noise and chaos is essential. You don't need to fly out of town to find peace; you just need to book the right staycation. Here is a guide to the best luxury hotels in Mumbai featuring deep soaking tubs.
+            - generic [ref=f1e202]: Read Full Article →
+        - link "July 10, 2026 Anniversary in a Jacuzzi Suite Booking a hotel room with a private jacuzzi is a great start for an anniversary, but to make it truly unforgettable, you need to plan the details. Here is a step-by-step guide to executing the perfect romantic surprise in a jacuzzi suite. Read Full Article →" [ref=f1e203] [cursor=pointer]:
+          - /url: /blog/how-to-plan-the-perfect-anniversary-surprise-in-a-jacuzzi-suite
+          - generic [ref=f1e204]:
+            - paragraph [ref=f1e205]: July 10, 2026
+            - heading "Anniversary in a Jacuzzi Suite" [level=2] [ref=f1e206]
+            - paragraph [ref=f1e207]: Booking a hotel room with a private jacuzzi is a great start for an anniversary, but to make it truly unforgettable, you need to plan the details. Here is a step-by-step guide to executing the perfect romantic surprise in a jacuzzi suite.
+            - generic [ref=f1e208]: Read Full Article →
+        - 'link "August 14, 2026 How a Bathtub Elevated My Anniversary Planning an anniversary can be stressful. You want it to be perfect, romantic, and memorable. For years, I defaulted to the standard routine: a nice dinner, maybe a movie, and a generic hotel room. But this year, I decided to change things up. I booked a suite with a private, in-room jacuzzi bathtub. Read Full Article →" [ref=f1e209] [cursor=pointer]':
+          - /url: /blog/how-a-private-in-room-bathtub-transformed-my-anniversary-date
+          - generic [ref=f1e210]:
+            - paragraph [ref=f1e211]: August 14, 2026
+            - heading "How a Bathtub Elevated My Anniversary" [level=2] [ref=f1e212]
+            - paragraph [ref=f1e213]: "Planning an anniversary can be stressful. You want it to be perfect, romantic, and memorable. For years, I defaulted to the standard routine: a nice dinner, maybe a movie, and a generic hotel room. But this year, I decided to change things up. I booked a suite with a private, in-room jacuzzi bathtub."
+            - generic [ref=f1e214]: Read Full Article →
+        - 'link "August 5, 2026 Lonavala Hotels with Bathtubs Lonavala is the quintessential weekend getaway for residents of Mumbai and Pune. While it is famous for its monsoons and chikki, it is also home to some incredibly romantic resorts that offer the ultimate luxury: private bathtubs with panoramic mountain views. Read Full Article →" [ref=f1e215] [cursor=pointer]':
+          - /url: /blog/escaping-to-lonavala-private-bathtubs-with-mountain-views
+          - generic [ref=f1e216]:
+            - paragraph [ref=f1e217]: August 5, 2026
+            - heading "Lonavala Hotels with Bathtubs" [level=2] [ref=f1e218]
+            - paragraph [ref=f1e219]: "Lonavala is the quintessential weekend getaway for residents of Mumbai and Pune. While it is famous for its monsoons and chikki, it is also home to some incredibly romantic resorts that offer the ultimate luxury: private bathtubs with panoramic mountain views."
+            - generic [ref=f1e220]: Read Full Article →
+        - link "July 20, 2026 Delhi Weekend Hotels with Bathtubs Delhi's extreme weather and fast-paced lifestyle can leave anyone exhausted. For couples looking to escape the city's smog and noise, a weekend getaway to a luxury hotel with an in-room bathtub is the perfect antidote. Read Full Article →" [ref=f1e221] [cursor=pointer]:
+          - /url: /blog/delhi-weekend-getaways-exploring-the-best-in-room-bathtubs
+          - generic [ref=f1e222]:
+            - paragraph [ref=f1e223]: July 20, 2026
+            - heading "Delhi Weekend Hotels with Bathtubs" [level=2] [ref=f1e224]
+            - paragraph [ref=f1e225]: Delhi's extreme weather and fast-paced lifestyle can leave anyone exhausted. For couples looking to escape the city's smog and noise, a weekend getaway to a luxury hotel with an in-room bathtub is the perfect antidote.
+            - generic [ref=f1e226]: Read Full Article →
+        - link "July 15, 2026 Bangalore Boutique Jacuzzi Hotels Bangalore's tech-driven culture means its residents work hard and need a place to unwind even harder. While the city has plenty of large 5-star hotels, the real charm lies in its boutique properties that offer intimate, romantic experiences, complete with private jacuzzis. Read Full Article →" [ref=f1e227] [cursor=pointer]:
+          - /url: /blog/bangalores-hidden-gems-boutique-hotels-with-private-jacuzzis
+          - generic [ref=f1e228]:
+            - paragraph [ref=f1e229]: July 15, 2026
+            - heading "Bangalore Boutique Jacuzzi Hotels" [level=2] [ref=f1e230]
+            - paragraph [ref=f1e231]: Bangalore's tech-driven culture means its residents work hard and need a place to unwind even harder. While the city has plenty of large 5-star hotels, the real charm lies in its boutique properties that offer intimate, romantic experiences, complete with private jacuzzis.
+            - generic [ref=f1e232]: Read Full Article →
+        - link "August 1, 2026 Udaipur Heritage Hotels with Bathtubs Udaipur is often called the Venice of the East, and for good reason. Its stunning lakes, majestic palaces, and romantic atmosphere make it the premier destination for couples in India. To truly experience Udaipur's royal heritage, booking a bath suite in a heritage hotel is a must. Read Full Article →" [ref=f1e233] [cursor=pointer]:
+          - /url: /blog/a-couples-guide-to-udaipur-royal-heritage-hotels-with-bath-suites
+          - generic [ref=f1e234]:
+            - paragraph [ref=f1e235]: August 1, 2026
+            - heading "Udaipur Heritage Hotels with Bathtubs" [level=2] [ref=f1e236]
+            - paragraph [ref=f1e237]: Udaipur is often called the Venice of the East, and for good reason. Its stunning lakes, majestic palaces, and romantic atmosphere make it the premier destination for couples in India. To truly experience Udaipur's royal heritage, booking a bath suite in a heritage hotel is a must.
+            - generic [ref=f1e238]: Read Full Article →
+        - link "August 18, 2026 Private Jacuzzi Suites in India Explore the best Indian hotels offering private in-room jacuzzis and hot tubs. From Himalayan mountain retreats to tropical beach resorts, discover where to find the ultimate couples getaway with hydrotherapy luxury. Read Full Article →" [ref=f1e239] [cursor=pointer]:
+          - /url: /blog/private-jacuzzi-suites-india
+          - generic [ref=f1e240]:
+            - paragraph [ref=f1e241]: August 18, 2026
+            - heading "Private Jacuzzi Suites in India" [level=2] [ref=f1e242]
+            - paragraph [ref=f1e243]: Explore the best Indian hotels offering private in-room jacuzzis and hot tubs. From Himalayan mountain retreats to tropical beach resorts, discover where to find the ultimate couples getaway with hydrotherapy luxury.
+            - generic [ref=f1e244]: Read Full Article →
+        - link "August 18, 2026 Accessible Hotels with Bathtubs Discover luxury hotels with bathtubs designed for accessibility. We highlight properties that combine romance with wheelchair access, grab bars, and thoughtful design for guests with mobility challenges. Read Full Article →" [ref=f1e245] [cursor=pointer]:
+          - /url: /blog/accessible-hotels-bathtubs-mobility
+          - generic [ref=f1e246]:
+            - paragraph [ref=f1e247]: August 18, 2026
+            - heading "Accessible Hotels with Bathtubs" [level=2] [ref=f1e248]
+            - paragraph [ref=f1e249]: Discover luxury hotels with bathtubs designed for accessibility. We highlight properties that combine romance with wheelchair access, grab bars, and thoughtful design for guests with mobility challenges.
+            - generic [ref=f1e250]: Read Full Article →
+        - link "August 18, 2026 Hotels with Bathtubs for Romance Discover how to find the perfect hotel with a private bathtub for your next romantic getaway. Our comprehensive guide covers what to look for, where to find verified listings, and tips for booking the ideal bathtub suite. Read Full Article →" [ref=f1e251] [cursor=pointer]:
+          - /url: /blog/ultimate-guide-hotels-with-bathtubs
+          - generic [ref=f1e252]:
+            - paragraph [ref=f1e253]: August 18, 2026
+            - heading "Hotels with Bathtubs for Romance" [level=2] [ref=f1e254]
+            - paragraph [ref=f1e255]: Discover how to find the perfect hotel with a private bathtub for your next romantic getaway. Our comprehensive guide covers what to look for, where to find verified listings, and tips for booking the ideal bathtub suite.
+            - generic [ref=f1e256]: Read Full Article →
+  - contentinfo [ref=f1e257]:
+    - generic [ref=f1e258]:
+      - generic [ref=f1e259]:
+        - generic [ref=f1e260]:
+          - generic [ref=f1e261]:
+            - text: Editorial & Travel Inspiration
+            - heading "Romantic Getaways & Jacuzzi Hotel Guides" [level=3] [ref=f1e262]
+          - link "Browse All Guides →" [ref=f1e263] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=f1e264]: Browse All Guides
+            - generic [ref=f1e265]: →
+        - generic [ref=f1e266]:
+          - link "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) 2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Guide →" [ref=f1e267] [cursor=pointer]:
+            - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+            - generic [ref=f1e268]:
+              - img "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [ref=f1e269]
+              - generic [ref=f1e270]: 2026-08-22
+            - generic [ref=f1e271]:
+              - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=4] [ref=f1e272]
+              - paragraph [ref=f1e273]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+              - generic [ref=f1e274]:
+                - generic [ref=f1e275]: Read Full Guide
+                - generic [ref=f1e276]: →
+          - link "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) 2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Guide →" [ref=f1e277] [cursor=pointer]:
+            - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+            - generic [ref=f1e278]:
+              - img "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [ref=f1e279]
+              - generic [ref=f1e280]: 2026-08-22
+            - generic [ref=f1e281]:
+              - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=4] [ref=f1e282]
+              - paragraph [ref=f1e283]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+              - generic [ref=f1e284]:
+                - generic [ref=f1e285]: Read Full Guide
+                - generic [ref=f1e286]: →
+          - link "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) 2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Guide →" [ref=f1e287] [cursor=pointer]:
+            - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+            - generic [ref=f1e288]:
+              - img "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [ref=f1e289]
+              - generic [ref=f1e290]: 2026-08-22
+            - generic [ref=f1e291]:
+              - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=4] [ref=f1e292]
+              - paragraph [ref=f1e293]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+              - generic [ref=f1e294]:
+                - generic [ref=f1e295]: Read Full Guide
+                - generic [ref=f1e296]: →
+      - generic [ref=f1e297]:
+        - generic [ref=f1e304]:
+          - heading "Browse Hotels by Region" [level=3] [ref=f1e305]
+          - paragraph [ref=f1e306]: Quickly jump to verified stays grouped by geographic travel zones
+        - generic [ref=f1e307]:
+          - generic [ref=f1e308]:
+            - heading "North India 23 Destinations" [level=4] [ref=f1e309]:
+              - generic [ref=f1e311]: North India
+              - generic [ref=f1e312]: 23 Destinations
+            - generic [ref=f1e313]:
+              - link "Agra (19)" [ref=f1e314] [cursor=pointer]:
+                - /url: /india/agra
+                - generic [ref=f1e315]: Agra
+                - generic [ref=f1e316]: (19)
+              - link "Amritsar (19)" [ref=f1e317] [cursor=pointer]:
+                - /url: /india/amritsar
+                - generic [ref=f1e318]: Amritsar
+                - generic [ref=f1e319]: (19)
+              - link "Chandigarh (16)" [ref=f1e320] [cursor=pointer]:
+                - /url: /india/chandigarh
+                - generic [ref=f1e321]: Chandigarh
+                - generic [ref=f1e322]: (16)
+              - link "Delhi (28)" [ref=f1e323] [cursor=pointer]:
+                - /url: /india/delhi
+                - generic [ref=f1e324]: Delhi
+                - generic [ref=f1e325]: (28)
+              - link "Dharamshala (9)" [ref=f1e326] [cursor=pointer]:
+                - /url: /india/dharamshala
+                - generic [ref=f1e327]: Dharamshala
+                - generic [ref=f1e328]: (9)
+              - link "Faridabad (14)" [ref=f1e329] [cursor=pointer]:
+                - /url: /india/faridabad
+                - generic [ref=f1e330]: Faridabad
+                - generic [ref=f1e331]: (14)
+              - link "Gurgaon (9)" [ref=f1e332] [cursor=pointer]:
+                - /url: /india/gurgaon
+                - generic [ref=f1e333]: Gurgaon
+                - generic [ref=f1e334]: (9)
+              - link "Gwalior (1)" [ref=f1e335] [cursor=pointer]:
+                - /url: /india/gwalior
+                - generic [ref=f1e336]: Gwalior
+                - generic [ref=f1e337]: (1)
+              - link "Haridwar (8)" [ref=f1e338] [cursor=pointer]:
+                - /url: /india/haridwar
+                - generic [ref=f1e339]: Haridwar
+                - generic [ref=f1e340]: (8)
+              - link "Jaipur (13)" [ref=f1e341] [cursor=pointer]:
+                - /url: /india/jaipur
+                - generic [ref=f1e342]: Jaipur
+                - generic [ref=f1e343]: (13)
+              - link "Koramangala (6)" [ref=f1e344] [cursor=pointer]:
+                - /url: /india/koramangala
+                - generic [ref=f1e345]: Koramangala
+                - generic [ref=f1e346]: (6)
+              - link "Lucknow (20)" [ref=f1e347] [cursor=pointer]:
+                - /url: /india/lucknow
+                - generic [ref=f1e348]: Lucknow
+                - generic [ref=f1e349]: (20)
+              - link "Mahipalpur (7)" [ref=f1e350] [cursor=pointer]:
+                - /url: /india/mahipalpur
+                - generic [ref=f1e351]: Mahipalpur
+                - generic [ref=f1e352]: (7)
+              - link "Manali (21)" [ref=f1e353] [cursor=pointer]:
+                - /url: /india/manali
+                - generic [ref=f1e354]: Manali
+                - generic [ref=f1e355]: (21)
+              - link "Matheran (1)" [ref=f1e356] [cursor=pointer]:
+                - /url: /india/matheran
+                - generic [ref=f1e357]: Matheran
+                - generic [ref=f1e358]: (1)
+              - link "Mathura (3)" [ref=f1e359] [cursor=pointer]:
+                - /url: /india/mathura
+                - generic [ref=f1e360]: Mathura
+                - generic [ref=f1e361]: (3)
+              - link "Mount Abu (6)" [ref=f1e362] [cursor=pointer]:
+                - /url: /india/mount-abu
+                - generic [ref=f1e363]: Mount Abu
+                - generic [ref=f1e364]: (6)
+              - link "Nainital (7)" [ref=f1e365] [cursor=pointer]:
+                - /url: /india/nainital
+                - generic [ref=f1e366]: Nainital
+                - generic [ref=f1e367]: (7)
+              - link "Rishikesh (20)" [ref=f1e368] [cursor=pointer]:
+                - /url: /india/rishikesh
+                - generic [ref=f1e369]: Rishikesh
+                - generic [ref=f1e370]: (20)
+              - link "Shimla (20)" [ref=f1e371] [cursor=pointer]:
+                - /url: /india/shimla
+                - generic [ref=f1e372]: Shimla
+                - generic [ref=f1e373]: (20)
+              - link "Shirdi (6)" [ref=f1e374] [cursor=pointer]:
+                - /url: /india/shirdi
+                - generic [ref=f1e375]: Shirdi
+                - generic [ref=f1e376]: (6)
+              - link "Udaipur (20)" [ref=f1e377] [cursor=pointer]:
+                - /url: /india/udaipur
+                - generic [ref=f1e378]: Udaipur
+                - generic [ref=f1e379]: (20)
+              - link "Zirakpur (7)" [ref=f1e380] [cursor=pointer]:
+                - /url: /india/zirakpur
+                - generic [ref=f1e381]: Zirakpur
+                - generic [ref=f1e382]: (7)
+          - generic [ref=f1e383]:
+            - heading "South India 11 Destinations" [level=4] [ref=f1e384]:
+              - generic [ref=f1e386]: South India
+              - generic [ref=f1e387]: 11 Destinations
+            - generic [ref=f1e388]:
+              - link "Bangalore (9)" [ref=f1e389] [cursor=pointer]:
+                - /url: /india/bangalore
+                - generic [ref=f1e390]: Bangalore
+                - generic [ref=f1e391]: (9)
+              - link "Calangute (20)" [ref=f1e392] [cursor=pointer]:
+                - /url: /india/calangute
+                - generic [ref=f1e393]: Calangute
+                - generic [ref=f1e394]: (20)
+              - link "Coimbatore (9)" [ref=f1e395] [cursor=pointer]:
+                - /url: /india/coimbatore
+                - generic [ref=f1e396]: Coimbatore
+                - generic [ref=f1e397]: (9)
+              - link "Goa (28)" [ref=f1e398] [cursor=pointer]:
+                - /url: /india/goa
+                - generic [ref=f1e399]: Goa
+                - generic [ref=f1e400]: (28)
+              - link "Kochi (12)" [ref=f1e401] [cursor=pointer]:
+                - /url: /india/kochi
+                - generic [ref=f1e402]: Kochi
+                - generic [ref=f1e403]: (12)
+              - link "Kodaikanal (7)" [ref=f1e404] [cursor=pointer]:
+                - /url: /india/kodaikanal
+                - generic [ref=f1e405]: Kodaikanal
+                - generic [ref=f1e406]: (7)
+              - link "Mahabalipuram (11)" [ref=f1e407] [cursor=pointer]:
+                - /url: /india/mahabalipuram
+                - generic [ref=f1e408]: Mahabalipuram
+                - generic [ref=f1e409]: (11)
+              - link "Munnar (21)" [ref=f1e410] [cursor=pointer]:
+                - /url: /india/munnar
+                - generic [ref=f1e411]: Munnar
+                - generic [ref=f1e412]: (21)
+              - link "Ooty (1)" [ref=f1e413] [cursor=pointer]:
+                - /url: /india/ooty
+                - generic [ref=f1e414]: Ooty
+                - generic [ref=f1e415]: (1)
+              - link "Panjim (7)" [ref=f1e416] [cursor=pointer]:
+                - /url: /india/panjim
+                - generic [ref=f1e417]: Panjim
+                - generic [ref=f1e418]: (7)
+              - link "Yercaud (4)" [ref=f1e419] [cursor=pointer]:
+                - /url: /india/yercaud
+                - generic [ref=f1e420]: Yercaud
+                - generic [ref=f1e421]: (4)
+          - generic [ref=f1e422]:
+            - heading "West & Central India 17 Destinations" [level=4] [ref=f1e423]:
+              - generic [ref=f1e425]: West & Central India
+              - generic [ref=f1e426]: 17 Destinations
+            - generic [ref=f1e427]:
+              - link "Ahmedabad (7)" [ref=f1e428] [cursor=pointer]:
+                - /url: /india/ahmedabad
+                - generic [ref=f1e429]: Ahmedabad
+                - generic [ref=f1e430]: (7)
+              - link "Bhopal (20)" [ref=f1e431] [cursor=pointer]:
+                - /url: /india/bhopal
+                - generic [ref=f1e432]: Bhopal
+                - generic [ref=f1e433]: (20)
+              - link "Daman (5)" [ref=f1e434] [cursor=pointer]:
+                - /url: /india/daman
+                - generic [ref=f1e435]: Daman
+                - generic [ref=f1e436]: (5)
+              - link "Gandhinagar (4)" [ref=f1e437] [cursor=pointer]:
+                - /url: /india/gandhinagar
+                - generic [ref=f1e438]: Gandhinagar
+                - generic [ref=f1e439]: (4)
+              - link "Igatpuri (14)" [ref=f1e440] [cursor=pointer]:
+                - /url: /india/igatpuri
+                - generic [ref=f1e441]: Igatpuri
+                - generic [ref=f1e442]: (14)
+              - link "Indore (30)" [ref=f1e443] [cursor=pointer]:
+                - /url: /india/indore
+                - generic [ref=f1e444]: Indore
+                - generic [ref=f1e445]: (30)
+              - link "Karjat (10)" [ref=f1e446] [cursor=pointer]:
+                - /url: /india/karjat
+                - generic [ref=f1e447]: Karjat
+                - generic [ref=f1e448]: (10)
+              - link "Kolhapur (8)" [ref=f1e449] [cursor=pointer]:
+                - /url: /india/kolhapur
+                - generic [ref=f1e450]: Kolhapur
+                - generic [ref=f1e451]: (8)
+              - link "Lavasa (4)" [ref=f1e452] [cursor=pointer]:
+                - /url: /india/lavasa
+                - generic [ref=f1e453]: Lavasa
+                - generic [ref=f1e454]: (4)
+              - link "Lonavala (10)" [ref=f1e455] [cursor=pointer]:
+                - /url: /india/lonavala
+                - generic [ref=f1e456]: Lonavala
+                - generic [ref=f1e457]: (10)
+              - link "Mumbai (17)" [ref=f1e458] [cursor=pointer]:
+                - /url: /india/mumbai
+                - generic [ref=f1e459]: Mumbai
+                - generic [ref=f1e460]: (17)
+              - link "Nashik (17)" [ref=f1e461] [cursor=pointer]:
+                - /url: /india/nashik
+                - generic [ref=f1e462]: Nashik
+                - generic [ref=f1e463]: (17)
+              - link "Panchgani (14)" [ref=f1e464] [cursor=pointer]:
+                - /url: /india/panchgani
+                - generic [ref=f1e465]: Panchgani
+                - generic [ref=f1e466]: (14)
+              - link "Panvel (2)" [ref=f1e467] [cursor=pointer]:
+                - /url: /india/panvel
+                - generic [ref=f1e468]: Panvel
+                - generic [ref=f1e469]: (2)
+              - link "Pune (7)" [ref=f1e470] [cursor=pointer]:
+                - /url: /india/pune
+                - generic [ref=f1e471]: Pune
+                - generic [ref=f1e472]: (7)
+              - link "Rajkot (19)" [ref=f1e473] [cursor=pointer]:
+                - /url: /india/rajkot
+                - generic [ref=f1e474]: Rajkot
+                - generic [ref=f1e475]: (19)
+              - link "Saputara (1)" [ref=f1e476] [cursor=pointer]:
+                - /url: /india/saputara
+                - generic [ref=f1e477]: Saputara
+                - generic [ref=f1e478]: (1)
+          - generic [ref=f1e479]:
+            - heading "East & North East 7 Destinations" [level=4] [ref=f1e480]:
+              - generic [ref=f1e482]: East & North East
+              - generic [ref=f1e483]: 7 Destinations
+            - generic [ref=f1e484]:
+              - link "Darjeeling (5)" [ref=f1e485] [cursor=pointer]:
+                - /url: /india/darjeeling
+                - generic [ref=f1e486]: Darjeeling
+                - generic [ref=f1e487]: (5)
+              - link "Digha (6)" [ref=f1e488] [cursor=pointer]:
+                - /url: /india/digha
+                - generic [ref=f1e489]: Digha
+                - generic [ref=f1e490]: (6)
+              - link "Kolkata (13)" [ref=f1e491] [cursor=pointer]:
+                - /url: /india/kolkata
+                - generic [ref=f1e492]: Kolkata
+                - generic [ref=f1e493]: (13)
+              - link "Mandarmani (16)" [ref=f1e494] [cursor=pointer]:
+                - /url: /india/mandarmani
+                - generic [ref=f1e495]: Mandarmani
+                - generic [ref=f1e496]: (16)
+              - link "Puri (5)" [ref=f1e497] [cursor=pointer]:
+                - /url: /india/puri
+                - generic [ref=f1e498]: Puri
+                - generic [ref=f1e499]: (5)
+              - link "Shillong (5)" [ref=f1e500] [cursor=pointer]:
+                - /url: /india/shillong
+                - generic [ref=f1e501]: Shillong
+                - generic [ref=f1e502]: (5)
+              - link "Siliguri (5)" [ref=f1e503] [cursor=pointer]:
+                - /url: /india/siliguri
+                - generic [ref=f1e504]: Siliguri
+                - generic [ref=f1e505]: (5)
+          - generic [ref=f1e506]:
+            - heading "International Romantic Escapes 5 Destinations" [level=4] [ref=f1e507]:
+              - generic [ref=f1e509]: International Romantic Escapes
+              - generic [ref=f1e510]: 5 Destinations
+            - generic [ref=f1e511]:
+              - link "Bali (20)" [ref=f1e512] [cursor=pointer]:
+                - /url: /indonesia/bali
+                - generic [ref=f1e513]: Bali
+                - generic [ref=f1e514]: (20)
+              - link "Dubai (20)" [ref=f1e515] [cursor=pointer]:
+                - /url: /uae/dubai
+                - generic [ref=f1e516]: Dubai
+                - generic [ref=f1e517]: (20)
+              - link "Las Vegas (20)" [ref=f1e518] [cursor=pointer]:
+                - /url: /usa/las-vegas
+                - generic [ref=f1e519]: Las Vegas
+                - generic [ref=f1e520]: (20)
+              - link "London (20)" [ref=f1e521] [cursor=pointer]:
+                - /url: /uk/london
+                - generic [ref=f1e522]: London
+                - generic [ref=f1e523]: (20)
+              - link "New York (18)" [ref=f1e524] [cursor=pointer]:
+                - /url: /usa/new-york
+                - generic [ref=f1e525]: New York
+                - generic [ref=f1e526]: (18)
+      - generic [ref=f1e527]:
+        - heading "Frequently Asked Questions" [level=3] [ref=f1e532]
+        - generic [ref=f1e533]:
+          - generic [ref=f1e534]:
+            - heading "How do you verify hotel bathtubs?" [level=4] [ref=f1e535]
+            - paragraph [ref=f1e536]: We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
+          - generic [ref=f1e537]:
+            - heading "Are bathtubs guaranteed in every room?" [level=4] [ref=f1e538]
+            - paragraph [ref=f1e539]: Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
+          - generic [ref=f1e540]:
+            - heading "Which destinations do you cover?" [level=4] [ref=f1e541]
+            - paragraph [ref=f1e542]: We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
+          - generic [ref=f1e543]:
+            - heading "How do bookings work?" [level=4] [ref=f1e544]
+            - paragraph [ref=f1e545]: We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
+      - generic [ref=f1e547]:
+        - generic [ref=f1e548]:
+          - heading "Triple Verified" [level=4] [ref=f1e552]
+          - paragraph [ref=f1e553]: Independently cross-checked across 3 major platforms
+        - generic [ref=f1e554]:
+          - heading "Guaranteed Tubs" [level=4] [ref=f1e558]
+          - paragraph [ref=f1e559]: Confirmed in-room hot tubs and jacuzzi suites
+        - generic [ref=f1e560]:
+          - heading "Direct Booking" [level=4] [ref=f1e564]
+          - paragraph [ref=f1e565]: Direct links to official trusted travel partners
+        - generic [ref=f1e566]:
+          - heading "Curated Stays" [level=4] [ref=f1e571]
+          - paragraph [ref=f1e572]: Handpicked luxury hotels for romantic escapes
+      - generic [ref=f1e574]:
+        - generic [ref=f1e575]: Start Your Romantic Escape
+        - heading "Ready to Book Your Luxury Bathtub Stay?" [level=3] [ref=f1e576]
+        - paragraph [ref=f1e577]: Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
+        - generic [ref=f1e578]:
+          - link "Browse All Destinations ↑" [ref=f1e579] [cursor=pointer]:
+            - /url: "#destinations"
+            - generic [ref=f1e580]: Browse All Destinations
+            - generic [ref=f1e581]: ↑
+          - link "Read Travel Inspiration →" [ref=f1e582] [cursor=pointer]:
+            - /url: /blog
+      - generic [ref=f1e583]:
+        - generic [ref=f1e584]:
+          - generic [ref=f1e600]:
+            - heading "Hotels with Bathtubs" [level=4] [ref=f1e601]
+            - paragraph [ref=f1e602]: Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.
+          - generic [ref=f1e603]:
+            - paragraph [ref=f1e604]: © 2026 HotelsWithBathtubs.com
+            - generic [ref=f1e605]:
+              - link "Travel Blog" [ref=f1e606] [cursor=pointer]:
+                - /url: /blog
+              - link "About Us" [ref=f1e607] [cursor=pointer]:
+                - /url: /about
+              - link "Affiliate Policy" [ref=f1e608] [cursor=pointer]:
+                - /url: /affiliate-policy
+              - link "Privacy" [ref=f1e609] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms" [ref=f1e610] [cursor=pointer]:
+                - /url: /terms
+              - link "Cookies" [ref=f1e611] [cursor=pointer]:
+                - /url: /cookies
+        - paragraph [ref=f1e612]: All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+  - alert [ref=f1e613]

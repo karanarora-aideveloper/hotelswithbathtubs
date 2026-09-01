@@ -1,0 +1,4099 @@
+{
+  "Kolhapur": [
+    {
+      "name": "Achalaa Resort",
+      "image": "/assets/achalaa-resort-kolhapur-with-bath-tub.webp",
+      "slug": "achalaa-resort-kolhapur-with-bath-tub"
+    },
+    {
+      "name": "Achalaa Resort",
+      "image": "/assets/achalaa-resort-kolhapur-with-bathtub-in-room.webp",
+      "slug": "achalaa-resort-kolhapur-with-bathtub-in-room"
+    },
+    {
+      "name": "Achalaa Resort",
+      "image": "/assets/achalaa-resort-kolhapur-with-spabath.webp",
+      "slug": "achalaa-resort-kolhapur-with-spabath"
+    },
+    {
+      "name": "Hotel Nisarg Resort",
+      "image": "/assets/bathtub-hotel-kolhapur-nisarg-resort.webp",
+      "slug": "bathtub-hotel-kolhapur-nisarg-resort"
+    },
+    {
+      "name": "In Terrace Garden Homes 1 6",
+      "image": "/assets/bathtub-in-terrace-garden-homes-1-6-kolhapur.webp",
+      "slug": "bathtub-in-terrace-garden-homes-1-6-kolhapur"
+    },
+    {
+      "name": "Room Achalaa Resort",
+      "image": "/assets/bathtub-room-achalaa-resort-kolhapur.webp",
+      "slug": "bathtub-room-achalaa-resort-kolhapur"
+    },
+    {
+      "name": "Room Garden Homes 1 6",
+      "image": "/assets/bathtub-room-garden-homes-1-6-kolhapur.webp",
+      "slug": "bathtub-room-garden-homes-1-6-kolhapur"
+    },
+    {
+      "name": "Room Nisarg Resort",
+      "image": "/assets/bathtub-room-nisarg-resort-kolhapur.webp",
+      "slug": "bathtub-room-nisarg-resort-kolhapur"
+    },
+    {
+      "name": "Room Regenta Place Raysons",
+      "image": "/assets/bathtub-room-regenta-place-raysons-kolhapur.webp",
+      "slug": "bathtub-room-regenta-place-raysons-kolhapur"
+    },
+    {
+      "name": "Room Vedganga Plus Villa Homestay",
+      "image": "/assets/bathtub-room-vedganga-plus-villa-homestay-kolhapur.webp",
+      "slug": "bathtub-room-vedganga-plus-villa-homestay-kolhapur"
+    },
+    {
+      "name": "Garden Homes 1 6",
+      "image": "/assets/garden-homes-1-6-kolhapur-with-bathtub.webp",
+      "slug": "garden-homes-1-6-kolhapur-with-bathtub"
+    },
+    {
+      "name": "Hotel Blooming Soul",
+      "image": "/assets/hotel-blooming-soul-kolhapur-with-bathtub-in-room.webp",
+      "slug": "hotel-blooming-soul-kolhapur-with-bathtub-in-room"
+    },
+    {
+      "name": "Nisarg Resort",
+      "image": "/assets/nisarg-resort-kolhapur-with-bathtub-in-room.webp",
+      "slug": "nisarg-resort-kolhapur-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Achalaa Resort",
+      "image": "/assets/spabath-room-achalaa-resort-kolhapur.webp",
+      "slug": "spabath-room-achalaa-resort-kolhapur"
+    }
+  ],
+  "Calangute": [
+    {
+      "name": "Adamo The Bellus",
+      "image": "/assets/adamo-the-bellus-calangute-with-hottub-in-room.webp",
+      "slug": "adamo-the-bellus-calangute-with-hottub-in-room"
+    },
+    {
+      "name": "Aqua Marina Beach Cottages",
+      "image": "/assets/aqua-marina-beach-cottages-calangute-with-bathtub.webp",
+      "slug": "aqua-marina-beach-cottages-calangute-with-bathtub"
+    },
+    {
+      "name": "Casa De Boutique Resort",
+      "image": "/assets/bath-tub-casa-de-goa-boutique-resort-calangute.webp",
+      "slug": "bath-tub-casa-de-goa-boutique-resort-calangute"
+    },
+    {
+      "name": "Bloomsuites L",
+      "image": "/assets/bathtub-bloomsuites-l-calangute.webp",
+      "slug": "bathtub-bloomsuites-l-calangute"
+    },
+    {
+      "name": "Calangute Estrela Do Mar Beach Resort A Beach Property",
+      "image": "/assets/bathtub-calangute-estrela-do-mar-beach-resort-a-beach-property.webp",
+      "slug": "bathtub-calangute-estrela-do-mar-beach-resort-a-beach-property"
+    },
+    {
+      "name": "Estrela Do Mar Beach Resort A Beach Property",
+      "image": "/assets/bathtub-estrela-do-mar-beach-resort-a-beach-property-calangute.webp",
+      "slug": "bathtub-estrela-do-mar-beach-resort-a-beach-property-calangute"
+    },
+    {
+      "name": "Hotel Casa De Boutique Resort",
+      "image": "/assets/bathtub-hotel-casa-de-goa-boutique-resort-calangute.webp",
+      "slug": "bathtub-hotel-casa-de-goa-boutique-resort-calangute"
+    },
+    {
+      "name": "Hotel Room The Postcard Saligao",
+      "image": "/assets/bathtub-hotel-room-the-postcard-saligao-calangute.webp",
+      "slug": "bathtub-hotel-room-the-postcard-saligao-calangute"
+    },
+    {
+      "name": "Hotel Small Daddy Plus",
+      "image": "/assets/bathtub-hotel-small-daddy-plus-calangute.webp",
+      "slug": "bathtub-hotel-small-daddy-plus-calangute"
+    },
+    {
+      "name": "Room Adamo The Bellus",
+      "image": "/assets/bathtub-room-adamo-the-bellus-calangute.webp",
+      "slug": "bathtub-room-adamo-the-bellus-calangute"
+    },
+    {
+      "name": "Room Storii By Itc Hotels Shanti Morada",
+      "image": "/assets/bathtub-room-calangute-storii-by-itc-hotels-shanti-morada-goa.webp",
+      "slug": "bathtub-room-calangute-storii-by-itc-hotels-shanti-morada-goa"
+    },
+    {
+      "name": "Room The Postcard Saligao",
+      "image": "/assets/bathtub-room-calangute-the-postcard-saligao.webp",
+      "slug": "bathtub-room-calangute-the-postcard-saligao"
+    },
+    {
+      "name": "Room The Park",
+      "image": "/assets/bathtub-room-the-park-calangute-goa.webp",
+      "slug": "bathtub-room-the-park-calangute-goa"
+    },
+    {
+      "name": "Casa De Boutique Resort",
+      "image": "/assets/casa-de-goa-boutique-resort-calangute-with-bathtub.webp",
+      "slug": "casa-de-goa-boutique-resort-calangute-with-bathtub"
+    },
+    {
+      "name": "Estrela Do Mar Beach Resort A Beach Property",
+      "image": "/assets/estrela-do-mar-beach-resort-a-beach-property-calangute-with-bathtub.webp",
+      "slug": "estrela-do-mar-beach-resort-a-beach-property-calangute-with-bathtub"
+    },
+    {
+      "name": "Hard Rock Hotel",
+      "image": "/assets/hard-rock-hotel-goa-calangute-with-bathtub.webp",
+      "slug": "hard-rock-hotel-goa-calangute-with-bathtub"
+    },
+    {
+      "name": "Hotel Adamo The Bellus",
+      "image": "/assets/hotel-adamo-the-bellus-calangute-with-jacuzzi-in-room.webp",
+      "slug": "hotel-adamo-the-bellus-calangute-with-jacuzzi-in-room"
+    },
+    {
+      "name": "The Postcard Saligao",
+      "image": "/assets/hottub-the-postcard-saligao-calangute.webp",
+      "slug": "hottub-the-postcard-saligao-calangute"
+    },
+    {
+      "name": "Hotel Aqua Marina Beach Cottages",
+      "image": "/assets/jacuzzi-hotel-calangute-aqua-marina-beach-cottages.webp",
+      "slug": "jacuzzi-hotel-calangute-aqua-marina-beach-cottages"
+    },
+    {
+      "name": "Room Adamo The Bellus",
+      "image": "/assets/jacuzzi-room-adamo-the-bellus-calangute.webp",
+      "slug": "jacuzzi-room-adamo-the-bellus-calangute"
+    },
+    {
+      "name": "Pool In Room The Park",
+      "image": "/assets/pool-in-room-the-park-calangute-goa.webp",
+      "slug": "pool-in-room-the-park-calangute-goa"
+    },
+    {
+      "name": "Private Pool Room The Park",
+      "image": "/assets/private-pool-room-the-park-calangute-goa.webp",
+      "slug": "private-pool-room-the-park-calangute-goa"
+    },
+    {
+      "name": "Romantic Hotel Room Adamo The Bellus",
+      "image": "/assets/romantic-hotel-room-adamo-the-bellus-calangute-with-private-jacuzzi.webp",
+      "slug": "romantic-hotel-room-adamo-the-bellus-calangute-with-private-jacuzzi"
+    },
+    {
+      "name": "Romantic Spabath Adamo The Bellus",
+      "image": "/assets/romantic-spabath-adamo-the-bellus-calangute.webp",
+      "slug": "romantic-spabath-adamo-the-bellus-calangute"
+    },
+    {
+      "name": "Room Casa De Boutique Resort",
+      "image": "/assets/spabath-room-casa-de-goa-boutique-resort-calangute.webp",
+      "slug": "spabath-room-casa-de-goa-boutique-resort-calangute"
+    },
+    {
+      "name": "Storii By Itc Hotels Shanti Morada",
+      "image": "/assets/storii-by-itc-hotels-shanti-morada-goa-calangute-with-bathtub.webp",
+      "slug": "storii-by-itc-hotels-shanti-morada-goa-calangute-with-bathtub"
+    },
+    {
+      "name": "The Park",
+      "image": "/assets/the-park-calangute-goa-with-bathtub-pool.webp",
+      "slug": "the-park-calangute-goa-with-bathtub-pool"
+    },
+    {
+      "name": "The Park With Private Pool In Room",
+      "image": "/assets/the-park-calangute-goa-with-private-pool-in-room.webp",
+      "slug": "the-park-calangute-goa-with-private-pool-in-room"
+    },
+    {
+      "name": "The Park",
+      "image": "/assets/the-park-calangute-goa-with-romantic-bathtub.webp",
+      "slug": "the-park-calangute-goa-with-romantic-bathtub"
+    },
+    {
+      "name": "The Postcard Saligao",
+      "image": "/assets/the-postcard-saligao-calangute-with-bathtub-in-room.webp",
+      "slug": "the-postcard-saligao-calangute-with-bathtub-in-room"
+    }
+  ],
+  "Kodaikanal": [
+    {
+      "name": "Aframe By The Alpenglow Hotel Room",
+      "image": "/assets/aframe-by-the-alpenglow-kodai-hotel-room-with-bathtub.webp",
+      "slug": "aframe-by-the-alpenglow-kodai-hotel-room-with-bathtub"
+    },
+    {
+      "name": "Room Hotel",
+      "image": "/assets/bathtub-room-kodai-hotel.webp",
+      "slug": "bathtub-room-kodai-hotel"
+    },
+    {
+      "name": "Divercity Luxury Glamp",
+      "image": "/assets/divercity-luxury-glamp-kodaikanal-with-jacuzzi.webp",
+      "slug": "divercity-luxury-glamp-kodaikanal-with-jacuzzi"
+    },
+    {
+      "name": "Tomorrowland Farms And Suites",
+      "image": "/assets/hottub-tomorrowland-farms-and-suites-kodaikanal.webp",
+      "slug": "hottub-tomorrowland-farms-and-suites-kodaikanal"
+    },
+    {
+      "name": "Divercity Luxury Glamp",
+      "image": "/assets/jacuzzi-divercity-luxury-glamp-kodaikanal.webp",
+      "slug": "jacuzzi-divercity-luxury-glamp-kodaikanal"
+    },
+    {
+      "name": "Hotel Tomorrowland Farms And Suites",
+      "image": "/assets/jacuzzi-hotel-tomorrowland-farms-and-suites-kodaikanal.webp",
+      "slug": "jacuzzi-hotel-tomorrowland-farms-and-suites-kodaikanal"
+    },
+    {
+      "name": "Kanal Glamp Luxuries",
+      "image": "/assets/jacuzzi-kanal-glamp-kodaikanal-luxuries.webp",
+      "slug": "jacuzzi-kanal-glamp-kodaikanal-luxuries"
+    },
+    {
+      "name": "Kanal Glamp Luxuries",
+      "image": "/assets/kanal-glamp-kodaikanal-luxuries-with-hottub.webp",
+      "slug": "kanal-glamp-kodaikanal-luxuries-with-hottub"
+    },
+    {
+      "name": "Kanal Glamp Luxuries",
+      "image": "/assets/kanal-glamp-kodaikanal-luxuries-with-jacuzzi.webp",
+      "slug": "kanal-glamp-kodaikanal-luxuries-with-jacuzzi"
+    },
+    {
+      "name": "Kodai Hotel",
+      "image": "/assets/kodai-hotel-with-bathtub-in-room-in-kodaikanal.webp",
+      "slug": "kodai-hotel-with-bathtub-in-room-in-kodaikanal"
+    },
+    {
+      "name": "Kanal Glamp Luxuries",
+      "image": "/assets/spabath-kanal-glamp-kodaikanal-luxuries.webp",
+      "slug": "spabath-kanal-glamp-kodaikanal-luxuries"
+    },
+    {
+      "name": "Tomorrowland Farms And Suites",
+      "image": "/assets/tomorrowland-farms-and-suites-kodaikanal-with-jacuzzi.webp",
+      "slug": "tomorrowland-farms-and-suites-kodaikanal-with-jacuzzi"
+    },
+    {
+      "name": "Tomorrowland Farms And Suites",
+      "image": "/assets/tomorrowland-farms-and-suites-kodaikanal-with-spabath.webp",
+      "slug": "tomorrowland-farms-and-suites-kodaikanal-with-spabath"
+    }
+  ],
+  "Mahipalpur": [
+    {
+      "name": "Airport Hotel Ramhan Palace",
+      "image": "/assets/airport-hotel-ramhan-palace-mahipalpur-with-bath-tub.webp",
+      "slug": "airport-hotel-ramhan-palace-mahipalpur-with-bath-tub"
+    },
+    {
+      "name": "Airport Hotel Ramhan Palace",
+      "image": "/assets/airport-hotel-ramhan-palace-mahipalpur-with-bathtub-in-room.webp",
+      "slug": "airport-hotel-ramhan-palace-mahipalpur-with-bathtub-in-room"
+    },
+    {
+      "name": "Airport Hotel Ramhan Palace",
+      "image": "/assets/bathtub-airport-hotel-ramhan-palace-mahipalpur.webp",
+      "slug": "bathtub-airport-hotel-ramhan-palace-mahipalpur"
+    },
+    {
+      "name": "Mahipalpur Hotel Linda Grand Near International Airport By Gross Group",
+      "image": "/assets/bathtub-mahipalpur-hotel-linda-grand-near-international-airport-by-gross-group.webp",
+      "slug": "bathtub-mahipalpur-hotel-linda-grand-near-international-airport-by-gross-group"
+    },
+    {
+      "name": "Room Airport Hotel Ramhan Palace",
+      "image": "/assets/bathtub-room-airport-hotel-ramhan-palace-mahipalpur.webp",
+      "slug": "bathtub-room-airport-hotel-ramhan-palace-mahipalpur"
+    },
+    {
+      "name": "Room Hotel Anand International",
+      "image": "/assets/bathtub-room-hotel-anand-international-mahipalpur.webp",
+      "slug": "bathtub-room-hotel-anand-international-mahipalpur"
+    },
+    {
+      "name": "Room Hotel Shanti Palace",
+      "image": "/assets/bathtub-room-hotel-shanti-palace-mahipalpur.webp",
+      "slug": "bathtub-room-hotel-shanti-palace-mahipalpur"
+    },
+    {
+      "name": "Hotel Airport Inn Near Airport",
+      "image": "/assets/hotel-airport-inn-near-delhi-airport-mahipalpur-with-bathtub-in-room.webp",
+      "slug": "hotel-airport-inn-near-delhi-airport-mahipalpur-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Prithvi Raj Near Airport",
+      "image": "/assets/hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-jacuzzi.webp",
+      "slug": "hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-jacuzzi"
+    },
+    {
+      "name": "Hotel Prithvi Raj Near Airport",
+      "image": "/assets/hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-romantic-hottub.webp",
+      "slug": "hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-romantic-hottub"
+    },
+    {
+      "name": "Hotel Prithvi Raj Near Airport",
+      "image": "/assets/hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-spabath.webp",
+      "slug": "hotel-prithvi-raj-near-delhi-airport-mahipalpur-with-spabath"
+    },
+    {
+      "name": "Hotel Shanti Palace",
+      "image": "/assets/hotel-shanti-palace-mahipalpur-with-bathtub.webp",
+      "slug": "hotel-shanti-palace-mahipalpur-with-bathtub"
+    },
+    {
+      "name": "Hotel Shanti Palace",
+      "image": "/assets/hotel-shanti-palace-mahipalpur-with-spabath-in-room.webp",
+      "slug": "hotel-shanti-palace-mahipalpur-with-spabath-in-room"
+    },
+    {
+      "name": "Romantic Jacuzzi Hotel Prithvi Raj Near Airport",
+      "image": "/assets/romantic-jacuzzi-hotel-prithvi-raj-near-delhi-airport-mahipalpur.webp",
+      "slug": "romantic-jacuzzi-hotel-prithvi-raj-near-delhi-airport-mahipalpur"
+    }
+  ],
+  "Goa": [
+    {
+      "name": "Alila Diwa A Hyatt Brand",
+      "image": "/assets/alila-diwa-goa-a-hyatt-brand-with-bathtub-room.webp",
+      "slug": "alila-diwa-goa-a-hyatt-brand-with-bathtub-room"
+    },
+    {
+      "name": "Alila Diwa A Hyatt Brand",
+      "image": "/assets/alila-diwa-goa-a-hyatt-brand-with-hottub.webp",
+      "slug": "alila-diwa-goa-a-hyatt-brand-with-hottub"
+    },
+    {
+      "name": "Alila Diwa A Hyatt Brand",
+      "image": "/assets/alila-diwa-goa-a-hyatt-brand-with-romantic-bathtub-in-room.webp",
+      "slug": "alila-diwa-goa-a-hyatt-brand-with-romantic-bathtub-in-room"
+    },
+    {
+      "name": "Art Resort Hotel Room",
+      "image": "/assets/art-resort-goa-hotel-room-with-bathtub.webp",
+      "slug": "art-resort-goa-hotel-room-with-bathtub"
+    },
+    {
+      "name": "Art Resort",
+      "image": "/assets/bathtub-art-resort-goa.webp",
+      "slug": "bathtub-art-resort-goa"
+    },
+    {
+      "name": "Hotel Grand Hyatt",
+      "image": "/assets/bathtub-hotel-grand-hyatt-goa.webp",
+      "slug": "bathtub-hotel-grand-hyatt-goa"
+    },
+    {
+      "name": "Hotel Resort W",
+      "image": "/assets/bathtub-hotel-resort-w-goa.webp",
+      "slug": "bathtub-hotel-resort-w-goa"
+    },
+    {
+      "name": "Room Alila Diwa A Hyatt Brand",
+      "image": "/assets/bathtub-room-alila-diwa-goa-a-hyatt-brand.webp",
+      "slug": "bathtub-room-alila-diwa-goa-a-hyatt-brand"
+    },
+    {
+      "name": "Room Beach Resort On Beach",
+      "image": "/assets/bathtub-room-goa-beach-resort-on-beach-mandarmani.webp",
+      "slug": "bathtub-room-goa-beach-resort-on-beach-mandarmani"
+    },
+    {
+      "name": "Room Marriott Resort Spa",
+      "image": "/assets/bathtub-room-goa-marriott-resort-spa-panjim.webp",
+      "slug": "bathtub-room-goa-marriott-resort-spa-panjim"
+    },
+    {
+      "name": "Room In North Larisa Resort Ashwem",
+      "image": "/assets/bathtub-room-in-north-goa-larisa-resort-ashwem.webp",
+      "slug": "bathtub-room-in-north-goa-larisa-resort-ashwem"
+    },
+    {
+      "name": "Room Larisa Beach Resort North",
+      "image": "/assets/bathtub-room-larisa-beach-resort-north-goa.webp",
+      "slug": "bathtub-room-larisa-beach-resort-north-goa"
+    },
+    {
+      "name": "Room Larisa Resort Ashwem North",
+      "image": "/assets/bathtub-room-larisa-resort-ashwem-north-goa.webp",
+      "slug": "bathtub-room-larisa-resort-ashwem-north-goa"
+    },
+    {
+      "name": "Room Resort W",
+      "image": "/assets/bathtub-room-resort-w-goa.webp",
+      "slug": "bathtub-room-resort-w-goa"
+    },
+    {
+      "name": "Room Taj Cidade De Heritage",
+      "image": "/assets/bathtub-room-taj-cidade-de-goa-heritage-panjim-goa.webp",
+      "slug": "bathtub-room-taj-cidade-de-goa-heritage-panjim-goa"
+    },
+    {
+      "name": "Room Taj Cidade De Horizon",
+      "image": "/assets/bathtub-room-taj-cidade-de-goa-horizon-panjim-goa.webp",
+      "slug": "bathtub-room-taj-cidade-de-goa-horizon-panjim-goa"
+    },
+    {
+      "name": "Room Wild Berry Resort Agonda South",
+      "image": "/assets/bathtub-room-wild-berry-resort-agonda-south-goa.webp",
+      "slug": "bathtub-room-wild-berry-resort-agonda-south-goa"
+    },
+    {
+      "name": "Cola Beach Resort Room In South",
+      "image": "/assets/cola-goa-beach-resort-room-in-south-goa-with-jacuzzi-and-sea-view.webp",
+      "slug": "cola-goa-beach-resort-room-in-south-goa-with-jacuzzi-and-sea-view"
+    },
+    {
+      "name": "Cola Beach Resort South",
+      "image": "/assets/cola-goa-beach-resort-south-goa-with-jacuzzi-in-room.webp",
+      "slug": "cola-goa-beach-resort-south-goa-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Cola Beach Resort South",
+      "image": "/assets/cola-goa-beach-resort-south-goa-with-jacuzzi.webp",
+      "slug": "cola-goa-beach-resort-south-goa-with-jacuzzi"
+    },
+    {
+      "name": "Cola Beach Resort South With Spa Jacuzzi",
+      "image": "/assets/cola-goa-beach-resort-south-goa-with-spa-jacuzzi.webp",
+      "slug": "cola-goa-beach-resort-south-goa-with-spa-jacuzzi"
+    },
+    {
+      "name": "Goa Beach Resort On Beach",
+      "image": "/assets/goa-beach-resort-on-beach-mandarmani-with-bathtub.webp",
+      "slug": "goa-beach-resort-on-beach-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Goa Marriott Resort Spa",
+      "image": "/assets/goa-marriott-resort-spa-panjim-with-bathtub.webp",
+      "slug": "goa-marriott-resort-spa-panjim-with-bathtub"
+    },
+    {
+      "name": "Goa Marriott Resort Spa",
+      "image": "/assets/goa-marriott-resort-spa-with-bathtub-in-panjim.webp",
+      "slug": "goa-marriott-resort-spa-with-bathtub-in-panjim"
+    },
+    {
+      "name": "Grand Hyatt",
+      "image": "/assets/grand-hyatt-goa-with-private-jacuzzi-in-room.webp",
+      "slug": "grand-hyatt-goa-with-private-jacuzzi-in-room"
+    },
+    {
+      "name": "Grandeur De Sanchi Luxury Beach Resort Spa North",
+      "image": "/assets/grandeur-de-sanchi-luxury-beach-resort-spa-north-goa-with-jacuzzi.webp",
+      "slug": "grandeur-de-sanchi-luxury-beach-resort-spa-north-goa-with-jacuzzi"
+    },
+    {
+      "name": "Hotel Longuinhos Beach Resort South",
+      "image": "/assets/hotel-longuinhos-beach-resort-south-goa-with-private-jacuzzi-and-sea-view.webp",
+      "slug": "hotel-longuinhos-beach-resort-south-goa-with-private-jacuzzi-and-sea-view"
+    },
+    {
+      "name": "Hotel Taj Cidade De Heritage",
+      "image": "/assets/hotel-taj-cidade-de-goa-heritage-panjim-goa-with-bathtub-in-room.webp",
+      "slug": "hotel-taj-cidade-de-goa-heritage-panjim-goa-with-bathtub-in-room"
+    },
+    {
+      "name": "Alila Diwa A Hyatt Brand",
+      "image": "/assets/hottub-alila-diwa-goa-a-hyatt-brand.webp",
+      "slug": "hottub-alila-diwa-goa-a-hyatt-brand"
+    },
+    {
+      "name": "Resort W",
+      "image": "/assets/hottub-resort-w-goa.webp",
+      "slug": "hottub-resort-w-goa"
+    },
+    {
+      "name": "Room Cola Beach Resort South With Sea View",
+      "image": "/assets/jacuzzi-room-cola-goa-beach-resort-south-goa-with-sea-view.webp",
+      "slug": "jacuzzi-room-cola-goa-beach-resort-south-goa-with-sea-view"
+    },
+    {
+      "name": "Room North Grandeur De Sanchi Luxury Beach Resort Spa",
+      "image": "/assets/jacuzzi-room-north-goa-grandeur-de-sanchi-luxury-beach-resort-spa.webp",
+      "slug": "jacuzzi-room-north-goa-grandeur-de-sanchi-luxury-beach-resort-spa"
+    },
+    {
+      "name": "Room The Baga Beach Resort North",
+      "image": "/assets/jacuzzi-room-the-baga-beach-resort-north-goa.webp",
+      "slug": "jacuzzi-room-the-baga-beach-resort-north-goa"
+    },
+    {
+      "name": "Larisa Beach Resort North",
+      "image": "/assets/larisa-beach-resort-north-goa-with-romantic-bathtub-in-room.webp",
+      "slug": "larisa-beach-resort-north-goa-with-romantic-bathtub-in-room"
+    },
+    {
+      "name": "Larisa Resort Ashwem North",
+      "image": "/assets/larisa-resort-ashwem-north-goa-with-bathtub.webp",
+      "slug": "larisa-resort-ashwem-north-goa-with-bathtub"
+    },
+    {
+      "name": "Longuinhos Beach Resort South",
+      "image": "/assets/longuinhos-beach-resort-south-goa-with-private-jacuzzi.webp",
+      "slug": "longuinhos-beach-resort-south-goa-with-private-jacuzzi"
+    },
+    {
+      "name": "Resort W",
+      "image": "/assets/resort-w-goa-with-bathtub-in-room.webp",
+      "slug": "resort-w-goa-with-bathtub-in-room"
+    },
+    {
+      "name": "Resort W",
+      "image": "/assets/resort-w-goa-with-hottub-in-room.webp",
+      "slug": "resort-w-goa-with-hottub-in-room"
+    },
+    {
+      "name": "Resort W",
+      "image": "/assets/resort-w-goa-with-spabath.webp",
+      "slug": "resort-w-goa-with-spabath"
+    },
+    {
+      "name": "Room Resort W",
+      "image": "/assets/spabath-room-resort-w-goa.webp",
+      "slug": "spabath-room-resort-w-goa"
+    },
+    {
+      "name": "Taj Cidade De Horizon",
+      "image": "/assets/taj-cidade-de-goa-horizon-panjim-goa-with-bath-tub.webp",
+      "slug": "taj-cidade-de-goa-horizon-panjim-goa-with-bath-tub"
+    },
+    {
+      "name": "Taj Cidade De Horizon",
+      "image": "/assets/taj-cidade-de-goa-horizon-panjim-goa-with-bathtub-in-room.webp",
+      "slug": "taj-cidade-de-goa-horizon-panjim-goa-with-bathtub-in-room"
+    },
+    {
+      "name": "The Baga Beach Resort North Jacuzzi In Room",
+      "image": "/assets/the-baga-beach-resort-north-goa-jacuzzi-in-room.webp",
+      "slug": "the-baga-beach-resort-north-goa-jacuzzi-in-room"
+    },
+    {
+      "name": "The Baga Beach Resort North",
+      "image": "/assets/the-baga-beach-resort-north-goa-with-private-jacuzzi-in-room.webp",
+      "slug": "the-baga-beach-resort-north-goa-with-private-jacuzzi-in-room"
+    },
+    {
+      "name": "Wild Berry Resort Agonda South",
+      "image": "/assets/wild-berry-resort-agonda-south-goa-with-romantic-bathtub.webp",
+      "slug": "wild-berry-resort-agonda-south-goa-with-romantic-bathtub"
+    }
+  ],
+  "Rishikesh": [
+    {
+      "name": "Aloha On The Ganges By Leisure Hotels",
+      "image": "/assets/aloha-on-the-ganges-by-leisure-hotels-rishikesh-with-bathtub.webp",
+      "slug": "aloha-on-the-ganges-by-leisure-hotels-rishikesh-with-bathtub"
+    },
+    {
+      "name": "Hotel The Neeraj Ganga Cottages",
+      "image": "/assets/bath-tub-hotel-the-neeraj-ganga-cottages-rishikesh.webp",
+      "slug": "bath-tub-hotel-the-neeraj-ganga-cottages-rishikesh"
+    },
+    {
+      "name": "Room The Westin Resort Spa Himalayas",
+      "image": "/assets/bath-tub-room-the-westin-resort-spa-himalayas-rishikesh.webp",
+      "slug": "bath-tub-room-the-westin-resort-spa-himalayas-rishikesh"
+    },
+    {
+      "name": "Ganga Kinare A Riverside Boutique Resort",
+      "image": "/assets/bathtub-ganga-kinare-a-riverside-boutique-resort-rishikesh.webp",
+      "slug": "bathtub-ganga-kinare-a-riverside-boutique-resort-rishikesh"
+    },
+    {
+      "name": "Hotel The Narayana Sanctuary Luxe Poolside Suites By Salvus",
+      "image": "/assets/bathtub-hotel-rishikesh-the-narayana-sanctuary-luxe-poolside-suites-by-salvus.webp",
+      "slug": "bathtub-hotel-rishikesh-the-narayana-sanctuary-luxe-poolside-suites-by-salvus"
+    },
+    {
+      "name": "Hotel The Westin Resort Spa Himalayas",
+      "image": "/assets/bathtub-hotel-rishikesh-the-westin-resort-spa-himalayas.webp",
+      "slug": "bathtub-hotel-rishikesh-the-westin-resort-spa-himalayas"
+    },
+    {
+      "name": "Hotel Room Raga On The Ganges",
+      "image": "/assets/bathtub-hotel-room-raga-on-the-ganges-rishikesh.webp",
+      "slug": "bathtub-hotel-room-raga-on-the-ganges-rishikesh"
+    },
+    {
+      "name": "Rishikesh Aloha On The Ganges By Leisure Hotels",
+      "image": "/assets/bathtub-rishikesh-aloha-on-the-ganges-by-leisure-hotels.webp",
+      "slug": "bathtub-rishikesh-aloha-on-the-ganges-by-leisure-hotels"
+    },
+    {
+      "name": "Room Aloha On The Ganges By Leisure Hotels",
+      "image": "/assets/bathtub-room-aloha-on-the-ganges-by-leisure-hotels-rishikesh.webp",
+      "slug": "bathtub-room-aloha-on-the-ganges-by-leisure-hotels-rishikesh"
+    },
+    {
+      "name": "Room Antalya",
+      "image": "/assets/bathtub-room-antalya-rishikesh.webp",
+      "slug": "bathtub-room-antalya-rishikesh"
+    },
+    {
+      "name": "Room Hotel Antalya",
+      "image": "/assets/bathtub-room-hotel-antalya-rishikesh.webp",
+      "slug": "bathtub-room-hotel-antalya-rishikesh"
+    },
+    {
+      "name": "Room The Neeraj Ganga Cottages",
+      "image": "/assets/bathtub-room-the-neeraj-ganga-cottages-rishikesh.webp",
+      "slug": "bathtub-room-the-neeraj-ganga-cottages-rishikesh"
+    },
+    {
+      "name": "Ski Hotels And Resorts",
+      "image": "/assets/bathtub-ski-hotels-and-resorts-rishikesh.webp",
+      "slug": "bathtub-ski-hotels-and-resorts-rishikesh"
+    },
+    {
+      "name": "Hotel Antalya",
+      "image": "/assets/hotel-antalya-rishikesh-with-bathtub-in-room.webp",
+      "slug": "hotel-antalya-rishikesh-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Raga On The Ganges",
+      "image": "/assets/hotel-raga-on-the-ganges-rishikesh-with-bathtub.webp",
+      "slug": "hotel-raga-on-the-ganges-rishikesh-with-bathtub"
+    },
+    {
+      "name": "Rishikesh The Westin Resort Spa Himalayas",
+      "image": "/assets/hottub-rishikesh-the-westin-resort-spa-himalayas.webp",
+      "slug": "hottub-rishikesh-the-westin-resort-spa-himalayas"
+    },
+    {
+      "name": "Hotel Raga On The Ganges",
+      "image": "/assets/jacuzzi-hotel-raga-on-the-ganges-rishikesh.webp",
+      "slug": "jacuzzi-hotel-raga-on-the-ganges-rishikesh"
+    },
+    {
+      "name": "Pride Hotel And Resort",
+      "image": "/assets/jacuzzi-pride-hotel-and-resort-rishikesh.webp",
+      "slug": "jacuzzi-pride-hotel-and-resort-rishikesh"
+    },
+    {
+      "name": "Room Hotel Regenta Inn On The Ganges",
+      "image": "/assets/jacuzzi-room-hotel-regenta-inn-on-the-ganges-rishikesh.webp",
+      "slug": "jacuzzi-room-hotel-regenta-inn-on-the-ganges-rishikesh"
+    },
+    {
+      "name": "Private Pool The Westin Resort Spa Himalayas",
+      "image": "/assets/private-pool-the-westin-resort-spa-himalayas-rishikesh.webp",
+      "slug": "private-pool-the-westin-resort-spa-himalayas-rishikesh"
+    },
+    {
+      "name": "Romantic Bathtub Hotel The Neeraj Ganga Heritage Palace",
+      "image": "/assets/romantic-bathtub-hotel-the-neeraj-ganga-heritage-palace-rishikesh.webp",
+      "slug": "romantic-bathtub-hotel-the-neeraj-ganga-heritage-palace-rishikesh"
+    },
+    {
+      "name": "Ski Hotels And Resorts",
+      "image": "/assets/ski-hotels-and-resorts-rishikesh-with-bathtub-in-room.webp",
+      "slug": "ski-hotels-and-resorts-rishikesh-with-bathtub-in-room"
+    },
+    {
+      "name": "The Neeraj Ganga Cottages",
+      "image": "/assets/the-neeraj-ganga-cottages-rishikesh-with-bathtub.webp",
+      "slug": "the-neeraj-ganga-cottages-rishikesh-with-bathtub"
+    },
+    {
+      "name": "The Neeraj Ganga Heritage Palace",
+      "image": "/assets/the-neeraj-ganga-heritage-palace-rishikesh-with-bathtub.webp",
+      "slug": "the-neeraj-ganga-heritage-palace-rishikesh-with-bathtub"
+    },
+    {
+      "name": "The Westin Resort Spa Himalayas Bathtub",
+      "image": "/assets/the-westin-resort-spa-himalayas-bathtub-rishikesh.webp",
+      "slug": "the-westin-resort-spa-himalayas-bathtub-rishikesh"
+    },
+    {
+      "name": "The Westin Resort Spa Himalayas",
+      "image": "/assets/the-westin-resort-spa-himalayas-rishikesh-with-bathtub-in-room.webp",
+      "slug": "the-westin-resort-spa-himalayas-rishikesh-with-bathtub-in-room"
+    },
+    {
+      "name": "The Westin Resort Spa Himalayas",
+      "image": "/assets/the-westin-resort-spa-himalayas-rishikesh-with-spabath.webp",
+      "slug": "the-westin-resort-spa-himalayas-rishikesh-with-spabath"
+    }
+  ],
+  "Haridwar": [
+    {
+      "name": "Ambrosia Sarovar Portico",
+      "image": "/assets/ambrosia-sarovar-portico-haridwar-with-hottub-in-room.webp",
+      "slug": "ambrosia-sarovar-portico-haridwar-with-hottub-in-room"
+    },
+    {
+      "name": "Hotel Godwin",
+      "image": "/assets/hotel-godwin-haridwar-with-bathtub.webp",
+      "slug": "hotel-godwin-haridwar-with-bathtub"
+    },
+    {
+      "name": "Hotel The Reo Near Har Ke Pauri Road",
+      "image": "/assets/hotel-the-reo-near-har-ke-pauri-road-haridwar-with-bathtub.webp",
+      "slug": "hotel-the-reo-near-har-ke-pauri-road-haridwar-with-bathtub"
+    },
+    {
+      "name": "Hotel Roomambrosia Sarovar Portico",
+      "image": "/assets/jacuzzi-hotel-roomambrosia-sarovar-portico-haridwar.webp",
+      "slug": "jacuzzi-hotel-roomambrosia-sarovar-portico-haridwar"
+    },
+    {
+      "name": "Room Pride Elite Near Railway Station",
+      "image": "/assets/jacuzzi-room-pride-elite-haridwar-near-haridwar-railway-station.webp",
+      "slug": "jacuzzi-room-pride-elite-haridwar-near-haridwar-railway-station"
+    },
+    {
+      "name": "Pride Elite Near Railway Station",
+      "image": "/assets/pride-elite-haridwar-near-haridwar-railway-station-with-jacuzzi.webp",
+      "slug": "pride-elite-haridwar-near-haridwar-railway-station-with-jacuzzi"
+    },
+    {
+      "name": "Rio Luxury Top Rated Most Awarded Property In",
+      "image": "/assets/rio-luxury-top-rated-most-awarded-property-in-haridwar-with-bathtub.webp",
+      "slug": "rio-luxury-top-rated-most-awarded-property-in-haridwar-with-bathtub"
+    },
+    {
+      "name": "Hotel Room Yashail Hotel",
+      "image": "/assets/spabath-hotel-room-yashail-hotel-haridwar.webp",
+      "slug": "spabath-hotel-room-yashail-hotel-haridwar"
+    },
+    {
+      "name": "Yashail Hotel",
+      "image": "/assets/yashail-hotel-haridwar-with-jacuzzi.webp",
+      "slug": "yashail-hotel-haridwar-with-jacuzzi"
+    }
+  ],
+  "Panchgani": [
+    {
+      "name": "Antilia Villa Luxurious Ac Swimming Pool",
+      "image": "/assets/antilia-villa-luxurious-ac-swimming-pool-panchgani-with-hot-tub.webp",
+      "slug": "antilia-villa-luxurious-ac-swimming-pool-panchgani-with-hot-tub"
+    },
+    {
+      "name": "Room Sabo Resort",
+      "image": "/assets/bath-tub-room-sabo-resort-panchgani.webp",
+      "slug": "bath-tub-room-sabo-resort-panchgani"
+    },
+    {
+      "name": "Hotel Hillview Rooms By 29 Bungalow",
+      "image": "/assets/bathtub-hotel-hillview-rooms-by-29-bungalow-panchgani.webp",
+      "slug": "bathtub-hotel-hillview-rooms-by-29-bungalow-panchgani"
+    },
+    {
+      "name": "Hotel The Cliff By Zuper",
+      "image": "/assets/bathtub-hotel-the-cliff-by-zuper-panchgani.webp",
+      "slug": "bathtub-hotel-the-cliff-by-zuper-panchgani"
+    },
+    {
+      "name": "Room Sharayu Holidays Valley View",
+      "image": "/assets/bathtub-room-panchgani-sharayu-holidays-valley-view.webp",
+      "slug": "bathtub-room-panchgani-sharayu-holidays-valley-view"
+    },
+    {
+      "name": "Room The Cliff By Zuper",
+      "image": "/assets/bathtub-room-the-cliff-by-zuper-panchgani.webp",
+      "slug": "bathtub-room-the-cliff-by-zuper-panchgani"
+    },
+    {
+      "name": "Room Wandr Tabletop",
+      "image": "/assets/bathtub-room-wandr-tabletop-panchgani.webp",
+      "slug": "bathtub-room-wandr-tabletop-panchgani"
+    },
+    {
+      "name": "Coral Villa",
+      "image": "/assets/coral-villa-panchgani-with-jacuzzi.webp",
+      "slug": "coral-villa-panchgani-with-jacuzzi"
+    },
+    {
+      "name": "Hillview Rooms By 29 Bungalow Bathtub",
+      "image": "/assets/hillview-rooms-by-29-bungalow-bathtub-panchgani.webp",
+      "slug": "hillview-rooms-by-29-bungalow-bathtub-panchgani"
+    },
+    {
+      "name": "Hillview Rooms By 29 Bungalow",
+      "image": "/assets/hillview-rooms-by-29-bungalow-panchgani-with-bathtub.webp",
+      "slug": "hillview-rooms-by-29-bungalow-panchgani-with-bathtub"
+    },
+    {
+      "name": "Hotel The Cliff By Zuper",
+      "image": "/assets/hotel-the-cliff-by-zuper-panchgani-with-bathtub-views.webp",
+      "slug": "hotel-the-cliff-by-zuper-panchgani-with-bathtub-views"
+    },
+    {
+      "name": "Hotel Wandr Tabletop",
+      "image": "/assets/hotel-wandr-tabletop-panchgani-with-bathtub.webp",
+      "slug": "hotel-wandr-tabletop-panchgani-with-bathtub"
+    },
+    {
+      "name": "Panchgani Antilia Villa Luxurious Ac Swimming Pool",
+      "image": "/assets/jacuzzi-panchgani-antilia-villa-luxurious-ac-swimming-pool.webp",
+      "slug": "jacuzzi-panchgani-antilia-villa-luxurious-ac-swimming-pool"
+    },
+    {
+      "name": "Views Coral Villa",
+      "image": "/assets/jacuzzi-views-coral-villa-panchgani.webp",
+      "slug": "jacuzzi-views-coral-villa-panchgani"
+    },
+    {
+      "name": "R Villa",
+      "image": "/assets/r-villa-panchgani-with-bathtub.webp",
+      "slug": "r-villa-panchgani-with-bathtub"
+    },
+    {
+      "name": "Romantic Hotel The Cliff By Zuper",
+      "image": "/assets/romantic-hotel-the-cliff-by-zuper-panchgani-with-bathtub.webp",
+      "slug": "romantic-hotel-the-cliff-by-zuper-panchgani-with-bathtub"
+    },
+    {
+      "name": "Sabo Resort",
+      "image": "/assets/sabo-resort-panchgani-with-spabath.webp",
+      "slug": "sabo-resort-panchgani-with-spabath"
+    },
+    {
+      "name": "Sharayu Holidays Valley View",
+      "image": "/assets/sharayu-holidays-valley-view-panchgani-with-bathtub.webp",
+      "slug": "sharayu-holidays-valley-view-panchgani-with-bathtub"
+    }
+  ],
+  "Digha": [
+    {
+      "name": "Antique Regency New",
+      "image": "/assets/antique-regency-new-digha-with-private-jacuzzi-in-room.webp",
+      "slug": "antique-regency-new-digha-with-private-jacuzzi-in-room"
+    },
+    {
+      "name": "Iconic Hotel",
+      "image": "/assets/bathtub-iconic-hotel-digha.webp",
+      "slug": "bathtub-iconic-hotel-digha"
+    },
+    {
+      "name": "Room Hotel Mtm New",
+      "image": "/assets/bathtub-room-hotel-mtm-new-digha.webp",
+      "slug": "bathtub-room-hotel-mtm-new-digha"
+    },
+    {
+      "name": "Room Iconic Hotel",
+      "image": "/assets/bathtub-room-iconic-hotel-digha.webp",
+      "slug": "bathtub-room-iconic-hotel-digha"
+    },
+    {
+      "name": "Hotel Daltin",
+      "image": "/assets/hotel-daltin-digha-with-jacuzzi.webp",
+      "slug": "hotel-daltin-digha-with-jacuzzi"
+    },
+    {
+      "name": "Hotel Mtm New",
+      "image": "/assets/hotel-mtm-new-digha-with-bathtub-in-room.webp",
+      "slug": "hotel-mtm-new-digha-with-bathtub-in-room"
+    },
+    {
+      "name": "Iconic Hotel",
+      "image": "/assets/iconic-hotel-digha-with-bathtub-in-room.webp",
+      "slug": "iconic-hotel-digha-with-bathtub-in-room"
+    },
+    {
+      "name": "Iconic Hotel",
+      "image": "/assets/iconic-hotel-digha-with-spabath.webp",
+      "slug": "iconic-hotel-digha-with-spabath"
+    },
+    {
+      "name": "Hotel Antique Regency New",
+      "image": "/assets/jacuzzi-hotel-antique-regency-new-digha.webp",
+      "slug": "jacuzzi-hotel-antique-regency-new-digha"
+    },
+    {
+      "name": "Room Hotel Daltin New",
+      "image": "/assets/jacuzzi-room-hotel-daltin-new-digha.webp",
+      "slug": "jacuzzi-room-hotel-daltin-new-digha"
+    },
+    {
+      "name": "Hotel Daltin New",
+      "image": "/assets/spabath-hotel-daltin-new-digha.webp",
+      "slug": "spabath-hotel-daltin-new-digha"
+    }
+  ],
+  "Mandarmani": [
+    {
+      "name": "Aqua Blue Resort Private Limited",
+      "image": "/assets/aqua-blue-resort-private-limited-mandarmani-with-bathtub-1.webp",
+      "slug": "aqua-blue-resort-private-limited-mandarmani-with-bathtub-1"
+    },
+    {
+      "name": "Azad Hind Beach Resort",
+      "image": "/assets/azad-hind-beach-resort-mandarmani-with-bathtub.webp",
+      "slug": "azad-hind-beach-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Grand Beach Resort",
+      "image": "/assets/bath-tub-grand-beach-resort-mandarmani.webp",
+      "slug": "bath-tub-grand-beach-resort-mandarmani"
+    },
+    {
+      "name": "Aqua Blue Resort Private Limited",
+      "image": "/assets/bathtub-aqua-blue-resort-private-limited-mandarmani.webp",
+      "slug": "bathtub-aqua-blue-resort-private-limited-mandarmani"
+    },
+    {
+      "name": "Hotel Samudra Bilas Resort",
+      "image": "/assets/bathtub-hotel-mandarmani-samudra-bilas-resort.webp",
+      "slug": "bathtub-hotel-mandarmani-samudra-bilas-resort"
+    },
+    {
+      "name": "Hotel Room Sea Smile Inn",
+      "image": "/assets/bathtub-hotel-room-mandarmani-sea-smile-inn.webp",
+      "slug": "bathtub-hotel-room-mandarmani-sea-smile-inn"
+    },
+    {
+      "name": "Hotel Sher Bengal Beach Resort",
+      "image": "/assets/bathtub-hotel-sher-bengal-beach-resort-mandarmani.webp",
+      "slug": "bathtub-hotel-sher-bengal-beach-resort-mandarmani"
+    },
+    {
+      "name": "Hotel The Rath Inns",
+      "image": "/assets/bathtub-hotel-the-rath-inns-mandarmani.webp",
+      "slug": "bathtub-hotel-the-rath-inns-mandarmani"
+    },
+    {
+      "name": "Mandarmani Sweet Dream Beach Resort",
+      "image": "/assets/bathtub-mandarmani-sweet-dream-beach-resort.webp",
+      "slug": "bathtub-mandarmani-sweet-dream-beach-resort"
+    },
+    {
+      "name": "Prasant Beach Resort",
+      "image": "/assets/bathtub-prasant-beach-resort-mandarmani.webp",
+      "slug": "bathtub-prasant-beach-resort-mandarmani"
+    },
+    {
+      "name": "Room Azad Hind Beach Resort",
+      "image": "/assets/bathtub-room-azad-hind-beach-resort-mandarmani.webp",
+      "slug": "bathtub-room-azad-hind-beach-resort-mandarmani"
+    },
+    {
+      "name": "Room Grand Beach Resort",
+      "image": "/assets/bathtub-room-grand-beach-resort-mandarmani.webp",
+      "slug": "bathtub-room-grand-beach-resort-mandarmani"
+    },
+    {
+      "name": "Room Prasant Beach Resort",
+      "image": "/assets/bathtub-room-mandarmani-prasant-beach-resort.webp",
+      "slug": "bathtub-room-mandarmani-prasant-beach-resort"
+    },
+    {
+      "name": "Room Sher Bengal Beach Resort",
+      "image": "/assets/bathtub-room-sher-bengal-beach-resort-mandarmani.webp",
+      "slug": "bathtub-room-sher-bengal-beach-resort-mandarmani"
+    },
+    {
+      "name": "Room Sweet Dream Beach Resort",
+      "image": "/assets/bathtub-room-sweet-dream-beach-resort-mandarmani.webp",
+      "slug": "bathtub-room-sweet-dream-beach-resort-mandarmani"
+    },
+    {
+      "name": "Room The Rath Inns",
+      "image": "/assets/bathtub-room-the-rath-inns-mandarmani.webp",
+      "slug": "bathtub-room-the-rath-inns-mandarmani"
+    },
+    {
+      "name": "Grand Beach Resort",
+      "image": "/assets/grand-beach-resort-mandarmani-with-bathtub.webp",
+      "slug": "grand-beach-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Holiday Beach Resort",
+      "image": "/assets/holiday-beach-resort-mandarmani-with-bathtub-in-room.webp",
+      "slug": "holiday-beach-resort-mandarmani-with-bathtub-in-room"
+    },
+    {
+      "name": "Prasant Beach Resort",
+      "image": "/assets/prasant-beach-resort-mandarmani-with-bathtub.webp",
+      "slug": "prasant-beach-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Samudra Bilas Resort",
+      "image": "/assets/samudra-bilas-resort-mandarmani-with-bathtub.webp",
+      "slug": "samudra-bilas-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Sher Bengal Beach Resort Bathtub",
+      "image": "/assets/sher-bengal-beach-resort-bathtub-mandarmani.webp",
+      "slug": "sher-bengal-beach-resort-bathtub-mandarmani"
+    },
+    {
+      "name": "Sher Bengal Beach Resort",
+      "image": "/assets/sher-bengal-beach-resort-mandarmani-with-bathtub.webp",
+      "slug": "sher-bengal-beach-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "Sweet Dream Beach Resort",
+      "image": "/assets/sweet-dream-beach-resort-mandarmani-with-bathtub.webp",
+      "slug": "sweet-dream-beach-resort-mandarmani-with-bathtub"
+    },
+    {
+      "name": "The Rath Inns Bathtub",
+      "image": "/assets/the-rath-inns-bathtub-mandarmani.webp",
+      "slug": "the-rath-inns-bathtub-mandarmani"
+    },
+    {
+      "name": "The Rath Inns",
+      "image": "/assets/the-rath-inns-mandarmani-with-bathtub.webp",
+      "slug": "the-rath-inns-mandarmani-with-bathtub"
+    }
+  ],
+  "Siliguri": [
+    {
+      "name": "Barsana Hotel Resort",
+      "image": "/assets/barsana-hotel-resort-siliguri-with-spabath-in-room.webp",
+      "slug": "barsana-hotel-resort-siliguri-with-spabath-in-room"
+    },
+    {
+      "name": "Hotel Mayfair Tea Resort",
+      "image": "/assets/bathtub-hotel-mayfair-tea-resort-siliguri.webp",
+      "slug": "bathtub-hotel-mayfair-tea-resort-siliguri"
+    },
+    {
+      "name": "Room Barsana Hotel Resort",
+      "image": "/assets/bathtub-room-barsana-hotel-resort-siliguri.webp",
+      "slug": "bathtub-room-barsana-hotel-resort-siliguri"
+    },
+    {
+      "name": "Hotel Faith",
+      "image": "/assets/hotel-faith-siliguri-with-bathtub-in-room.webp",
+      "slug": "hotel-faith-siliguri-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Barsana Hotel Resort",
+      "image": "/assets/jacuzzi-room-barsana-hotel-resort-siliguri.webp",
+      "slug": "jacuzzi-room-barsana-hotel-resort-siliguri"
+    },
+    {
+      "name": "Room Mayfair Tea Resort",
+      "image": "/assets/jacuzzi-room-mayfair-tea-resort-siliguri.webp",
+      "slug": "jacuzzi-room-mayfair-tea-resort-siliguri"
+    },
+    {
+      "name": "Room The Cindrella Hotel",
+      "image": "/assets/jacuzzi-room-the-cindrella-hotel-siliguri.webp",
+      "slug": "jacuzzi-room-the-cindrella-hotel-siliguri"
+    },
+    {
+      "name": "Mayfair Tea Resort",
+      "image": "/assets/mayfair-tea-resort-siliguri-with-hottub-in-room.webp",
+      "slug": "mayfair-tea-resort-siliguri-with-hottub-in-room"
+    },
+    {
+      "name": "Mayfair Tea Resort",
+      "image": "/assets/mayfair-tea-resort-siliguri-with-spabath-in-room.webp",
+      "slug": "mayfair-tea-resort-siliguri-with-spabath-in-room"
+    },
+    {
+      "name": "Room Mayfair Tea Resort",
+      "image": "/assets/spabath-room-mayfair-tea-resort-siliguri.webp",
+      "slug": "spabath-room-mayfair-tea-resort-siliguri"
+    }
+  ],
+  "Kochi": [
+    {
+      "name": "Room The Postcard Mandalay Hall",
+      "image": "/assets/bath-tub-room-the-postcard-mandalay-hall-kochi.webp",
+      "slug": "bath-tub-room-the-postcard-mandalay-hall-kochi"
+    },
+    {
+      "name": "Hotel The Postcard Mandalay Hall",
+      "image": "/assets/bathtub-hotel-the-postcard-mandalay-hall-kochi.webp",
+      "slug": "bathtub-hotel-the-postcard-mandalay-hall-kochi"
+    },
+    {
+      "name": "Romantic Hotel Forte",
+      "image": "/assets/bathtub-romantic-hotel-forte-kochi.webp",
+      "slug": "bathtub-romantic-hotel-forte-kochi"
+    },
+    {
+      "name": "Room Crowne Plaza An Ihg Hotel",
+      "image": "/assets/bathtub-room-crowne-plaza-kochi-an-ihg-hotel.webp",
+      "slug": "bathtub-room-crowne-plaza-kochi-an-ihg-hotel"
+    },
+    {
+      "name": "Brunton Boatyard",
+      "image": "/assets/brunton-boatyard-kochi-with-bathtub-a-cgh-earth-experience.webp",
+      "slug": "brunton-boatyard-kochi-with-bathtub-a-cgh-earth-experience"
+    },
+    {
+      "name": "Crowne Plaza An Ihg Hotel",
+      "image": "/assets/crowne-plaza-kochi-an-ihg-hotel-with-bath-tub.webp",
+      "slug": "crowne-plaza-kochi-an-ihg-hotel-with-bath-tub"
+    },
+    {
+      "name": "Crowne Plaza An Ihg Hotel",
+      "image": "/assets/crowne-plaza-kochi-an-ihg-hotel-with-bathtub-in-room.webp",
+      "slug": "crowne-plaza-kochi-an-ihg-hotel-with-bathtub-in-room"
+    },
+    {
+      "name": "Crowne Plaza An Ihg Hotel",
+      "image": "/assets/crowne-plaza-kochi-an-ihg-hotel-with-bathtub.webp",
+      "slug": "crowne-plaza-kochi-an-ihg-hotel-with-bathtub"
+    },
+    {
+      "name": "Crowne Plaza An Ihg Hotel",
+      "image": "/assets/hot-tub-crowne-plaza-kochi-an-ihg-hotel.webp",
+      "slug": "hot-tub-crowne-plaza-kochi-an-ihg-hotel"
+    },
+    {
+      "name": "Hotel Monsoon Empress",
+      "image": "/assets/hotel-monsoon-empress-kochi-with-bathtub.webp",
+      "slug": "hotel-monsoon-empress-kochi-with-bathtub"
+    },
+    {
+      "name": "Hotel Olive Downtown",
+      "image": "/assets/jacuzzi-hotel-olive-downtown-kochi.webp",
+      "slug": "jacuzzi-hotel-olive-downtown-kochi"
+    },
+    {
+      "name": "Room Marriott Hotel",
+      "image": "/assets/jacuzzi-room-kochi-marriott-hotel.webp",
+      "slug": "jacuzzi-room-kochi-marriott-hotel"
+    },
+    {
+      "name": "Room Ramada Resort By Wyndham",
+      "image": "/assets/jacuzzi-room-ramada-resort-by-wyndham-kochi.webp",
+      "slug": "jacuzzi-room-ramada-resort-by-wyndham-kochi"
+    },
+    {
+      "name": "Kochi Marriott Hotel",
+      "image": "/assets/kochi-marriott-hotel-with-bathtub.webp",
+      "slug": "kochi-marriott-hotel-with-bathtub"
+    },
+    {
+      "name": "Kochi Marriott Hotel",
+      "image": "/assets/kochi-marriott-hotel-with-spabath-in-room.webp",
+      "slug": "kochi-marriott-hotel-with-spabath-in-room"
+    },
+    {
+      "name": "Olive Downtown",
+      "image": "/assets/olive-downtown-kochi-with-jacuzzi-in-room.webp",
+      "slug": "olive-downtown-kochi-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Ramada Resort By Wyndham",
+      "image": "/assets/ramada-resort-by-wyndham-kochi-with-jacuzzi-in-room.webp",
+      "slug": "ramada-resort-by-wyndham-kochi-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Romantic Hotel Forte",
+      "image": "/assets/romantic-hotel-forte-kochi-with-bathtub.webp",
+      "slug": "romantic-hotel-forte-kochi-with-bathtub"
+    },
+    {
+      "name": "Room Crowne Plaza An Ihg Hotel",
+      "image": "/assets/spabath-room-crowne-plaza-kochi-an-ihg-hotel.webp",
+      "slug": "spabath-room-crowne-plaza-kochi-an-ihg-hotel"
+    },
+    {
+      "name": "The Postcard Mandalay Hall Bathtub",
+      "image": "/assets/the-postcard-mandalay-hall-bathtub-kochi.webp",
+      "slug": "the-postcard-mandalay-hall-bathtub-kochi"
+    },
+    {
+      "name": "The Postcard Mandalay Hall",
+      "image": "/assets/the-postcard-mandalay-hall-kochi-with-bathtub-in-room.webp",
+      "slug": "the-postcard-mandalay-hall-kochi-with-bathtub-in-room"
+    }
+  ],
+  "Koramangala": [
+    {
+      "name": "Seasons Suites",
+      "image": "/assets/bath-tub-seasons-suites-koramangala.webp",
+      "slug": "bath-tub-seasons-suites-koramangala"
+    },
+    {
+      "name": "Hotel Luho 41 Penthouse",
+      "image": "/assets/bathtub-hotel-koramangala-luho-41-penthouse.webp",
+      "slug": "bathtub-hotel-koramangala-luho-41-penthouse"
+    },
+    {
+      "name": "Hotel Room Luho 41 Penthouse",
+      "image": "/assets/bathtub-hotel-room-luho-41-penthouse-koramangala.webp",
+      "slug": "bathtub-hotel-room-luho-41-penthouse-koramangala"
+    },
+    {
+      "name": "Hotel Seasons Suites",
+      "image": "/assets/bathtub-hotel-seasons-suites-koramangala.webp",
+      "slug": "bathtub-hotel-seasons-suites-koramangala"
+    },
+    {
+      "name": "Room Seasons Suites",
+      "image": "/assets/bathtub-room-seasons-suites-koramangala.webp",
+      "slug": "bathtub-room-seasons-suites-koramangala"
+    },
+    {
+      "name": "Hotel Seasons Suites",
+      "image": "/assets/hotel-seasons-suites-koramangala-with-bathtub.webp",
+      "slug": "hotel-seasons-suites-koramangala-with-bathtub"
+    },
+    {
+      "name": "Luho 187",
+      "image": "/assets/luho-187-koramangala-with-bathtub-in-room.webp",
+      "slug": "luho-187-koramangala-with-bathtub-in-room"
+    },
+    {
+      "name": "Luho 41 Penthouse",
+      "image": "/assets/luho-41-penthouse-koramangala-with-bath-tub-in-room.webp",
+      "slug": "luho-41-penthouse-koramangala-with-bath-tub-in-room"
+    },
+    {
+      "name": "Luho 41 Penthouse",
+      "image": "/assets/luho-41-penthouse-koramangala-with-bathtub-in-room.webp",
+      "slug": "luho-41-penthouse-koramangala-with-bathtub-in-room"
+    },
+    {
+      "name": "Luho 41 Penthouse",
+      "image": "/assets/luho-41-penthouse-koramangala-with-bathtub.webp",
+      "slug": "luho-41-penthouse-koramangala-with-bathtub"
+    },
+    {
+      "name": "Seasons Suites",
+      "image": "/assets/seasons-suites-koramangala-with-bathtub-in-room.webp",
+      "slug": "seasons-suites-koramangala-with-bathtub-in-room"
+    }
+  ],
+  "Matheran": [
+    {
+      "name": "Adamo The Resort",
+      "image": "/assets/bathtub-adamo-the-resort-matheran.webp",
+      "slug": "bathtub-adamo-the-resort-matheran"
+    }
+  ],
+  "Gurgaon": [
+    {
+      "name": "Clarens Hotel",
+      "image": "/assets/bathtub-clarens-hotel-gurgaon.webp",
+      "slug": "bathtub-clarens-hotel-gurgaon"
+    },
+    {
+      "name": "Hotel Golden Tulip Sector 29",
+      "image": "/assets/bathtub-hotel-golden-tulip-gurgaon-sector-29.webp",
+      "slug": "bathtub-hotel-golden-tulip-gurgaon-sector-29"
+    },
+    {
+      "name": "Hotel The Westin New",
+      "image": "/assets/bathtub-hotel-the-westin-gurgaon-new-delhi.webp",
+      "slug": "bathtub-hotel-the-westin-gurgaon-new-delhi"
+    },
+    {
+      "name": "Room The Westin New",
+      "image": "/assets/bathtub-room-the-westin-gurgaon-new-delhi.webp",
+      "slug": "bathtub-room-the-westin-gurgaon-new-delhi"
+    },
+    {
+      "name": "Clarens Hotel",
+      "image": "/assets/clarens-hotel-gurgaon-with-bathtub.webp",
+      "slug": "clarens-hotel-gurgaon-with-bathtub"
+    },
+    {
+      "name": "Clarens Hotel",
+      "image": "/assets/clarens-hotel-gurgaon-with-hottub-in-room.webp",
+      "slug": "clarens-hotel-gurgaon-with-hottub-in-room"
+    },
+    {
+      "name": "Golden Tulip Sector 29",
+      "image": "/assets/golden-tulip-gurgaon-sector-29-with-bathtub-in-room.webp",
+      "slug": "golden-tulip-gurgaon-sector-29-with-bathtub-in-room"
+    },
+    {
+      "name": "Golden Tulip Sector 29",
+      "image": "/assets/golden-tulip-gurgaon-sector-29-with-bathtub.webp",
+      "slug": "golden-tulip-gurgaon-sector-29-with-bathtub"
+    },
+    {
+      "name": "Hotel Bathtub The Westin New",
+      "image": "/assets/hotel-bathtub-the-westin-gurgaon-new-delhi.webp",
+      "slug": "hotel-bathtub-the-westin-gurgaon-new-delhi"
+    },
+    {
+      "name": "Hotel Windsor Heights",
+      "image": "/assets/hotel-windsor-heights-gurgaon-with-bathtub-in-room.webp",
+      "slug": "hotel-windsor-heights-gurgaon-with-bathtub-in-room"
+    },
+    {
+      "name": "In Room The Anya Hotel",
+      "image": "/assets/jacuzzi-in-room-the-anya-hotel-gurgaon.webp",
+      "slug": "jacuzzi-in-room-the-anya-hotel-gurgaon"
+    },
+    {
+      "name": "The Anya Hotel",
+      "image": "/assets/the-anya-hotel-gurgaon-with-jacuzzi-in-room.webp",
+      "slug": "the-anya-hotel-gurgaon-with-jacuzzi-in-room"
+    },
+    {
+      "name": "The Westin New",
+      "image": "/assets/the-westin-gurgaon-new-delhi-with-bathtub-in-room-1.webp",
+      "slug": "the-westin-gurgaon-new-delhi-with-bathtub-in-room-1"
+    },
+    {
+      "name": "The Westin New",
+      "image": "/assets/the-westin-gurgaon-new-delhi-with-bathtub-in-room.webp",
+      "slug": "the-westin-gurgaon-new-delhi-with-bathtub-in-room"
+    },
+    {
+      "name": "The Westin New",
+      "image": "/assets/the-westin-gurgaon-new-delhi-with-spabath-in-room.webp",
+      "slug": "the-westin-gurgaon-new-delhi-with-spabath-in-room"
+    }
+  ],
+  "Lonavala": [
+    {
+      "name": "Della Resorts",
+      "image": "/assets/bathtub-della-resorts-lonavala.webp",
+      "slug": "bathtub-della-resorts-lonavala"
+    },
+    {
+      "name": "Hotel Aamby Valley City",
+      "image": "/assets/bathtub-hotel-aamby-valley-city-lonavala.webp",
+      "slug": "bathtub-hotel-aamby-valley-city-lonavala"
+    },
+    {
+      "name": "Hotel Hilton Shillim Estate Retreat And Spa",
+      "image": "/assets/bathtub-hotel-hilton-shillim-estate-retreat-and-spa-lonavala.webp",
+      "slug": "bathtub-hotel-hilton-shillim-estate-retreat-and-spa-lonavala"
+    },
+    {
+      "name": "Della Resorts",
+      "image": "/assets/della-resorts-lonavala-with-spabath.webp",
+      "slug": "della-resorts-lonavala-with-spabath"
+    },
+    {
+      "name": "Hilton Shillim Estate Retreat And Spa",
+      "image": "/assets/hilton-shillim-estate-retreat-and-spa-lonavala-with-bathtub.webp",
+      "slug": "hilton-shillim-estate-retreat-and-spa-lonavala-with-bathtub"
+    },
+    {
+      "name": "Nostravila",
+      "image": "/assets/hot-tub-nostravila-lonavala.webp",
+      "slug": "hot-tub-nostravila-lonavala"
+    },
+    {
+      "name": "Hotel Aamby Valley City",
+      "image": "/assets/hotel-aamby-valley-city-lonavala-with-jacuzzi-in-room.webp",
+      "slug": "hotel-aamby-valley-city-lonavala-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Hotel Nostravila",
+      "image": "/assets/hotel-nostravila-lonavala-with-jacuzzi-in-room.webp",
+      "slug": "hotel-nostravila-lonavala-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Aamby Valley City",
+      "image": "/assets/jacuzzi-aamby-valley-city-lonavala.webp",
+      "slug": "jacuzzi-aamby-valley-city-lonavala"
+    },
+    {
+      "name": "Room Nostravila",
+      "image": "/assets/jacuzzi-room-nostravila-lonavala.webp",
+      "slug": "jacuzzi-room-nostravila-lonavala"
+    },
+    {
+      "name": "Juvana Resort Spa Aamby Valley City",
+      "image": "/assets/juvana-resort-spa-aamby-valley-city-lonavala-with-jacuzzi.webp",
+      "slug": "juvana-resort-spa-aamby-valley-city-lonavala-with-jacuzzi"
+    },
+    {
+      "name": "Nostravila",
+      "image": "/assets/nostravila-lonavala-with-jacuzzi.webp",
+      "slug": "nostravila-lonavala-with-jacuzzi"
+    },
+    {
+      "name": "Romantic Bathtub Della Resorts",
+      "image": "/assets/romantic-bathtub-della-resorts-lonavala.webp",
+      "slug": "romantic-bathtub-della-resorts-lonavala"
+    },
+    {
+      "name": "Room With Hothtub Della Resorts",
+      "image": "/assets/room-with-hothtub-della-resorts-lonavala.webp",
+      "slug": "room-with-hothtub-della-resorts-lonavala"
+    }
+  ],
+  "Dharamshala": [
+    {
+      "name": "Echor Mandara Treevilla",
+      "image": "/assets/bathtub-echor-mandara-treevilla-dharamshala.webp",
+      "slug": "bathtub-echor-mandara-treevilla-dharamshala"
+    },
+    {
+      "name": "Hotel Norbu The Montanna Ihcl Seleqtions",
+      "image": "/assets/bathtub-hotel-norbu-the-montanna-dharamshala-ihcl-seleqtions.webp",
+      "slug": "bathtub-hotel-norbu-the-montanna-dharamshala-ihcl-seleqtions"
+    },
+    {
+      "name": "Room Brij Anayra A Himalayan Luxury Retreat",
+      "image": "/assets/bathtub-room-brij-anayra-dharamshala-a-himalayan-luxury-retreat.webp",
+      "slug": "bathtub-room-brij-anayra-dharamshala-a-himalayan-luxury-retreat"
+    },
+    {
+      "name": "Brij Anayra A Himalayan Luxury Retreat",
+      "image": "/assets/brij-anayra-dharamshala-a-himalayan-luxury-retreat-with-bathtub.webp",
+      "slug": "brij-anayra-dharamshala-a-himalayan-luxury-retreat-with-bathtub"
+    },
+    {
+      "name": "Dpolo Club Spa Resort",
+      "image": "/assets/dpolo-club-spa-resort-dharamshala-with-hottub.webp",
+      "slug": "dpolo-club-spa-resort-dharamshala-with-hottub"
+    },
+    {
+      "name": "Echor Mandara Treevilla",
+      "image": "/assets/echor-mandara-treevilla-dharamshala-with-hottub.webp",
+      "slug": "echor-mandara-treevilla-dharamshala-with-hottub"
+    },
+    {
+      "name": "Room Echor Mandara Treevilla",
+      "image": "/assets/hottub-room-echor-mandara-treevilla-dharamshala.webp",
+      "slug": "hottub-room-echor-mandara-treevilla-dharamshala"
+    },
+    {
+      "name": "Indraprastha Spa Resort",
+      "image": "/assets/indraprastha-spa-resort-dharamshala-with-jacuzzi-room.webp",
+      "slug": "indraprastha-spa-resort-dharamshala-with-jacuzzi-room"
+    },
+    {
+      "name": "Hotel Echor Mandara Treevilla",
+      "image": "/assets/jacuzzi-hotel-echor-mandara-treevilla-dharamshala.webp",
+      "slug": "jacuzzi-hotel-echor-mandara-treevilla-dharamshala"
+    },
+    {
+      "name": "Hotel Room Echor Mandara Treevilla",
+      "image": "/assets/jacuzzi-hotel-room-echor-mandara-treevilla-dharamshala.webp",
+      "slug": "jacuzzi-hotel-room-echor-mandara-treevilla-dharamshala"
+    },
+    {
+      "name": "Room Dpolo Club Spa Resort",
+      "image": "/assets/jacuzzi-room-dpolo-club-spa-resort-dharamshala.webp",
+      "slug": "jacuzzi-room-dpolo-club-spa-resort-dharamshala"
+    },
+    {
+      "name": "Norbu The Montanna Ihcl Seleqtions",
+      "image": "/assets/norbu-the-montanna-dharamshala-ihcl-seleqtions-with-bathtub-in-room.webp",
+      "slug": "norbu-the-montanna-dharamshala-ihcl-seleqtions-with-bathtub-in-room"
+    },
+    {
+      "name": "Romantic Spabath Dpolo Club Spa Resort",
+      "image": "/assets/romantic-spabath-dpolo-club-spa-resort-dharamshala.webp",
+      "slug": "romantic-spabath-dpolo-club-spa-resort-dharamshala"
+    },
+    {
+      "name": "Room Norbu The Montanna Ihcl Seleqtions",
+      "image": "/assets/spabath-room-norbu-the-montanna-dharamshala-ihcl-seleqtions.webp",
+      "slug": "spabath-room-norbu-the-montanna-dharamshala-ihcl-seleqtions"
+    }
+  ],
+  "Bangalore": [
+    {
+      "name": "Four Seasons Hotel At Embassy One",
+      "image": "/assets/bathtub-four-seasons-hotel-bengaluru-at-embassy-one-bangalore.webp",
+      "slug": "bathtub-four-seasons-hotel-bengaluru-at-embassy-one-bangalore"
+    },
+    {
+      "name": "Four Seasons Hotel At Embassy One",
+      "image": "/assets/bathtub-four-seasons-hotel-bengaluru-at-embassy-one.webp",
+      "slug": "bathtub-four-seasons-hotel-bengaluru-at-embassy-one"
+    },
+    {
+      "name": "Hotel La Marvella",
+      "image": "/assets/bathtub-hotel-la-marvella-bengaluru-bangalore.webp",
+      "slug": "bathtub-hotel-la-marvella-bengaluru-bangalore"
+    },
+    {
+      "name": "Hotel Oakwood Premier Prestige",
+      "image": "/assets/bathtub-hotel-oakwood-premier-prestige-bangalore.webp",
+      "slug": "bathtub-hotel-oakwood-premier-prestige-bangalore"
+    },
+    {
+      "name": "Hotel The Oberoi",
+      "image": "/assets/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
+      "slug": "bathtub-hotel-the-oberoi-bengaluru-bangalore"
+    },
+    {
+      "name": "Jw Marriott Hotel",
+      "image": "/assets/bathtub-jw-marriott-hotel-bengaluru-bangalore.webp",
+      "slug": "bathtub-jw-marriott-hotel-bengaluru-bangalore"
+    },
+    {
+      "name": "Springs Hotels And Spa",
+      "image": "/assets/bathtub-springs-hotels-and-spa-bangalore.webp",
+      "slug": "bathtub-springs-hotels-and-spa-bangalore"
+    },
+    {
+      "name": "Women Four Seasons Hotel At Embassy One",
+      "image": "/assets/bathtub-women-four-seasons-hotel-bengaluru-at-embassy-one-bangalore.webp",
+      "slug": "bathtub-women-four-seasons-hotel-bengaluru-at-embassy-one-bangalore"
+    },
+    {
+      "name": "Hotel La Marvella",
+      "image": "/assets/jacuzzi-hotel-la-marvella-bengaluru-bangalore.webp",
+      "slug": "jacuzzi-hotel-la-marvella-bengaluru-bangalore"
+    },
+    {
+      "name": "Hotel The Lalit Ashok",
+      "image": "/assets/jacuzzi-hotel-the-lalit-ashok-bangalore.webp",
+      "slug": "jacuzzi-hotel-the-lalit-ashok-bangalore"
+    },
+    {
+      "name": "Hotel The Oberoi",
+      "image": "/assets/jacuzzi-hotel-the-oberoi-bengaluru-bangalore.webp",
+      "slug": "jacuzzi-hotel-the-oberoi-bengaluru-bangalore"
+    },
+    {
+      "name": "Room Bathtub Jw Marriott Hotel",
+      "image": "/assets/room-bathtub-jw-marriott-hotel-bengaluru-bangalore.webp",
+      "slug": "room-bathtub-jw-marriott-hotel-bengaluru-bangalore"
+    },
+    {
+      "name": "Hotel Oakwood Premier Prestige",
+      "image": "/assets/spabath-hotel-oakwood-premier-prestige-bangalore.webp",
+      "slug": "spabath-hotel-oakwood-premier-prestige-bangalore"
+    },
+    {
+      "name": "Jw Marriott Hotel",
+      "image": "/assets/spabath-jw-marriott-hotel-bengaluru-bangalore.webp",
+      "slug": "spabath-jw-marriott-hotel-bengaluru-bangalore"
+    }
+  ],
+  "Mumbai": [
+    {
+      "name": "Four Seasons Hotel",
+      "image": "/assets/bathtub-four-seasons-hotel-mumbai.webp",
+      "slug": "bathtub-four-seasons-hotel-mumbai"
+    },
+    {
+      "name": "Hotel Bawa Continental",
+      "image": "/assets/bathtub-hotel-bawa-continental-mumbai.webp",
+      "slug": "bathtub-hotel-bawa-continental-mumbai"
+    },
+    {
+      "name": "Hotel Onn Shelter Inn",
+      "image": "/assets/bathtub-hotel-onn-shelter-inn-mumbai.webp",
+      "slug": "bathtub-hotel-onn-shelter-inn-mumbai"
+    },
+    {
+      "name": "Hotel Taj Santacruz",
+      "image": "/assets/bathtub-hotel-taj-santacruz-mumbai.webp",
+      "slug": "bathtub-hotel-taj-santacruz-mumbai"
+    },
+    {
+      "name": "Hotel The St Regis",
+      "image": "/assets/bathtub-hotel-the-st-regis-mumbai.webp",
+      "slug": "bathtub-hotel-the-st-regis-mumbai"
+    },
+    {
+      "name": "Hotel Vivanta Navi Turbhe",
+      "image": "/assets/bathtub-hotel-vivanta-navi-mumbai-turbhe.webp",
+      "slug": "bathtub-hotel-vivanta-navi-mumbai-turbhe"
+    },
+    {
+      "name": "Onn Shelter Inn",
+      "image": "/assets/bathtub-onn-shelter-inn-mumbai.webp",
+      "slug": "bathtub-onn-shelter-inn-mumbai"
+    },
+    {
+      "name": "Room Hilton International Airport Hotel",
+      "image": "/assets/bathtub-room-hilton-mumbai-international-airport-hotel.webp",
+      "slug": "bathtub-room-hilton-mumbai-international-airport-hotel"
+    },
+    {
+      "name": "Room Holiday Inn International Airport An Ihg Hotel ",
+      "image": "/assets/bathtub-room-holiday-inn-mumbai-international-airport-an-ihg-hotel-.webp",
+      "slug": "bathtub-room-holiday-inn-mumbai-international-airport-an-ihg-hotel-"
+    },
+    {
+      "name": "Room Hotel Bawa Continental",
+      "image": "/assets/bathtub-room-hotel-bawa-continental-mumbai.webp",
+      "slug": "bathtub-room-hotel-bawa-continental-mumbai"
+    },
+    {
+      "name": "Four Seasons Hotel",
+      "image": "/assets/four-seasons-hotel-mumbai-with-bathtub-in-room.webp",
+      "slug": "four-seasons-hotel-mumbai-with-bathtub-in-room"
+    },
+    {
+      "name": "Four Seasons Hotel",
+      "image": "/assets/four-seasons-hotel-mumbai-with-bathtub.webp",
+      "slug": "four-seasons-hotel-mumbai-with-bathtub"
+    },
+    {
+      "name": "Grand Hyatt Hotel And Residences Bathtub",
+      "image": "/assets/grand-hyatt-mumbai-hotel-and-residences-bathtub.webp",
+      "slug": "grand-hyatt-mumbai-hotel-and-residences-bathtub"
+    },
+    {
+      "name": "Grand Hyatt Hotel And Residences",
+      "image": "/assets/grand-hyatt-mumbai-hotel-and-residences-with-bathtub.webp",
+      "slug": "grand-hyatt-mumbai-hotel-and-residences-with-bathtub"
+    },
+    {
+      "name": "Grand Hyatt Hotel And Residences",
+      "image": "/assets/grand-hyatt-mumbai-hotel-and-residences-with-hottub.webp",
+      "slug": "grand-hyatt-mumbai-hotel-and-residences-with-hottub"
+    },
+    {
+      "name": "Hilton International Airport Hotel",
+      "image": "/assets/hilton-mumbai-international-airport-hotel-with-bathtub.webp",
+      "slug": "hilton-mumbai-international-airport-hotel-with-bathtub"
+    },
+    {
+      "name": "Hilton International Airport Hotel",
+      "image": "/assets/hilton-mumbai-international-airport-hotel-with-hottub.webp",
+      "slug": "hilton-mumbai-international-airport-hotel-with-hottub"
+    },
+    {
+      "name": "Holiday Inn International Airport An Ihg Hotel",
+      "image": "/assets/holiday-inn-mumbai-international-airport-an-ihg-hotel-with-romantic-bathtub.webp",
+      "slug": "holiday-inn-mumbai-international-airport-an-ihg-hotel-with-romantic-bathtub"
+    },
+    {
+      "name": "Hotel Bawa Continental",
+      "image": "/assets/hotel-bawa-continental-mumbai-with-bathtub-in-room.webp",
+      "slug": "hotel-bawa-continental-mumbai-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Bawa Continental",
+      "image": "/assets/hotel-bawa-continental-mumbai-with-bathtub.webp",
+      "slug": "hotel-bawa-continental-mumbai-with-bathtub"
+    },
+    {
+      "name": "Grand Hyatt Hotel And Residences",
+      "image": "/assets/hottub-grand-hyatt-mumbai-hotel-and-residences.webp",
+      "slug": "hottub-grand-hyatt-mumbai-hotel-and-residences"
+    },
+    {
+      "name": "Room The St. Regis",
+      "image": "/assets/hottub-room-the-st.-regis-mumbai.webp",
+      "slug": "hottub-room-the-st.-regis-mumbai"
+    },
+    {
+      "name": "Hotel Ramee Techome",
+      "image": "/assets/jacuzzi-hotel-ramee-techome-mumbai.webp",
+      "slug": "jacuzzi-hotel-ramee-techome-mumbai"
+    },
+    {
+      "name": "Room Hotel Ramee Techome",
+      "image": "/assets/jacuzzi-room-hotel-ramee-techome-mumbai.webp",
+      "slug": "jacuzzi-room-hotel-ramee-techome-mumbai"
+    },
+    {
+      "name": "Onn Shelter Inn",
+      "image": "/assets/onn-shelter-inn-mumbai-with-bathtub.webp",
+      "slug": "onn-shelter-inn-mumbai-with-bathtub"
+    },
+    {
+      "name": "Ramee Techome",
+      "image": "/assets/ramee-techome-mumbai-with-jacuzzi-in-room.webp",
+      "slug": "ramee-techome-mumbai-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Ramee Techome",
+      "image": "/assets/ramee-techome-mumbai-with-jacuzzi.webp",
+      "slug": "ramee-techome-mumbai-with-jacuzzi"
+    },
+    {
+      "name": "Romantic Bathtub Holiday Inn International Airport An Ihg Hotel",
+      "image": "/assets/romantic-bathtub-holiday-inn-mumbai-international-airport-an-ihg-hotel.webp",
+      "slug": "romantic-bathtub-holiday-inn-mumbai-international-airport-an-ihg-hotel"
+    },
+    {
+      "name": "Room Taj Santacruz",
+      "image": "/assets/spabath-room-taj-santacruz-mumbai.webp",
+      "slug": "spabath-room-taj-santacruz-mumbai"
+    },
+    {
+      "name": "View The St. Regis",
+      "image": "/assets/spabath-view-the-st.-regis-mumbai.webp",
+      "slug": "spabath-view-the-st.-regis-mumbai"
+    },
+    {
+      "name": "Taj Santacruz",
+      "image": "/assets/taj-santacruz-mumbai-with-bathtub.webp",
+      "slug": "taj-santacruz-mumbai-with-bathtub"
+    },
+    {
+      "name": "The St. Regis",
+      "image": "/assets/the-st.-regis-mumbai-with-bathtub.webp",
+      "slug": "the-st.-regis-mumbai-with-bathtub"
+    }
+  ],
+  "Rajkot": [
+    {
+      "name": "Heritage Khirasara Palace",
+      "image": "/assets/bathtub-heritage-khirasara-palace-rajkot.webp",
+      "slug": "bathtub-heritage-khirasara-palace-rajkot"
+    },
+    {
+      "name": "Hotel Seasons",
+      "image": "/assets/bathtub-hotel-seasons-rajkot.webp",
+      "slug": "bathtub-hotel-seasons-rajkot"
+    },
+    {
+      "name": "Rajkot Nova Hotel New Crossroad",
+      "image": "/assets/bathtub-rajkot-nova-hotel-new-crossroad.webp",
+      "slug": "bathtub-rajkot-nova-hotel-new-crossroad"
+    },
+    {
+      "name": "Room Heritage Khirasara Palace",
+      "image": "/assets/bathtub-room-heritage-khirasara-palace-rajkot.webp",
+      "slug": "bathtub-room-heritage-khirasara-palace-rajkot"
+    },
+    {
+      "name": "Room Hotel Royal Orbit",
+      "image": "/assets/bathtub-room-rajkot-hotel-royal-orbit.webp",
+      "slug": "bathtub-room-rajkot-hotel-royal-orbit"
+    },
+    {
+      "name": "Heritage Khirasara Palace",
+      "image": "/assets/heritage-khirasara-palace-rajkot-with-bathtub.webp",
+      "slug": "heritage-khirasara-palace-rajkot-with-bathtub"
+    },
+    {
+      "name": "Room Hotel Nova Bizz",
+      "image": "/assets/hot-tub-room-hotel-nova-bizz-rajkot.webp",
+      "slug": "hot-tub-room-hotel-nova-bizz-rajkot"
+    },
+    {
+      "name": "Hotel Nova Bizz",
+      "image": "/assets/hotel-nova-bizz-rajkot-with-hottub.webp",
+      "slug": "hotel-nova-bizz-rajkot-with-hottub"
+    },
+    {
+      "name": "Hotel Nova Bizz",
+      "image": "/assets/hotel-nova-bizz-rajkot-with-jacuzzi-in-room.webp",
+      "slug": "hotel-nova-bizz-rajkot-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Hotel Nova Bizz",
+      "image": "/assets/hotel-nova-bizz-rajkot-with-jacuzzi.webp",
+      "slug": "hotel-nova-bizz-rajkot-with-jacuzzi"
+    },
+    {
+      "name": "Hotel Nova Bling",
+      "image": "/assets/hotel-nova-bling-rajkot-with-hottub.webp",
+      "slug": "hotel-nova-bling-rajkot-with-hottub"
+    },
+    {
+      "name": "Hotel Nova Bliss",
+      "image": "/assets/hotel-nova-bliss-rajkot-with-hottub-in-room.webp",
+      "slug": "hotel-nova-bliss-rajkot-with-hottub-in-room"
+    },
+    {
+      "name": "Hotel Nova Bliss",
+      "image": "/assets/hotel-nova-bliss-rajkot-with-jacuzzi-in-room.webp",
+      "slug": "hotel-nova-bliss-rajkot-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Hotel Nova Bliss With Spa Jacuzzi",
+      "image": "/assets/hotel-nova-bliss-rajkot-with-spa-jacuzzi.webp",
+      "slug": "hotel-nova-bliss-rajkot-with-spa-jacuzzi"
+    },
+    {
+      "name": "Hotel Nova Boutique",
+      "image": "/assets/hotel-nova-boutique-rajkot-with-hot-tub-in-room.webp",
+      "slug": "hotel-nova-boutique-rajkot-with-hot-tub-in-room"
+    },
+    {
+      "name": "Hotel Nova Boutique With Spa Bath",
+      "image": "/assets/hotel-nova-boutique-rajkot-with-spa-bath.webp",
+      "slug": "hotel-nova-boutique-rajkot-with-spa-bath"
+    },
+    {
+      "name": "Hotel Royal Orbit",
+      "image": "/assets/hotel-royal-orbit-rajkot-with-bathtub.webp",
+      "slug": "hotel-royal-orbit-rajkot-with-bathtub"
+    },
+    {
+      "name": "Hotel Nova Bizz",
+      "image": "/assets/hottub-hotel-nova-bizz-rajkot.webp",
+      "slug": "hottub-hotel-nova-bizz-rajkot"
+    },
+    {
+      "name": "Hotel Nova Bliss",
+      "image": "/assets/hottub-hotel-nova-bliss-rajkot.webp",
+      "slug": "hottub-hotel-nova-bliss-rajkot"
+    },
+    {
+      "name": "Room Hotel Nova Boutique",
+      "image": "/assets/hottub-room-hotel-nova-boutique-rajkot.webp",
+      "slug": "hottub-room-hotel-nova-boutique-rajkot"
+    },
+    {
+      "name": "Heritage Khirasara Palace",
+      "image": "/assets/jacuzzi-heritage-khirasara-palace-rajkot.webp",
+      "slug": "jacuzzi-heritage-khirasara-palace-rajkot"
+    },
+    {
+      "name": "Hotel Nova Bling",
+      "image": "/assets/jacuzzi-hotel-nova-bling-rajkot.webp",
+      "slug": "jacuzzi-hotel-nova-bling-rajkot"
+    },
+    {
+      "name": "Hotel Nova Park",
+      "image": "/assets/jacuzzi-hotel-nova-park-rajkot.webp",
+      "slug": "jacuzzi-hotel-nova-park-rajkot"
+    },
+    {
+      "name": "Hotel Room The Imperial Palace",
+      "image": "/assets/jacuzzi-hotel-room-the-imperial-palace-rajkot.webp",
+      "slug": "jacuzzi-hotel-room-the-imperial-palace-rajkot"
+    },
+    {
+      "name": "Nova Hotel New Crossroad",
+      "image": "/assets/jacuzzi-nova-hotel-new-crossroad-rajkot.webp",
+      "slug": "jacuzzi-nova-hotel-new-crossroad-rajkot"
+    },
+    {
+      "name": "Rajkot Hotel Nova Bizz",
+      "image": "/assets/jacuzzi-rajkot-hotel-nova-bizz.webp",
+      "slug": "jacuzzi-rajkot-hotel-nova-bizz"
+    },
+    {
+      "name": "Room Hotel Nova Bizz",
+      "image": "/assets/jacuzzi-room-hotel-nova-bizz-rajkot.webp",
+      "slug": "jacuzzi-room-hotel-nova-bizz-rajkot"
+    },
+    {
+      "name": "Room Hotel Nova Bliss",
+      "image": "/assets/jacuzzi-room-hotel-nova-bliss-rajkot.webp",
+      "slug": "jacuzzi-room-hotel-nova-bliss-rajkot"
+    },
+    {
+      "name": "Room Hotel Nova Boutique",
+      "image": "/assets/jacuzzi-room-hotel-nova-boutique-rajkot.webp",
+      "slug": "jacuzzi-room-hotel-nova-boutique-rajkot"
+    },
+    {
+      "name": "Nova Park",
+      "image": "/assets/nova-park-rajkot-with-jacuzzi-in-room.webp",
+      "slug": "nova-park-rajkot-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Regency Lagoon Resort",
+      "image": "/assets/regency-lagoon-resort-rajkot-with-bathtub.webp",
+      "slug": "regency-lagoon-resort-rajkot-with-bathtub"
+    },
+    {
+      "name": "Romantic Spabath Bizz The Hotel",
+      "image": "/assets/romantic-spabath-bizz-the-hotel-rajkot.webp",
+      "slug": "romantic-spabath-bizz-the-hotel-rajkot"
+    },
+    {
+      "name": "Hotel Nova Bliss",
+      "image": "/assets/spa-bath-hotel-nova-bliss-rajkot.webp",
+      "slug": "spa-bath-hotel-nova-bliss-rajkot"
+    },
+    {
+      "name": "Spa Jacuzzi Suite Hotel Nova Boutique",
+      "image": "/assets/spa-jacuzzi-suite-hotel-nova-boutique-rajkot.webp",
+      "slug": "spa-jacuzzi-suite-hotel-nova-boutique-rajkot"
+    },
+    {
+      "name": "Nova Park",
+      "image": "/assets/spabath-nova-park-rajkot.webp",
+      "slug": "spabath-nova-park-rajkot"
+    },
+    {
+      "name": "Room Hotel Nova Boutique",
+      "image": "/assets/spabath-room-hotel-nova-boutique-rajkot.webp",
+      "slug": "spabath-room-hotel-nova-boutique-rajkot"
+    },
+    {
+      "name": "Room Hotel Nova Bizz",
+      "image": "/assets/spabath-room-rajkot-hotel-nova-bizz.webp",
+      "slug": "spabath-room-rajkot-hotel-nova-bizz"
+    },
+    {
+      "name": "The Imperial Palace",
+      "image": "/assets/the-imperial-palace-rajkot-with-hottub.webp",
+      "slug": "the-imperial-palace-rajkot-with-hottub"
+    }
+  ],
+  "Agra": [
+    {
+      "name": "Holiday Inn Mg Road An Ihg Hotel",
+      "image": "/assets/bathtub-holiday-inn-agra-mg-road-an-ihg-hotel.webp",
+      "slug": "bathtub-holiday-inn-agra-mg-road-an-ihg-hotel"
+    },
+    {
+      "name": "Hotel Courtyard By Marriott",
+      "image": "/assets/bathtub-hotel-courtyard-by-marriott-agra.webp",
+      "slug": "bathtub-hotel-courtyard-by-marriott-agra"
+    },
+    {
+      "name": "Hotel Grand Mercure An Accor Brand",
+      "image": "/assets/bathtub-hotel-grand-mercure-agra-an-accor-brand.webp",
+      "slug": "bathtub-hotel-grand-mercure-agra-an-accor-brand"
+    },
+    {
+      "name": "Hotel Room Doubletree By Hilton",
+      "image": "/assets/bathtub-hotel-room-doubletree-by-hilton-agra.webp",
+      "slug": "bathtub-hotel-room-doubletree-by-hilton-agra"
+    },
+    {
+      "name": "Hotel The P L Palace",
+      "image": "/assets/bathtub-hotel-the-p-l-palace-agra.webp",
+      "slug": "bathtub-hotel-the-p-l-palace-agra"
+    },
+    {
+      "name": "Room Fragrant Nature A Five Star Classified Hotel",
+      "image": "/assets/bathtub-room-fragrant-nature-kochi-a-five-star-classified-hotel.webp",
+      "slug": "bathtub-room-fragrant-nature-kochi-a-five-star-classified-hotel"
+    },
+    {
+      "name": "Room Holiday Inn Mg Road An Ihg Hotel",
+      "image": "/assets/bathtub-room-holiday-inn-agra-mg-road-an-ihg-hotel.webp",
+      "slug": "bathtub-room-holiday-inn-agra-mg-road-an-ihg-hotel"
+    },
+    {
+      "name": "Room Jaypee Palace Hotel",
+      "image": "/assets/bathtub-room-jaypee-palace-hotel-agra.webp",
+      "slug": "bathtub-room-jaypee-palace-hotel-agra"
+    },
+    {
+      "name": "Room Radisson Hotel",
+      "image": "/assets/bathtub-room-radisson-hotel-agra.webp",
+      "slug": "bathtub-room-radisson-hotel-agra"
+    },
+    {
+      "name": "Room Taj Hotel Convention Centre",
+      "image": "/assets/bathtub-room-taj-hotel-convention-centre-agra.webp",
+      "slug": "bathtub-room-taj-hotel-convention-centre-agra"
+    },
+    {
+      "name": "Room Taj Ronak Luxury Hotels",
+      "image": "/assets/bathtub-room-taj-ronak-luxury-hotels-agra.webp",
+      "slug": "bathtub-room-taj-ronak-luxury-hotels-agra"
+    },
+    {
+      "name": "Room Tajview Ihcl Seleqtions",
+      "image": "/assets/bathtub-room-tajview-agra-ihcl-seleqtions.webp",
+      "slug": "bathtub-room-tajview-agra-ihcl-seleqtions"
+    },
+    {
+      "name": "Taj Hotel Convention Centre",
+      "image": "/assets/bathtub-taj-hotel-convention-centre-agra.webp",
+      "slug": "bathtub-taj-hotel-convention-centre-agra"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-agra-with-bathtub-in-room.webp",
+      "slug": "courtyard-by-marriott-agra-with-bathtub-in-room"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-agra-with-hottub.webp",
+      "slug": "courtyard-by-marriott-agra-with-hottub"
+    },
+    {
+      "name": "Doubletree By Hilton",
+      "image": "/assets/doubletree-by-hilton-agra-with-bathtub-in-room.webp",
+      "slug": "doubletree-by-hilton-agra-with-bathtub-in-room"
+    },
+    {
+      "name": "Doubletree By Hilton",
+      "image": "/assets/doubletree-by-hilton-agra-with-spabath.webp",
+      "slug": "doubletree-by-hilton-agra-with-spabath"
+    },
+    {
+      "name": "Fragrant Nature A Five Star Classified Hotel",
+      "image": "/assets/fragrant-nature-kochi-a-five-star-classified-hotel-with-bathtub.webp",
+      "slug": "fragrant-nature-kochi-a-five-star-classified-hotel-with-bathtub"
+    },
+    {
+      "name": "Holiday Inn Mg Road An Ihg Hotel",
+      "image": "/assets/holiday-inn-agra-mg-road-an-ihg-hotel-with-bathtub-in-room.webp",
+      "slug": "holiday-inn-agra-mg-road-an-ihg-hotel-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Clarks Shiraz",
+      "image": "/assets/hotel-clarks-shiraz-agra-with-spabath.webp",
+      "slug": "hotel-clarks-shiraz-agra-with-spabath"
+    },
+    {
+      "name": "Hotel Doubletree By Hilton",
+      "image": "/assets/hotel-doubletree-by-hilton-agra-with-bathtub.webp",
+      "slug": "hotel-doubletree-by-hilton-agra-with-bathtub"
+    },
+    {
+      "name": "Suite Hotel Clarks Shiraz",
+      "image": "/assets/jacuzzi-suite-hotel-clarks-shiraz-agra.webp",
+      "slug": "jacuzzi-suite-hotel-clarks-shiraz-agra"
+    },
+    {
+      "name": "Jaypee Palace Hotel",
+      "image": "/assets/jaypee-palace-hotel-agra-with-bathtub-in-room.webp",
+      "slug": "jaypee-palace-hotel-agra-with-bathtub-in-room"
+    },
+    {
+      "name": "Radisson Hotel",
+      "image": "/assets/radisson-hotel-agra-with-bathtub.webp",
+      "slug": "radisson-hotel-agra-with-bathtub"
+    },
+    {
+      "name": "Romantic Bathtub Room The P L Palace",
+      "image": "/assets/romantic-bathtub-room-the-p-l-palace-agra.webp",
+      "slug": "romantic-bathtub-room-the-p-l-palace-agra"
+    },
+    {
+      "name": "Romantic Taj Hotel Convention Centre",
+      "image": "/assets/romantic-taj-hotel-convention-centre-agra-with-bath-tub-in-room.webp",
+      "slug": "romantic-taj-hotel-convention-centre-agra-with-bath-tub-in-room"
+    },
+    {
+      "name": "Taj Hotel Convention Centre",
+      "image": "/assets/taj-hotel-convention-centre-agra-with-bathtub.webp",
+      "slug": "taj-hotel-convention-centre-agra-with-bathtub"
+    },
+    {
+      "name": "Taj Ronak Luxury Hotels",
+      "image": "/assets/taj-ronak-luxury-hotels-agra-with-bathtub-in-room.webp",
+      "slug": "taj-ronak-luxury-hotels-agra-with-bathtub-in-room"
+    },
+    {
+      "name": "Taj Ronak Luxury Hotels",
+      "image": "/assets/taj-ronak-luxury-hotels-agra-with-spabath.webp",
+      "slug": "taj-ronak-luxury-hotels-agra-with-spabath"
+    },
+    {
+      "name": "Tajview Ihcl Seleqtions",
+      "image": "/assets/tajview-agra-ihcl-seleqtions-with-bathtub.webp",
+      "slug": "tajview-agra-ihcl-seleqtions-with-bathtub"
+    },
+    {
+      "name": "The P L Palace",
+      "image": "/assets/the-p-l-palace-agra-with-bathtub-in-room.webp",
+      "slug": "the-p-l-palace-agra-with-bathtub-in-room"
+    },
+    {
+      "name": "The P L Palace",
+      "image": "/assets/the-p-l-palace-agra-with-bathtub.webp",
+      "slug": "the-p-l-palace-agra-with-bathtub"
+    }
+  ],
+  "Udaipur": [
+    {
+      "name": "Hotel Bamboo Saa Resort Spa",
+      "image": "/assets/bathtub-hotel-bamboo-saa-resort-spa-udaipur-with-nice-views.webp",
+      "slug": "bathtub-hotel-bamboo-saa-resort-spa-udaipur-with-nice-views"
+    }
+  ],
+  "Amritsar": [
+    {
+      "name": "Hotel Blusalzz Residence",
+      "image": "/assets/bathtub-hotel-blusalzz-residence-amritsar.webp",
+      "slug": "bathtub-hotel-blusalzz-residence-amritsar"
+    },
+    {
+      "name": "Hotel Cape House",
+      "image": "/assets/bathtub-hotel-cape-house-amritsar.webp",
+      "slug": "bathtub-hotel-cape-house-amritsar"
+    },
+    {
+      "name": "Hotel Ranjits Svaasa",
+      "image": "/assets/bathtub-hotel-ranjits-svaasa-amritsar.webp",
+      "slug": "bathtub-hotel-ranjits-svaasa-amritsar"
+    },
+    {
+      "name": "Hotel Room Taj Swarna",
+      "image": "/assets/bathtub-hotel-room-taj-swarna-amritsar.webp",
+      "slug": "bathtub-hotel-room-taj-swarna-amritsar"
+    },
+    {
+      "name": "Room Holiday Inn Ranjit Avenue An Ihg Hotel",
+      "image": "/assets/bathtub-room-holiday-inn-amritsar-ranjit-avenue-an-ihg-hotel.webp",
+      "slug": "bathtub-room-holiday-inn-amritsar-ranjit-avenue-an-ihg-hotel"
+    },
+    {
+      "name": "Room Le Meridien",
+      "image": "/assets/bathtub-room-le-meridien-amritsar.webp",
+      "slug": "bathtub-room-le-meridien-amritsar"
+    },
+    {
+      "name": "Room The Pribson Hotel",
+      "image": "/assets/bathtub-room-the-pribson-hotel-amritsar.webp",
+      "slug": "bathtub-room-the-pribson-hotel-amritsar"
+    },
+    {
+      "name": "Cape House",
+      "image": "/assets/cape-house-amritsar-with-bathtub-ib-room.webp",
+      "slug": "cape-house-amritsar-with-bathtub-ib-room"
+    },
+    {
+      "name": "Cape House",
+      "image": "/assets/cape-house-amritsar-with-bathtub.webp",
+      "slug": "cape-house-amritsar-with-bathtub"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-amritsar-with-bathtub.webp",
+      "slug": "courtyard-by-marriott-amritsar-with-bathtub"
+    },
+    {
+      "name": "Fortune Ranjit Vihar Member Itcs Hotel Group",
+      "image": "/assets/fortune-ranjit-vihar-amritsar-member-itcs-hotel-group-with-spabath.webp",
+      "slug": "fortune-ranjit-vihar-amritsar-member-itcs-hotel-group-with-spabath"
+    },
+    {
+      "name": "Ganesha Palace",
+      "image": "/assets/ganesha-palace-amritsar-with-jacuzzi.webp",
+      "slug": "ganesha-palace-amritsar-with-jacuzzi"
+    },
+    {
+      "name": "Golden Premier",
+      "image": "/assets/golden-premier-amritsar-with-bathtub-in-room.webp",
+      "slug": "golden-premier-amritsar-with-bathtub-in-room"
+    },
+    {
+      "name": "Holiday Inn Ranjit Avenue An Ihg Hotel",
+      "image": "/assets/holiday-inn-amritsar-ranjit-avenue-an-ihg-hotel-with-bathtub.webp",
+      "slug": "holiday-inn-amritsar-ranjit-avenue-an-ihg-hotel-with-bathtub"
+    },
+    {
+      "name": "Holiday Inn Ranjit Avenue Ihg Hotel",
+      "image": "/assets/holiday-inn-amritsar-ranjit-avenue-ihg-hotel-with-bathtub-in-room.webp",
+      "slug": "holiday-inn-amritsar-ranjit-avenue-ihg-hotel-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Le Meridien",
+      "image": "/assets/hotel-le-meridien-amritsar-with-bathtub-in-room.webp",
+      "slug": "hotel-le-meridien-amritsar-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Levelup Signature",
+      "image": "/assets/hotel-levelup-signature-amritsar-with-bathtub.webp",
+      "slug": "hotel-levelup-signature-amritsar-with-bathtub"
+    },
+    {
+      "name": "Fortune Ranjit Vihar Member Itcs Hotel Group",
+      "image": "/assets/hottub-fortune-ranjit-vihar-amritsar-member-itcs-hotel-group.webp",
+      "slug": "hottub-fortune-ranjit-vihar-amritsar-member-itcs-hotel-group"
+    },
+    {
+      "name": "Ganesha Palace",
+      "image": "/assets/jacuzzi-ganesha-palace-amritsar.webp",
+      "slug": "jacuzzi-ganesha-palace-amritsar"
+    },
+    {
+      "name": "Hotel Suite Best Western Plus",
+      "image": "/assets/jacuzzi-hotel-suite-best-western-plus-amritsar.webp",
+      "slug": "jacuzzi-hotel-suite-best-western-plus-amritsar"
+    },
+    {
+      "name": "Spa Taj Swarna",
+      "image": "/assets/jacuzzi-spa-taj-swarna-amritsar.webp",
+      "slug": "jacuzzi-spa-taj-swarna-amritsar"
+    },
+    {
+      "name": "Suite Fortune Ranjit Vihar Member Itcs Hotel Group",
+      "image": "/assets/jacuzzi-suite-fortune-ranjit-vihar-amritsar-member-itcs-hotel-group.webp",
+      "slug": "jacuzzi-suite-fortune-ranjit-vihar-amritsar-member-itcs-hotel-group"
+    },
+    {
+      "name": "Romantic Hotel Ramada By Wyndham",
+      "image": "/assets/romantic-hotel-ramada-by-wyndham-amritsar-with-bathtub-in-room.webp",
+      "slug": "romantic-hotel-ramada-by-wyndham-amritsar-with-bathtub-in-room"
+    },
+    {
+      "name": "The Pribson Hotel",
+      "image": "/assets/the-pribson-hotel-amritsar-with-bathtub.webp",
+      "slug": "the-pribson-hotel-amritsar-with-bathtub"
+    }
+  ],
+  "Kolkata": [
+    {
+      "name": "Hotel Calcutta Bungalow",
+      "image": "/assets/bathtub-hotel-calcutta-bungalow-kolkata.webp",
+      "slug": "bathtub-hotel-calcutta-bungalow-kolkata"
+    },
+    {
+      "name": "Hotel Hyatt Regency",
+      "image": "/assets/bathtub-hotel-hyatt-regency-kolkata.webp",
+      "slug": "bathtub-hotel-hyatt-regency-kolkata"
+    },
+    {
+      "name": "Hotel The Westin Rajarhat",
+      "image": "/assets/bathtub-hotel-the-westin-kolkata-rajarhat.webp",
+      "slug": "bathtub-hotel-the-westin-kolkata-rajarhat"
+    },
+    {
+      "name": "Itc Sonar A Luxury Collection Hotel",
+      "image": "/assets/bathtub-itc-sonar-a-luxury-collection-hotel-kolkata.webp",
+      "slug": "bathtub-itc-sonar-a-luxury-collection-hotel-kolkata"
+    },
+    {
+      "name": "Jw Marriott Hotel",
+      "image": "/assets/bathtub-jw-marriott-hotel-kolkata.webp",
+      "slug": "bathtub-jw-marriott-hotel-kolkata"
+    },
+    {
+      "name": "Kenilworth Hotel",
+      "image": "/assets/bathtub-kenilworth-hotel-kolkata.webp",
+      "slug": "bathtub-kenilworth-hotel-kolkata"
+    },
+    {
+      "name": "Novotel Hotel And Residences",
+      "image": "/assets/bathtub-novotel-kolkata-hotel-and-residences.webp",
+      "slug": "bathtub-novotel-kolkata-hotel-and-residences"
+    },
+    {
+      "name": "Room Novotel Hotel And Residences",
+      "image": "/assets/bathtub-room-novotel-kolkata-hotel-and-residences.webp",
+      "slug": "bathtub-room-novotel-kolkata-hotel-and-residences"
+    },
+    {
+      "name": "Hothtub Hotel The Westin Rajarhat",
+      "image": "/assets/hothtub-hotel-the-westin-kolkata-rajarhat.webp",
+      "slug": "hothtub-hotel-the-westin-kolkata-rajarhat"
+    },
+    {
+      "name": "Hotel Hyatt Regency",
+      "image": "/assets/jacuzzi-hotel-hyatt-regency-kolkata.webp",
+      "slug": "jacuzzi-hotel-hyatt-regency-kolkata"
+    },
+    {
+      "name": "Hotel The Westin Rajarhat",
+      "image": "/assets/jacuzzi-hotel-the-westin-kolkata-rajarhat.webp",
+      "slug": "jacuzzi-hotel-the-westin-kolkata-rajarhat"
+    },
+    {
+      "name": "Itc Sonar A Luxury Collection Hotel",
+      "image": "/assets/jacuzzi-itc-sonar-a-luxury-collection-hotel-kolkata.webp",
+      "slug": "jacuzzi-itc-sonar-a-luxury-collection-hotel-kolkata"
+    },
+    {
+      "name": "Romantic Bathtub Itc Sonar A Luxury Collection Hotel",
+      "image": "/assets/romantic-bathtub-itc-sonar-a-luxury-collection-hotel-kolkata.webp",
+      "slug": "romantic-bathtub-itc-sonar-a-luxury-collection-hotel-kolkata"
+    },
+    {
+      "name": "Room Bathtub Jw Marriott Hotel",
+      "image": "/assets/room-bathtub-jw-marriott-hotel-kolkata.webp",
+      "slug": "room-bathtub-jw-marriott-hotel-kolkata"
+    },
+    {
+      "name": "Kenilworth Hotel",
+      "image": "/assets/spabath-kenilworth-hotel-kolkata.webp",
+      "slug": "spabath-kenilworth-hotel-kolkata"
+    }
+  ],
+  "Nainital": [
+    {
+      "name": "Hotel Casa De Bello Near Kainchi Dham",
+      "image": "/assets/bathtub-hotel-casa-de-bello-nainital-near-kainchi-dham.webp",
+      "slug": "bathtub-hotel-casa-de-bello-nainital-near-kainchi-dham"
+    },
+    {
+      "name": "In Room Casa De Bello Near Kainchi Dham",
+      "image": "/assets/bathtub-in-room-casa-de-bello-nainital-near-kainchi-dham.webp",
+      "slug": "bathtub-in-room-casa-de-bello-nainital-near-kainchi-dham"
+    },
+    {
+      "name": "Namah A Member Of Radisson Individuals Retreats",
+      "image": "/assets/bathtub-namah-nainital-a-member-of-radisson-individuals-retreats.webp",
+      "slug": "bathtub-namah-nainital-a-member-of-radisson-individuals-retreats"
+    },
+    {
+      "name": "Room Casa De Bello Near Kainchi Dham",
+      "image": "/assets/bathtub-room-casa-de-bello-nainital-near-kainchi-dham.webp",
+      "slug": "bathtub-room-casa-de-bello-nainital-near-kainchi-dham"
+    },
+    {
+      "name": "Room Spruce Hill Hotel Restro",
+      "image": "/assets/bathtub-room-spruce-hill-hotel-restro-nainital.webp",
+      "slug": "bathtub-room-spruce-hill-hotel-restro-nainital"
+    },
+    {
+      "name": "Suite Casa De Bello Near Kainchi Dham",
+      "image": "/assets/bathtub-suite-casa-de-bello-nainital-near-kainchi-dham.webp",
+      "slug": "bathtub-suite-casa-de-bello-nainital-near-kainchi-dham"
+    },
+    {
+      "name": "Casa De Bello Near Kainchi Dham",
+      "image": "/assets/casa-de-bello-nainital-near-kainchi-dham-with-bath-tub-in-room.webp",
+      "slug": "casa-de-bello-nainital-near-kainchi-dham-with-bath-tub-in-room"
+    },
+    {
+      "name": "Casa De Bello Near Kainchi Dham",
+      "image": "/assets/casa-de-bello-nainital-near-kainchi-dham-with-bathtub.webp",
+      "slug": "casa-de-bello-nainital-near-kainchi-dham-with-bathtub"
+    },
+    {
+      "name": "Casa De Bello Near Kainchi Dham",
+      "image": "/assets/casa-de-bello-nainital-near-kainchi-dham-with-hot-tub.webp",
+      "slug": "casa-de-bello-nainital-near-kainchi-dham-with-hot-tub"
+    },
+    {
+      "name": "Casa De Bello Near Kainchi Dham",
+      "image": "/assets/casa-de-bello-nainital-near-kainchi-dham-with-spabath-in-room.webp",
+      "slug": "casa-de-bello-nainital-near-kainchi-dham-with-spabath-in-room"
+    },
+    {
+      "name": "Casa De Bello Near Kainchi Dham",
+      "image": "/assets/casa-de-bello-nainital-near-kainchi-dham-with-spabath.webp",
+      "slug": "casa-de-bello-nainital-near-kainchi-dham-with-spabath"
+    },
+    {
+      "name": "Room The Lake Hill",
+      "image": "/assets/jacuzzi-room-the-lake-hill-nainital.webp",
+      "slug": "jacuzzi-room-the-lake-hill-nainital"
+    },
+    {
+      "name": "Spruce Hill Hotel Restro",
+      "image": "/assets/spruce-hill-hotel-restro-nainital-with-bathtub.webp",
+      "slug": "spruce-hill-hotel-restro-nainital-with-bathtub"
+    }
+  ],
+  "Pune": [
+    {
+      "name": "Hotel Conrad",
+      "image": "/assets/bathtub-hotel-conrad-pune.webp",
+      "slug": "bathtub-hotel-conrad-pune"
+    },
+    {
+      "name": "Hotel Conrad Spa",
+      "image": "/assets/bathtub-hotel-conrad-spa-pune.webp",
+      "slug": "bathtub-hotel-conrad-spa-pune"
+    },
+    {
+      "name": "Hotel Jw Marriott",
+      "image": "/assets/bathtub-hotel-jw-marriott-pune.webp",
+      "slug": "bathtub-hotel-jw-marriott-pune"
+    },
+    {
+      "name": "Hotel Tip Top International",
+      "image": "/assets/bathtub-hotel-tip-top-international-pune.webp",
+      "slug": "bathtub-hotel-tip-top-international-pune"
+    },
+    {
+      "name": "O Hotel",
+      "image": "/assets/bathtub-o-hotel-pune.webp",
+      "slug": "bathtub-o-hotel-pune"
+    },
+    {
+      "name": "Ramee Grand Hotel And Spa",
+      "image": "/assets/bathtub-ramee-grand-hotel-and-spa-pune.webp",
+      "slug": "bathtub-ramee-grand-hotel-and-spa-pune"
+    },
+    {
+      "name": "Room O Hotel",
+      "image": "/assets/bathtub-room-o-hotel-pune.webp",
+      "slug": "bathtub-room-o-hotel-pune"
+    },
+    {
+      "name": "Spa Hotel Conrad",
+      "image": "/assets/bathtub-spa-hotel-conrad-pune.webp",
+      "slug": "bathtub-spa-hotel-conrad-pune"
+    },
+    {
+      "name": "Hotel Tip Top International",
+      "image": "/assets/jacuzzi-hotel-tip-top-international-pune.webp",
+      "slug": "jacuzzi-hotel-tip-top-international-pune"
+    },
+    {
+      "name": "Room Hotel Tip Top International",
+      "image": "/assets/jacuzzi-room-hotel-tip-top-international-pune.webp",
+      "slug": "jacuzzi-room-hotel-tip-top-international-pune"
+    }
+  ],
+  "Ahmedabad": [
+    {
+      "name": "Hotel Courtyard By Marriott",
+      "image": "/assets/bathtub-hotel-courtyard-by-marriott-ahmedabad.webp",
+      "slug": "bathtub-hotel-courtyard-by-marriott-ahmedabad"
+    },
+    {
+      "name": "Hotel G Express Formerly Known As Tgb Express",
+      "image": "/assets/bathtub-hotel-g-express-formerly-known-as-tgb-express-ahmedabad.webp",
+      "slug": "bathtub-hotel-g-express-formerly-known-as-tgb-express-ahmedabad"
+    },
+    {
+      "name": "Hyatt Regency",
+      "image": "/assets/bathtub-hyatt-regency-ahmedabad.webp",
+      "slug": "bathtub-hyatt-regency-ahmedabad"
+    },
+    {
+      "name": "Novotel",
+      "image": "/assets/bathtub-novotel-ahmedabad.webp",
+      "slug": "bathtub-novotel-ahmedabad"
+    },
+    {
+      "name": "Radisson Blu Hotel",
+      "image": "/assets/bathtub-radisson-blu-hotel-ahmedabad.webp",
+      "slug": "bathtub-radisson-blu-hotel-ahmedabad"
+    },
+    {
+      "name": "Room Hotel Courtyard By Marriott",
+      "image": "/assets/bathtub-room-hotel-courtyard-by-marriott-ahmedabad.webp",
+      "slug": "bathtub-room-hotel-courtyard-by-marriott-ahmedabad"
+    },
+    {
+      "name": "Room Hyatt Regency",
+      "image": "/assets/bathtub-room-hyatt-regency-ahmedabad.webp",
+      "slug": "bathtub-room-hyatt-regency-ahmedabad"
+    },
+    {
+      "name": "Scenaria Hotel",
+      "image": "/assets/bathtub-scenaria-hotel-ahmedabad.webp",
+      "slug": "bathtub-scenaria-hotel-ahmedabad"
+    },
+    {
+      "name": "Hotel G Express Formerly Known As Tgb Express",
+      "image": "/assets/jacuzzi-hotel-g-express-formerly-known-as-tgb-express-ahmedabad.webp",
+      "slug": "jacuzzi-hotel-g-express-formerly-known-as-tgb-express-ahmedabad"
+    },
+    {
+      "name": "Novotel",
+      "image": "/assets/jacuzzi-novotel-ahmedabad.webp",
+      "slug": "jacuzzi-novotel-ahmedabad"
+    },
+    {
+      "name": "Room Bathtub Hyatt Regency",
+      "image": "/assets/room-bathtub-hyatt-regency-ahmedabad.webp",
+      "slug": "room-bathtub-hyatt-regency-ahmedabad"
+    }
+  ],
+  "Faridabad": [
+    {
+      "name": "Hotel Courtyard By Marriott Aravali Resort",
+      "image": "/assets/bathtub-hotel-courtyard-by-marriott-aravali-resort-faridabad.webp",
+      "slug": "bathtub-hotel-courtyard-by-marriott-aravali-resort-faridabad"
+    },
+    {
+      "name": "Hotel Vivanta Surajkund Ncr",
+      "image": "/assets/bathtub-hotel-faridabad-vivanta-surajkund-ncr.webp",
+      "slug": "bathtub-hotel-faridabad-vivanta-surajkund-ncr"
+    },
+    {
+      "name": "Hotel Park Plaza",
+      "image": "/assets/bathtub-hotel-park-plaza-faridabad.webp",
+      "slug": "bathtub-hotel-park-plaza-faridabad"
+    },
+    {
+      "name": "Hotel Radisson Blu",
+      "image": "/assets/bathtub-hotel-radisson-blu-faridabad.webp",
+      "slug": "bathtub-hotel-radisson-blu-faridabad"
+    },
+    {
+      "name": "Hotel Room Radisson Blu",
+      "image": "/assets/bathtub-hotel-room-radisson-blu-faridabad.webp",
+      "slug": "bathtub-hotel-room-radisson-blu-faridabad"
+    },
+    {
+      "name": "Hotel The Lalit Mangar",
+      "image": "/assets/bathtub-hotel-the-lalit-mangar-faridabad.webp",
+      "slug": "bathtub-hotel-the-lalit-mangar-faridabad"
+    },
+    {
+      "name": "Room Vivanta Surajkund Ncr",
+      "image": "/assets/bathtub-room-vivanta-surajkund-ncr-faridabad.webp",
+      "slug": "bathtub-room-vivanta-surajkund-ncr-faridabad"
+    },
+    {
+      "name": "Suite Park Plaza",
+      "image": "/assets/bathtub-suite-park-plaza-faridabad.webp",
+      "slug": "bathtub-suite-park-plaza-faridabad"
+    },
+    {
+      "name": "Courtyard By Marriott Aravali Resort",
+      "image": "/assets/courtyard-by-marriott-aravali-resort-faridabad-with-bathtub.webp",
+      "slug": "courtyard-by-marriott-aravali-resort-faridabad-with-bathtub"
+    },
+    {
+      "name": "Hotel Park Plaza",
+      "image": "/assets/hotel-park-plaza-faridabad-with-bathtub-in-room.webp",
+      "slug": "hotel-park-plaza-faridabad-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Lavit Couple Friendly Near Metro Station",
+      "image": "/assets/jacuzzi-hotel-lavit-couple-friendly-near-faridabad-metro-station.webp",
+      "slug": "jacuzzi-hotel-lavit-couple-friendly-near-faridabad-metro-station"
+    },
+    {
+      "name": "Park Plaza",
+      "image": "/assets/park-plaza-faridabad-with-bathtub.webp",
+      "slug": "park-plaza-faridabad-with-bathtub"
+    },
+    {
+      "name": "Radisson Blu",
+      "image": "/assets/radisson-blu-faridabad-with-bath-tub.webp",
+      "slug": "radisson-blu-faridabad-with-bath-tub"
+    },
+    {
+      "name": "Radisson Blu",
+      "image": "/assets/radisson-blu-faridabad-with-bathtub.webp",
+      "slug": "radisson-blu-faridabad-with-bathtub"
+    },
+    {
+      "name": "Faridabad Vivanta Surajkund Ncr",
+      "image": "/assets/spa-bath-faridabad-vivanta-surajkund-ncr.webp",
+      "slug": "spa-bath-faridabad-vivanta-surajkund-ncr"
+    },
+    {
+      "name": "The Lalit Mangar",
+      "image": "/assets/the-lalit-mangar-faridabad-with-bathtub.webp",
+      "slug": "the-lalit-mangar-faridabad-with-bathtub"
+    },
+    {
+      "name": "Vivanta Surajkund Ncr",
+      "image": "/assets/vivanta-surajkund-ncr-faridabad-with-bathtub-in-room.webp",
+      "slug": "vivanta-surajkund-ncr-faridabad-with-bathtub-in-room"
+    },
+    {
+      "name": "Vivanta Surajkund Ncr",
+      "image": "/assets/vivanta-surajkund-ncr-faridabad-with-bathtub.webp",
+      "slug": "vivanta-surajkund-ncr-faridabad-with-bathtub"
+    }
+  ],
+  "Nashik": [
+    {
+      "name": "Hotel Courtyard By Marriott",
+      "image": "/assets/bathtub-hotel-courtyard-by-marriott-nashik.webp",
+      "slug": "bathtub-hotel-courtyard-by-marriott-nashik"
+    },
+    {
+      "name": "Hotel Express Inn The Business Luxury Hotel",
+      "image": "/assets/bathtub-hotel-nashik-express-inn-the-business-luxury-hotel.webp",
+      "slug": "bathtub-hotel-nashik-express-inn-the-business-luxury-hotel"
+    },
+    {
+      "name": "In Room Freesia Resort By Express Inn",
+      "image": "/assets/bathtub-in-room-freesia-resort-by-express-inn-nashik.webp",
+      "slug": "bathtub-in-room-freesia-resort-by-express-inn-nashik"
+    },
+    {
+      "name": "Regenta Resort Soma Vine Village",
+      "image": "/assets/bathtub-regenta-resort-soma-vine-village-nashik.webp",
+      "slug": "bathtub-regenta-resort-soma-vine-village-nashik"
+    },
+    {
+      "name": "Room Courtyard By Marriott",
+      "image": "/assets/bathtub-room-courtyard-by-marriott-nashik.webp",
+      "slug": "bathtub-room-courtyard-by-marriott-nashik"
+    },
+    {
+      "name": "Room Grape County Eco Resort Spa",
+      "image": "/assets/bathtub-room-grape-county-eco-resort-spa-nashik.webp",
+      "slug": "bathtub-room-grape-county-eco-resort-spa-nashik"
+    },
+    {
+      "name": "Room Radisson Blu Hotel Spa",
+      "image": "/assets/bathtub-room-radisson-blu-hotel-spa-nashik.webp",
+      "slug": "bathtub-room-radisson-blu-hotel-spa-nashik"
+    },
+    {
+      "name": "Room Treat Hotel City Center",
+      "image": "/assets/bathtub-room-treat-hotel-nashik-city-center.webp",
+      "slug": "bathtub-room-treat-hotel-nashik-city-center"
+    },
+    {
+      "name": "The Ssk Solitaire Hotel Banquets",
+      "image": "/assets/bathtub-the-ssk-solitaire-hotel-banquets-nashik.webp",
+      "slug": "bathtub-the-ssk-solitaire-hotel-banquets-nashik"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-nashik-with-bathtub-in-room.webp",
+      "slug": "courtyard-by-marriott-nashik-with-bathtub-in-room"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-nashik-with-spabath.webp",
+      "slug": "courtyard-by-marriott-nashik-with-spabath"
+    },
+    {
+      "name": "Express Inn The Business Luxury Hotel",
+      "image": "/assets/express-inn-the-business-luxury-hotel-nashik-with-bathtub.webp",
+      "slug": "express-inn-the-business-luxury-hotel-nashik-with-bathtub"
+    },
+    {
+      "name": "Freesia Resort By Express Inn",
+      "image": "/assets/freesia-resort-by-express-inn-nashik-with-bathtub.webp",
+      "slug": "freesia-resort-by-express-inn-nashik-with-bathtub"
+    },
+    {
+      "name": "Grape County Eco Resort Spa",
+      "image": "/assets/grape-county-eco-resort-spa-nashik-with-bathtub-in-room.webp",
+      "slug": "grape-county-eco-resort-spa-nashik-with-bathtub-in-room"
+    },
+    {
+      "name": "Grape County Eco Resort Spa",
+      "image": "/assets/grape-county-eco-resort-spa-nashik-with-private-jacuzzi.webp",
+      "slug": "grape-county-eco-resort-spa-nashik-with-private-jacuzzi"
+    },
+    {
+      "name": "Hotel Grape County Eco Resort Spa",
+      "image": "/assets/hotel-grape-county-eco-resort-spa-nashik-with-bathtub.webp",
+      "slug": "hotel-grape-county-eco-resort-spa-nashik-with-bathtub"
+    },
+    {
+      "name": "Viveda Wellness Resort 2",
+      "image": "/assets/hottub-viveda-wellness-resort-nashik-2.webp",
+      "slug": "hottub-viveda-wellness-resort-nashik-2"
+    },
+    {
+      "name": "Grape County Eco Resort Spa",
+      "image": "/assets/jacuzzi-grape-county-eco-resort-spa-nashik.webp",
+      "slug": "jacuzzi-grape-county-eco-resort-spa-nashik"
+    },
+    {
+      "name": "Hotel Room Viveda Wellness Resort",
+      "image": "/assets/jacuzzi-hotel-room-viveda-wellness-resort-nashik.webp",
+      "slug": "jacuzzi-hotel-room-viveda-wellness-resort-nashik"
+    },
+    {
+      "name": "Room Viveda Wellness Resort",
+      "image": "/assets/jacuzzi-room-nashik-viveda-wellness-resort.webp",
+      "slug": "jacuzzi-room-nashik-viveda-wellness-resort"
+    },
+    {
+      "name": "Regenta Resort Soma Vine Village",
+      "image": "/assets/regenta-resort-soma-vine-village-nashik-with-bathtub.webp",
+      "slug": "regenta-resort-soma-vine-village-nashik-with-bathtub"
+    },
+    {
+      "name": "Romantic Bathtub Freesia Resort By Express Inn",
+      "image": "/assets/romantic-bathtub-nashik-freesia-resort-by-express-inn.webp",
+      "slug": "romantic-bathtub-nashik-freesia-resort-by-express-inn"
+    },
+    {
+      "name": "Romantic Spabath Express Inn The Business Luxury Hotel",
+      "image": "/assets/romantic-spabath-nashik-express-inn-the-business-luxury-hotel.webp",
+      "slug": "romantic-spabath-nashik-express-inn-the-business-luxury-hotel"
+    },
+    {
+      "name": "Treat Hotel City Center",
+      "image": "/assets/treat-hotel-nashik-city-center-with-bathtub.webp",
+      "slug": "treat-hotel-nashik-city-center-with-bathtub"
+    },
+    {
+      "name": "Viveda Wellness Resort",
+      "image": "/assets/viveda-wellness-resort-nashik-with-private-jacuzzi.webp",
+      "slug": "viveda-wellness-resort-nashik-with-private-jacuzzi"
+    }
+  ],
+  "Chandigarh": [
+    {
+      "name": "Hotel Hyatt Regency",
+      "image": "/assets/bathtub-hotel-hyatt-regency-chandigarh.webp",
+      "slug": "bathtub-hotel-hyatt-regency-chandigarh"
+    },
+    {
+      "name": "Hotel The Lalit",
+      "image": "/assets/bathtub-hotel-the-lalit-chandigarh.webp",
+      "slug": "bathtub-hotel-the-lalit-chandigarh"
+    },
+    {
+      "name": "Hotel The Regent Regency Rediscovered",
+      "image": "/assets/bathtub-hotel-the-regent-chandigarh-regency-rediscovered.webp",
+      "slug": "bathtub-hotel-the-regent-chandigarh-regency-rediscovered"
+    },
+    {
+      "name": "Hotel Wyndham Mohali",
+      "image": "/assets/bathtub-hotel-wyndham-chandigarh-mohali.webp",
+      "slug": "bathtub-hotel-wyndham-chandigarh-mohali"
+    },
+    {
+      "name": "Room Hyatt Regency",
+      "image": "/assets/bathtub-room-hyatt-regency-chandigarh.webp",
+      "slug": "bathtub-room-hyatt-regency-chandigarh"
+    },
+    {
+      "name": "Room Jw Marriott Hotel",
+      "image": "/assets/bathtub-room-jw-marriott-hotel-chandigarh.webp",
+      "slug": "bathtub-room-jw-marriott-hotel-chandigarh"
+    },
+    {
+      "name": "Room Lords Inn",
+      "image": "/assets/bathtub-room-lords-inn-chandigarh-zirakpur.webp",
+      "slug": "bathtub-room-lords-inn-chandigarh-zirakpur"
+    },
+    {
+      "name": "Wyndham Mohali Hotel",
+      "image": "/assets/bathtub-wyndham-chandigarh-mohali-hotel.webp",
+      "slug": "bathtub-wyndham-chandigarh-mohali-hotel"
+    },
+    {
+      "name": "Holiday Inn Panchkula An Ihg Hotel",
+      "image": "/assets/holiday-inn-chandigarh-panchkula-an-ihg-hotel-with-romantic-bathtub.webp",
+      "slug": "holiday-inn-chandigarh-panchkula-an-ihg-hotel-with-romantic-bathtub"
+    },
+    {
+      "name": "Hotel Lords Inn",
+      "image": "/assets/hotel-lords-inn-chandigarh-zirakpur-with-romantic-bathtub-in-room.webp",
+      "slug": "hotel-lords-inn-chandigarh-zirakpur-with-romantic-bathtub-in-room"
+    },
+    {
+      "name": "Hyatt Centric Sector17 Hotel",
+      "image": "/assets/hyatt-centric-sector17-chandigarh-hotel-with-bathtub.webp",
+      "slug": "hyatt-centric-sector17-chandigarh-hotel-with-bathtub"
+    },
+    {
+      "name": "Hyatt Regency Hotel",
+      "image": "/assets/hyatt-regency-chandigarh-hotel-with-bathtub.webp",
+      "slug": "hyatt-regency-chandigarh-hotel-with-bathtub"
+    },
+    {
+      "name": "Hyatt Regency",
+      "image": "/assets/hyatt-regency-chandigarh-with-bathtub-in-room.webp",
+      "slug": "hyatt-regency-chandigarh-with-bathtub-in-room"
+    },
+    {
+      "name": "Hyatt Regency",
+      "image": "/assets/jacuzzi-hyatt-regency-chandigarh.webp",
+      "slug": "jacuzzi-hyatt-regency-chandigarh"
+    },
+    {
+      "name": "Room The Regent Regency Rediscovered",
+      "image": "/assets/jacuzzi-room-the-regent-chandigarh-regency-rediscovered.webp",
+      "slug": "jacuzzi-room-the-regent-chandigarh-regency-rediscovered"
+    },
+    {
+      "name": "Jw Marriott Hotel",
+      "image": "/assets/jw-marriott-hotel-chandigarh-with-bathtub-in-room.webp",
+      "slug": "jw-marriott-hotel-chandigarh-with-bathtub-in-room"
+    },
+    {
+      "name": "Jw Marriott Hotel",
+      "image": "/assets/jw-marriott-hotel-chandigarh-with-bathtub.webp",
+      "slug": "jw-marriott-hotel-chandigarh-with-bathtub"
+    },
+    {
+      "name": "Park Plaza Hotel",
+      "image": "/assets/park-plaza-chandigarh-zirakpur-hotel-with-romantic-bathtub.webp",
+      "slug": "park-plaza-chandigarh-zirakpur-hotel-with-romantic-bathtub"
+    },
+    {
+      "name": "Radisson Hotel Room",
+      "image": "/assets/radisson-chandigarh-zirakpur-hotel-room-with-hot-tub.webp",
+      "slug": "radisson-chandigarh-zirakpur-hotel-room-with-hot-tub"
+    },
+    {
+      "name": "Radisson Red Mohali",
+      "image": "/assets/radisson-red-chandigarh-mohali-with-bathtub-in-room.webp",
+      "slug": "radisson-red-chandigarh-mohali-with-bathtub-in-room"
+    },
+    {
+      "name": "The Regent Regency Rediscovered",
+      "image": "/assets/the-regent-chandigarh-regency-rediscovered-with-bathtub.webp",
+      "slug": "the-regent-chandigarh-regency-rediscovered-with-bathtub"
+    },
+    {
+      "name": "Wyndham Mohali Hotel",
+      "image": "/assets/wyndham-chandigarh-mohali-hotel-with-bathtub-in-room.webp",
+      "slug": "wyndham-chandigarh-mohali-hotel-with-bathtub-in-room"
+    },
+    {
+      "name": "Wyndham Mohali Hotel",
+      "image": "/assets/wyndham-chandigarh-mohali-hotel-with-bathtub.webp",
+      "slug": "wyndham-chandigarh-mohali-hotel-with-bathtub"
+    }
+  ],
+  "Karjat": [
+    {
+      "name": "Hotel The Kanila Resort",
+      "image": "/assets/bathtub-hotel-karjat-the-kanila-resort.webp",
+      "slug": "bathtub-hotel-karjat-the-kanila-resort"
+    },
+    {
+      "name": "Hotel Room Oleander Farms",
+      "image": "/assets/bathtub-hotel-room-oleander-farms-karjat.webp",
+      "slug": "bathtub-hotel-room-oleander-farms-karjat"
+    },
+    {
+      "name": "Hillrock Resort Villas Neral",
+      "image": "/assets/hillrock-resort-villas-neral-karjat-with-bathtub.webp",
+      "slug": "hillrock-resort-villas-neral-karjat-with-bathtub"
+    },
+    {
+      "name": "Room Teak Resort",
+      "image": "/assets/hot-tub-room-teak-resort-karjat.webp",
+      "slug": "hot-tub-room-teak-resort-karjat"
+    },
+    {
+      "name": "Hut Staycation",
+      "image": "/assets/jacuzzi-hut-staycation-karjat-with-hot-tub.webp",
+      "slug": "jacuzzi-hut-staycation-karjat-with-hot-tub"
+    },
+    {
+      "name": "Hut Staycation",
+      "image": "/assets/jacuzzi-hut-staycation-karjat.webp",
+      "slug": "jacuzzi-hut-staycation-karjat"
+    },
+    {
+      "name": "Radisson Blu Plaza Resort Convention Centre",
+      "image": "/assets/jacuzzi-radisson-blu-plaza-resort-convention-centre-karjat.webp",
+      "slug": "jacuzzi-radisson-blu-plaza-resort-convention-centre-karjat"
+    },
+    {
+      "name": "Room Teak Resort",
+      "image": "/assets/jacuzzi-room-teak-resort-karjat.webp",
+      "slug": "jacuzzi-room-teak-resort-karjat"
+    },
+    {
+      "name": "Oleander Farms",
+      "image": "/assets/oleander-farms-karjat-with-bathtub-in-room.webp",
+      "slug": "oleander-farms-karjat-with-bathtub-in-room"
+    },
+    {
+      "name": "Radisson Blu Plaza Resort Convention Centre",
+      "image": "/assets/radisson-blu-plaza-resort-convention-centre-karjat-with-bathtub.webp",
+      "slug": "radisson-blu-plaza-resort-convention-centre-karjat-with-bathtub"
+    },
+    {
+      "name": "Romantic Jacuzzi Room Touchwood Villa Khalapur",
+      "image": "/assets/romantic-jacuzzi-room-touchwood-villa-karjat-khalapur.webp",
+      "slug": "romantic-jacuzzi-room-touchwood-villa-karjat-khalapur"
+    },
+    {
+      "name": "Room Teak Resort",
+      "image": "/assets/spabath-room-teak-resort-karjat.webp",
+      "slug": "spabath-room-teak-resort-karjat"
+    },
+    {
+      "name": "Teak Resort",
+      "image": "/assets/teak-resort-karjat-with-jacuzzi-in-room.webp",
+      "slug": "teak-resort-karjat-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Teak Resort",
+      "image": "/assets/teak-resort-karjat-with-jacuzzi.webp",
+      "slug": "teak-resort-karjat-with-jacuzzi"
+    },
+    {
+      "name": "Teak Resort",
+      "image": "/assets/teak-resort-karjat-with-spabath-in-room.webp",
+      "slug": "teak-resort-karjat-with-spabath-in-room"
+    },
+    {
+      "name": "The Kanila Resort",
+      "image": "/assets/the-kanila-resort-karjat-with-bathtub.webp",
+      "slug": "the-kanila-resort-karjat-with-bathtub"
+    },
+    {
+      "name": "Touchwood Villa Khalapur",
+      "image": "/assets/touchwood-villa-karjat-khalapur-with-spabath-in-room.webp",
+      "slug": "touchwood-villa-karjat-khalapur-with-spabath-in-room"
+    }
+  ],
+  "Mahabalipuram": [
+    {
+      "name": "Hotel Taj Fishermans Cove Resort Spa Chennai",
+      "image": "/assets/bathtub-hotel-mahabalipuram-taj-fishermans-cove-resort-spa-chennai.webp",
+      "slug": "bathtub-hotel-mahabalipuram-taj-fishermans-cove-resort-spa-chennai"
+    },
+    {
+      "name": "Hotel Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/bathtub-hotel-sheraton-grand-chennai-resort-spa-mahabalipuram.webp",
+      "slug": "bathtub-hotel-sheraton-grand-chennai-resort-spa-mahabalipuram"
+    },
+    {
+      "name": "Intercontinental Chennai Resort An Ihg Hotel",
+      "image": "/assets/bathtub-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel.webp",
+      "slug": "bathtub-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel"
+    },
+    {
+      "name": "Mahabalipuram Blu Be View",
+      "image": "/assets/bathtub-mahabalipuram-blu-be-view.webp",
+      "slug": "bathtub-mahabalipuram-blu-be-view"
+    },
+    {
+      "name": "Mahabalipuram Kaldan Samudhra Palace",
+      "image": "/assets/bathtub-mahabalipuram-kaldan-samudhra-palace.webp",
+      "slug": "bathtub-mahabalipuram-kaldan-samudhra-palace"
+    },
+    {
+      "name": "Mahabalipuram Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/bathtub-mahabalipuram-sheraton-grand-chennai-resort-spa.webp",
+      "slug": "bathtub-mahabalipuram-sheraton-grand-chennai-resort-spa"
+    },
+    {
+      "name": "Montecarlo Hotel",
+      "image": "/assets/bathtub-montecarlo-hotel-mahabalipuram.webp",
+      "slug": "bathtub-montecarlo-hotel-mahabalipuram"
+    },
+    {
+      "name": "Room Kaldan Samudhra Palace",
+      "image": "/assets/bathtub-room-kaldan-samudhra-palace-mahabalipuram.webp",
+      "slug": "bathtub-room-kaldan-samudhra-palace-mahabalipuram"
+    },
+    {
+      "name": "Room Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/bathtub-room-sheraton-grand-chennai-resort-spa-mahabalipuram.webp",
+      "slug": "bathtub-room-sheraton-grand-chennai-resort-spa-mahabalipuram"
+    },
+    {
+      "name": "Room Taj Fishermans Cove Resort Spa Chennai",
+      "image": "/assets/bathtub-room-taj-fishermans-cove-resort-spa-chennai-mahabalipuram.webp",
+      "slug": "bathtub-room-taj-fishermans-cove-resort-spa-chennai-mahabalipuram"
+    },
+    {
+      "name": "Horizon Blu Inn",
+      "image": "/assets/horizon-blu-inn-mahabalipuram-with-bathtub-in-room.webp",
+      "slug": "horizon-blu-inn-mahabalipuram-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/hottub-hotel-sheraton-grand-chennai-resort-spa-mahabalipuram.webp",
+      "slug": "hottub-hotel-sheraton-grand-chennai-resort-spa-mahabalipuram"
+    },
+    {
+      "name": "Intercontinental Chennai Resort An Ihg Hotel",
+      "image": "/assets/intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel-with-bathtub.webp",
+      "slug": "intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel-with-bathtub"
+    },
+    {
+      "name": "Room Intercontinental Chennai Resort An Ihg Hotel",
+      "image": "/assets/jacuzzi-room-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel.webp",
+      "slug": "jacuzzi-room-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel"
+    },
+    {
+      "name": "Kaldan Samudhra Palace",
+      "image": "/assets/kaldan-samudhra-palace-mahabalipuram-with-bathtub.webp",
+      "slug": "kaldan-samudhra-palace-mahabalipuram-with-bathtub"
+    },
+    {
+      "name": "Montecarlo Hotel",
+      "image": "/assets/montecarlo-hotel-mahabalipuram-with-bathtub.webp",
+      "slug": "montecarlo-hotel-mahabalipuram-with-bathtub"
+    },
+    {
+      "name": "Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/sheraton-grand-chennai-resort-spa-mahabalipuram-with-bath-tub.webp",
+      "slug": "sheraton-grand-chennai-resort-spa-mahabalipuram-with-bath-tub"
+    },
+    {
+      "name": "Sheraton Grand Chennai Resort Spa",
+      "image": "/assets/sheraton-grand-chennai-resort-spa-mahabalipuram-with-bathtub-in-room.webp",
+      "slug": "sheraton-grand-chennai-resort-spa-mahabalipuram-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Intercontinental Chennai Resort An Ihg Hotel",
+      "image": "/assets/spabath-room-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel.webp",
+      "slug": "spabath-room-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel"
+    },
+    {
+      "name": "Taj Fishermans Cove Resort Spa Chennai",
+      "image": "/assets/taj-fishermans-cove-resort-spa-chennai-mahabalipuram-with-bathtub.webp",
+      "slug": "taj-fishermans-cove-resort-spa-chennai-mahabalipuram-with-bathtub"
+    }
+  ],
+  "New Delhi": [
+    {
+      "name": "Hotel Novotel New Aerocity International Airport",
+      "image": "/assets/bathtub-hotel-novotel-new-delhi-aerocity-international-airport.webp",
+      "slug": "bathtub-hotel-novotel-new-delhi-aerocity-international-airport"
+    },
+    {
+      "name": "Hotel Pullman New Aerocity International Airport",
+      "image": "/assets/bathtub-hotel-pullman-new-delhi-aerocity-international-airport.webp",
+      "slug": "bathtub-hotel-pullman-new-delhi-aerocity-international-airport"
+    },
+    {
+      "name": "Hotel Radisson Blu Plaza Airport",
+      "image": "/assets/bathtub-hotel-radisson-blu-plaza-delhi-airport.webp",
+      "slug": "bathtub-hotel-radisson-blu-plaza-delhi-airport"
+    },
+    {
+      "name": "Ihg Hotel Crowne Plaza New Okhla",
+      "image": "/assets/bathtub-ihg-hotel-crowne-plaza-new-delhi-okhla.webp",
+      "slug": "bathtub-ihg-hotel-crowne-plaza-new-delhi-okhla"
+    },
+    {
+      "name": "Room Crowne Plaza New Okhla An Ihg Hotel",
+      "image": "/assets/bathtub-room-crowne-plaza-new-delhi-okhla-an-ihg-hotel.webp",
+      "slug": "bathtub-room-crowne-plaza-new-delhi-okhla-an-ihg-hotel"
+    },
+    {
+      "name": "Room Hotel Krishna By Rcg Hotels New",
+      "image": "/assets/bathtub-room-hotel-krishna-by-rcg-hotels-paharganj-new-delhi.webp",
+      "slug": "bathtub-room-hotel-krishna-by-rcg-hotels-paharganj-new-delhi"
+    },
+    {
+      "name": "Room Novotel New Aerocity International Airport",
+      "image": "/assets/bathtub-room-novotel-new-delhi-aerocity-international-airport.webp",
+      "slug": "bathtub-room-novotel-new-delhi-aerocity-international-airport"
+    },
+    {
+      "name": "Room Pullman New Aerocity International Airport",
+      "image": "/assets/bathtub-room-pullman-new-delhi-aerocity-international-airport.webp",
+      "slug": "bathtub-room-pullman-new-delhi-aerocity-international-airport"
+    },
+    {
+      "name": "Room Radisson Blu Plaza Airport",
+      "image": "/assets/bathtub-room-radisson-blu-plaza-delhi-airport.webp",
+      "slug": "bathtub-room-radisson-blu-plaza-delhi-airport"
+    },
+    {
+      "name": "Room The Imperial New",
+      "image": "/assets/bathtub-room-the-imperial-new-delhi.webp",
+      "slug": "bathtub-room-the-imperial-new-delhi"
+    },
+    {
+      "name": "Crowne Plaza New Okhla An Ihg Hotel",
+      "image": "/assets/crowne-plaza-new-delhi-okhla-an-ihg-hotel-with-bathtub.webp",
+      "slug": "crowne-plaza-new-delhi-okhla-an-ihg-hotel-with-bathtub"
+    },
+    {
+      "name": "Crowne Plaza New Okhla An Ihg Hotel",
+      "image": "/assets/crowne-plaza-new-delhi-okhla-an-ihg-hotel-with-romantic-bathtub.webp",
+      "slug": "crowne-plaza-new-delhi-okhla-an-ihg-hotel-with-romantic-bathtub"
+    },
+    {
+      "name": "Diplomat Chanakyapuri New A Boutique Hotel",
+      "image": "/assets/diplomat-chanakyapuri-new-delhi-a-boutique-hotel-with-bathtub.webp",
+      "slug": "diplomat-chanakyapuri-new-delhi-a-boutique-hotel-with-bathtub"
+    },
+    {
+      "name": "Room The Prime",
+      "image": "/assets/hot-tub-room-the-prime-delhi.webp",
+      "slug": "hot-tub-room-the-prime-delhi"
+    },
+    {
+      "name": "Hotel Krishna By Rcg Hotels New",
+      "image": "/assets/hotel-krishna-by-rcg-hotels-paharganj-new-delhi-with-bathtub-in-room.webp",
+      "slug": "hotel-krishna-by-rcg-hotels-paharganj-new-delhi-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Jaypee Vasant Continental New",
+      "image": "/assets/hottub-room-jaypee-vasant-continental-new-delhi.webp",
+      "slug": "hottub-room-jaypee-vasant-continental-new-delhi"
+    },
+    {
+      "name": "Hyatt Centric Janakpuri New",
+      "image": "/assets/hyatt-centric-janakpuri-new-delhi-with-bathtub-in-room.webp",
+      "slug": "hyatt-centric-janakpuri-new-delhi-with-bathtub-in-room"
+    },
+    {
+      "name": "Jaypee Vasant Continental New",
+      "image": "/assets/jacuzzi-jaypee-vasant-continental-new-delhi.webp",
+      "slug": "jacuzzi-jaypee-vasant-continental-new-delhi"
+    },
+    {
+      "name": "Roseate House New Aerocity",
+      "image": "/assets/jacuzzi-roseate-house-new-delhi-aerocity.webp",
+      "slug": "jacuzzi-roseate-house-new-delhi-aerocity"
+    },
+    {
+      "name": "The Imperial New",
+      "image": "/assets/jacuzzi-the-imperial-new-delhi.webp",
+      "slug": "jacuzzi-the-imperial-new-delhi"
+    },
+    {
+      "name": "Jaypee Vasant Continental New",
+      "image": "/assets/jaypee-vasant-continental-new-delhi-with-bathtub.webp",
+      "slug": "jaypee-vasant-continental-new-delhi-with-bathtub"
+    },
+    {
+      "name": "Novotel New Aerocity International Airport Hotel Room",
+      "image": "/assets/novotel-new-delhi-aerocity-international-airport-hotel-room-with-bathtub.webp",
+      "slug": "novotel-new-delhi-aerocity-international-airport-hotel-room-with-bathtub"
+    },
+    {
+      "name": "Pullman New Aerocity International Airport",
+      "image": "/assets/pullman-new-delhi-aerocity-international-airport-with-bathtub-in-room.webp",
+      "slug": "pullman-new-delhi-aerocity-international-airport-with-bathtub-in-room"
+    },
+    {
+      "name": "Pullman New Aerocity International Airport",
+      "image": "/assets/pullman-new-delhi-aerocity-international-airport-with-bathtub.webp",
+      "slug": "pullman-new-delhi-aerocity-international-airport-with-bathtub"
+    },
+    {
+      "name": "Radisson Blu Plaza Airport",
+      "image": "/assets/radisson-blu-plaza-delhi-airport-with-bathtub.webp",
+      "slug": "radisson-blu-plaza-delhi-airport-with-bathtub"
+    },
+    {
+      "name": "Staybook Hotel Nitya Maharani New",
+      "image": "/assets/staybook-hotel-nitya-maharani-new-delhi-paharganj.webp",
+      "slug": "staybook-hotel-nitya-maharani-new-delhi-paharganj"
+    },
+    {
+      "name": "The Imperial New",
+      "image": "/assets/the-imperial-new-delhi-with-jacuzzi.webp",
+      "slug": "the-imperial-new-delhi-with-jacuzzi"
+    },
+    {
+      "name": "The Park New",
+      "image": "/assets/the-park-new-delhi-with-bathtub-in-room.webp",
+      "slug": "the-park-new-delhi-with-bathtub-in-room"
+    },
+    {
+      "name": "The Prime",
+      "image": "/assets/the-prime-delhi-with-hot-tub.webp",
+      "slug": "the-prime-delhi-with-hot-tub"
+    }
+  ],
+  "Zirakpur": [
+    {
+      "name": "Hotel Pearl Wood",
+      "image": "/assets/bathtub-hotel-pearl-wood-zirakpur.webp",
+      "slug": "bathtub-hotel-pearl-wood-zirakpur"
+    },
+    {
+      "name": "Room Pax Ak Continental",
+      "image": "/assets/bathtub-room-pax-ak-continental-zirakpur.webp",
+      "slug": "bathtub-room-pax-ak-continental-zirakpur"
+    },
+    {
+      "name": "Hotel Lucky Inn",
+      "image": "/assets/hotel-lucky-inn-zirakpur-with-bathtub-in-room.webp",
+      "slug": "hotel-lucky-inn-zirakpur-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Pride Inn",
+      "image": "/assets/hottub-room-pride-inn-zirakpur.webp",
+      "slug": "hottub-room-pride-inn-zirakpur"
+    },
+    {
+      "name": "Hotel Pride Inn",
+      "image": "/assets/jacuzzi-hotel-pride-inn-zirakpur.webp",
+      "slug": "jacuzzi-hotel-pride-inn-zirakpur"
+    },
+    {
+      "name": "Urban Homestay Camping Swimming Pool Wood Cottage",
+      "image": "/assets/jacuzzi-urban-homestay-camping-swimming-pool-wood-cottage-zirakpur.webp",
+      "slug": "jacuzzi-urban-homestay-camping-swimming-pool-wood-cottage-zirakpur"
+    },
+    {
+      "name": "Pax Ak Continental",
+      "image": "/assets/pax-ak-continental-zirakpur-with-romantic-bathtub-in-room.webp",
+      "slug": "pax-ak-continental-zirakpur-with-romantic-bathtub-in-room"
+    },
+    {
+      "name": "Pride Inn",
+      "image": "/assets/pride-inn-zirakpur-with-jacuzzi-in-room.webp",
+      "slug": "pride-inn-zirakpur-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Zirakpur Urban Homestay Camping Swimming Pool Wood Cottage",
+      "image": "/assets/spabath-zirakpur-urban-homestay-camping-swimming-pool-wood-cottage.webp",
+      "slug": "spabath-zirakpur-urban-homestay-camping-swimming-pool-wood-cottage"
+    }
+  ],
+  "Puri": [
+    {
+      "name": "Hotel Mayfair Waves",
+      "image": "/assets/bathtub-hotel-puri-mayfair-waves.webp",
+      "slug": "bathtub-hotel-puri-mayfair-waves"
+    },
+    {
+      "name": "Hotel Pride Ananya Resorts",
+      "image": "/assets/bathtub-hotel-puri-pride-ananya-resorts.webp",
+      "slug": "bathtub-hotel-puri-pride-ananya-resorts"
+    },
+    {
+      "name": "Hotel Surya Beach Inn",
+      "image": "/assets/hotel-surya-beach-inn-puri-with-bathtub.webp",
+      "slug": "hotel-surya-beach-inn-puri-with-bathtub"
+    },
+    {
+      "name": "Room Mayfair Heritage",
+      "image": "/assets/jacuzzi-room-puri-mayfair-heritage.webp",
+      "slug": "jacuzzi-room-puri-mayfair-heritage"
+    },
+    {
+      "name": "Mayfair Waves",
+      "image": "/assets/mayfair-waves-puri-with-bathtub-in-room.webp",
+      "slug": "mayfair-waves-puri-with-bathtub-in-room"
+    }
+  ],
+  "Coimbatore": [
+    {
+      "name": "Hotel Radisson Blu",
+      "image": "/assets/bathtub-hotel-radisson-blu-coimbatore.webp",
+      "slug": "bathtub-hotel-radisson-blu-coimbatore"
+    },
+    {
+      "name": "Hotel Vivanta",
+      "image": "/assets/bathtub-hotel-vivanta-coimbatore.webp",
+      "slug": "bathtub-hotel-vivanta-coimbatore"
+    },
+    {
+      "name": "Room Radisson Blu",
+      "image": "/assets/bathtub-room-radisson-blu-coimbatore.webp",
+      "slug": "bathtub-room-radisson-blu-coimbatore"
+    },
+    {
+      "name": "Gokulam Park",
+      "image": "/assets/gokulam-park-coimbatore-with-bathtub.webp",
+      "slug": "gokulam-park-coimbatore-with-bathtub"
+    },
+    {
+      "name": "Hash Six Hotels",
+      "image": "/assets/hash-six-hotels-coimbatore-with-bathtub.webp",
+      "slug": "hash-six-hotels-coimbatore-with-bathtub"
+    },
+    {
+      "name": "Hotel Park Elanza",
+      "image": "/assets/hotel-park-elanza-coimbatore-with-hottub.webp",
+      "slug": "hotel-park-elanza-coimbatore-with-hottub"
+    },
+    {
+      "name": "Hotel Park Elanza",
+      "image": "/assets/hotel-park-elanza-coimbatore-with-jacuzzi-in-room.webp",
+      "slug": "hotel-park-elanza-coimbatore-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Hotel Radisson Blu",
+      "image": "/assets/hottub-hotel-radisson-blu-coimbatore.webp",
+      "slug": "hottub-hotel-radisson-blu-coimbatore"
+    },
+    {
+      "name": "Room Hotel Park Elanza",
+      "image": "/assets/jacuzzi-room-hotel-park-elanza-coimbatore.webp",
+      "slug": "jacuzzi-room-hotel-park-elanza-coimbatore"
+    },
+    {
+      "name": "Radisson Blu",
+      "image": "/assets/radisson-blu-coimbatore-with-bathtub-in-room.webp",
+      "slug": "radisson-blu-coimbatore-with-bathtub-in-room"
+    },
+    {
+      "name": "Radisson Blu",
+      "image": "/assets/radisson-blu-coimbatore-with-spabath.webp",
+      "slug": "radisson-blu-coimbatore-with-spabath"
+    },
+    {
+      "name": "Romantic Bathtub Gokulam Park",
+      "image": "/assets/romantic-bathtub-gokulam-park-coimbatore.webp",
+      "slug": "romantic-bathtub-gokulam-park-coimbatore"
+    },
+    {
+      "name": "Romantic Hotel Vivanta",
+      "image": "/assets/romantic-hotel-vivanta-coimbatore-with-bathtub.webp",
+      "slug": "romantic-hotel-vivanta-coimbatore-with-bathtub"
+    },
+    {
+      "name": "Sr Jungle Resort",
+      "image": "/assets/sr-jungle-resort-coimbatore-with-romantic-bathtub.webp",
+      "slug": "sr-jungle-resort-coimbatore-with-romantic-bathtub"
+    }
+  ],
+  "Bhopal": [
+    {
+      "name": "Hotel Room Courtyard By Marriott",
+      "image": "/assets/bathtub-hotel-room-courtyard-by-marriott-bhopal.webp",
+      "slug": "bathtub-hotel-room-courtyard-by-marriott-bhopal"
+    },
+    {
+      "name": "Hotel Room Radisson",
+      "image": "/assets/bathtub-hotel-room-radisson-bhopal.webp",
+      "slug": "bathtub-hotel-room-radisson-bhopal"
+    },
+    {
+      "name": "Hotel Taj Lakefront",
+      "image": "/assets/bathtub-hotel-taj-lakefront-bhopal.webp",
+      "slug": "bathtub-hotel-taj-lakefront-bhopal"
+    },
+    {
+      "name": "Room Giovanni Village Resort",
+      "image": "/assets/bathtub-room-giovanni-village-resort-bhopal.webp",
+      "slug": "bathtub-room-giovanni-village-resort-bhopal"
+    },
+    {
+      "name": "Courtyard By Marriott Hottub",
+      "image": "/assets/courtyard-by-marriott-bhopal-hottub.webp",
+      "slug": "courtyard-by-marriott-bhopal-hottub"
+    },
+    {
+      "name": "Courtyard By Marriott With Bath",
+      "image": "/assets/courtyard-by-marriott-bhopal-with-bath.webp",
+      "slug": "courtyard-by-marriott-bhopal-with-bath"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-bhopal-with-bathtub-in-room.webp",
+      "slug": "courtyard-by-marriott-bhopal-with-bathtub-in-room"
+    },
+    {
+      "name": "Ganpati Hotel",
+      "image": "/assets/ganpati-hotel-bhopal-with-bathtub.webp",
+      "slug": "ganpati-hotel-bhopal-with-bathtub"
+    },
+    {
+      "name": "Giovanni Village Resort",
+      "image": "/assets/giovanni-village-resort-bhopal-with-bathtub-in-room.webp",
+      "slug": "giovanni-village-resort-bhopal-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Caesars Palace",
+      "image": "/assets/hotel-caesars-palace-bhopal-with-hottub-in-room.webp",
+      "slug": "hotel-caesars-palace-bhopal-with-hottub-in-room"
+    },
+    {
+      "name": "Hotel Caesars Palace",
+      "image": "/assets/hotel-caesars-palace-bhopal-with-hottub.webp",
+      "slug": "hotel-caesars-palace-bhopal-with-hottub"
+    },
+    {
+      "name": "Hotel Caesars Palace",
+      "image": "/assets/hotel-caesars-palace-bhopal-with-spabath-in-room.webp",
+      "slug": "hotel-caesars-palace-bhopal-with-spabath-in-room"
+    },
+    {
+      "name": "Hotel Room Taj Lakefront",
+      "image": "/assets/hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view.webp",
+      "slug": "hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view"
+    },
+    {
+      "name": "Hotel Sapphire Blue",
+      "image": "/assets/hotel-sapphire-blue-bhopal-with-jacuzzi-in-room.webp",
+      "slug": "hotel-sapphire-blue-bhopal-with-jacuzzi-in-room"
+    },
+    {
+      "name": "Room Hotel Caesars Palace",
+      "image": "/assets/hottub-room-hotel-caesars-palace-bhopal.webp",
+      "slug": "hottub-room-hotel-caesars-palace-bhopal"
+    },
+    {
+      "name": "Room Hotel Caesars Palace",
+      "image": "/assets/jacuzzi-room-hotel-caesars-palace-bhopal.webp",
+      "slug": "jacuzzi-room-hotel-caesars-palace-bhopal"
+    },
+    {
+      "name": "Private Pool Room Giovanni Village Resort",
+      "image": "/assets/private-pool-room-giovanni-village-resort-bhopal.webp",
+      "slug": "private-pool-room-giovanni-village-resort-bhopal"
+    },
+    {
+      "name": "Radisson Bathtub In Room",
+      "image": "/assets/radisson-bhopal-bathtub-in-room.webp",
+      "slug": "radisson-bhopal-bathtub-in-room"
+    },
+    {
+      "name": "Radisson",
+      "image": "/assets/radisson-bhopal-with-bathtub-in-room.webp",
+      "slug": "radisson-bhopal-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Radisson",
+      "image": "/assets/spabath-room-radisson-bhopal.webp",
+      "slug": "spabath-room-radisson-bhopal"
+    }
+  ],
+  "Shillong": [
+    {
+      "name": "Hotel Room Courtyard By Marriott",
+      "image": "/assets/bathtub-hotel-room-courtyard-by-marriott-shillong.webp",
+      "slug": "bathtub-hotel-room-courtyard-by-marriott-shillong"
+    },
+    {
+      "name": "Bellevue Home Stay",
+      "image": "/assets/bellevue-home-stay-shillong-with-bathtub.webp",
+      "slug": "bellevue-home-stay-shillong-with-bathtub"
+    },
+    {
+      "name": "Courtyard By Marriott",
+      "image": "/assets/courtyard-by-marriott-shillong-with-bathtub.webp",
+      "slug": "courtyard-by-marriott-shillong-with-bathtub"
+    },
+    {
+      "name": "Hotel Honeyshine",
+      "image": "/assets/hotel-honeyshine-shillong-with-bathtub.webp",
+      "slug": "hotel-honeyshine-shillong-with-bathtub"
+    },
+    {
+      "name": "Urban Tavern",
+      "image": "/assets/urban-tavern-shillong-with-bathtub-in-room.webp",
+      "slug": "urban-tavern-shillong-with-bathtub-in-room"
+    }
+  ],
+  "Igatpuri": [
+    {
+      "name": "Hotel Room Rakabi The Fern",
+      "image": "/assets/bathtub-hotel-room-rakabi-the-fern-igatpuri.webp",
+      "slug": "bathtub-hotel-room-rakabi-the-fern-igatpuri"
+    },
+    {
+      "name": "Room Tropical Retreat Luxury Spa Resort",
+      "image": "/assets/bathtub-room-tropical-retreat-luxury-spa-resort-igatpuri.webp",
+      "slug": "bathtub-room-tropical-retreat-luxury-spa-resort-igatpuri"
+    },
+    {
+      "name": "Hotel Grand Parivaar Room",
+      "image": "/assets/hotel-grand-parivaar-igatpuri-room-with-bathtub.webp",
+      "slug": "hotel-grand-parivaar-igatpuri-room-with-bathtub"
+    },
+    {
+      "name": "Hotel Rakabi The Fern",
+      "image": "/assets/hottub-hotel-rakabi-the-fern-igatpuri.webp",
+      "slug": "hottub-hotel-rakabi-the-fern-igatpuri"
+    },
+    {
+      "name": "Igatpuri Hills Retreat",
+      "image": "/assets/igatpuri-hills-retreat-with-spabath.webp",
+      "slug": "igatpuri-hills-retreat-with-spabath"
+    },
+    {
+      "name": "Hotel Regenta Place",
+      "image": "/assets/jacuzzi-hotel-regenta-place-igatpuri.webp",
+      "slug": "jacuzzi-hotel-regenta-place-igatpuri"
+    },
+    {
+      "name": "Igatpuri Hills Retreat",
+      "image": "/assets/jacuzzi-igatpuri-hills-retreat.webp",
+      "slug": "jacuzzi-igatpuri-hills-retreat"
+    },
+    {
+      "name": "Room Regenta Place",
+      "image": "/assets/jacuzzi-room-regenta-place-igatpuri.webp",
+      "slug": "jacuzzi-room-regenta-place-igatpuri"
+    },
+    {
+      "name": "Suite Sierra Sky Villa",
+      "image": "/assets/jacuzzi-suite-sierra-sky-villa-igatpuri.webp",
+      "slug": "jacuzzi-suite-sierra-sky-villa-igatpuri"
+    },
+    {
+      "name": "Manas Lifestyle Villas With Private Pool In Room",
+      "image": "/assets/manas-lifestyle-villas-igatpuri-with-private-pool-in-room.webp",
+      "slug": "manas-lifestyle-villas-igatpuri-with-private-pool-in-room"
+    },
+    {
+      "name": "Mystic Valley Spa Resort",
+      "image": "/assets/mystic-valley-spa-resort-igatpuri-with-bathtub-in-room.webp",
+      "slug": "mystic-valley-spa-resort-igatpuri-with-bathtub-in-room"
+    },
+    {
+      "name": "Private Pool Room Manas Lifestyle Villas",
+      "image": "/assets/private-pool-room-manas-lifestyle-villas-igatpuri.webp",
+      "slug": "private-pool-room-manas-lifestyle-villas-igatpuri"
+    },
+    {
+      "name": "Rakabi The Fern",
+      "image": "/assets/rakabi-the-fern-igatpuri-with-bathtub-in-room.webp",
+      "slug": "rakabi-the-fern-igatpuri-with-bathtub-in-room"
+    },
+    {
+      "name": "Rakabi The Fern",
+      "image": "/assets/rakabi-the-fern-igatpuri-with-bathtub.webp",
+      "slug": "rakabi-the-fern-igatpuri-with-bathtub"
+    },
+    {
+      "name": "Regenta Place",
+      "image": "/assets/regenta-place-igatpuri-with-private-jacuzzi.webp",
+      "slug": "regenta-place-igatpuri-with-private-jacuzzi"
+    },
+    {
+      "name": "Romantic Bathtub Room Mystic Valley Spa Resort",
+      "image": "/assets/romantic-bathtub-room-mystic-valley-spa-resort-igatpuri.webp",
+      "slug": "romantic-bathtub-room-mystic-valley-spa-resort-igatpuri"
+    },
+    {
+      "name": "Sierra Sky Villa",
+      "image": "/assets/sierra-sky-villa-igatpuri-with-private-jacuzzi-in-terrace.webp",
+      "slug": "sierra-sky-villa-igatpuri-with-private-jacuzzi-in-terrace"
+    },
+    {
+      "name": "Tropical Retreat Luxury Spa Resort",
+      "image": "/assets/tropical-retreat-luxury-spa-resort-igatpuri-with-bathtub-room-views.webp",
+      "slug": "tropical-retreat-luxury-spa-resort-igatpuri-with-bathtub-room-views"
+    }
+  ],
+  "Jaipur": [
+    {
+      "name": "Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/bathtub-hotel-royal-orchid-jaipur-3-kms-to-airport.webp",
+      "slug": "bathtub-hotel-royal-orchid-jaipur-3-kms-to-airport"
+    },
+    {
+      "name": "Hotel The Raj Palace",
+      "image": "/assets/bathtub-hotel-the-raj-palace-jaipur.webp",
+      "slug": "bathtub-hotel-the-raj-palace-jaipur"
+    },
+    {
+      "name": "Lmb Hotel City Centre",
+      "image": "/assets/bathtub-lmb-hotel-city-centre-jaipur.webp",
+      "slug": "bathtub-lmb-hotel-city-centre-jaipur"
+    },
+    {
+      "name": "Room Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/bathtub-room-hotel-royal-orchid-jaipur-3-kms-to-airport.webp",
+      "slug": "bathtub-room-hotel-royal-orchid-jaipur-3-kms-to-airport"
+    },
+    {
+      "name": "Room The Raj Palace",
+      "image": "/assets/bathtub-room-the-raj-palace-jaipur.webp",
+      "slug": "bathtub-room-the-raj-palace-jaipur"
+    },
+    {
+      "name": "The Leela Palace",
+      "image": "/assets/bathtub-the-leela-palace-jaipur.webp",
+      "slug": "bathtub-the-leela-palace-jaipur"
+    },
+    {
+      "name": "Clarion Bella Casa At Airport",
+      "image": "/assets/clarion-bella-casa-at-airport-jaipur-with-bathtub-in-room.webp",
+      "slug": "clarion-bella-casa-at-airport-jaipur-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Royal Orchid 3 Kms To Airport Bathtub",
+      "image": "/assets/hotel-royal-orchid-jaipur-3-kms-to-airport-bathtub.webp",
+      "slug": "hotel-royal-orchid-jaipur-3-kms-to-airport-bathtub"
+    },
+    {
+      "name": "Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/hotel-royal-orchid-jaipur-3-kms-to-airport-with-bathtub-in-room.webp",
+      "slug": "hotel-royal-orchid-jaipur-3-kms-to-airport-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/hotel-royal-orchid-jaipur-3-kms-to-airport-with-romantic-bathtub.webp",
+      "slug": "hotel-royal-orchid-jaipur-3-kms-to-airport-with-romantic-bathtub"
+    },
+    {
+      "name": "Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/hottub-hotel-royal-orchid-jaipur-3-kms-to-airport.webp",
+      "slug": "hottub-hotel-royal-orchid-jaipur-3-kms-to-airport"
+    },
+    {
+      "name": "Hotel The Gulmohar Mansion Boutique Stay In",
+      "image": "/assets/hottub-hotel-the-gulmohar-mansion-boutique-stay-in-jaipur.webp",
+      "slug": "hottub-hotel-the-gulmohar-mansion-boutique-stay-in-jaipur"
+    },
+    {
+      "name": "Room Stardom Resort",
+      "image": "/assets/jacuzzi-room-stardom-resort-jaipur.webp",
+      "slug": "jacuzzi-room-stardom-resort-jaipur"
+    },
+    {
+      "name": "Lmb Hotel City Centre",
+      "image": "/assets/lmb-hotel-city-centre-jaipur-with-bathtub.webp",
+      "slug": "lmb-hotel-city-centre-jaipur-with-bathtub"
+    },
+    {
+      "name": "Rajasthali Resort Spa",
+      "image": "/assets/rajasthali-resort-spa-jaipur-with-spabath-in-room.webp",
+      "slug": "rajasthali-resort-spa-jaipur-with-spabath-in-room"
+    },
+    {
+      "name": "Room Bathtub Hotel Royal Orchid 3 Kms To Airport",
+      "image": "/assets/room-bathtub-hotel-royal-orchid-jaipur-3-kms-to-airport.webp",
+      "slug": "room-bathtub-hotel-royal-orchid-jaipur-3-kms-to-airport"
+    },
+    {
+      "name": "Stardom Resort",
+      "image": "/assets/stardom-resort-jaipur-with-jacuzzi.webp",
+      "slug": "stardom-resort-jaipur-with-jacuzzi"
+    },
+    {
+      "name": "The Lalit",
+      "image": "/assets/the-lalit-jaipur-with-bathtub.webp",
+      "slug": "the-lalit-jaipur-with-bathtub"
+    },
+    {
+      "name": "The Leela Palace",
+      "image": "/assets/the-leela-palace-jaipur-with-bathtub.webp",
+      "slug": "the-leela-palace-jaipur-with-bathtub"
+    },
+    {
+      "name": "The Raj Palace Hotel In",
+      "image": "/assets/the-raj-palace-hotel-in-jaipur-with-romantic-bathtub-in-room.webp",
+      "slug": "the-raj-palace-hotel-in-jaipur-with-romantic-bathtub-in-room"
+    },
+    {
+      "name": "The Raj Palace",
+      "image": "/assets/the-raj-palace-jaipur-with-bathtub-in-room.webp",
+      "slug": "the-raj-palace-jaipur-with-bathtub-in-room"
+    },
+    {
+      "name": "The Raj Palace",
+      "image": "/assets/the-raj-palace-jaipur-with-bathtub.webp",
+      "slug": "the-raj-palace-jaipur-with-bathtub"
+    },
+    {
+      "name": "The Raj Palace",
+      "image": "/assets/the-raj-palace-jaipur-with-romantic-bathtub.webp",
+      "slug": "the-raj-palace-jaipur-with-romantic-bathtub"
+    }
+  ],
+  "Indore": [
+    {
+      "name": "Hotel Sheraton Grand Palace",
+      "image": "/assets/bathtub-hotel-sheraton-grand-palace-indore.webp",
+      "slug": "bathtub-hotel-sheraton-grand-palace-indore"
+    },
+    {
+      "name": "Room Hotel Grand Girdhar",
+      "image": "/assets/bathtub-room-indore-hotel-grand-girdhar.webp",
+      "slug": "bathtub-room-indore-hotel-grand-girdhar"
+    },
+    {
+      "name": "Room Marriott Hotel",
+      "image": "/assets/bathtub-room-indore-marriott-hotel.webp",
+      "slug": "bathtub-room-indore-marriott-hotel"
+    },
+    {
+      "name": "Room Lemon Tree Hotel",
+      "image": "/assets/bathtub-room-lemon-tree-hotel-indore.webp",
+      "slug": "bathtub-room-lemon-tree-hotel-indore"
+    },
+    {
+      "name": "Room Sheraton Grand Palace",
+      "image": "/assets/bathtub-room-sheraton-grand-palace-indore.webp",
+      "slug": "bathtub-room-sheraton-grand-palace-indore"
+    },
+    {
+      "name": "Room Wow Crest Ihcl Seleqtions",
+      "image": "/assets/bathtub-room-wow-crest-indore-ihcl-seleqtions.webp",
+      "slug": "bathtub-room-wow-crest-indore-ihcl-seleqtions"
+    },
+    {
+      "name": "Room Marriott Hotel",
+      "image": "/assets/hot-tub-room-indore-marriott-hotel.webp",
+      "slug": "hot-tub-room-indore-marriott-hotel"
+    },
+    {
+      "name": "Hotel Sayaji",
+      "image": "/assets/hotel-sayaji-indore-with-bathtub-in-room.webp",
+      "slug": "hotel-sayaji-indore-with-bathtub-in-room"
+    },
+    {
+      "name": "Hotel Winway",
+      "image": "/assets/hotel-winway-indore-with-bathtub-in-room.webp",
+      "slug": "hotel-winway-indore-with-bathtub-in-room"
+    },
+    {
+      "name": "Indore Marriott Hotel",
+      "image": "/assets/indore-marriott-hotel-with-bathtub-in-room.webp",
+      "slug": "indore-marriott-hotel-with-bathtub-in-room"
+    },
+    {
+      "name": "Indore Marriott Hotel",
+      "image": "/assets/indore-marriott-hotel-with-bathtub.webp",
+      "slug": "indore-marriott-hotel-with-bathtub"
+    },
+    {
+      "name": "Indore Marriott Hotel",
+      "image": "/assets/indore-marriott-hotel-with-spabath-in-room.webp",
+      "slug": "indore-marriott-hotel-with-spabath-in-room"
+    },
+    {
+      "name": "Lemon Tree Hotel Bathtub In Room",
+      "image": "/assets/lemon-tree-hotel-indore-bathtub-in-room.webp",
+      "slug": "lemon-tree-hotel-indore-bathtub-in-room"
+    },
+    {
+      "name": "Lemon Tree Hotel",
+      "image": "/assets/lemon-tree-hotel-indore-with-bath-tub.webp",
+      "slug": "lemon-tree-hotel-indore-with-bath-tub"
+    },
+    {
+      "name": "Sheraton Grand Palace",
+      "image": "/assets/sheraton-grand-palace-indore-with-hot-tub.webp",
+      "slug": "sheraton-grand-palace-indore-with-hot-tub"
+    },
+    {
+      "name": "Room Hotel Sayaji",
+      "image": "/assets/spabath-room-hotel-sayaji-indore.webp",
+      "slug": "spabath-room-hotel-sayaji-indore"
+    },
+    {
+      "name": "Room Marriott Hotel",
+      "image": "/assets/spabath-room-indore-marriott-hotel.webp",
+      "slug": "spabath-room-indore-marriott-hotel"
+    }
+  ],
+  "Shirdi": [
+    {
+      "name": "Hotel Sun N Sand",
+      "image": "/assets/bathtub-hotel-sun-n-sand-shirdi.webp",
+      "slug": "bathtub-hotel-sun-n-sand-shirdi"
+    },
+    {
+      "name": "Room Saibaba International Hotel",
+      "image": "/assets/bathtub-room-saibaba-international-hotel-shirdi.webp",
+      "slug": "bathtub-room-saibaba-international-hotel-shirdi"
+    },
+    {
+      "name": "Hotel Room Sun N Sand",
+      "image": "/assets/jacuzzi-hotel-room-sun-n-sand-shirdi.webp",
+      "slug": "jacuzzi-hotel-room-sun-n-sand-shirdi"
+    },
+    {
+      "name": "Pushpak Resort",
+      "image": "/assets/pushpak-resort-shirdi-with-bathtub.webp",
+      "slug": "pushpak-resort-shirdi-with-bathtub"
+    },
+    {
+      "name": "Sai Neem Tree Hotel",
+      "image": "/assets/sai-neem-tree-hotel-shirdi-with-bathtub.webp",
+      "slug": "sai-neem-tree-hotel-shirdi-with-bathtub"
+    },
+    {
+      "name": "Saibaba International Hotel",
+      "image": "/assets/saibaba-international-hotel-shirdi-with-bathtub.webp",
+      "slug": "saibaba-international-hotel-shirdi-with-bathtub"
+    },
+    {
+      "name": "Sun N Sand",
+      "image": "/assets/sun-n-sand-shirdi-with-spabath.webp",
+      "slug": "sun-n-sand-shirdi-with-spabath"
+    }
+  ],
+  "Panjim": [
+    {
+      "name": "Hotel Welcomheritage Inn",
+      "image": "/assets/bathtub-hotel-welcomheritage-panjim-inn.webp",
+      "slug": "bathtub-hotel-welcomheritage-panjim-inn"
+    },
+    {
+      "name": "Room Prazeres Boutique Hotel",
+      "image": "/assets/bathtub-room-panjim-prazeres-boutique-hotel.webp",
+      "slug": "bathtub-room-panjim-prazeres-boutique-hotel"
+    },
+    {
+      "name": "Room The Crescent",
+      "image": "/assets/bathtub-room-the-crescent-panjim.webp",
+      "slug": "bathtub-room-the-crescent-panjim"
+    },
+    {
+      "name": "Chances Resort And Casino An Indy Resort",
+      "image": "/assets/chances-resort-and-casino-an-indy-resort-panjim-with-jacuzzi.webp",
+      "slug": "chances-resort-and-casino-an-indy-resort-panjim-with-jacuzzi"
+    },
+    {
+      "name": "Hotel The Crescent",
+      "image": "/assets/hotel-the-crescent-panjim-with-bathtub-in-room.webp",
+      "slug": "hotel-the-crescent-panjim-with-bathtub-in-room"
+    },
+    {
+      "name": "Room Chances Resort And Casino An Indy Resort",
+      "image": "/assets/jacuzzi-room-panjim-chances-resort-and-casino-an-indy-resort.webp",
+      "slug": "jacuzzi-room-panjim-chances-resort-and-casino-an-indy-resort"
+    },
+    {
+      "name": "Prazeres Boutique Hotel",
+      "image": "/assets/prazeres-boutique-hotel-panjim-with-bathtub.webp",
+      "slug": "prazeres-boutique-hotel-panjim-with-bathtub"
+    },
+    {
+      "name": "Romantic Hotel O Pierre",
+      "image": "/assets/romantic-hotel-o-pierre-panjim-with-bathtub-in-room.webp",
+      "slug": "romantic-hotel-o-pierre-panjim-with-bathtub-in-room"
+    },
+    {
+      "name": "Welcomheritage Inn",
+      "image": "/assets/welcomheritage-panjim-inn-with-bathtub-in-room.webp",
+      "slug": "welcomheritage-panjim-inn-with-bathtub-in-room"
+    }
+  ],
+  "Mount Abu": [
+    {
+      "name": "In Room Hotel Hillock",
+      "image": "/assets/bathtub-in-room-hotel-hillock-mount-abu.webp",
+      "slug": "bathtub-in-room-hotel-hillock-mount-abu"
+    },
+    {
+      "name": "Room Hotel Hillock",
+      "image": "/assets/bathtub-room-hotel-hillock-mount-abu.webp",
+      "slug": "bathtub-room-hotel-hillock-mount-abu"
+    },
+    {
+      "name": "Room Hotel Mount Regency In",
+      "image": "/assets/bathtub-room-hotel-mount-regency-in-mount-abu.webp",
+      "slug": "bathtub-room-hotel-mount-regency-in-mount-abu"
+    },
+    {
+      "name": "Chacha Inn The Garden Retreat",
+      "image": "/assets/chacha-inn-the-garden-retreat-mount-abu-with-bathtub.webp",
+      "slug": "chacha-inn-the-garden-retreat-mount-abu-with-bathtub"
+    },
+    {
+      "name": "Hotel Hillock",
+      "image": "/assets/hotel-hillock-mount-abu-with-spabath.webp",
+      "slug": "hotel-hillock-mount-abu-with-spabath"
+    },
+    {
+      "name": "Room Hotel Hillock",
+      "image": "/assets/jacuzzi-room-hotel-hillock-mount-abu.webp",
+      "slug": "jacuzzi-room-hotel-hillock-mount-abu"
+    },
+    {
+      "name": "Sterling",
+      "image": "/assets/sterling-mount-abu-with-bathtub-in-room.webp",
+      "slug": "sterling-mount-abu-with-bathtub-in-room"
+    },
+    {
+      "name": "The House Of Bb",
+      "image": "/assets/the-house-of-bb-mount-abu-with-bathtub.webp",
+      "slug": "the-house-of-bb-mount-abu-with-bathtub"
+    }
+  ],
+  "Lavasa": [
+    {
+      "name": "Lavasa Endora Homestay A Fully Equipped Lake Facing 3Bhk",
+      "image": "/assets/bathtub-lavasa-endora-homestay-a-fully-equipped-lake-facing-3bhk.webp",
+      "slug": "bathtub-lavasa-endora-homestay-a-fully-equipped-lake-facing-3bhk"
+    },
+    {
+      "name": "Hotel Lake Facing Premium Reteat",
+      "image": "/assets/jacuzzi-hotel-lavasa-lake-facing-premium-reteat.webp",
+      "slug": "jacuzzi-hotel-lavasa-lake-facing-premium-reteat"
+    },
+    {
+      "name": "Lake Facing Premium Reteat Hotel",
+      "image": "/assets/lake-facing-premium-reteat-lavasa-hotel-with-jacuzzi.webp",
+      "slug": "lake-facing-premium-reteat-lavasa-hotel-with-jacuzzi"
+    },
+    {
+      "name": "Private Jacuzzi Room Lake Palace",
+      "image": "/assets/private-jacuzzi-room-lavasa-lake-palace.webp",
+      "slug": "private-jacuzzi-room-lavasa-lake-palace"
+    }
+  ],
+  "Darjeeling": [
+    {
+      "name": "Room Crescent Resort",
+      "image": "/assets/bathtub-room-crescent-resort-darjeeling.webp",
+      "slug": "bathtub-room-crescent-resort-darjeeling"
+    },
+    {
+      "name": "Room The West Gate Posada By Summit",
+      "image": "/assets/bathtub-room-darjeeling-the-west-gate-posada-by-summit.webp",
+      "slug": "bathtub-room-darjeeling-the-west-gate-posada-by-summit"
+    },
+    {
+      "name": "Room Taj Chia Kutir Resort Spa",
+      "image": "/assets/bathtub-room-taj-chia-kutir-resort-spa-darjeeling.webp",
+      "slug": "bathtub-room-taj-chia-kutir-resort-spa-darjeeling"
+    },
+    {
+      "name": "Room The Elgin Heritage Resort Spa",
+      "image": "/assets/bathtub-room-the-elgin-darjeeling-heritage-resort-spa.webp",
+      "slug": "bathtub-room-the-elgin-darjeeling-heritage-resort-spa"
+    },
+    {
+      "name": "Crescent Resort",
+      "image": "/assets/crescent-resort-darjeeling-with-bathtub.webp",
+      "slug": "crescent-resort-darjeeling-with-bathtub"
+    },
+    {
+      "name": "Room The West Gate Posada By Summit",
+      "image": "/assets/jacuzzi-room-the-west-gate-posada-by-summit-darjeeling.webp",
+      "slug": "jacuzzi-room-the-west-gate-posada-by-summit-darjeeling"
+    },
+    {
+      "name": "Taj Chia Kutir Resort Spa",
+      "image": "/assets/taj-chia-kutir-resort-spa-darjeeling-with-bathtub-in-room.webp",
+      "slug": "taj-chia-kutir-resort-spa-darjeeling-with-bathtub-in-room"
+    },
+    {
+      "name": "The Elgin Heritage Resort Spa",
+      "image": "/assets/the-elgin-darjeeling-heritage-resort-spa-with-bathtub-in-room.webp",
+      "slug": "the-elgin-darjeeling-heritage-resort-spa-with-bathtub-in-room"
+    },
+    {
+      "name": "The Elgin Heritage Resort Spa",
+      "image": "/assets/the-elgin-darjeeling-heritage-resort-spa-with-bathtub.webp",
+      "slug": "the-elgin-darjeeling-heritage-resort-spa-with-bathtub"
+    },
+    {
+      "name": "The West Gate Posada By Summit Bathtub",
+      "image": "/assets/the-west-gate-posada-by-summit-bathtub-darjeeling.webp",
+      "slug": "the-west-gate-posada-by-summit-bathtub-darjeeling"
+    },
+    {
+      "name": "The West Gate Posada By Summit",
+      "image": "/assets/the-west-gate-posada-by-summit-darjeeling-with-bathtub-on-room.webp",
+      "slug": "the-west-gate-posada-by-summit-darjeeling-with-bathtub-on-room"
+    },
+    {
+      "name": "The West Gate Posada By Summit",
+      "image": "/assets/the-west-gate-posada-by-summit-darjeeling-with-private-jacuzzi-in-room.webp",
+      "slug": "the-west-gate-posada-by-summit-darjeeling-with-private-jacuzzi-in-room"
+    },
+    {
+      "name": "The West Gate Posada By Summit",
+      "image": "/assets/the-west-gate-posada-by-summit-darjeeling-with-spabath.webp",
+      "slug": "the-west-gate-posada-by-summit-darjeeling-with-spabath"
+    }
+  ],
+  "Saputara": [
+    {
+      "name": "Room Hotel Lake View",
+      "image": "/assets/bathtub-room-hotel-lake-view-saputara.webp",
+      "slug": "bathtub-room-hotel-lake-view-saputara"
+    },
+    {
+      "name": "Hotel Lake View",
+      "image": "/assets/hotel-lake-view-saputara-with-bathtub-in-room.webp",
+      "slug": "hotel-lake-view-saputara-with-bathtub-in-room"
+    }
+  ],
+  "Panvel": [
+    {
+      "name": "Room Raaj Resort",
+      "image": "/assets/bathtub-room-raaj-resort-panvel.webp",
+      "slug": "bathtub-room-raaj-resort-panvel"
+    },
+    {
+      "name": "Hotel Raaj Resort",
+      "image": "/assets/hotel-raaj-resort-panvel.webp",
+      "slug": "hotel-raaj-resort-panvel"
+    },
+    {
+      "name": "Raaj Resort",
+      "image": "/assets/raaj-resort-panvel-with-bathtub-in-room.webp",
+      "slug": "raaj-resort-panvel-with-bathtub-in-room"
+    }
+  ],
+  "Daman": [
+    {
+      "name": "Room Silver Waves Resort Spa",
+      "image": "/assets/bathtub-room-silver-waves-resort-spa-daman.webp",
+      "slug": "bathtub-room-silver-waves-resort-spa-daman"
+    },
+    {
+      "name": "Hotel Silver Resort",
+      "image": "/assets/hotel-silver-resort-daman-with-bathtub.webp",
+      "slug": "hotel-silver-resort-daman-with-bathtub"
+    },
+    {
+      "name": "Romantic Hotel Room Urbane By Treat",
+      "image": "/assets/romantic-hotel-room-urbane-by-treat-daman-with-bathtub.webp",
+      "slug": "romantic-hotel-room-urbane-by-treat-daman-with-bathtub"
+    },
+    {
+      "name": "Silver Waves Resort Spa",
+      "image": "/assets/silver-waves-resort-spa-daman-with-bathtub-in-room.webp",
+      "slug": "silver-waves-resort-spa-daman-with-bathtub-in-room"
+    },
+    {
+      "name": "The Gold Beach Annexe",
+      "image": "/assets/the-gold-beach-annexe-daman-with-bathtub.webp",
+      "slug": "the-gold-beach-annexe-daman-with-bathtub"
+    },
+    {
+      "name": "The Gold Beach Resort",
+      "image": "/assets/the-gold-beach-resort-daman-with-private-jacuzzi-in-room.webp",
+      "slug": "the-gold-beach-resort-daman-with-private-jacuzzi-in-room"
+    }
+  ],
+  "Gandhinagar": [
+    {
+      "name": "Room The Eiffel Hotel Banquet",
+      "image": "/assets/bathtub-room-the-eiffel-hotel-banquet-gandhinagar.webp",
+      "slug": "bathtub-room-the-eiffel-hotel-banquet-gandhinagar"
+    },
+    {
+      "name": "Classic Dineout",
+      "image": "/assets/classic-dineout-gandhinagar-with-spabath-in-room.webp",
+      "slug": "classic-dineout-gandhinagar-with-spabath-in-room"
+    },
+    {
+      "name": "Hotel Royal Empire",
+      "image": "/assets/hotel-royal-empire-gandhinagar-with-jacuzzi.webp",
+      "slug": "hotel-royal-empire-gandhinagar-with-jacuzzi"
+    },
+    {
+      "name": "Classic Dineout",
+      "image": "/assets/jacuzzi-classic-dineout-gandhinagar.webp",
+      "slug": "jacuzzi-classic-dineout-gandhinagar"
+    },
+    {
+      "name": "Room Hotel Royal Empire",
+      "image": "/assets/jacuzzi-room-hotel-royal-empire-gandhinagar.webp",
+      "slug": "jacuzzi-room-hotel-royal-empire-gandhinagar"
+    },
+    {
+      "name": "Taj Resort And Spa",
+      "image": "/assets/taj-gandhinagar-resort-and-spa-with-bathtub-in-room.webp",
+      "slug": "taj-gandhinagar-resort-and-spa-with-bathtub-in-room"
+    },
+    {
+      "name": "The Eiffel Hotel Banquet",
+      "image": "/assets/the-eiffel-hotel-banquet-gandhinagar-with-bathtub.webp",
+      "slug": "the-eiffel-hotel-banquet-gandhinagar-with-bathtub"
+    }
+  ],
+  "Yercaud": [
+    {
+      "name": "Room Grand Palace Hotel Spa",
+      "image": "/assets/bathtub-room-yercaud-grand-palace-hotel-spa.webp",
+      "slug": "bathtub-room-yercaud-grand-palace-hotel-spa"
+    },
+    {
+      "name": "Grand Palace Hotel Spa",
+      "image": "/assets/grand-palace-hotel-spa-yercaud-with-bathtub.webp",
+      "slug": "grand-palace-hotel-spa-yercaud-with-bathtub"
+    },
+    {
+      "name": "Hotel Casita Inn",
+      "image": "/assets/jacuzzi-hotel-casita-inn-yercaud.webp",
+      "slug": "jacuzzi-hotel-casita-inn-yercaud"
+    },
+    {
+      "name": "Room Stayvista At The Bungalow With Bonfire Pvt Pool",
+      "image": "/assets/jacuzzi-room-stayvista-at-the-yercaud-bungalow-with-bonfire-pvt-pool.webp",
+      "slug": "jacuzzi-room-stayvista-at-the-yercaud-bungalow-with-bonfire-pvt-pool"
+    },
+    {
+      "name": "R Hotels By Suraj Residency",
+      "image": "/assets/r-hotels-by-suraj-residency-yercaud-with-bathtub.webp",
+      "slug": "r-hotels-by-suraj-residency-yercaud-with-bathtub"
+    },
+    {
+      "name": "Stayvista At The Bungalow With Bonfire Pvt Pool",
+      "image": "/assets/stayvista-at-the-yercaud-bungalow-with-bonfire-pvt-pool-with-hottub.webp",
+      "slug": "stayvista-at-the-yercaud-bungalow-with-bonfire-pvt-pool-with-hottub"
+    }
+  ],
+  "Manali": [
+    {
+      "name": "Welcomheritage Urvashis Retreat",
+      "image": "/assets/bathtub-welcomheritage-urvashis-retreat-manali.webp",
+      "slug": "bathtub-welcomheritage-urvashis-retreat-manali"
+    }
+  ],
+  "Munnar": [
+    {
+      "name": "Broad Bean Resort Spa Hotel",
+      "image": "/assets/broad-bean-resort-spa-hotel-munnar-with-romantic-jacuzzi-in-room.webp",
+      "slug": "broad-bean-resort-spa-hotel-munnar-with-romantic-jacuzzi-in-room"
+    }
+  ],
+  "Mathura": [
+    {
+      "name": "F2B Stay",
+      "image": "/assets/f2b-stay-mathura-with-bathtub.webp",
+      "slug": "f2b-stay-mathura-with-bathtub"
+    },
+    {
+      "name": "Lalita Grand",
+      "image": "/assets/lalita-grand-mathura-with-bathtub.webp",
+      "slug": "lalita-grand-mathura-with-bathtub"
+    },
+    {
+      "name": "Romantic Bathtub Room Lalita Grand",
+      "image": "/assets/romantic-bathtub-room-lalita-grand-mathura.webp",
+      "slug": "romantic-bathtub-room-lalita-grand-mathura"
+    }
+  ],
+  "Ooty": [
+    {
+      "name": "Hotel In Beverly Villa",
+      "image": "/assets/hotel-in-ooty-beverly-villa-with-bathtub.webp",
+      "slug": "hotel-in-ooty-beverly-villa-with-bathtub"
+    }
+  ],
+  "Shimla": [
+    {
+      "name": "The Orchid Hotel",
+      "image": "/assets/jacuzzi-the-orchid-hotel-shimla.webp",
+      "slug": "jacuzzi-the-orchid-hotel-shimla"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+    "Hotel Cards": {
+        "selector": "._Hlisting li",
+        "count": 2
+    }
+}

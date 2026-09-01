@@ -1,0 +1,1065 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - link "Hotels With Bathtubs Verified Premium Suites & Jacuzzis" [ref=f3e3] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: Hotels With Bathtubs
+        - paragraph [ref=f3e20]: Verified Premium Suites & Jacuzzis
+    - generic [ref=f3e21]:
+      - link "Destinations" [ref=f3e22] [cursor=pointer]:
+        - /url: /#destinations
+      - link "Travel Guides" [ref=f3e23] [cursor=pointer]:
+        - /url: /blog
+      - link "Verification" [ref=f3e24] [cursor=pointer]:
+        - /url: /#verification
+      - link "FAQs" [ref=f3e25] [cursor=pointer]:
+        - /url: /#faq
+      - link "Browse 60+ Cities" [ref=f3e26] [cursor=pointer]:
+        - /url: /#destinations
+  - main [ref=f3e27]:
+    - generic [ref=f3e29]:
+      - heading "Hotels with Bathtubs & Private Jacuzzis" [level=1] [ref=f3e30]
+      - paragraph [ref=f3e31]: Discover 748+ curated luxury hotels and romantic couple suites with guaranteed in-room bathtubs. Triple-verified across MakeMyTrip, Agoda & Booking.com.
+    - generic [ref=f3e32]:
+      - generic [ref=f3e34]:
+        - textbox "Search cities we cover (e.g. Lucknow, Goa, Delhi)..." [ref=f3e36]
+        - button "Search" [ref=f3e37]
+      - generic [ref=f3e39]:
+        - generic [ref=f3e40]:
+          - generic [ref=f3e41]: "Popular:"
+          - link "Kolkata" [ref=f3e42] [cursor=pointer]:
+            - /url: /india/kolkata
+          - link "Delhi" [ref=f3e43] [cursor=pointer]:
+            - /url: /india/delhi
+          - link "Goa" [ref=f3e44] [cursor=pointer]:
+            - /url: /india/goa
+          - link "Manali" [ref=f3e45] [cursor=pointer]:
+            - /url: /india/manali
+          - link "Munnar" [ref=f3e46] [cursor=pointer]:
+            - /url: /india/munnar
+          - link "Jaipur" [ref=f3e47] [cursor=pointer]:
+            - /url: /india/jaipur
+          - link "Udaipur" [ref=f3e48] [cursor=pointer]:
+            - /url: /india/udaipur
+          - link "Dubai" [ref=f3e49] [cursor=pointer]:
+            - /url: /uae/dubai
+          - link "London" [ref=f3e50] [cursor=pointer]:
+            - /url: /uk/london
+          - link "Bali" [ref=f3e51] [cursor=pointer]:
+            - /url: /indonesia/bali
+        - link "Browse All Destinations ↓" [ref=f3e52] [cursor=pointer]:
+          - /url: "#destinations"
+          - generic [ref=f3e53]: Browse All Destinations
+          - generic [ref=f3e54]: ↓
+    - generic [ref=f3e55]:
+      - generic [ref=f3e56]: Verified on MakeMyTrip, Agoda & Booking.com
+      - generic [ref=f3e60]: Guaranteed In-Room Tubs
+      - generic [ref=f3e64]: Trusted Booking Links
+      - generic [ref=f3e68]: "Live Status: Verified Active"
+    - generic [ref=f3e72]:
+      - generic [ref=f3e73]:
+        - generic [ref=f3e74]:
+          - heading "Our Triple-Verification Promise" [level=2] [ref=f3e75]
+          - paragraph [ref=f3e76]: Eliminating misleading photos so you enjoy guaranteed in-room bathtubs and jacuzzis.
+        - generic [ref=f3e77]: Independently Checked & Active
+      - generic [ref=f3e80]:
+        - generic [ref=f3e81]:
+          - generic [ref=f3e82]:
+            - generic [ref=f3e83]:
+              - generic [ref=f3e84]: "1"
+              - generic [ref=f3e85]: MakeMyTrip Audit
+            - paragraph [ref=f3e86]: Confirmed "Bathtub", "Jacuzzi", or "Jacuzzi/Bathtub" room tags in verified listings.
+          - generic [ref=f3e87]: ✓ Verified Amenity Tags
+        - generic [ref=f3e88]:
+          - generic [ref=f3e89]:
+            - generic [ref=f3e90]:
+              - generic [ref=f3e91]: "2"
+              - generic [ref=f3e92]: Agoda Facility Check
+            - paragraph [ref=f3e93]: Cross-referenced against Agoda's explicit "Bathtub" and private jacuzzi room facility filter.
+          - generic [ref=f3e94]: ✓ Verified Facilities
+        - generic [ref=f3e95]:
+          - generic [ref=f3e96]:
+            - generic [ref=f3e97]:
+              - generic [ref=f3e98]: "3"
+              - generic [ref=f3e99]: Booking.com Validation
+            - paragraph [ref=f3e100]: Validated in room specifications for genuine in-room hot tubs and deep soaking tubs.
+          - generic [ref=f3e101]: ✓ Verified Room Specs
+    - main [ref=f3e102]:
+      - generic [ref=f3e103]:
+        - generic [ref=f3e104]:
+          - generic [ref=f3e105]:
+            - heading "India Getaways" [level=2] [ref=f3e106]
+            - paragraph [ref=f3e107]: Explore top romantic destinations across India with verified in-room tubs
+          - generic [ref=f3e108]: 58 Cities Available
+        - generic [ref=f3e109]:
+          - link "Hotels in Indore with Bathtub ✓ Verified Stays Indore 30 Verified Hotels View Hotels" [ref=f3e110] [cursor=pointer]:
+            - /url: /india/indore
+            - generic [ref=f3e111]:
+              - img "Hotels in Indore with Bathtub" [ref=f3e112]
+              - generic [ref=f3e113]: ✓ Verified Stays
+            - generic [ref=f3e116]:
+              - heading "Indore" [level=3] [ref=f3e117]
+              - paragraph [ref=f3e118]: 30 Verified Hotels
+              - generic [ref=f3e119]: View Hotels
+          - link "Hotels in Delhi with Bathtub ✓ Verified Stays Delhi 28 Verified Hotels View Hotels" [ref=f3e123] [cursor=pointer]:
+            - /url: /india/delhi
+            - generic [ref=f3e124]:
+              - img "Hotels in Delhi with Bathtub" [ref=f3e125]
+              - generic [ref=f3e126]: ✓ Verified Stays
+            - generic [ref=f3e129]:
+              - heading "Delhi" [level=3] [ref=f3e130]
+              - paragraph [ref=f3e131]: 28 Verified Hotels
+              - generic [ref=f3e132]: View Hotels
+          - link "Hotels in Goa with Bathtub ✓ Verified Stays Goa 28 Verified Hotels View Hotels" [ref=f3e136] [cursor=pointer]:
+            - /url: /india/goa
+            - generic [ref=f3e137]:
+              - img "Hotels in Goa with Bathtub" [ref=f3e138]
+              - generic [ref=f3e139]: ✓ Verified Stays
+            - generic [ref=f3e142]:
+              - heading "Goa" [level=3] [ref=f3e143]
+              - paragraph [ref=f3e144]: 28 Verified Hotels
+              - generic [ref=f3e145]: View Hotels
+          - link "Hotels in Munnar with Bathtub ✓ Verified Stays Munnar 21 Verified Hotels View Hotels" [ref=f3e149] [cursor=pointer]:
+            - /url: /india/munnar
+            - generic [ref=f3e150]:
+              - img "Hotels in Munnar with Bathtub" [ref=f3e151]
+              - generic [ref=f3e152]: ✓ Verified Stays
+            - generic [ref=f3e155]:
+              - heading "Munnar" [level=3] [ref=f3e156]
+              - paragraph [ref=f3e157]: 21 Verified Hotels
+              - generic [ref=f3e158]: View Hotels
+          - link "Hotels in Manali with Bathtub ✓ Verified Stays Manali 21 Verified Hotels View Hotels" [ref=f3e162] [cursor=pointer]:
+            - /url: /india/manali
+            - generic [ref=f3e163]:
+              - img "Hotels in Manali with Bathtub" [ref=f3e164]
+              - generic [ref=f3e165]: ✓ Verified Stays
+            - generic [ref=f3e168]:
+              - heading "Manali" [level=3] [ref=f3e169]
+              - paragraph [ref=f3e170]: 21 Verified Hotels
+              - generic [ref=f3e171]: View Hotels
+          - link "Hotels in Lucknow with Bathtub ✓ Verified Stays Lucknow 20 Verified Hotels View Hotels" [ref=f3e175] [cursor=pointer]:
+            - /url: /india/lucknow
+            - generic [ref=f3e176]:
+              - img "Hotels in Lucknow with Bathtub" [ref=f3e177]
+              - generic [ref=f3e178]: ✓ Verified Stays
+            - generic [ref=f3e181]:
+              - heading "Lucknow" [level=3] [ref=f3e182]
+              - paragraph [ref=f3e183]: 20 Verified Hotels
+              - generic [ref=f3e184]: View Hotels
+          - link "Hotels in Udaipur with Bathtub ✓ Verified Stays Udaipur 20 Verified Hotels View Hotels" [ref=f3e188] [cursor=pointer]:
+            - /url: /india/udaipur
+            - generic [ref=f3e189]:
+              - img "Hotels in Udaipur with Bathtub" [ref=f3e190]
+              - generic [ref=f3e191]: ✓ Verified Stays
+            - generic [ref=f3e194]:
+              - heading "Udaipur" [level=3] [ref=f3e195]
+              - paragraph [ref=f3e196]: 20 Verified Hotels
+              - generic [ref=f3e197]: View Hotels
+          - link "Hotels in Rishikesh with Bathtub ✓ Verified Stays Rishikesh 20 Verified Hotels View Hotels" [ref=f3e201] [cursor=pointer]:
+            - /url: /india/rishikesh
+            - generic [ref=f3e202]:
+              - img "Hotels in Rishikesh with Bathtub" [ref=f3e203]
+              - generic [ref=f3e204]: ✓ Verified Stays
+            - generic [ref=f3e207]:
+              - heading "Rishikesh" [level=3] [ref=f3e208]
+              - paragraph [ref=f3e209]: 20 Verified Hotels
+              - generic [ref=f3e210]: View Hotels
+          - link "Hotels in Calangute with Bathtub ✓ Verified Stays Calangute 20 Verified Hotels View Hotels" [ref=f3e214] [cursor=pointer]:
+            - /url: /india/calangute
+            - generic [ref=f3e215]:
+              - img "Hotels in Calangute with Bathtub" [ref=f3e216]
+              - generic [ref=f3e217]: ✓ Verified Stays
+            - generic [ref=f3e220]:
+              - heading "Calangute" [level=3] [ref=f3e221]
+              - paragraph [ref=f3e222]: 20 Verified Hotels
+              - generic [ref=f3e223]: View Hotels
+          - link "Hotels in Bhopal with Bathtub ✓ Verified Stays Bhopal 20 Verified Hotels View Hotels" [ref=f3e227] [cursor=pointer]:
+            - /url: /india/bhopal
+            - generic [ref=f3e228]:
+              - img "Hotels in Bhopal with Bathtub" [ref=f3e229]
+              - generic [ref=f3e230]: ✓ Verified Stays
+            - generic [ref=f3e233]:
+              - heading "Bhopal" [level=3] [ref=f3e234]
+              - paragraph [ref=f3e235]: 20 Verified Hotels
+              - generic [ref=f3e236]: View Hotels
+          - link "Hotels in Shimla with Bathtub ✓ Verified Stays Shimla 20 Verified Hotels View Hotels" [ref=f3e240] [cursor=pointer]:
+            - /url: /india/shimla
+            - generic [ref=f3e241]:
+              - img "Hotels in Shimla with Bathtub" [ref=f3e242]
+              - generic [ref=f3e243]: ✓ Verified Stays
+            - generic [ref=f3e246]:
+              - heading "Shimla" [level=3] [ref=f3e247]
+              - paragraph [ref=f3e248]: 20 Verified Hotels
+              - generic [ref=f3e249]: View Hotels
+          - link "Hotels in Agra with Bathtub ✓ Verified Stays Agra 19 Verified Hotels View Hotels" [ref=f3e253] [cursor=pointer]:
+            - /url: /india/agra
+            - generic [ref=f3e254]:
+              - img "Hotels in Agra with Bathtub" [ref=f3e255]
+              - generic [ref=f3e256]: ✓ Verified Stays
+            - generic [ref=f3e259]:
+              - heading "Agra" [level=3] [ref=f3e260]
+              - paragraph [ref=f3e261]: 19 Verified Hotels
+              - generic [ref=f3e262]: View Hotels
+          - link "Hotels in Rajkot with Bathtub ✓ Verified Stays Rajkot 19 Verified Hotels View Hotels" [ref=f3e266] [cursor=pointer]:
+            - /url: /india/rajkot
+            - generic [ref=f3e267]:
+              - img "Hotels in Rajkot with Bathtub" [ref=f3e268]
+              - generic [ref=f3e269]: ✓ Verified Stays
+            - generic [ref=f3e272]:
+              - heading "Rajkot" [level=3] [ref=f3e273]
+              - paragraph [ref=f3e274]: 19 Verified Hotels
+              - generic [ref=f3e275]: View Hotels
+          - link "Hotels in Amritsar with Bathtub ✓ Verified Stays Amritsar 19 Verified Hotels View Hotels" [ref=f3e279] [cursor=pointer]:
+            - /url: /india/amritsar
+            - generic [ref=f3e280]:
+              - img "Hotels in Amritsar with Bathtub" [ref=f3e281]
+              - generic [ref=f3e282]: ✓ Verified Stays
+            - generic [ref=f3e285]:
+              - heading "Amritsar" [level=3] [ref=f3e286]
+              - paragraph [ref=f3e287]: 19 Verified Hotels
+              - generic [ref=f3e288]: View Hotels
+          - link "Hotels in Mumbai with Bathtub ✓ Verified Stays Mumbai 17 Verified Hotels View Hotels" [ref=f3e292] [cursor=pointer]:
+            - /url: /india/mumbai
+            - generic [ref=f3e293]:
+              - img "Hotels in Mumbai with Bathtub" [ref=f3e294]
+              - generic [ref=f3e295]: ✓ Verified Stays
+            - generic [ref=f3e298]:
+              - heading "Mumbai" [level=3] [ref=f3e299]
+              - paragraph [ref=f3e300]: 17 Verified Hotels
+              - generic [ref=f3e301]: View Hotels
+          - link "Hotels in Nashik with Bathtub ✓ Verified Stays Nashik 17 Verified Hotels View Hotels" [ref=f3e305] [cursor=pointer]:
+            - /url: /india/nashik
+            - generic [ref=f3e306]:
+              - img "Hotels in Nashik with Bathtub" [ref=f3e307]
+              - generic [ref=f3e308]: ✓ Verified Stays
+            - generic [ref=f3e311]:
+              - heading "Nashik" [level=3] [ref=f3e312]
+              - paragraph [ref=f3e313]: 17 Verified Hotels
+              - generic [ref=f3e314]: View Hotels
+          - link "Hotels in Chandigarh with Bathtub ✓ Verified Stays Chandigarh 16 Verified Hotels View Hotels" [ref=f3e318] [cursor=pointer]:
+            - /url: /india/chandigarh
+            - generic [ref=f3e319]:
+              - img "Hotels in Chandigarh with Bathtub" [ref=f3e320]
+              - generic [ref=f3e321]: ✓ Verified Stays
+            - generic [ref=f3e324]:
+              - heading "Chandigarh" [level=3] [ref=f3e325]
+              - paragraph [ref=f3e326]: 16 Verified Hotels
+              - generic [ref=f3e327]: View Hotels
+          - link "Hotels in Mandarmani with Bathtub ✓ Verified Stays Mandarmani 16 Verified Hotels View Hotels" [ref=f3e331] [cursor=pointer]:
+            - /url: /india/mandarmani
+            - generic [ref=f3e332]:
+              - img "Hotels in Mandarmani with Bathtub" [ref=f3e333]
+              - generic [ref=f3e334]: ✓ Verified Stays
+            - generic [ref=f3e337]:
+              - heading "Mandarmani" [level=3] [ref=f3e338]
+              - paragraph [ref=f3e339]: 16 Verified Hotels
+              - generic [ref=f3e340]: View Hotels
+          - link "Hotels in Igatpuri with Bathtub ✓ Verified Stays Igatpuri 14 Verified Hotels View Hotels" [ref=f3e344] [cursor=pointer]:
+            - /url: /india/igatpuri
+            - generic [ref=f3e345]:
+              - img "Hotels in Igatpuri with Bathtub" [ref=f3e346]
+              - generic [ref=f3e347]: ✓ Verified Stays
+            - generic [ref=f3e350]:
+              - heading "Igatpuri" [level=3] [ref=f3e351]
+              - paragraph [ref=f3e352]: 14 Verified Hotels
+              - generic [ref=f3e353]: View Hotels
+          - link "Hotels in Panchgani with Bathtub ✓ Verified Stays Panchgani 14 Verified Hotels View Hotels" [ref=f3e357] [cursor=pointer]:
+            - /url: /india/panchgani
+            - generic [ref=f3e358]:
+              - img "Hotels in Panchgani with Bathtub" [ref=f3e359]
+              - generic [ref=f3e360]: ✓ Verified Stays
+            - generic [ref=f3e363]:
+              - heading "Panchgani" [level=3] [ref=f3e364]
+              - paragraph [ref=f3e365]: 14 Verified Hotels
+              - generic [ref=f3e366]: View Hotels
+          - link "Hotels in Faridabad with Bathtub ✓ Verified Stays Faridabad 14 Verified Hotels View Hotels" [ref=f3e370] [cursor=pointer]:
+            - /url: /india/faridabad
+            - generic [ref=f3e371]:
+              - img "Hotels in Faridabad with Bathtub" [ref=f3e372]
+              - generic [ref=f3e373]: ✓ Verified Stays
+            - generic [ref=f3e376]:
+              - heading "Faridabad" [level=3] [ref=f3e377]
+              - paragraph [ref=f3e378]: 14 Verified Hotels
+              - generic [ref=f3e379]: View Hotels
+          - link "Hotels in Kolkata with Bathtub ✓ Verified Stays Kolkata 13 Verified Hotels View Hotels" [ref=f3e383] [cursor=pointer]:
+            - /url: /india/kolkata
+            - generic [ref=f3e384]:
+              - img "Hotels in Kolkata with Bathtub" [ref=f3e385]
+              - generic [ref=f3e386]: ✓ Verified Stays
+            - generic [ref=f3e389]:
+              - heading "Kolkata" [level=3] [ref=f3e390]
+              - paragraph [ref=f3e391]: 13 Verified Hotels
+              - generic [ref=f3e392]: View Hotels
+          - link "Hotels in Jaipur with Bathtub ✓ Verified Stays Jaipur 13 Verified Hotels View Hotels" [ref=f3e396] [cursor=pointer]:
+            - /url: /india/jaipur
+            - generic [ref=f3e397]:
+              - img "Hotels in Jaipur with Bathtub" [ref=f3e398]
+              - generic [ref=f3e399]: ✓ Verified Stays
+            - generic [ref=f3e402]:
+              - heading "Jaipur" [level=3] [ref=f3e403]
+              - paragraph [ref=f3e404]: 13 Verified Hotels
+              - generic [ref=f3e405]: View Hotels
+          - link "Hotels in Kochi with Bathtub ✓ Verified Stays Kochi 12 Verified Hotels View Hotels" [ref=f3e409] [cursor=pointer]:
+            - /url: /india/kochi
+            - generic [ref=f3e410]:
+              - img "Hotels in Kochi with Bathtub" [ref=f3e411]
+              - generic [ref=f3e412]: ✓ Verified Stays
+            - generic [ref=f3e415]:
+              - heading "Kochi" [level=3] [ref=f3e416]
+              - paragraph [ref=f3e417]: 12 Verified Hotels
+              - generic [ref=f3e418]: View Hotels
+          - link "Hotels in Mahabalipuram with Bathtub ✓ Verified Stays Mahabalipuram 11 Verified Hotels View Hotels" [ref=f3e422] [cursor=pointer]:
+            - /url: /india/mahabalipuram
+            - generic [ref=f3e423]:
+              - img "Hotels in Mahabalipuram with Bathtub" [ref=f3e424]
+              - generic [ref=f3e425]: ✓ Verified Stays
+            - generic [ref=f3e428]:
+              - heading "Mahabalipuram" [level=3] [ref=f3e429]
+              - paragraph [ref=f3e430]: 11 Verified Hotels
+              - generic [ref=f3e431]: View Hotels
+          - link "Hotels in Karjat with Bathtub ✓ Verified Stays Karjat 10 Verified Hotels View Hotels" [ref=f3e435] [cursor=pointer]:
+            - /url: /india/karjat
+            - generic [ref=f3e436]:
+              - img "Hotels in Karjat with Bathtub" [ref=f3e437]
+              - generic [ref=f3e438]: ✓ Verified Stays
+            - generic [ref=f3e441]:
+              - heading "Karjat" [level=3] [ref=f3e442]
+              - paragraph [ref=f3e443]: 10 Verified Hotels
+              - generic [ref=f3e444]: View Hotels
+          - link "Hotels in Lonavala with Bathtub ✓ Verified Stays Lonavala 10 Verified Hotels View Hotels" [ref=f3e448] [cursor=pointer]:
+            - /url: /india/lonavala
+            - generic [ref=f3e449]:
+              - img "Hotels in Lonavala with Bathtub" [ref=f3e450]
+              - generic [ref=f3e451]: ✓ Verified Stays
+            - generic [ref=f3e454]:
+              - heading "Lonavala" [level=3] [ref=f3e455]
+              - paragraph [ref=f3e456]: 10 Verified Hotels
+              - generic [ref=f3e457]: View Hotels
+          - link "Hotels in Bangalore with Bathtub ✓ Verified Stays Bangalore 9 Verified Hotels View Hotels" [ref=f3e461] [cursor=pointer]:
+            - /url: /india/bangalore
+            - generic [ref=f3e462]:
+              - img "Hotels in Bangalore with Bathtub" [ref=f3e463]
+              - generic [ref=f3e464]: ✓ Verified Stays
+            - generic [ref=f3e467]:
+              - heading "Bangalore" [level=3] [ref=f3e468]
+              - paragraph [ref=f3e469]: 9 Verified Hotels
+              - generic [ref=f3e470]: View Hotels
+          - link "Hotels in Dharamshala with Bathtub ✓ Verified Stays Dharamshala 9 Verified Hotels View Hotels" [ref=f3e474] [cursor=pointer]:
+            - /url: /india/dharamshala
+            - generic [ref=f3e475]:
+              - img "Hotels in Dharamshala with Bathtub" [ref=f3e476]
+              - generic [ref=f3e477]: ✓ Verified Stays
+            - generic [ref=f3e480]:
+              - heading "Dharamshala" [level=3] [ref=f3e481]
+              - paragraph [ref=f3e482]: 9 Verified Hotels
+              - generic [ref=f3e483]: View Hotels
+          - link "Hotels in Gurgaon with Bathtub ✓ Verified Stays Gurgaon 9 Verified Hotels View Hotels" [ref=f3e487] [cursor=pointer]:
+            - /url: /india/gurgaon
+            - generic [ref=f3e488]:
+              - img "Hotels in Gurgaon with Bathtub" [ref=f3e489]
+              - generic [ref=f3e490]: ✓ Verified Stays
+            - generic [ref=f3e493]:
+              - heading "Gurgaon" [level=3] [ref=f3e494]
+              - paragraph [ref=f3e495]: 9 Verified Hotels
+              - generic [ref=f3e496]: View Hotels
+          - link "Hotels in Coimbatore with Bathtub ✓ Verified Stays Coimbatore 9 Verified Hotels View Hotels" [ref=f3e500] [cursor=pointer]:
+            - /url: /india/coimbatore
+            - generic [ref=f3e501]:
+              - img "Hotels in Coimbatore with Bathtub" [ref=f3e502]
+              - generic [ref=f3e503]: ✓ Verified Stays
+            - generic [ref=f3e506]:
+              - heading "Coimbatore" [level=3] [ref=f3e507]
+              - paragraph [ref=f3e508]: 9 Verified Hotels
+              - generic [ref=f3e509]: View Hotels
+          - link "Hotels in Haridwar with Bathtub ✓ Verified Stays Haridwar 8 Verified Hotels View Hotels" [ref=f3e513] [cursor=pointer]:
+            - /url: /india/haridwar
+            - generic [ref=f3e514]:
+              - img "Hotels in Haridwar with Bathtub" [ref=f3e515]
+              - generic [ref=f3e516]: ✓ Verified Stays
+            - generic [ref=f3e519]:
+              - heading "Haridwar" [level=3] [ref=f3e520]
+              - paragraph [ref=f3e521]: 8 Verified Hotels
+              - generic [ref=f3e522]: View Hotels
+          - link "Hotels in Kolhapur with Bathtub ✓ Verified Stays Kolhapur 8 Verified Hotels View Hotels" [ref=f3e526] [cursor=pointer]:
+            - /url: /india/kolhapur
+            - generic [ref=f3e527]:
+              - img "Hotels in Kolhapur with Bathtub" [ref=f3e528]
+              - generic [ref=f3e529]: ✓ Verified Stays
+            - generic [ref=f3e532]:
+              - heading "Kolhapur" [level=3] [ref=f3e533]
+              - paragraph [ref=f3e534]: 8 Verified Hotels
+              - generic [ref=f3e535]: View Hotels
+          - link "Hotels in Pune with Bathtub ✓ Verified Stays Pune 7 Verified Hotels View Hotels" [ref=f3e539] [cursor=pointer]:
+            - /url: /india/pune
+            - generic [ref=f3e540]:
+              - img "Hotels in Pune with Bathtub" [ref=f3e541]
+              - generic [ref=f3e542]: ✓ Verified Stays
+            - generic [ref=f3e545]:
+              - heading "Pune" [level=3] [ref=f3e546]
+              - paragraph [ref=f3e547]: 7 Verified Hotels
+              - generic [ref=f3e548]: View Hotels
+          - link "Hotels in Ahmedabad with Bathtub ✓ Verified Stays Ahmedabad 7 Verified Hotels View Hotels" [ref=f3e552] [cursor=pointer]:
+            - /url: /india/ahmedabad
+            - generic [ref=f3e553]:
+              - img "Hotels in Ahmedabad with Bathtub" [ref=f3e554]
+              - generic [ref=f3e555]: ✓ Verified Stays
+            - generic [ref=f3e558]:
+              - heading "Ahmedabad" [level=3] [ref=f3e559]
+              - paragraph [ref=f3e560]: 7 Verified Hotels
+              - generic [ref=f3e561]: View Hotels
+          - link "Hotels in Nainital with Bathtub ✓ Verified Stays Nainital 7 Verified Hotels View Hotels" [ref=f3e565] [cursor=pointer]:
+            - /url: /india/nainital
+            - generic [ref=f3e566]:
+              - img "Hotels in Nainital with Bathtub" [ref=f3e567]
+              - generic [ref=f3e568]: ✓ Verified Stays
+            - generic [ref=f3e571]:
+              - heading "Nainital" [level=3] [ref=f3e572]
+              - paragraph [ref=f3e573]: 7 Verified Hotels
+              - generic [ref=f3e574]: View Hotels
+          - link "Hotels in Kodaikanal with Bathtub ✓ Verified Stays Kodaikanal 7 Verified Hotels View Hotels" [ref=f3e578] [cursor=pointer]:
+            - /url: /india/kodaikanal
+            - generic [ref=f3e579]:
+              - img "Hotels in Kodaikanal with Bathtub" [ref=f3e580]
+              - generic [ref=f3e581]: ✓ Verified Stays
+            - generic [ref=f3e584]:
+              - heading "Kodaikanal" [level=3] [ref=f3e585]
+              - paragraph [ref=f3e586]: 7 Verified Hotels
+              - generic [ref=f3e587]: View Hotels
+          - link "Hotels in Panjim with Bathtub ✓ Verified Stays Panjim 7 Verified Hotels View Hotels" [ref=f3e591] [cursor=pointer]:
+            - /url: /india/panjim
+            - generic [ref=f3e592]:
+              - img "Hotels in Panjim with Bathtub" [ref=f3e593]
+              - generic [ref=f3e594]: ✓ Verified Stays
+            - generic [ref=f3e597]:
+              - heading "Panjim" [level=3] [ref=f3e598]
+              - paragraph [ref=f3e599]: 7 Verified Hotels
+              - generic [ref=f3e600]: View Hotels
+          - link "Hotels in Mahipalpur with Bathtub ✓ Verified Stays Mahipalpur 7 Verified Hotels View Hotels" [ref=f3e604] [cursor=pointer]:
+            - /url: /india/mahipalpur
+            - generic [ref=f3e605]:
+              - img "Hotels in Mahipalpur with Bathtub" [ref=f3e606]
+              - generic [ref=f3e607]: ✓ Verified Stays
+            - generic [ref=f3e610]:
+              - heading "Mahipalpur" [level=3] [ref=f3e611]
+              - paragraph [ref=f3e612]: 7 Verified Hotels
+              - generic [ref=f3e613]: View Hotels
+          - link "Hotels in Zirakpur with Bathtub ✓ Verified Stays Zirakpur 7 Verified Hotels View Hotels" [ref=f3e617] [cursor=pointer]:
+            - /url: /india/zirakpur
+            - generic [ref=f3e618]:
+              - img "Hotels in Zirakpur with Bathtub" [ref=f3e619]
+              - generic [ref=f3e620]: ✓ Verified Stays
+            - generic [ref=f3e623]:
+              - heading "Zirakpur" [level=3] [ref=f3e624]
+              - paragraph [ref=f3e625]: 7 Verified Hotels
+              - generic [ref=f3e626]: View Hotels
+          - link "Hotels in Digha with Bathtub ✓ Verified Stays Digha 6 Verified Hotels View Hotels" [ref=f3e630] [cursor=pointer]:
+            - /url: /india/digha
+            - generic [ref=f3e631]:
+              - img "Hotels in Digha with Bathtub" [ref=f3e632]
+              - generic [ref=f3e633]: ✓ Verified Stays
+            - generic [ref=f3e636]:
+              - heading "Digha" [level=3] [ref=f3e637]
+              - paragraph [ref=f3e638]: 6 Verified Hotels
+              - generic [ref=f3e639]: View Hotels
+          - link "Hotels in Mount Abu with Bathtub ✓ Verified Stays Mount Abu 6 Verified Hotels View Hotels" [ref=f3e643] [cursor=pointer]:
+            - /url: /india/mount-abu
+            - generic [ref=f3e644]:
+              - img "Hotels in Mount Abu with Bathtub" [ref=f3e645]
+              - generic [ref=f3e646]: ✓ Verified Stays
+            - generic [ref=f3e649]:
+              - heading "Mount Abu" [level=3] [ref=f3e650]
+              - paragraph [ref=f3e651]: 6 Verified Hotels
+              - generic [ref=f3e652]: View Hotels
+          - link "Hotels in Koramangala with Bathtub ✓ Verified Stays Koramangala 6 Verified Hotels View Hotels" [ref=f3e656] [cursor=pointer]:
+            - /url: /india/koramangala
+            - generic [ref=f3e657]:
+              - img "Hotels in Koramangala with Bathtub" [ref=f3e658]
+              - generic [ref=f3e659]: ✓ Verified Stays
+            - generic [ref=f3e662]:
+              - heading "Koramangala" [level=3] [ref=f3e663]
+              - paragraph [ref=f3e664]: 6 Verified Hotels
+              - generic [ref=f3e665]: View Hotels
+          - link "Hotels in Shirdi with Bathtub ✓ Verified Stays Shirdi 6 Verified Hotels View Hotels" [ref=f3e669] [cursor=pointer]:
+            - /url: /india/shirdi
+            - generic [ref=f3e670]:
+              - img "Hotels in Shirdi with Bathtub" [ref=f3e671]
+              - generic [ref=f3e672]: ✓ Verified Stays
+            - generic [ref=f3e675]:
+              - heading "Shirdi" [level=3] [ref=f3e676]
+              - paragraph [ref=f3e677]: 6 Verified Hotels
+              - generic [ref=f3e678]: View Hotels
+          - link "Hotels in Puri with Bathtub ✓ Verified Stays Puri 5 Verified Hotels View Hotels" [ref=f3e682] [cursor=pointer]:
+            - /url: /india/puri
+            - generic [ref=f3e683]:
+              - img "Hotels in Puri with Bathtub" [ref=f3e684]
+              - generic [ref=f3e685]: ✓ Verified Stays
+            - generic [ref=f3e688]:
+              - heading "Puri" [level=3] [ref=f3e689]
+              - paragraph [ref=f3e690]: 5 Verified Hotels
+              - generic [ref=f3e691]: View Hotels
+          - link "Hotels in Siliguri with Bathtub ✓ Verified Stays Siliguri 5 Verified Hotels View Hotels" [ref=f3e695] [cursor=pointer]:
+            - /url: /india/siliguri
+            - generic [ref=f3e696]:
+              - img "Hotels in Siliguri with Bathtub" [ref=f3e697]
+              - generic [ref=f3e698]: ✓ Verified Stays
+            - generic [ref=f3e701]:
+              - heading "Siliguri" [level=3] [ref=f3e702]
+              - paragraph [ref=f3e703]: 5 Verified Hotels
+              - generic [ref=f3e704]: View Hotels
+          - link "Hotels in Daman with Bathtub ✓ Verified Stays Daman 5 Verified Hotels View Hotels" [ref=f3e708] [cursor=pointer]:
+            - /url: /india/daman
+            - generic [ref=f3e709]:
+              - img "Hotels in Daman with Bathtub" [ref=f3e710]
+              - generic [ref=f3e711]: ✓ Verified Stays
+            - generic [ref=f3e714]:
+              - heading "Daman" [level=3] [ref=f3e715]
+              - paragraph [ref=f3e716]: 5 Verified Hotels
+              - generic [ref=f3e717]: View Hotels
+          - link "Hotels in Darjeeling with Bathtub ✓ Verified Stays Darjeeling 5 Verified Hotels View Hotels" [ref=f3e721] [cursor=pointer]:
+            - /url: /india/darjeeling
+            - generic [ref=f3e722]:
+              - img "Hotels in Darjeeling with Bathtub" [ref=f3e723]
+              - generic [ref=f3e724]: ✓ Verified Stays
+            - generic [ref=f3e727]:
+              - heading "Darjeeling" [level=3] [ref=f3e728]
+              - paragraph [ref=f3e729]: 5 Verified Hotels
+              - generic [ref=f3e730]: View Hotels
+          - link "Hotels in Shillong with Bathtub ✓ Verified Stays Shillong 5 Verified Hotels View Hotels" [ref=f3e734] [cursor=pointer]:
+            - /url: /india/shillong
+            - generic [ref=f3e735]:
+              - img "Hotels in Shillong with Bathtub" [ref=f3e736]
+              - generic [ref=f3e737]: ✓ Verified Stays
+            - generic [ref=f3e740]:
+              - heading "Shillong" [level=3] [ref=f3e741]
+              - paragraph [ref=f3e742]: 5 Verified Hotels
+              - generic [ref=f3e743]: View Hotels
+          - link "Hotels in Gandhinagar with Bathtub ✓ Verified Stays Gandhinagar 4 Verified Hotels View Hotels" [ref=f3e747] [cursor=pointer]:
+            - /url: /india/gandhinagar
+            - generic [ref=f3e748]:
+              - img "Hotels in Gandhinagar with Bathtub" [ref=f3e749]
+              - generic [ref=f3e750]: ✓ Verified Stays
+            - generic [ref=f3e753]:
+              - heading "Gandhinagar" [level=3] [ref=f3e754]
+              - paragraph [ref=f3e755]: 4 Verified Hotels
+              - generic [ref=f3e756]: View Hotels
+          - link "Hotels in Yercaud with Bathtub ✓ Verified Stays Yercaud 4 Verified Hotels View Hotels" [ref=f3e760] [cursor=pointer]:
+            - /url: /india/yercaud
+            - generic [ref=f3e761]:
+              - img "Hotels in Yercaud with Bathtub" [ref=f3e762]
+              - generic [ref=f3e763]: ✓ Verified Stays
+            - generic [ref=f3e766]:
+              - heading "Yercaud" [level=3] [ref=f3e767]
+              - paragraph [ref=f3e768]: 4 Verified Hotels
+              - generic [ref=f3e769]: View Hotels
+          - link "Hotels in Lavasa with Bathtub ✓ Verified Stays Lavasa 4 Verified Hotels View Hotels" [ref=f3e773] [cursor=pointer]:
+            - /url: /india/lavasa
+            - generic [ref=f3e774]:
+              - img "Hotels in Lavasa with Bathtub" [ref=f3e775]
+              - generic [ref=f3e776]: ✓ Verified Stays
+            - generic [ref=f3e779]:
+              - heading "Lavasa" [level=3] [ref=f3e780]
+              - paragraph [ref=f3e781]: 4 Verified Hotels
+              - generic [ref=f3e782]: View Hotels
+          - link "Hotels in Mathura with Bathtub ✓ Verified Stays Mathura 3 Verified Hotels View Hotels" [ref=f3e786] [cursor=pointer]:
+            - /url: /india/mathura
+            - generic [ref=f3e787]:
+              - img "Hotels in Mathura with Bathtub" [ref=f3e788]
+              - generic [ref=f3e789]: ✓ Verified Stays
+            - generic [ref=f3e792]:
+              - heading "Mathura" [level=3] [ref=f3e793]
+              - paragraph [ref=f3e794]: 3 Verified Hotels
+              - generic [ref=f3e795]: View Hotels
+          - link "Hotels in Panvel with Bathtub ✓ Verified Stays Panvel 2 Verified Hotels View Hotels" [ref=f3e799] [cursor=pointer]:
+            - /url: /india/panvel
+            - generic [ref=f3e800]:
+              - img "Hotels in Panvel with Bathtub" [ref=f3e801]
+              - generic [ref=f3e802]: ✓ Verified Stays
+            - generic [ref=f3e805]:
+              - heading "Panvel" [level=3] [ref=f3e806]
+              - paragraph [ref=f3e807]: 2 Verified Hotels
+              - generic [ref=f3e808]: View Hotels
+          - link "Hotels in Ooty with Bathtub ✓ Verified Stays Ooty 1 Verified Hotels View Hotels" [ref=f3e812] [cursor=pointer]:
+            - /url: /india/ooty
+            - generic [ref=f3e813]:
+              - img "Hotels in Ooty with Bathtub" [ref=f3e814]
+              - generic [ref=f3e815]: ✓ Verified Stays
+            - generic [ref=f3e818]:
+              - heading "Ooty" [level=3] [ref=f3e819]
+              - paragraph [ref=f3e820]: 1 Verified Hotels
+              - generic [ref=f3e821]: View Hotels
+          - link "Hotels in Matheran with Bathtub ✓ Verified Stays Matheran 1 Verified Hotels View Hotels" [ref=f3e825] [cursor=pointer]:
+            - /url: /india/matheran
+            - generic [ref=f3e826]:
+              - img "Hotels in Matheran with Bathtub" [ref=f3e827]
+              - generic [ref=f3e828]: ✓ Verified Stays
+            - generic [ref=f3e831]:
+              - heading "Matheran" [level=3] [ref=f3e832]
+              - paragraph [ref=f3e833]: 1 Verified Hotels
+              - generic [ref=f3e834]: View Hotels
+          - link "Hotels in Saputara with Bathtub ✓ Verified Stays Saputara 1 Verified Hotels View Hotels" [ref=f3e838] [cursor=pointer]:
+            - /url: /india/saputara
+            - generic [ref=f3e839]:
+              - img "Hotels in Saputara with Bathtub" [ref=f3e840]
+              - generic [ref=f3e841]: ✓ Verified Stays
+            - generic [ref=f3e844]:
+              - heading "Saputara" [level=3] [ref=f3e845]
+              - paragraph [ref=f3e846]: 1 Verified Hotels
+              - generic [ref=f3e847]: View Hotels
+          - link "Hotels in Gwalior with Bathtub ✓ Verified Stays Gwalior 1 Verified Hotels View Hotels" [ref=f3e851] [cursor=pointer]:
+            - /url: /india/gwalior
+            - generic [ref=f3e852]:
+              - img "Hotels in Gwalior with Bathtub" [ref=f3e853]
+              - generic [ref=f3e854]: ✓ Verified Stays
+            - generic [ref=f3e857]:
+              - heading "Gwalior" [level=3] [ref=f3e858]
+              - paragraph [ref=f3e859]: 1 Verified Hotels
+              - generic [ref=f3e860]: View Hotels
+      - generic [ref=f3e864]:
+        - generic [ref=f3e865]:
+          - generic [ref=f3e866]:
+            - heading "International Romantic Escapes" [level=2] [ref=f3e867]
+            - paragraph [ref=f3e868]: World-class luxury destinations featuring verified private jacuzzis & tubs
+          - generic [ref=f3e869]: Global Escapes
+        - generic [ref=f3e870]:
+          - link "Hotels in Las Vegas with Bathtub USA ✓ Verified Stays Las Vegas 20 Verified Hotels • USA View Hotels" [ref=f3e871] [cursor=pointer]:
+            - /url: /usa/las-vegas
+            - generic [ref=f3e872]:
+              - img "Hotels in Las Vegas with Bathtub" [ref=f3e873]
+              - generic [ref=f3e874]: USA
+              - generic [ref=f3e875]: ✓ Verified Stays
+            - generic [ref=f3e878]:
+              - heading "Las Vegas" [level=3] [ref=f3e879]
+              - paragraph [ref=f3e880]: 20 Verified Hotels • USA
+              - generic [ref=f3e881]: View Hotels
+          - link "Hotels in Bali with Bathtub Indonesia ✓ Verified Stays Bali 20 Verified Hotels • Indonesia View Hotels" [ref=f3e885] [cursor=pointer]:
+            - /url: /indonesia/bali
+            - generic [ref=f3e886]:
+              - img "Hotels in Bali with Bathtub" [ref=f3e887]
+              - generic [ref=f3e888]: Indonesia
+              - generic [ref=f3e889]: ✓ Verified Stays
+            - generic [ref=f3e892]:
+              - heading "Bali" [level=3] [ref=f3e893]
+              - paragraph [ref=f3e894]: 20 Verified Hotels • Indonesia
+              - generic [ref=f3e895]: View Hotels
+          - link "Hotels in Dubai with Bathtub UAE ✓ Verified Stays Dubai 20 Verified Hotels • UAE View Hotels" [ref=f3e899] [cursor=pointer]:
+            - /url: /uae/dubai
+            - generic [ref=f3e900]:
+              - img "Hotels in Dubai with Bathtub" [ref=f3e901]
+              - generic [ref=f3e902]: UAE
+              - generic [ref=f3e903]: ✓ Verified Stays
+            - generic [ref=f3e906]:
+              - heading "Dubai" [level=3] [ref=f3e907]
+              - paragraph [ref=f3e908]: 20 Verified Hotels • UAE
+              - generic [ref=f3e909]: View Hotels
+          - link "Hotels in London with Bathtub UK ✓ Verified Stays London 20 Verified Hotels • UK View Hotels" [ref=f3e913] [cursor=pointer]:
+            - /url: /uk/london
+            - generic [ref=f3e914]:
+              - img "Hotels in London with Bathtub" [ref=f3e915]
+              - generic [ref=f3e916]: UK
+              - generic [ref=f3e917]: ✓ Verified Stays
+            - generic [ref=f3e920]:
+              - heading "London" [level=3] [ref=f3e921]
+              - paragraph [ref=f3e922]: 20 Verified Hotels • UK
+              - generic [ref=f3e923]: View Hotels
+          - link "Hotels in New York with Bathtub USA ✓ Verified Stays New York 18 Verified Hotels • USA View Hotels" [ref=f3e927] [cursor=pointer]:
+            - /url: /usa/new-york
+            - generic [ref=f3e928]:
+              - img "Hotels in New York with Bathtub" [ref=f3e929]
+              - generic [ref=f3e930]: USA
+              - generic [ref=f3e931]: ✓ Verified Stays
+            - generic [ref=f3e934]:
+              - heading "New York" [level=3] [ref=f3e935]
+              - paragraph [ref=f3e936]: 18 Verified Hotels • USA
+              - generic [ref=f3e937]: View Hotels
+          - generic [ref=f3e941]:
+            - heading "More Cities Coming Soon" [level=3] [ref=f3e945]
+            - paragraph [ref=f3e946]: We are continuously auditing & adding verified luxury bathtub stays in Paris, Rome, Tokyo, and more.
+            - generic [ref=f3e947]: Auditing New Properties Weekly
+  - contentinfo [ref=f3e948]:
+    - generic [ref=f3e949]:
+      - generic [ref=f3e950]:
+        - generic [ref=f3e951]:
+          - generic [ref=f3e952]:
+            - text: Editorial & Travel Inspiration
+            - heading "Romantic Getaways & Jacuzzi Hotel Guides" [level=3] [ref=f3e953]
+          - link "Browse All Guides →" [ref=f3e954] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=f3e955]: Browse All Guides
+            - generic [ref=f3e956]: →
+        - generic [ref=f3e957]:
+          - link "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) 2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Guide →" [ref=f3e958] [cursor=pointer]:
+            - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+            - generic [ref=f3e959]:
+              - img "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [ref=f3e960]
+              - generic [ref=f3e961]: 2026-08-22
+            - generic [ref=f3e962]:
+              - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=4] [ref=f3e963]
+              - paragraph [ref=f3e964]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+              - generic [ref=f3e965]:
+                - generic [ref=f3e966]: Read Full Guide
+                - generic [ref=f3e967]: →
+          - link "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) 2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Guide →" [ref=f3e968] [cursor=pointer]:
+            - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+            - generic [ref=f3e969]:
+              - img "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [ref=f3e970]
+              - generic [ref=f3e971]: 2026-08-22
+            - generic [ref=f3e972]:
+              - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=4] [ref=f3e973]
+              - paragraph [ref=f3e974]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+              - generic [ref=f3e975]:
+                - generic [ref=f3e976]: Read Full Guide
+                - generic [ref=f3e977]: →
+          - link "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) 2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Guide →" [ref=f3e978] [cursor=pointer]:
+            - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+            - generic [ref=f3e979]:
+              - img "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [ref=f3e980]
+              - generic [ref=f3e981]: 2026-08-22
+            - generic [ref=f3e982]:
+              - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=4] [ref=f3e983]
+              - paragraph [ref=f3e984]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+              - generic [ref=f3e985]:
+                - generic [ref=f3e986]: Read Full Guide
+                - generic [ref=f3e987]: →
+      - generic [ref=f3e988]:
+        - generic [ref=f3e995]:
+          - heading "Browse Hotels by Region" [level=3] [ref=f3e996]
+          - paragraph [ref=f3e997]: Quickly jump to verified stays grouped by geographic travel zones
+        - generic [ref=f3e998]:
+          - generic [ref=f3e999]:
+            - heading "North India 23 Destinations" [level=4] [ref=f3e1000]:
+              - generic [ref=f3e1002]: North India
+              - generic [ref=f3e1003]: 23 Destinations
+            - generic [ref=f3e1004]:
+              - link "Agra (19)" [ref=f3e1005] [cursor=pointer]:
+                - /url: /india/agra
+                - generic [ref=f3e1006]: Agra
+                - generic [ref=f3e1007]: (19)
+              - link "Amritsar (19)" [ref=f3e1008] [cursor=pointer]:
+                - /url: /india/amritsar
+                - generic [ref=f3e1009]: Amritsar
+                - generic [ref=f3e1010]: (19)
+              - link "Chandigarh (16)" [ref=f3e1011] [cursor=pointer]:
+                - /url: /india/chandigarh
+                - generic [ref=f3e1012]: Chandigarh
+                - generic [ref=f3e1013]: (16)
+              - link "Delhi (28)" [ref=f3e1014] [cursor=pointer]:
+                - /url: /india/delhi
+                - generic [ref=f3e1015]: Delhi
+                - generic [ref=f3e1016]: (28)
+              - link "Dharamshala (9)" [ref=f3e1017] [cursor=pointer]:
+                - /url: /india/dharamshala
+                - generic [ref=f3e1018]: Dharamshala
+                - generic [ref=f3e1019]: (9)
+              - link "Faridabad (14)" [ref=f3e1020] [cursor=pointer]:
+                - /url: /india/faridabad
+                - generic [ref=f3e1021]: Faridabad
+                - generic [ref=f3e1022]: (14)
+              - link "Gurgaon (9)" [ref=f3e1023] [cursor=pointer]:
+                - /url: /india/gurgaon
+                - generic [ref=f3e1024]: Gurgaon
+                - generic [ref=f3e1025]: (9)
+              - link "Gwalior (1)" [ref=f3e1026] [cursor=pointer]:
+                - /url: /india/gwalior
+                - generic [ref=f3e1027]: Gwalior
+                - generic [ref=f3e1028]: (1)
+              - link "Haridwar (8)" [ref=f3e1029] [cursor=pointer]:
+                - /url: /india/haridwar
+                - generic [ref=f3e1030]: Haridwar
+                - generic [ref=f3e1031]: (8)
+              - link "Jaipur (13)" [ref=f3e1032] [cursor=pointer]:
+                - /url: /india/jaipur
+                - generic [ref=f3e1033]: Jaipur
+                - generic [ref=f3e1034]: (13)
+              - link "Koramangala (6)" [ref=f3e1035] [cursor=pointer]:
+                - /url: /india/koramangala
+                - generic [ref=f3e1036]: Koramangala
+                - generic [ref=f3e1037]: (6)
+              - link "Lucknow (20)" [ref=f3e1038] [cursor=pointer]:
+                - /url: /india/lucknow
+                - generic [ref=f3e1039]: Lucknow
+                - generic [ref=f3e1040]: (20)
+              - link "Mahipalpur (7)" [ref=f3e1041] [cursor=pointer]:
+                - /url: /india/mahipalpur
+                - generic [ref=f3e1042]: Mahipalpur
+                - generic [ref=f3e1043]: (7)
+              - link "Manali (21)" [ref=f3e1044] [cursor=pointer]:
+                - /url: /india/manali
+                - generic [ref=f3e1045]: Manali
+                - generic [ref=f3e1046]: (21)
+              - link "Matheran (1)" [ref=f3e1047] [cursor=pointer]:
+                - /url: /india/matheran
+                - generic [ref=f3e1048]: Matheran
+                - generic [ref=f3e1049]: (1)
+              - link "Mathura (3)" [ref=f3e1050] [cursor=pointer]:
+                - /url: /india/mathura
+                - generic [ref=f3e1051]: Mathura
+                - generic [ref=f3e1052]: (3)
+              - link "Mount Abu (6)" [ref=f3e1053] [cursor=pointer]:
+                - /url: /india/mount-abu
+                - generic [ref=f3e1054]: Mount Abu
+                - generic [ref=f3e1055]: (6)
+              - link "Nainital (7)" [ref=f3e1056] [cursor=pointer]:
+                - /url: /india/nainital
+                - generic [ref=f3e1057]: Nainital
+                - generic [ref=f3e1058]: (7)
+              - link "Rishikesh (20)" [ref=f3e1059] [cursor=pointer]:
+                - /url: /india/rishikesh
+                - generic [ref=f3e1060]: Rishikesh
+                - generic [ref=f3e1061]: (20)
+              - link "Shimla (20)" [ref=f3e1062] [cursor=pointer]:
+                - /url: /india/shimla
+                - generic [ref=f3e1063]: Shimla
+                - generic [ref=f3e1064]: (20)
+              - link "Shirdi (6)" [ref=f3e1065] [cursor=pointer]:
+                - /url: /india/shirdi
+                - generic [ref=f3e1066]: Shirdi
+                - generic [ref=f3e1067]: (6)
+              - link "Udaipur (20)" [ref=f3e1068] [cursor=pointer]:
+                - /url: /india/udaipur
+                - generic [ref=f3e1069]: Udaipur
+                - generic [ref=f3e1070]: (20)
+              - link "Zirakpur (7)" [ref=f3e1071] [cursor=pointer]:
+                - /url: /india/zirakpur
+                - generic [ref=f3e1072]: Zirakpur
+                - generic [ref=f3e1073]: (7)
+          - generic [ref=f3e1074]:
+            - heading "South India 11 Destinations" [level=4] [ref=f3e1075]:
+              - generic [ref=f3e1077]: South India
+              - generic [ref=f3e1078]: 11 Destinations
+            - generic [ref=f3e1079]:
+              - link "Bangalore (9)" [ref=f3e1080] [cursor=pointer]:
+                - /url: /india/bangalore
+                - generic [ref=f3e1081]: Bangalore
+                - generic [ref=f3e1082]: (9)
+              - link "Calangute (20)" [ref=f3e1083] [cursor=pointer]:
+                - /url: /india/calangute
+                - generic [ref=f3e1084]: Calangute
+                - generic [ref=f3e1085]: (20)
+              - link "Coimbatore (9)" [ref=f3e1086] [cursor=pointer]:
+                - /url: /india/coimbatore
+                - generic [ref=f3e1087]: Coimbatore
+                - generic [ref=f3e1088]: (9)
+              - link "Goa (28)" [ref=f3e1089] [cursor=pointer]:
+                - /url: /india/goa
+                - generic [ref=f3e1090]: Goa
+                - generic [ref=f3e1091]: (28)
+              - link "Kochi (12)" [ref=f3e1092] [cursor=pointer]:
+                - /url: /india/kochi
+                - generic [ref=f3e1093]: Kochi
+                - generic [ref=f3e1094]: (12)
+              - link "Kodaikanal (7)" [ref=f3e1095] [cursor=pointer]:
+                - /url: /india/kodaikanal
+                - generic [ref=f3e1096]: Kodaikanal
+                - generic [ref=f3e1097]: (7)
+              - link "Mahabalipuram (11)" [ref=f3e1098] [cursor=pointer]:
+                - /url: /india/mahabalipuram
+                - generic [ref=f3e1099]: Mahabalipuram
+                - generic [ref=f3e1100]: (11)
+              - link "Munnar (21)" [ref=f3e1101] [cursor=pointer]:
+                - /url: /india/munnar
+                - generic [ref=f3e1102]: Munnar
+                - generic [ref=f3e1103]: (21)
+              - link "Ooty (1)" [ref=f3e1104] [cursor=pointer]:
+                - /url: /india/ooty
+                - generic [ref=f3e1105]: Ooty
+                - generic [ref=f3e1106]: (1)
+              - link "Panjim (7)" [ref=f3e1107] [cursor=pointer]:
+                - /url: /india/panjim
+                - generic [ref=f3e1108]: Panjim
+                - generic [ref=f3e1109]: (7)
+              - link "Yercaud (4)" [ref=f3e1110] [cursor=pointer]:
+                - /url: /india/yercaud
+                - generic [ref=f3e1111]: Yercaud
+                - generic [ref=f3e1112]: (4)
+          - generic [ref=f3e1113]:
+            - heading "West & Central India 17 Destinations" [level=4] [ref=f3e1114]:
+              - generic [ref=f3e1116]: West & Central India
+              - generic [ref=f3e1117]: 17 Destinations
+            - generic [ref=f3e1118]:
+              - link "Ahmedabad (7)" [ref=f3e1119] [cursor=pointer]:
+                - /url: /india/ahmedabad
+                - generic [ref=f3e1120]: Ahmedabad
+                - generic [ref=f3e1121]: (7)
+              - link "Bhopal (20)" [ref=f3e1122] [cursor=pointer]:
+                - /url: /india/bhopal
+                - generic [ref=f3e1123]: Bhopal
+                - generic [ref=f3e1124]: (20)
+              - link "Daman (5)" [ref=f3e1125] [cursor=pointer]:
+                - /url: /india/daman
+                - generic [ref=f3e1126]: Daman
+                - generic [ref=f3e1127]: (5)
+              - link "Gandhinagar (4)" [ref=f3e1128] [cursor=pointer]:
+                - /url: /india/gandhinagar
+                - generic [ref=f3e1129]: Gandhinagar
+                - generic [ref=f3e1130]: (4)
+              - link "Igatpuri (14)" [ref=f3e1131] [cursor=pointer]:
+                - /url: /india/igatpuri
+                - generic [ref=f3e1132]: Igatpuri
+                - generic [ref=f3e1133]: (14)
+              - link "Indore (30)" [ref=f3e1134] [cursor=pointer]:
+                - /url: /india/indore
+                - generic [ref=f3e1135]: Indore
+                - generic [ref=f3e1136]: (30)
+              - link "Karjat (10)" [ref=f3e1137] [cursor=pointer]:
+                - /url: /india/karjat
+                - generic [ref=f3e1138]: Karjat
+                - generic [ref=f3e1139]: (10)
+              - link "Kolhapur (8)" [ref=f3e1140] [cursor=pointer]:
+                - /url: /india/kolhapur
+                - generic [ref=f3e1141]: Kolhapur
+                - generic [ref=f3e1142]: (8)
+              - link "Lavasa (4)" [ref=f3e1143] [cursor=pointer]:
+                - /url: /india/lavasa
+                - generic [ref=f3e1144]: Lavasa
+                - generic [ref=f3e1145]: (4)
+              - link "Lonavala (10)" [ref=f3e1146] [cursor=pointer]:
+                - /url: /india/lonavala
+                - generic [ref=f3e1147]: Lonavala
+                - generic [ref=f3e1148]: (10)
+              - link "Mumbai (17)" [ref=f3e1149] [cursor=pointer]:
+                - /url: /india/mumbai
+                - generic [ref=f3e1150]: Mumbai
+                - generic [ref=f3e1151]: (17)
+              - link "Nashik (17)" [ref=f3e1152] [cursor=pointer]:
+                - /url: /india/nashik
+                - generic [ref=f3e1153]: Nashik
+                - generic [ref=f3e1154]: (17)
+              - link "Panchgani (14)" [ref=f3e1155] [cursor=pointer]:
+                - /url: /india/panchgani
+                - generic [ref=f3e1156]: Panchgani
+                - generic [ref=f3e1157]: (14)
+              - link "Panvel (2)" [ref=f3e1158] [cursor=pointer]:
+                - /url: /india/panvel
+                - generic [ref=f3e1159]: Panvel
+                - generic [ref=f3e1160]: (2)
+              - link "Pune (7)" [ref=f3e1161] [cursor=pointer]:
+                - /url: /india/pune
+                - generic [ref=f3e1162]: Pune
+                - generic [ref=f3e1163]: (7)
+              - link "Rajkot (19)" [ref=f3e1164] [cursor=pointer]:
+                - /url: /india/rajkot
+                - generic [ref=f3e1165]: Rajkot
+                - generic [ref=f3e1166]: (19)
+              - link "Saputara (1)" [ref=f3e1167] [cursor=pointer]:
+                - /url: /india/saputara
+                - generic [ref=f3e1168]: Saputara
+                - generic [ref=f3e1169]: (1)
+          - generic [ref=f3e1170]:
+            - heading "East & North East 7 Destinations" [level=4] [ref=f3e1171]:
+              - generic [ref=f3e1173]: East & North East
+              - generic [ref=f3e1174]: 7 Destinations
+            - generic [ref=f3e1175]:
+              - link "Darjeeling (5)" [ref=f3e1176] [cursor=pointer]:
+                - /url: /india/darjeeling
+                - generic [ref=f3e1177]: Darjeeling
+                - generic [ref=f3e1178]: (5)
+              - link "Digha (6)" [ref=f3e1179] [cursor=pointer]:
+                - /url: /india/digha
+                - generic [ref=f3e1180]: Digha
+                - generic [ref=f3e1181]: (6)
+              - link "Kolkata (13)" [ref=f3e1182] [cursor=pointer]:
+                - /url: /india/kolkata
+                - generic [ref=f3e1183]: Kolkata
+                - generic [ref=f3e1184]: (13)
+              - link "Mandarmani (16)" [ref=f3e1185] [cursor=pointer]:
+                - /url: /india/mandarmani
+                - generic [ref=f3e1186]: Mandarmani
+                - generic [ref=f3e1187]: (16)
+              - link "Puri (5)" [ref=f3e1188] [cursor=pointer]:
+                - /url: /india/puri
+                - generic [ref=f3e1189]: Puri
+                - generic [ref=f3e1190]: (5)
+              - link "Shillong (5)" [ref=f3e1191] [cursor=pointer]:
+                - /url: /india/shillong
+                - generic [ref=f3e1192]: Shillong
+                - generic [ref=f3e1193]: (5)
+              - link "Siliguri (5)" [ref=f3e1194] [cursor=pointer]:
+                - /url: /india/siliguri
+                - generic [ref=f3e1195]: Siliguri
+                - generic [ref=f3e1196]: (5)
+          - generic [ref=f3e1197]:
+            - heading "International Romantic Escapes 5 Destinations" [level=4] [ref=f3e1198]:
+              - generic [ref=f3e1200]: International Romantic Escapes
+              - generic [ref=f3e1201]: 5 Destinations
+            - generic [ref=f3e1202]:
+              - link "Bali (20)" [ref=f3e1203] [cursor=pointer]:
+                - /url: /indonesia/bali
+                - generic [ref=f3e1204]: Bali
+                - generic [ref=f3e1205]: (20)
+              - link "Dubai (20)" [ref=f3e1206] [cursor=pointer]:
+                - /url: /uae/dubai
+                - generic [ref=f3e1207]: Dubai
+                - generic [ref=f3e1208]: (20)
+              - link "Las Vegas (20)" [ref=f3e1209] [cursor=pointer]:
+                - /url: /usa/las-vegas
+                - generic [ref=f3e1210]: Las Vegas
+                - generic [ref=f3e1211]: (20)
+              - link "London (20)" [ref=f3e1212] [cursor=pointer]:
+                - /url: /uk/london
+                - generic [ref=f3e1213]: London
+                - generic [ref=f3e1214]: (20)
+              - link "New York (18)" [ref=f3e1215] [cursor=pointer]:
+                - /url: /usa/new-york
+                - generic [ref=f3e1216]: New York
+                - generic [ref=f3e1217]: (18)
+      - generic [ref=f3e1218]:
+        - heading "Frequently Asked Questions" [level=3] [ref=f3e1223]
+        - generic [ref=f3e1224]:
+          - generic [ref=f3e1225]:
+            - heading "How do you verify hotel bathtubs?" [level=4] [ref=f3e1226]
+            - paragraph [ref=f3e1227]: We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
+          - generic [ref=f3e1228]:
+            - heading "Are bathtubs guaranteed in every room?" [level=4] [ref=f3e1229]
+            - paragraph [ref=f3e1230]: Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
+          - generic [ref=f3e1231]:
+            - heading "Which destinations do you cover?" [level=4] [ref=f3e1232]
+            - paragraph [ref=f3e1233]: We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
+          - generic [ref=f3e1234]:
+            - heading "How do bookings work?" [level=4] [ref=f3e1235]
+            - paragraph [ref=f3e1236]: We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
+      - generic [ref=f3e1238]:
+        - generic [ref=f3e1239]:
+          - heading "Triple Verified" [level=4] [ref=f3e1243]
+          - paragraph [ref=f3e1244]: Independently cross-checked across 3 major platforms
+        - generic [ref=f3e1245]:
+          - heading "Guaranteed Tubs" [level=4] [ref=f3e1249]
+          - paragraph [ref=f3e1250]: Confirmed in-room hot tubs and jacuzzi suites
+        - generic [ref=f3e1251]:
+          - heading "Direct Booking" [level=4] [ref=f3e1255]
+          - paragraph [ref=f3e1256]: Direct links to official trusted travel partners
+        - generic [ref=f3e1257]:
+          - heading "Curated Stays" [level=4] [ref=f3e1262]
+          - paragraph [ref=f3e1263]: Handpicked luxury hotels for romantic escapes
+      - generic [ref=f3e1265]:
+        - generic [ref=f3e1266]: Start Your Romantic Escape
+        - heading "Ready to Book Your Luxury Bathtub Stay?" [level=3] [ref=f3e1267]
+        - paragraph [ref=f3e1268]: Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
+        - generic [ref=f3e1269]:
+          - link "Browse All Destinations ↑" [ref=f3e1270] [cursor=pointer]:
+            - /url: "#destinations"
+            - generic [ref=f3e1271]: Browse All Destinations
+            - generic [ref=f3e1272]: ↑
+          - link "Read Travel Inspiration →" [ref=f3e1273] [cursor=pointer]:
+            - /url: /blog
+      - generic [ref=f3e1274]:
+        - generic [ref=f3e1275]:
+          - generic [ref=f3e1291]:
+            - heading "Hotels with Bathtubs" [level=4] [ref=f3e1292]
+            - paragraph [ref=f3e1293]: Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.
+          - generic [ref=f3e1294]:
+            - paragraph [ref=f3e1295]: © 2026 HotelsWithBathtubs.com
+            - generic [ref=f3e1296]:
+              - link "Travel Blog" [ref=f3e1297] [cursor=pointer]:
+                - /url: /blog
+              - link "About Us" [ref=f3e1298] [cursor=pointer]:
+                - /url: /about
+              - link "Affiliate Policy" [ref=f3e1299] [cursor=pointer]:
+                - /url: /affiliate-policy
+              - link "Privacy" [ref=f3e1300] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms" [ref=f3e1301] [cursor=pointer]:
+                - /url: /terms
+              - link "Cookies" [ref=f3e1302] [cursor=pointer]:
+                - /url: /cookies
+        - paragraph [ref=f3e1303]: All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+  - alert [ref=f3e1304]

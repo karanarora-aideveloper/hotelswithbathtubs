@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Hotel clark inn sweets",
+    "url": "https://www.booking.com/hotel/in/clark-inn-sweets.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=1&hapos=1&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/907347329.webp?k=0e59df3b505674bc19dd7278a4e375c96cdb321bee161098036c1d371fd3c4b6&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "Moti Manas Mansion - A Homestay in Gwalior",
+    "url": "https://www.booking.com/hotel/in/moti-manas-mansion.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/869296205.webp?k=77fa91eb21d9eda58058ea941800e88e556b1f7f69264e4834ac871db335d831&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "Hotel teara",
+    "url": "https://www.booking.com/hotel/in/teara-gwalior.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=3&hapos=3&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/903735182.webp?k=3ce5bc5740cfbabddb25f01a70c50d8f7870ec3e0978c16cbb511c4f7d8a5038&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "Hotel teara",
+    "url": "https://www.booking.com/hotel/in/teara.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=4&hapos=4&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/903618302.webp?k=ba94f099bc1ca3bef14f79f279786bd647795b571cb0568554c7fb5c8647fad4&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "Narayanam",
+    "url": "https://www.booking.com/hotel/in/narayanam-gwalior.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=5&hapos=5&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/175706548.webp?k=98f6da42e76f5fdb81065057b32c013eb9b13328e9f6919b057a82ca8595cb9c&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "THE MASARA MANAR Hotel",
+    "url": "https://www.booking.com/hotel/in/the-masara-manar.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=6&hapos=6&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/889008536.webp?k=ccd4f2f8aa93df6b41d717bcc6cfc7c9dc860f93478163d1772d982fd50ee9e5&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  },
+  {
+    "name": "Royal Milestone Resort & Hotel",
+    "url": "https://www.booking.com/hotel/in/royal-milestone-resort-amp.html?aid=304142&label=gen173nr-10CAQoggJCDnNlYXJjaF9nd2FsaW9ySDNYBGhsiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL3iMvUBsACAdICJDVkMDBmMTIwLTBlZjAtNDgyNi1iNzgxLTRmMzA3ZGZiNWNhMdgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=7&hapos=7&sr_order=popularity&nflt=hotelfacility%3D63&srpvid=2b5151bb4dae00f3&srepoch=1788003460&from=searchresults",
+    "image": "https://cf.bstatic.com/xdata/images/hotel/square600/827971321.webp?k=22fd48e7f2dc08af52be22002c5bdb9f0aab949f3453ca02718a2a06c4112558&o=",
+    "amenities": [
+      "Bathtub",
+      "Hot Tub"
+    ],
+    "source": "Booking.com"
+  }
+]

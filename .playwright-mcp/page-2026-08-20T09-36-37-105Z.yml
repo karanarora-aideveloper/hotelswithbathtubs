@@ -1,0 +1,9 @@
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: SM
+      - heading "This site is in development" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Enter the access password to continue. You’ll only need to do this once on this device.
+      - textbox "Password" [active] [ref=e7]
+      - button "Enter Site" [ref=e8]
+  - alert [ref=e9]

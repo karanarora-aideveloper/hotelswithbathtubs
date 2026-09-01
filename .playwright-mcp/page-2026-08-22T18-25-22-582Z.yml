@@ -1,0 +1,1087 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - link "Hotels With Bathtubs Verified Premium Suites & Jacuzzis" [ref=f3e3] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]: Hotels With Bathtubs
+        - paragraph [ref=f3e20]: Verified Premium Suites & Jacuzzis
+    - generic [ref=f3e21]:
+      - link "Destinations" [ref=f3e22] [cursor=pointer]:
+        - /url: /#destinations
+      - link "Travel Guides" [ref=f3e23] [cursor=pointer]:
+        - /url: /blog
+      - link "Verification" [ref=f3e24] [cursor=pointer]:
+        - /url: /#verification
+      - link "FAQs" [ref=f3e25] [cursor=pointer]:
+        - /url: /#faq
+      - link "Browse 60+ Cities" [ref=f3e26] [cursor=pointer]:
+        - /url: /#destinations
+  - main [ref=f3e27]:
+    - generic [ref=f3e1305]:
+      - link "Home" [ref=f3e1306] [cursor=pointer]:
+        - /url: /
+      - text: › India › Hotels with Bathtubs in Delhi
+    - generic [ref=f3e1308]:
+      - generic [ref=f3e1309]:
+        - generic [ref=f3e1310]: 🏨
+        - text: 28 Verified Hotels · Triple-Source Validated
+      - heading "Hotels with Bathtubs in Delhi, India" [level=1] [ref=f3e1311]
+      - paragraph [ref=f3e1312]: Experience romantic comfort and luxury from the privacy of your verified in-room bathtub & jacuzzi suite.
+    - generic [ref=f3e1313]:
+      - generic [ref=f3e1314]: Verified on MakeMyTrip, Agoda & Booking.com
+      - generic [ref=f3e1318]: Guaranteed Bathtubs
+      - generic [ref=f3e1322]: Trusted Booking Links
+    - main [ref=f3e1326]:
+      - generic [ref=f3e1327]:
+        - generic [ref=f3e1328]:
+          - generic [ref=f3e1329]:
+            - generic [ref=f3e1330]: "Filter Tubs:"
+            - button "All Tubs 28" [ref=f3e1331]:
+              - generic [ref=f3e1332]: All Tubs
+              - generic [ref=f3e1333]: "28"
+            - button "🛁 In-Room Jacuzzi 27" [ref=f3e1334]:
+              - generic [ref=f3e1335]: 🛁 In-Room Jacuzzi
+              - generic [ref=f3e1336]: "27"
+            - button "✨ Deep Soaking Tubs 27" [ref=f3e1337]:
+              - generic [ref=f3e1338]: ✨ Deep Soaking Tubs
+              - generic [ref=f3e1339]: "27"
+          - textbox "Search hotel name..." [ref=f3e1341]
+        - generic [ref=f3e1344]:
+          - generic [ref=f3e1345]: 💡
+          - generic [ref=f3e1347]:
+            - strong [ref=f3e1348]: "Booking Tip for Delhi Bathtub Suites:"
+            - text: When selecting your room on MakeMyTrip, Agoda, or Booking.com, ensure your chosen room tier (such as
+            - emphasis [ref=f3e1349]: Executive Suite
+            - text: or
+            - emphasis [ref=f3e1350]: Deluxe Room with Jacuzzi
+            - text: ) explicitly lists the bathtub amenity before confirming.
+        - generic [ref=f3e1351]:
+          - generic [ref=f3e1352]:
+            - generic [ref=f3e1353]:
+              - img "The Park New - Hotel with Bathtub in Delhi" [ref=f3e1354]
+              - generic [ref=f3e1355]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1358]:
+              - heading "The Park New" [level=2] [ref=f3e1359]
+              - paragraph [ref=f3e1360]:
+                - generic [ref=f3e1364]: Delhi, India
+              - paragraph [ref=f3e1365]: Experience comfort and romance at The Park New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1366]:
+                - listitem [ref=f3e1367]:
+                  - generic [ref=f3e1368]: ✓
+                  - generic [ref=f3e1369]: Private Bathtub
+                - listitem [ref=f3e1370]:
+                  - generic [ref=f3e1371]: 🛁
+                  - generic [ref=f3e1372]: Jacuzzi Suite
+                - listitem [ref=f3e1373]:
+                  - generic [ref=f3e1374]: ✓
+                  - generic [ref=f3e1375]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1377] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DThe%2520Park%2520New
+                - generic [ref=f3e1378]: Check on MakeMyTrip
+                - generic [ref=f3e1379]: →
+          - generic [ref=f3e1380]:
+            - generic [ref=f3e1381]:
+              - img "Staybook Hotel Nitya Maharani New - Hotel with Bathtub in Delhi" [ref=f3e1382]
+              - generic [ref=f3e1383]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1386]:
+              - heading "Staybook Hotel Nitya Maharani New" [level=2] [ref=f3e1387]
+              - paragraph [ref=f3e1388]:
+                - generic [ref=f3e1392]: Delhi, India
+              - paragraph [ref=f3e1393]: Experience comfort and romance at Staybook Hotel Nitya Maharani New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1394]:
+                - listitem [ref=f3e1395]:
+                  - generic [ref=f3e1396]: ✓
+                  - generic [ref=f3e1397]: Private Bathtub
+                - listitem [ref=f3e1398]:
+                  - generic [ref=f3e1399]: 🛁
+                  - generic [ref=f3e1400]: Jacuzzi Suite
+                - listitem [ref=f3e1401]:
+                  - generic [ref=f3e1402]: ✓
+                  - generic [ref=f3e1403]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1405] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DStaybook%2520Hotel%2520Nitya%2520Maharani%2520New
+                - generic [ref=f3e1406]: Check on MakeMyTrip
+                - generic [ref=f3e1407]: →
+          - generic [ref=f3e1408]:
+            - generic [ref=f3e1409]:
+              - img "Novotel New Aerocity International Airport Hotel Room - Hotel with Bathtub in Delhi" [ref=f3e1410]
+              - generic [ref=f3e1411]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1414]:
+              - heading "Novotel New Aerocity International Airport Hotel Room" [level=2] [ref=f3e1415]
+              - paragraph [ref=f3e1416]:
+                - generic [ref=f3e1420]: Delhi, India
+              - paragraph [ref=f3e1421]: Experience comfort and romance at Novotel New Aerocity International Airport Hotel Room in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1422]:
+                - listitem [ref=f3e1423]:
+                  - generic [ref=f3e1424]: ✓
+                  - generic [ref=f3e1425]: Private Bathtub
+                - listitem [ref=f3e1426]:
+                  - generic [ref=f3e1427]: 🛁
+                  - generic [ref=f3e1428]: Jacuzzi Suite
+                - listitem [ref=f3e1429]:
+                  - generic [ref=f3e1430]: ✓
+                  - generic [ref=f3e1431]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1433] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DNovotel%2520New%2520Aerocity%2520International%2520Airport%2520Hotel%2520Room
+                - generic [ref=f3e1434]: Check on MakeMyTrip
+                - generic [ref=f3e1435]: →
+          - generic [ref=f3e1436]:
+            - generic [ref=f3e1437]:
+              - img "Roseate House New Aerocity - Hotel with Bathtub in Delhi" [ref=f3e1438]
+              - generic [ref=f3e1439]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1442]:
+              - heading "Roseate House New Aerocity" [level=2] [ref=f3e1443]
+              - paragraph [ref=f3e1444]:
+                - generic [ref=f3e1448]: Delhi, India
+              - paragraph [ref=f3e1449]: Experience comfort and romance at Roseate House New Aerocity in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1450]:
+                - listitem [ref=f3e1451]:
+                  - generic [ref=f3e1452]: ✓
+                  - generic [ref=f3e1453]: Private Bathtub
+                - listitem [ref=f3e1454]:
+                  - generic [ref=f3e1455]: 🛁
+                  - generic [ref=f3e1456]: Jacuzzi Suite
+                - listitem [ref=f3e1457]:
+                  - generic [ref=f3e1458]: ✓
+                  - generic [ref=f3e1459]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1461] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DRoseate%2520House%2520New%2520Aerocity
+                - generic [ref=f3e1462]: Check on MakeMyTrip
+                - generic [ref=f3e1463]: →
+          - generic [ref=f3e1464]:
+            - generic [ref=f3e1465]:
+              - img "Hyatt Centric Janakpuri New - Hotel with Bathtub in Delhi" [ref=f3e1466]
+              - generic [ref=f3e1467]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1470]:
+              - heading "Hyatt Centric Janakpuri New" [level=2] [ref=f3e1471]
+              - paragraph [ref=f3e1472]:
+                - generic [ref=f3e1476]: Delhi, India
+              - paragraph [ref=f3e1477]: Experience comfort and romance at Hyatt Centric Janakpuri New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1478]:
+                - listitem [ref=f3e1479]:
+                  - generic [ref=f3e1480]: ✓
+                  - generic [ref=f3e1481]: Private Bathtub
+                - listitem [ref=f3e1482]:
+                  - generic [ref=f3e1483]: 🛁
+                  - generic [ref=f3e1484]: Jacuzzi Suite
+                - listitem [ref=f3e1485]:
+                  - generic [ref=f3e1486]: ✓
+                  - generic [ref=f3e1487]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1489] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DHyatt%2520Centric%2520Janakpuri%2520New
+                - generic [ref=f3e1490]: Check on MakeMyTrip
+                - generic [ref=f3e1491]: →
+          - generic [ref=f3e1492]:
+            - generic [ref=f3e1493]:
+              - img "Jaypee Vasant Continental New - Hotel with Bathtub in Delhi" [ref=f3e1494]
+              - generic [ref=f3e1495]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1498]:
+              - heading "Jaypee Vasant Continental New" [level=2] [ref=f3e1499]
+              - paragraph [ref=f3e1500]:
+                - generic [ref=f3e1504]: Delhi, India
+              - paragraph [ref=f3e1505]: Experience comfort and romance at Jaypee Vasant Continental New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1506]:
+                - listitem [ref=f3e1507]:
+                  - generic [ref=f3e1508]: ✓
+                  - generic [ref=f3e1509]: Private Bathtub
+                - listitem [ref=f3e1510]:
+                  - generic [ref=f3e1511]: 🛁
+                  - generic [ref=f3e1512]: Jacuzzi Suite
+                - listitem [ref=f3e1513]:
+                  - generic [ref=f3e1514]: ✓
+                  - generic [ref=f3e1515]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1517] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DJaypee%2520Vasant%2520Continental%2520New
+                - generic [ref=f3e1518]: Check on MakeMyTrip
+                - generic [ref=f3e1519]: →
+          - generic [ref=f3e1520]:
+            - generic [ref=f3e1521]:
+              - img "The Prime - Hotel with Bathtub in Delhi" [ref=f3e1522]
+              - generic [ref=f3e1523]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1526]:
+              - heading "The Prime" [level=2] [ref=f3e1527]
+              - paragraph [ref=f3e1528]:
+                - generic [ref=f3e1532]: Delhi, India
+              - paragraph [ref=f3e1533]: Experience comfort and romance at The Prime in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1534]:
+                - listitem [ref=f3e1535]:
+                  - generic [ref=f3e1536]: ✓
+                  - generic [ref=f3e1537]: Private Bathtub
+                - listitem [ref=f3e1538]:
+                  - generic [ref=f3e1539]: 🛁
+                  - generic [ref=f3e1540]: Jacuzzi Suite
+                - listitem [ref=f3e1541]:
+                  - generic [ref=f3e1542]: ✓
+                  - generic [ref=f3e1543]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1545] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DThe%2520Prime
+                - generic [ref=f3e1546]: Check on MakeMyTrip
+                - generic [ref=f3e1547]: →
+          - generic [ref=f3e1548]:
+            - generic [ref=f3e1549]:
+              - img "Diplomat Chanakyapuri New A Boutique Hotel - Hotel with Bathtub in Delhi" [ref=f3e1550]
+              - generic [ref=f3e1551]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1554]:
+              - heading "Diplomat Chanakyapuri New A Boutique Hotel" [level=2] [ref=f3e1555]
+              - paragraph [ref=f3e1556]:
+                - generic [ref=f3e1560]: Delhi, India
+              - paragraph [ref=f3e1561]: Experience comfort and romance at Diplomat Chanakyapuri New A Boutique Hotel in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1562]:
+                - listitem [ref=f3e1563]:
+                  - generic [ref=f3e1564]: ✓
+                  - generic [ref=f3e1565]: Private Bathtub
+                - listitem [ref=f3e1566]:
+                  - generic [ref=f3e1567]: 🛁
+                  - generic [ref=f3e1568]: Jacuzzi Suite
+                - listitem [ref=f3e1569]:
+                  - generic [ref=f3e1570]: ✓
+                  - generic [ref=f3e1571]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1573] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DDiplomat%2520Chanakyapuri%2520New%2520A%2520Boutique%2520Hotel
+                - generic [ref=f3e1574]: Check on MakeMyTrip
+                - generic [ref=f3e1575]: →
+          - generic [ref=f3e1576]:
+            - generic [ref=f3e1577]:
+              - img "The Imperial New - Hotel with Bathtub in Delhi" [ref=f3e1578]
+              - generic [ref=f3e1579]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1582]:
+              - heading "The Imperial New" [level=2] [ref=f3e1583]
+              - paragraph [ref=f3e1584]:
+                - generic [ref=f3e1588]: Delhi, India
+              - paragraph [ref=f3e1589]: Experience comfort and romance at The Imperial New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1590]:
+                - listitem [ref=f3e1591]:
+                  - generic [ref=f3e1592]: ✓
+                  - generic [ref=f3e1593]: Private Bathtub
+                - listitem [ref=f3e1594]:
+                  - generic [ref=f3e1595]: 🛁
+                  - generic [ref=f3e1596]: Jacuzzi Suite
+                - listitem [ref=f3e1597]:
+                  - generic [ref=f3e1598]: ✓
+                  - generic [ref=f3e1599]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1601] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DThe%2520Imperial%2520New
+                - generic [ref=f3e1602]: Check on MakeMyTrip
+                - generic [ref=f3e1603]: →
+          - generic [ref=f3e1604]:
+            - generic [ref=f3e1605]:
+              - img "Radisson Blu Plaza Airport - Hotel with Bathtub in Delhi" [ref=f3e1606]
+              - generic [ref=f3e1607]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1610]:
+              - heading "Radisson Blu Plaza Airport" [level=2] [ref=f3e1611]
+              - paragraph [ref=f3e1612]:
+                - generic [ref=f3e1616]: Delhi, India
+              - paragraph [ref=f3e1617]: Experience comfort and romance at Radisson Blu Plaza Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1618]:
+                - listitem [ref=f3e1619]:
+                  - generic [ref=f3e1620]: ✓
+                  - generic [ref=f3e1621]: Private Bathtub
+                - listitem [ref=f3e1622]:
+                  - generic [ref=f3e1623]: 🛁
+                  - generic [ref=f3e1624]: Jacuzzi Suite
+                - listitem [ref=f3e1625]:
+                  - generic [ref=f3e1626]: ✓
+                  - generic [ref=f3e1627]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1629] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DRadisson%2520Blu%2520Plaza%2520Airport
+                - generic [ref=f3e1630]: Check on MakeMyTrip
+                - generic [ref=f3e1631]: →
+          - generic [ref=f3e1632]:
+            - generic [ref=f3e1633]:
+              - img "Pullman New Aerocity International Airport - Hotel with Bathtub in Delhi" [ref=f3e1634]
+              - generic [ref=f3e1635]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1638]:
+              - heading "Pullman New Aerocity International Airport" [level=2] [ref=f3e1639]
+              - paragraph [ref=f3e1640]:
+                - generic [ref=f3e1644]: Delhi, India
+              - paragraph [ref=f3e1645]: Experience comfort and romance at Pullman New Aerocity International Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1646]:
+                - listitem [ref=f3e1647]:
+                  - generic [ref=f3e1648]: ✓
+                  - generic [ref=f3e1649]: Private Bathtub
+                - listitem [ref=f3e1650]:
+                  - generic [ref=f3e1651]: 🛁
+                  - generic [ref=f3e1652]: Jacuzzi Suite
+                - listitem [ref=f3e1653]:
+                  - generic [ref=f3e1654]: ✓
+                  - generic [ref=f3e1655]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1657] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DPullman%2520New%2520Aerocity%2520International%2520Airport
+                - generic [ref=f3e1658]: Check on MakeMyTrip
+                - generic [ref=f3e1659]: →
+          - generic [ref=f3e1660]:
+            - generic [ref=f3e1661]:
+              - img "Novotel New Aerocity International Airport - Hotel with Bathtub in Delhi" [ref=f3e1662]
+              - generic [ref=f3e1663]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1666]:
+              - heading "Novotel New Aerocity International Airport" [level=2] [ref=f3e1667]
+              - paragraph [ref=f3e1668]:
+                - generic [ref=f3e1672]: Delhi, India
+              - paragraph [ref=f3e1673]: Experience comfort and romance at Novotel New Aerocity International Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1674]:
+                - listitem [ref=f3e1675]:
+                  - generic [ref=f3e1676]: ✓
+                  - generic [ref=f3e1677]: Private Bathtub
+                - listitem [ref=f3e1678]:
+                  - generic [ref=f3e1679]: 🛁
+                  - generic [ref=f3e1680]: Jacuzzi Suite
+                - listitem [ref=f3e1681]:
+                  - generic [ref=f3e1682]: ✓
+                  - generic [ref=f3e1683]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1685] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DNovotel%2520New%2520Aerocity%2520International%2520Airport
+                - generic [ref=f3e1686]: Check on MakeMyTrip
+                - generic [ref=f3e1687]: →
+          - generic [ref=f3e1688]:
+            - generic [ref=f3e1689]:
+              - img "Hotel Krishna By Rcg Hotels New - Hotel with Bathtub in Delhi" [ref=f3e1690]
+              - generic [ref=f3e1691]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1694]:
+              - heading "Hotel Krishna By Rcg Hotels New" [level=2] [ref=f3e1695]
+              - paragraph [ref=f3e1696]:
+                - generic [ref=f3e1700]: Delhi, India
+              - paragraph [ref=f3e1701]: Experience comfort and romance at Hotel Krishna By Rcg Hotels New in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1702]:
+                - listitem [ref=f3e1703]:
+                  - generic [ref=f3e1704]: ✓
+                  - generic [ref=f3e1705]: Private Bathtub
+                - listitem [ref=f3e1706]:
+                  - generic [ref=f3e1707]: 🛁
+                  - generic [ref=f3e1708]: Jacuzzi Suite
+                - listitem [ref=f3e1709]:
+                  - generic [ref=f3e1710]: ✓
+                  - generic [ref=f3e1711]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1713] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DHotel%2520Krishna%2520By%2520Rcg%2520Hotels%2520New
+                - generic [ref=f3e1714]: Check on MakeMyTrip
+                - generic [ref=f3e1715]: →
+          - generic [ref=f3e1716]:
+            - generic [ref=f3e1717]:
+              - img "Crowne Plaza New Okhla An Ihg Hotel - Hotel with Bathtub in Delhi" [ref=f3e1718]
+              - generic [ref=f3e1719]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1722]:
+              - heading "Crowne Plaza New Okhla An Ihg Hotel" [level=2] [ref=f3e1723]
+              - paragraph [ref=f3e1724]:
+                - generic [ref=f3e1728]: Delhi, India
+              - paragraph [ref=f3e1729]: Experience comfort and romance at Crowne Plaza New Okhla An Ihg Hotel in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1730]:
+                - listitem [ref=f3e1731]:
+                  - generic [ref=f3e1732]: ✓
+                  - generic [ref=f3e1733]: Private Bathtub
+                - listitem [ref=f3e1734]:
+                  - generic [ref=f3e1735]: 🛁
+                  - generic [ref=f3e1736]: Jacuzzi Suite
+                - listitem [ref=f3e1737]:
+                  - generic [ref=f3e1738]: ✓
+                  - generic [ref=f3e1739]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1741] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DCrowne%2520Plaza%2520New%2520Okhla%2520An%2520Ihg%2520Hotel
+                - generic [ref=f3e1742]: Check on MakeMyTrip
+                - generic [ref=f3e1743]: →
+          - generic [ref=f3e1744]:
+            - generic [ref=f3e1745]:
+              - img "Ihg Hotel Crowne Plaza New Okhla - Hotel with Bathtub in Delhi" [ref=f3e1746]
+              - generic [ref=f3e1747]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1750]:
+              - heading "Ihg Hotel Crowne Plaza New Okhla" [level=2] [ref=f3e1751]
+              - paragraph [ref=f3e1752]:
+                - generic [ref=f3e1756]: Delhi, India
+              - paragraph [ref=f3e1757]: Experience comfort and romance at Ihg Hotel Crowne Plaza New Okhla in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1758]:
+                - listitem [ref=f3e1759]:
+                  - generic [ref=f3e1760]: ✓
+                  - generic [ref=f3e1761]: Private Bathtub
+                - listitem [ref=f3e1762]:
+                  - generic [ref=f3e1763]: 🛁
+                  - generic [ref=f3e1764]: Jacuzzi Suite
+                - listitem [ref=f3e1765]:
+                  - generic [ref=f3e1766]: ✓
+                  - generic [ref=f3e1767]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1769] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DIhg%2520Hotel%2520Crowne%2520Plaza%2520New%2520Okhla
+                - generic [ref=f3e1770]: Check on MakeMyTrip
+                - generic [ref=f3e1771]: →
+          - generic [ref=f3e1772]:
+            - generic [ref=f3e1773]:
+              - img "Hotel Radisson Blu Plaza Airport - Hotel with Bathtub in Delhi" [ref=f3e1774]
+              - generic [ref=f3e1775]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1778]:
+              - heading "Hotel Radisson Blu Plaza Airport" [level=2] [ref=f3e1779]
+              - paragraph [ref=f3e1780]:
+                - generic [ref=f3e1784]: Delhi, India
+              - paragraph [ref=f3e1785]: Experience comfort and romance at Hotel Radisson Blu Plaza Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1786]:
+                - listitem [ref=f3e1787]:
+                  - generic [ref=f3e1788]: ✓
+                  - generic [ref=f3e1789]: Private Bathtub
+                - listitem [ref=f3e1790]:
+                  - generic [ref=f3e1791]: 🛁
+                  - generic [ref=f3e1792]: Jacuzzi Suite
+                - listitem [ref=f3e1793]:
+                  - generic [ref=f3e1794]: ✓
+                  - generic [ref=f3e1795]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1797] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DHotel%2520Radisson%2520Blu%2520Plaza%2520Airport
+                - generic [ref=f3e1798]: Check on MakeMyTrip
+                - generic [ref=f3e1799]: →
+          - generic [ref=f3e1800]:
+            - generic [ref=f3e1801]:
+              - img "Hotel Pullman New Aerocity International Airport - Hotel with Bathtub in Delhi" [ref=f3e1802]
+              - generic [ref=f3e1803]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1806]:
+              - heading "Hotel Pullman New Aerocity International Airport" [level=2] [ref=f3e1807]
+              - paragraph [ref=f3e1808]:
+                - generic [ref=f3e1812]: Delhi, India
+              - paragraph [ref=f3e1813]: Experience comfort and romance at Hotel Pullman New Aerocity International Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1814]:
+                - listitem [ref=f3e1815]:
+                  - generic [ref=f3e1816]: ✓
+                  - generic [ref=f3e1817]: Private Bathtub
+                - listitem [ref=f3e1818]:
+                  - generic [ref=f3e1819]: 🛁
+                  - generic [ref=f3e1820]: Jacuzzi Suite
+                - listitem [ref=f3e1821]:
+                  - generic [ref=f3e1822]: ✓
+                  - generic [ref=f3e1823]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1825] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DHotel%2520Pullman%2520New%2520Aerocity%2520International%2520Airport
+                - generic [ref=f3e1826]: Check on MakeMyTrip
+                - generic [ref=f3e1827]: →
+          - generic [ref=f3e1828]:
+            - generic [ref=f3e1829]:
+              - img "Hotel Novotel New Aerocity International Airport - Hotel with Bathtub in Delhi" [ref=f3e1830]
+              - generic [ref=f3e1831]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1834]:
+              - heading "Hotel Novotel New Aerocity International Airport" [level=2] [ref=f3e1835]
+              - paragraph [ref=f3e1836]:
+                - generic [ref=f3e1840]: Delhi, India
+              - paragraph [ref=f3e1841]: Experience comfort and romance at Hotel Novotel New Aerocity International Airport in Delhi. Triple-verified private in-room bathtubs and luxury jacuzzi suites.
+              - list [ref=f3e1842]:
+                - listitem [ref=f3e1843]:
+                  - generic [ref=f3e1844]: ✓
+                  - generic [ref=f3e1845]: Private Bathtub
+                - listitem [ref=f3e1846]:
+                  - generic [ref=f3e1847]: 🛁
+                  - generic [ref=f3e1848]: Jacuzzi Suite
+                - listitem [ref=f3e1849]:
+                  - generic [ref=f3e1850]: ✓
+                  - generic [ref=f3e1851]: Couple Friendly
+              - link "Check on MakeMyTrip →" [ref=f3e1853] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-listing%2F%3Fcity%3DDelhi%26searchText%3DHotel%2520Novotel%2520New%2520Aerocity%2520International%2520Airport
+                - generic [ref=f3e1854]: Check on MakeMyTrip
+                - generic [ref=f3e1855]: →
+          - generic [ref=f3e1856]:
+            - generic [ref=f3e1857]:
+              - img "Hyatt Delhi Residence, Aerocity - Hotel with Bathtub in Delhi" [ref=f3e1858]
+              - generic [ref=f3e1859]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1862]:
+              - heading "Hyatt Delhi Residence, Aerocity" [level=2] [ref=f3e1863]
+              - paragraph [ref=f3e1864]:
+                - generic [ref=f3e1868]: Delhi, India
+              - list [ref=f3e1869]:
+                - listitem [ref=f3e1870]:
+                  - generic [ref=f3e1871]: ✓
+                  - generic [ref=f3e1872]: Bathtub
+                - listitem [ref=f3e1873]:
+                  - generic [ref=f3e1874]: 🛁
+                  - generic [ref=f3e1875]: Jacuzzi
+                - listitem [ref=f3e1876]:
+                  - generic [ref=f3e1877]: 🛁
+                  - generic [ref=f3e1878]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e1880] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202103311931341437%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.55424%26lng%3D77.12209%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D3%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e1881]: Check on MakeMyTrip
+                - generic [ref=f3e1882]: →
+          - generic [ref=f3e1883]:
+            - generic [ref=f3e1884]:
+              - img "The Bristol Hotel - Hotel with Bathtub in Delhi" [ref=f3e1885]
+              - generic [ref=f3e1886]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1889]:
+              - heading "The Bristol Hotel" [level=2] [ref=f3e1890]
+              - paragraph [ref=f3e1891]:
+                - generic [ref=f3e1895]: Delhi, India
+              - paragraph [ref=f3e1896]: Witness a blend of grandeur and elegance during your stay at the premium 5-star property, The Bristol Hotel boasting a luxe pool, spa and lavish accommodations.
+              - list [ref=f3e1897]:
+                - listitem [ref=f3e1898]:
+                  - generic [ref=f3e1899]: ✓
+                  - generic [ref=f3e1900]: Bathtub
+                - listitem [ref=f3e1901]:
+                  - generic [ref=f3e1902]: 🛁
+                  - generic [ref=f3e1903]: Jacuzzi
+                - listitem [ref=f3e1904]:
+                  - generic [ref=f3e1905]: 🛁
+                  - generic [ref=f3e1906]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e1908] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D20090912131939256%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTGGN%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.47925%26lng%3D77.09161%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D6%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e1909]: Check on MakeMyTrip
+                - generic [ref=f3e1910]: →
+          - generic [ref=f3e1911]:
+            - generic [ref=f3e1912]:
+              - img "Park Plaza Delhi CBD Shahdara - Hotel with Bathtub in Delhi" [ref=f3e1913]
+              - generic [ref=f3e1914]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1917]:
+              - heading "Park Plaza Delhi CBD Shahdara" [level=2] [ref=f3e1918]
+              - paragraph [ref=f3e1919]:
+                - generic [ref=f3e1923]: Delhi, India
+              - paragraph [ref=f3e1924]: Standing tall in the Central Business District, Park Plaza is a modern architectural landmark offering luxurious stays with a range of sophisticated amenities
+              - list [ref=f3e1925]:
+                - listitem [ref=f3e1926]:
+                  - generic [ref=f3e1927]: ✓
+                  - generic [ref=f3e1928]: Bathtub
+                - listitem [ref=f3e1929]:
+                  - generic [ref=f3e1930]: 🛁
+                  - generic [ref=f3e1931]: Jacuzzi
+                - listitem [ref=f3e1932]:
+                  - generic [ref=f3e1933]: 🛁
+                  - generic [ref=f3e1934]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e1936] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201211081220304096%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.65885%26lng%3D77.29784%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D1%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e1937]: Check on MakeMyTrip
+                - generic [ref=f3e1938]: →
+          - generic [ref=f3e1939]:
+            - generic [ref=f3e1940]:
+              - img "Hotel The Royal Plaza - Hotel with Bathtub in Delhi" [ref=f3e1941]
+              - generic [ref=f3e1942]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1945]:
+              - heading "Hotel The Royal Plaza" [level=2] [ref=f3e1946]
+              - paragraph [ref=f3e1947]:
+                - generic [ref=f3e1951]: Delhi, India
+              - paragraph [ref=f3e1952]: Experience unparalleled comfort and luxury at Hotel The Royal Plaza, an award-winning hotel offering plush rooms, multiple restaurants, an exclusive spa and a host of luxury amenities.
+              - list [ref=f3e1953]:
+                - listitem [ref=f3e1954]:
+                  - generic [ref=f3e1955]: ✓
+                  - generic [ref=f3e1956]: Bathtub
+                - listitem [ref=f3e1957]:
+                  - generic [ref=f3e1958]: 🛁
+                  - generic [ref=f3e1959]: Jacuzzi
+                - listitem [ref=f3e1960]:
+                  - generic [ref=f3e1961]: 🛁
+                  - generic [ref=f3e1962]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e1964] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D200810221411529549%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.62127%26lng%3D77.21699%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D9%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26viewType%3DPREMIUM%26mtkeys%3Dundefined
+                - generic [ref=f3e1965]: Check on MakeMyTrip
+                - generic [ref=f3e1966]: →
+          - generic [ref=f3e1967]:
+            - generic [ref=f3e1968]:
+              - img "Hotel Dream World at Delhi Airport IGI - Hotel with Bathtub in Delhi" [ref=f3e1969]
+              - generic [ref=f3e1970]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e1973]:
+              - heading "Hotel Dream World at Delhi Airport IGI" [level=2] [ref=f3e1974]
+              - paragraph [ref=f3e1975]:
+                - generic [ref=f3e1979]: Delhi, India
+              - list [ref=f3e1980]:
+                - listitem [ref=f3e1981]:
+                  - generic [ref=f3e1982]: ✓
+                  - generic [ref=f3e1983]: Bathtub
+                - listitem [ref=f3e1984]:
+                  - generic [ref=f3e1985]: 🛁
+                  - generic [ref=f3e1986]: Jacuzzi
+                - listitem [ref=f3e1987]:
+                  - generic [ref=f3e1988]: 🛁
+                  - generic [ref=f3e1989]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e1991] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202404232216407556%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.54743%26lng%3D77.12682%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D10%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e1992]: Check on MakeMyTrip
+                - generic [ref=f3e1993]: →
+          - generic [ref=f3e1994]:
+            - generic [ref=f3e1995]:
+              - img "Clarens Hotel - Hotel with Bathtub in Delhi" [ref=f3e1996]
+              - generic [ref=f3e1997]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e2000]:
+              - heading "Clarens Hotel" [level=2] [ref=f3e2001]
+              - paragraph [ref=f3e2002]:
+                - generic [ref=f3e2006]: Delhi, India
+              - paragraph [ref=f3e2007]: Opulent rooms, multiple dining venues, a lavish spa and bespoke experiences await you for a delightful stay at this contemporary property.
+              - list [ref=f3e2008]:
+                - listitem [ref=f3e2009]:
+                  - generic [ref=f3e2010]: 🛁
+                  - generic [ref=f3e2011]: Jacuzzi
+              - link "Check on MakeMyTrip →" [ref=f3e2013] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201203141036031166%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTGGN%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.46153%26lng%3D77.06793%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D8%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26viewType%3DPREMIUM%26mtkeys%3Dundefined
+                - generic [ref=f3e2014]: Check on MakeMyTrip
+                - generic [ref=f3e2015]: →
+          - generic [ref=f3e2016]:
+            - generic [ref=f3e2017]:
+              - img "The Leela Ambience Gurugram Hotel & Residences - The Luxury Urban Sanctuary - Hotel with Bathtub in Delhi" [ref=f3e2018]
+              - generic [ref=f3e2019]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e2022]:
+              - heading "The Leela Ambience Gurugram Hotel & Residences - The Luxury Urban Sanctuary" [level=2] [ref=f3e2023]
+              - paragraph [ref=f3e2024]:
+                - generic [ref=f3e2028]: Delhi, India
+              - paragraph [ref=f3e2029]: Luxury city stay featuring a heated pool, rooms with Royal Club privileges, golf sessions and guided city tours.
+              - list [ref=f3e2030]:
+                - listitem [ref=f3e2031]:
+                  - generic [ref=f3e2032]: ✓
+                  - generic [ref=f3e2033]: Bathtub
+                - listitem [ref=f3e2034]:
+                  - generic [ref=f3e2035]: 🛁
+                  - generic [ref=f3e2036]: Jacuzzi
+              - link "Check on MakeMyTrip →" [ref=f3e2038] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201004121608139600%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTGGN%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.50522%26lng%3D77.09711%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D5%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26viewType%3DLUXE%26mtkeys%3Dundefined
+                - generic [ref=f3e2039]: Check on MakeMyTrip
+                - generic [ref=f3e2040]: →
+          - generic [ref=f3e2041]:
+            - generic [ref=f3e2042]:
+              - img "Airport Hotel Grand by Fantasia - Hotel with Bathtub in Delhi" [ref=f3e2043]
+              - generic [ref=f3e2044]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e2047]:
+              - heading "Airport Hotel Grand by Fantasia" [level=2] [ref=f3e2048]
+              - paragraph [ref=f3e2049]:
+                - generic [ref=f3e2053]: Delhi, India
+              - paragraph [ref=f3e2054]: Conveniently located near the airport, Airport Hotel Grand & Wellness Center is a modern 3-star hotel offering pocket-friendly accommodations and premium amenities for a comfortable stay.
+              - list [ref=f3e2055]:
+                - listitem [ref=f3e2056]:
+                  - generic [ref=f3e2057]: ✓
+                  - generic [ref=f3e2058]: Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e2060] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D200901301132199835%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.54509%26lng%3D77.1235%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D4%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26viewType%3DBUDGET%26mtkeys%3Dundefined
+                - generic [ref=f3e2061]: Check on MakeMyTrip
+                - generic [ref=f3e2062]: →
+          - generic [ref=f3e2063]:
+            - generic [ref=f3e2064]:
+              - img "Hotel Aura @ 5 min from New Delhi Railway Station and Connaught Place - Hotel with Bathtub in Delhi" [ref=f3e2065]
+              - generic [ref=f3e2066]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e2069]:
+              - heading "Hotel Aura @ 5 min from New Delhi Railway Station and Connaught Place" [level=2] [ref=f3e2070]
+              - paragraph [ref=f3e2071]:
+                - generic [ref=f3e2075]: Delhi, India
+              - paragraph [ref=f3e2076]: Located close to New Delhi Railway Station, this hotel offers a restaurant, business centre & banquet hall.
+              - list [ref=f3e2077]:
+                - listitem [ref=f3e2078]:
+                  - generic [ref=f3e2079]: ✓
+                  - generic [ref=f3e2080]: Bathtub
+                - listitem [ref=f3e2081]:
+                  - generic [ref=f3e2082]: 🛁
+                  - generic [ref=f3e2083]: Jacuzzi
+              - link "Check on MakeMyTrip →" [ref=f3e2085] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D200905281306045072%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTDEL%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.64591%26lng%3D77.21599%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D2%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e2086]: Check on MakeMyTrip
+                - generic [ref=f3e2087]: →
+          - generic [ref=f3e2088]:
+            - generic [ref=f3e2089]:
+              - img "Country Inn & Suites by Radisson, Gurgaon Sector 12 - Hotel with Bathtub in Delhi" [ref=f3e2090]
+              - generic [ref=f3e2091]: ✓ Verified on MakeMyTrip
+            - generic [ref=f3e2094]:
+              - heading "Country Inn & Suites by Radisson, Gurgaon Sector 12" [level=2] [ref=f3e2095]
+              - paragraph [ref=f3e2096]:
+                - generic [ref=f3e2100]: Delhi, India
+              - paragraph [ref=f3e2101]: Experience unparalleled luxury at this lavish property offering well-appointed rooms, an incredible restaurant, a luxurious spa, an outdoor pool and world-class amenities.
+              - list [ref=f3e2102]:
+                - listitem [ref=f3e2103]:
+                  - generic [ref=f3e2104]: ✓
+                  - generic [ref=f3e2105]: Bathtub
+                - listitem [ref=f3e2106]:
+                  - generic [ref=f3e2107]: 🛁
+                  - generic [ref=f3e2108]: Jacuzzi
+                - listitem [ref=f3e2109]:
+                  - generic [ref=f3e2110]: 🛁
+                  - generic [ref=f3e2111]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=f3e2113] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201203031004444209%26_uCurrency%3DINR%26checkin%3D08192026%26checkout%3D08202026%26city%3DCTGGN%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D28.46807%26lng%3D77.03812%26locusId%3DCTDEL%26locusType%3Dcity%26rank%3D7%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DDelhi%26mtkeys%3Dundefined
+                - generic [ref=f3e2114]: Check on MakeMyTrip
+                - generic [ref=f3e2115]: →
+      - generic [ref=f3e2117]:
+        - generic [ref=f3e2118]:
+          - text: Frequently Asked Questions
+          - heading "Booking Bathtub & Jacuzzi Hotels in Delhi" [level=2] [ref=f3e2119]
+        - generic [ref=f3e2120]:
+          - generic [ref=f3e2121]:
+            - heading "Which hotels in Delhi have private in-room bathtubs or jacuzzis?" [level=3] [ref=f3e2122]
+            - paragraph [ref=f3e2123]: Top verified hotels in Delhi offering private in-room tubs include The Park New, Staybook Hotel Nitya Maharani New, Novotel New Aerocity International Airport Hotel Room. All listings on this page have been verified across MakeMyTrip, Agoda, and Booking.com to confirm that the specific room tier includes a bathtub or jacuzzi.
+          - generic [ref=f3e2124]:
+            - heading "Are these bathtub hotels in Delhi couple-friendly?" [level=3] [ref=f3e2125]
+            - paragraph [ref=f3e2126]: Yes. Verified properties in Delhi featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying valid government photo IDs (Aadhaar, Passport, or Driving License) for check-in.
+          - generic [ref=f3e2127]:
+            - heading "How do I make sure my room in Delhi definitely has a bathtub?" [level=3] [ref=f3e2128]
+            - paragraph [ref=f3e2129]: Standard or base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named “Suite with Bathtub”, “Jacuzzi Suite”, “Executive Room”, or “Royal Suite” where the amenity list explicitly lists a private bathtub.
+          - generic [ref=f3e2130]:
+            - heading "Are there budget-friendly hotels with bathtubs in Delhi?" [level=3] [ref=f3e2131]
+            - paragraph [ref=f3e2132]: Yes, Delhi offers a wide spectrum of accommodations ranging from affordable boutique hotels to ultra-luxury 5-star resorts featuring deep soaking bathtubs and private spa baths.
+  - contentinfo [ref=f3e948]:
+    - generic [ref=f3e949]:
+      - generic [ref=f3e950]:
+        - generic [ref=f3e951]:
+          - generic [ref=f3e952]:
+            - text: Editorial & Travel Inspiration
+            - heading "Romantic Getaways & Jacuzzi Hotel Guides" [level=3] [ref=f3e953]
+          - link "Browse All Guides →" [ref=f3e954] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=f3e955]: Browse All Guides
+            - generic [ref=f3e956]: →
+        - generic [ref=f3e957]:
+          - link "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) 2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Guide →" [ref=f3e958] [cursor=pointer]:
+            - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+            - generic [ref=f3e959]:
+              - img "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [ref=f3e960]
+              - generic [ref=f3e961]: 2026-08-22
+            - generic [ref=f3e962]:
+              - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=4] [ref=f3e963]
+              - paragraph [ref=f3e964]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+              - generic [ref=f3e965]:
+                - generic [ref=f3e966]: Read Full Guide
+                - generic [ref=f3e967]: →
+          - link "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) 2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Guide →" [ref=f3e968] [cursor=pointer]:
+            - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+            - generic [ref=f3e969]:
+              - img "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [ref=f3e970]
+              - generic [ref=f3e971]: 2026-08-22
+            - generic [ref=f3e972]:
+              - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=4] [ref=f3e973]
+              - paragraph [ref=f3e974]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+              - generic [ref=f3e975]:
+                - generic [ref=f3e976]: Read Full Guide
+                - generic [ref=f3e977]: →
+          - link "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) 2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Guide →" [ref=f3e978] [cursor=pointer]:
+            - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+            - generic [ref=f3e979]:
+              - img "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [ref=f3e980]
+              - generic [ref=f3e981]: 2026-08-22
+            - generic [ref=f3e982]:
+              - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=4] [ref=f3e983]
+              - paragraph [ref=f3e984]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+              - generic [ref=f3e985]:
+                - generic [ref=f3e986]: Read Full Guide
+                - generic [ref=f3e987]: →
+      - generic [ref=f3e988]:
+        - generic [ref=f3e995]:
+          - heading "Browse Hotels by Region" [level=3] [ref=f3e996]
+          - paragraph [ref=f3e997]: Quickly jump to verified stays grouped by geographic travel zones
+        - generic [ref=f3e998]:
+          - generic [ref=f3e999]:
+            - heading "North India 23 Destinations" [level=4] [ref=f3e1000]:
+              - generic [ref=f3e1002]: North India
+              - generic [ref=f3e1003]: 23 Destinations
+            - generic [ref=f3e1004]:
+              - link "Agra (19)" [ref=f3e1005] [cursor=pointer]:
+                - /url: /india/agra
+                - generic [ref=f3e1006]: Agra
+                - generic [ref=f3e1007]: (19)
+              - link "Amritsar (19)" [ref=f3e1008] [cursor=pointer]:
+                - /url: /india/amritsar
+                - generic [ref=f3e1009]: Amritsar
+                - generic [ref=f3e1010]: (19)
+              - link "Chandigarh (16)" [ref=f3e1011] [cursor=pointer]:
+                - /url: /india/chandigarh
+                - generic [ref=f3e1012]: Chandigarh
+                - generic [ref=f3e1013]: (16)
+              - link "Delhi (28)" [ref=f3e1014] [cursor=pointer]:
+                - /url: /india/delhi
+                - generic [ref=f3e1015]: Delhi
+                - generic [ref=f3e1016]: (28)
+              - link "Dharamshala (9)" [ref=f3e1017] [cursor=pointer]:
+                - /url: /india/dharamshala
+                - generic [ref=f3e1018]: Dharamshala
+                - generic [ref=f3e1019]: (9)
+              - link "Faridabad (14)" [ref=f3e1020] [cursor=pointer]:
+                - /url: /india/faridabad
+                - generic [ref=f3e1021]: Faridabad
+                - generic [ref=f3e1022]: (14)
+              - link "Gurgaon (9)" [ref=f3e1023] [cursor=pointer]:
+                - /url: /india/gurgaon
+                - generic [ref=f3e1024]: Gurgaon
+                - generic [ref=f3e1025]: (9)
+              - link "Gwalior (1)" [ref=f3e1026] [cursor=pointer]:
+                - /url: /india/gwalior
+                - generic [ref=f3e1027]: Gwalior
+                - generic [ref=f3e1028]: (1)
+              - link "Haridwar (8)" [ref=f3e1029] [cursor=pointer]:
+                - /url: /india/haridwar
+                - generic [ref=f3e1030]: Haridwar
+                - generic [ref=f3e1031]: (8)
+              - link "Jaipur (13)" [ref=f3e1032] [cursor=pointer]:
+                - /url: /india/jaipur
+                - generic [ref=f3e1033]: Jaipur
+                - generic [ref=f3e1034]: (13)
+              - link "Koramangala (6)" [ref=f3e1035] [cursor=pointer]:
+                - /url: /india/koramangala
+                - generic [ref=f3e1036]: Koramangala
+                - generic [ref=f3e1037]: (6)
+              - link "Lucknow (20)" [ref=f3e1038] [cursor=pointer]:
+                - /url: /india/lucknow
+                - generic [ref=f3e1039]: Lucknow
+                - generic [ref=f3e1040]: (20)
+              - link "Mahipalpur (7)" [ref=f3e1041] [cursor=pointer]:
+                - /url: /india/mahipalpur
+                - generic [ref=f3e1042]: Mahipalpur
+                - generic [ref=f3e1043]: (7)
+              - link "Manali (21)" [ref=f3e1044] [cursor=pointer]:
+                - /url: /india/manali
+                - generic [ref=f3e1045]: Manali
+                - generic [ref=f3e1046]: (21)
+              - link "Matheran (1)" [ref=f3e1047] [cursor=pointer]:
+                - /url: /india/matheran
+                - generic [ref=f3e1048]: Matheran
+                - generic [ref=f3e1049]: (1)
+              - link "Mathura (3)" [ref=f3e1050] [cursor=pointer]:
+                - /url: /india/mathura
+                - generic [ref=f3e1051]: Mathura
+                - generic [ref=f3e1052]: (3)
+              - link "Mount Abu (6)" [ref=f3e1053] [cursor=pointer]:
+                - /url: /india/mount-abu
+                - generic [ref=f3e1054]: Mount Abu
+                - generic [ref=f3e1055]: (6)
+              - link "Nainital (7)" [ref=f3e1056] [cursor=pointer]:
+                - /url: /india/nainital
+                - generic [ref=f3e1057]: Nainital
+                - generic [ref=f3e1058]: (7)
+              - link "Rishikesh (20)" [ref=f3e1059] [cursor=pointer]:
+                - /url: /india/rishikesh
+                - generic [ref=f3e1060]: Rishikesh
+                - generic [ref=f3e1061]: (20)
+              - link "Shimla (20)" [ref=f3e1062] [cursor=pointer]:
+                - /url: /india/shimla
+                - generic [ref=f3e1063]: Shimla
+                - generic [ref=f3e1064]: (20)
+              - link "Shirdi (6)" [ref=f3e1065] [cursor=pointer]:
+                - /url: /india/shirdi
+                - generic [ref=f3e1066]: Shirdi
+                - generic [ref=f3e1067]: (6)
+              - link "Udaipur (20)" [ref=f3e1068] [cursor=pointer]:
+                - /url: /india/udaipur
+                - generic [ref=f3e1069]: Udaipur
+                - generic [ref=f3e1070]: (20)
+              - link "Zirakpur (7)" [ref=f3e1071] [cursor=pointer]:
+                - /url: /india/zirakpur
+                - generic [ref=f3e1072]: Zirakpur
+                - generic [ref=f3e1073]: (7)
+          - generic [ref=f3e1074]:
+            - heading "South India 11 Destinations" [level=4] [ref=f3e1075]:
+              - generic [ref=f3e1077]: South India
+              - generic [ref=f3e1078]: 11 Destinations
+            - generic [ref=f3e1079]:
+              - link "Bangalore (9)" [ref=f3e1080] [cursor=pointer]:
+                - /url: /india/bangalore
+                - generic [ref=f3e1081]: Bangalore
+                - generic [ref=f3e1082]: (9)
+              - link "Calangute (20)" [ref=f3e1083] [cursor=pointer]:
+                - /url: /india/calangute
+                - generic [ref=f3e1084]: Calangute
+                - generic [ref=f3e1085]: (20)
+              - link "Coimbatore (9)" [ref=f3e1086] [cursor=pointer]:
+                - /url: /india/coimbatore
+                - generic [ref=f3e1087]: Coimbatore
+                - generic [ref=f3e1088]: (9)
+              - link "Goa (28)" [ref=f3e1089] [cursor=pointer]:
+                - /url: /india/goa
+                - generic [ref=f3e1090]: Goa
+                - generic [ref=f3e1091]: (28)
+              - link "Kochi (12)" [ref=f3e1092] [cursor=pointer]:
+                - /url: /india/kochi
+                - generic [ref=f3e1093]: Kochi
+                - generic [ref=f3e1094]: (12)
+              - link "Kodaikanal (7)" [ref=f3e1095] [cursor=pointer]:
+                - /url: /india/kodaikanal
+                - generic [ref=f3e1096]: Kodaikanal
+                - generic [ref=f3e1097]: (7)
+              - link "Mahabalipuram (11)" [ref=f3e1098] [cursor=pointer]:
+                - /url: /india/mahabalipuram
+                - generic [ref=f3e1099]: Mahabalipuram
+                - generic [ref=f3e1100]: (11)
+              - link "Munnar (21)" [ref=f3e1101] [cursor=pointer]:
+                - /url: /india/munnar
+                - generic [ref=f3e1102]: Munnar
+                - generic [ref=f3e1103]: (21)
+              - link "Ooty (1)" [ref=f3e1104] [cursor=pointer]:
+                - /url: /india/ooty
+                - generic [ref=f3e1105]: Ooty
+                - generic [ref=f3e1106]: (1)
+              - link "Panjim (7)" [ref=f3e1107] [cursor=pointer]:
+                - /url: /india/panjim
+                - generic [ref=f3e1108]: Panjim
+                - generic [ref=f3e1109]: (7)
+              - link "Yercaud (4)" [ref=f3e1110] [cursor=pointer]:
+                - /url: /india/yercaud
+                - generic [ref=f3e1111]: Yercaud
+                - generic [ref=f3e1112]: (4)
+          - generic [ref=f3e1113]:
+            - heading "West & Central India 17 Destinations" [level=4] [ref=f3e1114]:
+              - generic [ref=f3e1116]: West & Central India
+              - generic [ref=f3e1117]: 17 Destinations
+            - generic [ref=f3e1118]:
+              - link "Ahmedabad (7)" [ref=f3e1119] [cursor=pointer]:
+                - /url: /india/ahmedabad
+                - generic [ref=f3e1120]: Ahmedabad
+                - generic [ref=f3e1121]: (7)
+              - link "Bhopal (20)" [ref=f3e1122] [cursor=pointer]:
+                - /url: /india/bhopal
+                - generic [ref=f3e1123]: Bhopal
+                - generic [ref=f3e1124]: (20)
+              - link "Daman (5)" [ref=f3e1125] [cursor=pointer]:
+                - /url: /india/daman
+                - generic [ref=f3e1126]: Daman
+                - generic [ref=f3e1127]: (5)
+              - link "Gandhinagar (4)" [ref=f3e1128] [cursor=pointer]:
+                - /url: /india/gandhinagar
+                - generic [ref=f3e1129]: Gandhinagar
+                - generic [ref=f3e1130]: (4)
+              - link "Igatpuri (14)" [ref=f3e1131] [cursor=pointer]:
+                - /url: /india/igatpuri
+                - generic [ref=f3e1132]: Igatpuri
+                - generic [ref=f3e1133]: (14)
+              - link "Indore (30)" [ref=f3e1134] [cursor=pointer]:
+                - /url: /india/indore
+                - generic [ref=f3e1135]: Indore
+                - generic [ref=f3e1136]: (30)
+              - link "Karjat (10)" [ref=f3e1137] [cursor=pointer]:
+                - /url: /india/karjat
+                - generic [ref=f3e1138]: Karjat
+                - generic [ref=f3e1139]: (10)
+              - link "Kolhapur (8)" [ref=f3e1140] [cursor=pointer]:
+                - /url: /india/kolhapur
+                - generic [ref=f3e1141]: Kolhapur
+                - generic [ref=f3e1142]: (8)
+              - link "Lavasa (4)" [ref=f3e1143] [cursor=pointer]:
+                - /url: /india/lavasa
+                - generic [ref=f3e1144]: Lavasa
+                - generic [ref=f3e1145]: (4)
+              - link "Lonavala (10)" [ref=f3e1146] [cursor=pointer]:
+                - /url: /india/lonavala
+                - generic [ref=f3e1147]: Lonavala
+                - generic [ref=f3e1148]: (10)
+              - link "Mumbai (17)" [ref=f3e1149] [cursor=pointer]:
+                - /url: /india/mumbai
+                - generic [ref=f3e1150]: Mumbai
+                - generic [ref=f3e1151]: (17)
+              - link "Nashik (17)" [ref=f3e1152] [cursor=pointer]:
+                - /url: /india/nashik
+                - generic [ref=f3e1153]: Nashik
+                - generic [ref=f3e1154]: (17)
+              - link "Panchgani (14)" [ref=f3e1155] [cursor=pointer]:
+                - /url: /india/panchgani
+                - generic [ref=f3e1156]: Panchgani
+                - generic [ref=f3e1157]: (14)
+              - link "Panvel (2)" [ref=f3e1158] [cursor=pointer]:
+                - /url: /india/panvel
+                - generic [ref=f3e1159]: Panvel
+                - generic [ref=f3e1160]: (2)
+              - link "Pune (7)" [ref=f3e1161] [cursor=pointer]:
+                - /url: /india/pune
+                - generic [ref=f3e1162]: Pune
+                - generic [ref=f3e1163]: (7)
+              - link "Rajkot (19)" [ref=f3e1164] [cursor=pointer]:
+                - /url: /india/rajkot
+                - generic [ref=f3e1165]: Rajkot
+                - generic [ref=f3e1166]: (19)
+              - link "Saputara (1)" [ref=f3e1167] [cursor=pointer]:
+                - /url: /india/saputara
+                - generic [ref=f3e1168]: Saputara
+                - generic [ref=f3e1169]: (1)
+          - generic [ref=f3e1170]:
+            - heading "East & North East 7 Destinations" [level=4] [ref=f3e1171]:
+              - generic [ref=f3e1173]: East & North East
+              - generic [ref=f3e1174]: 7 Destinations
+            - generic [ref=f3e1175]:
+              - link "Darjeeling (5)" [ref=f3e1176] [cursor=pointer]:
+                - /url: /india/darjeeling
+                - generic [ref=f3e1177]: Darjeeling
+                - generic [ref=f3e1178]: (5)
+              - link "Digha (6)" [ref=f3e1179] [cursor=pointer]:
+                - /url: /india/digha
+                - generic [ref=f3e1180]: Digha
+                - generic [ref=f3e1181]: (6)
+              - link "Kolkata (13)" [ref=f3e1182] [cursor=pointer]:
+                - /url: /india/kolkata
+                - generic [ref=f3e1183]: Kolkata
+                - generic [ref=f3e1184]: (13)
+              - link "Mandarmani (16)" [ref=f3e1185] [cursor=pointer]:
+                - /url: /india/mandarmani
+                - generic [ref=f3e1186]: Mandarmani
+                - generic [ref=f3e1187]: (16)
+              - link "Puri (5)" [ref=f3e1188] [cursor=pointer]:
+                - /url: /india/puri
+                - generic [ref=f3e1189]: Puri
+                - generic [ref=f3e1190]: (5)
+              - link "Shillong (5)" [ref=f3e1191] [cursor=pointer]:
+                - /url: /india/shillong
+                - generic [ref=f3e1192]: Shillong
+                - generic [ref=f3e1193]: (5)
+              - link "Siliguri (5)" [ref=f3e1194] [cursor=pointer]:
+                - /url: /india/siliguri
+                - generic [ref=f3e1195]: Siliguri
+                - generic [ref=f3e1196]: (5)
+          - generic [ref=f3e1197]:
+            - heading "International Romantic Escapes 5 Destinations" [level=4] [ref=f3e1198]:
+              - generic [ref=f3e1200]: International Romantic Escapes
+              - generic [ref=f3e1201]: 5 Destinations
+            - generic [ref=f3e1202]:
+              - link "Bali (20)" [ref=f3e1203] [cursor=pointer]:
+                - /url: /indonesia/bali
+                - generic [ref=f3e1204]: Bali
+                - generic [ref=f3e1205]: (20)
+              - link "Dubai (20)" [ref=f3e1206] [cursor=pointer]:
+                - /url: /uae/dubai
+                - generic [ref=f3e1207]: Dubai
+                - generic [ref=f3e1208]: (20)
+              - link "Las Vegas (20)" [ref=f3e1209] [cursor=pointer]:
+                - /url: /usa/las-vegas
+                - generic [ref=f3e1210]: Las Vegas
+                - generic [ref=f3e1211]: (20)
+              - link "London (20)" [ref=f3e1212] [cursor=pointer]:
+                - /url: /uk/london
+                - generic [ref=f3e1213]: London
+                - generic [ref=f3e1214]: (20)
+              - link "New York (18)" [ref=f3e1215] [cursor=pointer]:
+                - /url: /usa/new-york
+                - generic [ref=f3e1216]: New York
+                - generic [ref=f3e1217]: (18)
+      - generic [ref=f3e1218]:
+        - heading "Frequently Asked Questions" [level=3] [ref=f3e1223]
+        - generic [ref=f3e1224]:
+          - generic [ref=f3e1225]:
+            - heading "How do you verify hotel bathtubs?" [level=4] [ref=f3e1226]
+            - paragraph [ref=f3e1227]: We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
+          - generic [ref=f3e1228]:
+            - heading "Are bathtubs guaranteed in every room?" [level=4] [ref=f3e1229]
+            - paragraph [ref=f3e1230]: Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
+          - generic [ref=f3e1231]:
+            - heading "Which destinations do you cover?" [level=4] [ref=f3e1232]
+            - paragraph [ref=f3e1233]: We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
+          - generic [ref=f3e1234]:
+            - heading "How do bookings work?" [level=4] [ref=f3e1235]
+            - paragraph [ref=f3e1236]: We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
+      - generic [ref=f3e1238]:
+        - generic [ref=f3e1239]:
+          - heading "Triple Verified" [level=4] [ref=f3e1243]
+          - paragraph [ref=f3e1244]: Independently cross-checked across 3 major platforms
+        - generic [ref=f3e1245]:
+          - heading "Guaranteed Tubs" [level=4] [ref=f3e1249]
+          - paragraph [ref=f3e1250]: Confirmed in-room hot tubs and jacuzzi suites
+        - generic [ref=f3e1251]:
+          - heading "Direct Booking" [level=4] [ref=f3e1255]
+          - paragraph [ref=f3e1256]: Direct links to official trusted travel partners
+        - generic [ref=f3e1257]:
+          - heading "Curated Stays" [level=4] [ref=f3e1262]
+          - paragraph [ref=f3e1263]: Handpicked luxury hotels for romantic escapes
+      - generic [ref=f3e1265]:
+        - generic [ref=f3e1266]: Start Your Romantic Escape
+        - heading "Ready to Book Your Luxury Bathtub Stay?" [level=3] [ref=f3e1267]
+        - paragraph [ref=f3e1268]: Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
+        - generic [ref=f3e1269]:
+          - link "Browse All Destinations ↑" [ref=f3e1270] [cursor=pointer]:
+            - /url: "#destinations"
+            - generic [ref=f3e1271]: Browse All Destinations
+            - generic [ref=f3e1272]: ↑
+          - link "Read Travel Inspiration →" [ref=f3e1273] [cursor=pointer]:
+            - /url: /blog
+      - generic [ref=f3e1274]:
+        - generic [ref=f3e1275]:
+          - generic [ref=f3e1291]:
+            - heading "Hotels with Bathtubs" [level=4] [ref=f3e1292]
+            - paragraph [ref=f3e1293]: Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.
+          - generic [ref=f3e1294]:
+            - paragraph [ref=f3e1295]: © 2026 HotelsWithBathtubs.com
+            - generic [ref=f3e1296]:
+              - link "Travel Blog" [ref=f3e1297] [cursor=pointer]:
+                - /url: /blog
+              - link "About Us" [ref=f3e1298] [cursor=pointer]:
+                - /url: /about
+              - link "Affiliate Policy" [ref=f3e1299] [cursor=pointer]:
+                - /url: /affiliate-policy
+              - link "Privacy" [ref=f3e1300] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms" [ref=f3e1301] [cursor=pointer]:
+                - /url: /terms
+              - link "Cookies" [ref=f3e1302] [cursor=pointer]:
+                - /url: /cookies
+        - paragraph [ref=f3e1303]: All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+  - alert [ref=f3e1304]: Hotels with Bathtub in Delhi | Hotels With Bathtubs

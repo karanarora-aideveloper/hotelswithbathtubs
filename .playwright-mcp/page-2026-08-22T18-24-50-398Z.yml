@@ -1,0 +1,910 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Hotels With Bathtubs Verified Premium Suites & Jacuzzis" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e18]:
+        - generic [ref=e19]: Hotels With Bathtubs
+        - paragraph [ref=e20]: Verified Premium Suites & Jacuzzis
+    - generic [ref=e21]:
+      - link "Destinations" [ref=e22] [cursor=pointer]:
+        - /url: /#destinations
+      - link "Travel Guides" [ref=e23] [cursor=pointer]:
+        - /url: /blog
+      - link "Verification" [ref=e24] [cursor=pointer]:
+        - /url: /#verification
+      - link "FAQs" [ref=e25] [cursor=pointer]:
+        - /url: /#faq
+      - link "Browse 60+ Cities" [ref=e26] [cursor=pointer]:
+        - /url: /#destinations
+  - main [ref=e27]:
+    - generic [ref=e1315]:
+      - link "Home" [ref=e1316] [cursor=pointer]:
+        - /url: /
+      - text: › India › Hotels with Bathtubs in Lucknow
+    - generic [ref=e1318]:
+      - generic [ref=e1319]:
+        - generic [ref=e1320]: 🏨
+        - text: 20 Verified Hotels · Triple-Source Validated
+      - heading "Hotels with Bathtubs in Lucknow, India" [level=1] [ref=e1321]
+      - paragraph [ref=e1322]: Experience romantic comfort and luxury from the privacy of your verified in-room bathtub & jacuzzi suite.
+    - generic [ref=e1323]:
+      - generic [ref=e1324]: Verified on MakeMyTrip, Agoda & Booking.com
+      - generic [ref=e1328]: Guaranteed Bathtubs
+      - generic [ref=e1332]: Trusted Booking Links
+    - main [ref=e1336]:
+      - generic [ref=e1337]:
+        - generic [ref=e1338]:
+          - generic [ref=e1339]:
+            - generic [ref=e1340]: "Filter Tubs:"
+            - button "All Tubs 20" [ref=e1341]:
+              - generic [ref=e1342]: All Tubs
+              - generic [ref=e1343]: "20"
+            - button "🛁 In-Room Jacuzzi 20" [ref=e1344]:
+              - generic [ref=e1345]: 🛁 In-Room Jacuzzi
+              - generic [ref=e1346]: "20"
+            - button "✨ Deep Soaking Tubs 20" [ref=e1347]:
+              - generic [ref=e1348]: ✨ Deep Soaking Tubs
+              - generic [ref=e1349]: "20"
+          - textbox "Search hotel name..." [ref=e1351]
+        - generic [ref=e1354]:
+          - generic [ref=e1355]: 💡
+          - generic [ref=e1357]:
+            - strong [ref=e1358]: "Booking Tip for Lucknow Bathtub Suites:"
+            - text: When selecting your room on MakeMyTrip, Agoda, or Booking.com, ensure your chosen room tier (such as
+            - emphasis [ref=e1359]: Executive Suite
+            - text: or
+            - emphasis [ref=e1360]: Deluxe Room with Jacuzzi
+            - text: ) explicitly lists the bathtub amenity before confirming.
+        - generic [ref=e1361]:
+          - generic [ref=e1362]:
+            - generic [ref=e1363]:
+              - img "Nirmal Palace - Hotel with Bathtub in Lucknow" [ref=e1364]
+              - generic [ref=e1365]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1368]:
+              - heading "Nirmal Palace" [level=2] [ref=e1369]
+              - paragraph [ref=e1370]:
+                - generic [ref=e1374]: Lucknow, India
+              - paragraph [ref=e1375]: Have a good time at this property that offers splendid rooms, Wi-Fi and modern facilities.
+              - list [ref=e1376]:
+                - listitem [ref=e1377]:
+                  - generic [ref=e1378]: ✓
+                  - generic [ref=e1379]: Bathtub
+                - listitem [ref=e1380]:
+                  - generic [ref=e1381]: 🛁
+                  - generic [ref=e1382]: Jacuzzi
+                - listitem [ref=e1383]:
+                  - generic [ref=e1384]: 🛁
+                  - generic [ref=e1385]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1387] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201109291653015372%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83379%26lng%3D80.91839%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D13%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1388]: Check on MakeMyTrip
+                - generic [ref=e1389]: →
+          - generic [ref=e1390]:
+            - generic [ref=e1391]:
+              - img "HOTEL MAJASH DREAMS - Hotel with Bathtub in Lucknow" [ref=e1392]
+              - generic [ref=e1393]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1396]:
+              - heading "HOTEL MAJASH DREAMS" [level=2] [ref=e1397]
+              - paragraph [ref=e1398]:
+                - generic [ref=e1402]: Lucknow, India
+              - list [ref=e1403]:
+                - listitem [ref=e1404]:
+                  - generic [ref=e1405]: ✓
+                  - generic [ref=e1406]: Bathtub
+                - listitem [ref=e1407]:
+                  - generic [ref=e1408]: 🛁
+                  - generic [ref=e1409]: Jacuzzi
+                - listitem [ref=e1410]:
+                  - generic [ref=e1411]: 🛁
+                  - generic [ref=e1412]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1414] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202511202259065955%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.85728%26lng%3D81.03951%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D4%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1415]: Check on MakeMyTrip
+                - generic [ref=e1416]: →
+          - generic [ref=e1417]:
+            - generic [ref=e1418]:
+              - img "Hotel Metro Regency - Hotel with Bathtub in Lucknow" [ref=e1419]
+              - generic [ref=e1420]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1423]:
+              - heading "Hotel Metro Regency" [level=2] [ref=e1424]
+              - paragraph [ref=e1425]:
+                - generic [ref=e1429]: Lucknow, India
+              - list [ref=e1430]:
+                - listitem [ref=e1431]:
+                  - generic [ref=e1432]: ✓
+                  - generic [ref=e1433]: Bathtub
+                - listitem [ref=e1434]:
+                  - generic [ref=e1435]: 🛁
+                  - generic [ref=e1436]: Jacuzzi
+                - listitem [ref=e1437]:
+                  - generic [ref=e1438]: 🛁
+                  - generic [ref=e1439]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1441] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202111251430374058%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83301%26lng%3D80.92136%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D8%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1442]: Check on MakeMyTrip
+                - generic [ref=e1443]: →
+          - generic [ref=e1444]:
+            - generic [ref=e1445]:
+              - img "Hotel Shelter 150 M From Charbagh Railway Station - Hotel with Bathtub in Lucknow" [ref=e1446]
+              - generic [ref=e1447]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1450]:
+              - heading "Hotel Shelter 150 M From Charbagh Railway Station" [level=2] [ref=e1451]
+              - paragraph [ref=e1452]:
+                - generic [ref=e1456]: Lucknow, India
+              - paragraph [ref=e1457]: Hotel Shelter brings you efficient services and comfortable accommodations, ensuring a splendid stay in the luxurious city of Lucknow.
+              - list [ref=e1458]:
+                - listitem [ref=e1459]:
+                  - generic [ref=e1460]: ✓
+                  - generic [ref=e1461]: Bathtub
+                - listitem [ref=e1462]:
+                  - generic [ref=e1463]: 🛁
+                  - generic [ref=e1464]: Jacuzzi
+                - listitem [ref=e1465]:
+                  - generic [ref=e1466]: 🛁
+                  - generic [ref=e1467]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1469] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201303291246482929%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83308%26lng%3D80.92077%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D2%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1470]: Check on MakeMyTrip
+                - generic [ref=e1471]: →
+          - generic [ref=e1472]:
+            - generic [ref=e1473]:
+              - img "Hotel Golden Orchid - Hotel with Bathtub in Lucknow" [ref=e1474]
+              - generic [ref=e1475]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1478]:
+              - heading "Hotel Golden Orchid" [level=2] [ref=e1479]
+              - paragraph [ref=e1480]:
+                - generic [ref=e1484]: Lucknow, India
+              - paragraph [ref=e1485]: Golden Orchid is a 3-star hotel offering convenience and luxury with comfortable rooms equipped with modern amenities.
+              - list [ref=e1486]:
+                - listitem [ref=e1487]:
+                  - generic [ref=e1488]: ✓
+                  - generic [ref=e1489]: Bathtub
+                - listitem [ref=e1490]:
+                  - generic [ref=e1491]: 🛁
+                  - generic [ref=e1492]: Jacuzzi
+                - listitem [ref=e1493]:
+                  - generic [ref=e1494]: 🛁
+                  - generic [ref=e1495]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1497] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201304121804475340%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.8739%26lng%3D80.93899%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D15%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1498]: Check on MakeMyTrip
+                - generic [ref=e1499]: →
+          - generic [ref=e1500]:
+            - generic [ref=e1501]:
+              - img "Holiday Inn Lucknow Airport Hotel - Hotel with Bathtub in Lucknow" [ref=e1502]
+              - generic [ref=e1503]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1506]:
+              - heading "Holiday Inn Lucknow Airport Hotel" [level=2] [ref=e1507]
+              - paragraph [ref=e1508]:
+                - generic [ref=e1512]: Lucknow, India
+              - paragraph [ref=e1513]: Holiday Inn Lucknow Airport Hotel offers a luxurious space with 4 dining outlets, a sparking swimming pool, and air-conditioned rooms in Transport Nagar, Lucknow.
+              - list [ref=e1514]:
+                - listitem [ref=e1515]:
+                  - generic [ref=e1516]: ✓
+                  - generic [ref=e1517]: Bathtub
+                - listitem [ref=e1518]:
+                  - generic [ref=e1519]: 🛁
+                  - generic [ref=e1520]: Jacuzzi
+                - listitem [ref=e1521]:
+                  - generic [ref=e1522]: 🛁
+                  - generic [ref=e1523]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1525] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202302241348296058%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.76173%26lng%3D80.88565%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D20%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26viewType%3DPREMIUM%26mtkeys%3Dundefined
+                - generic [ref=e1526]: Check on MakeMyTrip
+                - generic [ref=e1527]: →
+          - generic [ref=e1528]:
+            - generic [ref=e1529]:
+              - img "Hilton Garden Inn Lucknow - Hotel with Bathtub in Lucknow" [ref=e1530]
+              - generic [ref=e1531]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1534]:
+              - heading "Hilton Garden Inn Lucknow" [level=2] [ref=e1535]
+              - paragraph [ref=e1536]:
+                - generic [ref=e1540]: Lucknow, India
+              - paragraph [ref=e1541]: Experience unparalleled luxury at this premium property offering well-appointed rooms, an incredible restaurant, a rooftop swimming pool and world-class amenities.
+              - list [ref=e1542]:
+                - listitem [ref=e1543]:
+                  - generic [ref=e1544]: ✓
+                  - generic [ref=e1545]: Bathtub
+                - listitem [ref=e1546]:
+                  - generic [ref=e1547]: 🛁
+                  - generic [ref=e1548]: Jacuzzi
+                - listitem [ref=e1549]:
+                  - generic [ref=e1550]: 🛁
+                  - generic [ref=e1551]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1553] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201709081331037533%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.86414%26lng%3D81.00826%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D7%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1554]: Check on MakeMyTrip
+                - generic [ref=e1555]: →
+          - generic [ref=e1556]:
+            - generic [ref=e1557]:
+              - img "Fairfield by Marriott Lucknow - Hotel with Bathtub in Lucknow" [ref=e1558]
+              - generic [ref=e1559]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1562]:
+              - heading "Fairfield by Marriott Lucknow" [level=2] [ref=e1563]
+              - paragraph [ref=e1564]:
+                - generic [ref=e1568]: Lucknow, India
+              - paragraph [ref=e1569]: Preferred by business travellers, Fairfield by Marriott offers a comfortable and convenient base close to convention centres and shopping malls in Lucknow.
+              - list [ref=e1570]:
+                - listitem [ref=e1571]:
+                  - generic [ref=e1572]: ✓
+                  - generic [ref=e1573]: Bathtub
+                - listitem [ref=e1574]:
+                  - generic [ref=e1575]: 🛁
+                  - generic [ref=e1576]: Jacuzzi
+                - listitem [ref=e1577]:
+                  - generic [ref=e1578]: 🛁
+                  - generic [ref=e1579]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1581] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D20160707173905956%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.86779%26lng%3D81.00933%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D6%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1582]: Check on MakeMyTrip
+                - generic [ref=e1583]: →
+          - generic [ref=e1584]:
+            - generic [ref=e1585]:
+              - img "Hyatt Regency Lucknow Gomti Nagar - Hotel with Bathtub in Lucknow" [ref=e1586]
+              - generic [ref=e1587]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1590]:
+              - heading "Hyatt Regency Lucknow Gomti Nagar" [level=2] [ref=e1591]
+              - paragraph [ref=e1592]:
+                - generic [ref=e1596]: Lucknow, India
+              - paragraph [ref=e1597]: Boasting an extravagantly designed facade, Hyatt Regency Lucknow offers modern amenities and upscale dining options catering to the needs of both business and leisure travellers.
+              - list [ref=e1598]:
+                - listitem [ref=e1599]:
+                  - generic [ref=e1600]: ✓
+                  - generic [ref=e1601]: Bathtub
+                - listitem [ref=e1602]:
+                  - generic [ref=e1603]: 🛁
+                  - generic [ref=e1604]: Jacuzzi
+                - listitem [ref=e1605]:
+                  - generic [ref=e1606]: 🛁
+                  - generic [ref=e1607]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1609] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201708021859232685%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.86609%26lng%3D81.00574%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D18%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26viewType%3DPREMIUM%26mtkeys%3Dundefined
+                - generic [ref=e1610]: Check on MakeMyTrip
+                - generic [ref=e1611]: →
+          - generic [ref=e1612]:
+            - generic [ref=e1613]:
+              - img "Roop Guest House - Hotel with Bathtub in Lucknow" [ref=e1614]
+              - generic [ref=e1615]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1618]:
+              - heading "Roop Guest House" [level=2] [ref=e1619]
+              - paragraph [ref=e1620]:
+                - generic [ref=e1624]: Lucknow, India
+              - list [ref=e1625]:
+                - listitem [ref=e1626]:
+                  - generic [ref=e1627]: ✓
+                  - generic [ref=e1628]: Bathtub
+                - listitem [ref=e1629]:
+                  - generic [ref=e1630]: 🛁
+                  - generic [ref=e1631]: Jacuzzi
+                - listitem [ref=e1632]:
+                  - generic [ref=e1633]: 🛁
+                  - generic [ref=e1634]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1636] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201702081630175253%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83382%26lng%3D80.92198%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D11%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1637]: Check on MakeMyTrip
+                - generic [ref=e1638]: →
+          - generic [ref=e1639]:
+            - generic [ref=e1640]:
+              - img "Hotel Kanha Inn - Hotel with Bathtub in Lucknow" [ref=e1641]
+              - generic [ref=e1642]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1645]:
+              - heading "Hotel Kanha Inn" [level=2] [ref=e1646]
+              - paragraph [ref=e1647]:
+                - generic [ref=e1651]: Lucknow, India
+              - list [ref=e1652]:
+                - listitem [ref=e1653]:
+                  - generic [ref=e1654]: ✓
+                  - generic [ref=e1655]: Bathtub
+                - listitem [ref=e1656]:
+                  - generic [ref=e1657]: 🛁
+                  - generic [ref=e1658]: Jacuzzi
+                - listitem [ref=e1659]:
+                  - generic [ref=e1660]: 🛁
+                  - generic [ref=e1661]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1663] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201705030826082451%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83231%26lng%3D80.92158%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D17%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1664]: Check on MakeMyTrip
+                - generic [ref=e1665]: →
+          - generic [ref=e1666]:
+            - generic [ref=e1667]:
+              - img "Crowne Plaza Lucknow an IHG Hotel - Hotel with Bathtub in Lucknow" [ref=e1668]
+              - generic [ref=e1669]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1672]:
+              - heading "Crowne Plaza Lucknow an IHG Hotel" [level=2] [ref=e1673]
+              - paragraph [ref=e1674]:
+                - generic [ref=e1678]: Lucknow, India
+              - paragraph [ref=e1679]: This property offers a comfortable stay near ISCKON Temple, HCL IT City, and educational institutions like IIT Lucknow & Atal Bihari Vajpayee Medical University.
+              - list [ref=e1680]:
+                - listitem [ref=e1681]:
+                  - generic [ref=e1682]: ✓
+                  - generic [ref=e1683]: Bathtub
+                - listitem [ref=e1684]:
+                  - generic [ref=e1685]: 🛁
+                  - generic [ref=e1686]: Jacuzzi
+                - listitem [ref=e1687]:
+                  - generic [ref=e1688]: 🛁
+                  - generic [ref=e1689]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1691] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202504281038556301%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.78585%26lng%3D81.03344%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D12%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1692]: Check on MakeMyTrip
+                - generic [ref=e1693]: →
+          - generic [ref=e1694]:
+            - generic [ref=e1695]:
+              - img "Apalace - Hotel with Bathtub in Lucknow" [ref=e1696]
+              - generic [ref=e1697]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1700]:
+              - heading "Apalace" [level=2] [ref=e1701]
+              - paragraph [ref=e1702]:
+                - generic [ref=e1706]: Lucknow, India
+              - list [ref=e1707]:
+                - listitem [ref=e1708]:
+                  - generic [ref=e1709]: ✓
+                  - generic [ref=e1710]: Bathtub
+                - listitem [ref=e1711]:
+                  - generic [ref=e1712]: 🛁
+                  - generic [ref=e1713]: Jacuzzi
+                - listitem [ref=e1714]:
+                  - generic [ref=e1715]: 🛁
+                  - generic [ref=e1716]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1718] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202110221155516499%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.79439%26lng%3D80.88374%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D9%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1719]: Check on MakeMyTrip
+                - generic [ref=e1720]: →
+          - generic [ref=e1721]:
+            - generic [ref=e1722]:
+              - img "CASA AMORE BY BLISS - Hotel with Bathtub in Lucknow" [ref=e1723]
+              - generic [ref=e1724]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1727]:
+              - heading "CASA AMORE BY BLISS" [level=2] [ref=e1728]
+              - paragraph [ref=e1729]:
+                - generic [ref=e1733]: Lucknow, India
+              - list [ref=e1734]:
+                - listitem [ref=e1735]:
+                  - generic [ref=e1736]: ✓
+                  - generic [ref=e1737]: Bathtub
+                - listitem [ref=e1738]:
+                  - generic [ref=e1739]: 🛁
+                  - generic [ref=e1740]: Jacuzzi
+                - listitem [ref=e1741]:
+                  - generic [ref=e1742]: 🛁
+                  - generic [ref=e1743]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1745] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202602161403176631%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.83629%26lng%3D81.0303%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D5%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1746]: Check on MakeMyTrip
+                - generic [ref=e1747]: →
+          - generic [ref=e1748]:
+            - generic [ref=e1749]:
+              - img "DIDI Hotel Alambagh - Hotel with Bathtub in Lucknow" [ref=e1750]
+              - generic [ref=e1751]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1754]:
+              - heading "DIDI Hotel Alambagh" [level=2] [ref=e1755]
+              - paragraph [ref=e1756]:
+                - generic [ref=e1760]: Lucknow, India
+              - paragraph [ref=e1761]: Enjoy a comfortable stay at this hotel in Lucknow which offers a banquet hall, cafe, conference room & tidy rooms.
+              - list [ref=e1762]:
+                - listitem [ref=e1763]:
+                  - generic [ref=e1764]: ✓
+                  - generic [ref=e1765]: Bathtub
+                - listitem [ref=e1766]:
+                  - generic [ref=e1767]: 🛁
+                  - generic [ref=e1768]: Jacuzzi
+                - listitem [ref=e1769]:
+                  - generic [ref=e1770]: 🛁
+                  - generic [ref=e1771]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1773] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201111200953211962%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.8148%26lng%3D80.90398%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D10%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1774]: Check on MakeMyTrip
+                - generic [ref=e1775]: →
+          - generic [ref=e1776]:
+            - generic [ref=e1777]:
+              - img "Hotel Sojourn Inn Lucknow - Hotel with Bathtub in Lucknow" [ref=e1778]
+              - generic [ref=e1779]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1782]:
+              - heading "Hotel Sojourn Inn Lucknow" [level=2] [ref=e1783]
+              - paragraph [ref=e1784]:
+                - generic [ref=e1788]: Lucknow, India
+              - list [ref=e1789]:
+                - listitem [ref=e1790]:
+                  - generic [ref=e1791]: ✓
+                  - generic [ref=e1792]: Bathtub
+                - listitem [ref=e1793]:
+                  - generic [ref=e1794]: 🛁
+                  - generic [ref=e1795]: Jacuzzi
+                - listitem [ref=e1796]:
+                  - generic [ref=e1797]: 🛁
+                  - generic [ref=e1798]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1800] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202310301531284258%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.87333%26lng%3D81.00764%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D1%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1801]: Check on MakeMyTrip
+                - generic [ref=e1802]: →
+          - generic [ref=e1803]:
+            - generic [ref=e1804]:
+              - img "Radical Palace - Hotel with Bathtub in Lucknow" [ref=e1805]
+              - generic [ref=e1806]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1809]:
+              - heading "Radical Palace" [level=2] [ref=e1810]
+              - paragraph [ref=e1811]:
+                - generic [ref=e1815]: Lucknow, India
+              - paragraph [ref=e1816]: Near Charbagh Railway Station, this hotel offers a restaurant, banquet hall, free Wi-Fi, indoor games & tour assistance.
+              - list [ref=e1817]:
+                - listitem [ref=e1818]:
+                  - generic [ref=e1819]: ✓
+                  - generic [ref=e1820]: Bathtub
+                - listitem [ref=e1821]:
+                  - generic [ref=e1822]: 🛁
+                  - generic [ref=e1823]: Jacuzzi
+                - listitem [ref=e1824]:
+                  - generic [ref=e1825]: 🛁
+                  - generic [ref=e1826]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1828] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D201605111109315168%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.837%26lng%3D80.91965%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D14%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1829]: Check on MakeMyTrip
+                - generic [ref=e1830]: →
+          - generic [ref=e1831]:
+            - generic [ref=e1832]:
+              - img "Villa Vistosa | Omaxe Hazratganj - Hotel with Bathtub in Lucknow" [ref=e1833]
+              - generic [ref=e1834]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1837]:
+              - heading "Villa Vistosa | Omaxe Hazratganj" [level=2] [ref=e1838]
+              - paragraph [ref=e1839]:
+                - generic [ref=e1843]: Lucknow, India
+              - list [ref=e1844]:
+                - listitem [ref=e1845]:
+                  - generic [ref=e1846]: ✓
+                  - generic [ref=e1847]: Bathtub
+                - listitem [ref=e1848]:
+                  - generic [ref=e1849]: 🛁
+                  - generic [ref=e1850]: Jacuzzi
+                - listitem [ref=e1851]:
+                  - generic [ref=e1852]: 🛁
+                  - generic [ref=e1853]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1855] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202410140554003172%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.81165%26lng%3D80.99762%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D19%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1856]: Check on MakeMyTrip
+                - generic [ref=e1857]: →
+          - generic [ref=e1858]:
+            - generic [ref=e1859]:
+              - img "Hotel Mahalaxmi Inn - Hotel with Bathtub in Lucknow" [ref=e1860]
+              - generic [ref=e1861]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1864]:
+              - heading "Hotel Mahalaxmi Inn" [level=2] [ref=e1865]
+              - paragraph [ref=e1866]:
+                - generic [ref=e1870]: Lucknow, India
+              - list [ref=e1871]:
+                - listitem [ref=e1872]:
+                  - generic [ref=e1873]: ✓
+                  - generic [ref=e1874]: Bathtub
+                - listitem [ref=e1875]:
+                  - generic [ref=e1876]: 🛁
+                  - generic [ref=e1877]: Jacuzzi
+                - listitem [ref=e1878]:
+                  - generic [ref=e1879]: 🛁
+                  - generic [ref=e1880]: Jacuzzi/Bathtub
+              - link "Check on MakeMyTrip →" [ref=e1882] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D20161013224242143%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.834%26lng%3D80.91948%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D16%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1883]: Check on MakeMyTrip
+                - generic [ref=e1884]: →
+          - generic [ref=e1885]:
+            - generic [ref=e1886]:
+              - img "All Seasons - Hotel with Bathtub in Lucknow" [ref=e1887]
+              - generic [ref=e1888]: ✓ Verified on MakeMyTrip
+            - generic [ref=e1891]:
+              - heading "All Seasons" [level=2] [ref=e1892]
+              - paragraph [ref=e1893]:
+                - generic [ref=e1897]: Lucknow, India
+              - list [ref=e1898]:
+                - listitem [ref=e1899]:
+                  - generic [ref=e1900]: ✓
+                  - generic [ref=e1901]: Bathtub
+                - listitem [ref=e1902]:
+                  - generic [ref=e1903]: 🛁
+                  - generic [ref=e1904]: Jacuzzi
+              - link "Check on MakeMyTrip →" [ref=e1906] [cursor=pointer]:
+                - /url: https://linkredirect.in/visitretailer/1729?id=1471944&dl=https%3A%2F%2Fwww.makemytrip.com%2Fhotels%2Fhotel-details%3FhotelId%3D202303201426164146%26_uCurrency%3DINR%26checkin%3D08232026%26checkout%3D08242026%26city%3DCTLKO%26country%3DIN%26filterData%3DROOM_AMENITIES%257CBathtub%252CJacuzzi%252CJacuzzi%252FBathtub%26lat%3D26.86448%26lng%3D81.02693%26locusId%3DCTLKO%26locusType%3Dcity%26rank%3D3%26regionNearByExp%3D3%26roomStayQualifier%3D2e0e%26rsc%3D1e2e0e%26searchText%3DLucknow%26mtkeys%3Dundefined
+                - generic [ref=e1907]: Check on MakeMyTrip
+                - generic [ref=e1908]: →
+      - generic [ref=e1910]:
+        - generic [ref=e1911]:
+          - text: Frequently Asked Questions
+          - heading "Booking Bathtub & Jacuzzi Hotels in Lucknow" [level=2] [ref=e1912]
+        - generic [ref=e1913]:
+          - generic [ref=e1914]:
+            - heading "Which hotels in Lucknow have private in-room bathtubs or jacuzzis?" [level=3] [ref=e1915]
+            - paragraph [ref=e1916]: Top verified hotels in Lucknow offering private in-room tubs include Nirmal Palace, HOTEL MAJASH DREAMS, Hotel Metro Regency. All listings on this page have been verified across MakeMyTrip, Agoda, and Booking.com to confirm that the specific room tier includes a bathtub or jacuzzi.
+          - generic [ref=e1917]:
+            - heading "Are these bathtub hotels in Lucknow couple-friendly?" [level=3] [ref=e1918]
+            - paragraph [ref=e1919]: Yes. Verified properties in Lucknow featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying valid government photo IDs (Aadhaar, Passport, or Driving License) for check-in.
+          - generic [ref=e1920]:
+            - heading "How do I make sure my room in Lucknow definitely has a bathtub?" [level=3] [ref=e1921]
+            - paragraph [ref=e1922]: Standard or base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named “Suite with Bathtub”, “Jacuzzi Suite”, “Executive Room”, or “Royal Suite” where the amenity list explicitly lists a private bathtub.
+          - generic [ref=e1923]:
+            - heading "Are there budget-friendly hotels with bathtubs in Lucknow?" [level=3] [ref=e1924]
+            - paragraph [ref=e1925]: Yes, Lucknow offers a wide spectrum of accommodations ranging from affordable boutique hotels to ultra-luxury 5-star resorts featuring deep soaking bathtubs and private spa baths.
+  - contentinfo [ref=e34]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - text: Editorial & Travel Inspiration
+            - heading "Romantic Getaways & Jacuzzi Hotel Guides" [level=3] [ref=e39]
+          - link "Browse All Guides →" [ref=e40] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e41]: Browse All Guides
+            - generic [ref=e42]: →
+        - generic [ref=e43]:
+          - link "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) 2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Guide →" [ref=e44] [cursor=pointer]:
+            - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+            - generic [ref=e45]:
+              - img "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [ref=e46]
+              - generic [ref=e47]: 2026-08-22
+            - generic [ref=e48]:
+              - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=4] [ref=e49]
+              - paragraph [ref=e50]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+              - generic [ref=e51]:
+                - generic [ref=e52]: Read Full Guide
+                - generic [ref=e53]: →
+          - link "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) 2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Guide →" [ref=e54] [cursor=pointer]:
+            - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+            - generic [ref=e55]:
+              - img "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [ref=e56]
+              - generic [ref=e57]: 2026-08-22
+            - generic [ref=e58]:
+              - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=4] [ref=e59]
+              - paragraph [ref=e60]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+              - generic [ref=e61]:
+                - generic [ref=e62]: Read Full Guide
+                - generic [ref=e63]: →
+          - link "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) 2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Guide →" [ref=e64] [cursor=pointer]:
+            - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+            - generic [ref=e65]:
+              - img "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [ref=e66]
+              - generic [ref=e67]: 2026-08-22
+            - generic [ref=e68]:
+              - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=4] [ref=e69]
+              - paragraph [ref=e70]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+              - generic [ref=e71]:
+                - generic [ref=e72]: Read Full Guide
+                - generic [ref=e73]: →
+      - generic [ref=e74]:
+        - generic [ref=e81]:
+          - heading "Browse Hotels by Region" [level=3] [ref=e82]
+          - paragraph [ref=e83]: Quickly jump to verified stays grouped by geographic travel zones
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - heading "North India 23 Destinations" [level=4] [ref=e86]:
+              - generic [ref=e88]: North India
+              - generic [ref=e89]: 23 Destinations
+            - generic [ref=e90]:
+              - link "Agra (19)" [ref=e91] [cursor=pointer]:
+                - /url: /india/agra
+                - generic [ref=e92]: Agra
+                - generic [ref=e93]: (19)
+              - link "Amritsar (19)" [ref=e94] [cursor=pointer]:
+                - /url: /india/amritsar
+                - generic [ref=e95]: Amritsar
+                - generic [ref=e96]: (19)
+              - link "Chandigarh (16)" [ref=e97] [cursor=pointer]:
+                - /url: /india/chandigarh
+                - generic [ref=e98]: Chandigarh
+                - generic [ref=e99]: (16)
+              - link "Delhi (28)" [ref=e100] [cursor=pointer]:
+                - /url: /india/delhi
+                - generic [ref=e101]: Delhi
+                - generic [ref=e102]: (28)
+              - link "Dharamshala (9)" [ref=e103] [cursor=pointer]:
+                - /url: /india/dharamshala
+                - generic [ref=e104]: Dharamshala
+                - generic [ref=e105]: (9)
+              - link "Faridabad (14)" [ref=e106] [cursor=pointer]:
+                - /url: /india/faridabad
+                - generic [ref=e107]: Faridabad
+                - generic [ref=e108]: (14)
+              - link "Gurgaon (9)" [ref=e109] [cursor=pointer]:
+                - /url: /india/gurgaon
+                - generic [ref=e110]: Gurgaon
+                - generic [ref=e111]: (9)
+              - link "Gwalior (1)" [ref=e112] [cursor=pointer]:
+                - /url: /india/gwalior
+                - generic [ref=e113]: Gwalior
+                - generic [ref=e114]: (1)
+              - link "Haridwar (8)" [ref=e115] [cursor=pointer]:
+                - /url: /india/haridwar
+                - generic [ref=e116]: Haridwar
+                - generic [ref=e117]: (8)
+              - link "Jaipur (13)" [ref=e118] [cursor=pointer]:
+                - /url: /india/jaipur
+                - generic [ref=e119]: Jaipur
+                - generic [ref=e120]: (13)
+              - link "Koramangala (6)" [ref=e121] [cursor=pointer]:
+                - /url: /india/koramangala
+                - generic [ref=e122]: Koramangala
+                - generic [ref=e123]: (6)
+              - link "Lucknow (20)" [ref=e124] [cursor=pointer]:
+                - /url: /india/lucknow
+                - generic [ref=e125]: Lucknow
+                - generic [ref=e126]: (20)
+              - link "Mahipalpur (7)" [ref=e127] [cursor=pointer]:
+                - /url: /india/mahipalpur
+                - generic [ref=e128]: Mahipalpur
+                - generic [ref=e129]: (7)
+              - link "Manali (21)" [ref=e130] [cursor=pointer]:
+                - /url: /india/manali
+                - generic [ref=e131]: Manali
+                - generic [ref=e132]: (21)
+              - link "Matheran (1)" [ref=e133] [cursor=pointer]:
+                - /url: /india/matheran
+                - generic [ref=e134]: Matheran
+                - generic [ref=e135]: (1)
+              - link "Mathura (3)" [ref=e136] [cursor=pointer]:
+                - /url: /india/mathura
+                - generic [ref=e137]: Mathura
+                - generic [ref=e138]: (3)
+              - link "Mount Abu (6)" [ref=e139] [cursor=pointer]:
+                - /url: /india/mount-abu
+                - generic [ref=e140]: Mount Abu
+                - generic [ref=e141]: (6)
+              - link "Nainital (7)" [ref=e142] [cursor=pointer]:
+                - /url: /india/nainital
+                - generic [ref=e143]: Nainital
+                - generic [ref=e144]: (7)
+              - link "Rishikesh (20)" [ref=e145] [cursor=pointer]:
+                - /url: /india/rishikesh
+                - generic [ref=e146]: Rishikesh
+                - generic [ref=e147]: (20)
+              - link "Shimla (20)" [ref=e148] [cursor=pointer]:
+                - /url: /india/shimla
+                - generic [ref=e149]: Shimla
+                - generic [ref=e150]: (20)
+              - link "Shirdi (6)" [ref=e151] [cursor=pointer]:
+                - /url: /india/shirdi
+                - generic [ref=e152]: Shirdi
+                - generic [ref=e153]: (6)
+              - link "Udaipur (20)" [ref=e154] [cursor=pointer]:
+                - /url: /india/udaipur
+                - generic [ref=e155]: Udaipur
+                - generic [ref=e156]: (20)
+              - link "Zirakpur (7)" [ref=e157] [cursor=pointer]:
+                - /url: /india/zirakpur
+                - generic [ref=e158]: Zirakpur
+                - generic [ref=e159]: (7)
+          - generic [ref=e160]:
+            - heading "South India 11 Destinations" [level=4] [ref=e161]:
+              - generic [ref=e163]: South India
+              - generic [ref=e164]: 11 Destinations
+            - generic [ref=e165]:
+              - link "Bangalore (9)" [ref=e166] [cursor=pointer]:
+                - /url: /india/bangalore
+                - generic [ref=e167]: Bangalore
+                - generic [ref=e168]: (9)
+              - link "Calangute (20)" [ref=e169] [cursor=pointer]:
+                - /url: /india/calangute
+                - generic [ref=e170]: Calangute
+                - generic [ref=e171]: (20)
+              - link "Coimbatore (9)" [ref=e172] [cursor=pointer]:
+                - /url: /india/coimbatore
+                - generic [ref=e173]: Coimbatore
+                - generic [ref=e174]: (9)
+              - link "Goa (28)" [ref=e175] [cursor=pointer]:
+                - /url: /india/goa
+                - generic [ref=e176]: Goa
+                - generic [ref=e177]: (28)
+              - link "Kochi (12)" [ref=e178] [cursor=pointer]:
+                - /url: /india/kochi
+                - generic [ref=e179]: Kochi
+                - generic [ref=e180]: (12)
+              - link "Kodaikanal (7)" [ref=e181] [cursor=pointer]:
+                - /url: /india/kodaikanal
+                - generic [ref=e182]: Kodaikanal
+                - generic [ref=e183]: (7)
+              - link "Mahabalipuram (11)" [ref=e184] [cursor=pointer]:
+                - /url: /india/mahabalipuram
+                - generic [ref=e185]: Mahabalipuram
+                - generic [ref=e186]: (11)
+              - link "Munnar (21)" [ref=e187] [cursor=pointer]:
+                - /url: /india/munnar
+                - generic [ref=e188]: Munnar
+                - generic [ref=e189]: (21)
+              - link "Ooty (1)" [ref=e190] [cursor=pointer]:
+                - /url: /india/ooty
+                - generic [ref=e191]: Ooty
+                - generic [ref=e192]: (1)
+              - link "Panjim (7)" [ref=e193] [cursor=pointer]:
+                - /url: /india/panjim
+                - generic [ref=e194]: Panjim
+                - generic [ref=e195]: (7)
+              - link "Yercaud (4)" [ref=e196] [cursor=pointer]:
+                - /url: /india/yercaud
+                - generic [ref=e197]: Yercaud
+                - generic [ref=e198]: (4)
+          - generic [ref=e199]:
+            - heading "West & Central India 17 Destinations" [level=4] [ref=e200]:
+              - generic [ref=e202]: West & Central India
+              - generic [ref=e203]: 17 Destinations
+            - generic [ref=e204]:
+              - link "Ahmedabad (7)" [ref=e205] [cursor=pointer]:
+                - /url: /india/ahmedabad
+                - generic [ref=e206]: Ahmedabad
+                - generic [ref=e207]: (7)
+              - link "Bhopal (20)" [ref=e208] [cursor=pointer]:
+                - /url: /india/bhopal
+                - generic [ref=e209]: Bhopal
+                - generic [ref=e210]: (20)
+              - link "Daman (5)" [ref=e211] [cursor=pointer]:
+                - /url: /india/daman
+                - generic [ref=e212]: Daman
+                - generic [ref=e213]: (5)
+              - link "Gandhinagar (4)" [ref=e214] [cursor=pointer]:
+                - /url: /india/gandhinagar
+                - generic [ref=e215]: Gandhinagar
+                - generic [ref=e216]: (4)
+              - link "Igatpuri (14)" [ref=e217] [cursor=pointer]:
+                - /url: /india/igatpuri
+                - generic [ref=e218]: Igatpuri
+                - generic [ref=e219]: (14)
+              - link "Indore (30)" [ref=e220] [cursor=pointer]:
+                - /url: /india/indore
+                - generic [ref=e221]: Indore
+                - generic [ref=e222]: (30)
+              - link "Karjat (10)" [ref=e223] [cursor=pointer]:
+                - /url: /india/karjat
+                - generic [ref=e224]: Karjat
+                - generic [ref=e225]: (10)
+              - link "Kolhapur (8)" [ref=e226] [cursor=pointer]:
+                - /url: /india/kolhapur
+                - generic [ref=e227]: Kolhapur
+                - generic [ref=e228]: (8)
+              - link "Lavasa (4)" [ref=e229] [cursor=pointer]:
+                - /url: /india/lavasa
+                - generic [ref=e230]: Lavasa
+                - generic [ref=e231]: (4)
+              - link "Lonavala (10)" [ref=e232] [cursor=pointer]:
+                - /url: /india/lonavala
+                - generic [ref=e233]: Lonavala
+                - generic [ref=e234]: (10)
+              - link "Mumbai (17)" [ref=e235] [cursor=pointer]:
+                - /url: /india/mumbai
+                - generic [ref=e236]: Mumbai
+                - generic [ref=e237]: (17)
+              - link "Nashik (17)" [ref=e238] [cursor=pointer]:
+                - /url: /india/nashik
+                - generic [ref=e239]: Nashik
+                - generic [ref=e240]: (17)
+              - link "Panchgani (14)" [ref=e241] [cursor=pointer]:
+                - /url: /india/panchgani
+                - generic [ref=e242]: Panchgani
+                - generic [ref=e243]: (14)
+              - link "Panvel (2)" [ref=e244] [cursor=pointer]:
+                - /url: /india/panvel
+                - generic [ref=e245]: Panvel
+                - generic [ref=e246]: (2)
+              - link "Pune (7)" [ref=e247] [cursor=pointer]:
+                - /url: /india/pune
+                - generic [ref=e248]: Pune
+                - generic [ref=e249]: (7)
+              - link "Rajkot (19)" [ref=e250] [cursor=pointer]:
+                - /url: /india/rajkot
+                - generic [ref=e251]: Rajkot
+                - generic [ref=e252]: (19)
+              - link "Saputara (1)" [ref=e253] [cursor=pointer]:
+                - /url: /india/saputara
+                - generic [ref=e254]: Saputara
+                - generic [ref=e255]: (1)
+          - generic [ref=e256]:
+            - heading "East & North East 7 Destinations" [level=4] [ref=e257]:
+              - generic [ref=e259]: East & North East
+              - generic [ref=e260]: 7 Destinations
+            - generic [ref=e261]:
+              - link "Darjeeling (5)" [ref=e262] [cursor=pointer]:
+                - /url: /india/darjeeling
+                - generic [ref=e263]: Darjeeling
+                - generic [ref=e264]: (5)
+              - link "Digha (6)" [ref=e265] [cursor=pointer]:
+                - /url: /india/digha
+                - generic [ref=e266]: Digha
+                - generic [ref=e267]: (6)
+              - link "Kolkata (13)" [ref=e268] [cursor=pointer]:
+                - /url: /india/kolkata
+                - generic [ref=e269]: Kolkata
+                - generic [ref=e270]: (13)
+              - link "Mandarmani (16)" [ref=e271] [cursor=pointer]:
+                - /url: /india/mandarmani
+                - generic [ref=e272]: Mandarmani
+                - generic [ref=e273]: (16)
+              - link "Puri (5)" [ref=e274] [cursor=pointer]:
+                - /url: /india/puri
+                - generic [ref=e275]: Puri
+                - generic [ref=e276]: (5)
+              - link "Shillong (5)" [ref=e277] [cursor=pointer]:
+                - /url: /india/shillong
+                - generic [ref=e278]: Shillong
+                - generic [ref=e279]: (5)
+              - link "Siliguri (5)" [ref=e280] [cursor=pointer]:
+                - /url: /india/siliguri
+                - generic [ref=e281]: Siliguri
+                - generic [ref=e282]: (5)
+          - generic [ref=e283]:
+            - heading "International Romantic Escapes 5 Destinations" [level=4] [ref=e284]:
+              - generic [ref=e286]: International Romantic Escapes
+              - generic [ref=e287]: 5 Destinations
+            - generic [ref=e288]:
+              - link "Bali (20)" [ref=e289] [cursor=pointer]:
+                - /url: /indonesia/bali
+                - generic [ref=e290]: Bali
+                - generic [ref=e291]: (20)
+              - link "Dubai (20)" [ref=e292] [cursor=pointer]:
+                - /url: /uae/dubai
+                - generic [ref=e293]: Dubai
+                - generic [ref=e294]: (20)
+              - link "Las Vegas (20)" [ref=e295] [cursor=pointer]:
+                - /url: /usa/las-vegas
+                - generic [ref=e296]: Las Vegas
+                - generic [ref=e297]: (20)
+              - link "London (20)" [ref=e298] [cursor=pointer]:
+                - /url: /uk/london
+                - generic [ref=e299]: London
+                - generic [ref=e300]: (20)
+              - link "New York (18)" [ref=e301] [cursor=pointer]:
+                - /url: /usa/new-york
+                - generic [ref=e302]: New York
+                - generic [ref=e303]: (18)
+      - generic [ref=e304]:
+        - heading "Frequently Asked Questions" [level=3] [ref=e309]
+        - generic [ref=e310]:
+          - generic [ref=e311]:
+            - heading "How do you verify hotel bathtubs?" [level=4] [ref=e312]
+            - paragraph [ref=e313]: We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
+          - generic [ref=e314]:
+            - heading "Are bathtubs guaranteed in every room?" [level=4] [ref=e315]
+            - paragraph [ref=e316]: Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
+          - generic [ref=e317]:
+            - heading "Which destinations do you cover?" [level=4] [ref=e318]
+            - paragraph [ref=e319]: We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
+          - generic [ref=e320]:
+            - heading "How do bookings work?" [level=4] [ref=e321]
+            - paragraph [ref=e322]: We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
+      - generic [ref=e324]:
+        - generic [ref=e325]:
+          - heading "Triple Verified" [level=4] [ref=e329]
+          - paragraph [ref=e330]: Independently cross-checked across 3 major platforms
+        - generic [ref=e331]:
+          - heading "Guaranteed Tubs" [level=4] [ref=e335]
+          - paragraph [ref=e336]: Confirmed in-room hot tubs and jacuzzi suites
+        - generic [ref=e337]:
+          - heading "Direct Booking" [level=4] [ref=e341]
+          - paragraph [ref=e342]: Direct links to official trusted travel partners
+        - generic [ref=e343]:
+          - heading "Curated Stays" [level=4] [ref=e348]
+          - paragraph [ref=e349]: Handpicked luxury hotels for romantic escapes
+      - generic [ref=e351]:
+        - generic [ref=e352]: Start Your Romantic Escape
+        - heading "Ready to Book Your Luxury Bathtub Stay?" [level=3] [ref=e353]
+        - paragraph [ref=e354]: Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
+        - generic [ref=e355]:
+          - link "Browse All Destinations ↑" [ref=e356] [cursor=pointer]:
+            - /url: "#destinations"
+            - generic [ref=e357]: Browse All Destinations
+            - generic [ref=e358]: ↑
+          - link "Read Travel Inspiration →" [ref=e359] [cursor=pointer]:
+            - /url: /blog
+      - generic [ref=e360]:
+        - generic [ref=e361]:
+          - generic [ref=e377]:
+            - heading "Hotels with Bathtubs" [level=4] [ref=e378]
+            - paragraph [ref=e379]: Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.
+          - generic [ref=e380]:
+            - paragraph [ref=e381]: © 2026 HotelsWithBathtubs.com
+            - generic [ref=e382]:
+              - link "Travel Blog" [ref=e383] [cursor=pointer]:
+                - /url: /blog
+              - link "About Us" [ref=e384] [cursor=pointer]:
+                - /url: /about
+              - link "Affiliate Policy" [ref=e385] [cursor=pointer]:
+                - /url: /affiliate-policy
+              - link "Privacy" [ref=e386] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms" [ref=e387] [cursor=pointer]:
+                - /url: /terms
+              - link "Cookies" [ref=e388] [cursor=pointer]:
+                - /url: /cookies
+        - paragraph [ref=e389]: All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+  - alert [ref=e390]: Hotels with Bathtub in Lucknow | Hotels With Bathtubs

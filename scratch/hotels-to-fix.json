@@ -1,0 +1,3224 @@
+[
+  {
+    "_id": "6a8979ec4c11b35f6a2dd0cd",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Hotel Calcutta Bungalow"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0ce",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Hotel Hyatt Regency"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0cf",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Hotel The Westin Rajarhat"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d0",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Itc Sonar A Luxury Collection Hotel"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d1",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Jw Marriott Hotel"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d2",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Kenilworth Hotel"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d3",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Novotel Hotel And Residences"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d4",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Hothtub Hotel The Westin Rajarhat"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d5",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Romantic Bathtub Itc Sonar A Luxury Collection Hotel"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d6",
+    "city": "Kolkata",
+    "country": "India",
+    "name": "Bathtub Jw Marriott Hotel"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d7",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Airport Hotel Ramhan Palace"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d8",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Mahipalpur Hotel Linda Grand Near International Airport By Gross Group"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0d9",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Hotel Anand International"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0da",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Hotel Shanti Palace"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0db",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Hotel Airport Inn Near Airport"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0dc",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Hotel Prithvi Raj Near Airport"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0dd",
+    "city": "Mahipalpur",
+    "country": "India",
+    "name": "Romantic Jacuzzi Hotel Prithvi Raj Near Airport"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0de",
+    "city": "Pune",
+    "country": "India",
+    "name": "Hotel Conrad"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0df",
+    "city": "Pune",
+    "country": "India",
+    "name": "Hotel Conrad Spa"
+  },
+  {
+    "_id": "6a8979ed4c11b35f6a2dd0e0",
+    "city": "Pune",
+    "country": "India",
+    "name": "Hotel Jw Marriott"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e1",
+    "city": "Pune",
+    "country": "India",
+    "name": "Hotel Tip Top International"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e2",
+    "city": "Pune",
+    "country": "India",
+    "name": "O Hotel"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e3",
+    "city": "Pune",
+    "country": "India",
+    "name": "Ramee Grand Hotel And Spa"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e4",
+    "city": "Pune",
+    "country": "India",
+    "name": "Spa Hotel Conrad"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e5",
+    "city": "Kochi",
+    "country": "India",
+    "name": "The Postcard Mandalay Hall"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e6",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Hotel The Postcard Mandalay Hall"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e7",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Forte"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e8",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Crowne Plaza An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0e9",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Brunton Boatyard"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0ea",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Hotel Monsoon Empress"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0eb",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Hotel Olive Downtown"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0ec",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Marriott Hotel"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0ed",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Ramada Resort By Wyndham"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0ee",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Kochi Marriott Hotel"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0ef",
+    "city": "Kochi",
+    "country": "India",
+    "name": "Olive Downtown"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0f0",
+    "city": "Kochi",
+    "country": "India",
+    "name": "The Postcard Mandalay Hall Bathtub"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0f1",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Clarens Hotel"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0f2",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Hotel Golden Tulip Sector 29"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0f3",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Hotel The Westin New"
+  },
+  {
+    "_id": "6a8979ee4c11b35f6a2dd0f4",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "The Westin New"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0f5",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Golden Tulip Sector 29"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0f6",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Hotel Bathtub The Westin New"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0f7",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "Hotel Windsor Heights"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0f8",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "In Room The Anya Hotel"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0f9",
+    "city": "Gurgaon",
+    "country": "India",
+    "name": "The Anya Hotel"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0fa",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Hotel Royal Orchid 3 Kms To Airport"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0fb",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Hotel The Raj Palace"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0fc",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Lmb Hotel City Centre"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0fd",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "The Raj Palace"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0fe",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "The Leela Palace"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd0ff",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Clarion Bella Casa At Airport"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd100",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Hotel Royal Orchid 3 Kms To Airport Bathtub"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd101",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Hotel The Gulmohar Mansion Boutique Stay In"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd102",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Stardom Resort"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd103",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Rajasthali Resort Spa"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd104",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "Bathtub Hotel Royal Orchid 3 Kms To Airport"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd105",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "The Lalit"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd106",
+    "city": "Jaipur",
+    "country": "India",
+    "name": "The Raj Palace Hotel In"
+  },
+  {
+    "_id": "6a8979ef4c11b35f6a2dd107",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Aloha On The Ganges By Leisure Hotels"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd108",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel The Neeraj Ganga Cottages"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd109",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "The Westin Resort Spa Himalayas"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10a",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Ganga Kinare A Riverside Boutique Resort"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10b",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel The Narayana Sanctuary Luxe Poolside Suites By Salvus"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10c",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel The Westin Resort Spa Himalayas"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10d",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel Room Raga On The Ganges"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10e",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Rishikesh Aloha On The Ganges By Leisure Hotels"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd10f",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Antalya"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd110",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel Antalya"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd111",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "The Neeraj Ganga Cottages"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd112",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Ski Hotels And Resorts"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd113",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel Raga On The Ganges"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd114",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Rishikesh The Westin Resort Spa Himalayas"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd115",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Pride Hotel And Resort"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd116",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Hotel Regenta Inn On The Ganges"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd117",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Private Pool The Westin Resort Spa Himalayas"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd118",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "Romantic Bathtub Hotel The Neeraj Ganga Heritage Palace"
+  },
+  {
+    "_id": "6a8979f04c11b35f6a2dd119",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "The Neeraj Ganga Heritage Palace"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11a",
+    "city": "Rishikesh",
+    "country": "India",
+    "name": "The Westin Resort Spa Himalayas Bathtub"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11b",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Hotel Courtyard By Marriott"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11c",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Hotel G Express Formerly Known As Tgb Express"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11d",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Hyatt Regency"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11e",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Novotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd11f",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Radisson Blu Hotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd120",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Scenaria Hotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd121",
+    "city": "Ahmedabad",
+    "country": "India",
+    "name": "Bathtub Hyatt Regency"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd122",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Four Seasons Hotel At Embassy One"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd123",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Hotel La Marvella"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd124",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Hotel Oakwood Premier Prestige"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd125",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Hotel The Oberoi"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd126",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Jw Marriott Hotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd127",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Springs Hotels And Spa"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd128",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Women Four Seasons Hotel At Embassy One"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd129",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Hotel The Lalit Ashok"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd12a",
+    "city": "Bangalore",
+    "country": "India",
+    "name": "Bathtub Jw Marriott Hotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd12b",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Four Seasons Hotel"
+  },
+  {
+    "_id": "6a8979f14c11b35f6a2dd12c",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel Bawa Continental"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd12d",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel Onn Shelter Inn"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd12e",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel Taj Santacruz"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd12f",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel The St Regis"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd130",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel Vivanta Navi Turbhe"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd131",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Onn Shelter Inn"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd132",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hilton International Airport Hotel"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd133",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Holiday Inn International Airport An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd134",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Grand Hyatt Hotel And Residences Bathtub"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd135",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Grand Hyatt Hotel And Residences"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd136",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "The St. Regis"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd137",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Hotel Ramee Techome"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd138",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Ramee Techome"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd139",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Romantic Bathtub Holiday Inn International Airport An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13a",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "Taj Santacruz"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13b",
+    "city": "Mumbai",
+    "country": "India",
+    "name": "View The St. Regis"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13c",
+    "city": "Agra",
+    "country": "India",
+    "name": "Holiday Inn Mg Road An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13d",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel Courtyard By Marriott"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13e",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel Grand Mercure An Accor Brand"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd13f",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel Room Doubletree By Hilton"
+  },
+  {
+    "_id": "6a8979f24c11b35f6a2dd140",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel The P L Palace"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd141",
+    "city": "Agra",
+    "country": "India",
+    "name": "Fragrant Nature A Five Star Classified Hotel"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd142",
+    "city": "Agra",
+    "country": "India",
+    "name": "Jaypee Palace Hotel"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd143",
+    "city": "Agra",
+    "country": "India",
+    "name": "Radisson Hotel"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd144",
+    "city": "Agra",
+    "country": "India",
+    "name": "Taj Hotel Convention Centre"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd145",
+    "city": "Agra",
+    "country": "India",
+    "name": "Taj Ronak Luxury Hotels"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd146",
+    "city": "Agra",
+    "country": "India",
+    "name": "Tajview Ihcl Seleqtions"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd147",
+    "city": "Agra",
+    "country": "India",
+    "name": "Courtyard By Marriott"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd148",
+    "city": "Agra",
+    "country": "India",
+    "name": "Doubletree By Hilton"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd149",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel Clarks Shiraz"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14a",
+    "city": "Agra",
+    "country": "India",
+    "name": "Hotel Doubletree By Hilton"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14b",
+    "city": "Agra",
+    "country": "India",
+    "name": "Suite Hotel Clarks Shiraz"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14c",
+    "city": "Agra",
+    "country": "India",
+    "name": "Romantic Bathtub Room The P L Palace"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14d",
+    "city": "Agra",
+    "country": "India",
+    "name": "Romantic Taj Hotel Convention Centre"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14e",
+    "city": "Agra",
+    "country": "India",
+    "name": "The P L Palace"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd14f",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hotel Hyatt Regency"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd150",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hotel The Lalit"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd151",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hotel The Regent Regency Rediscovered"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd152",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hotel Wyndham Mohali"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd153",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hyatt Regency"
+  },
+  {
+    "_id": "6a8979f34c11b35f6a2dd154",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Jw Marriott Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd155",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Lords Inn"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd156",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Wyndham Mohali Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd157",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Holiday Inn Panchkula An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd158",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hotel Lords Inn"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd159",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hyatt Centric Sector17 Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15a",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Hyatt Regency Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15b",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "The Regent Regency Rediscovered"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15c",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Park Plaza Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15d",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Radisson Hotel Room"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15e",
+    "city": "Chandigarh",
+    "country": "India",
+    "name": "Radisson Red Mohali"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd15f",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Blusalzz Residence"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd160",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Cape House"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd161",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Ranjits Svaasa"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd162",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Room Taj Swarna"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd163",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Holiday Inn Ranjit Avenue An Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd164",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Le Meridien"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd165",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "The Pribson Hotel"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd166",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Cape House"
+  },
+  {
+    "_id": "6a8979f44c11b35f6a2dd167",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Courtyard By Marriott"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd168",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Fortune Ranjit Vihar Member Itcs Hotel Group"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd169",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Ganesha Palace"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16a",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Golden Premier"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16b",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Holiday Inn Ranjit Avenue Ihg Hotel"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16c",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Le Meridien"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16d",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Levelup Signature"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16e",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Hotel Suite Best Western Plus"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd16f",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Spa Taj Swarna"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd170",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Suite Fortune Ranjit Vihar Member Itcs Hotel Group"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd171",
+    "city": "Amritsar",
+    "country": "India",
+    "name": "Ramada By Wyndham"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd172",
+    "city": "Goa",
+    "country": "India",
+    "name": "Alila Diwa A Hyatt Brand"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd173",
+    "city": "Goa",
+    "country": "India",
+    "name": "Art Resort Hotel Room"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd174",
+    "city": "Goa",
+    "country": "India",
+    "name": "Art Resort"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd175",
+    "city": "Goa",
+    "country": "India",
+    "name": "Hotel Grand Hyatt"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd176",
+    "city": "Goa",
+    "country": "India",
+    "name": "Hotel Resort W"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd177",
+    "city": "Goa",
+    "country": "India",
+    "name": "Beach Resort On Beach"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd178",
+    "city": "Goa",
+    "country": "India",
+    "name": "Marriott Resort Spa"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd179",
+    "city": "Goa",
+    "country": "India",
+    "name": "In North Larisa Resort Ashwem"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd17a",
+    "city": "Goa",
+    "country": "India",
+    "name": "Larisa Beach Resort North"
+  },
+  {
+    "_id": "6a8979f54c11b35f6a2dd17b",
+    "city": "Goa",
+    "country": "India",
+    "name": "Larisa Resort Ashwem North"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd17c",
+    "city": "Goa",
+    "country": "India",
+    "name": "Resort W"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd17d",
+    "city": "Goa",
+    "country": "India",
+    "name": "Taj Cidade De Heritage"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd17e",
+    "city": "Goa",
+    "country": "India",
+    "name": "Taj Cidade De Horizon"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd17f",
+    "city": "Goa",
+    "country": "India",
+    "name": "Wild Berry Resort Agonda South"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd180",
+    "city": "Goa",
+    "country": "India",
+    "name": "Cola Beach Resort Room In South"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd181",
+    "city": "Goa",
+    "country": "India",
+    "name": "Cola Beach Resort South"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd182",
+    "city": "Goa",
+    "country": "India",
+    "name": "Cola Beach Resort South With Spa Jacuzzi"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd183",
+    "city": "Goa",
+    "country": "India",
+    "name": "Goa Beach Resort On Beach"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd184",
+    "city": "Goa",
+    "country": "India",
+    "name": "Goa Marriott Resort Spa"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd185",
+    "city": "Goa",
+    "country": "India",
+    "name": "Grand Hyatt"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd186",
+    "city": "Goa",
+    "country": "India",
+    "name": "Grandeur De Sanchi Luxury Beach Resort Spa North"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd187",
+    "city": "Goa",
+    "country": "India",
+    "name": "Hotel Longuinhos Beach Resort South"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd188",
+    "city": "Goa",
+    "country": "India",
+    "name": "Hotel Taj Cidade De Heritage"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd189",
+    "city": "Goa",
+    "country": "India",
+    "name": "Cola Beach Resort South With Sea View"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd18a",
+    "city": "Goa",
+    "country": "India",
+    "name": "North Grandeur De Sanchi Luxury Beach Resort Spa"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd18b",
+    "city": "Goa",
+    "country": "India",
+    "name": "The Baga Beach Resort North"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd18c",
+    "city": "Goa",
+    "country": "India",
+    "name": "Longuinhos Beach Resort South"
+  },
+  {
+    "_id": "6a8979f64c11b35f6a2dd18d",
+    "city": "Goa",
+    "country": "India",
+    "name": "The Baga Beach Resort North Jacuzzi In Room"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd18e",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Della Resorts"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd18f",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Hotel Aamby Valley City"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd190",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Hotel Hilton Shillim Estate Retreat And Spa"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd191",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Hilton Shillim Estate Retreat And Spa"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd192",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Nostravila"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd193",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Hotel Nostravila"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd194",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Aamby Valley City"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd195",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Juvana Resort Spa Aamby Valley City"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd196",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "Romantic Bathtub Della Resorts"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd197",
+    "city": "Lonavala",
+    "country": "India",
+    "name": "With Hothtub Della Resorts"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd198",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Echor Mandara Treevilla"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd199",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Hotel Norbu The Montanna Ihcl Seleqtions"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19a",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Brij Anayra A Himalayan Luxury Retreat"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19b",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Dpolo Club Spa Resort"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19c",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Indraprastha Spa Resort"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19d",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Hotel Echor Mandara Treevilla"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19e",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Hotel Room Echor Mandara Treevilla"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd19f",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Norbu The Montanna Ihcl Seleqtions"
+  },
+  {
+    "_id": "6a8979f74c11b35f6a2dd1a0",
+    "city": "Dharamshala",
+    "country": "India",
+    "name": "Romantic Spabath Dpolo Club Spa Resort"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1ae",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Achalaa Resort"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1af",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Hotel Nisarg Resort"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b0",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "In Terrace Garden Homes 1 6"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b1",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Garden Homes 1 6"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b2",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Nisarg Resort"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b3",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Regenta Place Raysons"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b4",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Vedganga Plus Villa Homestay"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b5",
+    "city": "Kolhapur",
+    "country": "India",
+    "name": "Hotel Blooming Soul"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b6",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Adamo The Bellus"
+  },
+  {
+    "_id": "6a897a014c11b35f6a2dd1b7",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Aqua Marina Beach Cottages"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1b8",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Casa De Boutique Resort"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1b9",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Bloomsuites L"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1ba",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Calangute Estrela Do Mar Beach Resort A Beach Property"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1bb",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Estrela Do Mar Beach Resort A Beach Property"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1bc",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hotel Casa De Boutique Resort"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1bd",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hotel Room The Postcard Saligao"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1be",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hotel Small Daddy Plus"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1bf",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Storii By Itc Hotels Shanti Morada"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c0",
+    "city": "Calangute",
+    "country": "India",
+    "name": "The Postcard Saligao"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c1",
+    "city": "Calangute",
+    "country": "India",
+    "name": "The Park"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c2",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hard Rock Hotel"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c3",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hotel Adamo The Bellus"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c4",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Hotel Aqua Marina Beach Cottages"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c5",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Pool In Room The Park"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c6",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Private Pool Room The Park"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c7",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Room Adamo The Bellus"
+  },
+  {
+    "_id": "6a897a024c11b35f6a2dd1c8",
+    "city": "Calangute",
+    "country": "India",
+    "name": "Romantic Spabath Adamo The Bellus"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1c9",
+    "city": "Calangute",
+    "country": "India",
+    "name": "The Park With Private Pool In Room"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1ca",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Aframe By The Alpenglow Hotel Room"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1cb",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Hotel"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1cc",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Divercity Luxury Glamp"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1cd",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Tomorrowland Farms And Suites"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1ce",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Hotel Tomorrowland Farms And Suites"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1cf",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Kanal Glamp Luxuries"
+  },
+  {
+    "_id": "6a897a034c11b35f6a2dd1d0",
+    "city": "Kodaikanal",
+    "country": "India",
+    "name": "Kodai Hotel"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d1",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Ambrosia Sarovar Portico"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d2",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Hotel Godwin"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d3",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Hotel The Reo Near Har Ke Pauri Road"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d4",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Hotel Roomambrosia Sarovar Portico"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d5",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Pride Elite Near Railway Station"
+  },
+  {
+    "_id": "6a897a064c11b35f6a2dd1d6",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Rio Luxury Top Rated Most Awarded Property In"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1d7",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Hotel Room Yashail Hotel"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1d8",
+    "city": "Haridwar",
+    "country": "India",
+    "name": "Yashail Hotel"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1d9",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Antilia Villa Luxurious Ac Swimming Pool"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1da",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Sabo Resort"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1db",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Hotel Hillview Rooms By 29 Bungalow"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1dc",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Hotel The Cliff By Zuper"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1dd",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Sharayu Holidays Valley View"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1de",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "The Cliff By Zuper"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1df",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Wandr Tabletop"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e0",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Coral Villa"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e1",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Hillview Rooms By 29 Bungalow Bathtub"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e2",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Hillview Rooms By 29 Bungalow"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e3",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Hotel Wandr Tabletop"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e4",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Panchgani Antilia Villa Luxurious Ac Swimming Pool"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e5",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "Views Coral Villa"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e6",
+    "city": "Panchgani",
+    "country": "India",
+    "name": "R Villa"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e7",
+    "city": "Digha",
+    "country": "India",
+    "name": "Antique Regency New"
+  },
+  {
+    "_id": "6a897a074c11b35f6a2dd1e8",
+    "city": "Digha",
+    "country": "India",
+    "name": "Iconic Hotel"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1e9",
+    "city": "Digha",
+    "country": "India",
+    "name": "Hotel Mtm New"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1ea",
+    "city": "Digha",
+    "country": "India",
+    "name": "Hotel Daltin"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1eb",
+    "city": "Digha",
+    "country": "India",
+    "name": "Hotel Antique Regency New"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1ec",
+    "city": "Digha",
+    "country": "India",
+    "name": "Hotel Daltin New"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1ed",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Aqua Blue Resort Private Limited"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1ee",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Azad Hind Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1ef",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Grand Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f0",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Hotel Samudra Bilas Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f1",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Hotel Room Sea Smile Inn"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f2",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Hotel Sher Bengal Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f3",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Hotel The Rath Inns"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f4",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Mandarmani Sweet Dream Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f5",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Prasant Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f6",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Sher Bengal Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f7",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Sweet Dream Beach Resort"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f8",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "The Rath Inns"
+  },
+  {
+    "_id": "6a897a084c11b35f6a2dd1f9",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Holiday Beach Resort"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1fa",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Samudra Bilas Resort"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1fb",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "Sher Bengal Beach Resort Bathtub"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1fc",
+    "city": "Mandarmani",
+    "country": "India",
+    "name": "The Rath Inns Bathtub"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1fd",
+    "city": "Siliguri",
+    "country": "India",
+    "name": "Barsana Hotel Resort"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1fe",
+    "city": "Siliguri",
+    "country": "India",
+    "name": "Hotel Mayfair Tea Resort"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd1ff",
+    "city": "Siliguri",
+    "country": "India",
+    "name": "Hotel Faith"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd200",
+    "city": "Siliguri",
+    "country": "India",
+    "name": "Mayfair Tea Resort"
+  },
+  {
+    "_id": "6a897a094c11b35f6a2dd201",
+    "city": "Siliguri",
+    "country": "India",
+    "name": "The Cindrella Hotel"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd202",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Seasons Suites"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd203",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Hotel Luho 41 Penthouse"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd204",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Hotel Room Luho 41 Penthouse"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd205",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Hotel Seasons Suites"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd206",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Luho 187"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd207",
+    "city": "Koramangala",
+    "country": "India",
+    "name": "Luho 41 Penthouse"
+  },
+  {
+    "_id": "6a897a0a4c11b35f6a2dd208",
+    "city": "Matheran",
+    "country": "India",
+    "name": "Adamo The Resort"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd209",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Heritage Khirasara Palace"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd20a",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Seasons"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd20b",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Rajkot Nova Hotel New Crossroad"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd20c",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Royal Orbit"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd20d",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Bizz"
+  },
+  {
+    "_id": "6a897a0d4c11b35f6a2dd20e",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Bling"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd20f",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Bliss"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd210",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Bliss With Spa Jacuzzi"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd211",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Boutique"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd212",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Boutique With Spa Bath"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd213",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Nova Park"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd214",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Hotel Room The Imperial Palace"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd215",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Nova Hotel New Crossroad"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd216",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Rajkot Hotel Nova Bizz"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd217",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Nova Park"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd218",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Regency Lagoon Resort"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd219",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Romantic Spabath Bizz The Hotel"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd21a",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "Spa Jacuzzi Suite Hotel Nova Boutique"
+  },
+  {
+    "_id": "6a897a0e4c11b35f6a2dd21b",
+    "city": "Rajkot",
+    "country": "India",
+    "name": "The Imperial Palace"
+  },
+  {
+    "_id": "6a897a0f4c11b35f6a2dd21c",
+    "city": "Udaipur",
+    "country": "India",
+    "name": "Hotel Bamboo Saa Resort Spa"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd21d",
+    "city": "Nainital",
+    "country": "India",
+    "name": "Hotel Casa De Bello Near Kainchi Dham"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd21e",
+    "city": "Nainital",
+    "country": "India",
+    "name": "In Room Casa De Bello Near Kainchi Dham"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd21f",
+    "city": "Nainital",
+    "country": "India",
+    "name": "Namah A Member Of Radisson Individuals Retreats"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd220",
+    "city": "Nainital",
+    "country": "India",
+    "name": "Casa De Bello Near Kainchi Dham"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd221",
+    "city": "Nainital",
+    "country": "India",
+    "name": "Spruce Hill Hotel Restro"
+  },
+  {
+    "_id": "6a897a114c11b35f6a2dd222",
+    "city": "Nainital",
+    "country": "India",
+    "name": "Suite Casa De Bello Near Kainchi Dham"
+  },
+  {
+    "_id": "6a897a124c11b35f6a2dd223",
+    "city": "Nainital",
+    "country": "India",
+    "name": "The Lake Hill"
+  },
+  {
+    "_id": "6a897a124c11b35f6a2dd224",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Courtyard By Marriott Aravali Resort"
+  },
+  {
+    "_id": "6a897a124c11b35f6a2dd225",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Vivanta Surajkund Ncr"
+  },
+  {
+    "_id": "6a897a124c11b35f6a2dd226",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Park Plaza"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd227",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Radisson Blu"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd228",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Room Radisson Blu"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd229",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel The Lalit Mangar"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22a",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Vivanta Surajkund Ncr"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22b",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Suite Park Plaza"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22c",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Courtyard By Marriott Aravali Resort"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22d",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Hotel Lavit Couple Friendly Near Metro Station"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22e",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Park Plaza"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd22f",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Radisson Blu"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd230",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "Faridabad Vivanta Surajkund Ncr"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd231",
+    "city": "Faridabad",
+    "country": "India",
+    "name": "The Lalit Mangar"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd232",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Hotel Courtyard By Marriott"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd233",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Hotel Express Inn The Business Luxury Hotel"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd234",
+    "city": "Nashik",
+    "country": "India",
+    "name": "In Room Freesia Resort By Express Inn"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd235",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Regenta Resort Soma Vine Village"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd236",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Courtyard By Marriott"
+  },
+  {
+    "_id": "6a897a134c11b35f6a2dd237",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Grape County Eco Resort Spa"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd238",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Radisson Blu Hotel Spa"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd239",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Treat Hotel City Center"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23a",
+    "city": "Nashik",
+    "country": "India",
+    "name": "The Ssk Solitaire Hotel Banquets"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23b",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Express Inn The Business Luxury Hotel"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23c",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Freesia Resort By Express Inn"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23d",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Hotel Grape County Eco Resort Spa"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23e",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Viveda Wellness Resort 2"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd23f",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Hotel Room Viveda Wellness Resort"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd240",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Viveda Wellness Resort"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd241",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Romantic Bathtub Freesia Resort By Express Inn"
+  },
+  {
+    "_id": "6a897a144c11b35f6a2dd242",
+    "city": "Nashik",
+    "country": "India",
+    "name": "Romantic Spabath Express Inn The Business Luxury Hotel"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd243",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Hotel The Kanila Resort"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd244",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Hotel Room Oleander Farms"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd245",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Hillrock Resort Villas Neral"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd246",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Teak Resort"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd247",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Hut Staycation"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd248",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Radisson Blu Plaza Resort Convention Centre"
+  },
+  {
+    "_id": "6a897a154c11b35f6a2dd249",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Oleander Farms"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24a",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Romantic Jacuzzi Room Touchwood Villa Khalapur"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24b",
+    "city": "Karjat",
+    "country": "India",
+    "name": "The Kanila Resort"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24c",
+    "city": "Karjat",
+    "country": "India",
+    "name": "Touchwood Villa Khalapur"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24d",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Hotel Taj Fishermans Cove Resort Spa Chennai"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24e",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Hotel Sheraton Grand Chennai Resort Spa"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd24f",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Intercontinental Chennai Resort An Ihg Hotel"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd250",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Mahabalipuram Blu Be View"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd251",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Mahabalipuram Kaldan Samudhra Palace"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd252",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Mahabalipuram Sheraton Grand Chennai Resort Spa"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd253",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Montecarlo Hotel"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd254",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Kaldan Samudhra Palace"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd255",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Sheraton Grand Chennai Resort Spa"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd256",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Taj Fishermans Cove Resort Spa Chennai"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd257",
+    "city": "Mahabalipuram",
+    "country": "India",
+    "name": "Horizon Blu Inn"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd258",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Hotel Novotel New Aerocity International Airport"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd259",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Hotel Pullman New Aerocity International Airport"
+  },
+  {
+    "_id": "6a897a164c11b35f6a2dd25a",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Hotel Radisson Blu Plaza Airport"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd25b",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Ihg Hotel Crowne Plaza New Okhla"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd25c",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Crowne Plaza New Okhla An Ihg Hotel"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd25d",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Hotel Krishna By Rcg Hotels New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd25e",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Novotel New Aerocity International Airport"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd25f",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Pullman New Aerocity International Airport"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd260",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Radisson Blu Plaza Airport"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd261",
+    "city": "Delhi",
+    "country": "India",
+    "name": "The Imperial New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd262",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Diplomat Chanakyapuri New A Boutique Hotel"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd263",
+    "city": "Delhi",
+    "country": "India",
+    "name": "The Prime"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd264",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Jaypee Vasant Continental New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd265",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Hyatt Centric Janakpuri New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd266",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Roseate House New Aerocity"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd267",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Novotel New Aerocity International Airport Hotel Room"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd268",
+    "city": "Delhi",
+    "country": "India",
+    "name": "Staybook Hotel Nitya Maharani New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd269",
+    "city": "Delhi",
+    "country": "India",
+    "name": "The Park New"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd26a",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Hotel Pearl Wood"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd26b",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Pax Ak Continental"
+  },
+  {
+    "_id": "6a897a174c11b35f6a2dd26c",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Hotel Lucky Inn"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd26d",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Pride Inn"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd26e",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Hotel Pride Inn"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd26f",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Urban Homestay Camping Swimming Pool Wood Cottage"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd270",
+    "city": "Zirakpur",
+    "country": "India",
+    "name": "Zirakpur Urban Homestay Camping Swimming Pool Wood Cottage"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd271",
+    "city": "Puri",
+    "country": "India",
+    "name": "Hotel Mayfair Waves"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd272",
+    "city": "Puri",
+    "country": "India",
+    "name": "Hotel Pride Ananya Resorts"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd273",
+    "city": "Puri",
+    "country": "India",
+    "name": "Hotel Surya Beach Inn"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd274",
+    "city": "Puri",
+    "country": "India",
+    "name": "Mayfair Heritage"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd275",
+    "city": "Puri",
+    "country": "India",
+    "name": "Mayfair Waves"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd276",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Hotel Radisson Blu"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd277",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Hotel Vivanta"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd278",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Radisson Blu"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd279",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Gokulam Park"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd27a",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Hash Six Hotels"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd27b",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Hotel Park Elanza"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd27c",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Romantic Bathtub Gokulam Park"
+  },
+  {
+    "_id": "6a897a184c11b35f6a2dd27d",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Vivanta"
+  },
+  {
+    "_id": "6a897a194c11b35f6a2dd27e",
+    "city": "Coimbatore",
+    "country": "India",
+    "name": "Sr Jungle Resort"
+  },
+  {
+    "_id": "6a897a194c11b35f6a2dd27f",
+    "city": "Shillong",
+    "country": "India",
+    "name": "Hotel Room Courtyard By Marriott"
+  },
+  {
+    "_id": "6a897a194c11b35f6a2dd280",
+    "city": "Shillong",
+    "country": "India",
+    "name": "Bellevue Home Stay"
+  },
+  {
+    "_id": "6a897a194c11b35f6a2dd281",
+    "city": "Shillong",
+    "country": "India",
+    "name": "Courtyard By Marriott"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd282",
+    "city": "Shillong",
+    "country": "India",
+    "name": "Hotel Honeyshine"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd283",
+    "city": "Shillong",
+    "country": "India",
+    "name": "Urban Tavern"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd284",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Hotel Room Rakabi The Fern"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd285",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Tropical Retreat Luxury Spa Resort"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd286",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Hotel Grand Parivaar Room"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd287",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Hotel Rakabi The Fern"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd288",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Igatpuri Hills Retreat"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd289",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Hotel Regenta Place"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28a",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Regenta Place"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28b",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Suite Sierra Sky Villa"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28c",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Manas Lifestyle Villas With Private Pool In Room"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28d",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Mystic Valley Spa Resort"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28e",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Private Pool Room Manas Lifestyle Villas"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd28f",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Rakabi The Fern"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd290",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Romantic Bathtub Room Mystic Valley Spa Resort"
+  },
+  {
+    "_id": "6a897a1a4c11b35f6a2dd291",
+    "city": "Igatpuri",
+    "country": "India",
+    "name": "Sierra Sky Villa"
+  },
+  {
+    "_id": "6a897a1b4c11b35f6a2dd292",
+    "city": "Indore",
+    "country": "India",
+    "name": "Hotel Sheraton Grand Palace"
+  },
+  {
+    "_id": "6a897a1b4c11b35f6a2dd293",
+    "city": "Indore",
+    "country": "India",
+    "name": "Hotel Grand Girdhar"
+  },
+  {
+    "_id": "6a897a1b4c11b35f6a2dd294",
+    "city": "Indore",
+    "country": "India",
+    "name": "Marriott Hotel"
+  },
+  {
+    "_id": "6a897a1b4c11b35f6a2dd295",
+    "city": "Indore",
+    "country": "India",
+    "name": "Lemon Tree Hotel"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd296",
+    "city": "Indore",
+    "country": "India",
+    "name": "Sheraton Grand Palace"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd297",
+    "city": "Indore",
+    "country": "India",
+    "name": "Wow Crest Ihcl Seleqtions"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd298",
+    "city": "Indore",
+    "country": "India",
+    "name": "Hotel Sayaji"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd299",
+    "city": "Indore",
+    "country": "India",
+    "name": "Hotel Winway"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29a",
+    "city": "Indore",
+    "country": "India",
+    "name": "Indore Marriott Hotel"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29b",
+    "city": "Indore",
+    "country": "India",
+    "name": "Lemon Tree Hotel Bathtub In Room"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29c",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Hotel Sun N Sand"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29d",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Saibaba International Hotel"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29e",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Hotel Room Sun N Sand"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd29f",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Pushpak Resort"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a0",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Sai Neem Tree Hotel"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a1",
+    "city": "Shirdi",
+    "country": "India",
+    "name": "Sun N Sand"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a2",
+    "city": "Panjim",
+    "country": "India",
+    "name": "Hotel Welcomheritage Inn"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a3",
+    "city": "Panjim",
+    "country": "India",
+    "name": "Prazeres Boutique Hotel"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a4",
+    "city": "Panjim",
+    "country": "India",
+    "name": "The Crescent"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a5",
+    "city": "Panjim",
+    "country": "India",
+    "name": "Chances Resort And Casino An Indy Resort"
+  },
+  {
+    "_id": "6a897a1c4c11b35f6a2dd2a6",
+    "city": "Panjim",
+    "country": "India",
+    "name": "Hotel The Crescent"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2a7",
+    "city": "Panjim",
+    "country": "India",
+    "name": "O Pierre"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2a8",
+    "city": "Panjim",
+    "country": "India",
+    "name": "Welcomheritage Inn"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2a9",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "In Room Hotel Hillock"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2aa",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "Hotel Hillock"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2ab",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "Hotel Mount Regency In"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2ac",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "Chacha Inn The Garden Retreat"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2ad",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "Sterling"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2ae",
+    "city": "Mount Abu",
+    "country": "India",
+    "name": "The House Of Bb"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2af",
+    "city": "Lavasa",
+    "country": "India",
+    "name": "Lavasa Endora Homestay A Fully Equipped Lake Facing 3Bhk"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b0",
+    "city": "Lavasa",
+    "country": "India",
+    "name": "Hotel Lake Facing Premium Reteat"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b1",
+    "city": "Lavasa",
+    "country": "India",
+    "name": "Lake Facing Premium Reteat Hotel"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b2",
+    "city": "Lavasa",
+    "country": "India",
+    "name": "Private Jacuzzi Room Lake Palace"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b3",
+    "city": "Darjeeling",
+    "country": "India",
+    "name": "Crescent Resort"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b4",
+    "city": "Darjeeling",
+    "country": "India",
+    "name": "The West Gate Posada By Summit"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b5",
+    "city": "Darjeeling",
+    "country": "India",
+    "name": "Taj Chia Kutir Resort Spa"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b6",
+    "city": "Darjeeling",
+    "country": "India",
+    "name": "The Elgin Heritage Resort Spa"
+  },
+  {
+    "_id": "6a897a1d4c11b35f6a2dd2b7",
+    "city": "Darjeeling",
+    "country": "India",
+    "name": "The West Gate Posada By Summit Bathtub"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2b8",
+    "city": "Saputara",
+    "country": "India",
+    "name": "Hotel Lake View"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2b9",
+    "city": "Panvel",
+    "country": "India",
+    "name": "Raaj Resort"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2ba",
+    "city": "Panvel",
+    "country": "India",
+    "name": "Hotel Raaj Resort"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2bb",
+    "city": "Daman",
+    "country": "India",
+    "name": "Silver Waves Resort Spa"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2bc",
+    "city": "Daman",
+    "country": "India",
+    "name": "Hotel Silver Resort"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2bd",
+    "city": "Daman",
+    "country": "India",
+    "name": "Room Urbane By Treat"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2be",
+    "city": "Daman",
+    "country": "India",
+    "name": "The Gold Beach Annexe"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2bf",
+    "city": "Daman",
+    "country": "India",
+    "name": "The Gold Beach Resort"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c0",
+    "city": "Gandhinagar",
+    "country": "India",
+    "name": "The Eiffel Hotel Banquet"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c1",
+    "city": "Gandhinagar",
+    "country": "India",
+    "name": "Classic Dineout"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c2",
+    "city": "Gandhinagar",
+    "country": "India",
+    "name": "Hotel Royal Empire"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c3",
+    "city": "Gandhinagar",
+    "country": "India",
+    "name": "Taj Resort And Spa"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c4",
+    "city": "Yercaud",
+    "country": "India",
+    "name": "Grand Palace Hotel Spa"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c5",
+    "city": "Yercaud",
+    "country": "India",
+    "name": "Hotel Casita Inn"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c6",
+    "city": "Yercaud",
+    "country": "India",
+    "name": "Stayvista At The Bungalow With Bonfire Pvt Pool"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c7",
+    "city": "Yercaud",
+    "country": "India",
+    "name": "R Hotels By Suraj Residency"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c8",
+    "city": "Manali",
+    "country": "India",
+    "name": "Welcomheritage Urvashis Retreat"
+  },
+  {
+    "_id": "6a897a1e4c11b35f6a2dd2c9",
+    "city": "Munnar",
+    "country": "India",
+    "name": "Broad Bean Resort Spa Hotel"
+  },
+  {
+    "_id": "6a897a1f4c11b35f6a2dd2ca",
+    "city": "Mathura",
+    "country": "India",
+    "name": "F2B Stay"
+  },
+  {
+    "_id": "6a897a1f4c11b35f6a2dd2cb",
+    "city": "Mathura",
+    "country": "India",
+    "name": "Lalita Grand"
+  },
+  {
+    "_id": "6a897a1f4c11b35f6a2dd2cc",
+    "city": "Mathura",
+    "country": "India",
+    "name": "Romantic Bathtub Room Lalita Grand"
+  },
+  {
+    "_id": "6a897a1f4c11b35f6a2dd2cd",
+    "city": "Ooty",
+    "country": "India",
+    "name": "Hotel In Beverly Villa"
+  },
+  {
+    "_id": "6a897a1f4c11b35f6a2dd2ce",
+    "city": "Shimla",
+    "country": "India",
+    "name": "The Orchid Hotel"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b709618",
+    "name": "Marina Bay Sands",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b709619",
+    "name": "Raffles Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b70961a",
+    "name": "Capella Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b70961b",
+    "name": "The Fullerton Bay Hotel Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b70961c",
+    "name": "Four Seasons Hotel Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60e82e3d2bd9b70961d",
+    "name": "The Ritz-Carlton Millenia Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b70961e",
+    "name": "W Singapore Sentosa Cove",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b70961f",
+    "name": "Fairmont Singapore",
+    "city": "Singapore",
+    "country": "Singapore"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709620",
+    "name": "Mandarin Oriental Kuala Lumpur",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709621",
+    "name": "The Ritz-Carlton Kuala Lumpur",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709622",
+    "name": "Four Seasons Hotel Kuala Lumpur",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709623",
+    "name": "Skylon Residences Bukit Ceylon",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709624",
+    "name": "Imperial KLCC Residences",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad60f82e3d2bd9b709625",
+    "name": "KLCC The Mews Luxury Suites",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b709626",
+    "name": "Dusit Thani Bangkok",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b709627",
+    "name": "MAYU Bangkok Japanese Style Hotel",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b709628",
+    "name": "Banyan Tree Bangkok",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b709629",
+    "name": "SILQ Hotel & Residence",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b70962a",
+    "name": "Pathumwan Princess Hotel",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b70962b",
+    "name": "W Bangkok Hotel",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b70962c",
+    "name": "Centara Grand at CentralWorld",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61082e3d2bd9b70962d",
+    "name": "Sivatel Bangkok Hotel",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b70962e",
+    "name": "V20 Boutique Jacuzzi Hotel",
+    "city": "Bangkok",
+    "country": "Thailand"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b70962f",
+    "name": "Four Seasons Boston",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709630",
+    "name": "Boston Harbor Hotel",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709631",
+    "name": "Raffles Boston",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709632",
+    "name": "Clarendon Square Bed & Breakfast",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709633",
+    "name": "Mandarin Oriental Boston",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709634",
+    "name": "Omni Boston Hotel at the Seaport",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61182e3d2bd9b709635",
+    "name": "The Westin Boston Seaport District",
+    "city": "Boston",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b709636",
+    "name": "Four Seasons Baltimore",
+    "city": "Baltimore",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b709637",
+    "name": "1840s Carrollton Inn",
+    "city": "Baltimore",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b709638",
+    "name": "The Royal Sonesta Harbor Court Baltimore",
+    "city": "Baltimore",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b709639",
+    "name": "Loews Kansas City Hotel",
+    "city": "Kansas City",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b70963a",
+    "name": "The Westin Kansas City at Crown Center",
+    "city": "Kansas City",
+    "country": "USA"
+  },
+  {
+    "_id": "6a8ad61282e3d2bd9b70963b",
+    "name": "Drury Inn & Suites Kansas City Airport",
+    "city": "Kansas City",
+    "country": "USA"
+  }
+]

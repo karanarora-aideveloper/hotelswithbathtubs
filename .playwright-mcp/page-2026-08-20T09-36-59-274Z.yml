@@ -1,0 +1,435 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e15] [cursor=pointer]
+  - alert [ref=e9]
+  - banner [ref=e19]:
+    - navigation [ref=e20]:
+      - link "SM Dr. Srishti Mehta ENDODONTIST · GWALIOR" [ref=e21] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=e22]: SM
+        - generic [ref=e23]:
+          - text: Dr. Srishti Mehta
+          - generic [ref=e24]: ENDODONTIST · GWALIOR
+      - generic [ref=e25]:
+        - link "About" [ref=e26] [cursor=pointer]:
+          - /url: "#about"
+        - link "Services" [ref=e27] [cursor=pointer]:
+          - /url: "#services"
+        - link "Cases" [ref=e28] [cursor=pointer]:
+          - /url: "#cases"
+        - link "Publications" [ref=e29] [cursor=pointer]:
+          - /url: "#publications"
+        - link "Why Us" [ref=e30] [cursor=pointer]:
+          - /url: "#why"
+        - link "Reviews" [ref=e31] [cursor=pointer]:
+          - /url: "#reviews"
+        - link "Consult" [ref=e32] [cursor=pointer]:
+          - /url: "#consult"
+        - link "Book Appointment" [ref=e33] [cursor=pointer]:
+          - /url: "#contact"
+  - main [ref=e34]:
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - paragraph [ref=e38]: BDS, MDS · Conservative Dentistry & Endodontics
+        - heading "Precise, painless root canal care in Gwalior" [level=1] [ref=e40]
+        - paragraph [ref=e41]:
+          - text: Dr. Srishti Mehta is a specialist Endodontist who has successfully completed
+          - strong [ref=e42]: 500+ root canal & endodontic cases
+          - text: — combining advanced technology with a gentle, patient-first approach to save your natural teeth.
+        - generic [ref=e43]:
+          - link "Book an Appointment" [ref=e44] [cursor=pointer]:
+            - /url: "#contact"
+          - link "View Case Highlights" [ref=e45] [cursor=pointer]:
+            - /url: "#cases"
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - paragraph [ref=e48]: 500+
+            - paragraph [ref=e49]: Cases Treated
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Gwalior
+            - paragraph [ref=e52]: Consulting In
+          - generic [ref=e53]:
+            - paragraph [ref=e54]: 100%
+            - paragraph [ref=e55]: Patient-First Care
+      - generic [ref=e56]:
+        - img "Dr. Srishti Mehta, Endodontist" [ref=e60]
+        - generic [ref=e61]: Dr. Srishti Mehta · Consultant Endodontist
+        - generic [ref=e62]:
+          - paragraph [ref=e63]: 500+
+          - paragraph [ref=e64]: Cases Treated
+        - generic [ref=e65]:
+          - paragraph [ref=e66]: 98%
+          - paragraph [ref=e67]: RCT Success
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - paragraph [ref=e74]: 500+
+        - paragraph [ref=e75]: Endodontic Cases Treated
+      - generic [ref=e76]:
+        - paragraph [ref=e81]: 98%
+        - paragraph [ref=e82]: Single-Sitting RCT Success
+      - generic [ref=e83]:
+        - paragraph [ref=e88]: 1000+
+        - paragraph [ref=e89]: Happy Patients
+      - generic [ref=e90]:
+        - paragraph [ref=e94]: 5★
+        - paragraph [ref=e95]: Average Patient Rating
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - paragraph [ref=e99]: About the Doctor
+        - heading "Meet Dr. Srishti Mehta" [level=2] [ref=e100]
+        - paragraph [ref=e101]:
+          - text: Dr. Srishti Mehta is a specialist Endodontist practicing in Gwalior, dedicated to relieving dental pain and saving natural teeth through precise root canal treatment. With over
+          - strong [ref=e102]: 500 successfully completed cases
+          - text: ", she is known for her gentle chairside manner, meticulous technique, and commitment to modern, minimally invasive endodontic care."
+        - paragraph [ref=e103]: From straightforward single-sitting root canals to complex retreatments and traumatic dental injuries, every case is approached with the same standard of precision, sterility, and patient comfort.
+        - paragraph [ref=e104]:
+          - text: Alongside clinical practice, she has actively contributed to dental research during her postgraduate training, co-authoring
+          - link "six peer-reviewed papers" [ref=e105] [cursor=pointer]:
+            - /url: "#publications"
+          - text: on topics including digital post-core fabrication, endodontic instrumentation, laser-assisted pain management, and microsurgical endodontics.
+        - list [ref=e106]:
+          - listitem [ref=e107]:
+            - generic [ref=e110]: BDS — Bachelor of Dental Surgery
+          - listitem [ref=e111]:
+            - generic [ref=e114]: MDS — Conservative Dentistry & Endodontics, Hitkarini Dental College & Hospital, Jabalpur
+          - listitem [ref=e115]:
+            - generic [ref=e118]: 500+ successful root canal & retreatment cases
+          - listitem [ref=e119]:
+            - generic [ref=e122]: Rotary & microscope-assisted endodontics
+          - listitem [ref=e123]:
+            - generic [ref=e126]: 6 peer-reviewed publications in national & international dental journals (2023–2024)
+      - generic [ref=e128]:
+        - paragraph [ref=e131]: Every tooth deserves a second chance. My aim is always to treat pain quickly and save the natural tooth wherever possible.
+        - paragraph [ref=e132]: — Dr. Srishti Mehta
+        - generic [ref=e133]:
+          - generic [ref=e134]:
+            - paragraph [ref=e135]: 500+
+            - paragraph [ref=e136]: Cases across RCT, retreatment & trauma management
+          - generic [ref=e137]:
+            - paragraph [ref=e138]: Gwalior
+            - paragraph [ref=e139]: Available for consultations across Gwalior & nearby regions
+    - generic [ref=e141]:
+      - generic [ref=e142]:
+        - paragraph [ref=e143]: Services
+        - heading "Endodontic & Conservative Dentistry Care" [level=2] [ref=e144]
+        - paragraph [ref=e145]: From root canals to conservative restorations, every treatment is tailored with precision and care.
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - heading "Root Canal Treatment" [level=3] [ref=e151]
+          - paragraph [ref=e152]: Precise, minimally painful RCT to relieve infection and save the natural tooth.
+        - generic [ref=e153]:
+          - heading "Single-Sitting RCT" [level=3] [ref=e158]
+          - paragraph [ref=e159]: Completed in one visit for straightforward cases, minimizing time and discomfort.
+        - generic [ref=e160]:
+          - heading "Re-RCT / Retreatment" [level=3] [ref=e164]
+          - paragraph [ref=e165]: Expert management of failed or previously treated root canals.
+        - generic [ref=e166]:
+          - heading "Microscope-Assisted Endodontics" [level=3] [ref=e171]
+          - paragraph [ref=e172]: Magnification-guided treatment for complex canal anatomy and higher precision.
+        - generic [ref=e173]:
+          - heading "Post & Core / Restoration" [level=3] [ref=e178]
+          - paragraph [ref=e179]: Strengthening and restoring treated teeth for long-term function.
+        - generic [ref=e180]:
+          - heading "Apicoectomy" [level=3] [ref=e185]
+          - paragraph [ref=e186]: Surgical endodontic procedure for persistent infections at the root tip.
+        - generic [ref=e187]:
+          - heading "Dental Trauma Management" [level=3] [ref=e191]
+          - paragraph [ref=e192]: Emergency care for chipped, fractured, or knocked-out teeth.
+        - generic [ref=e193]:
+          - heading "Composite Restorations" [level=3] [ref=e197]
+          - paragraph [ref=e198]: Tooth-colored fillings that repair decay or fracture while blending naturally with the tooth.
+        - generic [ref=e199]:
+          - heading "Inlays & Onlays" [level=3] [ref=e203]
+          - paragraph [ref=e204]: Durable indirect restorations for teeth with damage too extensive for a simple filling.
+        - generic [ref=e205]:
+          - heading "Veneers" [level=3] [ref=e210]
+          - paragraph [ref=e211]: Thin custom shells that improve the shape, shade, and alignment of visible teeth.
+        - generic [ref=e212]:
+          - heading "Tooth Bleaching" [level=3] [ref=e217]
+          - paragraph [ref=e218]: Professional whitening to brighten stained or discolored teeth safely.
+        - generic [ref=e219]:
+          - heading "Endocrowns" [level=3] [ref=e223]
+          - paragraph [ref=e224]: Conservative all-ceramic restoration that rebuilds a root-canal-treated tooth without a full crown prep.
+    - generic [ref=e225]:
+      - generic [ref=e226]:
+        - paragraph [ref=e227]: Case Highlights
+        - heading "Notable Cases, By Category" [level=2] [ref=e228]
+        - paragraph [ref=e229]: A look at the range of cases handled across 500+ treatments — shown by type, with patient identities never disclosed.
+      - generic [ref=e230]:
+        - generic [ref=e231]:
+          - generic [ref=e232]: Retreatment
+          - heading "Complex Re-RCT, Mandibular Molar" [level=3] [ref=e237]
+          - paragraph [ref=e238]: A previously root-canal-treated molar with a missed canal and persistent infection, resolved through careful retreatment under magnification.
+          - generic [ref=e239]: Tooth saved
+        - generic [ref=e243]:
+          - generic [ref=e244]: Microscope-Assisted
+          - heading "Calcified Canal Location" [level=3] [ref=e250]
+          - paragraph [ref=e251]: Severely calcified canal system located and negotiated using dental operating microscope, avoiding extraction.
+          - generic [ref=e252]: Extraction avoided
+        - generic [ref=e256]:
+          - generic [ref=e257]: Trauma
+          - heading "Traumatic Crown Fracture" [level=3] [ref=e262]
+          - paragraph [ref=e263]: Emergency management of a fractured anterior tooth following an accident, with pulp therapy and aesthetic restoration.
+          - generic [ref=e264]: Pain relieved
+        - generic [ref=e268]:
+          - generic [ref=e269]: Pulp Therapy
+          - heading "Pulpotomy" [level=3] [ref=e274]
+          - paragraph [ref=e275]: Conservative vital pulp therapy performed on an adult molar to preserve pulp health and avoid full root canal treatment.
+          - generic [ref=e276]: Tooth vitality preserved
+        - generic [ref=e280]:
+          - generic [ref=e281]: Surgical Endodontics
+          - heading "Apicoectomy for Persistent Lesion" [level=3] [ref=e287]
+          - paragraph [ref=e288]: Surgical removal of the root tip and infected tissue after non-surgical retreatment did not fully resolve a periapical lesion.
+          - generic [ref=e289]: Lesion resolved
+        - generic [ref=e293]:
+          - generic [ref=e294]: Multi-Rooted RCT
+          - heading "Curved Canal Anatomy" [level=3] [ref=e299]
+          - paragraph [ref=e300]: Root canal treatment of a molar with sharply curved roots, completed using flexible rotary instrumentation.
+          - generic [ref=e301]: Full function restored
+        - generic [ref=e305]:
+          - generic [ref=e306]: Conservative Dentistry
+          - heading "Endocrown After Root Canal" [level=3] [ref=e311]
+          - paragraph [ref=e312]: Ceramic endocrown placed on a root-canal-treated molar to restore strength and function without a full crown preparation.
+          - generic [ref=e313]: Tooth restored
+        - generic [ref=e317]:
+          - generic [ref=e318]: Conservative Dentistry
+          - heading "Composite Restoration, Fractured Incisor and Diastemas" [level=3] [ref=e323]
+          - paragraph [ref=e324]: Tooth-colored composite restoration used to rebuild a fractured front tooth, matching natural shade and contour.
+          - generic [ref=e325]: Aesthetics restored
+    - generic [ref=e330]:
+      - generic [ref=e331]:
+        - paragraph [ref=e332]: Academic Contributions
+        - heading "Publications & Research" [level=2] [ref=e333]
+        - paragraph [ref=e334]: 6 peer-reviewed papers published in national & international dental journals during her MDS training in Conservative Dentistry & Endodontics at Hitkarini Dental College & Hospital, Jabalpur (2023–2024). Open each PDF to read the full paper.
+      - generic [ref=e335]:
+        - generic [ref=e336]:
+          - generic [ref=e343]:
+            - generic [ref=e344]:
+              - generic [ref=e345]: Original Research
+              - generic [ref=e346]: First Author
+            - 'heading "Digital Post-Core or Conventional Post-Core: An In Vitro Study" [level=3] [ref=e347]'
+          - paragraph [ref=e348]: Mehta S, Paul B, Shivkumar M, Dube K, Pandey S.
+          - paragraph [ref=e349]: Journal of Advanced Medical and Dental Sciences Research (JAMDSR), 2023;11(12):37–41
+          - generic [ref=e350]:
+            - link "View PDF" [ref=e351] [cursor=pointer]:
+              - /url: /publication_1.pdf
+            - link "Download" [ref=e355] [cursor=pointer]:
+              - /url: /publication_1.pdf
+        - generic [ref=e359]:
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - generic [ref=e368]: Literature Review
+              - generic [ref=e369]: Co-Author
+            - heading "Recent Advances in Endodontic Instruments — A Literature Review" [level=3] [ref=e370]
+          - paragraph [ref=e371]: Sharma M, Paul B, Shivkumar M, Dube K, Kapur C, Sinha P, Mehta S.
+          - paragraph [ref=e372]: Journal of Population Therapeutics & Clinical Pharmacology (JPTCP), 2024;31(1):1080–1087
+          - generic [ref=e373]:
+            - link "View PDF" [ref=e374] [cursor=pointer]:
+              - /url: /publication_2.pdf
+            - link "Download" [ref=e378] [cursor=pointer]:
+              - /url: /publication_2.pdf
+        - generic [ref=e382]:
+          - generic [ref=e389]:
+            - generic [ref=e390]:
+              - generic [ref=e391]: Research Article
+              - generic [ref=e392]: Co-Author
+            - heading "Comparative Evaluation of the Influence of Different Laser Modalities on Post-Endodontic Pain Following a Single-Visit RCT" [level=3] [ref=e393]
+          - paragraph [ref=e394]: Maheshwari P, Paul B, Mantri SP, Dube K, Singhai S, Mehta S, Hathiwala S.
+          - paragraph [ref=e395]: Journal of Population Therapeutics & Clinical Pharmacology (JPTCP), 2024;31(5):463–467
+          - generic [ref=e396]:
+            - link "View PDF" [ref=e397] [cursor=pointer]:
+              - /url: /publication_3.pdf
+            - link "Download" [ref=e401] [cursor=pointer]:
+              - /url: /publication_3.pdf
+        - generic [ref=e405]:
+          - generic [ref=e412]:
+            - generic [ref=e413]:
+              - generic [ref=e414]: Review Article
+              - generic [ref=e415]: Co-Author
+            - 'heading "Crafting the Hollywood Smile: The Art and Science Behind the Perfect Smile" [level=3] [ref=e416]'
+          - paragraph [ref=e417]: Wadhawan R, Parambil AT, Saikia S, Singh S, Mehta S, Patel D, Sailendran S.
+          - paragraph [ref=e418]: IP Annals of Prosthodontics and Restorative Dentistry, 2024;10(3):1–5
+          - generic [ref=e419]:
+            - link "View PDF" [ref=e420] [cursor=pointer]:
+              - /url: /publication_4.pdf
+            - link "Download" [ref=e424] [cursor=pointer]:
+              - /url: /publication_4.pdf
+        - generic [ref=e428]:
+          - generic [ref=e435]:
+            - generic [ref=e436]:
+              - generic [ref=e437]: Review Article
+              - generic [ref=e438]: Co-Author
+            - 'heading "Harnessing Innovative Perspectives on the Maxillary Sinus: Clinical Implications and Consequences for Endodontic Procedures" [level=3] [ref=e439]'
+          - paragraph [ref=e440]: Wadhawan R, Mehta S, Shivanna P, Singh M, Sharma M, Nimkar PA.
+          - paragraph [ref=e441]: IOSR Journal of Dental and Medical Sciences (IOSR-JDMS), 2024;23(8):49–54
+          - generic [ref=e442]:
+            - link "View PDF" [ref=e443] [cursor=pointer]:
+              - /url: /publication_5.pdf
+            - link "Download" [ref=e447] [cursor=pointer]:
+              - /url: /publication_5.pdf
+        - generic [ref=e451]:
+          - generic [ref=e458]:
+            - generic [ref=e459]:
+              - generic [ref=e460]: Review Article
+              - generic [ref=e461]: Co-Author
+            - 'heading "Exacting Endodontics: The Evolution and Precision of Microsurgical Techniques" [level=3] [ref=e462]'
+          - paragraph [ref=e463]: Wadhawan R, Bain P, Mehta S, Sharma D, Raghuvanshi M, Rajawat S.
+          - paragraph [ref=e464]: International Journal of Applied Dental Sciences, 2024;10(3):329–341
+          - generic [ref=e465]:
+            - link "View PDF" [ref=e466] [cursor=pointer]:
+              - /url: /publication_6.pdf
+            - link "Download" [ref=e470] [cursor=pointer]:
+              - /url: /publication_6.pdf
+    - generic [ref=e475]:
+      - generic [ref=e476]:
+        - paragraph [ref=e477]: Why Patients Choose Dr. Srishti
+        - heading "Trusted, Precise, Patient-First" [level=2] [ref=e478]
+      - generic [ref=e479]:
+        - generic [ref=e480]:
+          - generic [ref=e481]: "1"
+          - generic [ref=e482]:
+            - heading "500+ Cases" [level=3] [ref=e483]
+            - paragraph [ref=e484]: A proven track record of successful root canal and endodontic treatments.
+        - generic [ref=e485]:
+          - generic [ref=e486]: "2"
+          - generic [ref=e487]:
+            - heading "Pain-Free Approach" [level=3] [ref=e488]
+            - paragraph [ref=e489]: Modern anesthesia techniques and a gentle chairside manner throughout treatment.
+        - generic [ref=e490]:
+          - generic [ref=e491]: "3"
+          - generic [ref=e492]:
+            - heading "Advanced Technology" [level=3] [ref=e493]
+            - paragraph [ref=e494]: Rotary endodontics and, where needed, microscope-assisted precision.
+        - generic [ref=e495]:
+          - generic [ref=e496]: "4"
+          - generic [ref=e497]:
+            - heading "Strict Sterilization" [level=3] [ref=e498]
+            - paragraph [ref=e499]: International-standard sterilization protocols for complete safety.
+        - generic [ref=e500]:
+          - generic [ref=e501]: "5"
+          - generic [ref=e502]:
+            - heading "Transparent Treatment Plans" [level=3] [ref=e503]
+            - paragraph [ref=e504]: Clear explanations of diagnosis, options, and costs before we begin.
+        - generic [ref=e505]:
+          - generic [ref=e506]: "6"
+          - generic [ref=e507]:
+            - heading "Personalized Follow-Up" [level=3] [ref=e508]
+            - paragraph [ref=e509]: Every patient is guided through recovery and long-term tooth care.
+    - generic [ref=e511]:
+      - generic [ref=e512]:
+        - paragraph [ref=e513]: Patient Experiences
+        - heading "What Patients Say" [level=2] [ref=e514]
+      - generic [ref=e515]:
+        - generic [ref=e516]:
+          - paragraph [ref=e528]: “The root canal was completely painless and finished faster than I expected. Dr. Mehta explained every step and I was so relieved.”
+          - generic [ref=e529]:
+            - generic [ref=e530]: AS
+            - generic [ref=e531]:
+              - paragraph [ref=e532]: Anjali S.
+              - paragraph [ref=e533]: DD Nagar, Gwalior
+        - generic [ref=e534]:
+          - paragraph [ref=e546]: “I was terrified of RCT after a bad experience elsewhere, but the process here was gentle, clean, and handled with a lot of care.”
+          - generic [ref=e547]:
+            - generic [ref=e548]: RV
+            - generic [ref=e549]:
+              - paragraph [ref=e550]: Rohit V.
+              - paragraph [ref=e551]: Gwalior
+        - generic [ref=e552]:
+          - paragraph [ref=e564]: “My re-treatment case was handled with a lot of skill after another clinic couldn't resolve it. Highly recommend Dr. Mehta for tough cases.”
+          - generic [ref=e565]:
+            - generic [ref=e566]: KP
+            - generic [ref=e567]:
+              - paragraph [ref=e568]: Kavita P.
+              - paragraph [ref=e569]: Gwalior
+        - generic [ref=e570]:
+          - paragraph [ref=e582]: “Took my son for a pulpotomy and the clinic was so patient with him. He wasn't scared at all by the end of the visit.”
+          - generic [ref=e583]:
+            - generic [ref=e584]: SJ
+            - generic [ref=e585]:
+              - paragraph [ref=e586]: Sameer J.
+              - paragraph [ref=e587]: Gwalior
+    - generic [ref=e588]:
+      - generic [ref=e589]:
+        - paragraph [ref=e590]: Consultations
+        - heading "Available for Consultation in Gwalior" [level=2] [ref=e591]
+        - paragraph [ref=e592]: Dr. Srishti currently consults on a visiting basis at partner dental clinics in Gwalior rather than a single fixed clinic. Get in touch to check availability — she’ll confirm the consulting location and timing with you directly.
+      - generic [ref=e593]:
+        - generic [ref=e594]:
+          - paragraph [ref=e599]: Location
+          - paragraph [ref=e600]: Gwalior, Madhya Pradesh
+          - paragraph [ref=e601]: Consulting on a visiting basis at partner dental clinics across the city.
+        - generic [ref=e602]:
+          - paragraph [ref=e607]: Appointments
+          - paragraph [ref=e608]: By Prior Booking
+          - paragraph [ref=e609]: Timing and the consulting clinic are confirmed when you get in touch.
+        - link [ref=e611] [cursor=pointer]:
+          - /url: tel:+918839563814
+          - paragraph [ref=e615]: Call to Enquire
+          - paragraph [ref=e616]: +91 88395 63814
+          - paragraph [ref=e617]: Reach out directly to check availability.
+      - link "Get in Touch" [ref=e619] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=e620]:
+      - generic [ref=e621]:
+        - paragraph [ref=e622]: Get In Touch
+        - heading "Book Your Appointment" [level=2] [ref=e623]
+        - paragraph [ref=e624]: Have tooth pain or need a consultation? Reach out and the clinic will get back to you shortly.
+      - generic [ref=e625]:
+        - generic [ref=e626]:
+          - link [ref=e627] [cursor=pointer]:
+            - /url: tel:+918839563814
+            - generic [ref=e631]:
+              - paragraph [ref=e632]: Phone
+              - paragraph [ref=e633]: +91 88395 63814
+          - link [ref=e634] [cursor=pointer]:
+            - /url: mailto:Drsrishtimehta0114@gmail.com
+            - generic [ref=e639]:
+              - paragraph [ref=e640]: Email
+              - paragraph [ref=e641]: Drsrishtimehta0114@gmail.com
+          - link [ref=e642] [cursor=pointer]:
+            - /url: "#consult"
+            - generic [ref=e647]:
+              - paragraph [ref=e648]: Location
+              - paragraph [ref=e649]: Consulting in Gwalior →
+        - generic [ref=e651]:
+          - generic [ref=e652]:
+            - generic [ref=e653]:
+              - text: Full Name
+              - textbox "Your name" [ref=e654]
+            - generic [ref=e655]:
+              - text: Phone Number
+              - textbox "+91 00000 00000" [ref=e656]
+          - generic [ref=e657]:
+            - text: Message
+            - textbox "Tell us about your concern or preferred visit time" [ref=e658]
+          - button "Send Request" [ref=e659]
+  - contentinfo [ref=e660]:
+    - generic [ref=e661]:
+      - generic [ref=e662]:
+        - generic [ref=e663]:
+          - generic [ref=e664]:
+            - generic [ref=e665]: SM
+            - generic [ref=e666]: Dr. Srishti Mehta · Endodontist, Gwalior
+          - paragraph [ref=e667]: Available for consultations in Gwalior, Madhya Pradesh
+        - generic [ref=e668]:
+          - generic [ref=e669]:
+            - paragraph [ref=e670]: Explore
+            - list [ref=e671]:
+              - listitem [ref=e672]:
+                - link "Services" [ref=e673] [cursor=pointer]:
+                  - /url: "#services"
+              - listitem [ref=e674]:
+                - link "Case Highlights" [ref=e675] [cursor=pointer]:
+                  - /url: "#cases"
+              - listitem [ref=e676]:
+                - link "Reviews" [ref=e677] [cursor=pointer]:
+                  - /url: "#reviews"
+          - generic [ref=e678]:
+            - paragraph [ref=e679]: Contact
+            - list [ref=e680]:
+              - listitem [ref=e681]:
+                - link "Consult" [ref=e682] [cursor=pointer]:
+                  - /url: "#consult"
+              - listitem [ref=e683]:
+                - link "Book Appointment" [ref=e684] [cursor=pointer]:
+                  - /url: "#contact"
+      - paragraph [ref=e685]: © 2026 Dr. Srishti Mehta. All rights reserved.

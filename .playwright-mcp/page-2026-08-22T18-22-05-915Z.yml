@@ -1,0 +1,408 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Hotels With Bathtubs Verified Premium Suites & Jacuzzis" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e18]:
+        - generic [ref=e19]: Hotels With Bathtubs
+        - paragraph [ref=e20]: Verified Premium Suites & Jacuzzis
+    - generic [ref=e21]:
+      - link "Destinations" [ref=e22] [cursor=pointer]:
+        - /url: /#destinations
+      - link "Travel Guides" [ref=e23] [cursor=pointer]:
+        - /url: /blog
+      - link "Verification" [ref=e24] [cursor=pointer]:
+        - /url: /#verification
+      - link "FAQs" [ref=e25] [cursor=pointer]:
+        - /url: /#faq
+      - link "Browse 60+ Cities" [ref=e26] [cursor=pointer]:
+        - /url: /#destinations
+  - main [ref=e27]:
+    - generic [ref=e28]: Loading...
+  - contentinfo [ref=e34]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - text: Editorial & Travel Inspiration
+            - heading "Romantic Getaways & Jacuzzi Hotel Guides" [level=3] [ref=e39]
+          - link "Browse All Guides →" [ref=e40] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e41]: Browse All Guides
+            - generic [ref=e42]: →
+        - generic [ref=e43]:
+          - link "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) 2026-08-22 Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide) Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune. Read Full Guide →" [ref=e44] [cursor=pointer]:
+            - /url: /blog/top-couple-resorts-in-lonavala-with-bathtubs
+            - generic [ref=e45]:
+              - img "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [ref=e46]
+              - generic [ref=e47]: 2026-08-22
+            - generic [ref=e48]:
+              - heading "Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)" [level=4] [ref=e49]
+              - paragraph [ref=e50]: Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune.
+              - generic [ref=e51]:
+                - generic [ref=e52]: Read Full Guide
+                - generic [ref=e53]: →
+          - link "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) 2026-08-22 Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026) Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces. Read Full Guide →" [ref=e54] [cursor=pointer]:
+            - /url: /blog/romantic-resorts-in-ooty-for-couples-with-bathtubs
+            - generic [ref=e55]:
+              - img "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [ref=e56]
+              - generic [ref=e57]: 2026-08-22
+            - generic [ref=e58]:
+              - heading "Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)" [level=4] [ref=e59]
+              - paragraph [ref=e60]: Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces.
+              - generic [ref=e61]:
+                - generic [ref=e62]: Read Full Guide
+                - generic [ref=e63]: →
+          - link "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) 2026-08-22 Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026) Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites. Read Full Guide →" [ref=e64] [cursor=pointer]:
+            - /url: /blog/hotels-with-bathtub-in-bangalore-couple-stays
+            - generic [ref=e65]:
+              - img "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [ref=e66]
+              - generic [ref=e67]: 2026-08-22
+            - generic [ref=e68]:
+              - heading "Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)" [level=4] [ref=e69]
+              - paragraph [ref=e70]: Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites.
+              - generic [ref=e71]:
+                - generic [ref=e72]: Read Full Guide
+                - generic [ref=e73]: →
+      - generic [ref=e74]:
+        - generic [ref=e81]:
+          - heading "Browse Hotels by Region" [level=3] [ref=e82]
+          - paragraph [ref=e83]: Quickly jump to verified stays grouped by geographic travel zones
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - heading "North India 23 Destinations" [level=4] [ref=e86]:
+              - generic [ref=e88]: North India
+              - generic [ref=e89]: 23 Destinations
+            - generic [ref=e90]:
+              - link "Agra (19)" [ref=e91] [cursor=pointer]:
+                - /url: /india/agra
+                - generic [ref=e92]: Agra
+                - generic [ref=e93]: (19)
+              - link "Amritsar (19)" [ref=e94] [cursor=pointer]:
+                - /url: /india/amritsar
+                - generic [ref=e95]: Amritsar
+                - generic [ref=e96]: (19)
+              - link "Chandigarh (16)" [ref=e97] [cursor=pointer]:
+                - /url: /india/chandigarh
+                - generic [ref=e98]: Chandigarh
+                - generic [ref=e99]: (16)
+              - link "Delhi (28)" [ref=e100] [cursor=pointer]:
+                - /url: /india/delhi
+                - generic [ref=e101]: Delhi
+                - generic [ref=e102]: (28)
+              - link "Dharamshala (9)" [ref=e103] [cursor=pointer]:
+                - /url: /india/dharamshala
+                - generic [ref=e104]: Dharamshala
+                - generic [ref=e105]: (9)
+              - link "Faridabad (14)" [ref=e106] [cursor=pointer]:
+                - /url: /india/faridabad
+                - generic [ref=e107]: Faridabad
+                - generic [ref=e108]: (14)
+              - link "Gurgaon (9)" [ref=e109] [cursor=pointer]:
+                - /url: /india/gurgaon
+                - generic [ref=e110]: Gurgaon
+                - generic [ref=e111]: (9)
+              - link "Gwalior (1)" [ref=e112] [cursor=pointer]:
+                - /url: /india/gwalior
+                - generic [ref=e113]: Gwalior
+                - generic [ref=e114]: (1)
+              - link "Haridwar (8)" [ref=e115] [cursor=pointer]:
+                - /url: /india/haridwar
+                - generic [ref=e116]: Haridwar
+                - generic [ref=e117]: (8)
+              - link "Jaipur (13)" [ref=e118] [cursor=pointer]:
+                - /url: /india/jaipur
+                - generic [ref=e119]: Jaipur
+                - generic [ref=e120]: (13)
+              - link "Koramangala (6)" [ref=e121] [cursor=pointer]:
+                - /url: /india/koramangala
+                - generic [ref=e122]: Koramangala
+                - generic [ref=e123]: (6)
+              - link "Lucknow (20)" [ref=e124] [cursor=pointer]:
+                - /url: /india/lucknow
+                - generic [ref=e125]: Lucknow
+                - generic [ref=e126]: (20)
+              - link "Mahipalpur (7)" [ref=e127] [cursor=pointer]:
+                - /url: /india/mahipalpur
+                - generic [ref=e128]: Mahipalpur
+                - generic [ref=e129]: (7)
+              - link "Manali (21)" [ref=e130] [cursor=pointer]:
+                - /url: /india/manali
+                - generic [ref=e131]: Manali
+                - generic [ref=e132]: (21)
+              - link "Matheran (1)" [ref=e133] [cursor=pointer]:
+                - /url: /india/matheran
+                - generic [ref=e134]: Matheran
+                - generic [ref=e135]: (1)
+              - link "Mathura (3)" [ref=e136] [cursor=pointer]:
+                - /url: /india/mathura
+                - generic [ref=e137]: Mathura
+                - generic [ref=e138]: (3)
+              - link "Mount Abu (6)" [ref=e139] [cursor=pointer]:
+                - /url: /india/mount-abu
+                - generic [ref=e140]: Mount Abu
+                - generic [ref=e141]: (6)
+              - link "Nainital (7)" [ref=e142] [cursor=pointer]:
+                - /url: /india/nainital
+                - generic [ref=e143]: Nainital
+                - generic [ref=e144]: (7)
+              - link "Rishikesh (20)" [ref=e145] [cursor=pointer]:
+                - /url: /india/rishikesh
+                - generic [ref=e146]: Rishikesh
+                - generic [ref=e147]: (20)
+              - link "Shimla (20)" [ref=e148] [cursor=pointer]:
+                - /url: /india/shimla
+                - generic [ref=e149]: Shimla
+                - generic [ref=e150]: (20)
+              - link "Shirdi (6)" [ref=e151] [cursor=pointer]:
+                - /url: /india/shirdi
+                - generic [ref=e152]: Shirdi
+                - generic [ref=e153]: (6)
+              - link "Udaipur (20)" [ref=e154] [cursor=pointer]:
+                - /url: /india/udaipur
+                - generic [ref=e155]: Udaipur
+                - generic [ref=e156]: (20)
+              - link "Zirakpur (7)" [ref=e157] [cursor=pointer]:
+                - /url: /india/zirakpur
+                - generic [ref=e158]: Zirakpur
+                - generic [ref=e159]: (7)
+          - generic [ref=e160]:
+            - heading "South India 11 Destinations" [level=4] [ref=e161]:
+              - generic [ref=e163]: South India
+              - generic [ref=e164]: 11 Destinations
+            - generic [ref=e165]:
+              - link "Bangalore (9)" [ref=e166] [cursor=pointer]:
+                - /url: /india/bangalore
+                - generic [ref=e167]: Bangalore
+                - generic [ref=e168]: (9)
+              - link "Calangute (20)" [ref=e169] [cursor=pointer]:
+                - /url: /india/calangute
+                - generic [ref=e170]: Calangute
+                - generic [ref=e171]: (20)
+              - link "Coimbatore (9)" [ref=e172] [cursor=pointer]:
+                - /url: /india/coimbatore
+                - generic [ref=e173]: Coimbatore
+                - generic [ref=e174]: (9)
+              - link "Goa (28)" [ref=e175] [cursor=pointer]:
+                - /url: /india/goa
+                - generic [ref=e176]: Goa
+                - generic [ref=e177]: (28)
+              - link "Kochi (12)" [ref=e178] [cursor=pointer]:
+                - /url: /india/kochi
+                - generic [ref=e179]: Kochi
+                - generic [ref=e180]: (12)
+              - link "Kodaikanal (7)" [ref=e181] [cursor=pointer]:
+                - /url: /india/kodaikanal
+                - generic [ref=e182]: Kodaikanal
+                - generic [ref=e183]: (7)
+              - link "Mahabalipuram (11)" [ref=e184] [cursor=pointer]:
+                - /url: /india/mahabalipuram
+                - generic [ref=e185]: Mahabalipuram
+                - generic [ref=e186]: (11)
+              - link "Munnar (21)" [ref=e187] [cursor=pointer]:
+                - /url: /india/munnar
+                - generic [ref=e188]: Munnar
+                - generic [ref=e189]: (21)
+              - link "Ooty (1)" [ref=e190] [cursor=pointer]:
+                - /url: /india/ooty
+                - generic [ref=e191]: Ooty
+                - generic [ref=e192]: (1)
+              - link "Panjim (7)" [ref=e193] [cursor=pointer]:
+                - /url: /india/panjim
+                - generic [ref=e194]: Panjim
+                - generic [ref=e195]: (7)
+              - link "Yercaud (4)" [ref=e196] [cursor=pointer]:
+                - /url: /india/yercaud
+                - generic [ref=e197]: Yercaud
+                - generic [ref=e198]: (4)
+          - generic [ref=e199]:
+            - heading "West & Central India 17 Destinations" [level=4] [ref=e200]:
+              - generic [ref=e202]: West & Central India
+              - generic [ref=e203]: 17 Destinations
+            - generic [ref=e204]:
+              - link "Ahmedabad (7)" [ref=e205] [cursor=pointer]:
+                - /url: /india/ahmedabad
+                - generic [ref=e206]: Ahmedabad
+                - generic [ref=e207]: (7)
+              - link "Bhopal (20)" [ref=e208] [cursor=pointer]:
+                - /url: /india/bhopal
+                - generic [ref=e209]: Bhopal
+                - generic [ref=e210]: (20)
+              - link "Daman (5)" [ref=e211] [cursor=pointer]:
+                - /url: /india/daman
+                - generic [ref=e212]: Daman
+                - generic [ref=e213]: (5)
+              - link "Gandhinagar (4)" [ref=e214] [cursor=pointer]:
+                - /url: /india/gandhinagar
+                - generic [ref=e215]: Gandhinagar
+                - generic [ref=e216]: (4)
+              - link "Igatpuri (14)" [ref=e217] [cursor=pointer]:
+                - /url: /india/igatpuri
+                - generic [ref=e218]: Igatpuri
+                - generic [ref=e219]: (14)
+              - link "Indore (30)" [ref=e220] [cursor=pointer]:
+                - /url: /india/indore
+                - generic [ref=e221]: Indore
+                - generic [ref=e222]: (30)
+              - link "Karjat (10)" [ref=e223] [cursor=pointer]:
+                - /url: /india/karjat
+                - generic [ref=e224]: Karjat
+                - generic [ref=e225]: (10)
+              - link "Kolhapur (8)" [ref=e226] [cursor=pointer]:
+                - /url: /india/kolhapur
+                - generic [ref=e227]: Kolhapur
+                - generic [ref=e228]: (8)
+              - link "Lavasa (4)" [ref=e229] [cursor=pointer]:
+                - /url: /india/lavasa
+                - generic [ref=e230]: Lavasa
+                - generic [ref=e231]: (4)
+              - link "Lonavala (10)" [ref=e232] [cursor=pointer]:
+                - /url: /india/lonavala
+                - generic [ref=e233]: Lonavala
+                - generic [ref=e234]: (10)
+              - link "Mumbai (17)" [ref=e235] [cursor=pointer]:
+                - /url: /india/mumbai
+                - generic [ref=e236]: Mumbai
+                - generic [ref=e237]: (17)
+              - link "Nashik (17)" [ref=e238] [cursor=pointer]:
+                - /url: /india/nashik
+                - generic [ref=e239]: Nashik
+                - generic [ref=e240]: (17)
+              - link "Panchgani (14)" [ref=e241] [cursor=pointer]:
+                - /url: /india/panchgani
+                - generic [ref=e242]: Panchgani
+                - generic [ref=e243]: (14)
+              - link "Panvel (2)" [ref=e244] [cursor=pointer]:
+                - /url: /india/panvel
+                - generic [ref=e245]: Panvel
+                - generic [ref=e246]: (2)
+              - link "Pune (7)" [ref=e247] [cursor=pointer]:
+                - /url: /india/pune
+                - generic [ref=e248]: Pune
+                - generic [ref=e249]: (7)
+              - link "Rajkot (19)" [ref=e250] [cursor=pointer]:
+                - /url: /india/rajkot
+                - generic [ref=e251]: Rajkot
+                - generic [ref=e252]: (19)
+              - link "Saputara (1)" [ref=e253] [cursor=pointer]:
+                - /url: /india/saputara
+                - generic [ref=e254]: Saputara
+                - generic [ref=e255]: (1)
+          - generic [ref=e256]:
+            - heading "East & North East 7 Destinations" [level=4] [ref=e257]:
+              - generic [ref=e259]: East & North East
+              - generic [ref=e260]: 7 Destinations
+            - generic [ref=e261]:
+              - link "Darjeeling (5)" [ref=e262] [cursor=pointer]:
+                - /url: /india/darjeeling
+                - generic [ref=e263]: Darjeeling
+                - generic [ref=e264]: (5)
+              - link "Digha (6)" [ref=e265] [cursor=pointer]:
+                - /url: /india/digha
+                - generic [ref=e266]: Digha
+                - generic [ref=e267]: (6)
+              - link "Kolkata (13)" [ref=e268] [cursor=pointer]:
+                - /url: /india/kolkata
+                - generic [ref=e269]: Kolkata
+                - generic [ref=e270]: (13)
+              - link "Mandarmani (16)" [ref=e271] [cursor=pointer]:
+                - /url: /india/mandarmani
+                - generic [ref=e272]: Mandarmani
+                - generic [ref=e273]: (16)
+              - link "Puri (5)" [ref=e274] [cursor=pointer]:
+                - /url: /india/puri
+                - generic [ref=e275]: Puri
+                - generic [ref=e276]: (5)
+              - link "Shillong (5)" [ref=e277] [cursor=pointer]:
+                - /url: /india/shillong
+                - generic [ref=e278]: Shillong
+                - generic [ref=e279]: (5)
+              - link "Siliguri (5)" [ref=e280] [cursor=pointer]:
+                - /url: /india/siliguri
+                - generic [ref=e281]: Siliguri
+                - generic [ref=e282]: (5)
+          - generic [ref=e283]:
+            - heading "International Romantic Escapes 5 Destinations" [level=4] [ref=e284]:
+              - generic [ref=e286]: International Romantic Escapes
+              - generic [ref=e287]: 5 Destinations
+            - generic [ref=e288]:
+              - link "Bali (20)" [ref=e289] [cursor=pointer]:
+                - /url: /indonesia/bali
+                - generic [ref=e290]: Bali
+                - generic [ref=e291]: (20)
+              - link "Dubai (20)" [ref=e292] [cursor=pointer]:
+                - /url: /uae/dubai
+                - generic [ref=e293]: Dubai
+                - generic [ref=e294]: (20)
+              - link "Las Vegas (20)" [ref=e295] [cursor=pointer]:
+                - /url: /usa/las-vegas
+                - generic [ref=e296]: Las Vegas
+                - generic [ref=e297]: (20)
+              - link "London (20)" [ref=e298] [cursor=pointer]:
+                - /url: /uk/london
+                - generic [ref=e299]: London
+                - generic [ref=e300]: (20)
+              - link "New York (18)" [ref=e301] [cursor=pointer]:
+                - /url: /usa/new-york
+                - generic [ref=e302]: New York
+                - generic [ref=e303]: (18)
+      - generic [ref=e304]:
+        - heading "Frequently Asked Questions" [level=3] [ref=e309]
+        - generic [ref=e310]:
+          - generic [ref=e311]:
+            - heading "How do you verify hotel bathtubs?" [level=4] [ref=e312]
+            - paragraph [ref=e313]: We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
+          - generic [ref=e314]:
+            - heading "Are bathtubs guaranteed in every room?" [level=4] [ref=e315]
+            - paragraph [ref=e316]: Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
+          - generic [ref=e317]:
+            - heading "Which destinations do you cover?" [level=4] [ref=e318]
+            - paragraph [ref=e319]: We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
+          - generic [ref=e320]:
+            - heading "How do bookings work?" [level=4] [ref=e321]
+            - paragraph [ref=e322]: We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
+      - generic [ref=e324]:
+        - generic [ref=e325]:
+          - heading "Triple Verified" [level=4] [ref=e329]
+          - paragraph [ref=e330]: Independently cross-checked across 3 major platforms
+        - generic [ref=e331]:
+          - heading "Guaranteed Tubs" [level=4] [ref=e335]
+          - paragraph [ref=e336]: Confirmed in-room hot tubs and jacuzzi suites
+        - generic [ref=e337]:
+          - heading "Direct Booking" [level=4] [ref=e341]
+          - paragraph [ref=e342]: Direct links to official trusted travel partners
+        - generic [ref=e343]:
+          - heading "Curated Stays" [level=4] [ref=e348]
+          - paragraph [ref=e349]: Handpicked luxury hotels for romantic escapes
+      - generic [ref=e351]:
+        - generic [ref=e352]: Start Your Romantic Escape
+        - heading "Ready to Book Your Luxury Bathtub Stay?" [level=3] [ref=e353]
+        - paragraph [ref=e354]: Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
+        - generic [ref=e355]:
+          - link "Browse All Destinations ↑" [ref=e356] [cursor=pointer]:
+            - /url: "#destinations"
+            - generic [ref=e357]: Browse All Destinations
+            - generic [ref=e358]: ↑
+          - link "Read Travel Inspiration →" [ref=e359] [cursor=pointer]:
+            - /url: /blog
+      - generic [ref=e360]:
+        - generic [ref=e361]:
+          - generic [ref=e377]:
+            - heading "Hotels with Bathtubs" [level=4] [ref=e378]
+            - paragraph [ref=e379]: Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.
+          - generic [ref=e380]:
+            - paragraph [ref=e381]: © 2026 HotelsWithBathtubs.com
+            - generic [ref=e382]:
+              - link "Travel Blog" [ref=e383] [cursor=pointer]:
+                - /url: /blog
+              - link "About Us" [ref=e384] [cursor=pointer]:
+                - /url: /about
+              - link "Affiliate Policy" [ref=e385] [cursor=pointer]:
+                - /url: /affiliate-policy
+              - link "Privacy" [ref=e386] [cursor=pointer]:
+                - /url: /privacy
+              - link "Terms" [ref=e387] [cursor=pointer]:
+                - /url: /terms
+              - link "Cookies" [ref=e388] [cursor=pointer]:
+                - /url: /cookies
+        - paragraph [ref=e389]: All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+  - alert [ref=e390]

@@ -1,0 +1,46 @@
+{
+  "name": "hotelswithbathtubs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@next/third-parties": "^16.3.1",
+    "@scrapingant/scrapingant-client": "^0.2.1",
+    "@tailwindcss/typography": "^0.5.20",
+    "@vercel/blob": "^2.8.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "isomorphic-dompurify": "^3.19.0",
+    "markdown-it": "^15.0.0",
+    "mixpanel-browser": "^2.82.1",
+    "mongoose": "^9.9.2",
+    "next": "16.3.1",
+    "puppeteer": "^24.43.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-quill-new": "^3.8.3",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/mixpanel-browser": "^2.60.0",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "playwright": "^1.62.1",
+    "playwright-extra": "^4.3.6",
+    "playwright-extra-plugin-stealth": "^0.0.1",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

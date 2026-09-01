@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels with Bathtubs: Romantic Getaways & Private Jacuzzi Suites</title>
+    <meta name="description" content="Discover premium hotels with private bathtubs and jacuzzis in the room. Plan your perfect romantic getaway with our curated directory of luxury suites.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛁</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛁</text></svg>">
+    <meta property="og:title" content="Hotels with Bathtubs: Romantic Getaways & Private Jacuzzi Suites">
+    <meta property="og:description" content="Discover premium hotels with private bathtubs and jacuzzis in the room. Plan your perfect romantic getaway with our curated directory of luxury suites.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hotelswithbathtubs.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="canonical" href="https://www.hotelswithbathtubs.com/">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VE2SJ4WXF8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VE2SJ4WXF8');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Hotels with Bathtubs",
+      "url": "https://www.hotelswithbathtubs.com/",
+      "description": "Directory of romantic hotels with private jacuzzis and bathtubs."
+    }
+    </script>
+
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-logo">
+            <h1>Hotels With Bathtubs</h1>
+            <p>Verified Premium Suites & Jacuzzis</p>
+        </a>
+        <div class="nav-links">
+            <a href="/blog/">Travel Blog</a>
+            <a href="#" style="background: var(--accent-secondary); color: #fff; padding: 0.5rem 1rem; border-radius: 8px;">List Your Property</a>
+        </div>
+    </nav>
+
+    <header class="hero" style="background-image: url('/assets/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp');">
+        <div class="hero-content">
+            <h2>Find Your Perfect Romantic Getaway</h2>
+            <p>Explore our curated selection of premium hotels featuring private in-room bathtubs and jacuzzis, verified by MakeMyTrip.</p>
+        </div>
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search cities, hotels, or destinations..." onkeyup="filterDestinations()">
+        <button class="search-btn">Search</button>
+    </div>
+
+    <div class="trust-banner">
+        <div class="trust-item"><span class="trust-icon">✅</span> Verified by MakeMyTrip</div>
+        <div class="trust-item"><span class="trust-icon">🛁</span> Guaranteed Bathtubs</div>
+        <div class="trust-item"><span class="trust-icon">🔒</span> Secure Booking</div>
+    </div>
+    
+    <main class="container">
+        <div class="grid" id="destinationsGrid">
+        <a href="/hotels-with-bathtub-in-udaipur/" class="card">
+            <div class="card-img-wrap">
+                <img src="/assets/bathtub-hotel-bamboo-saa-resort-spa-udaipur-with-nice-views.webp" alt="Hotels in Udaipur with Bathtub" class="card-img" loading="lazy">
+            </div>
+            <div class="card-content">
+                <span class="card-title">Udaipur</span>
+                <span class="card-subtitle">8 Verified Hotels</span>
+                <span class="view-btn">View Hotels →</span>
+            </div>
+        </a>
+
+        <a href="/hotels-with-bathtub-in-manali/" class="card">
+            <div class="card-img-wrap">
+                <img src="/assets/bathtub-welcomheritage-urvashis-retreat-manali.webp" alt="Hotels in Manali with Bathtub" class="card-img" loading="lazy">
+            </div>
+            <div class="card-content">
+                <span class="card-title">Manali</span>
+                <span class="card-subtitle">6 Verified Hotels</span>
+                <span class="view-btn">View Hotels →</span>
+            </div>
+        </a>
+
+        <a href="/hotels-with-bathtub-in-munnar/" class="card">
+            <div class="card-img-wrap">
+                <img src="/assets/broad-bean-resort-spa-hotel-munnar-with-romantic-jacuzzi-in-room.webp" alt="Hotels in Munnar with Bathtub" class="card-img" loading="lazy">
+            </div>
+            <div class="card-content">
+                <span class="card-title">Munnar</span>
+                <span class="card-subtitle">3 Verified Hotels</span>
+                <span class="view-btn">View Hotels →</span>
+            </div>
+        </a>
+
+        <a href="/hotels-with-bathtub-in-shimla/" class="card">
+            <div class="card-img-wrap">
+                <img src="/assets/jacuzzi-the-orchid-hotel-shimla.webp" alt="Hotels in Shimla with Bathtub" class="card-img" loading="lazy">
+            </div>
+            <div class="card-content">
+                <span class="card-title">Shimla</span>
+                <span class="card-subtitle">4 Verified Hotels</span>
+                <span class="view-btn">View Hotels →</span>
+            </div>
+        </a>
+
+        <a href="/rishikesh" class="card">
+            <img src="/assets/bathtub-hotel-room-raga-on-the-ganges-rishikesh.webp" alt="Hotels in Rishikesh with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Rishikesh with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/zirakpur" class="card">
+            <img src="/assets/hotel-lords-inn-chandigarh-zirakpur-with-romantic-bathtub-in-room.webp" alt="Hotels in Zirakpur with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Zirakpur with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-gandhinagar" class="card">
+            <img src="/assets/jacuzzi-room-hotel-royal-empire-gandhinagar.webp" alt="Hotels With Bathtub In Gandhinagar" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Gandhinagar</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-jaipur" class="card">
+            <img src="/assets/the-raj-palace-hotel-in-jaipur-with-romantic-bathtub-in-room.webp" alt="Hotels With Bathtub In Jaipur" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Jaipur</span>
+            </div>
+        </a>
+    
+        <a href="/kolhapur" class="card">
+            <img src="/assets/bathtub-room-regenta-place-raysons-kolhapur.webp" alt="Hotels in Kolhapur with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Kolhapur with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/karjat" class="card">
+            <img src="/assets/jacuzzi-room-teak-resort-karjat.webp" alt="Hotels in Karjat with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Karjat with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/mahabalipuram" class="card">
+            <img src="/assets/jacuzzi-room-intercontinental-chennai-mahabalipuram-resort-an-ihg-hotel.webp" alt="Hotels in Mahabalipuram with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Mahabalipuram with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/shillong" class="card">
+            <img src="/assets/bathtub-hotel-room-courtyard-by-marriott-shillong.webp" alt="Hotels in Shillong with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Shillong with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/panvel" class="card">
+            <img src="/assets/raaj-resort-panvel-with-bathtub-in-room.webp" alt="Hotels in Panvel with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Panvel with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/kochi" class="card">
+            <img src="/assets/romantic-room-with-bathtub-taj-malabar-resort-spa-cochin-1.webp" alt="Hotels in Kochi with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Kochi with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-pune" class="card">
+            <img src="/assets/bathtub-hotel-tip-top-international-pune.webp" alt="Hotels With Bathtub In Pune" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Pune</span>
+            </div>
+        </a>
+    
+        <a href="/mount-abu" class="card">
+            <img src="/assets/the-house-of-bb-mount-abu-with-bathtub.webp" alt="Hotels in Mount Abu with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Mount Abu with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/igatpuri" class="card">
+            <img src="/assets/tropical-retreat-luxury-spa-resort-igatpuri-with-bathtub-room-views.webp" alt="Hotels in Igatpuri with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Igatpuri with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/amritsar" class="card">
+            <img src="/assets/jacuzzi-hotel-suite-best-western-plus-amritsar.webp" alt="Hotels in Amritsar with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Amritsar with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/cookie-policy" class="card">
+            <img src="/assets/hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view-428x400.webp" alt="Hotels in Cookie Policy with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Cookie Policy with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/nashik" class="card">
+            <img src="/assets/express-inn-the-business-luxury-hotel-nashik-with-bathtub.webp" alt="Hotels in Nashik with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Nashik with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="#" class="card">
+            <img src="/assets/hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view-428x400.webp" alt="Hotels in Privacy Policy 2 with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Privacy Policy 2 with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/dharamshala" class="card">
+            <img src="/assets/jacuzzi-hotel-echor-mandara-treevilla-dharamshala.webp" alt="Hotels in Dharamshala with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Dharamshala with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/mandarmani" class="card">
+            <img src="/assets/sweet-dream-beach-resort-mandarmani-with-bathtub.webp" alt="Hotels in Mandarmani with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Mandarmani with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/bhopal" class="card">
+            <img src="/assets/hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view.webp" alt="Hotels in Bhopal with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Bhopal with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/mathura" class="card">
+            <img src="/assets/romantic-bathtub-room-lalita-grand-mathura.webp" alt="Hotels in Mathura with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Mathura with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/darjeeling" class="card">
+            <img src="/assets/bathtub-room-taj-chia-kutir-resort-spa-darjeeling.webp" alt="Hotels in Darjeeling with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Darjeeling with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/yercaud" class="card">
+            <img src="/assets/jacuzzi-room-stayvista-at-the-yercaud-bungalow-with-bonfire-pvt-pool.webp" alt="Hotels in Yercaud with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Yercaud with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/puri" class="card">
+            <img src="/assets/mayfair-waves-puri-with-bathtub-in-room.webp" alt="Hotels in Puri with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Puri with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/panchgani" class="card">
+            <img src="/assets/bathtub-hotel-the-cliff-by-zuper-panchgani.webp" alt="Hotels in Panchgani with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Panchgani with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/siliguri" class="card">
+            <img src="/assets/jacuzzi-room-mayfair-tea-resort-siliguri.webp" alt="Hotels in Siliguri with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Siliguri with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/faridabad" class="card">
+            <img src="/assets/bathtub-hotel-room-radisson-blu-faridabad.webp" alt="Hotels in Faridabad with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Faridabad with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-new-delhi" class="card">
+            <img src="/assets/novotel-new-delhi-aerocity-international-airport-hotel-room-with-bathtub.webp" alt="Hotels With Bathtub In New Delhi" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In New Delhi</span>
+            </div>
+        </a>
+    
+        <a href="/coimbatore" class="card">
+            <img src="/assets/jacuzzi-room-hotel-park-elanza-coimbatore.webp" alt="Hotels in Coimbatore with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Coimbatore with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/mahipalpur" class="card">
+            <img src="/assets/radisson-blu-plaza-delhi-airport-with-bathtub.webp" alt="Hotels in Mahipalpur with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Mahipalpur with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-chandigarh" class="card">
+            <img src="/assets/holiday-inn-chandigarh-panchkula-an-ihg-hotel-with-romantic-bathtub.webp" alt="Hotels With Bathtub In Chandigarh" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Chandigarh</span>
+            </div>
+        </a>
+    
+        <a href="/legal-notice" class="card">
+            <img src="/assets/hotel-room-taj-lakefront-bhopal-with-bathtub-lake-view-428x400.webp" alt="Hotels in Legal Notice with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Legal Notice with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/rajkot" class="card">
+            <img src="/assets/jacuzzi-room-hotel-nova-boutique-rajkot.webp" alt="Hotels in Rajkot with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Rajkot with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-lonavala" class="card">
+            <img src="/assets/hotel-aamby-valley-city-lonavala-with-jacuzzi-in-room.webp" alt="Hotels With Bathtub In Lonavala" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Lonavala</span>
+            </div>
+        </a>
+    
+        <a href="/koramangala" class="card">
+            <img src="/assets/bathtub-hotel-room-luho-41-penthouse-koramangala.webp" alt="Hotels in Koramangala with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Koramangala with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/panjim" class="card">
+            <img src="/assets/bathtub-room-taj-cidade-de-goa-heritage-panjim-goa.webp" alt="Hotels in Panjim with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Panjim with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/shirdi" class="card">
+            <img src="/assets/jacuzzi-hotel-room-sun-n-sand-shirdi.webp" alt="Hotels in Shirdi with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Shirdi with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/daman" class="card">
+            <img src="/assets/romantic-hotel-room-urbane-by-treat-daman-with-bathtub.webp" alt="Hotels in Daman with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Daman with Bathtub</span>
+            </div>
+        </a>
+
+        <a href="/hotels-with-bathtub-in-goa" class="card">
+            <img src="/assets/larisa-beach-resort-north-goa-with-romantic-bathtub-in-room.webp" alt="Hotels With Bathtub In Goa" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Goa</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-kolkata" class="card">
+            <img src="/assets/bathtub-jw-marriott-hotel-kolkata.webp" alt="Hotels With Bathtub In Kolkata" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Kolkata</span>
+            </div>
+        </a>
+    
+        <a href="/lavasa" class="card">
+            <img src="/assets/private-jacuzzi-room-lavasa-lake-palace.webp" alt="Hotels in Lavasa with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Lavasa with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/kodaikanal" class="card">
+            <img src="/assets/tomorrowland-farms-and-suites-kodaikanal-with-spabath.webp" alt="Hotels in Kodaikanal with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Kodaikanal with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/calangute" class="card">
+            <img src="/assets/jacuzzi-room-adamo-the-bellus-calangute.webp" alt="Hotels in Calangute with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Calangute with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/indore" class="card">
+            <img src="/assets/indore-marriott-hotel-with-bathtub.webp" alt="Hotels in Indore with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Indore with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-ahmedabad" class="card">
+            <img src="/assets/bathtub-hotel-courtyard-by-marriott-ahmedabad.webp" alt="Hotels With Bathtub In Ahmedabad" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Ahmedabad</span>
+            </div>
+        </a>
+    
+        <a href="/haridwar" class="card">
+            <img src="/assets/jacuzzi-hotel-roomambrosia-sarovar-portico-haridwar.webp" alt="Hotels in Haridwar with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Haridwar with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-gurgaon" class="card">
+            <img src="/assets/the-leela-ambience-gurugram-hotel-residences-with-spabath-room.webp" alt="Hotels With Bathtub In Gurgaon" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Gurgaon</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-bangalore" class="card">
+            <img src="/assets/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp" alt="Hotels With Bathtub In Bangalore" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Bangalore</span>
+            </div>
+        </a>
+    
+        <a href="/paharganj" class="card">
+            <img src="/assets/the-prime-delhi-with-hot-tub.webp" alt="Hotels in Paharganj with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Paharganj with Bathtub</span>
+            </div>
+        </a>
+    
+        <a href="/hotels-with-bathtub-in-mumbai" class="card">
+            <img src="/assets/romantic-bathtub-holiday-inn-mumbai-international-airport-an-ihg-hotel.webp" alt="Hotels With Bathtub In Mumbai" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels With Bathtub In Mumbai</span>
+            </div>
+        </a>
+    
+        <a href="/agra" class="card">
+            <img src="/assets/bathtub-room-taj-hotel-convention-centre-agra.webp" alt="Hotels in Agra with Bathtub" class="card-img" loading="lazy">
+            <div class="card-content">
+                <span class="card-title">Hotels in Agra with Bathtub</span>
+            </div>
+        </a>
+    
+            </div>
+    </div>
+    
+        <section class="seo-content" style="margin-top: 4rem; padding: 3rem; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border);">
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-main);">Why Book a Hotel with a Private Bathtub?</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1rem;">When planning a romantic getaway, an anniversary trip, or a relaxing weekend retreat, finding the perfect accommodation is crucial. Booking a hotel with a private bathtub or an in-room jacuzzi elevates your stay from ordinary to extraordinary. Our comprehensive directory helps couples discover premium luxury suites that offer the ultimate relaxation experience.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1rem;">Whether you are looking for a stunning boutique hotel in the city, a quiet countryside resort, or a beachfront villa, having a soaking tub in your room provides a private sanctuary to unwind after a long day of exploring. A deep soaking tub not only soothes tired muscles but creates the perfect romantic ambiance. Explore our curated list of destinations above and book your dream stay today.</p>
+        </section>
+    
+        <section class="seo-content faq-section" style="margin-top: 4rem; padding: 3rem; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border);">
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-main);">Frequently Asked Questions</h2>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--accent-secondary); font-size: 1.2rem; margin-bottom: 0.5rem;">Are the bathtubs and jacuzzis totally private?</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Yes! Every hotel featured in our directory offers private, in-room bathtubs or jacuzzis. They are located inside your personal suite, ensuring complete privacy for your romantic getaway.</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--accent-secondary); font-size: 1.2rem; margin-bottom: 0.5rem;">How do I verify the room amenities before booking?</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">When you click 'Check Availability' on any of our destination pages, you will be redirected to the official booking partner. Always ensure you select the specific room type (e.g., "Suite with Spa Bath" or "Jacuzzi Suite") during checkout, as standard rooms in the same hotel may only have showers.</p>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--accent-secondary); font-size: 1.2rem; margin-bottom: 0.5rem;">Which destinations are best for couples?</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Popular choices for a romantic retreat include Goa, Udaipur, Lonavala, and Nainital, as they offer stunning views (beaches, lakes, or mountains) right from your private tub.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">&copy; 2026 HotelsWithBathtubs.com. All rights reserved.</p>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="#" style="color: var(--accent); font-size: 0.9rem;">About Us</a>
+                <a href="#" style="color: var(--accent); font-size: 0.9rem;">Contact</a>
+                <a href="#" style="color: var(--accent); font-size: 0.9rem;">Privacy Policy</a>
+                <a href="/legal-notice" style="color: var(--accent); font-size: 0.9rem;">Terms of Service</a>
+                <a href="/cookie-policy" style="color: var(--accent); font-size: 0.9rem;">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function filterDestinations() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toUpperCase();
+            var grid = document.getElementById('destinationsGrid');
+            var cards = grid.getElementsByClassName('card');
+            
+            for (var i = 0; i < cards.length; i++) {
+                var title = cards[i].getElementsByClassName('card-title')[0];
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

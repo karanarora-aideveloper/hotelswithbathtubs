@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Hotel Willow Banks, Mall Road Shimla",
+    "city": "Shimla",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=200701120646243660&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTSLV&country=IN&lat=31.10094&lng=77.17629&locusId=CTSLV&locusType=city&rank=9&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Shimla&viewType=PREMIUM&mtkeys=undefined",
+    "image": "/assets/mmt-hotel-willow-banks-mall-road-shimla.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "dusitD2 Fagu,Shimla",
+    "city": "Shimla",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202410141220381152&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKFRI&country=IN&lat=31.12044&lng=77.32365&locusId=CTSLV&locusType=city&rank=2&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Shimla&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-dusitd2-fagushimla.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Landmark Shimla - with Elevator Access to Mall road",
+    "city": "Shimla",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201802081115565313&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTSLV&country=IN&lat=31.10563&lng=77.16345&locusId=CTSLV&locusType=city&rank=18&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Shimla&mtkeys=undefined",
+    "image": "/assets/mmt-landmark-shimla---with-elevator-access-to-mall-roa.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "HOTEL PRESTIGE The Mall Road",
+    "city": "Shimla",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=20111217124153535&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTSLV&country=IN&lat=31.10262&lng=77.17689&locusId=CTSLV&locusType=city&rank=15&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Shimla&mtkeys=undefined",
+    "image": "/assets/mmt-hotel-prestige-the-mall-road.webp",
+    "has_bathtub": true
+  }
+]

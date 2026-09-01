@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Aurika, Udaipur - Luxury by Lemon Tree Hotels",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201909041602327140&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.57517&lng=73.64293&locusId=CTUDR&locusType=city&rank=19&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-aurika-udaipur---luxury-by-lemon-tree-hotels.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "goSTOPS Plus Udaipur Gulab Bagh",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202507251732575875&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.57528&lng=73.69086&locusId=CTUDR&locusType=city&rank=13&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&mtkeys=undefined",
+    "image": "/assets/mmt-gostops-plus-udaipur-gulab-bagh.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Perfectstayz Premium Udaipur by the Lake",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202406091247043369&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.54434&lng=73.687&locusId=CTUDR&locusType=city&rank=24&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&mtkeys=undefined",
+    "image": "/assets/mmt-perfectstayz-premium-udaipur-by-the-lake.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "City Connect by Downtown",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201409051253036999&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.5733&lng=73.69968&locusId=CTUDR&locusType=city&rank=9&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&mtkeys=undefined",
+    "image": "/assets/mmt-city-connect-by-downtown.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Udaipur Marriott Hotel",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202502171016175326&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.61824&lng=73.66513&locusId=CTUDR&locusType=city&rank=7&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-udaipur-marriott-hotel.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Wyndham Grand Udaipur Palace",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202507241820015190&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.60646&lng=73.66032&locusId=CTUDR&locusType=city&rank=18&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-wyndham-grand-udaipur-palace.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Radisson Blu Udaipur Palace Resort and Spa",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201405011316509287&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.59&lng=73.66743&locusId=CTUDR&locusType=city&rank=12&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&viewType=PREMIUM&mtkeys=undefined",
+    "image": "/assets/mmt-radisson-blu-udaipur-palace-resort-and-spa.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Hotel Udai Median | Rooms with Bathtub | Near Sukhdia Circle, Udaipur",
+    "city": "Udaipur",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201711141454559376&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTUDR&country=IN&lat=24.59493&lng=73.69227&locusId=CTUDR&locusType=city&rank=15&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Udaipur&mtkeys=undefined",
+    "image": "/assets/mmt-hotel-udai-median-|-rooms-with-bathtub-|-near-sukh.webp",
+    "has_bathtub": true
+  }
+]

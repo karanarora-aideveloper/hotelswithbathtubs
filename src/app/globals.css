@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-bg-main: #f5f7fa;
+  --color-bg-card: #ffffff;
+  --color-text-main: #1a1a1a;
+  --color-text-muted: #6b7280;
+  
+  --color-accent: #eb5510;
+  --color-accent-hover: #d14609;
+  --color-accent-secondary: #003b95;
+  --color-accent-secondary-hover: #002c70;
+  
+  --color-success: #059669;
+  --color-border: #e5e7eb;
+}
+
+/* Custom CSS to mimic the old OTA styling but mapped to Tailwind */
+html {
+  font-size: 14px;
+}
+@media (min-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 30, 80, 0.5);
+  z-index: 1;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%) scaleX(0.2);
+  }
+  50% {
+    transform: translateX(0%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.2);
+  }
+}
+
+.animate-indeterminate {
+  animation: indeterminate 1.2s infinite linear;
+  transform-origin: 0% 50%;
+  width: 100%;
+}
+
+

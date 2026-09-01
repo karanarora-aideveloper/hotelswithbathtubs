@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Le Montfort Resort",
+    "city": "Munnar",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202407261303399582&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTXMN&country=IN&lat=10.0363&lng=77.07651&locusId=CTXMN&locusType=city&rank=8&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Munnar&viewType=PREMIUM&mtkeys=undefined",
+    "image": "/assets/mmt-le-montfort-resort.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "LUXEGLAMP Munnar",
+    "city": "Munnar",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202302231418427348&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTXMN&country=IN&lat=10.01511&lng=77.24123&locusId=CTXMN&locusType=city&rank=9&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Munnar&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-luxeglamp-munnar.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "ELEPHANT PASSAGE",
+    "city": "Munnar",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202104240631313670&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTXMN&country=IN&lat=10.01961&lng=77.0326&locusId=CTXMN&locusType=city&rank=15&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Munnar&viewType=PREMIUM&mtkeys=undefined",
+    "image": "/assets/mmt-elephant-passage.webp",
+    "has_bathtub": true
+  }
+]

@@ -1,0 +1,45 @@
+- generic [active] [ref=f1e1]:
+  - button "Open Next.js Dev Tools" [ref=f1e14] [cursor=pointer]
+  - alert [ref=f1e18]
+  - main [ref=f1e118]:
+    - generic [ref=f1e119]:
+      - generic [ref=f1e120]:
+        - generic [ref=f1e121]:
+          - heading "Blog Posts" [level=1] [ref=f1e122]
+          - paragraph [ref=f1e123]: Manage your blog content
+        - generic [ref=f1e124]:
+          - link "+ New Post" [ref=f1e125] [cursor=pointer]:
+            - /url: /admin/dashboard/new
+          - button "Logout" [ref=f1e126]
+      - table [ref=f1e128]:
+        - rowgroup [ref=f1e129]:
+          - row [ref=f1e130]:
+            - columnheader "Title" [ref=f1e131]
+            - columnheader "Status" [ref=f1e132]
+            - columnheader "Date" [ref=f1e133]
+            - columnheader "Actions" [ref=f1e134]
+        - rowgroup [ref=f1e135]:
+          - row [ref=f1e136]:
+            - cell [ref=f1e137]:
+              - generic [ref=f1e138]:
+                - paragraph [ref=f1e139]: "Demystifying Root Canal Pain: What You Really Feel During Treatment"
+                - paragraph [ref=f1e140]: /demystifying-root-canal-pain-what-you-really-feel-during-treatment
+            - cell "Published" [ref=f1e141]
+            - cell "20/08/2026" [ref=f1e143]
+            - cell [ref=f1e144]:
+              - generic [ref=f1e145]:
+                - link "Edit" [ref=f1e146] [cursor=pointer]:
+                  - /url: /admin/dashboard/1787218661902
+                - button "Delete" [ref=f1e147]
+          - row [ref=f1e148]:
+            - cell [ref=f1e149]:
+              - generic [ref=f1e150]:
+                - paragraph [ref=f1e151]: "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision"
+                - paragraph [ref=f1e152]: /complete-guide-to-modern-endodontics-saving-natural-teeth
+            - cell "Published" [ref=f1e153]
+            - cell "20/08/2026" [ref=f1e155]
+            - cell [ref=f1e156]:
+              - generic [ref=f1e157]:
+                - link "Edit" [ref=f1e158] [cursor=pointer]:
+                  - /url: /admin/dashboard/1787218554610
+                - button "Delete" [ref=f1e159]

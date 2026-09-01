@@ -1,0 +1,35 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - generic [ref=f2e4]:
+        - heading "Blog" [level=1] [ref=f2e5]
+        - paragraph [ref=f2e6]: Insights on endodontic care, dental health, and root canal treatment.
+      - generic [ref=f2e7]:
+        - 'link "Demystifying Root Canal Pain: What You Really Feel During Treatment Patient Education Root Canal Endodontics Demystifying Root Canal Pain: What You Really Feel During Treatment Learn why modern root canal therapy is comfortable, pain-free, and designed to relieve severe tooth pain rather than cause it. Aug 20, 2026 Read →" [ref=f2e8] [cursor=pointer]':
+          - /url: /blog/demystifying-root-canal-pain-what-you-really-feel-during-treatment
+          - 'img "Demystifying Root Canal Pain: What You Really Feel During Treatment" [ref=f2e10]'
+          - generic [ref=f2e11]:
+            - generic [ref=f2e12]:
+              - generic [ref=f2e13]: Patient Education
+              - generic [ref=f2e14]: Root Canal
+              - generic [ref=f2e15]: Endodontics
+            - 'heading "Demystifying Root Canal Pain: What You Really Feel During Treatment" [level=2] [ref=f2e16]'
+            - paragraph [ref=f2e17]: Learn why modern root canal therapy is comfortable, pain-free, and designed to relieve severe tooth pain rather than cause it.
+            - generic [ref=f2e18]:
+              - time [ref=f2e19]: Aug 20, 2026
+              - generic [ref=f2e20]: Read →
+        - 'link "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision Endodontics Dental Technology Patient Guide Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision Discover how advanced operating microscopes, 3D imaging, and ultrasonic instrumentation make modern root canal treatment comfortable, fast, and remarkably successful. Aug 20, 2026 Read →" [ref=f2e21] [cursor=pointer]':
+          - /url: /blog/complete-guide-to-modern-endodontics-saving-natural-teeth
+          - 'img "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision" [ref=f2e23]'
+          - generic [ref=f2e24]:
+            - generic [ref=f2e25]:
+              - generic [ref=f2e26]: Endodontics
+              - generic [ref=f2e27]: Dental Technology
+              - generic [ref=f2e28]: Patient Guide
+            - 'heading "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision" [level=2] [ref=f2e29]'
+            - paragraph [ref=f2e30]: Discover how advanced operating microscopes, 3D imaging, and ultrasonic instrumentation make modern root canal treatment comfortable, fast, and remarkably successful.
+            - generic [ref=f2e31]:
+              - time [ref=f2e32]: Aug 20, 2026
+              - generic [ref=f2e33]: Read →
+  - button "Open Next.js Dev Tools" [ref=f2e39] [cursor=pointer]
+  - alert [ref=f2e43]

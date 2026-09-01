@@ -1,0 +1,73 @@
+- generic [active] [ref=f1e1]:
+  - button "Open Next.js Dev Tools" [ref=f1e14] [cursor=pointer]
+  - alert [ref=f1e18]: New Post
+  - main [ref=f1e49]:
+    - generic [ref=f1e50]:
+      - generic [ref=f1e51]:
+        - heading "New Post" [level=1] [ref=f1e52]
+        - button "← Back" [ref=f1e53]
+      - generic [ref=f1e54]:
+        - generic [ref=f1e55]:
+          - generic [ref=f1e56]: Title *
+          - textbox "Enter blog post title" [ref=f1e57]
+          - paragraph [ref=f1e58]:
+            - text: "URL slug:"
+            - code [ref=f1e59]: /blog/
+        - generic [ref=f1e60]:
+          - generic [ref=f1e61]: Content *
+          - generic [ref=f1e63]:
+            - generic [ref=f1e64]:
+              - generic [ref=f1e65]:
+                - button [ref=f1e66] [cursor=pointer]:
+                  - strong [ref=f1e67]: B
+                - button [ref=f1e68] [cursor=pointer]:
+                  - emphasis [ref=f1e69]: I
+                - button "S" [ref=f1e70] [cursor=pointer]
+              - generic [ref=f1e71]:
+                - button "H1" [ref=f1e72] [cursor=pointer]
+                - button "H2" [ref=f1e73] [cursor=pointer]
+                - button "H3" [ref=f1e74] [cursor=pointer]
+              - generic [ref=f1e75]:
+                - button "•" [ref=f1e76] [cursor=pointer]
+                - button "1." [ref=f1e77] [cursor=pointer]
+                - button "\"" [ref=f1e78] [cursor=pointer]
+              - generic [ref=f1e79]:
+                - button "🔗" [ref=f1e80] [cursor=pointer]
+                - button "🔗✕" [disabled] [ref=f1e81]
+              - generic [ref=f1e82]:
+                - button "↶" [disabled] [ref=f1e83]
+                - button "↷" [disabled] [ref=f1e84]
+            - textbox [ref=f1e86]:
+              - paragraph [ref=f1e87]: Start typing...
+          - paragraph [ref=f1e88]: Use the toolbar above to format your content
+        - generic [ref=f1e89]:
+          - generic [ref=f1e90]:
+            - generic [ref=f1e91]: Excerpt
+            - button "Auto-generate from content" [ref=f1e92]
+          - textbox "Short summary of the blog post (160 characters)" [ref=f1e93]
+          - paragraph [ref=f1e94]: 0/160 characters
+        - generic [ref=f1e95]:
+          - generic [ref=f1e96]: Meta Description (SEO)
+          - textbox "SEO description for search engines" [ref=f1e97]
+          - paragraph [ref=f1e98]: 0/160 characters
+        - generic [ref=f1e99]:
+          - generic [ref=f1e100]:
+            - generic [ref=f1e101]: Categories
+            - textbox "e.g., Endodontics, Root Canal, Tips" [ref=f1e102]
+            - paragraph [ref=f1e103]: Separate with commas
+          - generic [ref=f1e104]:
+            - generic [ref=f1e105]: Tags
+            - textbox "e.g., dental, health, treatment" [ref=f1e106]
+            - paragraph [ref=f1e107]: Separate with commas
+        - generic [ref=f1e108]:
+          - generic [ref=f1e109]:
+            - generic [ref=f1e110]: Featured Image URL
+            - textbox "https://example.com/image.jpg" [ref=f1e111]
+          - generic [ref=f1e112]:
+            - generic [ref=f1e113]: Status
+            - combobox [ref=f1e114]:
+              - option "Draft" [selected]
+              - option "Published"
+        - generic [ref=f1e115]:
+          - button "Publish Post" [ref=f1e116]
+          - button "Cancel" [ref=f1e117]

@@ -1,0 +1,99 @@
+- generic [active] [ref=f4e1]:
+  - main [ref=f4e2]:
+    - 'img "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision" [ref=f4e4]'
+    - article [ref=f4e5]:
+      - generic [ref=f4e6]:
+        - generic [ref=f4e7]:
+          - generic [ref=f4e8]: Endodontics
+          - generic [ref=f4e9]: Dental Technology
+          - generic [ref=f4e10]: Patient Guide
+        - 'heading "Complete Guide to Modern Endodontics: Saving Natural Teeth with Precision" [level=1] [ref=f4e11]'
+        - generic [ref=f4e12]:
+          - generic [ref=f4e13]:
+            - generic [ref=f4e14]: SM
+            - generic [ref=f4e15]:
+              - text: Dr. Srishti Mehta•
+              - time [ref=f4e16]: August 20, 2026
+          - generic [ref=f4e17]: 3 min read
+      - generic [ref=f4e18]:
+        - heading "The Evolution of Endodontic Care" [level=1] [ref=f4e19]
+        - paragraph [ref=f4e20]: For decades, the phrase "root canal" carried unwarranted anxiety. Today, endodontics has undergone a revolutionary transformation through high-precision optical magnification, digital diagnostic imaging, and biomimetic restorative materials.
+        - paragraph [ref=f4e21]: As a dedicated Endodontist and Root Canal Specialist, my primary objective is always the preservation of your natural tooth structure while ensuring a seamless, completely comfortable treatment experience.
+        - separator [ref=f4e22]
+        - heading "1. What Happens Inside an Infected Tooth?" [level=2] [ref=f4e23]
+        - paragraph [ref=f4e24]: Each tooth contains a complex internal anatomy known as the dental pulp. The pulp consists of blood vessels, sensitive nerve fibers, and connective tissues that help nourish the tooth during its developmental stages.
+        - paragraph [ref=f4e25]: "When deep dental decay, repeated restorations, or micro-cracks compromise the outer enamel and dentin layers, oral bacteria can colonize the pulp chamber. This triggers inflammatory pulpitis, leading to:"
+        - list [ref=f4e26]:
+          - listitem [ref=f4e27]: Spontaneous or lingering throbbing pain
+          - listitem [ref=f4e28]: Acute sensitivity to temperature extremes (hot and cold liquids)
+          - listitem [ref=f4e29]: Localized gum swelling or tenderness upon mastication
+          - listitem [ref=f4e30]: Darkening or discoloration of the clinical crown
+        - figure "Endodontic Anatomy Diagram" [ref=f4e31]:
+          - img "Endodontic Anatomy Diagram" [ref=f4e32]
+        - separator [ref=f4e34]
+        - heading "2. Advanced Technology in Modern Root Canal Therapy" [level=2] [ref=f4e35]
+        - paragraph [ref=f4e36]: "The difference between conventional root canal treatment and modern specialist endodontics lies in visualization and precision:"
+        - list [ref=f4e37]:
+          - listitem [ref=f4e38]:
+            - strong [ref=f4e39]: "Surgical Operating Microscopes (SOM):"
+            - text: Providing up to 20x illumination and magnification, allowing clinicians to locate extra microscopic canal orifices (such as MB2 in maxillary molars) that might otherwise remain undetected.
+          - listitem [ref=f4e40]:
+            - strong [ref=f4e41]: "CBCT 3D Radiography:"
+            - text: Low-dose cone-beam computed tomography provides volumetric 3D scans of complex root curvatures, canal branching, and periapical bone lesions.
+          - listitem [ref=f4e42]:
+            - strong [ref=f4e43]: "Apex Locators & Rotary Nickel-Titanium (NiTi) Files:"
+            - text: Electronic apex locators accurately determine canal terminus with sub-millimeter precision, while flexible NiTi files adapt smoothly to natural root contours.
+          - listitem [ref=f4e44]:
+            - strong [ref=f4e45]: "Ultrasonic & Hydrodynamic Irrigation:"
+            - text: Advanced acoustic disinfection removes bacteria and smear layers from hidden lateral isthmuses without damaging root dentin.
+        - figure "High Tech Dental Clinic" [ref=f4e46]:
+          - img "High Tech Dental Clinic"
+        - separator [ref=f4e48]
+        - heading "3. Step-by-Step Treatment Walkthrough" [level=2] [ref=f4e49]
+        - paragraph [ref=f4e50]: "Modern single-visit or two-visit endodontic therapy follows an evidence-based, minimally invasive protocol:"
+        - list [ref=f4e51]:
+          - listitem [ref=f4e52]:
+            - strong [ref=f4e53]: "Profound Local Anesthesia:"
+            - text: Targeted anesthetic solutions completely numb the affected area for a completely pain-free procedure.
+          - listitem [ref=f4e54]:
+            - strong [ref=f4e55]: "Rubber Dam Isolation:"
+            - text: A sterile latex/non-latex shield prevents oral saliva contamination and ensures maximum hygiene.
+          - listitem [ref=f4e56]:
+            - strong [ref=f4e57]: "Micro-Access Cavity:"
+            - text: Only a minimal amount of tooth structure is removed to access the infected pulp chamber.
+          - listitem [ref=f4e58]:
+            - strong [ref=f4e59]: "Mechanical Shaping & Chemical Disinfection:"
+            - text: Gentle rotary instrumentation paired with heated biocidal irrigants clears all microbial pathogens.
+          - listitem [ref=f4e60]:
+            - strong [ref=f4e61]: "3D Bioceramic Hermetic Seal:"
+            - text: The root canals are obturated with biocompatible bioceramic sealers and gutta-percha to prevent future reinfection.
+          - listitem [ref=f4e62]:
+            - strong [ref=f4e63]: "Coronal Core Build-up:"
+            - text: The crown is structurally restored to prepare it for permanent functional use.
+        - separator [ref=f4e64]
+        - heading "4. Post-Treatment Care & Long-Term Prognosis" [level=2] [ref=f4e65]
+        - paragraph [ref=f4e66]: Following treatment, slight tenderness upon chewing is normal for 24–48 hours as surrounding periodontal ligaments heal. Mild over-the-counter analgesics typically provide complete relief.
+        - paragraph [ref=f4e67]:
+          - generic [ref=f4e68]:
+            - text: With proper coronal seal, definitive crown placement, and regular routine dental hygiene, teeth treated endodontically have a documented clinical success rate exceeding
+            - strong [ref=f4e69]: 95%
+            - text: and can last a lifetime.
+        - separator [ref=f4e70]
+        - heading "Conclusion & Consultation" [level=2] [ref=f4e71]
+        - paragraph [ref=f4e72]: Saving your natural tooth should always be the primary treatment choice over extraction wherever clinically feasible. Natural teeth maintain proper jawbone density, natural chewing efficiency, and aesthetic harmony.
+        - paragraph [ref=f4e73]: If you are experiencing persistent tooth discomfort or have been advised for endodontic therapy, feel free to schedule a consultation with Dr. Srishti Mehta for a comprehensive evaluation.
+      - generic [ref=f4e74]:
+        - paragraph [ref=f4e75]: "Tags:"
+        - generic [ref=f4e76]:
+          - generic [ref=f4e77]: "#root canal"
+          - generic [ref=f4e78]: "#dental microscope"
+          - generic [ref=f4e79]: "#CBCT"
+          - generic [ref=f4e80]: "#painless dentistry"
+          - generic [ref=f4e81]: "#tooth preservation"
+      - generic [ref=f4e83]:
+        - heading "Have a dental concern?" [level=3] [ref=f4e84]
+        - paragraph [ref=f4e85]: Get in touch with Dr. Srishti for professional endodontic consultation.
+        - link "Schedule a Consultation" [ref=f4e86] [cursor=pointer]:
+          - /url: /#contact
+  - button "Open Next.js Dev Tools" [ref=f4e92] [cursor=pointer]
+  - alert [ref=f4e96]

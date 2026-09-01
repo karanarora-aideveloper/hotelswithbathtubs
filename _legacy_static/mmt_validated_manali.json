@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Moustache Manali.",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202403181630483962&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.28796&lng=77.17712&locusId=CTKUU&locusType=city&rank=6&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&mtkeys=undefined",
+    "image": "/assets/mmt-moustache-manali..webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "The Himalayan",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201209141526559876&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.24431&lng=77.1823&locusId=CTKUU&locusType=city&rank=21&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-the-himalayan.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "GLAMPING CLUB",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202301231357582046&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.22494&lng=77.21792&locusId=CTKUU&locusType=city&rank=9&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-glamping-club.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "The Holiday Resorts, Cottages & Spa",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=200711051122373396&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.22588&lng=77.18514&locusId=CTKUU&locusType=city&rank=18&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&mtkeys=undefined",
+    "image": "/assets/mmt-the-holiday-resorts-cottages-&-spa.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Larisa Resort Manali",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=201504161511418139&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.15311&lng=77.17586&locusId=CTKUU&locusType=city&rank=19&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&viewType=LUXE&mtkeys=undefined",
+    "image": "/assets/mmt-larisa-resort-manali.webp",
+    "has_bathtub": true
+  },
+  {
+    "name": "Welcomhotel By ITC Hotels Hamsa Manali",
+    "city": "Manali",
+    "url": "https://www.makemytrip.com/hotels/hotel-details?hotelId=202306031636209712&_uCurrency=INR&checkin=08162026&checkout=08172026&city=CTKUU&country=IN&lat=32.30095&lng=77.17619&locusId=CTKUU&locusType=city&rank=12&regionNearByExp=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Manali&mtkeys=undefined",
+    "image": "/assets/mmt-welcomhotel-by-itc-hotels-hamsa-manali.webp",
+    "has_bathtub": true
+  }
+]

@@ -1,0 +1,9 @@
+[     200ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "new-password"): (More info: https://goo.gl/9p2vKq) %o @ http://localhost:3005/admin/login:0
+[     214ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     222ms] [LOG] [HMR] connected @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    8504ms] [WARNING] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22424ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22517ms] [LOG] [Fast Refresh] done in 194ms @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22535ms] [WARNING] Next.js detected. `immediatelyRender` defaults to false to avoid hydration mismatches. Pass `immediatelyRender: true` explicitly if you are rendering the editor only on the client. @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22536ms] [WARNING] Next.js detected. `immediatelyRender` defaults to false to avoid hydration mismatches. Pass `immediatelyRender: true` explicitly if you are rendering the editor only on the client. @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   22547ms] [WARNING] [tiptap warn]: Duplicate extension names found: ['link']. This can lead to issues. @ http://localhost:3005/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
