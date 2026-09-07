@@ -247,7 +247,7 @@ export default async function Footer() {
                 >
                   <div className="relative overflow-hidden aspect-[16/10]">
                     <Image
-                      src={blog.image || 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'}
+                      src={imageUrl(blog.image)}
                       alt={blog.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"

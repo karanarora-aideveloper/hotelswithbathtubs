@@ -6,6 +6,7 @@ import Blog from '@/models/Blog';
 import Hotel from '@/models/Hotel';
 import { markdownToHtml } from '@/lib/markdown';
 import StructuredData from '@/components/StructuredData';
+import { imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 
 export async function generateStaticParams() {
@@ -219,7 +220,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {blog.image && (
               <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs">
                 <Image
-                  src={blog.image}
+                  src={imageUrl(blog.image)}
                   alt={blog.title}
                   fill
                   priority
@@ -270,7 +271,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     {relatedBlog.image && (
                       <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
                         <Image
-                          src={relatedBlog.image}
+                          src={imageUrl(relatedBlog.image)}
                           alt={relatedBlog.title}
                           fill
                           loading="lazy"

@@ -44,10 +44,11 @@ export const metadata = {
 async function getCities() {
   await connectToDatabase();
   
-  const pipeline = [
+  const pipeline: any[] = [
     // Match the city page's own filter — flagged hotels are hidden there,
     // so they must not count toward (or inflate) a city's tile here either.
     { $match: { flagged: { $ne: true } } },
+    { $sort: { rating: -1 as const, reviewsCount: -1 as const } },
     {
       $group: {
         _id: { city: "$city", country: "$country" },

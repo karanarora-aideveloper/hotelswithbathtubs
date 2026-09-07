@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import ProgressiveImage from '@/components/ProgressiveImage';
 import { resolveCountry, slugify } from '@/lib/utils';
-import { imageUrl } from '@/lib/imageUrl';
 
 interface CityCardProps {
   city: string;
@@ -40,6 +39,7 @@ export default function CityCard({
       href={targetUrl}
       prefetch={true}
       onClick={handleClick}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '380px' }}
       className={`bg-white rounded-2xl overflow-hidden border border-border shadow-sm transition-all flex flex-col group text-left cursor-pointer ${
         clicked 
           ? 'ring-2 ring-accent border-accent shadow-md opacity-90' 
@@ -47,13 +47,12 @@ export default function CityCard({
       }`}
     >
       <div className="relative overflow-hidden aspect-[4/3]">
-        <Image
-          src={imageUrl(image)}
+        <ProgressiveImage
+          src={image}
           alt={`Hotels in ${city} with Bathtub`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          loading={priority ? undefined : "lazy"}
+          className="group-hover:scale-105 transition-transform duration-500"
           priority={priority}
         />
         {isInternational && (

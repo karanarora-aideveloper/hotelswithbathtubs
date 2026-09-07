@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { imageUrl } from '@/lib/imageUrl';
 
 interface Hotel {
   _id: string;
@@ -197,7 +198,7 @@ export default function ReviewQueuePage() {
             {/* Image */}
             <div className="relative h-64 md:h-auto min-h-[280px] bg-gray-100">
               <Image
-                src={hotel.image}
+                src={imageUrl(hotel.image)}
                 alt={hotel.name}
                 fill
                 className="object-cover"

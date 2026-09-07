@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
+import { imageUrl } from '@/lib/imageUrl';
 
 interface Hotel {
   _id: string;
@@ -227,7 +228,7 @@ export default function UrlFixerPage() {
             {/* Image */}
             <div className="relative h-56 md:h-auto min-h-[240px] bg-gray-100">
               <Image
-                src={hotel.image}
+                src={imageUrl(hotel.image)}
                 alt={hotel.name}
                 fill
                 className="object-cover"

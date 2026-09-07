@@ -3,6 +3,7 @@ import Image from 'next/image';
 import connectToDatabase from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
+import { imageUrl } from '@/lib/imageUrl';
 
 export const metadata = {
   title: 'Bathtub Hotel Travel Guides & Tips',
@@ -104,7 +105,7 @@ export default async function BlogIndex() {
                   {featured.image && (
                     <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
                       <Image
-                        src={featured.image}
+                        src={imageUrl(featured.image)}
                         alt={featured.title}
                         fill
                         priority
@@ -124,7 +125,7 @@ export default async function BlogIndex() {
                 {blog.image && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
                     <Image
-                      src={blog.image}
+                      src={imageUrl(blog.image)}
                       alt={blog.title}
                       fill
                       priority={idx < 3}

@@ -379,7 +379,7 @@ export default async function CityHotelsPage({
                           {blog.image && (
                             <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
                               <Image
-                                src={blog.image}
+                                src={imageUrl(blog.image)}
                                 alt={blog.title}
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

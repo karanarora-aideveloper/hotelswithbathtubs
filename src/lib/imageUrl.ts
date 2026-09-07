@@ -14,14 +14,22 @@
 const BLOB_BASE_URL = process.env.NEXT_PUBLIC_BLOB_BASE_URL ||
   'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/';
 
+export const DEFAULT_HOTEL_IMAGE =
+  'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+
 export function imageUrl(src?: string): string {
   if (!src || src.trim() === '') {
-    return 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+    return DEFAULT_HOTEL_IMAGE;
   }
 
   const trimmed = src.trim();
 
-  // If already a full http/https URL (Unsplash, Agoda, Booking, Blob Storage, etc.), preserve it
+  // Agoda blocks hotlinking and serves 42-byte transparent 1x1 GIFs: intercept and fall back
+  if (trimmed.includes('agoda.net') || trimmed.includes('agoda.com')) {
+    return DEFAULT_HOTEL_IMAGE;
+  }
+
+  // If already a full http/https URL (Unsplash, Booking, Blob Storage, etc.), preserve it
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
   }
@@ -29,18 +37,9 @@ export function imageUrl(src?: string): string {
   // Extract clean filename from /assets/path or path
   const filename = trimmed.replace(/^\/assets\//, '').replace(/^\/+/, '');
 
-  // In development, use local assets
-  if (process.env.NODE_ENV === 'development') {
-    return `/assets/${filename}`;
-  }
-
-  // In production, use Blob URLs
-  if (BLOB_BASE_URL.startsWith('http')) {
-    return `${BLOB_BASE_URL}${filename}`;
-  }
-
-  // Fallback to local
-  return `/assets/${filename}`;
+  // Always route to high-speed Vercel Blob CDN
+  const base = BLOB_BASE_URL.endsWith('/') ? BLOB_BASE_URL : `${BLOB_BASE_URL}/`;
+  return `${base}${filename}`;
 }
 
 /**

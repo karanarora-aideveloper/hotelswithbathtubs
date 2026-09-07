@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import Image from 'next/image';
 import OutboundLink from '@/components/OutboundLink';
+import ProgressiveImage from '@/components/ProgressiveImage';
 import { imageUrl } from '@/lib/imageUrl';
 
 type HotelData = {
@@ -22,37 +22,6 @@ type HotelData = {
   tubType?: string;
   bookingTip?: string;
 };
-
-const DEFAULT_HOTEL_IMAGE = 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
-
-function HotelCardImage({
-  src,
-  alt,
-  priority,
-}: {
-  src: string;
-  alt: string;
-  priority: boolean;
-}) {
-  const [imgSrc, setImgSrc] = useState(src);
-
-  return (
-    <Image
-      src={imgSrc}
-      alt={alt}
-      fill
-      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      className="object-cover group-hover:scale-105 transition-transform duration-500"
-      loading={priority ? undefined : 'lazy'}
-      priority={priority}
-      onError={() => {
-        if (imgSrc !== DEFAULT_HOTEL_IMAGE) {
-          setImgSrc(DEFAULT_HOTEL_IMAGE);
-        }
-      }}
-    />
-  );
-}
 
 export default function CityHotelsClient({
   hotels,
@@ -300,13 +269,16 @@ export default function CityHotelsClient({
             return (
               <div
                 key={h._id || i}
+                style={{ contentVisibility: 'auto', containIntrinsicSize: '420px' }}
                 className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group"
               >
                 <div className="relative overflow-hidden aspect-[16/10]">
-                  <HotelCardImage
-                    src={imageUrl(h.image)}
+                  <ProgressiveImage
+                    src={h.image}
                     alt={`${h.name} - Hotel with Bathtub in ${cityName}`}
                     priority={i < 2}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="group-hover:scale-105 transition-transform duration-500"
                   />
                   <span className="absolute top-4 left-4 bg-emerald-700/95 backdrop-blur-xs text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
