@@ -63,17 +63,17 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
 
-  // Title: "Bathtub Hotels in [City] for Couples" (~34-38 chars)
-  // Appends " | Hotels With Bathtubs" (+23 chars) from layout template -> Total: 54-60 chars (100% SERP fit)
-  const pageTitle = cityName.length > 11
-    ? `Bathtub Hotels in ${cityName}`
-    : `Bathtub Hotels in ${cityName} for Couples`;
-  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzis in ${cityName}, ${countryName}. Triple-checked for romantic couples stays.`;
+  // Title: "Hotels with Bathtub in [City] (X+ Stays for Couples)"
+  // Appends " | Hotels With Bathtubs" from layout template -> perfectly matches exact search intent
+  const pageTitle = cityName.length > 12
+    ? `Hotels with Bathtub in ${cityName} (${hotelCount}+ Stays)`
+    : `Hotels with Bathtub in ${cityName} (${hotelCount}+ Stays for Couples)`;
+  const pageDescription = `Find hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ triple-verified stays with private deep soaking tubs & jacuzzi suites for couples.`;
 
   return {
     title: pageTitle,
     description: pageDescription,
-    keywords: `hotels with bathtubs ${cityName}, hotels with jacuzzi in room ${cityName}, in room hot tub hotels ${cityName}, whirlpool suites ${cityName}, couple friendly bathtub hotels in ${cityName}, romantic hotels in ${cityName}, luxury jacuzzi suites ${cityName}, private hot tub in room ${cityName}`,
+    keywords: `hotels with bathtub in ${cityName}, hotel with bathtub in room ${cityName}, bathtub hotel in ${cityName}, couple friendly hotels with bathtub in ${cityName}, hotels with jacuzzi in room ${cityName}, private hot tub in room ${cityName}, whirlpool suites ${cityName}, romantic hotels in ${cityName}`,
     alternates: {
       canonical: `/${countrySlug}/${citySlug}`,
     },
@@ -268,7 +268,7 @@ export default async function CityHotelsPage({
                   <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated
                 </div>
                 <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-                  Bathtub Hotels in {cityName} for Couples
+                  Hotels with Bathtub in {cityName} for Couples &amp; Romantic Stays
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl font-medium opacity-90 max-w-2xl mx-auto">
                   {rawHotels.length}+ verified hotels with private in-room bathtubs &amp; jacuzzi suites in {cityName}, {countryName} — every listing triple-checked, no shared spa tubs.

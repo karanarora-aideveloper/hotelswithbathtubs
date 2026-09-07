@@ -105,6 +105,24 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // India - Lucknow
+  'lucknow-india': {
+    intro: 'Lucknow, the city of Nawabs, blends regal Awadhi heritage with contemporary five-star indulgence. Discover handpicked luxury hotels featuring private marble soaking tubs and jacuzzi suites curated for couples seeking an intimate staycation.',
+    amenities: [
+      'Palatial marble deep-soaking bathtubs',
+      'Gomti River-facing luxury jacuzzi suites',
+      'Spacious en-suite master bathrooms with rain showers',
+      'Aromatherapy bath oils and complimentary plush bathrobes',
+      'Romantic candlelit in-room bath preparations'
+    ],
+    whyChoose: [
+      'Regal Awadhi hospitality and world-famous culinary heritage',
+      'Prime Gomti Nagar riverfront and Hazratganj central locations',
+      'Ideal for couples anniversaries, honeymoons, and weekend staycations',
+      'Triple-verified across Booking.com, Agoda, and MakeMyTrip'
+    ]
+  },
+
   // India - Delhi
   'delhi-india': {
     intro: 'Delhi, the historic capital, offers premier 5-star luxury and boutique retreats with private in-room bathtubs and jacuzzis for couples and staycationers.',
@@ -926,7 +944,7 @@ export function generateCityPageContent(
   const whyChooseList = content.whyChoose.map(w => `<li>${w}</li>`).join('');
 
   return `
-    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Bathtub Hotels in ${formattedCity} for Couples</h2>
+    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Hotels with Bathtub in ${formattedCity} for Couples &amp; Jacuzzi Suites</h2>
     <p class="text-gray-700 leading-relaxed mb-4">${content.intro}</p>
     <p class="text-gray-700 leading-relaxed mb-6">Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across Booking.com, Agoda, and MakeMyTrip to guarantee private in-room tubs without misleading photos.</p>
     
