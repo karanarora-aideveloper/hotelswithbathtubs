@@ -23,6 +23,37 @@ type HotelData = {
   bookingTip?: string;
 };
 
+const DEFAULT_HOTEL_IMAGE = 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+
+function HotelCardImage({
+  src,
+  alt,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  priority: boolean;
+}) {
+  const [imgSrc, setImgSrc] = useState(src);
+
+  return (
+    <Image
+      src={imgSrc}
+      alt={alt}
+      fill
+      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      className="object-cover group-hover:scale-105 transition-transform duration-500"
+      loading={priority ? undefined : 'lazy'}
+      priority={priority}
+      onError={() => {
+        if (imgSrc !== DEFAULT_HOTEL_IMAGE) {
+          setImgSrc(DEFAULT_HOTEL_IMAGE);
+        }
+      }}
+    />
+  );
+}
+
 export default function CityHotelsClient({
   hotels,
   cityName,
@@ -272,13 +303,9 @@ export default function CityHotelsClient({
                 className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group"
               >
                 <div className="relative overflow-hidden aspect-[16/10]">
-                  <Image
+                  <HotelCardImage
                     src={imageUrl(h.image)}
                     alt={`${h.name} - Hotel with Bathtub in ${cityName}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading={i < 2 ? undefined : "lazy"}
                     priority={i < 2}
                   />
                   <span className="absolute top-4 left-4 bg-emerald-700/95 backdrop-blur-xs text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
