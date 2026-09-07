@@ -6,6 +6,7 @@ import Blog from '@/models/Blog';
 import Hotel from '@/models/Hotel';
 import { markdownToHtml } from '@/lib/markdown';
 import StructuredData from '@/components/StructuredData';
+import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 
 export async function generateStaticParams() {
   await connectToDatabase();
@@ -91,16 +92,29 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const htmlContent = markdownToHtml(blog.content);
 
   // Determine if this blog is strongly associated with a specific city
-  // by checking if the title contains a known city that we have hotels for.
+  // by checking if the title or slug contains a known city that we have hotels for.
   const allCities = await Hotel.distinct('city', { flagged: { $ne: true } });
-  let matchedCity = null;
+  let matchedCity: string | null = null;
+  let matchedCountrySlug: string = 'india';
   let matchedCityCount = 0;
-  
+
   for (const city of allCities) {
-    const regex = new RegExp(`\\b${city}\\b`, 'i');
-    if (regex.test(blog.title)) {
+    const regex = new RegExp(`\\b${escapeRegex(city)}\\b`, 'i');
+    if (regex.test(blog.title) || regex.test(blog.slug.replace(/-/g, ' '))) {
       matchedCity = city;
-      matchedCityCount = await Hotel.countDocuments({ city: new RegExp(`^${city}$`, 'i'), flagged: { $ne: true } });
+      const hotel = await Hotel.findOne({
+        city: new RegExp(`^${escapeRegex(city)}$`, 'i'),
+        flagged: { $ne: true }
+      }).select('country');
+      if (hotel && hotel.country) {
+        matchedCountrySlug = resolveCountry(hotel.country).slug;
+      } else {
+        matchedCountrySlug = inferCountry(city);
+      }
+      matchedCityCount = await Hotel.countDocuments({
+        city: new RegExp(`^${escapeRegex(city)}$`, 'i'),
+        flagged: { $ne: true }
+      });
       break;
     }
   }
@@ -229,7 +243,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   We have triple-verified {matchedCityCount}+ luxury hotels and boutique resorts in {matchedCity} that guarantee a private, in-room bathtub or jacuzzi for your romantic getaway.
                 </p>
                 <Link 
-                  href={`/${inferCountry(matchedCity)}/${matchedCity.toLowerCase().replace(/\\s+/g, '-')}`}
+                  href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
                   className="inline-block bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-xl transform hover:-translate-y-1"
                 >
                   View Bathtub Hotels in {matchedCity} &rarr;

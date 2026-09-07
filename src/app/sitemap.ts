@@ -15,9 +15,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const uniqueCountries = new Set<string>();
   const uniqueLocations = new Set<string>();
 
+  // Canonical mapping for consolidated neighborhoods to prevent emitting 301 redirects in sitemap
+  const neighborhoodCanonicalMap: Record<string, string> = {
+    'calangute': 'goa',
+    'panjim': 'goa',
+    'koramangala': 'bangalore',
+    'mahipalpur': 'delhi',
+    'paharganj': 'delhi',
+  };
+
   for (const h of hotels) {
+    if (!h.city || !h.country) continue;
     const countryInfo = resolveCountry(h.country);
-    const citySlug = slugify(h.city);
+    let citySlug = slugify(h.city);
+    if (neighborhoodCanonicalMap[citySlug]) {
+      citySlug = neighborhoodCanonicalMap[citySlug];
+    }
+    if (!countryInfo.slug || !citySlug) continue;
     uniqueCountries.add(countryInfo.slug);
     uniqueLocations.add(`${countryInfo.slug}/${citySlug}`);
   }
@@ -41,12 +55,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Fetch all published blogs
   const blogs = await Blog.find({ published: true }).select('slug updatedAt -_id');
   
-  const blogRoutes = blogs.map(blog => ({
-    url: `${baseUrl}/blog/${blog.slug}`,
-    lastModified: blog.updatedAt || new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  const blogRoutes = blogs
+    .filter(blog => blog.slug && blog.slug.trim() !== '')
+    .map(blog => ({
+      url: `${baseUrl}/blog/${blog.slug}`,
+      lastModified: blog.updatedAt || new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
 
   // 3. Define static routes
   const staticRoutes = [

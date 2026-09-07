@@ -13,14 +13,14 @@ export const revalidate = 3600; // Revalidate every hour
 // Page-level metadata — overrides layout.tsx defaults
 // Targeting "hotel with bathtub in room" (1,000/mo, $0.72 CPC, currently pos 15.9)
 export const metadata = {
-  title: 'Hotel with Bathtub in Room | 748+ Verified Stays Worldwide',
-  description: 'Find hotels with bathtub in room — 748+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private soaking tubs & jacuzzis in 60+ cities worldwide.',
+  title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
+  description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities worldwide.',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Hotel with Bathtub in Room | 748+ Verified Stays Worldwide',
-    description: 'Find hotels with bathtub in room — 748+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private soaking tubs & jacuzzis in 60+ cities.',
+    title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
+    description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -35,8 +35,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hotel with Bathtub in Room | 748+ Verified Stays Worldwide',
-    description: 'Find hotels with bathtub in room — 748+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private soaking tubs & jacuzzis in 60+ cities.',
+    title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
+    description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities.',
     images: ['https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -105,12 +105,15 @@ export default async function Home() {
     { name: 'Munnar', href: '/india/munnar' },
     { name: 'Jaipur', href: '/india/jaipur' },
     { name: 'Udaipur', href: '/india/udaipur' },
+    { name: 'New York', href: '/usa/new-york' },
+    { name: 'Las Vegas', href: '/usa/las-vegas' },
+    { name: 'Miami', href: '/usa/miami' },
+    { name: 'London', href: '/uk/london' },
+    { name: 'Paris', href: '/france/paris' },
     { name: 'Dubai', href: '/uae/dubai' },
     { name: 'Singapore', href: '/singapore/singapore' },
     { name: 'Bangkok', href: '/thailand/bangkok' },
     { name: 'Tokyo', href: '/japan/tokyo' },
-    { name: 'Paris', href: '/france/paris' },
-    { name: 'London', href: '/uk/london' },
     { name: 'Bali', href: '/indonesia/bali' },
   ];
 
@@ -139,7 +142,7 @@ export default async function Home() {
         "name": "Are hotels with bathtub in room more expensive?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not always. Many mid-range and boutique hotels include bathtubs in standard rooms. Our directory covers options from ₹2,500/night in India to luxury international suites across 60+ destinations."
+          "text": "Not always. Many mid-range and boutique hotels include bathtubs in standard rooms. Our directory covers options from ₹2,500/night in India to luxury international suites across 100+ destinations worldwide."
         }
       },
       {
@@ -147,7 +150,7 @@ export default async function Home() {
         "name": "Which cities have the most hotels with bathtubs in room?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "In India: Kolkata, Delhi, Goa, Jaipur, and Udaipur. Internationally: Dubai, Singapore, Bangkok, Tokyo, and London all have strong selections of luxury rooms with private in-room bathtubs."
+          "text": "In India: Kolkata, Delhi, Goa, Jaipur, and Udaipur. In the USA: New York, Las Vegas, Boston, Miami, and Los Angeles. Globally: London, Dubai, Paris, Singapore, Bangkok, and Tokyo all feature extensive selections of luxury rooms with private in-room bathtubs and jacuzzis."
         }
       }
     ]
