@@ -6,7 +6,7 @@ import Blog from '@/models/Blog';
 import Hotel from '@/models/Hotel';
 import { markdownToHtml } from '@/lib/markdown';
 import StructuredData from '@/components/StructuredData';
-import { imageUrl } from '@/lib/imageUrl';
+import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 
 export async function generateStaticParams() {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (blog) {
     const title = blog.title;
     const description = blog.excerpt || `Read our curated travel guide: ${blog.title}. Discover top romantic hotels with bathtubs and jacuzzis.`;
-    const ogImage = blog.image || 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+    const ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
 
     return {
       title,
@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "@type": "BlogPosting",
     "headline": blog.title,
     "description": blog.excerpt,
-    "image": blog.image || "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
+    "image": blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE,
     "datePublished": blog.date,
     "dateModified": blog.updatedAt || blog.date,
     "author": {
@@ -204,7 +204,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href="/blog" className="text-accent-secondary hover:underline">Blog</Link> &rsaquo; <span className="text-text-main line-clamp-1 inline">{blog.title}</span>
           </div>
 
-          <main className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
             <header className="mb-8 sm:mb-12 text-center border-b border-border pb-6 sm:pb-8">
               <div className="text-accent font-semibold text-xs sm:text-sm mb-3 sm:mb-4 tracking-wider uppercase">
                 Published on {blog.date} by {blog.author || 'Travel Editor'}
@@ -257,7 +257,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 &larr; Back to all articles
               </Link>
             </div>
-          </main>
+          </div>
 
           {/* Explore Blogs Section */}
           {relatedBlogs.length > 0 && (

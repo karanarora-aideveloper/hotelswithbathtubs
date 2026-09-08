@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Logo from './Logo';
 import { imageUrl } from '@/lib/imageUrl';
-import { headers } from 'next/headers';
 import { resolveCountry, slugify } from '@/lib/utils';
 
 // Region groupings for better destination scanning
@@ -151,10 +150,6 @@ function getUrlSlug(text: string) {
 }
 
 export default async function Footer() {
-  const headersList = await headers();
-  const pathname = headersList.get('x-pathname') || '';
-  const isBlogPage = pathname.startsWith('/blog');
-
   await connectToDatabase();
 
   // Fetch all unique cities from the DB. Excludes flagged hotels
@@ -220,7 +215,7 @@ export default async function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
 
         {/* Travel Blog Section - Visually Rich Editorial Cards */}
-        {recentBlogs.length > 0 && !isBlogPage && (
+        {recentBlogs.length > 0 && (
           <section className="mb-20 bg-white rounded-3xl p-6 sm:p-10 border border-border shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-gray-100">
               <div>
@@ -452,7 +447,7 @@ export default async function Footer() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href="#destinations"
+                href="/#destinations"
                 className="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
               >
                 <span>Browse All Destinations</span>

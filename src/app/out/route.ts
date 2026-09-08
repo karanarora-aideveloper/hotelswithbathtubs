@@ -35,8 +35,10 @@ export async function GET(request: NextRequest) {
       return new Response('Invalid redirect destination', { status: 400 });
     }
 
-    // Use 307 temporary redirect
-    return NextResponse.redirect(targetUrl, 307);
+    // Use 307 temporary redirect with X-Robots-Tag to ensure search bots never index redirect URLs
+    const response = NextResponse.redirect(targetUrl, 307);
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return response;
   } catch {
     return new Response('Invalid URL format', { status: 400 });
   }

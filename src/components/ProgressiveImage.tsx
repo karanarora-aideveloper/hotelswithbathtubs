@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
@@ -27,56 +27,13 @@ export default function ProgressiveImage({
   className = '',
   containerClassName = '',
 }: ProgressiveImageProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(priority);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imgSrc, setImgSrc] = useState(() => imageUrl(src));
+  const [imgError, setImgError] = useState(false);
 
-  // Sync state whenever src prop changes (e.g. user searches or filters)
-  useEffect(() => {
-    const nextUrl = imageUrl(src);
-    setImgSrc(nextUrl);
-    setIsLoaded(false);
-  }, [src]);
-
-  // Viewport IntersectionObserver with eager 350px preloading margin
-  useEffect(() => {
-    if (priority || isInView) return;
-
-    const el = containerRef.current;
-    if (!el) return;
-
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      setIsInView(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      {
-        rootMargin: '350px 0px', // Eagerly trigger download 350px before entering viewport
-        threshold: 0.01,
-      }
-    );
-
-    observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [priority, isInView]);
+  const resolvedUrl = imgError ? DEFAULT_HOTEL_IMAGE : imageUrl(src);
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative w-full h-full overflow-hidden bg-gray-100 ${containerClassName}`}
-    >
+    <div className={`relative w-full h-full overflow-hidden bg-gray-100 ${containerClassName}`}>
       {/* Skeleton Shimmer Placeholder with Subtle Bathtub Watermark */}
       {!isLoaded && (
         <div className="absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-r from-gray-100 via-gray-200/60 to-gray-100 animate-pulse">
@@ -91,29 +48,24 @@ export default function ProgressiveImage({
         </div>
       )}
 
-      {/* Optimized Image with Smooth Fade-in */}
-      {isInView && (
-        <Image
-          src={imgSrc}
-          alt={alt}
-          fill={fill}
-          width={!fill ? width : undefined}
-          height={!fill ? height : undefined}
-          sizes={sizes}
-          priority={priority}
-          loading={priority ? undefined : 'lazy'}
-          decoding="async"
-          onLoad={() => setIsLoaded(true)}
-          onError={() => {
-            if (imgSrc !== DEFAULT_HOTEL_IMAGE) {
-              setImgSrc(DEFAULT_HOTEL_IMAGE);
-            }
-          }}
-          className={`object-cover transition-opacity duration-300 ease-out ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          } ${className}`}
-        />
-      )}
+      {/* Optimized Image with native lazy loading and SSR inclusion */}
+      <Image
+        src={resolvedUrl}
+        alt={alt}
+        fill={fill}
+        width={!fill ? width : undefined}
+        height={!fill ? height : undefined}
+        sizes={sizes}
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setImgError(true)}
+        className={`object-cover transition-opacity duration-300 ease-out ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        } ${className}`}
+      />
     </div>
   );
 }
+

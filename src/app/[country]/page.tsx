@@ -178,7 +178,20 @@ export default async function CountryHubPage({
             </div>
           </header>
 
-          <main className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+          <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+            {/* Country Hub Editorial Context */}
+            <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-6 sm:p-8 shadow-xs mb-12">
+              <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
+                Why Book a Bathtub Hotel in {countryName}?
+              </h2>
+              <p className="text-gray-700 leading-relaxed mb-3">
+                Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Every property featured across our {countryName} destinations is triple-verified across MakeMyTrip, Agoda, and Booking.com to confirm that your chosen room tier guarantees a private in-room soaking tub or whirlpool jacuzzi.
+              </p>
+            </div>
+
             <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
               <div>
                 <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">Romantic Destinations</h2>
@@ -198,7 +211,7 @@ export default async function CountryHubPage({
                 />
               ))}
             </div>
-          </main>
+          </section>
         </>
       </StructuredData>
     </StructuredData>

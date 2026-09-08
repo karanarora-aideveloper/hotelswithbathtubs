@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/admin/', '/api/', '/out'],
+      disallow: ['/admin', '/api', '/out'],
     },
     sitemap: 'https://www.hotelswithbathtubs.com/sitemap.xml',
   };

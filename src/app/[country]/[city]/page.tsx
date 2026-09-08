@@ -140,6 +140,12 @@ export default async function CityHotelsPage({
     description: h.description || '',
     rating: h.rating,
     reviewsCount: h.reviewsCount,
+    roomType: h.roomType,
+    tubType: h.tubType,
+    bookingTip: h.bookingTip,
+    price: h.price,
+    neighborhood: h.neighborhood,
+    landmarkDistance: h.landmarkDistance,
   }));
 
   // Fetch related blogs where title or slug contains the city name
@@ -186,11 +192,13 @@ export default async function CityHotelsPage({
     "itemListElement": hotels.map((h, idx) => ({
       "@type": "ListItem",
       "position": idx + 1,
+      "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
+      "name": h.name,
       "item": {
         "@type": "Hotel",
         "name": h.name,
-        "description": h.description || `Luxury hotel with private in-room bathtub in ${cityName}`,
-        "image": imageUrl(h.image.split('/').pop() || 'placeholder.webp'),
+        "description": h.description || `Verified hotel with private in-room bathtub in ${cityName}`,
+        "image": imageUrl(h.image?.split('/').pop() || ''),
         "address": {
           "@type": "PostalAddress",
           "addressLocality": cityName,
@@ -200,67 +208,19 @@ export default async function CityHotelsPage({
           "@type": "LocationFeatureSpecification",
           "name": a,
           "value": true
-        })),
-        ...(h.rating && h.reviewsCount ? {
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": h.rating,
-            "reviewCount": h.reviewsCount,
-            "bestRating": h.rating <= 5 ? "5" : "10",
-            "worstRating": "1"
-          }
-        } : {})
+        }))
       }
     }))
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Top verified properties with in-room bathtubs and jacuzzis in ${cityName} include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings are verified across MakeMyTrip, Agoda, and Booking.com.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Are these bathtub hotels in ${cityName} couple-friendly?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, verified hotels in ${cityName} featured on our platform welcome couples and provide private, secluded bathtub or jacuzzi suites. We recommend carrying valid government photo IDs for check-in.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `How do I ensure my booked room in ${cityName} includes a bathtub?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Not all room tiers in a hotel include bathtubs. When booking, select specific room categories such as 'Suite with Bathtub', 'Jacuzzi Suite', or 'Executive Premier' to guarantee your private tub.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Are there budget-friendly hotels with bathtubs in ${cityName}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${cityName} features a mix of boutique lodges, 4-star hotels, and 5-star luxury resorts offering in-room bathtubs across varying budget ranges.`
-        }
-      }
-    ]
-  };
-
   return (
-    <StructuredData data={breadcrumbSchema}>
-      <StructuredData data={hotelListSchema}>
-        <StructuredData data={faqSchema}>
-          <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
-              <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link> &rsaquo; Hotels with Bathtubs in {cityName}
-            </div>
+    <>
+      <StructuredData data={breadcrumbSchema} />
+      <StructuredData data={hotelListSchema} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
+        <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link> &rsaquo; Hotels with Bathtubs in {cityName}
+      </div>
 
             <header className="relative py-20 sm:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
               <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
@@ -307,7 +267,14 @@ export default async function CityHotelsPage({
               </div>
             </section>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
+            {/* Editorial & Affiliate Disclosure */}
+            <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-4 mb-8 text-center">
+              <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
+                <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, or MakeMyTrip, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
+              </p>
+            </div>
+
+            <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
               <CityHotelsClient
                 hotels={hotels}
                 cityName={cityName}
@@ -451,10 +418,7 @@ export default async function CityHotelsPage({
                   </section>
                 );
               })()}
-            </main>
+            </section>
           </>
-        </StructuredData>
-      </StructuredData>
-    </StructuredData>
   );
 }

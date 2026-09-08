@@ -23,9 +23,6 @@ export const metadata: Metadata = {
     default: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
   },
   description: "Discover 748+ verified hotels with private in-room bathtubs and jacuzzis across 60+ destinations. Triple-verified across MakeMyTrip, Agoda & Booking.com for romantic getaways.",
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
     description: "Discover 748+ verified hotels with private in-room bathtubs and jacuzzis across 60+ destinations. Triple-verified on MakeMyTrip, Agoda & Booking.com.",

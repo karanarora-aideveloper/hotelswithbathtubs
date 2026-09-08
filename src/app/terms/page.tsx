@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function TermsOfService() {
   return (
     <div className="bg-bg-main py-12 md:py-20 min-h-[80vh]">
-      <main className="max-w-4xl mx-auto px-6 md:px-12 bg-white md:rounded-3xl shadow-sm border border-border pb-16 pt-10">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 bg-white md:rounded-3xl shadow-sm border border-border pb-16 pt-10">
         <header className="mb-10 border-b border-border pb-8">
           <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4">
             Terms of Service
@@ -34,7 +34,7 @@ export default function TermsOfService() {
             While we strive to ensure the information on our website is accurate and up-to-date, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or availability with respect to the website or the information, products, services, or related graphics contained on the website.
           </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -13,14 +13,14 @@ export const revalidate = 3600; // Revalidate every hour
 // Page-level metadata — overrides layout.tsx defaults
 // Targeting "hotel with bathtub in room" (1,000/mo, $0.72 CPC, currently pos 15.9)
 export const metadata = {
-  title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
-  description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities worldwide.',
+  title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
+  description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
-    description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities.',
+    title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
+    description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -35,8 +35,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hotel with Bathtub in Room | 725+ Verified Stays Worldwide',
-    description: 'Find hotels with bathtub in room — 725+ stays triple-verified across Booking.com, Agoda & MakeMyTrip. Private deep soaking tubs & jacuzzi suites in 100+ cities.',
+    title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
+    description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
     images: ['https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -297,7 +297,7 @@ export default async function Home() {
           </section>
 
           {/* Main Destination Discovery Hub */}
-          <main id="destinations" className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-16 scroll-mt-24">
+          <section id="destinations" className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-16 scroll-mt-24">
             {/* India Destinations Section */}
             {indiaCities.length > 0 && (
               <div>
@@ -367,7 +367,7 @@ export default async function Home() {
               </div>
             )}
             {/* FAQ Section — targets "hotel with bathtub in room" long-tail + enables FAQPage schema */}
-            <section aria-label="Frequently Asked Questions" className="max-w-3xl mx-auto">
+            <section id="faq" aria-label="Frequently Asked Questions" className="max-w-3xl mx-auto">
               <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary mb-6">
                 Hotel with Bathtub in Room — Common Questions
               </h2>
@@ -404,7 +404,7 @@ export default async function Home() {
                 ))}
               </div>
             </section>
-          </main>
+          </section>
         </>
       </StructuredData>
     </StructuredData>

@@ -944,7 +944,7 @@ export function generateCityPageContent(
   const whyChooseList = content.whyChoose.map(w => `<li>${w}</li>`).join('');
 
   return `
-    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Hotels with Bathtub in ${formattedCity} for Couples &amp; Jacuzzi Suites</h2>
+    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Why Book a Hotel Room with a Bathtub in ${formattedCity}, ${formattedCountry}?</h2>
     <p class="text-gray-700 leading-relaxed mb-4">${content.intro}</p>
     <p class="text-gray-700 leading-relaxed mb-6">Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across Booking.com, Agoda, and MakeMyTrip to guarantee private in-room tubs without misleading photos.</p>
     

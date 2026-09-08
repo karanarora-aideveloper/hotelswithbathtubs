@@ -34,6 +34,11 @@ export function imageUrl(src?: string): string {
     return trimmed;
   }
 
+  // If local static asset in public/assets or public/images, preserve it
+  if (trimmed.startsWith('/assets/') || trimmed.startsWith('/images/')) {
+    return trimmed;
+  }
+
   // Extract clean filename from /assets/path or path
   const filename = trimmed.replace(/^\/assets\//, '').replace(/^\/+/, '');
 

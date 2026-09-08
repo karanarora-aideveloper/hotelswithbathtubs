@@ -12,12 +12,12 @@ export const metadata: Metadata = {
 export default function AffiliatePolicy() {
   return (
     <div className="bg-bg-main py-12 md:py-20 min-h-[80vh]">
-      <main className="max-w-4xl mx-auto px-6 md:px-12 bg-white md:rounded-3xl shadow-sm border border-border pb-16 pt-10">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 bg-white md:rounded-3xl shadow-sm border border-border pb-16 pt-10">
         <header className="mb-10 border-b border-border pb-8">
           <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4">
-            Affiliate Policy & Disclosure
+            Affiliate Policy &amp; Disclosure
           </h1>
-          <p className="text-text-muted">Last updated: August 2026</p>
+          <p className="text-text-muted">Last updated: September 2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-accent-secondary prose-p:text-text-main prose-a:text-accent hover:prose-a:text-accent-hover">
@@ -47,10 +47,13 @@ export default function AffiliatePolicy() {
 
           <h2>Questions?</h2>
           <p>
-            If you have any questions regarding our affiliate relationships or how our platform operates, please feel free to <Link href="#">contact us</Link>. Your trust is paramount to us, and we are committed to complete transparency.
+            If you have any questions regarding our affiliate relationships or how our platform operates, please feel free to{' '}
+            <a href="mailto:editorial@hotelswithbathtubs.com" className="text-accent hover:underline font-semibold">
+              contact our editorial team
+            </a>. Your trust is paramount to us, and we are committed to complete transparency.
           </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

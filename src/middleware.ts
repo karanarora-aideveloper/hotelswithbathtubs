@@ -25,11 +25,12 @@ export function middleware(req: NextRequest) {
   if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
     const basicAuth = req.headers.get('authorization');
 
-    const adminUser = process.env.ADMIN_USER || 'admin';
-    const adminPass = process.env.ADMIN_PASS || 'bathtubs2026';
+    const adminUser = process.env.ADMIN_USER;
+    const adminPass = process.env.ADMIN_PASS;
 
-    if (!process.env.ADMIN_USER || !process.env.ADMIN_PASS) {
-      console.warn('⚠️ ADMIN_USER or ADMIN_PASS environment variables are not set. Using fallback credentials.');
+    // Never expose an admin endpoint with predictable fallback credentials.
+    if (!adminUser || !adminPass) {
+      return new NextResponse('Admin authentication is not configured', { status: 503 });
     }
 
     const expectedAuth = `Basic ${Buffer.from(`${adminUser}:${adminPass}`).toString('base64')}`;

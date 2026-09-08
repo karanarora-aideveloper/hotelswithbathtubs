@@ -21,6 +21,9 @@ type HotelData = {
   roomType?: string;
   tubType?: string;
   bookingTip?: string;
+  price?: string;
+  neighborhood?: string;
+  landmarkDistance?: string;
 };
 
 export default function CityHotelsClient({
@@ -280,10 +283,12 @@ export default function CityHotelsClient({
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="group-hover:scale-105 transition-transform duration-500"
                   />
-                  <span className="absolute top-4 left-4 bg-emerald-700/95 backdrop-blur-xs text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                    <span>✓ Verified on {verifiedSources.join(', ')}</span>
-                  </span>
+                  {verifiedSources.length > 0 && (
+                    <span className="absolute top-4 left-4 bg-emerald-700/95 backdrop-blur-xs text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                      <span>✓ Verified on {verifiedSources.join(', ')}</span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
@@ -295,12 +300,17 @@ export default function CityHotelsClient({
                       <span className="text-text-muted text-xs font-normal">({h.reviewsCount} verified reviews)</span>
                     </div>
                   )}
-                  <p className="text-sm text-text-muted font-medium mb-3 flex items-center gap-1">
+                  <p className="text-sm text-text-muted font-medium mb-3 flex items-center gap-1.5 flex-wrap">
                     <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <span>{cityName}, {countryName}</span>
+                    <span className="font-semibold text-gray-800">{h.neighborhood ? `${h.neighborhood}, ${cityName}` : `${cityName}, ${countryName}`}</span>
+                    {h.landmarkDistance && (
+                      <span className="text-2xs text-text-muted font-normal bg-gray-100 px-2 py-0.5 rounded-md">
+                        {h.landmarkDistance}
+                      </span>
+                    )}
                   </p>
 
                   {/* Room Category & Tub Badges */}
@@ -331,7 +341,7 @@ export default function CityHotelsClient({
                     </div>
                   )}
 
-                  <ul className="mt-auto border-t border-border pt-4 mb-6 space-y-2">
+                  <ul className="mt-auto border-t border-border pt-4 mb-4 space-y-2">
                     {h.amenities.map((amenity: string, idx: number) => {
                       const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub');
                       return (
@@ -344,6 +354,17 @@ export default function CityHotelsClient({
                       );
                     })}
                   </ul>
+
+                  {/* Starting Price & Outbound Booking Actions */}
+                  {h.price && (
+                    <div className="flex items-baseline justify-between py-2 border-t border-dashed border-gray-200 mb-3">
+                      <span className="text-2xs uppercase tracking-wider text-text-muted font-bold">Rates From</span>
+                      <div className="text-right">
+                        <span className="text-lg font-black text-accent-secondary">{h.price}</span>
+                        <span className="text-2xs text-text-muted ml-1">/ night</span>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex flex-col gap-2">
                     {[h.url, h.agodaUrl, h.bookingUrl]
