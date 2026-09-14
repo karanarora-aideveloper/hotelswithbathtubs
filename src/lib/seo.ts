@@ -480,6 +480,23 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // France - Paris
+  'paris-france': {
+    intro: 'Paris, the City of Light and romance, offers timeless palace hotels and boutique Haussmannian suites. Indulge in Carrara marble soaking tubs overlooking the Eiffel Tower, Place Vendôme, and private courtyard gardens.',
+    amenities: [
+      'Eiffel Tower-facing freestanding marble soaking tubs',
+      'Historic Place Vendôme palace suites with deep bathtubs',
+      'Art Deco mosaic bathrooms with Diptyque and Guerlain bath rituals',
+      'Private two-person whirlpool tubs in luxury Saint-Germain retreats'
+    ],
+    whyChoose: [
+      'The world’s undisputed capital of romance and anniversary celebrations',
+      'Michelin three-star dining, Seine river cruises, and Louvre access',
+      'Storied historic palaces where legendary artists and icons stayed',
+      'Triple-verified room tiers with guaranteed in-room bathtubs'
+    ]
+  },
+
   // Italy - Rome
   'rome-italy': {
     intro: 'Rome, the Eternal City, provides an unforgettable setting for romance. Stay in converted Renaissance palazzos and luxury retreats near the Spanish Steps featuring Carrara marble mosaic bathtubs and private whirlpools.',
@@ -562,6 +579,40 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Traditional Kaiseki multi-course fine dining',
       'Private natural thermal onsen waters inside your suite',
       'Verified accommodations across top booking channels'
+    ]
+  },
+
+  // Japan - Tokyo
+  'tokyo-japan': {
+    intro: 'Tokyo combines futuristic neon-lit cityscapes with refined traditional Japanese bath culture (ofuro). Relax in high-rise skyscraper suites featuring panoramic skyline bathtubs with views of Mount Fuji and Tokyo Tower.',
+    amenities: [
+      'High-rise deep soaking bathtubs with Tokyo Tower and Mount Fuji views',
+      'Aromatic traditional Hinoki cedarwood baths with seasonal yuzu citrus',
+      'Granite-clad spa bathrooms with built-in mist saunas',
+      'Japanese bath salts and luxurious silk robes'
+    ],
+    whyChoose: [
+      'Mesmerizing glittering night panoramas from your private bath',
+      'World-leading Michelin-starred culinary dining in Ginza and Roppongi',
+      'Serene oasis of calm soaring high above the bustling metropolis',
+      'Triple-verified room tiers with guaranteed private tubs'
+    ]
+  },
+
+  // Malaysia - Kuala Lumpur
+  'kuala-lumpur-malaysia': {
+    intro: 'Kuala Lumpur offers dazzling modern skylines and tropical luxury. Discover premier suites with deep soaking bathtubs directly overlooking the illuminated Petronas Twin Towers and lush KLCC Park greenery.',
+    amenities: [
+      'Petronas Twin Towers-facing private soaking bathtubs',
+      'Luxury marble bathrooms with separate rain showers and soaking tubs',
+      'High-floor jetted jacuzzi suites with city skyline panoramas',
+      'Spa-grade bath amenities and aromatherapy infusions'
+    ],
+    whyChoose: [
+      'Unrivaled views of the world’s most iconic twin skyscrapers',
+      'Exceptional luxury value for 5-star suites and rooftop infinity pools',
+      'Vibrant shopping in Bukit Bintang and world-renowned street dining',
+      'Guaranteed room tier verification across top booking platforms'
     ]
   },
 
@@ -837,6 +888,57 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // India - Ooty
+  'ooty-india': {
+    intro: 'Ooty (Udhagamandalam), the Queen of Hill Stations in the Nilgiris, is India’s premier romantic mountain escape. Experience British colonial heritage suites with working wood fireplaces, clawfoot soaking bathtubs, and mist-wrapped tea garden vistas.',
+    amenities: [
+      'Authentic cast-iron clawfoot bathtubs and working fireplaces',
+      'Tea estate-facing deep soaking tubs with panoramic valley views',
+      'Heated whirlpool jacuzzi baths for chilly Nilgiri evenings',
+      'Aromatic Nilgiri eucalyptus and lavender bath preparations'
+    ],
+    whyChoose: [
+      'South India’s most celebrated honeymoon and couple sanctuary',
+      'Crisp mountain air, botanical gardens, and Nilgiri Mountain Railway',
+      'Historic 19th-century colonial luxury heritage estates',
+      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // India - Matheran
+  'matheran-india': {
+    intro: 'Matheran, Asia’s only automobile-free hill station, offers peaceful seclusion surrounded by dense Sahyadri forests. Relax in historic heritage bungalows and boutique retreats featuring private soaking tubs and jacuzzi suites.',
+    amenities: [
+      'Dense forest-view private soaking bathtubs',
+      'Jetted whirlpool jacuzzis for relaxing couple getaways',
+      'Colonial heritage veranda suites with classic rolltop tubs',
+      'Aromatherapy bath salts and tranquil nature sounds'
+    ],
+    whyChoose: [
+      '100% pollution-free, vehicle-free peace just 2 hours from Mumbai and Pune',
+      'Scenic red-soil trails, Charlotte Lake, and breathtaking cliffside lookouts',
+      'Charming heritage bungalows dating back to 1854',
+      'Verified in-room tub amenities guaranteed upon booking'
+    ]
+  },
+
+  // India - Saputara
+  'saputara-india': {
+    intro: 'Saputara, Gujarat’s picturesque hill station tucked in the Sahyadri ranges, provides a refreshing romantic retreat. Unwind in lakeview suites and scenic mountain resorts featuring private deep soaking bathtubs and hydrotherapy baths.',
+    amenities: [
+      'Saputara Lake-facing deep soaking bathtubs',
+      'Mountain ridge-view suites with private whirlpool baths',
+      'Spacious modern marble bathrooms with rainfall showers',
+      'Herbal bath amenities and scenic balcony seating'
+    ],
+    whyChoose: [
+      'Gujarat’s sole hill station with pleasant year-round mountain climate',
+      'Saputara Lake boating, ropeway rides, and sunset viewpoints',
+      'Peaceful weekend respite for couples from Surat, Ahmedabad, and Mumbai',
+      'Accurate room tier verification with guaranteed private bathtubs'
+    ]
+  },
+
   // USA - Aspen
   'aspen-usa': {
     intro: 'Aspen combines world-class Canadian Rockies skiing with bespoke alpine glamor. Unwind in ski-in/ski-out five-star chalets featuring Holly Hunt design, deep soaking bathtubs, heated marble floors, and roaring gas fireplaces.',
@@ -936,6 +1038,57 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class 18th & Vine jazz clubs and celebrated culinary scene',
       'Spacious romantic suites with exceptional Midwestern hospitality',
       'Verified partner booking links with guaranteed in-room tubs'
+    ]
+  },
+
+  // USA - Orlando
+  'orlando-usa': {
+    intro: 'Orlando is renowned for world-class theme parks, but its luxury resort enclaves offer some of Florida’s most romantic couple retreats. Unwind in five-star suites featuring freestanding marble bathtubs, private lakefront balconies, and fireworks views.',
+    amenities: [
+      'Freestanding Italian marble soaking tubs with Disney fireworks views',
+      'Private jetted whirlpool jacuzzi suites in luxury Bonnet Creek resorts',
+      'Adult-only oasis pool sanctuaries with private cabanas',
+      'Designer bathroom amenities by Salvatore Ferragamo and Le Labo'
+    ],
+    whyChoose: [
+      'World-class AAA Five Diamond lakeside luxury resorts and spas',
+      'Michelin-starred dining and championship golf at your doorstep',
+      'Quiet luxury retreats secluded from theme park bustle',
+      'Triple-verified in-room tubs guaranteed across booking partners'
+    ]
+  },
+
+  // USA - Scottsdale
+  'scottsdale-usa': {
+    intro: 'Scottsdale blends dramatic Sonoran Desert landscapes with premier spa wellness and luxury living. Relax in private casitas and suites featuring deep soaking bathtubs, outdoor shower courtyards, and Camelback Mountain panoramas.',
+    amenities: [
+      'Camelback Mountain-facing deep soaking tubs and private patios',
+      'Sonoran Desert adobe casitas with kiva fireplaces and spa baths',
+      'Outdoor stone soaking bathtubs under starry Arizona skies',
+      'Botanical desert bath salts and soothing agave spa rituals'
+    ],
+    whyChoose: [
+      'America’s premier desert resort and wellness spa destination',
+      'Dramatic terracotta sunrises and Old Town Scottsdale dining',
+      'World-famous golf and luxury poolside cabanas',
+      'Guaranteed in-room tubs with confirmed room tiers'
+    ]
+  },
+
+  // USA - Lake Tahoe
+  'lake-tahoe-usa': {
+    intro: 'Lake Tahoe offers pristine alpine waters and dramatic Sierra Nevada mountain peaks. Discover romantic lakefront lodges and mountain chalets featuring deep jetted whirlpool tubs, stone fireplaces, and heated bathroom floors.',
+    amenities: [
+      'Deep jetted whirlpool bathtubs overlooking sapphire Lake Tahoe',
+      'Outdoor private balcony soaking tubs nestled among towering Sierra pines',
+      'Cozy stone gas fireplaces adjacent to oversized soaking tubs',
+      'Heated bathroom floors and plush alpine down robes'
+    ],
+    whyChoose: [
+      'Crystal-clear alpine lake shores and world-renowned ski slopes',
+      'Cozy fireside romance for winter getaways and summer beach retreats',
+      'Slope-side ski-in/ski-out five-star lodges and private cottages',
+      'Accurate room tier verification with guaranteed private bathtubs'
     ]
   },
 
