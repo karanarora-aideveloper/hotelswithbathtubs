@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "/Users/karanarora/mystartups/deploy.sh"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1131.0",
