@@ -35,6 +35,15 @@ const CITY_TO_COUNTRY: Record<string, string> = {
   'Rome': 'italy', 'Barcelona': 'spain', 'Amsterdam': 'netherlands'
 };
 
+const CITY_ALIASES: Record<string, string> = {
+  'nyc': 'New York',
+  'new-york-city': 'New York',
+  'vegas': 'Las Vegas',
+  'la': 'Los Angeles',
+  'sf': 'San Francisco',
+  'nola': 'New Orleans',
+};
+
 function inferCountry(cityName: string): string {
   return CITY_TO_COUNTRY[cityName] || 'india';
 }
@@ -111,25 +120,42 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   let matchedCountrySlug: string = 'india';
   let matchedCityCount = 0;
 
-  for (const city of allCities) {
-    const regex = new RegExp(`\\b${escapeRegex(city)}\\b`, 'i');
-    if (regex.test(blog.title) || regex.test(blog.slug.replace(/-/g, ' '))) {
-      matchedCity = city;
-      const hotel = await Hotel.findOne({
-        city: new RegExp(`^${escapeRegex(city)}$`, 'i'),
-        flagged: { $ne: true }
-      }).select('country');
-      if (hotel && hotel.country) {
-        matchedCountrySlug = resolveCountry(hotel.country).slug;
-      } else {
-        matchedCountrySlug = inferCountry(city);
-      }
-      matchedCityCount = await Hotel.countDocuments({
-        city: new RegExp(`^${escapeRegex(city)}$`, 'i'),
-        flagged: { $ne: true }
-      });
+  // Check known aliases first (e.g. NYC -> New York)
+  const slugLower = blog.slug.toLowerCase();
+  const titleLower = blog.title.toLowerCase();
+  for (const [alias, canonicalCity] of Object.entries(CITY_ALIASES)) {
+    const aliasRegex = new RegExp(`\\b${escapeRegex(alias)}\\b`, 'i');
+    if (aliasRegex.test(titleLower) || aliasRegex.test(slugLower.replace(/-/g, ' '))) {
+      matchedCity = canonicalCity;
       break;
     }
+  }
+
+  // Fallback to exact city name scan
+  if (!matchedCity) {
+    for (const city of allCities) {
+      const regex = new RegExp(`\\b${escapeRegex(city)}\\b`, 'i');
+      if (regex.test(blog.title) || regex.test(blog.slug.replace(/-/g, ' '))) {
+        matchedCity = city;
+        break;
+      }
+    }
+  }
+
+  if (matchedCity) {
+    const hotel = await Hotel.findOne({
+      city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
+      flagged: { $ne: true }
+    }).select('country');
+    if (hotel && hotel.country) {
+      matchedCountrySlug = resolveCountry(hotel.country).slug;
+    } else {
+      matchedCountrySlug = inferCountry(matchedCity);
+    }
+    matchedCityCount = await Hotel.countDocuments({
+      city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
+      flagged: { $ne: true }
+    });
   }
 
   // Structured Data Schemas
