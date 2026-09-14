@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-  // Extract headers injected by Vercel
-  const country = request.headers.get('x-vercel-ip-country') || 'India';
-  let city = request.headers.get('x-vercel-ip-city') || '';
+  // Extract headers injected by Vercel or Cloudflare
+  const countryCode = (
+    request.headers.get('x-vercel-ip-country') ||
+    request.headers.get('cf-ipcountry') ||
+    'US'
+  ).toUpperCase();
   
-  // Clean up URL encoding if necessary
+  let city = request.headers.get('x-vercel-ip-city') || '';
   if (city) {
     city = decodeURIComponent(city);
   }
 
-  // Next.js automatically maps ISO country codes in `x-vercel-ip-country` (e.g. "IN" -> "India")
-  // Wait, x-vercel-ip-country returns the ISO code (e.g., 'US', 'IN').
-  // Let's map a few common ones, or default to India.
   const countryMap: Record<string, string> = {
     'IN': 'India',
     'US': 'USA',
@@ -29,12 +29,18 @@ export async function GET(request: Request) {
     'GR': 'Greece',
     'CH': 'Switzerland',
     'CA': 'Canada',
+    'AU': 'Australia',
   };
 
-  const fullCountryName = countryMap[country] || 'India';
+  const isIndia = countryCode === 'IN';
+  const isUS = countryCode === 'US';
+  const fullCountryName = countryMap[countryCode] || (isIndia ? 'India' : 'USA');
 
   return NextResponse.json({
+    countryCode,
     country: fullCountryName,
-    city: city
+    city,
+    isIndia,
+    isUS,
   });
 }

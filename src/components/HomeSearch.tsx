@@ -4,11 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import { useGeo } from '@/lib/useGeo';
 
 type Match = { country: string; city: string };
 
 export default function HomeSearch() {
   const router = useRouter();
+  const { geo } = useGeo();
   const [locations, setLocations] = useState<Record<string, string[]>>({});
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -121,7 +123,11 @@ export default function HomeSearch() {
             }}
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
-            placeholder="Search cities we cover (e.g. Lucknow, Goa, Delhi)..."
+            placeholder={
+              geo.isIndia
+                ? "Search cities with in-room bathtubs (e.g. Goa, Udaipur, Manali)..."
+                : "Search cities with in-room bathtubs (e.g. New York, Las Vegas, Miami)..."
+            }
             className="w-full px-4 md:px-6 py-3 md:py-4 text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all"
           />
 

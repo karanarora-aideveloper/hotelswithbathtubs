@@ -2,9 +2,10 @@ import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Link from 'next/link';
 import HomeSearch from '@/components/HomeSearch';
+import HomeGeoShortcuts from '@/components/HomeGeoShortcuts';
+import HomeDestinationsClient from '@/components/HomeDestinationsClient';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
-import CityCard from '@/components/CityCard';
 
 // Force dynamic or revalidate since it's a directory
 export const revalidate = 3600; // Revalidate every hour
@@ -124,24 +125,6 @@ export default async function Home() {
     "areaServed": "Worldwide"
   };
 
-  // Popular inspiration quick links for above-the-fold — prioritized for high-intent US & global searches
-  const popularShortcuts = [
-    { name: 'New York', href: '/usa/new-york' },
-    { name: 'Las Vegas', href: '/usa/las-vegas' },
-    { name: 'Miami', href: '/usa/miami' },
-    { name: 'Los Angeles', href: '/usa/los-angeles' },
-    { name: 'Chicago', href: '/usa/chicago' },
-    { name: 'London', href: '/uk/london' },
-    { name: 'Paris', href: '/france/paris' },
-    { name: 'Dubai', href: '/uae/dubai' },
-    { name: 'Goa', href: '/india/goa' },
-    { name: 'Udaipur', href: '/india/udaipur' },
-    { name: 'Manali', href: '/india/manali' },
-    { name: 'Singapore', href: '/singapore/singapore' },
-    { name: 'Tokyo', href: '/japan/tokyo' },
-    { name: 'Bali', href: '/indonesia/bali' },
-  ];
-
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -209,28 +192,8 @@ export default async function Home() {
           <div className="relative z-20 max-w-4xl mx-4 md:mx-auto -mt-20 bg-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-black/5">
             <HomeSearch />
             
-            {/* Above-The-Fold Inspiration Shortcuts */}
-            <div className="mt-4 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-text-muted font-medium">Popular:</span>
-                {popularShortcuts.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="px-2.5 py-1 bg-gray-100 hover:bg-accent-secondary hover:text-white rounded-lg text-accent-secondary font-semibold transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-              <a 
-                href="#destinations" 
-                className="text-accent font-bold hover:underline inline-flex items-center gap-1 ml-auto sm:ml-0"
-              >
-                <span>Browse All Destinations</span>
-                <span>↓</span>
-              </a>
-            </div>
+            {/* Above-The-Fold Inspiration Shortcuts (Geo-Adaptive) */}
+            <HomeGeoShortcuts />
           </div>
 
           {/* Trust Strip with Clean Trust Badges */}
@@ -320,104 +283,13 @@ export default async function Home() {
             </div>
           </section>
 
-          {/* Main Destination Discovery Hub */}
+          {/* Main Destination Discovery Hub (Geo-Adaptive & Interactive Tabs) */}
           <section id="destinations" className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-16 scroll-mt-24">
-            {/* United States Destinations Section */}
-            {usaCities.length > 0 && (
-              <div>
-                <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
-                  <div>
-                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">United States Luxury Escapes</h2>
-                    <p className="text-text-muted text-sm mt-1">Discover premier American city breaks and romantic retreats featuring verified in-room jacuzzis &amp; deep soaking tubs</p>
-                  </div>
-                  <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full">
-                    {usaCities.length} US Destinations
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                  {usaCities.map((item: any, idx: number) => (
-                    <CityCard
-                      key={`${item._id.city}-${item._id.country}`}
-                      city={item._id.city}
-                      country={item._id.country}
-                      hotelCount={item.hotelCount}
-                      image={item.image}
-                      isInternational={true}
-                      priority={idx < 4}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-            {/* International Romantic Destinations Section */}
-            {internationalCities.length > 0 && (
-              <div>
-                <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
-                  <div>
-                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">International Romantic Escapes</h2>
-                    <p className="text-text-muted text-sm mt-1">World-class luxury destinations featuring verified private jacuzzis &amp; tubs</p>
-                  </div>
-                  <span className="px-3 py-1 bg-accent-secondary/10 text-accent-secondary font-semibold text-xs sm:text-sm rounded-full">
-                    Global Escapes
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                  {internationalCities.map((item: any, idx: number) => (
-                    <CityCard
-                      key={`${item._id.city}-${item._id.country}`}
-                      city={item._id.city}
-                      country={item._id.country}
-                      hotelCount={item.hotelCount}
-                      image={item.image}
-                      isInternational={true}
-                      priority={idx < 4}
-                    />
-                  ))}
-
-                  {/* Balanced "More Coming Soon" Card */}
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center">
-                    <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mb-3">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </svg>
-                    </div>
-                    <h3 className="font-heading text-lg font-bold text-accent-secondary mb-1">More Cities Coming Soon</h3>
-                    <p className="text-xs text-text-muted leading-relaxed mb-4">We are continuously auditing &amp; adding verified luxury bathtub stays in Paris, Rome, Tokyo, and more.</p>
-                    <span className="text-xs font-semibold text-accent">Auditing New Properties Weekly</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* India Destinations Section */}
-            {indiaCities.length > 0 && (
-              <div>
-                <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
-                  <div>
-                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">India Getaways</h2>
-                    <p className="text-text-muted text-sm mt-1">Explore top romantic destinations across India with verified in-room tubs</p>
-                  </div>
-                  <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full">
-                    {indiaCities.length} Cities Available
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                  {indiaCities.map((item: any, idx: number) => (
-                    <CityCard
-                      key={`${item._id.city}-${item._id.country}`}
-                      city={item._id.city}
-                      country={item._id.country}
-                      hotelCount={item.hotelCount}
-                      image={item.image}
-                      priority={idx < 4}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+            <HomeDestinationsClient
+              usaCities={usaCities}
+              internationalCities={internationalCities}
+              indiaCities={indiaCities}
+            />
             {/* FAQ Section — targets "hotel with bathtub in room" long-tail + enables FAQPage schema */}
             <section id="faq" aria-label="Frequently Asked Questions" className="max-w-3xl mx-auto">
               <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary mb-6">
