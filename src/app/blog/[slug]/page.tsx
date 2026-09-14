@@ -179,29 +179,51 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     };
   })();
 
+  const matchedCountryInfo = resolveCountry(matchedCountrySlug);
+  const matchedCountryName = matchedCountryInfo.displayName;
+
+  const breadcrumbItems: any[] = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.hotelswithbathtubs.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Travel Guides",
+      "item": "https://www.hotelswithbathtubs.com/blog"
+    }
+  ];
+
+  let nextPos = 3;
+  if (matchedCity) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": nextPos++,
+      "name": `Hotels with Bathtubs in ${matchedCountryName}`,
+      "item": `https://www.hotelswithbathtubs.com/${matchedCountrySlug}`
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": nextPos++,
+      "name": `Hotels in ${matchedCity}`,
+      "item": `https://www.hotelswithbathtubs.com/${matchedCountrySlug}/${slugify(matchedCity)}`
+    });
+  }
+
+  breadcrumbItems.push({
+    "@type": "ListItem",
+    "position": nextPos,
+    "name": blog.title,
+    "item": `https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`
+  });
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.hotelswithbathtubs.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Travel Blog",
-        "item": "https://www.hotelswithbathtubs.com/blog"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": blog.title,
-        "item": `https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`
-      }
-    ]
+    "itemListElement": breadcrumbItems
   };
 
   return (
@@ -214,9 +236,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           />
         )}
         <div className="bg-bg-main py-6 sm:py-10 md:py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-8 mb-4 text-xs sm:text-sm font-medium text-text-muted">
-            <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href="/blog" className="text-accent-secondary hover:underline">Blog</Link> &rsaquo; <span className="text-text-main line-clamp-1 inline">{blog.title}</span>
-          </div>
+          <nav aria-label="Breadcrumbs" className="max-w-4xl mx-auto px-4 sm:px-8 mb-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1.5">
+            <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+            <span>&rsaquo;</span>
+            <Link href="/blog" className="text-accent-secondary hover:underline">Guides</Link>
+            {matchedCity && (
+              <>
+                <span>&rsaquo;</span>
+                <Link href={`/${matchedCountrySlug}`} className="text-accent-secondary hover:underline">
+                  {matchedCountryName}
+                </Link>
+                <span>&rsaquo;</span>
+                <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} className="text-accent-secondary hover:underline">
+                  {matchedCity}
+                </Link>
+              </>
+            )}
+            <span>&rsaquo;</span>
+            <span className="text-text-main line-clamp-1 inline font-semibold">{blog.title}</span>
+          </nav>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
             <header className="mb-8 sm:mb-12 text-center border-b border-border pb-6 sm:pb-8">
@@ -259,12 +297,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <p className="text-gray-700 font-serif text-lg mb-6 max-w-2xl mx-auto">
                   We have triple-verified {matchedCityCount}+ luxury hotels and boutique resorts in {matchedCity} that guarantee a private, in-room bathtub or jacuzzi for your romantic getaway.
                 </p>
-                <Link 
-                  href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
-                  className="inline-block bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-xl transform hover:-translate-y-1"
-                >
-                  View Bathtub Hotels in {matchedCity} &rarr;
-                </Link>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                  <Link 
+                    href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                    className="inline-block bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-xl font-bold text-base sm:text-lg transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5"
+                  >
+                    View Bathtub Hotels in {matchedCity} &rarr;
+                  </Link>
+                  <Link 
+                    href={`/${matchedCountrySlug}`}
+                    className="inline-block bg-white hover:bg-gray-50 text-accent-secondary border border-accent/25 px-6 py-3.5 rounded-xl font-semibold text-base transition-all shadow-2xs"
+                  >
+                    All {matchedCountryName} Stays &rarr;
+                  </Link>
+                </div>
               </div>
             )}
 

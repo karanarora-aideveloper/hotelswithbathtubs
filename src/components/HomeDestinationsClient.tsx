@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import CityCard from '@/components/CityCard';
 import { useGeo } from '@/lib/useGeo';
 
@@ -47,21 +48,25 @@ export default function HomeDestinationsClient({
   const renderUSASection = () => (
     usaCities.length > 0 && (
       <div id="section-usa" className="scroll-mt-32">
-        <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-gray-200 pb-4 gap-3">
           <div>
-            <div className="flex items-center gap-2">
+            <Link href="/usa" className="group inline-flex items-center gap-2 hover:text-accent transition-colors">
               <span className="text-xl">🇺🇸</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary group-hover:text-accent transition-colors">
                 United States Luxury Escapes
               </h2>
-            </div>
+            </Link>
             <p className="text-text-muted text-xs sm:text-sm mt-1">
               Premier American city stays and romantic getaways featuring verified in-room jacuzzis &amp; deep soaking tubs
             </p>
           </div>
-          <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap">
-            {usaCities.length} US Cities
-          </span>
+          <Link
+            href="/usa"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-accent/10 hover:bg-accent hover:text-white text-accent font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap transition-all self-start sm:self-auto group shadow-2xs"
+          >
+            <span>Explore All {usaCities.length} US Destinations</span>
+            <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
@@ -132,21 +137,25 @@ export default function HomeDestinationsClient({
   const renderIndiaSection = () => (
     indiaCities.length > 0 && (
       <div id="section-india" className="scroll-mt-32">
-        <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-gray-200 pb-4 gap-3">
           <div>
-            <div className="flex items-center gap-2">
+            <Link href="/india" className="group inline-flex items-center gap-2 hover:text-accent transition-colors">
               <span className="text-xl">🇮🇳</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary group-hover:text-accent transition-colors">
                 India Getaways
               </h2>
-            </div>
+            </Link>
             <p className="text-text-muted text-xs sm:text-sm mt-1">
               Top romantic destinations across India featuring verified private jacuzzi suites &amp; in-room soaking tubs
             </p>
           </div>
-          <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap">
-            {indiaCities.length} Cities in India
-          </span>
+          <Link
+            href="/india"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-accent/10 hover:bg-accent hover:text-white text-accent font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap transition-all self-start sm:self-auto group shadow-2xs"
+          >
+            <span>Explore All {indiaCities.length} Indian Cities</span>
+            <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">

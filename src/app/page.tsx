@@ -17,6 +17,11 @@ export const metadata = {
   description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
   alternates: {
     canonical: '/',
+    languages: {
+      'en-US': 'https://www.hotelswithbathtubs.com/usa',
+      'en-IN': 'https://www.hotelswithbathtubs.com/india',
+      'x-default': 'https://www.hotelswithbathtubs.com',
+    },
   },
   openGraph: {
     title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',

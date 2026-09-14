@@ -57,6 +57,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     description: pageDescription,
     alternates: {
       canonical: `/${countrySlug}`,
+      languages: {
+        ...(countrySlug === 'usa' ? { 'en-US': 'https://www.hotelswithbathtubs.com/usa' } : {}),
+        ...(countrySlug === 'india' ? { 'en-IN': 'https://www.hotelswithbathtubs.com/india' } : {}),
+        'x-default': 'https://www.hotelswithbathtubs.com',
+      },
     },
     openGraph: {
       title: `${pageTitle} | Hotels With Bathtubs`,
@@ -140,6 +145,23 @@ export default async function CountryHubPage({
     ]
   };
 
+  // CollectionPage Schema with Geographic Entity Coverage
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `Hotels with Bathtub in ${countryName}`,
+    "description": `Discover ${totalHotels}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}.`,
+    "url": `https://www.hotelswithbathtubs.com/${countrySlug}`,
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": countryName,
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": countrySlug === 'usa' ? 'US' : countrySlug === 'india' ? 'IN' : countrySlug.toUpperCase()
+      }
+    }
+  };
+
   // ItemList Schema for Cities in this Country
   const cityListSchema = {
     "@context": "https://schema.org",
@@ -190,11 +212,12 @@ export default async function CountryHubPage({
   };
 
   return (
-    <StructuredData data={breadcrumbSchema}>
-      <StructuredData data={cityListSchema}>
-        <StructuredData data={faqSchema}>
-          <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
+    <StructuredData data={collectionSchema}>
+      <StructuredData data={breadcrumbSchema}>
+        <StructuredData data={cityListSchema}>
+          <StructuredData data={faqSchema}>
+            <>
+              <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
               <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; Hotels with Bathtubs in {countryName}
             </div>
 
@@ -278,5 +301,6 @@ export default async function CountryHubPage({
         </StructuredData>
       </StructuredData>
     </StructuredData>
+  </StructuredData>
   );
 }

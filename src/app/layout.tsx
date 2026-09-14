@@ -90,6 +90,13 @@ export default async function RootLayout({
 
           {/* Quick Header Wayfinding Links */}
           <div className="flex items-center gap-2 sm:gap-6 text-xs sm:text-sm font-semibold text-text-main">
+            <Link 
+              href="/usa" 
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50/80 hover:bg-amber-100 text-accent-secondary border border-amber-200/80 rounded-lg font-bold transition-all shadow-2xs"
+            >
+              <span>🇺🇸</span>
+              <span>USA Stays</span>
+            </Link>
             <Link href="/#destinations" className="hover:text-accent transition-colors py-1">
               Destinations
             </Link>
