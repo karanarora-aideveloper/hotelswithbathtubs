@@ -1295,7 +1295,129 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Triple-verified across leading travel platforms',
       'Direct links with transparent pricing and flexible cancellation'
     ]
+  },
+
+  // Germany
+  'berlin-germany': {
+    intro: 'Experience the cutting-edge luxury of Berlin. Discover historic and avant-garde hotels offering private bathtubs and exclusive jacuzzi suites in the heart of Germany\'s vibrant capital.',
+    amenities: ['Deep soaking tubs', 'Heated floors', 'Designer luxury toiletries', 'Spa-inspired marble bathrooms'],
+    whyChoose: ['Perfect for romantic weekend getaways', 'Close to Brandenburg Gate and Museum Island', 'High-end design and modern comforts']
+  },
+  'munich-germany': {
+    intro: 'Munich combines Bavarian charm with world-class hospitality. Find the finest luxury stays featuring in-room bathtubs and serene spa suites near Marienplatz and the English Garden.',
+    amenities: ['Freestanding soaking tubs', 'Bavarian spa amenities', 'Couples massage services', 'Spacious luxury suites'],
+    whyChoose: ['Ideal for Alpine stopovers', 'Rich cultural and romantic experiences', 'Proximity to luxury shopping and dining']
+  },
+
+  // Austria
+  'vienna-austria': {
+    intro: 'Immerse yourself in imperial elegance in Vienna. Our curated selection of luxury hotels offers opulent in-room bathtubs and private jacuzzis, surrounded by the city\'s majestic architecture.',
+    amenities: ['Palatial marble bathrooms', 'Classic freestanding bathtubs', 'Premium bath salts and oils', 'Underfloor heating'],
+    whyChoose: ['Unmatched imperial luxury', 'Steps away from the Vienna State Opera', 'Perfect for a grand romantic escape']
+  },
+  'salzburg-austria': {
+    intro: 'Discover the romantic charm of Mozart\'s birthplace. These exquisite Salzburg hotels feature luxurious bathtubs and spa-like suites, blending historic grandeur with modern comfort.',
+    amenities: ['Scenic alpine views from the bath', 'Luxury organic toiletries', 'Deep soaking tubs', 'In-room spa services'],
+    whyChoose: ['Charming historic atmosphere', 'Gateway to the Austrian Alps', 'Ideal for anniversary celebrations']
+  },
+
+  // Czechia
+  'prague-czechia': {
+    intro: 'Prague\'s fairytale setting is perfect for romance. Unwind in private bathtubs and luxury jacuzzi suites overlooking the Vltava River or the historic Prague Castle.',
+    amenities: ['Antique-style clawfoot tubs', 'River or castle views', 'Opulent baroque interiors', 'Aromatherapy bath menus'],
+    whyChoose: ['One of Europe\'s most romantic cities', 'Exceptional value for luxury', 'Stunning historic architecture']
+  },
+
+  // Hungary
+  'budapest-hungary': {
+    intro: 'Known as the City of Spas, Budapest extends its thermal bath heritage into its finest luxury hotels. Enjoy private, deep soaking bathtubs and romantic jacuzzi suites.',
+    amenities: ['Thermal-inspired soaking tubs', 'Danube river views', 'Luxurious Hungarian bath products', 'Spacious couple suites'],
+    whyChoose: ['Rich thermal bathing culture', 'Breathtaking views of Parliament and the Danube', 'Perfect for wellness and romance']
+  },
+
+  // Portugal
+  'lisbon-portugal': {
+    intro: 'Experience the sun-kissed charm of Lisbon. From historic palaces to chic modern boutiques, find the best hotels offering private bathtubs for a relaxing romantic getaway.',
+    amenities: ['Azulejo-tiled luxury bathrooms', 'Deep soaking tubs', 'River Tagus views', 'Premium Mediterranean bath amenities'],
+    whyChoose: ['Vibrant culinary and cultural scene', 'Stunning hilltop views', 'Warm, romantic atmosphere']
+  },
+
+  // Ireland
+  'dublin-ireland': {
+    intro: 'Discover Irish hospitality at its finest in Dublin. Relax in plush, luxurious hotel suites featuring private bathtubs and high-end amenities after a day exploring the lively city.',
+    amenities: ['Classic freestanding bathtubs', 'Plush bathrobes and slippers', 'Premium Irish organic toiletries', 'Heated towel rails'],
+    whyChoose: ['Cozy and romantic hideaways', 'Close to Trinity College and Temple Bar', 'Unparalleled Irish charm and service']
+  },
+
+  // Spain
+  'madrid-spain': {
+    intro: 'Embrace the elegance and vibrant energy of Madrid. Our selected luxury hotels offer majestic in-room bathtubs and palatial spa suites right in the city center.',
+    amenities: ['Spacious marble bathtubs', 'Exclusive Spanish luxury amenities', 'Rain showers and soaking tubs', 'In-room spa treatments'],
+    whyChoose: ['World-class art museums and dining', 'Sophisticated romantic atmosphere', 'Central location for exploring']
+  },
+
+  // Italy
+  'venice-italy': {
+    intro: 'Venice is the epitome of romance. Stay in converted palazzos and luxury hotels featuring opulent private bathtubs overlooking the Grand Canal or quiet Venetian waterways.',
+    amenities: ['Murano glass chandeliers in bathrooms', 'Canal-view soaking tubs', 'Classic Italian marble', 'Exclusive Acqua di Parma toiletries'],
+    whyChoose: ['The world\'s most romantic city', 'Unforgettable gondola rides and dining', 'True palatial luxury']
+  },
+  'florence-italy': {
+    intro: 'Surround yourself with Renaissance art and luxury in Florence. Discover the finest hotels offering private bathtubs, exquisite frescoes, and unparalleled Italian elegance.',
+    amenities: ['Freestanding tubs with city views', 'Renaissance-inspired luxury bathrooms', 'Premium Italian bath products', 'Couples massage and spa'],
+    whyChoose: ['Heart of the Renaissance', 'Romantic walks along the Arno', 'Exceptional culinary and art experiences']
+  },
+  'milan-italy': {
+    intro: 'Experience the height of fashion and luxury in Milan. Unwind in ultra-modern designer suites featuring deep soaking bathtubs and exclusive in-room spa amenities.',
+    amenities: ['Designer freestanding bathtubs', 'Minimalist luxury aesthetics', 'Exclusive designer toiletries', 'High-tech bathroom features'],
+    whyChoose: ['World-class shopping and design', 'Sophisticated cosmopolitan vibe', 'Proximity to the Duomo']
+  },
+
+  // South Africa
+  'cape-town-south-africa': {
+    intro: 'Cape Town offers dramatic landscapes and ultimate luxury. Enjoy private bathtubs and jacuzzis with breathtaking views of Table Mountain or the Atlantic Ocean.',
+    amenities: ['Ocean or mountain view soaking tubs', 'Luxurious African botanicals', 'Spacious private terraces', 'In-room romantic dining'],
+    whyChoose: ['Incredible natural beauty', 'World-renowned winelands nearby', 'Perfect for luxury honeymoons']
+  },
+
+  // Brazil
+  'rio-de-janeiro-brazil': {
+    intro: 'Feel the rhythm of Rio de Janeiro. Stay in iconic beachfront luxury hotels offering private bathtubs, jacuzzis, and sweeping views of Copacabana and Ipanema.',
+    amenities: ['Beachfront view soaking tubs', 'Tropical bath amenities', 'Private balconies with jacuzzis', 'Luxurious Brazilian linens'],
+    whyChoose: ['Iconic beaches and vibrant culture', 'Romantic tropical atmosphere', 'Unforgettable ocean sunsets']
+  },
+
+  // Mexico
+  'cancun-mexico': {
+    intro: 'Cancun is the ultimate tropical escape. Discover exclusive beachfront resorts featuring private in-room jacuzzis and deep soaking bathtubs overlooking the Caribbean Sea.',
+    amenities: ['Private ocean-view jacuzzis', 'Deep soaking tubs', 'All-inclusive luxury spa services', 'Premium agave-based amenities'],
+    whyChoose: ['Pristine white sand beaches', 'Ultimate relaxation and romance', 'World-class luxury resorts']
+  },
+  'mexico-city-mexico': {
+    intro: 'Explore the vibrant heart of Mexico City. Relax in sophisticated luxury hotels offering plush suites with private bathtubs, perfectly situated in Polanco and Reforma.',
+    amenities: ['Modern freestanding bathtubs', 'Panoramic city views', 'Exclusive artisanal bath products', 'Spacious marble bathrooms'],
+    whyChoose: ['Incredible culinary scene', 'Rich history and culture', 'Chic and cosmopolitan luxury']
+  },
+
+  // Costa Rica
+  'san-jose-costa-rica': {
+    intro: 'San Jose is your gateway to tropical luxury. Find the best hotels offering serene spa suites and private bathtubs, blending urban comfort with Costa Rican nature.',
+    amenities: ['Tropical garden-view soaking tubs', 'Eco-friendly luxury amenities', 'In-room couples spa treatments', 'Volcanic mud bath products'],
+    whyChoose: ['Perfect start to a romantic eco-tour', 'Lush tropical surroundings', 'Rich coffee culture and history']
+  },
+
+  // New Zealand
+  'auckland-new-zealand': {
+    intro: 'Auckland combines harbor-side beauty with urban luxury. Discover exceptional hotels featuring private bathtubs and serene suites overlooking the Viaduct Harbour.',
+    amenities: ['Harbor-view deep soaking tubs', 'Premium New Zealand botanicals', 'Heated bathroom floors', 'Spacious couples suites'],
+    whyChoose: ['Stunning waterfront views', 'Gateway to New Zealand\'s natural wonders', 'Sophisticated dining and romance']
+  },
+  'queenstown-new-zealand': {
+    intro: 'Queenstown is the alpine jewel of New Zealand. Unwind after a day of adventure in luxury lodges and boutique hotels featuring private bathtubs and dramatic lake and mountain views.',
+    amenities: ['Lake Wakatipu and mountain views from the bath', 'Freestanding luxury tubs', 'Locally sourced organic amenities', 'Fireplaces and heated floors'],
+    whyChoose: ['Unparalleled alpine scenery', 'Ultimate romantic adventure destination', 'Exclusive luxury lodges']
   }
+
 };
 
 export function getCityContent(city: string, country: string): typeof cityIntroContent['default'] {
