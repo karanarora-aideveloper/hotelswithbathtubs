@@ -10,7 +10,7 @@ tags: "["manali", "munnar", "honeymoon", "jacuzzi resorts", "private jacuzzi", "
 featured: "true"
 published: "true"
 publishedDate: "2026-08-21"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_manali-munnar-honeymoon-jacuzzi-resorts.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_manali-munnar-honeymoon-jacuzzi-resorts.jpeg"
 ---
 
 # Best Honeymoon Resorts with Private Jacuzzis in Manali & Munnar: Romantic Hill Escapes

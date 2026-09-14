@@ -2,7 +2,7 @@ import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { imageUrl } from '@/lib/imageUrl';
+import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
@@ -61,19 +61,30 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   const ogImage = firstHotel && firstHotel.image
     ? imageUrl(firstHotel.image.split('/').pop() || '')
-    : 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+    : DEFAULT_HOTEL_IMAGE;
 
-  // Title: "Hotels with Bathtub in [City] (X+ Stays for Couples)"
-  // Appends " | Hotels With Bathtubs" from layout template -> perfectly matches exact search intent
-  const pageTitle = cityName.length > 12
-    ? `Hotels with Bathtub in ${cityName} (${hotelCount}+ Stays)`
-    : `Hotels with Bathtub in ${cityName} (${hotelCount}+ Stays for Couples)`;
+  // Title: pageTitle + " | Hotels With Bathtubs" (24 chars from layout template)
+  // Target: ≤60 chars total rendered in Google SERP → pageTitle ≤36 chars ideal
+  const baseTitle = `Hotels with Bathtub in ${cityName}`;
+  const withCount = `${baseTitle} (${hotelCount}+)`;
+  const withCouples = `${baseTitle} (${hotelCount}+ Stays for Couples)`;
+  // Pick the longest variant that fits under 36 chars
+  const pageTitle = withCouples.length <= 36
+    ? withCouples
+    : withCount.length <= 36
+      ? withCount
+      : baseTitle;
   const pageDescription = `Find hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ triple-verified stays with private deep soaking tubs & jacuzzi suites for couples.`;
 
   return {
     title: pageTitle,
     description: pageDescription,
-    keywords: `hotels with bathtub in ${cityName}, hotel with bathtub in room ${cityName}, bathtub hotel in ${cityName}, couple friendly hotels with bathtub in ${cityName}, hotels with jacuzzi in room ${cityName}, private hot tub in room ${cityName}, whirlpool suites ${cityName}, romantic hotels in ${cityName}`,
+    ...(hotelCount < 3 ? {
+      robots: {
+        index: false,
+        follow: true,
+      },
+    } : {}),
     alternates: {
       canonical: `/${countrySlug}/${citySlug}`,
     },
@@ -204,6 +215,16 @@ export default async function CityHotelsPage({
           "addressLocality": cityName,
           "addressCountry": countryName
         },
+        "priceRange": h.price ? `${h.price}` : "$$$",
+        ...(h.rating && h.reviewsCount ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": Number(h.rating),
+            "reviewCount": Number(h.reviewsCount),
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        } : {}),
         "amenityFeature": (h.amenities || []).map((a: string) => ({
           "@type": "LocationFeatureSpecification",
           "name": a,
@@ -213,10 +234,51 @@ export default async function CityHotelsPage({
     }))
   };
 
+  // FAQPage schema for the 4 structured FAQ questions displayed on this page
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across MakeMyTrip, Agoda, and Booking.com to confirm that the specific room tier includes a bathtub or jacuzzi.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Are these bathtub hotels in ${cityName} couple-friendly?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying valid government photo IDs (Aadhaar, Passport, or Driving License) for check-in.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `How do I make sure my room in ${cityName} definitely has a bathtub?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Standard or base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly lists a private bathtub.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Are there budget-friendly hotels with bathtubs in ${cityName}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes, ${cityName} offers a wide spectrum of accommodations ranging from affordable boutique hotels to ultra-luxury 5-star resorts featuring deep soaking bathtubs and private spa baths.`
+        }
+      }
+    ]
+  };
+
   return (
     <>
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={hotelListSchema} />
+      <StructuredData data={faqSchema} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
         <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link> &rsaquo; Hotels with Bathtubs in {cityName}

@@ -10,7 +10,7 @@ tags: "["gurgaon", "romantic getaways", "luxury hotels", "hotels with bathtubs",
 featured: "false"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotel-with-bathtub-in-gurgaon.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotel-with-bathtub-in-gurgaon.jpeg"
 ---
 
 # Hotel With Bathtub in Gurgaon: Best Couple-Friendly Stays Near Delhi
@@ -19,7 +19,7 @@ When the hustle and bustle of Delhi gets too overwhelming, you don't always have
 
 Gurgaon (Gurugram) boasts some of the most modern, luxurious, and massive hotel properties in the NCR region, many of which cater directly to weekend staycationers with premium spa amenities right in the room.
 
-[**👉 Browse All Verified Hotels with Bathtubs in Gurgaon**](/india/delhi)
+[**👉 Browse All Verified Hotels with Bathtubs in Gurgaon**](/india/gurgaon)
 
 ---
 
@@ -65,4 +65,4 @@ Absolutely. Many top-tier business hotels in Gurgaon are designed for luxury and
 
 Ready to book your NCR staycation? 
 
-[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Gurgaon**](/india/delhi)
+[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Gurgaon**](/india/gurgaon)

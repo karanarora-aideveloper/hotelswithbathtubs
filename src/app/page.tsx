@@ -1,7 +1,6 @@
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Link from 'next/link';
-import Image from 'next/image';
 import HomeSearch from '@/components/HomeSearch';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
@@ -25,7 +24,7 @@ export const metadata = {
     siteName: 'Hotels with Bathtubs',
     images: [
       {
-        url: 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
         alt: 'Hotels with Bathtubs in Room - Verified Luxury Suites',
@@ -37,7 +36,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
     description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
-    images: ['https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 
@@ -48,7 +47,18 @@ async function getCities() {
     // Match the city page's own filter — flagged hotels are hidden there,
     // so they must not count toward (or inflate) a city's tile here either.
     { $match: { flagged: { $ne: true } } },
-    { $sort: { rating: -1 as const, reviewsCount: -1 as const } },
+    {
+      $addFields: {
+        hasImage: {
+          $cond: [
+            { $and: [{ $ne: ["$image", null] }, { $ne: ["$image", ""] }] },
+            1,
+            0
+          ]
+        }
+      }
+    },
+    { $sort: { hasImage: -1 as const, rating: -1 as const, reviewsCount: -1 as const } },
     {
       $group: {
         _id: { city: "$city", country: "$country" },
@@ -66,9 +76,16 @@ async function getCities() {
 export default async function Home() {
   const cities = await getCities();
 
-  // Separate India from International destinations to prevent sparse single-card rows
+  // Separate into United States, Global Romantic, and India destinations
+  const usaCities = cities.filter(c => {
+    const country = c._id.country?.toLowerCase();
+    return country === 'usa' || country === 'united states';
+  });
+  const internationalCities = cities.filter(c => {
+    const country = c._id.country?.toLowerCase();
+    return country !== 'india' && country !== 'usa' && country !== 'united states';
+  });
   const indiaCities = cities.filter(c => c._id.country?.toLowerCase() === 'india');
-  const internationalCities = cities.filter(c => c._id.country?.toLowerCase() !== 'india');
 
   const schema = {
     "@context": "https://schema.org",
@@ -76,7 +93,15 @@ export default async function Home() {
     "name": "Hotels with Bathtubs",
     "description": "Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda & Booking.com.",
     "url": "https://www.hotelswithbathtubs.com",
-    "image": "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
+    "image": "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.hotelswithbathtubs.com/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
     "sameAs": [
       "https://www.facebook.com/hotelswithbathtubs",
       "https://www.instagram.com/hotelswithbathtubs"
@@ -87,33 +112,32 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Hotels with Bathtubs",
-    "image": "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
-    "description": "Premium hotel directory with verified bathtubs and jacuzzis worldwide",
     "url": "https://www.hotelswithbathtubs.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
+    "logo": "https://www.hotelswithbathtubs.com/apple-icon",
+    "image": "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
+    "description": "Premium hotel directory with verified in-room bathtubs and jacuzzi suites worldwide",
+    "founder": {
+      "@type": "Person",
+      "name": "Karan Arora",
+      "jobTitle": "Founder & Luxury Hotel Scout"
     },
-    "areaServed": "IN"
+    "areaServed": "Worldwide"
   };
 
-  // Popular inspiration quick links for above-the-fold
+  // Popular inspiration quick links for above-the-fold — prioritized for high-intent US & global searches
   const popularShortcuts = [
-    { name: 'Kolkata', href: '/india/kolkata' },
-    { name: 'Delhi', href: '/india/delhi' },
-    { name: 'Goa', href: '/india/goa' },
-    { name: 'Manali', href: '/india/manali' },
-    { name: 'Munnar', href: '/india/munnar' },
-    { name: 'Jaipur', href: '/india/jaipur' },
-    { name: 'Udaipur', href: '/india/udaipur' },
     { name: 'New York', href: '/usa/new-york' },
     { name: 'Las Vegas', href: '/usa/las-vegas' },
     { name: 'Miami', href: '/usa/miami' },
+    { name: 'Los Angeles', href: '/usa/los-angeles' },
+    { name: 'Chicago', href: '/usa/chicago' },
     { name: 'London', href: '/uk/london' },
     { name: 'Paris', href: '/france/paris' },
     { name: 'Dubai', href: '/uae/dubai' },
+    { name: 'Goa', href: '/india/goa' },
+    { name: 'Udaipur', href: '/india/udaipur' },
+    { name: 'Manali', href: '/india/manali' },
     { name: 'Singapore', href: '/singapore/singapore' },
-    { name: 'Bangkok', href: '/thailand/bangkok' },
     { name: 'Tokyo', href: '/japan/tokyo' },
     { name: 'Bali', href: '/indonesia/bali' },
   ];
@@ -163,20 +187,20 @@ export default async function Home() {
       <StructuredData data={faqSchema}>
         <>
           <header className="relative pt-32 pb-44 px-4 sm:px-8 text-center bg-accent-secondary hero-overlay overflow-hidden">
-            <Image
-              src="https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
+            <img
+              src="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
               alt="Hotels with Bathtubs - Verified Luxury Suites"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center absolute inset-0 z-0"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="object-cover object-center absolute inset-0 z-0 w-full h-full"
             />
             <div className="relative z-10 max-w-4xl mx-auto text-white">
               <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">
                 Hotels with Bathtub in Room &amp; Private Jacuzzis
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md mb-8 opacity-90 max-w-3xl mx-auto">
-                748+ curated hotels with bathtub in room — every listing triple-verified across MakeMyTrip, Agoda &amp; Booking.com. No misleading photos. Guaranteed private tubs.
+                700+ curated hotels with bathtub in room — every listing triple-verified across MakeMyTrip, Agoda &amp; Booking.com. No misleading photos. Guaranteed private tubs.
               </p>
             </div>
           </header>
@@ -298,34 +322,34 @@ export default async function Home() {
 
           {/* Main Destination Discovery Hub */}
           <section id="destinations" className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-16 scroll-mt-24">
-            {/* India Destinations Section */}
-            {indiaCities.length > 0 && (
+            {/* United States Destinations Section */}
+            {usaCities.length > 0 && (
               <div>
                 <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
                   <div>
-                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">India Getaways</h2>
-                    <p className="text-text-muted text-sm mt-1">Explore top romantic destinations across India with verified in-room tubs</p>
+                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">United States Luxury Escapes</h2>
+                    <p className="text-text-muted text-sm mt-1">Discover premier American city breaks and romantic retreats featuring verified in-room jacuzzis &amp; deep soaking tubs</p>
                   </div>
                   <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full">
-                    {indiaCities.length} Cities Available
+                    {usaCities.length} US Destinations
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                  {indiaCities.map((item: any, idx: number) => (
+                  {usaCities.map((item: any, idx: number) => (
                     <CityCard
                       key={`${item._id.city}-${item._id.country}`}
                       city={item._id.city}
                       country={item._id.country}
                       hotelCount={item.hotelCount}
                       image={item.image}
+                      isInternational={true}
                       priority={idx < 4}
                     />
                   ))}
                 </div>
               </div>
             )}
-
             {/* International Romantic Destinations Section */}
             {internationalCities.length > 0 && (
               <div>
@@ -363,6 +387,34 @@ export default async function Home() {
                     <p className="text-xs text-text-muted leading-relaxed mb-4">We are continuously auditing &amp; adding verified luxury bathtub stays in Paris, Rome, Tokyo, and more.</p>
                     <span className="text-xs font-semibold text-accent">Auditing New Properties Weekly</span>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* India Destinations Section */}
+            {indiaCities.length > 0 && (
+              <div>
+                <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
+                  <div>
+                    <h2 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary">India Getaways</h2>
+                    <p className="text-text-muted text-sm mt-1">Explore top romantic destinations across India with verified in-room tubs</p>
+                  </div>
+                  <span className="px-3 py-1 bg-accent/10 text-accent font-semibold text-xs sm:text-sm rounded-full">
+                    {indiaCities.length} Cities Available
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                  {indiaCities.map((item: any, idx: number) => (
+                    <CityCard
+                      key={`${item._id.city}-${item._id.country}`}
+                      city={item._id.city}
+                      country={item._id.country}
+                      hotelCount={item.hotelCount}
+                      image={item.image}
+                      priority={idx < 4}
+                    />
+                  ))}
                 </div>
               </div>
             )}

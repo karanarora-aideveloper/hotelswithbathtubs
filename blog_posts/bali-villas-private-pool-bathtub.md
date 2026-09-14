@@ -10,7 +10,7 @@ tags: "["bali", "indonesia", "honeymoon", "romantic getaways", "jacuzzi suites"]
 featured: "true"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_bali-villas-private-pool-bathtub.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_bali-villas-private-pool-bathtub.jpeg"
 ---
 
 # Bali Villas With Private Pool and Bathtub: The Ultimate Honeymoon Guide

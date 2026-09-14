@@ -10,7 +10,7 @@ tags: "["dubai", "uae", "luxury hotels", "romantic getaways", "jacuzzi suites"]"
 featured: "true"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_dubai-hotels-with-private-jacuzzi.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_dubai-hotels-with-private-jacuzzi.jpeg"
 ---
 
 # Dubai Hotels With Private Jacuzzi: Top Luxury Suites & Views

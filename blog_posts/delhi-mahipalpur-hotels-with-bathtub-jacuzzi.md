@@ -10,7 +10,7 @@ tags: "["delhi", "mahipalpur", "aerocity", "hotels with bathtubs", "couple frien
 featured: "true"
 published: "true"
 publishedDate: "2026-08-21"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_delhi-mahipalpur-hotels-with-bathtub-jacuzzi.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_delhi-mahipalpur-hotels-with-bathtub-jacuzzi.jpeg"
 ---
 
 # Top Couple-Friendly Hotels with Bathtubs & Jacuzzis in Mahipalpur & Delhi Airport: Verified Stays

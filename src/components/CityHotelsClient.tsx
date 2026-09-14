@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { imageUrl } from '@/lib/imageUrl';
+import { slugify } from '@/lib/utils';
 
 type HotelData = {
   _id?: string;
@@ -110,20 +111,39 @@ export default function CityHotelsClient({
   }
 
   // Render the right button for any booking URL
-  function BookingButton({ url, hotelName, cityName: city, preferredLabel }: {
+  function BookingButton({ url, hotelName, cityName: city, preferredLabel, isPrimary }: {
     url: string;
     hotelName: string;
     cityName: string;
     preferredLabel?: string;
+    isPrimary?: boolean;
   }) {
     const provider = getUrlProvider(url);
     const config: Record<NonNullable<UrlProvider>, { label: string; className: string; source: string } | null> = {
-      makemytrip: { label: 'Check on MakeMyTrip', source: 'MakeMyTrip', className: 'bg-accent hover:bg-accent-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      booking:    { label: 'Check on Booking.com', source: 'Booking.com', className: 'bg-accent-secondary hover:bg-accent-secondary-hover text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      agoda:      { label: 'Check on Agoda', source: 'Agoda', className: 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      trivago:    { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      tripadvisor:{ label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      google:     null, // don't show Google search links as booking buttons
+      makemytrip: { 
+        label: 'Check on MakeMyTrip', 
+        source: 'MakeMyTrip', 
+        className: isPrimary 
+          ? 'bg-accent hover:bg-accent-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' 
+          : 'bg-amber-600 hover:bg-amber-700 text-white text-center py-2 px-4 rounded-xl font-semibold transition-colors text-xs shadow-xs flex items-center justify-center gap-2' 
+      },
+      booking: { 
+        label: 'Check on Booking.com', 
+        source: 'Booking.com', 
+        className: isPrimary 
+          ? 'bg-accent-secondary hover:bg-accent-secondary-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2' 
+          : 'bg-accent-secondary/90 hover:bg-accent-secondary text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2' 
+      },
+      agoda: { 
+        label: 'Check on Agoda', 
+        source: 'Agoda', 
+        className: isPrimary 
+          ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2' 
+          : 'bg-emerald-600/90 hover:bg-emerald-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2' 
+      },
+      trivago: { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
+      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
+      google: null, // don't show Google search links as booking buttons
     };
     if (!provider || !config[provider]) return null;
     const { label, source, className } = config[provider]!;
@@ -272,8 +292,9 @@ export default function CityHotelsClient({
             return (
               <div
                 key={h._id || i}
+                id={`hotel-${slugify(h.name)}`}
                 style={{ contentVisibility: 'auto', containIntrinsicSize: '420px' }}
-                className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group"
+                className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group scroll-mt-24"
               >
                 <div className="relative overflow-hidden aspect-[16/10]">
                   <ProgressiveImage
@@ -292,7 +313,7 @@ export default function CityHotelsClient({
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
-                  <h2 className="font-heading text-xl font-bold text-accent-secondary mb-1">{h.name}</h2>
+                  <h3 className="font-heading text-xl font-bold text-accent-secondary mb-1">{h.name}</h3>
                   {h.rating && h.reviewsCount && (
                     <div className="flex items-center gap-1.5 mb-2 text-sm font-bold text-gray-800">
                       <span className="text-amber-500 text-base">★</span>
@@ -367,11 +388,25 @@ export default function CityHotelsClient({
                   )}
 
                   <div className="flex flex-col gap-2">
-                    {[h.url, h.agodaUrl, h.bookingUrl]
-                      .filter((u): u is string => !!u)
-                      .filter((u, idx, arr) => arr.indexOf(u) === idx)
-                      .map((u, i) => <BookingButton key={i} url={u} hotelName={h.name} cityName={cityName} />)
-                    }
+                    {(() => {
+                      const isUSOrGlobal = countryName.toLowerCase() !== 'india';
+                      const rawUrls = [h.bookingUrl, h.agodaUrl, h.url]
+                        .filter((u): u is string => !!u)
+                        .filter((u, idx, arr) => arr.indexOf(u) === idx);
+                      
+                      const sortedUrls = isUSOrGlobal
+                        ? [...rawUrls].sort((a, b) => {
+                            const provA = getUrlProvider(a);
+                            const provB = getUrlProvider(b);
+                            const priority: Record<string, number> = { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
+                            return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
+                          })
+                        : rawUrls;
+
+                      return sortedUrls.map((u, i) => (
+                        <BookingButton key={i} url={u} hotelName={h.name} cityName={cityName} isPrimary={i === 0} />
+                      ));
+                    })()}
                   </div>
                 </div>
               </div>

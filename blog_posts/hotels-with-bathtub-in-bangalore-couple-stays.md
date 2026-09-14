@@ -4,7 +4,7 @@ slug: "hotels-with-bathtub-in-bangalore-couple-stays"
 excerpt: "Looking for a romantic staycation in the Garden City? Discover the best hotels with bathtubs in Bangalore featuring private in-room jacuzzis, rooftop pools, and couple suites."
 date: "2026-08-22"
 author: "HotelsWithBathtubs Editorial Team"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotels-with-bathtub-in-bangalore-couple-stays.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotels-with-bathtub-in-bangalore-couple-stays.jpeg"
 ---
 
 # Top 9 Hotels with Bathtubs in Bangalore for Romantic Couple Staycations (2026)

@@ -10,7 +10,7 @@ tags: "["kolkata", "romantic getaways", "couple friendly", "hotels with bathtubs
 featured: "true"
 published: "true"
 publishedDate: "2026-08-21"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_kolkata-hotels-with-bathtub-couples-guide.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_kolkata-hotels-with-bathtub-couples-guide.jpeg"
 ---
 
 # Top 7 Romantic Hotels with Bathtubs in Kolkata for Couples: Expert Verified Guide

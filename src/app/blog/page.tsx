@@ -18,7 +18,7 @@ export const metadata = {
     siteName: 'Hotels with Bathtubs',
     images: [
       {
-        url: 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
         alt: 'Hotels With Bathtubs Travel Blog',
@@ -30,7 +30,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Bathtub Hotel Travel Guides & Tips',
     description: 'Explore curated travel guides, honeymoon tips, and reviews of luxury hotels with private in-room bathtubs.',
-    images: ['https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 

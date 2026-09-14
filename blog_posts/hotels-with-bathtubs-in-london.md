@@ -10,7 +10,7 @@ tags: "["london", "uk", "boutique hotels", "romantic getaways", "hotels with bat
 featured: "false"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotels-with-bathtubs-in-london.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotels-with-bathtubs-in-london.jpeg"
 ---
 
 # Hotels With Bathtubs in London: Historic Charm and Luxury

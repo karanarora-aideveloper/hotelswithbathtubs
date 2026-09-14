@@ -4,7 +4,7 @@ slug: "romantic-resorts-in-ooty-for-couples-with-bathtubs"
 excerpt: "Escape to the Queen of Hill Stations. Discover the most romantic resorts in Ooty for couples featuring vintage clawfoot bathtubs, private jacuzzis, and cozy fireplaces."
 date: "2026-08-22"
 author: "HotelsWithBathtubs Editorial Team"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_romantic-resorts-in-ooty-for-couples-with-bathtubs.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_romantic-resorts-in-ooty-for-couples-with-bathtubs.jpeg"
 ---
 
 # Best Romantic Resorts in Ooty for Couples with Bathtubs & Fireplaces (2026)

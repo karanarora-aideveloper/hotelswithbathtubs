@@ -10,7 +10,7 @@ tags: "["rishikesh", "romantic getaways", "luxury resorts", "hotels with bathtub
 featured: "false"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotel-with-bathtub-in-rishikesh.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotel-with-bathtub-in-rishikesh.jpeg"
 ---
 
 # Hotel With Bathtub in Rishikesh: Best Relaxing Stays With a View
@@ -19,7 +19,7 @@ Rishikesh is world-renowned as the yoga capital of the world, a place of profoun
 
 Imagine spending your morning meditating by the Ganges, your afternoon trekking in the Himalayan foothills, and your evening soaking in a warm, private bathtub while looking out at the mountains.
 
-[**👉 Browse All Verified Hotels with Bathtubs in Rishikesh**](/india/shimla)
+[**👉 Browse All Verified Hotels with Bathtubs in Rishikesh**](/india/rishikesh)
 
 ---
 
@@ -63,4 +63,4 @@ To secure a suite with a highly sought-after river or mountain view bathtub, you
 
 Ready to find your inner peace in ultimate luxury? 
 
-[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Rishikesh**](/india/shimla)
+[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Rishikesh**](/india/rishikesh)

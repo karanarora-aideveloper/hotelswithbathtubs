@@ -8,6 +8,14 @@ import { markdownToHtml } from '@/lib/markdown';
 import StructuredData from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
+import AuthorBio from '@/components/AuthorBio';
+
+// Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
+function toISO(dateStr: string | undefined): string {
+  if (!dateStr) return new Date().toISOString();
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime()) ? dateStr : parsed.toISOString();
+}
 
 export async function generateStaticParams() {
   await connectToDatabase();
@@ -17,14 +25,18 @@ export async function generateStaticParams() {
   }));
 }
 
-// Very basic mapping of common countries for cities
+// Comprehensive mapping of international and US cities
 const CITY_TO_COUNTRY: Record<string, string> = {
   'Dubai': 'uae', 'London': 'uk', 'New York': 'usa', 'Las Vegas': 'usa', 'NYC': 'usa',
-  'Bali': 'indonesia', 'Singapore': 'singapore', 'Bangkok': 'thailand', 'Paris': 'france', 'Tokyo': 'japan'
+  'Miami': 'usa', 'Chicago': 'usa', 'Los Angeles': 'usa', 'San Francisco': 'usa',
+  'Boston': 'usa', 'Seattle': 'usa', 'Austin': 'usa', 'Nashville': 'usa',
+  'Aspen': 'usa', 'San Diego': 'usa', 'New Orleans': 'usa', 'Baltimore': 'usa', 'Kansas City': 'usa',
+  'Bali': 'indonesia', 'Singapore': 'singapore', 'Bangkok': 'thailand', 'Paris': 'france', 'Tokyo': 'japan',
+  'Rome': 'italy', 'Barcelona': 'spain', 'Amsterdam': 'netherlands'
 };
 
 function inferCountry(cityName: string): string {
-  return CITY_TO_COUNTRY[cityName] || 'india'; // Default to India for all other cities currently
+  return CITY_TO_COUNTRY[cityName] || 'india';
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -57,8 +69,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           },
         ],
         type: 'article',
-        publishedTime: blog.date,
-        authors: [blog.author || 'Travel Editor'],
+        publishedTime: toISO(blog.date),
+        authors: ['Karan Arora'],
       },
       twitter: {
         card: 'summary_large_image',
@@ -127,11 +139,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "headline": blog.title,
     "description": blog.excerpt,
     "image": blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE,
-    "datePublished": blog.date,
-    "dateModified": blog.updatedAt || blog.date,
+    "datePublished": toISO(blog.date),
+    "dateModified": toISO(blog.updatedAt?.toString() || blog.date),
     "author": {
       "@type": "Person",
-      "name": blog.author || "Travel Editor"
+      "name": "Karan Arora",
+      "jobTitle": "Founder & Luxury Hotel Scout",
+      "url": "https://www.hotelswithbathtubs.com/about"
     },
     "publisher": {
       "@type": "Organization",
@@ -207,7 +221,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
             <header className="mb-8 sm:mb-12 text-center border-b border-border pb-6 sm:pb-8">
               <div className="text-accent font-semibold text-xs sm:text-sm mb-3 sm:mb-4 tracking-wider uppercase">
-                Published on {blog.date} by {blog.author || 'Travel Editor'}
+                Published on {blog.date} by Karan Arora (Founder &amp; Curator)
               </div>
               <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4 sm:mb-6">
                 {blog.title}
@@ -234,6 +248,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               className="prose prose-base sm:prose-lg md:prose-xl max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
+
+            <AuthorBio />
 
             {matchedCity && matchedCityCount > 0 && (
               <div className="mt-12 sm:mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-6 sm:p-10 text-center shadow-sm">

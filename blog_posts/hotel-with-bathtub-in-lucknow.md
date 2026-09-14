@@ -10,7 +10,7 @@ tags: "["lucknow", "romantic getaways", "luxury hotels", "hotels with bathtubs",
 featured: "false"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotel-with-bathtub-in-lucknow.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotel-with-bathtub-in-lucknow.jpeg"
 ---
 
 # Hotel With Bathtub in Lucknow: Best Private and Luxury Hotel Rooms
@@ -19,7 +19,7 @@ Lucknow, the City of Nawabs, is synonymous with grandeur, incredible food, and u
 
 Whether you are celebrating an anniversary, planning a romantic staycation, or simply treating yourself after a long week, sinking into a warm, private bath can melt the stress away. 
 
-[**👉 Browse All Verified Hotels with Bathtubs in Lucknow**](/india/delhi)
+[**👉 Browse All Verified Hotels with Bathtubs in Lucknow**](/india/lucknow)
 
 ---
 
@@ -66,4 +66,4 @@ Major international chains operating in the Gomti Nagar area usually feature dee
 
 Ready to experience Nawabi luxury? 
 
-[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Lucknow**](/india/delhi)
+[**👉 Explore our complete list of Triple-Verified Hotels with Bathtubs in Lucknow**](/india/lucknow)

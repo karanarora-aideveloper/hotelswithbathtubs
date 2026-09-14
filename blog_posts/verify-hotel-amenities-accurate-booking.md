@@ -10,7 +10,7 @@ tags: "["hotel verification", "amenities check", "booking tips", "authentic hote
 featured: "true"
 published: "true"
 publishedDate: "2026-08-18"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_verify-hotel-amenities-accurate-booking.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_verify-hotel-amenities-accurate-booking.jpeg"
 ---
 
 # How to Verify Hotel Amenities Are Accurate Before Booking: Complete Verification Guide

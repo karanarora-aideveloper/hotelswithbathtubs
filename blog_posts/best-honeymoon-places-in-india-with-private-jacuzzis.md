@@ -4,7 +4,7 @@ slug: "best-honeymoon-places-in-india-with-private-jacuzzis"
 excerpt: "Discover the best honeymoon places in India featuring private in-room bathtubs and outdoor jacuzzis. From snowy Shimla and Manali retreats to misty Munnar tea hills and royal Udaipur palaces."
 date: "2026-08-22"
 author: "HotelsWithBathtubs Editorial Team"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_best-honeymoon-places-in-india-with-private-jacuzzis.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_best-honeymoon-places-in-india-with-private-jacuzzis.jpeg"
 ---
 
 # Top 12 Best Honeymoon Places in India with Private Jacuzzis & Bathtubs (2026)

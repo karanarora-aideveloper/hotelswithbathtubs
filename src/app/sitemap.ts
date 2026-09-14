@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const countryLastMod = new Map<string, Date>();
     const locationLastMod = new Map<string, Date>();
+    const locationHotelCount = new Map<string, number>();
 
     // Canonical mapping for consolidated neighborhoods to prevent emitting 301 redirects in sitemap
     const neighborhoodCanonicalMap: Record<string, string> = {
@@ -38,6 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const locKey = `${countryInfo.slug}/${citySlug}`;
       const hotelUpdated = h.updatedAt ? new Date(h.updatedAt) : fallbackDate;
 
+      // Track hotel count for thin-destination filtering
+      locationHotelCount.set(locKey, (locationHotelCount.get(locKey) || 0) + 1);
+
       // Track latest update for country hub
       const currCountryDate = countryLastMod.get(countryInfo.slug);
       if (!currCountryDate || hotelUpdated > currCountryDate) {
@@ -59,13 +63,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     }));
 
-    // City Destination Routes
-    const locationRoutes = Array.from(locationLastMod.keys()).map(location => ({
-      url: `${baseUrl}/${location}`,
-      lastModified: locationLastMod.get(location) || fallbackDate,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }));
+    // City Destination Routes (exclude thin destinations with < 3 hotels to avoid GSC "Submitted URL marked noindex" error)
+    const locationRoutes = Array.from(locationLastMod.keys())
+      .filter(location => (locationHotelCount.get(location) || 0) >= 3)
+      .map(location => ({
+        url: `${baseUrl}/${location}`,
+        lastModified: locationLastMod.get(location) || fallbackDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      }));
 
     // 2. Fetch all published blogs
     const blogs = await Blog.find({ published: true }).select('slug updatedAt date -_id');

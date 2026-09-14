@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 
 interface Hotel {
@@ -227,13 +226,12 @@ export default function UrlFixerPage() {
           <div className="grid md:grid-cols-2 gap-0">
             {/* Image */}
             <div className="relative h-56 md:h-auto min-h-[240px] bg-gray-100">
-              <Image
+              <img
                 src={imageUrl(hotel.image)}
                 alt={hotel.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
                 {hotel.amenities.slice(0, 3).map(a => (

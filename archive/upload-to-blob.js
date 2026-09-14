@@ -1,28 +1,26 @@
 #!/usr/bin/env node
 /**
- * Helper script for Python scrapers to upload images to Vercel Blob
+ * Helper script for Python scrapers to upload images to Cloudflare R2
  *
  * Usage from Python:
  *   import subprocess
  *   result = subprocess.run(['node', 'upload-to-blob.js', 'filename.webp'],
  *                           capture_output=True, text=True)
- *   blob_url = result.stdout.strip()
+ *   r2_url = result.stdout.strip()
  */
 
 const fs = require('fs');
 const path = require('path');
-const { put } = require('@vercel/blob');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
-async function uploadToBlob(filename) {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    // Fallback to local if no token (for backwards compatibility)
-    console.error('');
+async function uploadToStorage(filename) {
+  if (!process.env.R2_SECRET_ACCESS_KEY) {
+    console.error('R2 credentials not set');
     process.exit(0);
   }
 
-  // File should be in current directory
   const filepath = path.join(process.cwd(), filename);
-
   if (!fs.existsSync(filepath)) {
     console.error(`File not found: ${filepath}`);
     process.exit(1);
@@ -30,13 +28,27 @@ async function uploadToBlob(filename) {
 
   try {
     const buffer = fs.readFileSync(filepath);
-    const blob = await put(`images/${filename}`, buffer, {
-      access: 'public',
-      contentType: 'image/webp',
+    const s3 = new S3Client({
+      region: 'auto',
+      endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+      credentials: {
+        accessKeyId: process.env.R2_ACCESS_KEY_ID,
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+      },
     });
 
-    // Print just the URL (Python script will capture this)
-    console.log(blob.url);
+    const bucket = process.env.R2_BUCKET_NAME || 'dreamwave';
+    const key = `hotelswithbathtubs/images/${filename}`;
+
+    await s3.send(new PutObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      Body: buffer,
+      ContentType: 'image/webp',
+    }));
+
+    const publicUrl = `https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/${filename}`;
+    console.log(publicUrl);
 
     // Delete local file after successful upload
     fs.unlinkSync(filepath);
@@ -52,7 +64,7 @@ if (!filename) {
   process.exit(1);
 }
 
-uploadToBlob(filename).catch(err => {
+uploadToStorage(filename).catch(err => {
   console.error(err);
   process.exit(1);
 });

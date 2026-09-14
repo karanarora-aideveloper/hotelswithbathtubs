@@ -10,7 +10,7 @@ tags: "["budget travel", "romantic getaway", "affordable luxury", "couples trip"
 featured: "true"
 published: "true"
 publishedDate: "2026-08-18"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_budget-romantic-getaway-india.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_budget-romantic-getaway-india.jpeg"
 ---
 
 # Budget Romantic Getaway Planning Tips for India: Luxury Hotels Under ₹30,000/Night

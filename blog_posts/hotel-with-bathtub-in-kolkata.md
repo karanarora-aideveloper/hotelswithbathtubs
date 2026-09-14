@@ -10,7 +10,7 @@ tags: "["kolkata", "romantic getaways", "luxury hotels", "hotels with bathtubs",
 featured: "false"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotel-with-bathtub-in-kolkata.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotel-with-bathtub-in-kolkata.jpeg"
 ---
 
 # Hotel With Bathtub in Kolkata: Best Boutique and Romantic Hotels

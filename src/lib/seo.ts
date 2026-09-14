@@ -888,6 +888,57 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // USA - Boston
+  'boston-usa': {
+    intro: 'Boston offers historic New England romance paired with world-class luxury. Discover Beacon Hill boutique stays, Back Bay five-star hotels, and Seaport waterfront towers featuring deep marble soaking bathtubs and private jacuzzi suites for romantic couple staycations.',
+    amenities: [
+      'Deep marble soaking tubs with Boston Harbor and Charles River skyline views',
+      'In-room jetted whirlpool tubs in Back Bay luxury towers',
+      'Diptyque and Guerlain designer bath amenities with heated bathroom floors',
+      'Victorian-inspired deep soaking tubs in historic brownstone suites'
+    ],
+    whyChoose: [
+      'Strolling distance to historic Beacon Hill, Boston Common, and Newbury Street',
+      'Celebrated seafood dining in the Seaport District and Italian North End',
+      'Top choice for romantic anniversaries and autumn weekend escapes',
+      'Verified in-room bathtub amenities confirmed across Booking.com and Agoda'
+    ]
+  },
+
+  // USA - Baltimore
+  'baltimore-usa': {
+    intro: 'Baltimore combines historic waterfront charm with intimate romantic escapes. Experience Inner Harbor luxury hotels and historic boutique inns featuring private double jacuzzi tubs, fireside baths, and sweeping harbor views.',
+    amenities: [
+      'Double jacuzzi whirlpool tubs for couples with harbor and city skyline views',
+      'Historic boutique suites with fireside clawfoot soaking tubs',
+      'Opulent marble spa bathrooms with oversized walk-in rain showers',
+      'Luxury bath salts and plush robes for weekend relaxation'
+    ],
+    whyChoose: [
+      'Steps from the National Aquarium, Fells Point cobblestones, and Inner Harbor',
+      'Romantic waterfront promenade dining and historic charm',
+      'Exceptional value for private jacuzzi suites within easy reach of Washington D.C.',
+      'Triple-verified room specifications with guaranteed private tubs'
+    ]
+  },
+
+  // USA - Kansas City
+  'kansas-city-usa': {
+    intro: 'Kansas City, famed for its jazz heritage and Country Club Plaza architecture, offers romantic boutique stays featuring private in-room whirlpool jacuzzi suites and deep soaking tubs ideal for weekend couple getaways.',
+    amenities: [
+      'In-room whirlpool jacuzzi tubs with soothing massage jets',
+      'Spanish-revival inspired deep soaking baths in Plaza luxury suites',
+      'Fireplace suites with adjacent freestanding soaking bathtubs',
+      'Designer bath botanicals and oversized plush bath sheets'
+    ],
+    whyChoose: [
+      'Minutes from Country Club Plaza shopping, historic fountains, and dining',
+      'World-class 18th & Vine jazz clubs and celebrated culinary scene',
+      'Spacious romantic suites with exceptional Midwestern hospitality',
+      'Verified partner booking links with guaranteed in-room tubs'
+    ]
+  },
+
   // India - Gwalior
   'gwalior-india': {
     intro: 'Gwalior, rich in Scindia royal heritage and towering over the plains with its ancient hilltop fort, offers magnificent palace stays. Experience regal suites with vintage clawfoot tubs, Italian marble baths, and private courtyard gardens.',
@@ -902,6 +953,176 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Historic hill fort known as the "Gibraltar of India"',
       'Intimate private royal suites with luxury deep soaking baths',
       'Triple-verified room tiers guaranteed across all travel platforms'
+    ]
+  },
+
+  // India - Rishikesh
+  'rishikesh-india': {
+    intro: 'Rishikesh, the world capital of yoga set along the emerald holy Ganges in the Himalayan foothills, offers serene luxury wellness sanctuaries. Unwind in private riverside soaking tubs and forest-view jacuzzi suites after exploring sacred ghats, suspension bridges, or white-water rapids.',
+    amenities: [
+      'Ganges river-facing deep soaking tubs with Himalayan valley views',
+      'Ayurvedic herbal bath infusions and therapeutic mineral salt soaks',
+      'Private balcony jacuzzi suites surrounded by Sal forests',
+      'Open-air stone plunge tubs with tranquil river murmur'
+    ],
+    whyChoose: [
+      'Minutes from iconic suspension bridges, Triveni Ghat evening aarti, and yoga ashrams',
+      'Peaceful riverside wellness sanctuaries tailored for romantic retreats and rejuvenation',
+      'Seamless access to river rafting, Rajaji National Park safaris, and organic cafes',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Rajkot
+  'rajkot-india': {
+    intro: 'Rajkot, the cultural and commercial heart of Gujarat\'s Saurashtra region, blends rich Gandhian heritage with contemporary hospitality. Experience upscale business and leisure hotels featuring spacious marble bathtubs and rejuvenating whirlpool suites after touring historic museums and bustling bazaars.',
+    amenities: [
+      'Deep soaking bathtubs with premium Ayurvedic bath essentials',
+      'Spacious Italian marble en-suite bathrooms with rainfall showers',
+      'Executive whirlpool jacuzzi suites in central commercial districts',
+      'Plush terry-cloth bathrobes and designer bathroom fixtures'
+    ],
+    whyChoose: [
+      'Close proximity to Kaba Gandhi No Delo, Watson Museum, and vibrant handicraft markets',
+      'Refined and serene suites perfect for couples seeking peaceful Saurashtra getaways',
+      'Generous suite layouts with dedicated workspaces and authentic Kathiyawadi dining',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Agra
+  'agra-india': {
+    intro: 'Agra, the legendary seat of Mughal emperors and home to the immortal Taj Mahal, is one of the world\'s most romantic destinations. Indulge in opulent heritage and five-star hotels offering marble soaking tubs and private jacuzzi suites with panoramic vistas of the ivory mausoleum.',
+    amenities: [
+      'Private Taj Mahal-facing deep soaking tubs and jacuzzi suites',
+      'Mughal-inspired hand-carved marble bathrooms with rose-water bath rituals',
+      'Freestanding clawfoot tubs overlooking landscaped Mughal gardens',
+      'Luxury brass fittings and bespoke Ayurvedic bath products'
+    ],
+    whyChoose: [
+      'Unrivaled views and sunrise access to the Taj Mahal and historic Agra Fort',
+      'World-class romantic heritage hospitality celebrating timeless Mughal romance',
+      'Fine-dining Mughlai restaurants and luxury spa pavilions on-site',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Amritsar
+  'amritsar-india': {
+    intro: 'Amritsar, Punjab\'s spiritual and culinary capital, captivates travelers with the radiant Golden Temple and storied heritage streets. Retreat to premium hotels offering tranquil in-room soaking tubs and jacuzzi suites after visiting the sacred Harmandir Sahib and vibrant street-food bazaars.',
+    amenities: [
+      'Deep soaking tubs paired with plush bath linens and calming essential oils',
+      'Spacious marble bathrooms featuring multi-jet hydrotherapy showers',
+      'Boutique jacuzzi suites overlooking vibrant heritage streetscapes',
+      'Handcrafted herbal bath salts and traditional wellness toiletries'
+    ],
+    whyChoose: [
+      'Steps from the Golden Temple, Jallianwala Bagh, and iconic culinary hubs',
+      'Intimate, peaceful sanctuaries for couples after experiencing evening temple ceremonies',
+      'Convenient shuttles to the Wagah Border retreat ceremony and airport',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Nashik
+  'nashik-india': {
+    intro: 'Nashik, India\'s premier wine capital nestled along the sacred Godavari River and Sahyadri foothills, offers an exquisite blend of viticulture and spirituality. Unwind in vineyard-facing soaking tubs and private jacuzzi villas after cellar tours and temple visits.',
+    amenities: [
+      'Vineyard-view deep soaking tubs overlooking rolling grape arbors',
+      'Private open-air patio jacuzzis under starlit Sahyadri skies',
+      'Wine-infused bath salts and grape-seed extract body treatments',
+      'Spacious sunlit bathrooms with freestanding tubs and vineyard breezes'
+    ],
+    whyChoose: [
+      'Front-row access to Sula Vineyards, boutique winery tasting rooms, and Godavari ghats',
+      'Idyllic weekend wine country escape designed for romantic anniversaries and couples',
+      'Boutique vineyard resort villas pairing private plunge baths with farm-to-fork dining',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Mandarmani
+  'mandarmani-india': {
+    intro: 'Mandarmani, a tranquil coastal haven along the Bay of Bengal, is famous for its expansive drivable beach and peaceful seaside ambiance. Discover coastal resorts offering private ocean-facing bathtubs and balcony jacuzzis perfect for a soothing weekend getaway from Kolkata.',
+    amenities: [
+      'Ocean-facing freestanding tubs with panoramic Bay of Bengal views',
+      'Private balcony jacuzzis catching gentle sea breezes and coastal sunrises',
+      'Spacious beach-villa bathrooms with open-air rain showers',
+      'Marine mineral bath salts and organic coastal wellness products'
+    ],
+    whyChoose: [
+      'Serene beachfront access away from crowded shores with red crab-dotted sands',
+      'Intimate coastal retreat for couples craving quiet seaside sunrises and candlelight dinners',
+      'Short, scenic driving distance from Kolkata for spontaneous romantic weekend escapes',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Chandigarh
+  'chandigarh-india': {
+    intro: 'Chandigarh, Le Corbusier\'s iconic modernist masterpiece and the joint capital of Punjab and Haryana, is celebrated for its lush gardens and orderly elegance. Stay in sophisticated five-star and boutique hotels featuring sleek freestanding soaking tubs and hydrotherapy suites near Sukhna Lake.',
+    amenities: [
+      'Contemporary freestanding soaking tubs with floor-to-ceiling city views',
+      'Sleek Italian marble bathrooms with ambient lighting and rain showers',
+      'Private jacuzzi suites overlooking Shivalik foothill horizons',
+      'Designer bath amenities, botanical soaking salts, and plush robes'
+    ],
+    whyChoose: [
+      'Minutes from Nek Chand\'s Rock Garden, Sukhna Lake promenades, and Sector 17 shopping',
+      'Refined urban oasis for couples seeking a stylish, contemporary weekend staycation',
+      'Spacious modernist suites with five-star dining and tranquil garden landscapes',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Panchgani
+  'panchgani-india': {
+    intro: 'Panchgani, perched amidst Maharashtra\'s Sahyadri range, charms travelers with its cool mountain breezes, strawberry orchards, and the dramatic Table Land plateau. Relax in cliffside suites featuring deep soaking bathtubs and outdoor jacuzzis framing sweeping vistas of the Krishna River valley.',
+    amenities: [
+      'Cliff-edge deep soaking tubs overlooking the Krishna River valley',
+      'Private open-air balcony jacuzzis with panoramic Sahyadri mountain vistas',
+      'Colonial-style clawfoot tubs in heritage hill-station cottages',
+      'Aromatherapy bath blends infused with local strawberry and herbal essences'
+    ],
+    whyChoose: [
+      'Spectacular proximity to Table Land, Sydney Point, and fresh strawberry farm trails',
+      'Crisp highland air and mist-shrouded valleys ideal for cozy romantic retreats',
+      'Private mountain-view chalets offering secluded luxury and artisanal Maharashtrian dining',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Faridabad
+  'faridabad-india': {
+    intro: 'Faridabad, set against the ancient Aravalli hills and the historic Surajkund reservoir, provides a tranquil, green NCR getaway just moments from Delhi. Experience premier resort and business hotels featuring deep marble bathtubs and serene jacuzzi suites surrounded by lush forested landscapes.',
+    amenities: [
+      'Deep marble soaking tubs overlooking forested Aravalli hills',
+      'Multi-jet jacuzzi suites designed for executive relaxation and couples retreats',
+      'Spacious designer bathrooms with walk-in rainfall showers and luxury fixtures',
+      'Aromatherapy essential oils, custom bath crystals, and plush bathrobes'
+    ],
+    whyChoose: [
+      'Convenient access to historic Surajkund, the annual Crafts Mela, and Aravalli nature trails',
+      'Peaceful green retreat for Delhi NCR couples seeking quiet weekend staycations',
+      'Expansive resort grounds featuring golf courses, fine dining, and wellness spas',
+      'Triple-verified across leading travel platforms'
+    ]
+  },
+
+  // India - Bhopal
+  'bhopal-india': {
+    intro: 'Bhopal, the enchanting City of Lakes and capital of Madhya Pradesh, merges royal Begum-era heritage with scenic lakeside beauty. Stay in regal heritage palaces and upscale hotels boasting deep marble soaking tubs and private jacuzzi suites overlooking Upper Lake (Bhojtal).',
+    amenities: [
+      'Upper Lake-facing private soaking bathtubs with tranquil water views',
+      'Royal Begum-inspired palace suites with antique brass and marble tubs',
+      'Private whirlpool jacuzzi suites set within heritage courtyards',
+      'Ayurvedic bath oils, herbal soaking sachets, and luxury plush robes'
+    ],
+    whyChoose: [
+      'Surrounded by historic landmarks including Taj-ul-Masajid, Bhojtal, and Jehan Numa heritage estates',
+      'Royal Nawabi charm and serene lakefront sunsets perfect for romantic escapes',
+      'Gateway to UNESCO World Heritage treasures at Sanchi and Bhimbetka',
+      'Triple-verified across leading travel platforms'
     ]
   },
 

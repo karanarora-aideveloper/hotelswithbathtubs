@@ -3,7 +3,7 @@ title: "How to Confirm a Hotel Has a Bathtub Before Booking"
 slug: "hotel-bathtub-booking-checklist-how-to-confirm-before-booking"
 date: "August 20, 2026"
 excerpt: "Follow this 6-step verification checklist to guarantee your hotel room includes a genuine private in-room bathtub or jacuzzi before you pay."
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_hotel-bathtub-booking-checklist-how-to-confirm-before-booking.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_hotel-bathtub-booking-checklist-how-to-confirm-before-booking.jpeg"
 published: "true"
 author: "Lead Travel Auditor"
 ---

@@ -3,13 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   serverExternalPackages: ['mongoose', 'mongodb', 'isomorphic-dompurify', 'jsdom', 'cheerio', 'markdown-it'],
   images: {
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'wsyhnifiqkc8fvyw.public.blob.vercel-storage.com',
+        hostname: 'pub-c12991664bbf475e918cb03e3ac5b910.r2.dev',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev',
         port: '',
         pathname: '/**',
       },

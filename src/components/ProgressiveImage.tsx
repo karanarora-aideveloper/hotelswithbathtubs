@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState, useRef, useEffect } from 'react';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
 interface ProgressiveImageProps {
@@ -29,8 +28,24 @@ export default function ProgressiveImage({
 }: ProgressiveImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const resolvedUrl = imgError ? DEFAULT_HOTEL_IMAGE : imageUrl(src);
+
+  const handleImageError = () => {
+    if (!imgError) {
+      setImgError(true);
+    } else {
+      setIsLoaded(true);
+    }
+  };
+
+  // If image was already loaded from browser cache before hydration, show it immediately
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setIsLoaded(true);
+    }
+  }, [resolvedUrl]);
 
   return (
     <div className={`relative w-full h-full overflow-hidden bg-gray-100 ${containerClassName}`}>
@@ -48,20 +63,21 @@ export default function ProgressiveImage({
         </div>
       )}
 
-      {/* Optimized Image with native lazy loading and SSR inclusion */}
-      <Image
+      {/* Optimized Image with native lazy loading for below-the-fold and eager loading for priority */}
+      <img
+        ref={imgRef}
         src={resolvedUrl}
         alt={alt}
-        fill={fill}
         width={!fill ? width : undefined}
         height={!fill ? height : undefined}
-        sizes={sizes}
-        priority={priority}
-        loading={priority ? undefined : 'lazy'}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
         decoding="async"
         onLoad={() => setIsLoaded(true)}
-        onError={() => setImgError(true)}
-        className={`object-cover transition-opacity duration-300 ease-out ${
+        onError={handleImageError}
+        className={`${
+          fill ? 'absolute inset-0 w-full h-full' : ''
+        } object-cover transition-opacity duration-300 ease-out ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         } ${className}`}
       />

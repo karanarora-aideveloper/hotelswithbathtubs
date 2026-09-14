@@ -54,13 +54,13 @@ export function markdownToHtml(markdown: string): string {
     }
   });
 
-  // Rewrite /assets/ image URLs to Vercel Blob in production
-  const BLOB_BASE = 'https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/';
+  // Rewrite /assets/ image URLs to Cloudflare R2 in production
+  const R2_BASE = 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/';
   $('img').each((_, el) => {
     const src = $(el).attr('src');
     if (src && src.startsWith('/assets/')) {
       const filename = src.replace('/assets/', '');
-      $(el).attr('src', `${BLOB_BASE}${filename}`);
+      $(el).attr('src', `${R2_BASE}${filename}`);
     }
   });
   

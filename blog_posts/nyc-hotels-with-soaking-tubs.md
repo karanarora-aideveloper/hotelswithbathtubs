@@ -10,7 +10,7 @@ tags: "["new york city", "usa", "manhattan", "luxury hotels", "romantic getaways
 featured: "true"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_nyc-hotels-with-soaking-tubs.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_nyc-hotels-with-soaking-tubs.jpeg"
 ---
 
 # NYC Hotels With Soaking Tubs: Luxury Manhattan Escapes

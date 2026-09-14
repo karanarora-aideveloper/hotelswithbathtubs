@@ -4,7 +4,7 @@ slug: "top-couple-resorts-in-lonavala-with-bathtubs"
 excerpt: "Looking for a romantic couple resort in Lonavala with a private in-room bathtub or jacuzzi? Discover top luxury stays, cliffside villas, and treehouses near Mumbai and Pune."
 date: "2026-08-22"
 author: "HotelsWithBathtubs Editorial Team"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_top-couple-resorts-in-lonavala-with-bathtubs.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_top-couple-resorts-in-lonavala-with-bathtubs.jpeg"
 ---
 
 # Top 8 Romantic Couple Resorts in Lonavala with Private Bathtubs (2026 Guide)

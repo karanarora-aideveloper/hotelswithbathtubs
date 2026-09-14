@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 
 interface Hotel {
@@ -197,13 +196,12 @@ export default function ReviewQueuePage() {
           <div className="grid md:grid-cols-2 gap-0">
             {/* Image */}
             <div className="relative h-64 md:h-auto min-h-[280px] bg-gray-100">
-              <Image
+              <img
                 src={imageUrl(hotel.image)}
                 alt={hotel.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
               />
               {/* Amenity chips over image */}
               <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">

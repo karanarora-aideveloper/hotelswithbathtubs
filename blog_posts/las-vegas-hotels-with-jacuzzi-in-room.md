@@ -10,7 +10,7 @@ tags: "["las vegas", "usa", "romantic getaways", "luxury hotels", "jacuzzi suite
 featured: "true"
 published: "true"
 publishedDate: "2026-08-19"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_las-vegas-hotels-with-jacuzzi-in-room.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_las-vegas-hotels-with-jacuzzi-in-room.jpeg"
 ---
 
 # Las Vegas Hotels With Jacuzzi in Room: Ultimate Luxury Suites

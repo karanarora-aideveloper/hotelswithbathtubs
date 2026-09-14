@@ -10,7 +10,7 @@ tags: "["honeymoon hotels", "freestanding bathtub", "romantic getaway", "couples
 featured: "true"
 published: "true"
 publishedDate: "2026-08-18"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_honeymoon-hotels-freestanding-bathtubs-india.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_honeymoon-hotels-freestanding-bathtubs-india.jpeg"
 ---
 
 # Honeymoon Hotels with Freestanding Bathtubs in India: The Ultimate Romantic Escape

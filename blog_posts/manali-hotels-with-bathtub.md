@@ -10,7 +10,7 @@ tags: ["manali", "romantic getaways", "luxury resorts", "hotels with bathtubs", 
 featured: true
 published: true
 publishedDate: "2026-08-20"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-welcomheritage-urvashis-retreat-manali.webp"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-welcomheritage-urvashis-retreat-manali.webp"
 ---
 
 # Manali Hotels with Bathtub: Best Relaxing Stays in the Mountains
@@ -29,7 +29,7 @@ Here are our top selections for hotels and luxury resorts in Manali that feature
 
 ### 1. WelcomHeritage Urvashi's Retreat
 
-![WelcomHeritage Urvashi's Retreat Manali](https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/bathtub-welcomheritage-urvashis-retreat-manali.webp)
+![WelcomHeritage Urvashi's Retreat Manali](https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-welcomheritage-urvashis-retreat-manali.webp)
 
 Nestled amidst pine forests and apple orchards with panoramic views of the Rohtang range, WelcomHeritage Urvashi's Retreat is one of Manali’s most enchanting boutique luxury properties. The heritage wooden interiors, combined with ultra-modern deep soaking tubs overlooking snow-clad peaks, create an unforgettable romantic experience.
 
@@ -38,7 +38,7 @@ Nestled amidst pine forests and apple orchards with panoramic views of the Rohta
 
 ### 2. The Desire Luxury Resort Manali
 
-![The Desire Luxury Resort Manali](https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/booking-the-desire-manali.webp)
+![The Desire Luxury Resort Manali](https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/booking-the-desire-manali.webp)
 
 If you're searching for modern elegance in the mountains, The Desire Manali offers spacious, well-appointed luxury suites designed specifically for couples and families looking to unwind.
 
@@ -47,7 +47,7 @@ If you're searching for modern elegance in the mountains, The Desire Manali offe
 
 ### 3. Hotel Ambika Residency
 
-![Hotel Ambika Residency Manali](https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/booking-hotel-ambika-residency-manali.webp)
+![Hotel Ambika Residency Manali](https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/booking-hotel-ambika-residency-manali.webp)
 
 Conveniently located with breathtaking vistas of the surrounding pine-covered hills, Hotel Ambika Residency blends warm Himalayan hospitality with comfortable, modern amenities for a relaxing stay.
 
@@ -56,7 +56,7 @@ Conveniently located with breathtaking vistas of the surrounding pine-covered hi
 
 ### 4. Zen Manali by Keekoo Stays
 
-![Zen Manali by Keekoo Stays](https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/booking-zen-manali-by-keekoo-stays.webp)
+![Zen Manali by Keekoo Stays](https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/booking-zen-manali-by-keekoo-stays.webp)
 
 Designed with minimalist aesthetics and serene surroundings, Zen Manali provides a tranquil sanctuary away from the crowded market streets. It's a favorite for couples seeking peace, meditation, and quiet comfort.
 
@@ -65,7 +65,7 @@ Designed with minimalist aesthetics and serene surroundings, Zen Manali provides
 
 ### 5. La Voglia Luxury Stays Old Manali
 
-![La Voglia Luxury Stays Old Manali](https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/booking-la-voglia-old-manali.webp)
+![La Voglia Luxury Stays Old Manali](https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/booking-la-voglia-old-manali.webp)
 
 Perched high in picturesque Old Manali near charming cafes and orchards, La Voglia provides boutique luxury accommodations with stunning vantage points over the entire valley.
 

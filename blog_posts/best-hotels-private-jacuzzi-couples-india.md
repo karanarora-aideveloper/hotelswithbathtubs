@@ -10,7 +10,7 @@ tags: "["jacuzzi hotels", "couples resorts", "romantic getaways", "luxury hotels
 featured: "true"
 published: "true"
 publishedDate: "2026-08-18"
-image: "https://wsyhnifiqkc8fvyw.public.blob.vercel-storage.com/images/blog_best-hotels-private-jacuzzi-couples-india.jpeg"
+image: "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/blog_best-hotels-private-jacuzzi-couples-india.jpeg"
 ---
 
 # Best Hotels with Private Jacuzzi Rooms in India for Couples: Triple-Verified Luxury
