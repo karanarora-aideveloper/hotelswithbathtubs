@@ -9,6 +9,7 @@ import Blog from '@/models/Blog';
 import Image from 'next/image';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
+import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = 3600;
 
@@ -481,6 +482,7 @@ export default async function CityHotelsPage({
                 );
               })()}
             </section>
+            <TrendingDestinations currentCity={cityName} />
           </>
   );
 }

@@ -1,8 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Outfit, Lora } from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google';
-import Script from "next/script";
 import "./globals.css";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -62,19 +60,14 @@ export default async function RootLayout({
 }>) {
   await connectToDatabase();
   const settings = await Settings.findOne();
-  const gaId = settings?.googleAnalyticsId || process.env.NEXT_PUBLIC_GA_ID;
-
+  
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable} ${lora.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col`}>
         <Suspense fallback={null}>
           <NavigationProgressBar />
         </Suspense>
-        <Script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="m0I/LcukVcqseIUANjyjuw"
-          strategy="afterInteractive"
-        />
+        
         <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border py-3 px-4 md:py-3.5 md:px-8 flex flex-row justify-between items-center shadow-xs">
           <Link href="/" className="flex items-center gap-2 md:gap-3 flex-shrink-0">
             <Logo className="w-8 h-8 md:w-9 md:h-9 flex-shrink-0" />
@@ -124,7 +117,7 @@ export default async function RootLayout({
 
         <Footer />
         <MixpanelProvider />
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        
       </body>
     </html>
   );

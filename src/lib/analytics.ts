@@ -28,21 +28,6 @@ export const initMixpanel = () => {
   }
 };
 
-export const sendGAEvent = (action: string, category: string, label: string, value?: number) => {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    const ignoreGa = localStorage.getItem('ignore_ga');
-    if (ignoreGa === 'true') {
-      console.log(`[GA4 Blocked] Event: ${action}`, { category, label, value });
-      return;
-    }
-
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value,
-    });
-  }
-};
 
 export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
   if (typeof window !== 'undefined') {

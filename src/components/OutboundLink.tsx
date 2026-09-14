@@ -1,6 +1,6 @@
 'use client';
 
-import { sendGAEvent, trackEvent } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
 import { wrapOutboundAffiliateLink } from '@/lib/affiliate';
 
 export default function OutboundLink({
@@ -27,9 +27,6 @@ export default function OutboundLink({
       rel="noopener noreferrer nofollow sponsored"
       className={className}
       onClick={() => {
-        // Track to Google Analytics
-        sendGAEvent('hotel_booking_click', 'conversion', `Hotel: ${hotelName} | City: ${cityName} | Source: ${source || 'MakeMyTrip'}`);
-        
         // Track to Mixpanel
         trackEvent('hotel_booking_click', {
           hotel_name: hotelName,
