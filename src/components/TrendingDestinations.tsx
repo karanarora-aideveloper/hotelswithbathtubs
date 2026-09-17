@@ -1,12 +1,15 @@
 import Link from 'next/link';
 
 const TRENDING_CITIES = [
-  { name: 'Paris', country: 'France', slug: '/france/paris' },
+  { name: 'Bangkok', country: 'Thailand', slug: '/thailand/bangkok' },
+  { name: 'Phuket', country: 'Thailand', slug: '/thailand/phuket' },
   { name: 'Bali', country: 'Indonesia', slug: '/indonesia/bali' },
+  { name: 'Paris', country: 'France', slug: '/france/paris' },
+  { name: 'Koh Samui', country: 'Thailand', slug: '/thailand/koh-samui' },
+  { name: 'Cancun', country: 'Mexico', slug: '/mexico/cancun' },
   { name: 'Tokyo', country: 'Japan', slug: '/japan/tokyo' },
   { name: 'Venice', country: 'Italy', slug: '/italy/venice' },
   { name: 'Orlando', country: 'USA', slug: '/usa/orlando' },
-  { name: 'Cancun', country: 'Mexico', slug: '/mexico/cancun' }
 ];
 
 export default function TrendingDestinations({ currentCity }: { currentCity: string }) {
