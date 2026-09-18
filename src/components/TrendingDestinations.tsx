@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 const TRENDING_CITIES = [
+  { name: 'Bora Bora', country: 'French Polynesia', slug: '/french-polynesia/bora-bora' },
   { name: 'Santorini', country: 'Greece', slug: '/greece/santorini' },
   { name: 'Bangkok', country: 'Thailand', slug: '/thailand/bangkok' },
   { name: 'London', country: 'UK', slug: '/uk/london' },

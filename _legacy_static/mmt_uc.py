@@ -136,7 +136,17 @@ def scrape():
     if not hasattr(uc.ChromeOptions, 'headless'):
         uc.ChromeOptions.headless = property(lambda self: False)
     
-    driver = uc.Chrome(version_main=151)
+    def get_chrome_version():
+        try:
+            out = subprocess.check_output(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version']).decode('utf-8')
+            m = re.search(r'Chrome\s+(\d+)', out)
+            if m:
+                return int(m.group(1))
+        except Exception:
+            pass
+        return 153
+
+    driver = uc.Chrome(version_main=get_chrome_version())
     wait = WebDriverWait(driver, 15)
 
     # undetected-chromedriver opens an internal tab during its stealth-patch

@@ -129,7 +129,17 @@ def scrape():
     # driver.set_window_size() call here, issued before uc's internal tab
     # churn settles, is exactly what causes "no such window: target window
     # already closed" crashes — so don't call it.
-    driver = uc.Chrome(options=options, version_main=151)
+    def get_chrome_version():
+        try:
+            out = subprocess.check_output(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version']).decode('utf-8')
+            m = re.search(r'Chrome\s+(\d+)', out)
+            if m:
+                return int(m.group(1))
+        except Exception:
+            pass
+        return 153
+
+    driver = uc.Chrome(options=options, version_main=get_chrome_version())
     wait = WebDriverWait(driver, 15)
 
     # Let undetected-chromedriver's internal tab churn settle before acting.

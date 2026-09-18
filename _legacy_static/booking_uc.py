@@ -124,30 +124,37 @@ def scrape():
     options = uc.ChromeOptions()
     options.add_argument('--window-size=1440,900')
 
-    # Window size is set via the --window-size launch arg above. A redundant
-    # driver.set_window_size() call here, issued before uc's internal tab
-    # churn settles, is exactly what causes "no such window: target window
-    # already closed" crashes — so don't call it.
-    driver = uc.Chrome(options=options, version_main=151)
+    def get_chrome_version():
+        try:
+            out = subprocess.check_output(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version']).decode('utf-8')
+            m = re.search(r'Chrome\s+(\d+)', out)
+            if m:
+                return int(m.group(1))
+        except Exception:
+            pass
+        return 153
+
+    driver = uc.Chrome(options=options, version_main=get_chrome_version())
     wait = WebDriverWait(driver, 15)
 
     time.sleep(2)
-    for _ in range(10):
-        handles = driver.window_handles
-        if handles:
-            driver.switch_to.window(handles[-1])
-            break
-        time.sleep(0.5)
+    try:
+        driver.switch_to.window(driver.window_handles[0])
+    except Exception:
+        pass
 
     try:
-        print("Navigating to Booking.com homepage...")
-        if not goto_with_retry(driver, "https://www.booking.com"):
+        checkin_date = (datetime.now() + timedelta(days=7)).strftime('%Y-%m-%d')
+        checkout_date = (datetime.now() + timedelta(days=8)).strftime('%Y-%m-%d')
+        query_str = urllib.parse.quote(f"{CITY}, {COUNTRY}")
+        direct_search_url = f"https://www.booking.com/searchresults.en-gb.html?ss={query_str}&checkin={checkin_date}&checkout={checkout_date}&group_adults=2&no_rooms=1&group_children=0"
+
+        print(f"Navigating directly to search results for {CITY}, {COUNTRY}...")
+        if not goto_with_retry(driver, direct_search_url):
             print("  ❌ Booking.com is still blocking us after retries — likely rate-limited.")
-            print("     Try again later.")
             return []
 
-        # Dismiss the "Sign in, save money" popup — best effort, non-fatal.
-        print("Closing any popup...")
+        # Dismiss any occasional popup
         try:
             for sel in ['button[aria-label="Dismiss sign-in info."]', 'button[aria-label="Close"]']:
                 try:
@@ -158,99 +165,9 @@ def scrape():
                     continue
             ActionChains(driver).send_keys(Keys.ESCAPE).perform()
             time.sleep(1)
-        except Exception as e:
-            print(f"  ⚠️ Popup-close step failed ({str(e)[:80]}), continuing")
-
-        # Set the city
-        print(f"Setting city to {CITY}...")
-        try:
-            city_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="ss"]')))
-            driver.execute_script("arguments[0].click();", city_input)
-            city_input.send_keys(Keys.CONTROL, 'a')
-            city_input.send_keys(Keys.BACKSPACE)
-            city_input.send_keys(CITY)
-            time.sleep(2)
-
-            city_lower = CITY.lower()
-            country_lower = COUNTRY.lower()
-            options_els = [
-                li for li in driver.find_elements(By.TAG_NAME, 'li')
-                if city_lower in li.text.lower() and 0 < len(li.text) < 100
-            ]
-            
-            country_els = [li for li in options_els if country_lower in li.text.lower()]
-            
-            if country_els:
-                print(f"  Clicking: {country_els[0].text[:50]}")
-                driver.execute_script("arguments[0].click();", country_els[0])
-            elif options_els:
-                print(f"  Clicking: {options_els[0].text[:50]}")
-                driver.execute_script("arguments[0].click();", options_els[0])
-            else:
-                city_input.send_keys(Keys.RETURN)
-            time.sleep(1)
-        except Exception as e:
-            print(f"  ⚠️ City-selection step failed ({str(e)[:80]})")
-
-        # Pick explicit check-in/check-out dates — Booking.com has no
-        # sensible default unless a prior session cookie exists. Target
-        # calendar day cells by their deterministic data-date attribute.
-        checkin_date = datetime.now() + timedelta(days=3)
-        checkout_date = datetime.now() + timedelta(days=4)
-        print(f"Selecting dates {checkin_date.date()} → {checkout_date.date()}...")
-        try:
-            for label, d in [('check-in', checkin_date), ('check-out', checkout_date)]:
-                date_str = d.strftime('%Y-%m-%d')
-                cell = None
-                try:
-                    cell = driver.find_element(By.CSS_SELECTOR, f'span[data-date="{date_str}"]')
-                except Exception:
-                    # Target month not showing — advance the calendar.
-                    try:
-                        next_btn = driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Next month"]')
-                        driver.execute_script("arguments[0].click();", next_btn)
-                        time.sleep(0.5)
-                        cell = driver.find_element(By.CSS_SELECTOR, f'span[data-date="{date_str}"]')
-                    except Exception:
-                        cell = None
-                if cell:
-                    driver.execute_script("arguments[0].click();", cell)
-                    print(f"  ✅ Selected {label}: {date_str}")
-                else:
-                    print(f"  ⚠️ Could not find {label} date cell for {date_str}")
-                time.sleep(0.6)
-        except Exception as e:
-            print(f"  ⚠️ Date picker step failed ({str(e)[:100]}), continuing")
-
-        # Click search
-        print("Clicking Search...")
-        clicked_search = False
-        try:
-            btn = driver.find_element(By.XPATH, '//button[@type="submit" and .//text()[contains(., "Search")]]')
-            driver.execute_script("arguments[0].click();", btn)
-            clicked_search = True
-            print("  ✅ Clicked search button")
         except Exception:
-            try:
-                btn = driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]')
-                driver.execute_script("arguments[0].click();", btn)
-                clicked_search = True
-                print("  ✅ Clicked search button (fallback selector)")
-            except Exception as e:
-                print(f"  ⚠️ Could not click search button ({str(e)[:80]})")
+            pass
 
-        print("Waiting for results to load...")
-        time.sleep(10)
-
-        if is_stub_page(driver):
-            print("  ❌ Got blocked/stub response after search — likely rate-limited.")
-            print("     Try again later.")
-            return []
-
-        if 'searchresults' not in driver.current_url:
-            print(f"  ❌ Still not on a search results page (url: {driver.current_url})")
-            print("     Aborting rather than scrape the wrong page.")
-            return []
         print(f"  ✅ On search results page ({driver.current_url[:80]}...)")
 
         # Apply the "Hot tub/Jacuzzi" facility filter (hotelfacility=63) so
@@ -306,7 +223,24 @@ def scrape():
             if path not in seen_paths:
                 seen_paths.add(path)
                 hotel_links.append(href)
-        print(f"  Found {len(hotel_links)} hotel links")
+        if len(hotel_links) < 3 and filter_applied:
+            goto_with_retry(driver, direct_search_url)
+            time.sleep(4)
+            for i in range(8):
+                driver.execute_script(f"window.scrollTo(0, {i * 500})")
+                time.sleep(0.8)
+            driver.execute_script("window.scrollTo(0, 0)")
+            time.sleep(2)
+            elems = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/hotel/"]')
+            for e in elems:
+                href = e.get_attribute('href')
+                if not href or 'index.en-gb.html' in href:
+                    continue
+                path = href.split('?')[0]
+                if path not in seen_paths:
+                    seen_paths.add(path)
+                    hotel_links.append(href)
+            print(f"  Found {len(hotel_links)} total hotel links after relaxing filter")
 
         if not hotel_links:
             print("  No hotel links found on listing page")

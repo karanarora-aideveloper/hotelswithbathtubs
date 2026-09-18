@@ -28,33 +28,28 @@ def upload_image_to_blob(filename, workspace_dir=None):
     if not workspace_dir:
         workspace_dir = os.getcwd()
 
-    # If no Blob token, return local path (backward compatibility)
-    if not os.environ.get('BLOB_READ_WRITE_TOKEN'):
-        print(f"⚠️ BLOB_READ_WRITE_TOKEN not set, using local path for {filename}")
-        return f"/assets/{filename}"
-
     try:
-        # Call Node.js helper to upload to Blob
+        # Call Node.js helper to upload to Cloudflare R2
         result = subprocess.run(
-            ['node', 'upload-to-blob.js', filename],
+            ['node', 'upload-to-r2.js', filename],
             cwd=workspace_dir,
             capture_output=True,
             text=True,
             timeout=30
         )
 
-        if result.returncode == 0:
-            blob_url = result.stdout.strip()
-            print(f"✅ Uploaded to Blob: {filename} → {blob_url}")
-            return blob_url
+        lines = [line.strip() for line in result.stdout.splitlines() if line.strip().startswith('http')]
+        if result.returncode == 0 and lines:
+            r2_url = lines[0]
+            print(f"✅ Uploaded to Cloudflare R2: {filename} → {r2_url}")
+            return r2_url
         else:
-            print(f"⚠️ Blob upload failed for {filename}: {result.stderr}")
-            # Fallback to local path
-            return f"/assets/{filename}"
+            print(f"⚠️ R2 upload fallback for {filename}: {result.stderr.strip() or result.stdout.strip()}")
+            return f"https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/{filename}"
 
     except subprocess.TimeoutExpired:
-        print(f"⚠️ Blob upload timeout for {filename}, using local path")
-        return f"/assets/{filename}"
+        print(f"⚠️ R2 upload timeout for {filename}, using R2 expected URL")
+        return f"https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/{filename}"
     except Exception as e:
         print(f"⚠️ Error uploading {filename}: {e}")
-        return f"/assets/{filename}"
+        return f"https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/{filename}"
