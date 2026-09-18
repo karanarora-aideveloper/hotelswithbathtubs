@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 scratch/
 raw_html/
+__pycache__/
+*.pyc
