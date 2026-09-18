@@ -2,14 +2,15 @@ import Link from 'next/link';
 
 const TRENDING_CITIES = [
   { name: 'Santorini', country: 'Greece', slug: '/greece/santorini' },
-  { name: 'Bora Bora', country: 'French Polynesia', slug: '/french-polynesia/bora-bora' },
-  { name: 'Seychelles', country: 'Seychelles', slug: '/seychelles/seychelles' },
   { name: 'Bangkok', country: 'Thailand', slug: '/thailand/bangkok' },
-  { name: 'Phuket', country: 'Thailand', slug: '/thailand/phuket' },
-  { name: 'Bali', country: 'Indonesia', slug: '/indonesia/bali' },
+  { name: 'London', country: 'UK', slug: '/uk/london' },
+  { name: 'New York', country: 'USA', slug: '/usa/new-york' },
+  { name: 'Dubai', country: 'UAE', slug: '/uae/dubai' },
   { name: 'Singapore', country: 'Singapore', slug: '/singapore/singapore' },
-  { name: 'Sydney', country: 'Australia', slug: '/australia/sydney' },
-  { name: 'Koh Samui', country: 'Thailand', slug: '/thailand/koh-samui' }
+  { name: 'Paris', country: 'France', slug: '/france/paris' },
+  { name: 'Bali', country: 'Indonesia', slug: '/indonesia/bali' },
+  { name: 'Phuket', country: 'Thailand', slug: '/thailand/phuket' },
+  { name: 'Sydney', country: 'Australia', slug: '/australia/sydney' }
 ];
 
 export default function TrendingDestinations({ currentCity }: { currentCity: string }) {

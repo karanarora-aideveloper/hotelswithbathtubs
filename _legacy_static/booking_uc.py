@@ -49,7 +49,7 @@ try:
 except ImportError:
     Image = None
 
-workspace_dir = '/Users/karanarora/hotelswithbathtubs'
+workspace_dir = os.getcwd()
 assets_dir = os.path.join(workspace_dir, 'public', 'assets')
 
 CITY = sys.argv[1] if len(sys.argv) > 1 else "Gwalior"
