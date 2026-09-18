@@ -2,7 +2,13 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(req: NextRequest) {
+  const host = req.headers.get('host') || '';
   const url = req.nextUrl;
+
+  // 301: Apex domain to WWW canonical domain redirect
+  if (host === 'hotelswithbathtubs.com') {
+    return NextResponse.redirect(`https://www.hotelswithbathtubs.com${url.pathname}${url.search}`, 301);
+  }
 
   // 301: Country alias redirects to canonical slugs
   if (url.pathname.startsWith('/united-states')) {

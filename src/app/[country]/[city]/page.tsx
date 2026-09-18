@@ -57,6 +57,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   if (hotelCount === 0) {
     return {
       title: `Hotels in ${cityName} Not Found`,
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -64,33 +68,25 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // Title: pageTitle + " | Hotels With Bathtubs" (24 chars from layout template)
-  // Target: ≤60 chars total rendered in Google SERP → pageTitle ≤36 chars ideal
-  const baseTitle = `Hotels with Bathtub in ${cityName}`;
-  const withCount = `${baseTitle} (${hotelCount}+)`;
-  const withCouples = `${baseTitle} (${hotelCount}+ Stays for Couples)`;
-  // Pick the longest variant that fits under 36 chars
-  const pageTitle = withCouples.length <= 36
-    ? withCouples
-    : withCount.length <= 36
-      ? withCount
-      : baseTitle;
-  const pageDescription = `Find hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ triple-verified stays with private deep soaking tubs & jacuzzi suites for couples.`;
+  // SERP-Optimized Title (48-58 chars): Front-loaded target keywords + current year freshness + trust hook
+  // Uses absolute title to prevent layout template from appending redundant suffixes that cause truncation
+  const pageTitle = `${hotelCount} Best Hotels with Bathtub in ${cityName} (2026) | Verified Stays`;
+  const pageDescription = `Find top hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ verified stays with private jacuzzi suites & deep soaking tubs for couples.`;
 
   return {
-    title: pageTitle,
+    title: {
+      absolute: pageTitle,
+    },
     description: pageDescription,
-    ...(hotelCount < 3 ? {
-      robots: {
-        index: false,
-        follow: true,
-      },
-    } : {}),
+    robots: {
+      index: true,
+      follow: true,
+    },
     alternates: {
       canonical: `/${countrySlug}/${citySlug}`,
     },
     openGraph: {
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
       url: `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`,
       siteName: 'Hotels with Bathtubs',
@@ -106,7 +102,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
       images: [ogImage],
     },
@@ -235,6 +231,10 @@ export default async function CityHotelsPage({
     }))
   };
 
+  const idRequirement = countrySlug === 'india'
+    ? 'valid government photo IDs (Aadhaar, Passport, or Driving License)'
+    : 'valid government-issued photo ID (Passport or national ID card)';
+
   // FAQPage schema for the 4 structured FAQ questions displayed on this page
   const faqSchema = {
     "@context": "https://schema.org",
@@ -253,7 +253,7 @@ export default async function CityHotelsPage({
         "name": `Are these bathtub hotels in ${cityName} couple-friendly?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying valid government photo IDs (Aadhaar, Passport, or Driving License) for check-in.`
+          "text": `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
         }
       },
       {
@@ -371,7 +371,7 @@ export default async function CityHotelsPage({
                         Are these bathtub hotels in {cityName} couple-friendly?
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        Yes. Verified properties in {cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying valid government photo IDs (Aadhaar, Passport, or Driving License) for check-in.
+                        Yes. Verified properties in {cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying {idRequirement} for check-in.
                       </p>
                     </div>
 
@@ -437,31 +437,56 @@ export default async function CityHotelsPage({
               {/* Also Explore: Cross-links to international & popular cities */}
               {(() => {
                 const isIndia = countrySlug === 'india';
-                const intlLinks = [
-                  { label: 'Dubai', href: '/uae/dubai' },
-                  { label: 'London', href: '/uk/london' },
-                  { label: 'New York', href: '/usa/new-york' },
-                  { label: 'Las Vegas', href: '/usa/las-vegas' },
+                const isTropical = ['french-polynesia', 'seychelles', 'mauritius', 'fiji', 'maldives', 'indonesia', 'greece'].includes(countrySlug);
+
+                const tropicalLinks = [
+                  { label: 'Bora Bora', href: '/french-polynesia/bora-bora' },
+                  { label: 'Maldives', href: '/maldives/maldives' },
+                  { label: 'Seychelles', href: '/seychelles/seychelles' },
+                  { label: 'Mauritius', href: '/mauritius/mauritius' },
+                  { label: 'Fiji', href: '/fiji/fiji' },
                   { label: 'Bali', href: '/indonesia/bali' },
+                  { label: 'Santorini', href: '/greece/santorini' },
+                  { label: 'Phuket', href: '/thailand/phuket' },
+                ];
+
+                const globalMetropolisLinks = [
+                  { label: 'London', href: '/uk/london' },
+                  { label: 'Paris', href: '/france/paris' },
+                  { label: 'New York', href: '/usa/new-york' },
+                  { label: 'Tokyo', href: '/japan/tokyo' },
+                  { label: 'Dubai', href: '/uae/dubai' },
                   { label: 'Singapore', href: '/singapore/singapore' },
                   { label: 'Bangkok', href: '/thailand/bangkok' },
-                  { label: 'Paris', href: '/france/paris' },
-                  { label: 'Tokyo', href: '/japan/tokyo' },
+                  { label: 'Zurich', href: '/switzerland/zurich' },
+                  { label: 'Rome', href: '/italy/rome' },
                 ];
+
                 const indiaLinks = [
-                  { label: 'Mumbai', href: '/india/mumbai' },
                   { label: 'Goa', href: '/india/goa' },
-                  { label: 'Delhi', href: '/india/delhi' },
-                  { label: 'Jaipur', href: '/india/jaipur' },
                   { label: 'Udaipur', href: '/india/udaipur' },
                   { label: 'Manali', href: '/india/manali' },
                   { label: 'Munnar', href: '/india/munnar' },
-                  { label: 'Shimla', href: '/india/shimla' },
-                  { label: 'Kolkata', href: '/india/kolkata' },
+                  { label: 'Jaipur', href: '/india/jaipur' },
+                  { label: 'Mumbai', href: '/india/mumbai' },
+                  { label: 'Delhi', href: '/india/delhi' },
                   { label: 'Bangalore', href: '/india/bangalore' },
                 ];
-                const links = isIndia ? intlLinks : indiaLinks;
-                const heading = isIndia ? '🌏 Also Popular: International Bathtub Hotels' : '🇮🇳 Also Popular: India Destinations';
+
+                let links = globalMetropolisLinks;
+                let heading = '🌏 Also Popular: Iconic Global Bathtub Stays';
+
+                if (isIndia) {
+                  links = globalMetropolisLinks;
+                  heading = '🌏 Also Popular: International Luxury Stays';
+                } else if (isTropical) {
+                  links = tropicalLinks;
+                  heading = '🏝️ Also Popular: Tropical & Overwater Bathtub Havens';
+                } else {
+                  links = globalMetropolisLinks;
+                  heading = '🌍 Also Popular: World-Class City Bathtub Suites';
+                }
+
                 return (
                   <section className="mt-12 pt-8 border-t border-gray-200 max-w-4xl mx-auto">
                     <p className="text-xs font-bold uppercase tracking-wider text-text-muted mb-3">{heading}</p>

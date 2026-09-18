@@ -63,9 +63,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     }));
 
-    // City Destination Routes (exclude thin destinations with < 3 hotels to avoid GSC "Submitted URL marked noindex" error)
+    // City Destination Routes (include all destinations with at least 1 verified hotel)
     const locationRoutes = Array.from(locationLastMod.keys())
-      .filter(location => (locationHotelCount.get(location) || 0) >= 3)
+      .filter(location => (locationHotelCount.get(location) || 0) >= 1)
       .map(location => ({
         url: `${baseUrl}/${location}`,
         lastModified: locationLastMod.get(location) || fallbackDate,

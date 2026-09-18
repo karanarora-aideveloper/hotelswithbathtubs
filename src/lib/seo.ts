@@ -1416,6 +1416,78 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     intro: 'Queenstown is the alpine jewel of New Zealand. Unwind after a day of adventure in luxury lodges and boutique hotels featuring private bathtubs and dramatic lake and mountain views.',
     amenities: ['Lake Wakatipu and mountain views from the bath', 'Freestanding luxury tubs', 'Locally sourced organic amenities', 'Fireplaces and heated floors'],
     whyChoose: ['Unparalleled alpine scenery', 'Ultimate romantic adventure destination', 'Exclusive luxury lodges']
+  },
+
+  // French Polynesia - Bora Bora
+  'bora-bora-french-polynesia': {
+    intro: 'Bora Bora is the crown jewel of South Pacific romance. Experience world-renowned overwater bungalows featuring glass-bottom soaking tubs, private horizon plunge pools, and uninterrupted views of Mount Otemanu rising over crystal turquoise lagoons.',
+    amenities: [
+      'Lagoon-facing freestanding soaking tubs with Mount Otemanu views',
+      'Overwater villa glass-floor viewing panels adjacent to bathtubs',
+      'Private sunset deck whirlpools and hydrotherapy tubs',
+      'Monoi oil and Polynesian botanical bath preparations',
+      'Direct lagoon access ladders from private bath pavilions'
+    ],
+    whyChoose: [
+      'The world’s most iconic overwater honeymoon destination',
+      'Unsurpassed lagoon privacy with private boat transfers and outrigger canoe breakfasts',
+      'World-class coral reef snorkeling right beneath your bungalow',
+      'Every luxury property verified with guaranteed in-suite tubs'
+    ]
+  },
+
+  // Seychelles
+  'seychelles-seychelles': {
+    intro: 'Seychelles offers untouched granite boulder shores and azure Indian Ocean waters. Discover cliffside sanctuary villas and beachfront estates featuring open-air granite soaking tubs, private plunge pools, and panoramic sea views.',
+    amenities: [
+      'Open-air monolithic granite soaking bathtubs',
+      'Cliffside private jacuzzis overlooking Anse Source d\'Argent',
+      'Glass-walled master suites framing lush tropical jungle canopies',
+      'Indigenous botanical and vanilla essential oil bath infusions',
+      'Private sunset infinity pools with connected spa soakers'
+    ],
+    whyChoose: [
+      'Secluded island romance and ultra-exclusive private villa living',
+      'Pristine UNESCO-protected nature and world-famous granite boulder beaches',
+      'Private butler service and candlelit beachside Creole dining',
+      'Verified in-room bathtubs across all featured island resorts'
+    ]
+  },
+
+  // Mauritius
+  'mauritius-mauritius': {
+    intro: 'Mauritius blends dramatic volcanic mountain backdrops with white sand lagoons. Unwind in colonial-style beachfront suites and private mountain retreats featuring deep freestanding tubs and tropical garden jacuzzis.',
+    amenities: [
+      'Oceanfront freestanding bathtubs overlooking coral lagoons',
+      'Outdoor tropical garden bathtubs surrounded by frangipani',
+      'Private terrace whirlpool jacuzzis with Le Morne mountain views',
+      'Sugar-cane and spice-infused Ayurvedic bath therapies',
+      'Oversized couples marble bathrooms with double rain showers'
+    ],
+    whyChoose: [
+      'Spectacular mix of turquoise lagoons and dramatic Le Morne peaks',
+      'Renowned Mauritian five-star hospitality and Michelin-caliber dining',
+      'Ideal year-round destination for romantic honeymoons and anniversaries',
+      'Triple-verified room tiers with guaranteed private in-room tubs'
+    ]
+  },
+
+  // Fiji
+  'fiji-fiji': {
+    intro: 'Fiji is the South Pacific’s paradise of private islands, warm smiles, and serene coral coves. Indulge in traditional Fijian bures featuring outdoor stone bathtubs, private plunge pools, and panoramic views of calm turquoise lagoons.',
+    amenities: [
+      'Handcrafted outdoor stone soaking bathtubs in private garden courtyards',
+      'Lagoon-edge private jacuzzis with sunset views',
+      'Traditional thatched bure master suites with deep soaking tubs',
+      'Pure Fiji coconut and frangipani botanical bath therapies',
+      'Private beach decks with open-air rainwater showers'
+    ],
+    whyChoose: [
+      'World-renowned Fijian warmth and private island tranquility',
+      'Adults-only romantic resorts surrounded by vibrant coral reefs',
+      'Intimate private beachfront bures designed exclusively for couples',
+      'Guaranteed private in-room bathtubs verified on all platforms'
+    ]
   }
 
 };

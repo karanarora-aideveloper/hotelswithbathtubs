@@ -55,6 +55,19 @@ const regionMapping: Record<string, string> = {
   'Australia': 'International Romantic Escapes',
   'Mexico': 'International Romantic Escapes',
   'New Zealand': 'International Romantic Escapes',
+  'French Polynesia': 'International Romantic Escapes',
+  'Seychelles': 'International Romantic Escapes',
+  'Mauritius': 'International Romantic Escapes',
+  'Fiji': 'International Romantic Escapes',
+  'Germany': 'International Romantic Escapes',
+  'Portugal': 'International Romantic Escapes',
+  'South Africa': 'International Romantic Escapes',
+  'Austria': 'International Romantic Escapes',
+  'Czechia': 'International Romantic Escapes',
+  'Hungary': 'International Romantic Escapes',
+  'Ireland': 'International Romantic Escapes',
+  'Brazil': 'International Romantic Escapes',
+  'Costa Rica': 'International Romantic Escapes',
 };
 
 const stateMapping: Record<string, string> = {
@@ -183,7 +196,7 @@ export default async function Footer() {
       subGroup = stateMapping[city] || 'North India';
     }
 
-    const region = regionMapping[subGroup] || regionMapping[country] || 'North India';
+    const region = regionMapping[subGroup] || regionMapping[country] || (country.toLowerCase() === 'india' ? 'North India' : 'International Romantic Escapes');
 
     if (!regionGroups[region]) {
       regionGroups[region] = [];
