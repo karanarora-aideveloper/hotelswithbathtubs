@@ -84,6 +84,16 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     alternates: {
       canonical: `/${countrySlug}/${citySlug}`,
+      languages: {
+        ...(countrySlug === 'usa' ? { 'en-US': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'uk' ? { 'en-GB': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'singapore' ? { 'en-SG': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'uae' ? { 'en-AE': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'india' ? { 'en-IN': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'australia' ? { 'en-AU': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        ...(countrySlug === 'canada' ? { 'en-CA': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
+        'x-default': 'https://www.hotelswithbathtubs.com',
+      },
     },
     openGraph: {
       title: pageTitle,
@@ -107,6 +117,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       images: [ogImage],
     },
   };
+
 }
 
 export default async function CityHotelsPage({
@@ -125,11 +136,13 @@ export default async function CityHotelsPage({
   const citySlug = slugify(rawCity);
 
   // Fetch only active (non-flagged) hotels using country regex for alias tolerance
+  // Sort by rating desc so best-rated hotels appear first for E-E-A-T and UX
   const rawHotels = await Hotel.find({
     city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
     country: countryInfo.regex,
     flagged: { $ne: true }
-  }).sort({ createdAt: -1 });
+  }).sort({ rating: -1 });
+
 
   if (rawHotels.length === 0) {
     notFound();
@@ -245,7 +258,7 @@ export default async function CityHotelsPage({
         "name": `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across MakeMyTrip, Agoda, and Booking.com to confirm that the specific room tier includes a bathtub or jacuzzi.`
+          "text": `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Expedia, Agoda, and Booking.com'} to confirm that the specific room tier includes a bathtub or jacuzzi.`
         }
       },
       {
@@ -305,7 +318,7 @@ export default async function CityHotelsPage({
                 <svg className="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>Verified on MakeMyTrip, Agoda &amp; Booking.com</span>
+                <span>Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Expedia, Agoda'} &amp; Booking.com</span>
               </div>
               <div className="flex items-center gap-2 font-semibold text-accent-secondary">
                 <svg className="w-5 h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -333,7 +346,7 @@ export default async function CityHotelsPage({
             {/* Editorial & Affiliate Disclosure */}
             <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-4 mb-8 text-center">
               <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-                <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, or MakeMyTrip, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
+                <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or Expedia'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
               </p>
             </div>
 
@@ -362,7 +375,7 @@ export default async function CityHotelsPage({
                         Which hotels in {cityName} have private in-room bathtubs or jacuzzis?
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        Top verified hotels in {cityName} offering private in-room tubs include {hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across MakeMyTrip, Agoda, and Booking.com to confirm that the specific room tier includes a bathtub or jacuzzi.
+                        Top verified hotels in {cityName} offering private in-room tubs include {hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Expedia, Agoda, and Booking.com'} to confirm that the specific room tier includes a bathtub or jacuzzi.
                       </p>
                     </div>
 

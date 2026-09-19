@@ -37,11 +37,13 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countryName = countryInfo.displayName;
   const countrySlug = countryInfo.slug;
 
-  // Count active hotels in this country using alias-tolerant regex
-  const hotelCount = await Hotel.countDocuments({
-    country: countryInfo.regex,
-    flagged: { $ne: true }
-  });
+  // Count active hotels and grab the highest-rated hotel image for a country-specific OG image
+  const [hotelCount, firstHotel] = await Promise.all([
+    Hotel.countDocuments({ country: countryInfo.regex, flagged: { $ne: true } }),
+    Hotel.findOne({ country: countryInfo.regex, flagged: { $ne: true }, image: { $exists: true, $ne: '' } })
+      .sort({ rating: -1 })
+      .select('image'),
+  ]);
 
   if (hotelCount === 0) {
     return {
@@ -49,28 +51,51 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     };
   }
 
-  const pageTitle = `Hotels with Bathtub in ${countryName}`;
-  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for romantic stays.`;
+  // Use best hotel photo as OG image; fallback to a generic bathtub image
+  const ogImageUrl = firstHotel?.image
+    ? firstHotel.image.startsWith('http')
+      ? firstHotel.image
+      : `https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/${firstHotel.image.split('/').pop()}`
+    : 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
+
+  // SERP-optimised title: front-loaded, year for freshness, trust hook
+  const geoMarkets = ['usa', 'uk', 'uae', 'singapore', 'france', 'italy', 'spain', 'japan', 'australia', 'germany', 'greece', 'switzerland', 'netherlands', 'canada'];
+  const useAbsoluteTitle = geoMarkets.includes(countrySlug);
+  const pageTitle = `Best Hotels with Bathtub in ${countryName} (2026) | Verified Stays`;
+  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for couples & romantic stays.`;
+
+  // hreflang: geographic locale signals for all priority markets
+  const hreflangMap: Record<string, string> = {
+    'usa': 'en-US',
+    'uk': 'en-GB',
+    'singapore': 'en-SG',
+    'uae': 'en-AE',
+    'india': 'en-IN',
+    'australia': 'en-AU',
+    'canada': 'en-CA',
+    'ireland': 'en-IE',
+    'new-zealand': 'en-NZ',
+  };
+  const localeCode = hreflangMap[countrySlug];
 
   return {
-    title: pageTitle,
+    title: useAbsoluteTitle ? { absolute: pageTitle } : pageTitle,
     description: pageDescription,
     alternates: {
       canonical: `/${countrySlug}`,
       languages: {
-        ...(countrySlug === 'usa' ? { 'en-US': 'https://www.hotelswithbathtubs.com/usa' } : {}),
-        ...(countrySlug === 'india' ? { 'en-IN': 'https://www.hotelswithbathtubs.com/india' } : {}),
+        ...(localeCode ? { [localeCode]: `https://www.hotelswithbathtubs.com/${countrySlug}` } : {}),
         'x-default': 'https://www.hotelswithbathtubs.com',
       },
     },
     openGraph: {
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
       url: `https://www.hotelswithbathtubs.com/${countrySlug}`,
       siteName: 'Hotels with Bathtubs',
       images: [
         {
-          url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: `Hotels with Bathtubs in ${countryName}`,
@@ -80,12 +105,13 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
-      images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
+      images: [ogImageUrl],
     },
   };
 }
+
 
 export default async function CountryHubPage({
   params,
@@ -145,7 +171,19 @@ export default async function CountryHubPage({
     ]
   };
 
-  // CollectionPage Schema with Geographic Entity Coverage
+  // ISO 3166-1 alpha-2 codes for structured data
+  const isoCountryMap: Record<string, string> = {
+    'usa': 'US', 'uk': 'GB', 'uae': 'AE', 'india': 'IN', 'singapore': 'SG',
+    'thailand': 'TH', 'malaysia': 'MY', 'japan': 'JP', 'france': 'FR',
+    'indonesia': 'ID', 'italy': 'IT', 'netherlands': 'NL', 'greece': 'GR',
+    'switzerland': 'CH', 'canada': 'CA', 'spain': 'ES', 'maldives': 'MV',
+    'turkey': 'TR', 'australia': 'AU', 'mexico': 'MX', 'new-zealand': 'NZ',
+    'french-polynesia': 'PF', 'seychelles': 'SC', 'mauritius': 'MU', 'fiji': 'FJ',
+    'germany': 'DE', 'portugal': 'PT', 'south-africa': 'ZA', 'austria': 'AT',
+    'czechia': 'CZ', 'hungary': 'HU', 'ireland': 'IE', 'brazil': 'BR',
+    'costa-rica': 'CR',
+  };
+
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -153,11 +191,11 @@ export default async function CountryHubPage({
     "description": `Discover ${totalHotels}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}.`,
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}`,
     "spatialCoverage": {
-      "@type": "Place",
+      "@type": "Country",
       "name": countryName,
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": countrySlug === 'usa' ? 'US' : countrySlug === 'india' ? 'IN' : countrySlug.toUpperCase()
+        "addressCountry": isoCountryMap[countrySlug] || countrySlug.toUpperCase().slice(0, 2)
       }
     }
   };
