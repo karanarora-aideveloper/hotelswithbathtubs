@@ -2763,6 +2763,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Complete serenity, absolute seclusion, and world-class luxury eco-hospitality (Banyan Tree, Habitas)',
       '100% verified private in-room and outdoor bathtub amenities'
     ]
+  },
+
+  // Philippines - El Nido
+  'el-nido-philippines': {
+    intro: 'El Nido on the northern tip of Palawan is a world-renowned tropical paradise of soaring karst limestone monoliths, hidden lagoons, and crystal-clear waters in Bacuit Bay. Unwind in exclusive eco-luxury island resorts and cliffside villas boasting private open-air stone soaking tubs, panoramic oceanfront jacuzzi suites, and sunset viewing terraces.',
+    amenities: [
+      'Private clifftop and beachfront freestanding soaking bathtubs framing dramatic views of Bacuit Bay\'s limestone karst cliffs',
+      'Open-air garden jacuzzi tubs surrounded by lush tropical orchids and swaying coconut palms',
+      'Artisanal organic virgin coconut oil and wild sea-salt bath infusions sourced locally in Palawan',
+      'Private plunge pool and soaking bath combos with direct overwater access to turquoise coral reefs'
+    ],
+    whyChoose: [
+      'Voted among the most visually breathtaking and romantic island archipelagos on Earth',
+      'Effortless access to private catamarans touring the Big Lagoon, Secret Beach, and Snake Island',
+      'Intimate eco-luxury resorts offering private candlelit beach dinners and stargazing over the Sulu Sea',
+      'Every hotel listing independently verified for authentic in-room and private villa bathtub amenities'
+    ]
+  },
+
+  // Philippines - Boracay
+  'boracay-philippines': {
+    intro: 'Boracay is legendary for its 4-kilometer powdery White Beach, azure shallow waters, and vibrant island energy. Discover premier luxury beachfront resorts and secluded clifftop sanctuaries in Station 1 and Punta Bunga Beach offering oversized marble soaking bathtubs, private sunset balcony whirlpools, and lavish spa suites.',
+    amenities: [
+      'Deep freestanding Italian marble bathtubs positioned against floor-to-ceiling windows overlooking White Beach',
+      'Private ocean-view balcony jacuzzi suites with uninterrupted vistas of Boracay’s iconic fiery sunsets',
+      'Aromatherapy bath rituals featuring native Philippine ylang-ylang, sampaguita blossom, and sweet orange oils',
+      'Spacious master bathroom retreats with double rain showers and luxury botanical toiletries'
+    ],
+    whyChoose: [
+      'World-famous powder-soft white sand that stays pleasantly cool under the tropical midday sun',
+      'Romantic sunset paraw sailing cruises, beachfront candlelight dining, and vibrant nightlife',
+      'Five-star hospitality retreats like Shangri-La Boracay and Discovery Shores delivering tailored butler service',
+      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room tubs'
+    ]
+  },
+
+  // Cambodia - Siem Reap
+  'siem-reap-cambodia': {
+    intro: 'Siem Reap serves as the mystical cultural gateway to the majestic temples of Angkor Wat and the ancient Khmer civilization. Rejuvenate after days of temple exploration in serene colonial heritage resorts and boutique sanctuary villas featuring hand-carved stone soaking bathtubs, private lotus courtyard plunge pools, and open-air rain gardens.',
+    amenities: [
+      'Hand-carved artisanal sandstone soaking bathtubs inspired by ancient Angkorian temple architecture',
+      'Private villa lotus garden jacuzzi suites and outdoor sunken marble baths surrounded by tropical frangipani',
+      'Traditional Khmer botanical bath infusions made with fresh lemongrass, kaffir lime, and turmeric root',
+      'Candlelit evening bath setups with floating lotus petals and calming jasmine incense'
+    ],
+    whyChoose: [
+      'Unmatched romantic cultural setting combining UNESCO World Heritage exploration with ultra-luxe spa relaxation',
+      'Sunrise temple expeditions to Angkor Wat and Ta Prohm followed by soothing afternoon spa hydrotherapy soaks',
+      'Peaceful oasis retreats set amidst lush jungle gardens just minutes from vibrant French Quarter dining',
+      'All listings verified across major booking portals for private in-room and courtyard bathtub fixtures'
+    ]
+  },
+
+  // Laos - Luang Prabang
+  'luang-prabang-laos': {
+    intro: 'Luang Prabang, the UNESCO World Heritage jewel of Laos, is an enchanting royal haven where French colonial elegance seamlessly blends with golden Buddhist temples along the Mekong and Nam Khan rivers. Immerse yourself in restored French-Indochinese boutique hotels boasting vintage clawfoot roll-top tubs, teakwood veranda bathtubs, and open-air river-view jacuzzi suites.',
+    amenities: [
+      'Classic French-Indochinese freestanding clawfoot soaking tubs set on private polished teakwood verandas',
+      'Secluded garden jacuzzi suites and outdoor river-facing stone tubs overlooking the misty Mekong River',
+      'Organic botanical bath rituals utilizing highland Lao herbs, mountain lemongrass, and wild forest honey',
+      'Panoramic French double doors opening from luxurious marble bathrooms to tropical garden terraces'
+    ],
+    whyChoose: [
+      'One of Southeast Asia\'s most tranquil and soul-soothing romantic destinations with preserved historic charm',
+      'Participate in the sacred dawn alms-giving ceremony and explore the multi-tiered turquoise cascades of Kuang Si Falls',
+      'Idyllic sunset longtail boat cruises along the Mekong River with French wines and traditional Lao cuisine',
+      'Every bathtub property independently audited to guarantee private in-room soaking amenities'
+    ]
+  },
+
+  // Nepal - Pokhara
+  'pokhara-nepal': {
+    intro: 'Pokhara is Nepal\'s premier romantic mountain escape, set along the tranquil shores of Phewa Lake beneath the awe-inspiring snow-capped Annapurna Massif and Mount Machapuchare (Fishtail). Indulge in boutique lakeside resorts and cliffside mountain lodges featuring deep soaking bathtubs, private panoramic balcony hot tubs, and heated Himalayan jacuzzi suites.',
+    amenities: [
+      'Panoramic picture-window soaking bathtubs framing unobstructed reflections of the snow-peaked Annapurna Range',
+      'Private heated balcony jacuzzi tubs overlooking the peaceful emerald waters of Phewa Lake',
+      'Therapeutic Himalayan pink rock salt scrubs and wild high-altitude herbal bath infusions',
+      'Cozy fireplace-side deep bathtubs ideal for warming up after crisp Himalayan mountain mornings'
+    ],
+    whyChoose: [
+      'Spectacular Himalayan mountain scenery creating an unforgettable backdrop for romantic staycations and honeymoons',
+      'Tranquil wooden boat excursions across Phewa Lake and breathtaking sunrise viewpoints from Sarangkot hill',
+      'Gateway to scenic mountain trails, world-class paragliding, and rejuvenating Ayurvedic wellness centers',
+      '100% verified private in-room bathtubs and jacuzzi suites cross-checked across Booking.com and Agoda'
+    ]
   }
 
 };

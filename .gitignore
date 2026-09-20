@@ -43,3 +43,5 @@ scratch/
 raw_html/
 __pycache__/
 *.pyc
+
+.pinterest_browser_profile

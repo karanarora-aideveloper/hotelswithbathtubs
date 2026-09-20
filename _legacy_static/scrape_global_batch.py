@@ -107,6 +107,17 @@ BATCHES = {
         ("Dead Sea", "Jordan"),
         ("AlUla", "Saudi Arabia"),
     ],
+    "southeast_asia_himalayas": [
+        ("El Nido", "Philippines"),
+        ("Boracay", "Philippines"),
+        ("Siem Reap", "Cambodia"),
+        ("Luang Prabang", "Laos"),
+        ("Pokhara", "Nepal"),
+    ],
+    "southeast_asia_catchup": [
+        ("Luang Prabang", "Laos"),
+        ("Pokhara", "Nepal"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

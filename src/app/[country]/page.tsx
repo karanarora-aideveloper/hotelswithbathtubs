@@ -189,6 +189,7 @@ export default async function CountryHubPage({
     'tanzania': 'TZ', 'chile': 'CL', 'argentina': 'AR', 'peru': 'PE',
     'colombia': 'CO', 'poland': 'PL', 'slovenia': 'SI',
     'qatar': 'QA', 'oman': 'OM', 'bahrain': 'BH', 'jordan': 'JO', 'saudi-arabia': 'SA',
+    'philippines': 'PH', 'cambodia': 'KH', 'laos': 'LA', 'nepal': 'NP',
   };
 
   const collectionSchema = {

@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { generatePinImage } from './generate_pin_image.mjs';
 import { imageUrl } from '../src/lib/imageUrl.ts';
+import { publishPinViaBrowser } from './pinterest_playwright.mjs';
 
 dotenv.config({ path: '.env.local' });
 
@@ -162,7 +163,23 @@ async function main() {
           console.log(`✓ PUBLISHED TO PINTEREST via API! Pin ID: ${pinId}`);
         } else {
           console.log(`ℹ️ API note: ${pinData.message || 'Trial access active'}`);
-          publishStatus = 'pending_review';
+          console.log(`Attempting headless browser publishing to board "${params.board}"...`);
+          try {
+            const browserResult = await publishPinViaBrowser({
+              imagePath: localPinPath,
+              title: pinTitle,
+              description: pinDescription,
+              link: destUrl,
+              boardName: params.board,
+            });
+            if (browserResult && browserResult.success) {
+              publishStatus = 'published';
+              console.log(`✓ PUBLISHED TO PINTEREST via Browser Automation!`);
+            }
+          } catch (bErr) {
+            console.warn(`Browser publisher note: ${bErr.message}`);
+            publishStatus = bErr.message.includes('Not logged in') ? 'needs_browser_login' : 'pending_review';
+          }
         }
       } catch (err) {
         console.warn('API call error:', err.message);
