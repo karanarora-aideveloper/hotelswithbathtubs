@@ -310,6 +310,21 @@ export default function CityHotelsClient({
                       <span>✓ Verified on {verifiedSources.join(', ')}</span>
                     </span>
                   )}
+
+                  {/* Pinterest Save Button */}
+                  <a
+                    href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(h.image))}&description=${encodeURIComponent(`${h.name} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 bg-red-600/95 hover:bg-red-700 text-white text-xs font-bold px-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1.5 z-10 transition-all opacity-90 sm:opacity-0 group-hover:opacity-100"
+                    title="Save to Pinterest"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                    </svg>
+                    <span>Save</span>
+                  </a>
                 </div>
 
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
