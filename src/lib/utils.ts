@@ -129,6 +129,9 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'malta': { dbCountry: 'Malta', slug: 'malta', displayName: 'Malta' },
   'tunisia': { dbCountry: 'Tunisia', slug: 'tunisia', displayName: 'Tunisia' },
   'egypt': { dbCountry: 'Egypt', slug: 'egypt', displayName: 'Egypt' },
+  'uzbekistan': { dbCountry: 'Uzbekistan', slug: 'uzbekistan', displayName: 'Uzbekistan' },
+  'kazakhstan': { dbCountry: 'Kazakhstan', slug: 'kazakhstan', displayName: 'Kazakhstan' },
+  'mongolia': { dbCountry: 'Mongolia', slug: 'mongolia', displayName: 'Mongolia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

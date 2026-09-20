@@ -132,6 +132,13 @@ BATCHES = {
         ("Aswan", "Egypt"),
         ("Sharm El Sheikh", "Egypt"),
     ],
+    "central_asia_silk_road": [
+        ("Samarkand", "Uzbekistan"),
+        ("Bukhara", "Uzbekistan"),
+        ("Almaty", "Kazakhstan"),
+        ("Ulaanbaatar", "Mongolia"),
+        ("Terelj", "Mongolia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

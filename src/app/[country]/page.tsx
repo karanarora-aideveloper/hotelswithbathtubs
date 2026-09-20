@@ -192,6 +192,7 @@ export default async function CountryHubPage({
     'philippines': 'PH', 'cambodia': 'KH', 'laos': 'LA', 'nepal': 'NP',
     'estonia': 'EE', 'latvia': 'LV', 'lithuania': 'LT', 'georgia': 'GE', 'azerbaijan': 'AZ',
     'cyprus': 'CY', 'malta': 'MT', 'tunisia': 'TN', 'egypt': 'EG',
+    'uzbekistan': 'UZ', 'kazakhstan': 'KZ', 'mongolia': 'MN',
   };
 
   const collectionSchema = {

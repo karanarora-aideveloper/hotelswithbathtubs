@@ -3018,6 +3018,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Seamless excursions to Ras Mohammed National Park, Mount Sinai, and Bedouin desert camps',
       '100% verified private in-room and terrace bathtubs cross-checked across Booking.com and Agoda'
     ]
+  },
+
+  // Uzbekistan - Samarkand
+  'samarkand-uzbekistan': {
+    intro: 'Samarkand is the legendary crown jewel of the ancient Silk Road, mesmerizing travelers with its soaring turquoise-domed mosques, celestial madrasahs, and timeless Islamic artistry. Experience intimate luxury boutique stays in restored Silk Road caravanserais featuring hand-painted ceramic mosaic bathtubs, private hammam steam suites, and deep soaking tubs set within fragrant courtyard gardens.',
+    amenities: [
+      'Intricate mosaic-tiled deep soaking plunge bathtubs crafted in traditional Timurid turquoise patterns',
+      'Private in-room hammam marble steam baths and aromatherapy hot tubs',
+      'Artisanal Uzbek bath preparations infused with wild mountain saffron, Damask rosewater, and dried mint',
+      'Private sunlit courtyard terraces with heated soaking tubs and Persian carpets'
+    ],
+    whyChoose: [
+      'One of the oldest continuously inhabited and most poetic cities in human history',
+      'Unforgettable evening illuminations across the majestic UNESCO-listed Registan Square',
+      'Marvel at the sapphire tilework of Shah-i-Zinda necropolis and savor sweet halva at the historic Siab Bazaar',
+      'Triple-verified across Booking.com and Agoda for guaranteed private in-room bathtub amenities'
+    ]
+  },
+
+  // Uzbekistan - Bukhara
+  'bukhara-uzbekistan': {
+    intro: 'Bukhara is a living medieval museum along the Silk Road, holding over two millennia of history across its terracotta minarets, domed bazaars, and tranquil oasis courtyards. Unwind in boutique heritage hotels—converted from 18th-century merchant mansions and madrasahs—boasting deep stone soaking baths, private courtyard jacuzzi suites, and traditional thermal hammam baths.',
+    amenities: [
+      'Authentic hand-carved stone and sunken terracotta bathtubs framed by vaulted brick ceilings',
+      'Private courtyard jacuzzi suites set beneath shaded pomegranate and fig trees',
+      'Therapeutic Bukharian bath rituals featuring warm herbal compresses, local almond oils, and mineral salts',
+      'Spacious heritage bathrooms complete with brass rainfall showers and artisanal embroidered robes'
+    ],
+    whyChoose: [
+      'A remarkably preserved UNESCO World Heritage ancient city that feels frozen in time',
+      'Romantic candlelit dinners along the historic Lyabi-Khauz pool beneath centuries-old mulberry trees',
+      'Explore ancient silk weaving, jewelers\' domes (Toqi Zargaron), and the towering Kalyan Minaret',
+      'Every bathtub listing independently audited to guarantee private in-room soaking amenities'
+    ]
+  },
+
+  // Kazakhstan - Almaty
+  'almaty-kazakhstan': {
+    intro: 'Almaty, Kazakhstan\'s scenic cultural metropolis, sits in the dramatic shadow of the snow-peaked Zailiyskiy Alatau mountains of the Tian Shan range. Indulge in alpine luxury ski chalets and five-star urban towers featuring heated outdoor cedarwood hot tubs, deep mountain-view soaking bathtubs, and private Kazakh banya steam suites.',
+    amenities: [
+      'Handcrafted outdoor heated cedarwood hot tubs and deep marble soaking bathtubs with panoramic Tian Shan mountain vistas',
+      'Private in-room traditional Kazakh banya sauna and steam hydrotherapy suites',
+      'Invigorating mountain bath preparations infused with wild Tian Shan spruce needle oil and alpine chamomile',
+      'Floor-to-ceiling glass bathroom suites with heated floors and designer European amenities'
+    ],
+    whyChoose: [
+      'Unique blend of vibrant cosmopolitan culture, tree-lined boulevards, and immediate high-alpine wilderness',
+      'Ride the scenic gondola to Shymbulak Mountain Resort and visit the world-famous Medeu high-altitude ice rink',
+      'Breathtaking sunsets from Kok Tobe hill and refined dining featuring Central Asian and European fusion cuisine',
+      '100% verified private in-room bathtubs and jacuzzi suites cross-checked across Booking.com and Agoda'
+    ]
+  },
+
+  // Mongolia - Ulaanbaatar
+  'ulaanbaatar-mongolia': {
+    intro: 'Ulaanbaatar, the dynamic capital of the Land of Eternal Blue Sky, bridges ancient nomadic Buddhist heritage with contemporary high-rise luxury along the Tuul River. Stay in premier five-star hotel towers and boutique wellness retreats offering floor-to-ceiling skyline soaking bathtubs, private executive jacuzzi suites, and therapeutic Mongolian botanical baths.',
+    amenities: [
+      'Oversized freestanding soaking bathtubs positioned beside floor-to-ceiling windows overlooking Bogd Khan Mountain',
+      'Private couple\'s jacuzzi spa suites with chromotherapy lighting and Finnish saunas',
+      'Nourishing Mongolian botanical bath therapies enriched with organic wild sea-buckthorn oil and steppe thyme',
+      'Luxurious marble bathrooms with heated floors, rain showers, and bespoke cashmere bath amenities'
+    ],
+    whyChoose: [
+      'Fascinating gateway to one of the world\'s last great nomadic wilderness frontiers',
+      'Visit the ancient Choijin Lama Temple, Gandantegchinlen Monastery, and vibrant cashmere boutiques',
+      'Enjoy evening throat-singing and traditional morin khuur horsehead fiddle orchestra performances',
+      'All listings verified across major booking portals for private in-room soaking facilities'
+    ]
+  },
+
+  // Mongolia - Terelj
+  'terelj-mongolia': {
+    intro: 'Gorkhi-Terelj National Park is a mystical wilderness wonderland of alpine valleys, granite rock formations, and larch forests nestled in the heart of Mongolia. Experience luxury glamping ger suites and eco-resorts featuring handcrafted outdoor wooden soaking tubs, private heated terrace hot tubs, and starlit open-sky wilderness baths.',
+    amenities: [
+      'Private handcrafted outdoor wooden hot tubs and deep soaking tubs framed by dramatic alpine rock formations',
+      'Heated luxury ger tent suites equipped with modern en-suite soaking bathtubs and wood-burning stoves',
+      'Therapeutic wilderness bath soaks utilizing wild Siberian larch extracts, river stones, and alpine flowers',
+      'Unobstructed open-air night sky views for bathing under the world-famous billion-star Mongolian sky'
+    ],
+    whyChoose: [
+      'An extraordinarily unique, bucket-list travel escape blending authentic nomadic culture with luxury comfort',
+      'Horseback riding across pristine alpine meadows, hiking to Turtle Rock, and exploring the Aryapala Meditation Temple',
+      'Absolute tranquility, pure mountain air, and unmatched celestial stargazing with zero light pollution',
+      'Every bathtub listing independently verified for authentic private in-room and terrace amenities'
+    ]
   }
 
 };

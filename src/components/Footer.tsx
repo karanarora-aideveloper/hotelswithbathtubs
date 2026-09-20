@@ -92,6 +92,9 @@ const regionMapping: Record<string, string> = {
   'Laos': 'Asia & Middle East',
   'Nepal': 'Asia & Middle East',
   'Azerbaijan': 'Asia & Middle East',
+  'Uzbekistan': 'Asia & Middle East',
+  'Kazakhstan': 'Asia & Middle East',
+  'Mongolia': 'Asia & Middle East',
 
   // Tropical Islands & Southern Escapes
   'French Polynesia': 'Tropical Islands & Southern Escapes',
