@@ -2848,6 +2848,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gateway to scenic mountain trails, world-class paragliding, and rejuvenating Ayurvedic wellness centers',
       '100% verified private in-room bathtubs and jacuzzi suites cross-checked across Booking.com and Agoda'
     ]
+  },
+
+  // Estonia - Tallinn
+  'tallinn-estonia': {
+    intro: 'Tallinn is Northern Europe\'s best-preserved medieval fairy tale, where cobblestone alleys, Gothic church spires, and modern Nordic design converge. Discover romantic boutique heritage hotels and luxury design sanctuaries within Tallinn Old Town and the trendy Noblessner seafront, boasting deep freestanding clawfoot tubs, private Nordic sauna suites, and stone jacuzzi bathrooms.',
+    amenities: [
+      'Deep roll-top freestanding clawfoot soaking tubs positioned by exposed medieval limestone walls and chimney alcoves',
+      'Private en-suite Nordic sauna rooms paired with cold plunge tubs and whirlpool jacuzzis',
+      'Artisanal Estonian botanical bath salts infused with native juniper berry, birch leaves, and wild forest heather',
+      'Modern glass-walled bathroom suites overlooking the terracotta rooftops of Old Town and the Baltic Sea'
+    ],
+    whyChoose: [
+      'UNESCO World Heritage medieval Old Town offering unmatched fairy-tale romantic ambiance year-round',
+      'Seamless fusion of ancient Hanseatic heritage and cutting-edge Nordic spa culture',
+      'Enchanting snow-covered winter markets, cozy cellar restaurants, and vibrant summer white nights',
+      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // Latvia - Riga
+  'riga-latvia': {
+    intro: 'Riga is the Baltic pearl celebrated for the world\'s finest concentration of Art Nouveau architecture, medieval cobblestone charm, and tranquil Daugava riverfronts. Experience opulent five-star grand hotels and restored Art Nouveau mansions featuring lavish marble bathrooms, deep oval soaking tubs, and couple\'s whirlpool jacuzzi suites.',
+    amenities: [
+      'Oversized freestanding oval marble bathtubs framed by restored Art Nouveau stained glass windows',
+      'Private terrace jacuzzis and penthouse whirlpool baths with views of Riga Cathedral spires and the Daugava River',
+      'Nourishing Baltic amber powder scrubs and pine needle bath rituals rooted in ancient Latvian healing traditions',
+      'Spacious bathroom retreats equipped with heated marble flooring, double vanities, and French spa essentials'
+    ],
+    whyChoose: [
+      'Stunning architectural elegance with hundreds of ornate Art Nouveau facades and romantic boulevards',
+      'Serene canal boat rides through Bastejkalna park and evening strolls across the historic Dome Square',
+      'Affordable European luxury with world-class classical opera, vibrant culinary scene, and boutique stays',
+      'Every hotel listing independently verified for authentic in-room bathtub amenities'
+    ]
+  },
+
+  // Lithuania - Vilnius
+  'vilnius-lithuania': {
+    intro: 'Vilnius captivates with its sprawling Baroque Old Town, winding cobbled lanes, and the whimsical bohemian spirit of the Republic of Užupis. Unwind in historic 16th-century monastery conversions and boutique design hotels featuring vintage cast-iron roll-top bathtubs, private courtyard jacuzzi suites, and heated stone soaking baths.',
+    amenities: [
+      'Classic freestanding cast-iron soaking bathtubs set under authentic vaulted brick ceilings',
+      'Private whirlpool spa suites with secluded courtyard views in the heart of Vilnius Old Town',
+      'Organic Lithuanian wildflower honey and linden blossom bath preparations',
+      'Cozy bathroom fireplaces and heated travertine floors for romantic Baltic autumn and winter nights'
+    ],
+    whyChoose: [
+      'One of Europe’s largest and most enchanting Baroque Old Towns, protected as a UNESCO World Heritage site',
+      'Bohemian artist enclave of Užupis with art galleries, riverside cafes, and secret courtyard gardens',
+      'Panoramic sunset views from Gediminas Castle Tower and the Hill of Three Crosses',
+      '100% verified private in-room bathtubs cross-checked across Booking.com and Agoda'
+    ]
+  },
+
+  // Georgia - Tbilisi
+  'tbilisi-georgia': {
+    intro: 'Tbilisi is an evocative crossroads of European and Asian traditions, world-famous for its ancient sulfur bathhouses in Abanotubani nestled beneath Narikala Fortress. Indulge in designer boutique hotels and restored heritage mansions featuring private natural sulfur hydrotherapy tubs, carved wooden balcony soaking baths, and panoramic city-view jacuzzis.',
+    amenities: [
+      'Private in-room natural thermal sulfur soaking baths and deep stone hydrotherapy tubs',
+      'Freestanding bathtubs set upon traditional carved wooden balconies overlooking the dramatic Mtkvari river gorge',
+      'Unique Georgian wine bath rituals featuring antioxidant-rich Saperavi grape seed extracts and Kakhetian honey',
+      'Artisanal eucalyptus and mountain herb bath preparations inspired by ancient Silk Road thermal rituals'
+    ],
+    whyChoose: [
+      'Centuries-old sulfur thermal bath culture providing an extraordinary wellness experience found nowhere else',
+      'Legendary Georgian hospitality, world-renowned natural wine traditions, and unforgettable supra dining feasts',
+      'Romantic cable car rides up to Narikala Fortress and vibrant nighttime strolls along cobblestone Shardeni Street',
+      'Every bathtub listing independently verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Azerbaijan - Baku
+  'baku-azerbaijan': {
+    intro: 'Baku, the glamorous City of Winds along the Caspian Sea, dazzles where futuristic skyline icons like the Flame Towers rise above the ancient sandstone labyrinth of Icherisheher (Old City). Stay in world-class five-star towers and boutique palace retreats boasting floor-to-ceiling panoramic Caspian Sea bathtubs, couple\'s jacuzzi suites, and lavish marble bathrooms.',
+    amenities: [
+      'Floor-to-ceiling glass-walled soaking bathtubs with direct vistas of the illuminated Flame Towers and Baku Bay',
+      'Private terrace jacuzzis and penthouse whirlpool baths looking out across the sparkling Caspian Sea coastline',
+      'Artisanal Caspian sea-salt scrubs and Persian saffron and pomegranate floral bath treatments',
+      'Sumptuous Italian marble bathrooms with integrated mirror TVs, rainfall showers, and designer toiletries'
+    ],
+    whyChoose: [
+      'Striking architectural juxtaposition of ancient Silk Road caravanserais and bold modernism (Zaha Hadid’s Heydar Aliyev Center)',
+      'Breezy evening promenades along Baku Boulevard with seaside tea houses and luxury dining',
+      'Unrivaled five-star luxury standards at exceptional value with panoramic penthouse views',
+      'All listings verified across major booking channels for private in-room and suite bathtub installations'
+    ]
   }
 
 };

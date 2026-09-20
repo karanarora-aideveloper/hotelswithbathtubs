@@ -118,6 +118,13 @@ BATCHES = {
         ("Luang Prabang", "Laos"),
         ("Pokhara", "Nepal"),
     ],
+    "baltic_caucasus": [
+        ("Tallinn", "Estonia"),
+        ("Riga", "Latvia"),
+        ("Vilnius", "Lithuania"),
+        ("Tbilisi", "Georgia"),
+        ("Baku", "Azerbaijan"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

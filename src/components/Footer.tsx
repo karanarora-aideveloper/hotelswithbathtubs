@@ -61,6 +61,10 @@ const regionMapping: Record<string, string> = {
   'Croatia': 'United Kingdom & Europe',
   'Poland': 'United Kingdom & Europe',
   'Slovenia': 'United Kingdom & Europe',
+  'Estonia': 'United Kingdom & Europe',
+  'Latvia': 'United Kingdom & Europe',
+  'Lithuania': 'United Kingdom & Europe',
+  'Georgia': 'United Kingdom & Europe',
 
   // Asia & Middle East
   'Singapore': 'Asia & Middle East',
@@ -85,6 +89,7 @@ const regionMapping: Record<string, string> = {
   'Cambodia': 'Asia & Middle East',
   'Laos': 'Asia & Middle East',
   'Nepal': 'Asia & Middle East',
+  'Azerbaijan': 'Asia & Middle East',
 
   // Tropical Islands & Southern Escapes
   'French Polynesia': 'Tropical Islands & Southern Escapes',
