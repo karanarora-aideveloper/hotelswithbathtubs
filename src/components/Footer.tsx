@@ -32,43 +32,51 @@ const regionMapping: Record<string, string> = {
   'Meghalaya': 'East & North East',
   'Odisha': 'East & North East',
 
-  'United Arab Emirates': 'International Romantic Escapes',
-  'United Kingdom': 'International Romantic Escapes',
-  'United States': 'International Romantic Escapes',
-  'Indonesia': 'International Romantic Escapes',
-  'UAE': 'International Romantic Escapes',
-  'UK': 'International Romantic Escapes',
-  'USA': 'International Romantic Escapes',
-  'Singapore': 'International Romantic Escapes',
-  'Thailand': 'International Romantic Escapes',
-  'Malaysia': 'International Romantic Escapes',
-  'Japan': 'International Romantic Escapes',
-  'France': 'International Romantic Escapes',
-  'Italy': 'International Romantic Escapes',
-  'Netherlands': 'International Romantic Escapes',
-  'Greece': 'International Romantic Escapes',
-  'Switzerland': 'International Romantic Escapes',
-  'Canada': 'International Romantic Escapes',
-  'Spain': 'International Romantic Escapes',
-  'Maldives': 'International Romantic Escapes',
-  'Turkey': 'International Romantic Escapes',
-  'Australia': 'International Romantic Escapes',
-  'Mexico': 'International Romantic Escapes',
-  'New Zealand': 'International Romantic Escapes',
-  'French Polynesia': 'International Romantic Escapes',
-  'Seychelles': 'International Romantic Escapes',
-  'Mauritius': 'International Romantic Escapes',
-  'Fiji': 'International Romantic Escapes',
-  'Germany': 'International Romantic Escapes',
-  'Portugal': 'International Romantic Escapes',
-  'South Africa': 'International Romantic Escapes',
-  'Austria': 'International Romantic Escapes',
-  'Czechia': 'International Romantic Escapes',
-  'Hungary': 'International Romantic Escapes',
-  'Ireland': 'International Romantic Escapes',
-  'Brazil': 'International Romantic Escapes',
-  'Costa Rica': 'International Romantic Escapes',
+  // United States & North America
+  'United States': 'United States & North America',
+  'USA': 'United States & North America',
+  'Canada': 'United States & North America',
+  'Mexico': 'United States & North America',
+
+  // United Kingdom & Europe
+  'United Kingdom': 'United Kingdom & Europe',
+  'UK': 'United Kingdom & Europe',
+  'France': 'United Kingdom & Europe',
+  'Italy': 'United Kingdom & Europe',
+  'Spain': 'United Kingdom & Europe',
+  'Netherlands': 'United Kingdom & Europe',
+  'Germany': 'United Kingdom & Europe',
+  'Switzerland': 'United Kingdom & Europe',
+  'Greece': 'United Kingdom & Europe',
+  'Austria': 'United Kingdom & Europe',
+  'Czechia': 'United Kingdom & Europe',
+  'Hungary': 'United Kingdom & Europe',
+  'Ireland': 'United Kingdom & Europe',
+  'Portugal': 'United Kingdom & Europe',
+
+  // Asia & Middle East
+  'Singapore': 'Asia & Middle East',
+  'United Arab Emirates': 'Asia & Middle East',
+  'UAE': 'Asia & Middle East',
+  'Thailand': 'Asia & Middle East',
+  'Japan': 'Asia & Middle East',
+  'Indonesia': 'Asia & Middle East',
+  'Malaysia': 'Asia & Middle East',
+  'Maldives': 'Asia & Middle East',
+  'Turkey': 'Asia & Middle East',
+
+  // Tropical Islands & Southern Escapes
+  'French Polynesia': 'Tropical Islands & Southern Escapes',
+  'Seychelles': 'Tropical Islands & Southern Escapes',
+  'Mauritius': 'Tropical Islands & Southern Escapes',
+  'Fiji': 'Tropical Islands & Southern Escapes',
+  'Australia': 'Tropical Islands & Southern Escapes',
+  'New Zealand': 'Tropical Islands & Southern Escapes',
+  'Costa Rica': 'Tropical Islands & Southern Escapes',
+  'Brazil': 'Tropical Islands & Southern Escapes',
+  'South Africa': 'Tropical Islands & Southern Escapes',
 };
+
 
 const stateMapping: Record<string, string> = {
   'Udaipur': 'Rajasthan',
@@ -179,11 +187,14 @@ export default async function Footer() {
 
   // Group cities by macro-region for effortless scanning
   const regionGroups: Record<string, { city: string, country: string, hotelCount: number }[]> = {
+    'United States & North America': [],
+    'United Kingdom & Europe': [],
+    'Asia & Middle East': [],
+    'Tropical Islands & Southern Escapes': [],
     'North India': [],
     'South India': [],
     'West & Central India': [],
     'East & North East': [],
-    'International Romantic Escapes': [],
   };
 
   citiesData.forEach(item => {
@@ -196,7 +207,7 @@ export default async function Footer() {
       subGroup = stateMapping[city] || 'North India';
     }
 
-    const region = regionMapping[subGroup] || regionMapping[country] || (country.toLowerCase() === 'india' ? 'North India' : 'International Romantic Escapes');
+    const region = regionMapping[subGroup] || regionMapping[country] || (country.toLowerCase() === 'india' ? 'North India' : 'United Kingdom & Europe');
 
     if (!regionGroups[region]) {
       regionGroups[region] = [];
@@ -286,7 +297,7 @@ export default async function Footer() {
           </section>
         )}
 
-        {/* Country Hubs Directory - Direct Crawl Navigation to All 19 Countries */}
+        {/* Country Hubs Directory - Direct Crawl Navigation to All 34 Countries */}
         <section className="mb-16 pb-12 border-b border-border">
           <div className="flex items-center gap-3 mb-6 pb-3 border-b border-gray-200">
             <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center">

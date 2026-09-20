@@ -63,6 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       alternates: {
         canonical: `/blog/${resolvedParams.slug}`,
+        languages: {
+          'x-default': 'https://www.hotelswithbathtubs.com',
+        },
       },
       openGraph: {
         title,
@@ -187,23 +190,72 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     }
   };
 
-  // Parse FAQ from markdown content
-  const faqSchema = (() => {
-    const faqSection = blog.content?.split(/##\s+Frequently Asked Questions/i)[1];
-    if (!faqSection) return null;
-    const pairs = [...faqSection.matchAll(/\*\*([^*]+\?)\*\*\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g)];
-    const questions = pairs.map((m: RegExpExecArray) => ({
-      "@type": "Question",
-      "name": m[1].trim(),
-      "acceptedAnswer": { "@type": "Answer", "text": m[2].trim() }
+  // Parse FAQ from markdown content with flexible header matching
+  const markdownFaqPairs = (() => {
+    const faqSection = blog.content?.split(/##\s+(?:Frequently Asked Questions|FAQ)/i)[1] || blog.content?.split(/###\s+(?:Frequently Asked Questions|FAQ)/i)[1];
+    if (!faqSection) return [];
+    const pairs = [
+      ...faqSection.matchAll(/\*\*([^*]+\?)\*\*\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g),
+      ...faqSection.matchAll(/###\s+([^\n?]+\?)\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g)
+    ];
+    return pairs.map((m: RegExpExecArray) => ({
+      q: m[1].trim(),
+      a: m[2].trim()
     }));
-    if (questions.length === 0) return null;
-    return {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": questions
-    };
   })();
+
+  const hasMarkdownFaq = markdownFaqPairs.length > 0;
+
+  // Contextual fallback FAQs for blogs without an in-content FAQ section
+  const fallbackFaqs: { q: string; a: string }[] = matchedCity
+    ? [
+        {
+          q: `Which hotels in ${matchedCity} feature private in-room bathtubs or jacuzzis?`,
+          a: `Top verified options in ${matchedCity} include properties curated in this guide and directory, hand-checked across Booking.com and Agoda to confirm private in-room tubs rather than shared hotel wellness facilities.`
+        },
+        {
+          q: `Are hotels with bathtubs in ${matchedCity} couple-friendly?`,
+          a: `Yes, verified bathtub hotels in ${matchedCity} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and getaways.`
+        },
+        {
+          q: `How do I ensure my room tier in ${matchedCity} includes a private bathtub?`,
+          a: `When booking through verified partner links, check that your chosen room tier (such as "Suite with Bathtub", "Executive Room", or "Jacuzzi Suite") explicitly lists a private bathtub in the amenities list before reserving.`
+        },
+        {
+          q: `What is the difference between a bathtub and a jacuzzi suite in ${matchedCity}?`,
+          a: `A hotel room with a bathtub typically features a deep freestanding soaking tub or Roman bath, while a jacuzzi suite includes hydrotherapy jets and whirlpool water massage. Both are private to your room.`
+        }
+      ]
+    : [
+        {
+          q: "How does Hotels with Bathtubs verify private in-room tubs?",
+          a: "Every hotel is cross-verified across Booking.com and Agoda by analyzing room category specifications, verified traveler photos, and amenity tags to guarantee the tub is private inside your room."
+        },
+        {
+          q: "Are hotel room bathtubs and jacuzzis private or shared?",
+          a: "All properties recommended on Hotels with Bathtubs guarantee private, in-room bathtubs or suites. We strictly filter out properties where tubs are located in shared hotel spas."
+        },
+        {
+          q: "Which room categories usually have bathtubs?",
+          a: "Standard base rooms often only include showers. Look for categories titled 'Suite with Bathtub', 'Executive Suite', 'Deluxe Room with Spa Bath', or 'Jacuzzi Villa'."
+        }
+      ];
+
+  const effectiveFaqs = hasMarkdownFaq ? markdownFaqPairs : fallbackFaqs;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": effectiveFaqs.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  };
+
 
   const matchedCountryInfo = resolveCountry(matchedCountrySlug);
   const matchedCountryName = matchedCountryInfo.displayName;
@@ -312,6 +364,29 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               className="prose prose-base sm:prose-lg md:prose-xl max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
+
+            {!hasMarkdownFaq && effectiveFaqs.length > 0 && (
+              <section className="mt-12 pt-8 border-t border-border">
+                <h3 className="font-heading text-2xl font-bold text-accent-secondary mb-6">
+                  Frequently Asked Questions
+                </h3>
+                <div className="space-y-3.5">
+                  {effectiveFaqs.map(({ q, a }) => (
+                    <details key={q} className="group border border-border rounded-xl overflow-hidden bg-bg-main shadow-2xs">
+                      <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer font-semibold text-sm sm:text-base text-accent-secondary list-none hover:bg-accent/5 transition-colors">
+                        <span>{q}</span>
+                        <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </summary>
+                      <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-text-muted leading-relaxed border-t border-border pt-3 font-serif">
+                        {a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <AuthorBio />
 

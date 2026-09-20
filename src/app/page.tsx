@@ -11,21 +11,28 @@ import StructuredData from '@/components/StructuredData';
 export const revalidate = 3600; // Revalidate every hour
 
 // Page-level metadata — overrides layout.tsx defaults
-// Targeting "hotel with bathtub in room" (1,000/mo, $0.72 CPC, currently pos 15.9)
+// Front-loaded for high-impression GSC head terms: "hotels with bathtub", "bathtub in room", "jacuzzi suites"
 export const metadata = {
-  title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
-  description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
+  title: {
+    absolute: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+  },
+  description: 'Find 990+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 34 countries. Triple-checked on Booking.com & Agoda.',
   alternates: {
     canonical: '/',
     languages: {
       'en-US': 'https://www.hotelswithbathtubs.com/usa',
+      'en-GB': 'https://www.hotelswithbathtubs.com/uk',
+      'en-SG': 'https://www.hotelswithbathtubs.com/singapore',
+      'en-AE': 'https://www.hotelswithbathtubs.com/uae',
       'en-IN': 'https://www.hotelswithbathtubs.com/india',
+      'en-AU': 'https://www.hotelswithbathtubs.com/australia',
+      'en-CA': 'https://www.hotelswithbathtubs.com/canada',
       'x-default': 'https://www.hotelswithbathtubs.com',
     },
   },
   openGraph: {
-    title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
-    description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
+    title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+    description: 'Find 990+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 34 countries. Triple-checked on Booking.com & Agoda.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -40,8 +47,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hotels with Bathtubs in Room | Verified Stays Worldwide',
-    description: 'Find hotels with bathtubs in room — verified stays across Booking.com, Agoda & MakeMyTrip. Discover private deep soaking tubs and jacuzzi suites worldwide.',
+    title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+    description: 'Find 990+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 34 countries. Triple-checked on Booking.com & Agoda.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -188,7 +195,7 @@ export default async function Home() {
                 Hotels with Bathtub in Room &amp; Private Jacuzzis
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md mb-8 opacity-90 max-w-3xl mx-auto">
-                700+ curated hotels with bathtub in room — every listing triple-verified across MakeMyTrip, Agoda &amp; Booking.com. No misleading photos. Guaranteed private tubs.
+                990+ curated hotels with bathtub in room — every listing triple-verified across Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
               </p>
             </div>
           </header>

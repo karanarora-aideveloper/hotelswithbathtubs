@@ -1488,6 +1488,516 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Intimate private beachfront bures designed exclusively for couples',
       'Guaranteed private in-room bathtubs verified on all platforms'
     ]
+  },
+
+  // UK - Manchester
+  'manchester-uk': {
+    intro: 'Manchester blends industrial Victorian architecture with stylish modern luxury. From Deansgate high-rise skyline suites to boutique warehouse conversions in the Northern Quarter, discover romantic hotels featuring freestanding copper tubs and private whirlpool jacuzzis.',
+    amenities: [
+      'Freestanding cast-iron and roll-top bathtubs in boutique warehouse suites',
+      'High-rise panoramic Deansgate skyline jacuzzi suites',
+      'Dual-head rainfall showers with luxury British botanical bath amenities',
+      'Private spa bath access with bespoke champagne room packages'
+    ],
+    whyChoose: [
+      'Vibrant music, theatre, dining, and culture right outside your door',
+      'Unique architectural heritage hotels and modern 5-star towers',
+      'Convenient rail links to London, Edinburgh, and Peak District getaways',
+      'Every bathtub suite independently confirmed on Booking.com'
+    ]
+  },
+
+  // India - Ahmedabad
+  'ahmedabad-india': {
+    intro: 'Ahmedabad combines UNESCO World Heritage havelis with modern Sabarmati riverfront luxury. Enjoy romantic couple retreats featuring deep marble soaking tubs, private jacuzzi suites, and serene courtyard stays across SG Highway and Ashram Road.',
+    amenities: [
+      'Deep marble soaking bathtubs with premium Ayurvedic bath oils',
+      'Spacious master suites with glass-partitioned designer tubs',
+      'Handcrafted terracotta and brass bathroom fixtures in heritage boutique havelis',
+      'Riverfront-facing premium rooms with separate rain showers'
+    ],
+    whyChoose: [
+      'Rich culinary, heritage, and textile culture for romantic explorers',
+      'Top-tier 5-star hotels offering full couple-friendly privacy and seamless check-in',
+      'Convenient base for exploring Gandhinagar, Adalaj Stepwell, and Modhera',
+      'All listings verified across Booking.com, Agoda, and MakeMyTrip'
+    ]
+  },
+
+  // India - Kochi
+  'kochi-india': {
+    intro: 'Kochi is Kerala’s historic spice capital, where Portuguese colonial mansions meet tranquil backwater vistas. Unwind in boutique heritage hotels in Fort Kochi and sea-facing luxury resorts featuring freestanding clawfoot tubs and private jacuzzi plunge baths.',
+    amenities: [
+      'Colonial-style freestanding clawfoot bathtubs in Fort Kochi heritage mansions',
+      'Arabian Sea and Vembanad Lake sunset view jacuzzi balconies',
+      'Natural Ayurvedic herbal bath salts and aromatic lemongrass oils',
+      'Open-to-sky tropical bathroom designs with lush garden courtyards'
+    ],
+    whyChoose: [
+      'Romantic waterfront promenades, Chinese fishing nets, and sunset cruises',
+      'Award-winning heritage conversions with intimate boutique privacy',
+      'Gateway to Kerala’s backwaters, Marari Beach, and Munnar hill tea estates',
+      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // India - Coimbatore
+  'coimbatore-india': {
+    intro: 'Nestled at the foothills of the Western Ghats, Coimbatore offers a serene sanctuary for couples. Discover contemporary luxury hotels and wellness retreats featuring deep soaking tubs, hydrotherapy jets, and peaceful mountain backdrops.',
+    amenities: [
+      'Deep ceramic soaking tubs with panoramic Western Ghats foothill views',
+      'Spacious executive suites with modern whirlpool jacuzzi installations',
+      'Herbal bath infusions and holistic wellness spa amenities',
+      'Private balcony seating overlooking serene green landscaped gardens'
+    ],
+    whyChoose: [
+      'Pleasant year-round climate and tranquil gateway to Ooty and Valparai',
+      'High-standard 5-star hospitality with discreet couple-friendly privacy',
+      'Proximity to Isha Yoga Center and Siruvani waterfalls',
+      'Independent verification confirming in-room tubs before reservation'
+    ]
+  },
+
+  // India - Pune
+  'pune-india': {
+    intro: 'Pune offers Maharashtra’s premier urban romantic escape. From lush green Koregaon Park boutique stays to upscale Viman Nagar and Senapati Bapat Road towers, unwind in designer suites with freestanding bathtubs and private hot tubs.',
+    amenities: [
+      'Freestanding designer soaking tubs with mood lighting and bath salts',
+      'Skyline and lush green canopy view jacuzzi suites',
+      'Walk-in glass steam showers and plush cotton bathrobes',
+      'Private in-room dining setups for anniversary dates and staycations'
+    ],
+    whyChoose: [
+      'Vibrant cafe culture, trendy microbreweries, and heritage landmarks',
+      'Convenient weekend drive from Mumbai via the Mumbai-Pune Expressway',
+      'Extensive selection of 5-star international chains with couple privacy',
+      'No shared spa facilities — every listed bathtub is 100% in-room'
+    ]
+  },
+
+  // India - Indore
+  'indore-india': {
+    intro: 'Indore, the cleanest city in India and culinary heart of Madhya Pradesh, features modern luxury hotels along Vijay Nagar and AB Road offering expansive executive suites with private jacuzzi tubs and deep soaking baths.',
+    amenities: [
+      'Oversized whirlpool jacuzzi bathtubs with massaging water jets',
+      'Executive club suites with marble bathrooms and deep soaking tubs',
+      'High-end designer bath amenities and complimentary bath bombs',
+      'City skyline vistas from top-floor presidential and luxury suites'
+    ],
+    whyChoose: [
+      'Legendary food streets at Sarafa Bazaar and 56 Dukan for couple foodies',
+      'Exceptional value for premium 5-star suite accommodations',
+      'Centrally located with easy access to Ujjain and Mandu heritage getaways',
+      'Verified room tiers guaranteeing private bathtubs upon check-in'
+    ]
+  },
+
+  // India - Gurgaon
+  'gurgaon-india': {
+    intro: 'Gurgaon (Gurugram) is Delhi NCR’s premier modern luxury hub. Featuring high-rise glass towers along Cyber City and Golf Course Road, enjoy opulent suites with panoramic floor-to-ceiling glass-wall bathtubs and private couple jacuzzis.',
+    amenities: [
+      'Floor-to-ceiling glass-walled bathtubs overlooking futuristic city skylines',
+      'Oversized Italian marble soaking tubs and dual rain showers',
+      'Private jacuzzi suites with romantic ambient lighting controls',
+      'Dedicated butler service and luxury spa bathroom amenities'
+    ],
+    whyChoose: [
+      'World-class fine dining, luxury malls, and rooftop cocktail lounges',
+      'Effortless staycation access from Delhi and Indira Gandhi International Airport',
+      'Highest concentration of 5-star luxury brand suites in North India',
+      'Every listing triple-checked for verified in-room bathtub guarantees'
+    ]
+  },
+
+  // India - Lonavala
+  'lonavala-india': {
+    intro: 'Lonavala is the ultimate monsoon and winter romance retreat in the Sahyadri mountains. Escape the city to luxury cliffside villas and hilltop resorts featuring outdoor private jacuzzis and mountain-view bathtubs.',
+    amenities: [
+      'Panoramic valley-view bathtubs overlooking mist-covered Sahyadri peaks',
+      'Private outdoor heated jacuzzi tubs on secluded villa sundecks',
+      'Open-air natural stone baths framed by tropical monsoon greenery',
+      'Aromatic bubble bath hampers with fresh rose petals and scented candles'
+    ],
+    whyChoose: [
+      'Breathtaking waterfalls, lush viewpoints, and cool mountain breezes',
+      'Under 2 hours drive from both Mumbai and Pune for quick romantic weekends',
+      'Unmatched privacy in standalone luxury pool and jacuzzi villas',
+      'Strictly verified private in-room or private sundeck tubs'
+    ]
+  },
+
+  // India - Karjat
+  'karjat-india': {
+    intro: 'Karjat offers a tranquil riverside and mountain hideaway nestled along the Ulhas River. Discover rustic-chic villas and boutique eco-resorts with open-air stone bathtubs and private plunge jacuzzis overlooking green valleys.',
+    amenities: [
+      'Handcrafted natural river-stone bathtubs set in private open courtyards',
+      'River-facing jacuzzi tubs on private wooden decks',
+      'Farm-to-table romantic candlelight dining next to private tubs',
+      'Surrounding organic orchards and scenic hiking trail views'
+    ],
+    whyChoose: [
+      'Serene escape from urban noise with fresh mountain air and clear skies',
+      'Ideal for couples seeking offbeat, quiet nature retreats',
+      'Short scenic drive from Mumbai, Thane, and Navi Mumbai',
+      'Verified private in-room installations on every listing'
+    ]
+  },
+
+  // India - Dharamshala
+  'dharamshala-india': {
+    intro: 'Perched under the snow-capped Dhauladhar range, Dharamshala and McLeod Ganj offer tranquil Himalayan romance. Stay in boutique mountain lodges featuring heated cedar soaking tubs and cedar-scented private jacuzzis framing cedar forests.',
+    amenities: [
+      'Himalayan mountain-facing heated bathtubs with pine valley vistas',
+      'Cedar-wood and natural slate stone bathroom architecture',
+      'Herbal mountain mineral bath salts and organic Tibetan skincare',
+      'Cozy fireplace suites with adjoining deep soaking baths'
+    ],
+    whyChoose: [
+      'Crisp Himalayan mountain air, Tibetan culture, and scenic pine trails',
+      'Intimate boutique lodges with personalized mountain hospitality',
+      'Perfect retreat for anniversaries, honeymoons, and peaceful creative getaways',
+      'Verified in-room bathtubs confirmed across major travel platforms'
+    ]
+  },
+
+  // India - Haridwar
+  'haridwar-india': {
+    intro: 'Haridwar offers spiritual tranquility along the sacred Ganges. Experience luxury wellness resorts and boutique heritage retreats featuring private herbal soaking tubs and tranquil river views for deep romantic rejuvenation.',
+    amenities: [
+      'Ganges river-view luxury suites with deep marble soaking tubs',
+      'Traditional Ayurvedic herbal bath rituals and therapeutic bath oils',
+      'Private balcony jacuzzi baths overlooking serene sacred ghats',
+      'Calming holistic wellness spa treatments within the resort'
+    ],
+    whyChoose: [
+      'Peaceful, rejuvenating atmosphere for couples seeking spiritual wellness',
+      'Close proximity to Raja Ji National Park and scenic Rishikesh',
+      'Pure vegetarian fine dining and serene riverside meditative stays',
+      'Every bathtub suite independently confirmed for private in-room use'
+    ]
+  },
+
+  // India - Kolhapur
+  'kolhapur-india': {
+    intro: 'Kolhapur showcases royal Maratha heritage, historic palaces, and rich cultural traditions. Stay in premium boutique hotels featuring executive suites with private soaking tubs and modern whirlpool jacuzzis.',
+    amenities: [
+      'Deep soaking ceramic bathtubs with refreshing herbal bath essences',
+      'Spacious royal master suites with marble bathrooms and ambient lighting',
+      'Dual shower setups with rainfall fixtures and premium bath linen',
+      'Quiet, private accommodations designed for couple relaxation'
+    ],
+    whyChoose: [
+      'Historic Mahalaxmi Temple, New Palace Museum, and Panhala Fort nearby',
+      'Famous Kolhapuri culinary cuisine and authentic regional charm',
+      'Great transit stopover between Mumbai, Pune, and Goa with 5-star comfort',
+      'Verified private in-room bathtub amenities on partner platforms'
+    ]
+  },
+
+  // India - Nainital
+  'nainital-india': {
+    intro: 'Nainital’s shimmering emerald lake and misty Kumaon hills have charmed couples for generations. Experience romantic heritage hotels and lake-facing luxury suites featuring vintage bathtubs and private hot water spa baths.',
+    amenities: [
+      'Naini Lake view vintage bathtubs set against pine-clad mountain slopes',
+      'Heritage wooden paneling and cozy heated master bathrooms',
+      'Hot water bubble bath preparations with mountain herbal fragrances',
+      'Adjoining private sun terraces overlooking the scenic hill town'
+    ],
+    whyChoose: [
+      'Classic hill station romance with boat rides, ropeway views, and Mall Road walks',
+      'Historic colonial-era properties brimming with nostalgic charm',
+      'Cool mountain escape within driving distance from Delhi NCR',
+      'Triple-verified room tiers to ensure private in-room tubs'
+    ]
+  },
+
+  // India - Kodaikanal
+  'kodaikanal-india': {
+    intro: 'Known as the "Princess of Hill Stations", Kodaikanal in Tamil Nadu’s Palani Hills offers misty pine forests, waterfalls, and romantic tranquility. Indulge in private jacuzzi suites and cliffside chalets with deep soaking bathtubs.',
+    amenities: [
+      'Deep soaking bathtubs framing mist-covered valleys and eucalyptus forests',
+      'Private indoor whirlpool jacuzzis with therapeutic jet settings',
+      'Cozy fireplace suites with heated bathrooms and plush robes',
+      'Spectacular hillside viewpoints directly from your private suite'
+    ],
+    whyChoose: [
+      'Cool year-round weather, boating on Kodai Lake, and scenic Coaker’s Walk',
+      'Secluded luxury chalets ideal for honeymoons and quiet couple getaways',
+      'Serene South Indian hill retreat away from urban crowds',
+      'Guaranteed private in-room tubs verified on Booking.com and Agoda'
+    ]
+  },
+
+  // India - Zirakpur
+  'zirakpur-india': {
+    intro: 'Zirakpur serves as the luxury hospitality gateway to Chandigarh, Himachal Pradesh, and the Shivalik foothills. Enjoy expansive 5-star hotel suites featuring designer bathtubs and private jacuzzi setups for relaxing weekend staycations.',
+    amenities: [
+      'Modern freestanding bathtubs in expansive executive and presidential suites',
+      'Whirlpool jacuzzi tubs with multi-jet massage functionality',
+      'Luxury designer toiletries, rain showers, and backlit vanity mirrors',
+      'Quiet soundproof rooms with private in-room dining menus'
+    ],
+    whyChoose: [
+      'Prime gateway location with seamless access to Chandigarh, Shimla, and Kasauli',
+      'High-value 5-star accommodations with top-tier spa and pool amenities',
+      'Discreet, couple-friendly atmosphere with hassle-free check-in',
+      'Triple-verified across online booking channels for guaranteed tubs'
+    ]
+  },
+
+  // India - Digha
+  'digha-india': {
+    intro: 'Digha is Bengal’s favorite coastal seaside getaway along the Bay of Bengal. Relax after a day on the beach in coastal luxury resorts featuring sea-breeze jacuzzi suites and private deep bathtubs built for couples.',
+    amenities: [
+      'Sea-facing balcony suites with private jacuzzi and hot tubs',
+      'Spacious marble bathrooms with deep soaking tubs',
+      'Refreshing sea breeze views and private room service amenities',
+      'Coastal decor with modern fixtures and complimentary bath hampers'
+    ],
+    whyChoose: [
+      'Relaxing sea-beach walks, fresh coastal seafood, and romantic sunsets',
+      'Popular weekend train or road trip escape from Kolkata',
+      'New-generation upscale resort properties offering complete privacy',
+      'Guaranteed in-room tubs independently verified'
+    ]
+  },
+
+  // India - Mount Abu
+  'mount-abu-india': {
+    intro: 'Mount Abu is Rajasthan’s only hill station, set amidst the ancient Aravalli Range. Discover romantic heritage retreats and lakeside suites offering private soaking bathtubs, mountain breezes, and sunset views over Nakki Lake.',
+    amenities: [
+      'Freestanding bathtubs set against Aravalli granite mountain views',
+      'Heritage haveli-style master suites with hand-carved jharokhas and deep baths',
+      'Aromatic herbal bath salts and traditional rosewater essences',
+      'Private garden terraces overlooking lush subtropical greenery'
+    ],
+    whyChoose: [
+      'Unique cool mountain oasis in Rajasthan with scenic Nakki Lake boat rides',
+      'Intimate heritage properties with royal Rajput hospitality',
+      'Peaceful retreat for couples visiting Dilwara Temples and Sunset Point',
+      'Verified room categories with private in-room bathtubs confirmed'
+    ]
+  },
+
+  // India - Shirdi
+  'shirdi-india': {
+    intro: 'Shirdi welcomes millions of pilgrims to the shrine of Sai Baba. For travelers seeking comfort and rejuvenation, top-tier spiritual retreats and luxury hotels offer peaceful suites with deep soaking tubs and private jacuzzi facilities.',
+    amenities: [
+      'Deep ceramic soaking tubs for relaxing after temple visits and darshan',
+      'Quiet executive suites with soundproofed marble bathrooms',
+      'Soothing herbal bath salts and comfortable cotton bathrobes',
+      'Spacious living areas with tranquil garden and pool views'
+    ],
+    whyChoose: [
+      'Comfortable, peaceful sanctuary just minutes from the Samadhi Mandir',
+      'Pure vegetarian dining, wellness spas, and family/couple privacy',
+      'Top-rated 4-star and 5-star properties offering premium amenities',
+      'Independent verification confirming private in-room bathtubs'
+    ]
+  },
+
+  // India - Igatpuri
+  'igatpuri-india': {
+    intro: 'Igatpuri is Maharashtra’s majestic waterfall and mist paradise in the Western Ghats. Unwind in luxury hillside villas and spa resorts featuring private outdoor stone bathtubs and heated jacuzzis overlooking green valleys.',
+    amenities: [
+      'Private outdoor stone tubs with panoramic Sahyadri mountain and waterfall views',
+      'Heated jacuzzi tubs on secluded private sundecks',
+      'Aromatic monsoon bubble baths with essential cedar and lavender oils',
+      'Villas featuring private plunge pools and adjoining open-air baths'
+    ],
+    whyChoose: [
+      'Spectacular monsoon clouds, mountain trails, and the Vipassana meditation center',
+      'Under 2.5 hours scenic drive from Mumbai and Thane',
+      'Unmatched couple privacy in standalone villas and luxury wellness resorts',
+      'All listed bathtub suites triple-checked for verified in-room tubs'
+    ]
+  },
+
+  // India - Mahabalipuram
+  'mahabalipuram-india': {
+    intro: 'Mahabalipuram (Mamallapuram) blends UNESCO World Heritage rock-cut temples with golden Coromandel Coast beaches. Indulge in beachfront luxury villas featuring sunken stone bathtubs and private oceanfront jacuzzi pools.',
+    amenities: [
+      'Sunken granite and marble bathtubs overlooking the Bay of Bengal',
+      'Private oceanfront plunge pools and open-air tropical jacuzzis',
+      'Natural sea-salt bath therapies and Ayurvedic coconut bath amenities',
+      'Private beach cabanas with romantic seaside candlelight dining'
+    ],
+    whyChoose: [
+      'Scenic East Coast Road (ECR) beach getaway just 1 hour from Chennai',
+      '7th-century Shore Temple and UNESCO rock reliefs right at your doorstep',
+      'World-class beach resorts offering unmatched couple luxury and privacy',
+      'Verified in-room and private villa bathtubs checked across partner platforms'
+    ]
+  },
+
+  // India - Darjeeling
+  'darjeeling-india': {
+    intro: 'Darjeeling is the Queen of the Hills, renowned for world-famous tea estates and sunrise vistas of Mount Kanchenjunga. Relax in colonial heritage suites and mountain chalets featuring vintage clawfoot bathtubs and fireplace warmth.',
+    amenities: [
+      'Kanchenjunga mountain-facing vintage clawfoot bathtubs',
+      'Historic colonial fireplace suites with heated bathrooms',
+      'Fresh Himalayan herbal bath infusions and Darjeeling tea bath salts',
+      'Private balcony seating overlooking rolling emerald tea plantations'
+    ],
+    whyChoose: [
+      'Unrivaled views of the world’s third-highest peak from your room',
+      'Intimate historic heritage properties with vintage British-era elegance',
+      'Romantic walks through tea gardens and along the historic Mall',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // India - Shillong
+  'shillong-india': {
+    intro: 'Shillong, the "Scotland of the East", offers rolling pine hills, living root bridges, and cool mountain air. Experience boutique Meghalaya retreats and Umiam lake-view resorts featuring heated soaking tubs and private spa jacuzzis.',
+    amenities: [
+      'Heated soaking bathtubs framed by pine forest and lake views',
+      'Natural local slate and cedar wood bathroom architecture',
+      'Aromatic pine-needle bath essences and soothing herbal salts',
+      'Cozy fireplace living areas with private couple dining'
+    ],
+    whyChoose: [
+      'Cool year-round weather, waterfalls, and vibrant music culture',
+      'Peaceful sanctuary for couples exploring Meghalaya’s natural wonders',
+      'Intimate boutique lodges with personalized Khasi hospitality',
+      'Guaranteed private in-room bathtubs verified on partner platforms'
+    ]
+  },
+
+  // India - Gandhinagar
+  'gandhinagar-india': {
+    intro: 'Gandhinagar, Gujarat’s lush green planned capital on the banks of the Sabarmati, features contemporary 5-star resorts and golf retreats offering expansive executive suites with designer bathtubs and private whirlpool jacuzzis.',
+    amenities: [
+      'Modern freestanding bathtubs in spacious luxury suites',
+      'Whirlpool jacuzzi tubs with relaxing hydrotherapy jets',
+      'Glass-enclosed rain showers and premium Ayurvedic toiletries',
+      'Expansive landscaped garden and golf course views'
+    ],
+    whyChoose: [
+      'Tranquil, pollution-free atmosphere with abundant green canopies',
+      'Close proximity to Akshardham Temple and GIFT City business hub',
+      'High-end hospitality offering complete couple privacy and luxury amenities',
+      'Strictly verified private in-room tubs on all listings'
+    ]
+  },
+
+  // India - Daman
+  'daman-india': {
+    intro: 'Daman combines Portuguese colonial history with Arabian Sea beaches. Unwind in beachfront resorts and heritage hotels featuring sea-view balcony jacuzzi suites and deep bathtubs designed for relaxing weekend couple escapes.',
+    amenities: [
+      'Sea-facing balcony suites with private jacuzzi and hot tubs',
+      'Spacious marble bathrooms with deep soaking tubs',
+      'Refreshing Arabian Sea sunset views from your private room',
+      'Complimentary bath hampers with aromatic sea-salt blends'
+    ],
+    whyChoose: [
+      'Popular coastal weekend road trip from Mumbai, Surat, and Vapi',
+      'Historic Portuguese forts, lighthouse, and relaxing sandy beaches',
+      'Couple-friendly beachside luxury resorts with full privacy',
+      'Triple-verified across online booking platforms'
+    ]
+  },
+
+  // India - Puri
+  'puri-india': {
+    intro: 'Puri on the Bay of Bengal combines spiritual significance with breezy golden sand beaches. Stay in luxury seaside resorts along Marine Drive featuring private jacuzzi tubs and sea-facing deep soaking baths for romantic relaxation.',
+    amenities: [
+      'Bay of Bengal ocean-view bathtubs and private balcony jacuzzis',
+      'Spacious coastal suites with natural stone and marble bathrooms',
+      'Therapeutic sea-salt bath preparations and plush beach towels',
+      'Private beach access with poolside dining and sunset views'
+    ],
+    whyChoose: [
+      'Golden beach sunsets, Jagannath Temple, and Konark Sun Temple day trips',
+      'Expansive coastal resorts designed for relaxed couple getaways',
+      'High-standard hospitality with discrete couple-friendly check-in',
+      'Independent verification confirming private in-room bathtubs'
+    ]
+  },
+
+  // India - Siliguri
+  'siliguri-india': {
+    intro: 'Siliguri is the strategic gateway to Darjeeling, Sikkim, Bhutan, and the Dooars. Experience luxury transit retreats and foothill resorts featuring expansive suites with deep marble soaking tubs and private jacuzzi baths.',
+    amenities: [
+      'Deep marble soaking bathtubs in premium club and presidential suites',
+      'Whirlpool jacuzzi baths with multi-speed hydrotherapy jets',
+      'Soundproofed executive rooms with scenic Mahananda river and foothill views',
+      'Luxury designer bathroom amenities and dual rainfall showers'
+    ],
+    whyChoose: [
+      'Convenient luxury hub connecting Bagdogra Airport and New Jalpaiguri',
+      'Top 5-star international hotel chains with excellent dining and spas',
+      'Relaxing rest stop before or after mountain explorations',
+      'Guaranteed in-room tubs independently verified'
+    ]
+  },
+
+  // India - Yercaud
+  'yercaud-india': {
+    intro: 'Yercaud in Tamil Nadu’s Shevaroy Hills is a peaceful sanctuary of coffee plantations, orange groves, and spice gardens. Escape to hillside chalets featuring deep soaking bathtubs and private jacuzzis overlooking mist-covered valleys.',
+    amenities: [
+      'Deep soaking tubs framing scenic Shevaroy mountain and lake views',
+      'Private villa jacuzzis nestled among coffee and cardamom plantations',
+      'Aromatic coffee-infused bath scrubs and natural herbal essences',
+      'Cozy private wooden sundecks with mountain valley panoramas'
+    ],
+    whyChoose: [
+      'Quiet, uncrowded alternative to Ooty and Kodaikanal for couples',
+      'Pleasant mountain climate with scenic boating on Yercaud Lake',
+      'Intimate plantation retreats offering supreme privacy and peace',
+      'Every bathtub suite triple-checked across verified booking partners'
+    ]
+  },
+
+  // India - Lavasa
+  'lavasa-india': {
+    intro: 'Lavasa, designed in the style of the Italian coastal town of Portofino, sits along the serene shores of Warasgaon Lake in the Western Ghats. Indulge in waterfront luxury suites featuring private lake-facing bathtubs and jacuzzi tubs.',
+    amenities: [
+      'Waterfront bathtubs with panoramic Warasgaon Lake views',
+      'Private jacuzzi suites with ambient mood lighting controls',
+      'Italian-inspired master bathrooms with glass-walled walk-in showers',
+      'Lakeside promenade views directly from your private balcony'
+    ],
+    whyChoose: [
+      'Charming European architectural aesthetic surrounded by green Sahyadri hills',
+      'Convenient weekend drive from Pune and Mumbai',
+      'Peaceful waterfront strolls, watersports, and relaxed promenade dining',
+      'Verified private in-room installations confirmed on partner platforms'
+    ]
+  },
+
+  // India - Panvel
+  'panvel-india': {
+    intro: 'Panvel, nestled at the base of the Karnala bird sanctuary and Matheran hills, offers luxury transit hotels and countryside farm retreats featuring executive suites with private jacuzzi tubs and modern soaking baths.',
+    amenities: [
+      'Private whirlpool jacuzzi tubs in expansive executive suites',
+      'Modern glass-walled master bathrooms with deep soaking bathtubs',
+      'Scenic green hill vistas and quiet countryside surroundings',
+      'Fast connectivity to Navi Mumbai, Mumbai-Pune Expressway, and Goa highway'
+    ],
+    whyChoose: [
+      'Quick weekend getaway from Mumbai without long driving times',
+      'Proximity to Karnala Fort, bird sanctuary, and Gadelshwar Lake',
+      'High-value modern 4-star and 5-star accommodations with full couple privacy',
+      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // India - Mathura
+  'mathura-india': {
+    intro: 'Mathura and Vrindavan in the sacred Braj region along the Yamuna offer profound spiritual heritage. Stay in upscale boutique resorts and heritage hotels offering tranquil suites with deep soaking bathtubs for relaxing after temple visits.',
+    amenities: [
+      'Deep ceramic soaking bathtubs for peaceful post-darshan relaxation',
+      'Spacious heritage-style master suites with quiet courtyard views',
+      'Soothing herbal bath salts and traditional sandalwood bath products',
+      'Comfortable air-conditioned suites with discreet, attentive hospitality'
+    ],
+    whyChoose: [
+      'Comfortable sanctuary near Shri Krishna Janmabhoomi and Vrindavan temples',
+      'Pure vegetarian dining, serene gardens, and couple/family privacy',
+      'Well-managed boutique hotels offering modern comforts in sacred Braj',
+      'Independent verification guaranteeing private in-room tubs'
+    ]
   }
 
 };
@@ -1506,15 +2016,32 @@ export function generateCityPageContent(
 ): string {
   const formattedCity = titleCase(city);
   const formattedCountry = titleCase(country);
+  const isIndia = country.toLowerCase() === 'india';
   const content = getCityContent(city, country);
 
   const amenitiesList = content.amenities.map(a => `<li><strong>${a.split(' ')[0]}</strong> ${a.slice(a.indexOf(' ') + 1)}</li>`).join('');
   const whyChooseList = content.whyChoose.map(w => `<li>${w}</li>`).join('');
 
+  const verificationSources = isIndia
+    ? 'Booking.com, Agoda, and MakeMyTrip'
+    : 'Booking.com, Agoda, and Expedia';
+
+  const bookingPartners = isIndia
+    ? `
+      <li><strong>Booking.com:</strong> Instant confirmation with free cancellation options.</li>
+      <li><strong>Agoda:</strong> Special member rates and mobile discounts across Asia & global stays.</li>
+      <li><strong>MakeMyTrip:</strong> Leading platform for India and international destinations with exclusive offers.</li>
+    `
+    : `
+      <li><strong>Booking.com:</strong> Instant confirmation with free cancellation and member discounts.</li>
+      <li><strong>Agoda:</strong> Competitive rates and exclusive mobile savings worldwide.</li>
+      <li><strong>Expedia:</strong> Trusted international booking partner with flexible stay options.</li>
+    `;
+
   return `
     <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Why Book a Hotel Room with a Bathtub in ${formattedCity}, ${formattedCountry}?</h2>
     <p class="text-gray-700 leading-relaxed mb-4">${content.intro}</p>
-    <p class="text-gray-700 leading-relaxed mb-6">Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across Booking.com, Agoda, and MakeMyTrip to guarantee private in-room tubs without misleading photos.</p>
+    <p class="text-gray-700 leading-relaxed mb-6">Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across ${verificationSources} to guarantee private in-room tubs without misleading photos.</p>
     
     <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Popular Bathtub Amenities in ${formattedCity}</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-6">
@@ -1529,9 +2056,7 @@ export function generateCityPageContent(
     <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">How to Book Your Stay in ${formattedCity}</h3>
     <p class="text-gray-700 leading-relaxed mb-2">All hotels listed on this guide feature direct links to verified online travel agencies:</p>
     <ul class="list-disc pl-5 space-y-1 text-gray-700">
-      <li><strong>Booking.com:</strong> Instant confirmation with free cancellation options.</li>
-      <li><strong>Agoda:</strong> Special member rates and mobile discounts across Asia & global stays.</li>
-      <li><strong>MakeMyTrip:</strong> Leading platform for India and international destinations with exclusive offers.</li>
+      ${bookingPartners}
     </ul>
   `;
 }

@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.hotelswithbathtubs.com'),
   title: {
     template: "%s | Hotels With Bathtubs",
-    default: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
+    default: "Hotels with Bathtub in Room & Jacuzzi Suites (2026)",
   },
-  description: "Discover 950+ verified hotels with private in-room bathtubs and jacuzzis across 125+ destinations in 34 countries. Triple-verified across Booking.com & Agoda for romantic getaways.",
+  description: "Discover 990+ verified hotels with private in-room bathtubs and jacuzzis across 125+ destinations in 34 countries. Triple-verified across Booking.com & Agoda for romantic getaways.",
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com',
   },

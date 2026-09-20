@@ -69,9 +69,15 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   // SERP-Optimized Title (48-58 chars): Front-loaded target keywords + current year freshness + trust hook
-  // Uses absolute title to prevent layout template from appending redundant suffixes that cause truncation
-  const pageTitle = `${hotelCount} Best Hotels with Bathtub in ${cityName} (2026) | Verified Stays`;
-  const pageDescription = `Find top hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ verified stays with private jacuzzi suites & deep soaking tubs for couples.`;
+  // For USA destinations, incorporate "Deep Soaking Tubs" to capture high-volume US search intent
+  const pageTitle = countrySlug === 'usa'
+    ? `${hotelCount} Best Hotels with Bathtubs & Soaking Tubs in ${cityName} (2026)`
+    : `${hotelCount} Best Hotels with Bathtub in ${cityName} (2026) | Verified Stays`;
+
+  const pageDescription = countrySlug === 'usa'
+    ? `Discover ${hotelCount}+ verified hotels with deep soaking tubs & private jacuzzi suites in ${cityName}. Hand-checked rooms with guaranteed bathtubs for couples.`
+    : `Find top hotels with bathtub in room in ${cityName}, ${countryName}. Explore ${hotelCount}+ verified stays with private jacuzzi suites & deep soaking tubs for couples.`;
+
 
   return {
     title: {
@@ -304,10 +310,14 @@ export default async function CityHotelsPage({
                   <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated
                 </div>
                 <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-                  Hotels with Bathtub in {cityName} for Couples &amp; Romantic Stays
+                  {countrySlug === 'usa'
+                    ? `Hotels with Bathtubs & Soaking Tubs in ${cityName}`
+                    : `Hotels with Bathtub in ${cityName} for Couples & Romantic Stays`}
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl font-medium opacity-90 max-w-2xl mx-auto">
-                  {rawHotels.length}+ verified hotels with private in-room bathtubs &amp; jacuzzi suites in {cityName}, {countryName} — every listing triple-checked, no shared spa tubs.
+                  {countrySlug === 'usa'
+                    ? `${rawHotels.length}+ verified hotels with private in-room deep soaking tubs & jacuzzi suites in ${cityName}, ${countryName} — every room verified, no shared facilities.`
+                    : `${rawHotels.length}+ verified hotels with private in-room bathtubs & jacuzzi suites in ${cityName}, ${countryName} — every listing triple-checked, no shared spa tubs.`}
                 </p>
               </div>
             </header>
