@@ -75,6 +75,19 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'brazil': { dbCountry: 'Brazil', slug: 'brazil', displayName: 'Brazil' },
   'costa-rica': { dbCountry: 'Costa Rica', slug: 'costa-rica', displayName: 'Costa Rica' },
   'costa rica': { dbCountry: 'Costa Rica', slug: 'costa-rica', displayName: 'Costa Rica' },
+  'saint-lucia': { dbCountry: 'Saint Lucia', slug: 'saint-lucia', displayName: 'Saint Lucia' },
+  'saint lucia': { dbCountry: 'Saint Lucia', slug: 'saint-lucia', displayName: 'Saint Lucia' },
+  'st-lucia': { dbCountry: 'Saint Lucia', slug: 'saint-lucia', displayName: 'Saint Lucia' },
+  'st lucia': { dbCountry: 'Saint Lucia', slug: 'saint-lucia', displayName: 'Saint Lucia' },
+  'jamaica': { dbCountry: 'Jamaica', slug: 'jamaica', displayName: 'Jamaica' },
+  'bahamas': { dbCountry: 'Bahamas', slug: 'bahamas', displayName: 'Bahamas' },
+  'the-bahamas': { dbCountry: 'Bahamas', slug: 'bahamas', displayName: 'Bahamas' },
+  'dominican-republic': { dbCountry: 'Dominican Republic', slug: 'dominican-republic', displayName: 'Dominican Republic' },
+  'dominican republic': { dbCountry: 'Dominican Republic', slug: 'dominican-republic', displayName: 'Dominican Republic' },
+  'turks-and-caicos': { dbCountry: 'Turks and Caicos', slug: 'turks-and-caicos', displayName: 'Turks & Caicos' },
+  'turks and caicos': { dbCountry: 'Turks and Caicos', slug: 'turks-and-caicos', displayName: 'Turks & Caicos' },
+  'barbados': { dbCountry: 'Barbados', slug: 'barbados', displayName: 'Barbados' },
+  'aruba': { dbCountry: 'Aruba', slug: 'aruba', displayName: 'Aruba' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

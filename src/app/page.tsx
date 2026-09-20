@@ -16,7 +16,7 @@ export const metadata = {
   title: {
     absolute: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
   },
-  description: 'Find 990+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 34 countries. Triple-checked on Booking.com & Agoda.',
+  description: 'Find 1,070+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 41 countries. Triple-checked on Booking.com & Agoda.',
   alternates: {
     canonical: '/',
     languages: {
@@ -195,7 +195,7 @@ export default async function Home() {
                 Hotels with Bathtub in Room &amp; Private Jacuzzis
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md mb-8 opacity-90 max-w-3xl mx-auto">
-                990+ curated hotels with bathtub in room — every listing triple-verified across Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
+                1,070+ curated hotels with bathtub in room across 41 countries — every listing triple-verified across Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
               </p>
             </div>
           </header>

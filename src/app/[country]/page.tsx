@@ -181,7 +181,9 @@ export default async function CountryHubPage({
     'french-polynesia': 'PF', 'seychelles': 'SC', 'mauritius': 'MU', 'fiji': 'FJ',
     'germany': 'DE', 'portugal': 'PT', 'south-africa': 'ZA', 'austria': 'AT',
     'czechia': 'CZ', 'hungary': 'HU', 'ireland': 'IE', 'brazil': 'BR',
-    'costa-rica': 'CR',
+    'costa-rica': 'CR', 'saint-lucia': 'LC', 'jamaica': 'JM', 'bahamas': 'BS',
+    'dominican-republic': 'DO', 'turks-and-caicos': 'TC', 'barbados': 'BB',
+    'aruba': 'AW',
   };
 
   const collectionSchema = {

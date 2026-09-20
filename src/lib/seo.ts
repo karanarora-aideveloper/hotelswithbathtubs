@@ -1998,6 +1998,125 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Well-managed boutique hotels offering modern comforts in sacred Braj',
       'Independent verification guaranteeing private in-room tubs'
     ]
+  },
+
+  // Saint Lucia - Soufriere
+  'soufriere-saint-lucia': {
+    intro: 'Soufrière is the undisputed crown jewel of Caribbean honeymoon romance, framed by the dramatic volcanic spires of the Gros and Petit Pitons. Experience iconic 3-walled open-air sanctuaries featuring private cliffside plunge pools, deep soaking stone tubs, and panoramic sunset views over the turquoise sea.',
+    amenities: [
+      'Open-air cliffside plunge pools and deep soaking tubs directly framing the Pitons',
+      'Handcrafted volcanic stone and tropical hardwood bathroom architecture',
+      'Scented botanical bath oils crafted from local St. Lucian cocoa and hibiscus',
+      'Private butler service delivering chilled champagne to your private tub'
+    ],
+    whyChoose: [
+      'Voted the world’s leading honeymoon destination for couples and anniversaries',
+      'Iconic architectural sanctuaries offering complete privacy without fourth walls',
+      'Nearby volcanic drive-in volcano, Sulphur Springs mud baths, and Diamond Falls',
+      'Every bathtub suite independently confirmed for guaranteed private in-room tubs'
+    ]
+  },
+
+  // Jamaica - Montego Bay
+  'montego-bay-jamaica': {
+    intro: 'Montego Bay on Jamaica’s vibrant north coast combines lush green mountains with calm azure waters. Discover world-class beachfront resorts and secluded overwater villas featuring oversized whirlpool jacuzzi tubs and private outdoor soaking baths.',
+    amenities: [
+      'Oversized whirlpool jacuzzi tubs overlooking private white-sand coves',
+      'Outdoor stone soaking tubs on secluded tropical garden sundecks',
+      'Dual rainfall showers with Jamaican blue mountain botanical bath amenities',
+      'Private swim-up pool suites with adjoining hydrotherapy spa baths'
+    ],
+    whyChoose: [
+      'World-famous reggae culture, beachfront dining, and catamaran sunset cruises',
+      'Extensive selection of luxury adults-only all-inclusive couple sanctuaries',
+      'Convenient direct flights from major US and UK airport hubs',
+      'Triple-verified across online booking platforms for authentic private tubs'
+    ]
+  },
+
+  // Bahamas - Nassau
+  'nassau-bahamas': {
+    intro: 'Nassau and Paradise Island offer glamorous Bahamian romance surrounded by the clearest turquoise waters on earth. Unwind in ultra-luxury oceanfront suites featuring freestanding deep soaking bathtubs, private jacuzzi balconies, and secluded beach access.',
+    amenities: [
+      'Freestanding designer soaking bathtubs with panoramic ocean vistas',
+      'Private oceanfront balcony jacuzzi tubs for romantic sunset stargazing',
+      'Expansive master bathrooms clad in Italian marble with separate rain showers',
+      'Dedicated concierge service and bespoke aromatherapy bath menus'
+    ],
+    whyChoose: [
+      'Pristine powdery white beaches, private island boat charters, and vibrant marine life',
+      'Historic colonial charm blended with 5-star international luxury resorts',
+      'Quick and effortless nonstop travel access from the US East Coast and London',
+      'Strictly confirmed in-room bathtub guarantees on every listing'
+    ]
+  },
+
+  // Dominican Republic - Punta Cana
+  'punta-cana-dominican-republic': {
+    intro: 'Punta Cana, where the Atlantic Ocean meets the Caribbean Sea, is famous for its endless white-sand beaches lined with towering coconut palms. Indulge in adults-only luxury suites featuring private hydrotherapy jacuzzis and open-air soaking tubs.',
+    amenities: [
+      'Private outdoor terrace jacuzzis overlooking swaying coconut groves',
+      'Deep marble soaking bathtubs with hydro-massage water jets',
+      'Swim-up luxury suites with direct pool access and adjoining private tubs',
+      'Complimentary bath hampers with tropical coconut and vanilla bath scrubs'
+    ],
+    whyChoose: [
+      'Warm tropical weather and calm turquoise waters ideal for couple relaxation',
+      'World-renowned all-inclusive luxury resort options with private butler service',
+      'Exceptional value for ultra-luxury suite and villa experiences',
+      'Verified room tiers guaranteeing private bathtubs upon check-in'
+    ]
+  },
+
+  // Turks and Caicos - Providenciales
+  'providenciales-turks-and-caicos': {
+    intro: 'Providenciales (Provo) is home to the award-winning powdery white sands of Grace Bay Beach. Experience ultra-luxury oceanfront residences and boutique beachfront suites featuring freestanding sculptural soaking tubs and secluded private jacuzzi terraces.',
+    amenities: [
+      'Freestanding sculptural soaking tubs with floor-to-ceiling turquoise ocean views',
+      'Private oceanfront wrap-around terraces with sunken jacuzzi tubs',
+      'Natural travertine stone bathrooms with glass-enclosed rain showers',
+      'Organic mineral bath salts and plush waffle-weave luxury robes'
+    ],
+    whyChoose: [
+      'Grace Bay Beach consistently rated among the best beaches in the world',
+      'Uncrowded, tranquil island atmosphere offering elite couple privacy',
+      'World-class scuba diving, coral reefs, and romantic sunset yacht charters',
+      'Every listing independently verified for authentic in-room bathtub luxury'
+    ]
+  },
+
+  // Barbados - Bridgetown
+  'bridgetown-barbados': {
+    intro: 'Bridgetown and Barbados’ legendary Platinum Coast showcase refined British-colonial heritage blended with warm Bajan hospitality. Stay in oceanfront suites featuring private marble soaking tubs, secluded balcony plunge pools, and calm Caribbean swimming waters.',
+    amenities: [
+      'Oceanfront freestanding marble bathtubs overlooking calm turquoise bays',
+      'Private balcony plunge pools and jetted spa tubs framed by bougainvillea',
+      'Handcrafted mahogany furnishings and colonial coral-stone architecture',
+      'Bespoke Mount Gay rum cocktail service delivered to your bath terrace'
+    ],
+    whyChoose: [
+      'World-famous dining scene known as the culinary capital of the Caribbean',
+      'Historic UNESCO World Heritage garrison architecture and platinum beaches',
+      'Elegant, intimate boutique luxury hotels tailored for romantic couples',
+      'Triple-verified room specifications with guaranteed private in-room tubs'
+    ]
+  },
+
+  // Aruba - Palm Beach
+  'palm-beach-aruba': {
+    intro: 'Palm Beach in Aruba, known as "One Happy Island", sits conveniently outside the hurricane belt, guaranteeing calm sunny skies year-round. Relax in luxury high-rise beach resorts featuring private balcony jacuzzi tubs and deep master soaking baths.',
+    amenities: [
+      'Private balcony jacuzzi hot tubs enjoying constant cooling trade winds',
+      'Deep freestanding soaking bathtubs with premium Aloe Vera bath amenities',
+      'Floor-to-ceiling glass doors opening onto panoramic sunset ocean views',
+      'Spacious double-vanity bathrooms with walk-in glass rainfall showers'
+    ],
+    whyChoose: [
+      'Guaranteed year-round sunny tropical weather outside the Caribbean hurricane zone',
+      'Vibrant nightlife, beachfront restaurants, and calm clear swimming waters',
+      'Renowned warm hospitality and safe, couple-friendly island atmosphere',
+      'All listings verified across Booking.com and Agoda with guaranteed tubs'
+    ]
   }
 
 };
