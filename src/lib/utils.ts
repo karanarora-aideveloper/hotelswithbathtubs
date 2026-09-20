@@ -88,6 +88,11 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'turks and caicos': { dbCountry: 'Turks and Caicos', slug: 'turks-and-caicos', displayName: 'Turks & Caicos' },
   'barbados': { dbCountry: 'Barbados', slug: 'barbados', displayName: 'Barbados' },
   'aruba': { dbCountry: 'Aruba', slug: 'aruba', displayName: 'Aruba' },
+  'iceland': { dbCountry: 'Iceland', slug: 'iceland', displayName: 'Iceland' },
+  'norway': { dbCountry: 'Norway', slug: 'norway', displayName: 'Norway' },
+  'finland': { dbCountry: 'Finland', slug: 'finland', displayName: 'Finland' },
+  'sweden': { dbCountry: 'Sweden', slug: 'sweden', displayName: 'Sweden' },
+  'denmark': { dbCountry: 'Denmark', slug: 'denmark', displayName: 'Denmark' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

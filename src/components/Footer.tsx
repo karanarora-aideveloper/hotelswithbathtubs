@@ -53,6 +53,11 @@ const regionMapping: Record<string, string> = {
   'Hungary': 'United Kingdom & Europe',
   'Ireland': 'United Kingdom & Europe',
   'Portugal': 'United Kingdom & Europe',
+  'Iceland': 'United Kingdom & Europe',
+  'Norway': 'United Kingdom & Europe',
+  'Finland': 'United Kingdom & Europe',
+  'Sweden': 'United Kingdom & Europe',
+  'Denmark': 'United Kingdom & Europe',
 
   // Asia & Middle East
   'Singapore': 'Asia & Middle East',

@@ -2202,6 +2202,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Exceptional boutique hospitality with evening wine receptions and turndown',
       'Every bathtub suite independently confirmed on Booking.com and Agoda'
     ]
+  },
+
+  // Iceland - Reykjavik
+  'reykjavik-iceland': {
+    intro: 'Reykjavik offers the ultimate Nordic geothermal wellness escape surrounded by volcanic landscapes, midnight sun, and aurora borealis. Discover boutique hotels and design suites featuring geothermal mineral-rich soaking tubs, outdoor thermal hot tubs, and private spa baths.',
+    amenities: [
+      'Geothermally heated outdoor hot tubs with northern sky viewing',
+      'Nordic volcanic stone soaking bathtubs and private spa bathrooms',
+      'Organic Icelandic silica and moss bath salts with plush heated robes',
+      'Floor-to-ceiling glass suites with views of Mount Esja and Faxaflói bay'
+    ],
+    whyChoose: [
+      'Prime base for exploring the Golden Circle, Blue Lagoon, and Northern Lights tours',
+      'World-famous geothermal wellness culture and thermal springs',
+      'Chic Nordic architecture with cutting-edge Icelandic culinary dining',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // Norway - Tromso
+  'tromso-norway': {
+    intro: 'Tromso, the Arctic capital of Norway, is legendary for polar wilderness, majestic fjords, and front-row seats to the aurora borealis. Relax in luxury fjord-side hotels featuring private cedarwood soaking tubs, heated outdoor jacuzzis, and glass-roofed polar suites.',
+    amenities: [
+      'Heated outdoor jacuzzi suites overlooking dramatic Arctic fjords',
+      'Freestanding designer soaking tubs with panoramic polar mountain views',
+      'En-suite Scandinavian saunas paired with deep soaking whirlpool baths',
+      'Warm heated floors and luxury Nordic wool throws for sub-zero comfort'
+    ],
+    whyChoose: [
+      'World’s premier destination for Northern Lights expeditions and whale watching',
+      'Recharge in steaming hot water under dancing green auroras in total intimacy',
+      'Vibrant Arctic maritime culture, polar dining, and midnight sun experiences',
+      'Triple-verified room tiers ensuring genuine in-room bathtubs'
+    ]
+  },
+
+  // Finland - Rovaniemi
+  'rovaniemi-finland': {
+    intro: 'Rovaniemi in Finnish Lapland is a true Arctic wonderland right on the Arctic Circle. Stay in breathtaking glass igloos, wilderness chalets, and design lodges with private outdoor jacuzzis, en-suite Finnish saunas, and romantic whirlpool tubs beneath the stars.',
+    amenities: [
+      'Private outdoor hot tubs surrounded by snowdrifts and pine forests',
+      'Glass-ceiling igloo suites with sunken whirlpool bathtubs',
+      'Authentic cedarwood private saunas integrated with soaking bath chambers',
+      'Lapland botanical bath infusions, reindeer pelt lounge chairs, and cozy fireplaces'
+    ],
+    whyChoose: [
+      'Official hometown of Santa Claus and ultimate romantic Arctic winter wonderland',
+      'Unrivaled views of the Northern Lights directly from your steaming private tub',
+      'Husky sledding, snowmobile safaris, and reindeer sleigh rides outside your door',
+      'Guaranteed private tub suites verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Sweden - Stockholm
+  'stockholm-sweden': {
+    intro: 'Stockholm, the Venice of the North, spans 14 pristine islands where Lake Mälaren meets the Baltic Sea. Experience high-end Scandinavian design hotels with deep freestanding soaking tubs, copper baths, and rooftop jacuzzi suites overlooking Gamla Stan.',
+    amenities: [
+      'Deep freestanding designer tubs crafted from Swedish cast stone and copper',
+      'Waterfront suites with soaking baths overlooking Stockholm’s archipelago',
+      'Spa-grade en-suite saunas paired with hydrotherapy jet tubs',
+      'Nordic minimalist bathrooms with heated marble floors and organic amenities'
+    ],
+    whyChoose: [
+      'Immerse in classic Swedish "lagom" and tranquil wellness traditions',
+      'Steps from the Royal Palace, Gamla Stan cobblestones, and world-class design museums',
+      'Exceptional Michelin-starred New Nordic dining paired with serene island romance',
+      'Verified accommodations ensuring in-room bathtubs without deceptive photography'
+    ]
+  },
+
+  // Denmark - Copenhagen
+  'copenhagen-denmark': {
+    intro: 'Copenhagen epitomizes romantic "hygge" with historic canal houses, Danish modern design, and cobblestone charm. Indulge in boutique hotels boasting vintage clawfoot bathtubs, bespoke brass soaking tubs, and serene courtyard spa suites.',
+    amenities: [
+      'Vintage freestanding roll-top clawfoot tubs in historic canal mansions',
+      'Artisanal brass and terrazzo soaking tubs with bespoke Danish organic bath oils',
+      'En-suite rain showers and deep soaking baths with heated stone floors',
+      'Private balconies and French windows overlooking Nyhavn and leafy courtyards'
+    ],
+    whyChoose: [
+      'The global capital of "hygge" — intimate, cozy comfort designed for couples',
+      'World-renowned gastronomy from cozy bakeries to multi-starred culinary temples',
+      'Walkable and bike-friendly historic neighborhoods, palaces, and harbor baths',
+      'Every hotel suite vetted on Booking.com and Agoda for guaranteed tub amenities'
+    ]
   }
 
 };

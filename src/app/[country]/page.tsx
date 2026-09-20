@@ -183,7 +183,8 @@ export default async function CountryHubPage({
     'czechia': 'CZ', 'hungary': 'HU', 'ireland': 'IE', 'brazil': 'BR',
     'costa-rica': 'CR', 'saint-lucia': 'LC', 'jamaica': 'JM', 'bahamas': 'BS',
     'dominican-republic': 'DO', 'turks-and-caicos': 'TC', 'barbados': 'BB',
-    'aruba': 'AW',
+    'aruba': 'AW', 'iceland': 'IS', 'norway': 'NO', 'finland': 'FI',
+    'sweden': 'SE', 'denmark': 'DK',
   };
 
   const collectionSchema = {
