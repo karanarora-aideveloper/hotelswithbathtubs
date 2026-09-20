@@ -185,7 +185,8 @@ export default async function CountryHubPage({
     'dominican-republic': 'DO', 'turks-and-caicos': 'TC', 'barbados': 'BB',
     'aruba': 'AW', 'iceland': 'IS', 'norway': 'NO', 'finland': 'FI',
     'sweden': 'SE', 'denmark': 'DK', 'south-korea': 'KR', 'taiwan': 'TW',
-    'vietnam': 'VN', 'sri-lanka': 'LK',
+    'vietnam': 'VN', 'sri-lanka': 'LK', 'croatia': 'HR', 'morocco': 'MA',
+    'tanzania': 'TZ',
   };
 
   const collectionSchema = {

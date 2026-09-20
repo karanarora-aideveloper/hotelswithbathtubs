@@ -2389,6 +2389,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Tranquil tropical sanctuary blending European heritage with warm Sri Lankan hospitality',
       'Every bathtub suite independently confirmed on Booking.com and Agoda'
     ]
+  },
+
+  // Italy - Positano
+  'positano-italy': {
+    intro: 'Positano clings dramatically to the cliffside of the Amalfi Coast, offering Italy’s most intoxicating coastal romance. Stay in boutique cliffside retreats featuring private sea-view hot tubs, hand-painted Vietri ceramic bathtubs, and bougainvillea-draped terraces overlooking the azure Tyrrhenian Sea.',
+    amenities: [
+      'Private terrace hot tubs and jacuzzi suites suspended above Positano’s pastel cliffside',
+      'Artisanal hand-painted Vietri ceramic soaking bathtubs with panoramic ocean views',
+      'Amalfi lemon-infused organic bath salts and plush Italian cotton robes',
+      'French doors opening directly to sun-drenched private balconies overlooking the beach'
+    ],
+    whyChoose: [
+      'The crown jewel of romantic honeymoon escapes on the Amalfi Coast',
+      'Unmatched panoramic sunset vistas over Sirenuse islands and sapphire waters',
+      'Cliffside Michelin-starred dining, private wooden boat charters, and Path of the Gods hiking',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // France - Nice
+  'nice-france': {
+    intro: 'Nice embodies the timeless glamour and Belle Époque elegance of the French Riviera. Discover historic seafront palaces and design hotels along the Promenade des Anglais featuring deep marble soaking bathtubs, private jacuzzis, and sweeping views of the Baie des Anges.',
+    amenities: [
+      'Deep freestanding marble soaking bathtubs overlooking the Mediterranean Sea',
+      'Private penthouse jacuzzi suites with views of Castle Hill and Promenade des Anglais',
+      'Artisanal Provençal lavender and citrus bath oils with luxury French bath amenities',
+      'Belle Époque high ceilings, ornate chandeliers, and private sea-facing balconies'
+    ],
+    whyChoose: [
+      'The vibrant cultural and culinary capital of the French Riviera',
+      'Stroll the sunlit Promenade des Anglais, vibrant flower markets, and Old Nice alleys',
+      'Perfect luxury base for exploring Monaco, Cannes, and perched medieval villages like Èze',
+      'Triple-verified accommodations guaranteeing genuine in-room bathtubs'
+    ]
+  },
+
+  // Croatia - Dubrovnik
+  'dubrovnik-croatia': {
+    intro: 'Dubrovnik, the Pearl of the Adriatic, combines ancient stone city walls with turquoise Mediterranean sea splendor. Relax in five-star coastal hideaways featuring cliffside infinity hot tubs, deep designer bathtubs, and private terraces overlooking the Adriatic and Lokrum Island.',
+    amenities: [
+      'Cliff-edge hot tubs and private whirlpool suites overlooking the sparkling Adriatic Sea',
+      'Oversized designer soaking tubs framed by floor-to-ceiling sea-view windows',
+      'Dalmatian botanical bath preparations infused with local rosemary and sea salt',
+      'Private terraces offering unobstructed vistas of the historic Dubrovnik Old Town walls'
+    ],
+    whyChoose: [
+      'UNESCO World Heritage medieval majesty paired with pristine crystal-clear waters',
+      'Stroll centuries-old marble streets, ancient city ramparts, and secluded cliffside bars',
+      'Private yacht day trips to the unspoiled Elaphiti Islands directly from hotel piers',
+      'Every bathtub suite independently verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Morocco - Marrakech
+  'marrakech-morocco': {
+    intro: 'Marrakech enchants with sensory splendor, vibrant souks, and hidden palace sanctuaries. Experience historic riads and luxury palace hotels featuring hand-crafted zellij tile plunge bathtubs, heated courtyard jacuzzis, and scented rosewater baths beneath palm-shaded skies.',
+    amenities: [
+      'Sunken hand-carved marble and zellij mosaic plunge bathtubs in intimate riad courtyards',
+      'Private rooftop jacuzzis with sweeping views of the Atlas Mountains and Koutoubia Mosque',
+      'Authentic Moroccan hammam bath rituals prepared with black soap, eucalyptus, and organic argan oil',
+      'Candlelit bath setups strewn with fragrant red rose petals and brass lantern illumination'
+    ],
+    whyChoose: [
+      'Ultimate exotic couple retreat blending Berber traditions with palatial luxury',
+      'Tranquil private courtyard oases hidden within the bustling UNESCO-listed Medina',
+      'Exquisite Moroccan gastronomy, private desert excursions, and world-class spa pampering',
+      'Guaranteed private in-room soaking tubs verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Tanzania - Zanzibar
+  'zanzibar-tanzania': {
+    intro: 'Zanzibar is the legendary spice island of the Indian Ocean, famous for powder-white sands, coral reefs, and turquoise lagoons. Indulge in barefoot luxury villas featuring oceanfront wooden hot tubs, sunken terrazzo baths, and open-air soaking tubs beneath swaying coconut palms.',
+    amenities: [
+      'Open-air freestanding terrazzo bathtubs nestled within private tropical beach gardens',
+      'Oceanfront wooden deck hot tubs with direct panoramic Indian Ocean sunset views',
+      'Zanzibari spice-infused bath preparations with wild vanilla, clove, and organic coconut milk',
+      'Thatched-roof luxury suites with private plunge pools, outdoor showers, and ocean breezes'
+    ],
+    whyChoose: [
+      'One of the world’s most pristine and romantic tropical beach honeymoon destinations',
+      'Incredible marine biodiversity for snorkeling, dhow sunset cruises, and dolphin safaris',
+      'Historic Stone Town UNESCO romance balanced with private island tranquility',
+      'Every bathtub listing independently verified across Booking.com and Agoda'
+    ]
   }
 
 };
