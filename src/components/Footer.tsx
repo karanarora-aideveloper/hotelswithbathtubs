@@ -76,6 +76,11 @@ const regionMapping: Record<string, string> = {
   'Taiwan': 'Asia & Middle East',
   'Vietnam': 'Asia & Middle East',
   'Sri Lanka': 'Asia & Middle East',
+  'Qatar': 'Asia & Middle East',
+  'Oman': 'Asia & Middle East',
+  'Bahrain': 'Asia & Middle East',
+  'Jordan': 'Asia & Middle East',
+  'Saudi Arabia': 'Asia & Middle East',
 
   // Tropical Islands & Southern Escapes
   'French Polynesia': 'Tropical Islands & Southern Escapes',

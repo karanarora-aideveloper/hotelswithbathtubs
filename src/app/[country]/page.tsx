@@ -188,6 +188,7 @@ export default async function CountryHubPage({
     'vietnam': 'VN', 'sri-lanka': 'LK', 'croatia': 'HR', 'morocco': 'MA',
     'tanzania': 'TZ', 'chile': 'CL', 'argentina': 'AR', 'peru': 'PE',
     'colombia': 'CO', 'poland': 'PL', 'slovenia': 'SI',
+    'qatar': 'QA', 'oman': 'OM', 'bahrain': 'BH', 'jordan': 'JO', 'saudi-arabia': 'SA',
   };
 
   const collectionSchema = {

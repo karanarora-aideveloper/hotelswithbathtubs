@@ -2661,6 +2661,108 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Tranquil Julian Alps walking trails, Vintgar Gorge, and world-famous Bled cream cake',
       'Every bathtub listing independently verified across Booking.com and Agoda'
     ]
+  },
+
+  // Qatar - Doha
+  'doha-qatar': {
+    intro: 'Doha stands as the pinnacle of modern Arabian luxury, where futuristic West Bay skyscrapers meet the tranquil waters of the Arabian Gulf. Discover opulent five-star hotel towers and palatial island resorts in The Pearl-Qatar offering expansive marble bathrooms, skyline-view deep soaking bathtubs, and romantic jacuzzi suites.',
+    amenities: [
+      'Oversized freestanding Italian marble soaking bathtubs with panoramic views of the Doha Corniche and West Bay skyline',
+      'Private jacuzzi suites and plunge pools in beachfront palatial villas on The Pearl-Qatar and Banana Island',
+      'Artisanal Arabian bath amenities infused with oud, amber, and damask rose water',
+      'Floor-to-ceiling glass bathroom suites with motorized privacy blinds and chromotherapy mood lighting'
+    ],
+    whyChoose: [
+      'World-class luxury hospitality standards with personalized 24-hour butler service',
+      'Iconic architectural marvels including the Museum of Islamic Art and National Museum of Qatar',
+      'Vibrant evening strolls through fragrant alleys of Souq Waqif and fine dining at Michelin-caliber venues',
+      '100% verified private in-room bathtubs cross-checked across Booking.com and Agoda'
+    ]
+  },
+
+  // Oman - Muscat
+  'muscat-oman': {
+    intro: 'Muscat delivers timeless Arabian elegance nestled between the rugged Al Hajar mountains and the Gulf of Oman. Unwind in beachfront sanctuaries and whitewashed palaces featuring sunken terrazzo bathtubs, private garden jacuzzis, and deep soaking tubs framed by dramatic coastal mountains.',
+    amenities: [
+      'Hand-carved Omani marble bathtubs and sunken terrazzo soaking tubs overlooking private gulf beaches',
+      'Secluded garden jacuzzi suites surrounded by swaying date palms and traditional water courtyards',
+      'Luxury bath infusions enriched with authentic Royal Green Hojari frankincense and coastal sea salts',
+      'Private villa plunge pools and candlelit open-air soaking terraces'
+    ],
+    whyChoose: [
+      'Pure romantic tranquility away from high-rise crowds with authentic low-rise Arabian architecture',
+      'Sunset dhow cruises along dramatic mountain fjords to spot playful Arabian Sea dolphins',
+      'Rich cultural explorations through the Sultan Qaboos Grand Mosque and the historic Mutrah Souq',
+      'Every bathtub listing independently audited for guaranteed private in-room amenities'
+    ]
+  },
+
+  // Oman - Jabal Akhdar
+  'jabal-akhdar-oman': {
+    intro: 'Jabal Akhdar—Oman\'s fabled "Green Mountain"—rises over 2,000 meters above sea level to offer one of the most breathtaking mountain escapes on the planet. Indulge in world-renowned cliff-edge luxury resorts boasting canyon-hanging infinity tubs, heated outdoor jacuzzis, and deep stone soaking baths with vertigo-inducing canyon vistas.',
+    amenities: [
+      'Dramatic canyon-edge standalone soaking bathtubs perched above 1,000-meter deep gorges',
+      'Private heated terrace hot tubs and jacuzzi villas looking across terraced pomegranate orchards',
+      'Locally distilled Damask rose water bath rituals and mountain herb bath salts',
+      'Indoor fireplace-side soaking tubs for crisp, cool mountain evenings under star-studded skies'
+    ],
+    whyChoose: [
+      'Unrivaled canyon vistas providing one of the most unique luxury honeymoon settings in the world',
+      'Pleasantly cool mountain temperatures year-round, ideal for outdoor soaking and canyon hikes',
+      'Intimate secluded retreats like Alila Jabal Akhdar and Anantara Diana’s Point cliff resorts',
+      'Every room category verified for authentic private bathtubs and private hot tubs'
+    ]
+  },
+
+  // Bahrain - Manama
+  'manama-bahrain': {
+    intro: 'Manama blends island cosmopolitan flair with ancient pearling heritage along the Arabian Gulf. Experience premier five-star urban sanctuaries and private island resorts across Bahrain Bay and Reef Island, showcasing panoramic sea-view soaking tubs, couple\'s jacuzzi suites, and lavish marble spa bathrooms.',
+    amenities: [
+      'Deep freestanding oval bathtubs positioned beside floor-to-ceiling windows overlooking Bahrain Bay',
+      'Private terrace jacuzzis and overwater villa dipping tubs on private lagoon islands',
+      'Nourishing pearl-infused mineral bath rituals celebrating Bahrain\'s historic pearl diving legacy',
+      'Double rain showers and twin vanities with designer French toiletries'
+    ],
+    whyChoose: [
+      'Private island resorts just minutes from the vibrant dining hubs of Block 338 in Adliya',
+      'Spectacular sunset views over the turquoise waters of the Arabian Gulf and modern skyline',
+      'UNESCO-listed pearling pathways, Qal\'at al-Bahrain fortress, and luxury boutique shopping',
+      'Triple-verified across Booking.com and Agoda for guaranteed in-room bathtub amenities'
+    ]
+  },
+
+  // Jordan - Dead Sea
+  'dead-sea-jordan': {
+    intro: 'The Dead Sea in Jordan is Earth\'s lowest elevation point (-430 meters) and one of the world\'s most renowned natural wellness sanctuaries. Pamper yourself in luxury oceanfront spa resorts featuring private mineral hydrotherapy bathtubs, heated balcony jacuzzis, and soaking suites with endless sunset views over the tranquil hypersaline sea.',
+    amenities: [
+      'Private sea-facing soaking bathtubs and heated terrace jacuzzi tubs overlooking the mystical waters',
+      'Mineral-rich Dead Sea salt crystals and raw therapeutic black mud treatments in-suite',
+      'Direct private beach access with mineral flotation coves and freshwater infinity plunge pools',
+      'Spacious marble bathrooms designed for post-float therapeutic hydrotherapy soaks'
+    ],
+    whyChoose: [
+      'A one-of-a-kind global bucket-list experience of effortless zero-gravity floating and natural mineral healing',
+      'Unmatched golden hour sunsets casting crimson reflections across the tranquil water toward the Judean hills',
+      'Convenient base for day trips to Mount Nebo, Madaba mosaics, and the ancient rose-red city of Petra',
+      'All bathtub listings verified across major booking portals for private in-room installations'
+    ]
+  },
+
+  // Saudi Arabia - AlUla
+  'alula-saudi-arabia': {
+    intro: 'AlUla is an extraordinary open-air living museum carved into the ochre sandstone canyons of the Ashar Valley. Discover ultra-luxury desert tented villas and canyon resorts offering rock-hewn outdoor bathtubs, private sunken pool terraces, and starlit open-sky soaking amidst towering 200,000-year-old rock formations.',
+    amenities: [
+      'Dramatic open-air stone bathtubs carved into sandstone terraces beneath billion-star desert skies',
+      'Private heated villa plunge pools with integrated jacuzzi jets facing sheer canyon cliffs',
+      'Artisanal desert botanical bath oils infused with native Arabian moringa, frankincense, and date palm extracts',
+      'Fire pit lounges adjacent to freestanding deep soaking tubs for magical cool desert nights'
+    ],
+    whyChoose: [
+      'One of the most exclusive and evocative luxury travel destinations newly open to global travelers',
+      'Seamless access to Hegra (Saudi Arabia\'s first UNESCO World Heritage site) and the Maraya mirrored hall',
+      'Complete serenity, absolute seclusion, and world-class luxury eco-hospitality (Banyan Tree, Habitas)',
+      '100% verified private in-room and outdoor bathtub amenities'
+    ]
   }
 
 };

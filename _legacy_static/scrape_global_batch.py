@@ -99,6 +99,14 @@ BATCHES = {
         ("Innsbruck", "Austria"),
         ("Krakow", "Poland"),
     ],
+    "middle_east_gulf": [
+        ("Doha", "Qatar"),
+        ("Muscat", "Oman"),
+        ("Jabal Akhdar", "Oman"),
+        ("Manama", "Bahrain"),
+        ("Dead Sea", "Jordan"),
+        ("AlUla", "Saudi Arabia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"
@@ -295,6 +303,12 @@ def scrape_city(driver, city, country):
             if hotel_name:
                 clean_city = city.lower().replace(' ', '-')
                 slug_name = re.sub(r"[^a-z0-9]+", "-", hotel_name.lower()).strip("-")[:55]
+                if not slug_name or len(slug_name) < 2:
+                    url_m = re.search(r'/hotel/[a-z]{2}/([^.]+)', link)
+                    if url_m:
+                        slug_name = re.sub(r"[^a-z0-9]+", "-", url_m.group(1).lower()).strip("-")[:55]
+                    if not slug_name:
+                        slug_name = f"stay-{int(time.time()*1000)%100000}"
                 slug = f"{clean_city}-{slug_name}"
                 img_path = download_image(img_url, slug) if img_url else None
                 hotels.append({

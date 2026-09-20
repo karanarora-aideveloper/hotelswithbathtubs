@@ -109,6 +109,12 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'colombia': { dbCountry: 'Colombia', slug: 'colombia', displayName: 'Colombia' },
   'poland': { dbCountry: 'Poland', slug: 'poland', displayName: 'Poland' },
   'slovenia': { dbCountry: 'Slovenia', slug: 'slovenia', displayName: 'Slovenia' },
+  'qatar': { dbCountry: 'Qatar', slug: 'qatar', displayName: 'Qatar' },
+  'oman': { dbCountry: 'Oman', slug: 'oman', displayName: 'Oman' },
+  'bahrain': { dbCountry: 'Bahrain', slug: 'bahrain', displayName: 'Bahrain' },
+  'jordan': { dbCountry: 'Jordan', slug: 'jordan', displayName: 'Jordan' },
+  'saudi-arabia': { dbCountry: 'Saudi Arabia', slug: 'saudi-arabia', displayName: 'Saudi Arabia' },
+  'saudi arabia': { dbCountry: 'Saudi Arabia', slug: 'saudi-arabia', displayName: 'Saudi Arabia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {
