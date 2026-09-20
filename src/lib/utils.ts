@@ -93,6 +93,13 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'finland': { dbCountry: 'Finland', slug: 'finland', displayName: 'Finland' },
   'sweden': { dbCountry: 'Sweden', slug: 'sweden', displayName: 'Sweden' },
   'denmark': { dbCountry: 'Denmark', slug: 'denmark', displayName: 'Denmark' },
+  'south-korea': { dbCountry: 'South Korea', slug: 'south-korea', displayName: 'South Korea' },
+  'south korea': { dbCountry: 'South Korea', slug: 'south-korea', displayName: 'South Korea' },
+  'korea': { dbCountry: 'South Korea', slug: 'south-korea', displayName: 'South Korea' },
+  'taiwan': { dbCountry: 'Taiwan', slug: 'taiwan', displayName: 'Taiwan' },
+  'vietnam': { dbCountry: 'Vietnam', slug: 'vietnam', displayName: 'Vietnam' },
+  'sri-lanka': { dbCountry: 'Sri Lanka', slug: 'sri-lanka', displayName: 'Sri Lanka' },
+  'sri lanka': { dbCountry: 'Sri Lanka', slug: 'sri-lanka', displayName: 'Sri Lanka' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

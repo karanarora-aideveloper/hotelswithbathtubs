@@ -9,6 +9,7 @@ import StructuredData from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import AuthorBio from '@/components/AuthorBio';
+import ProgressiveImage from '@/components/ProgressiveImage';
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
 function toISO(dateStr: string | undefined): string {
@@ -337,9 +338,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
             <header className="mb-8 sm:mb-12 text-center border-b border-border pb-6 sm:pb-8">
               <div className="text-accent font-semibold text-xs sm:text-sm mb-3 sm:mb-4 tracking-wider uppercase">
-                Published on {blog.date} by Karan Arora (Founder &amp; Curator)
+                {blog.date ? `Published on ${blog.date} by ` : 'Curated by '}Karan Arora (Founder &amp; Curator)
               </div>
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4 sm:mb-6">
+              <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4 sm:mb-6">
                 {blog.title}
               </h1>
               <div className="flex justify-center gap-4 text-xl sm:text-2xl">
@@ -349,10 +350,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {blog.image && (
               <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs">
-                <Image
-                  src={imageUrl(blog.image)}
+                <ProgressiveImage
+                  src={blog.image}
                   alt={blog.title}
-                  fill
                   priority
                   sizes="(max-width: 768px) 100vw, 800px"
                   className="object-cover"
@@ -361,7 +361,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             )}
 
             <article
-              className="prose prose-base sm:prose-lg md:prose-xl max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
+              className="prose prose-base sm:prose-lg md:prose-xl max-w-none break-words overflow-hidden prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
 
@@ -433,11 +433,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                     {relatedBlog.image && (
                       <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                        <Image
-                          src={imageUrl(relatedBlog.image)}
+                        <ProgressiveImage
+                          src={relatedBlog.image}
                           alt={relatedBlog.title}
-                          fill
-                          loading="lazy"
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />

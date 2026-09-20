@@ -16,7 +16,7 @@ export const metadata = {
   title: {
     absolute: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
   },
-  description: 'Find 1,220+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 46 countries. Triple-checked on Booking.com & Agoda.',
+  description: 'Find 1,310+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 50 countries. Triple-checked on Booking.com & Agoda.',
   alternates: {
     canonical: '/',
     languages: {
@@ -32,7 +32,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
-    description: 'Find 1,220+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 46 countries. Triple-checked on Booking.com & Agoda.',
+    description: 'Find 1,310+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 50 countries. Triple-checked on Booking.com & Agoda.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -48,7 +48,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
-    description: 'Find 1,220+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 46 countries. Triple-checked on Booking.com & Agoda.',
+    description: 'Find 1,310+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 50 countries. Triple-checked on Booking.com & Agoda.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -181,7 +181,7 @@ export default async function Home() {
       <StructuredData data={organizationSchema} />
       <StructuredData data={faqSchema}>
         <>
-          <header className="relative pt-32 pb-44 px-4 sm:px-8 text-center bg-accent-secondary hero-overlay overflow-hidden">
+          <header className="relative pt-20 sm:pt-28 md:pt-32 pb-32 sm:pb-40 md:pb-44 px-4 sm:px-8 text-center bg-accent-secondary hero-overlay overflow-hidden">
             <img
               src="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
               alt="Hotels with Bathtubs - Verified Luxury Suites"
@@ -191,55 +191,55 @@ export default async function Home() {
               className="object-cover object-center absolute inset-0 z-0 w-full h-full"
             />
             <div className="relative z-10 max-w-4xl mx-auto text-white">
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">
+              <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-extrabold mb-3 sm:mb-4 drop-shadow-lg leading-tight">
                 Hotels with Bathtub in Room &amp; Private Jacuzzis
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md mb-8 opacity-90 max-w-3xl mx-auto">
-                1,220+ curated hotels with bathtub in room across 46 countries — every listing triple-verified across Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
+              <p className="text-sm sm:text-lg md:text-xl font-medium drop-shadow-md mb-6 sm:mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
+                1,310+ curated hotels with bathtub in room across 50 countries — every listing triple-verified across Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
               </p>
             </div>
           </header>
           
           {/* Main Search Panel + Direct Inspiration Navigation */}
-          <div className="relative z-20 max-w-4xl mx-4 md:mx-auto -mt-20 bg-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-black/5">
+          <div className="relative z-20 max-w-4xl mx-3 sm:mx-4 md:mx-auto -mt-16 sm:-mt-20 bg-white p-3.5 sm:p-6 rounded-2xl shadow-2xl border border-black/5">
             <HomeSearch />
             
             {/* Above-The-Fold Inspiration Shortcuts (Geo-Adaptive) */}
             <HomeGeoShortcuts />
           </div>
 
-          {/* Trust Strip with Clean Trust Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 p-4 md:p-5 mb-10 bg-white border-b border-border shadow-sm mx-4 md:mx-auto max-w-4xl rounded-b-2xl text-xs sm:text-sm">
-            <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-              <svg className="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+          {/* Trust Strip with Clean Trust Badges (2x2 on mobile, flex on desktop) */}
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 md:gap-8 p-3 sm:p-5 mb-8 sm:mb-10 bg-white border-b border-border shadow-xs mx-3 sm:mx-4 md:mx-auto max-w-4xl rounded-b-2xl text-2xs sm:text-xs md:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Verified on MakeMyTrip, Agoda &amp; Booking.com</span>
+              <span className="truncate sm:whitespace-normal">Triple-Platform Verified</span>
             </div>
-            <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-              <svg className="w-5 h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
-              <span>Guaranteed In-Room Tubs</span>
+              <span>Guaranteed Tubs</span>
             </div>
-            <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-              <svg className="w-5 h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
-              <span>Trusted Booking Links</span>
+              <span>Trusted Direct Links</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-medium text-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Live Status: Verified Active</span>
+            <div className="flex items-center justify-start sm:justify-center gap-1.5 px-2 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-semibold text-3xs sm:text-xs">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
+              <span className="truncate">Active &amp; Audited</span>
             </div>
           </div>
 
           {/* Streamlined & Consolidated Proof Module */}
-          <section id="verification" className="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-12 scroll-mt-24">
-            <div className="bg-gradient-to-br from-accent/5 to-accent-secondary/5 border border-accent/20 rounded-3xl p-6 sm:p-10 shadow-sm">
+          <section id="verification" className="max-w-5xl mx-auto px-4 sm:px-8 py-6 sm:py-12 scroll-mt-24">
+            <div className="bg-gradient-to-br from-accent/5 to-accent-secondary/5 border border-accent/20 rounded-2xl sm:rounded-3xl p-4 sm:p-10 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-accent/15">
                 <div>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">
+                  <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-accent-secondary">
                     Our Triple-Verification Promise
                   </h2>
                   <p className="text-text-muted text-sm mt-1">

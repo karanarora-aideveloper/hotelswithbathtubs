@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import connectToDatabase from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
-import { imageUrl } from '@/lib/imageUrl';
+import ProgressiveImage from '@/components/ProgressiveImage';
 
 export const metadata = {
   title: 'Bathtub Hotel Travel Guides & Tips',
@@ -104,10 +103,9 @@ export default async function BlogIndex() {
                   </div>
                   {featured.image && (
                     <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
-                      <Image
-                        src={imageUrl(featured.image)}
+                      <ProgressiveImage
+                        src={featured.image}
                         alt={featured.title}
-                        fill
                         priority
                         sizes="(max-width: 768px) 100vw, 320px"
                         className="object-cover"
@@ -124,23 +122,21 @@ export default async function BlogIndex() {
               <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                 {blog.image && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                    <Image
-                      src={imageUrl(blog.image)}
+                    <ProgressiveImage
+                      src={blog.image}
                       alt={blog.title}
-                      fill
                       priority={idx < 3}
-                      loading={idx < 3 ? undefined : "lazy"}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 )}
-                <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
                   <p className="text-accent font-semibold text-xs sm:text-sm mb-2">{blog.date}</p>
                   <h2 className="font-heading text-lg sm:text-xl font-bold text-text-main mb-2 sm:mb-3 group-hover:text-accent transition-colors line-clamp-2">
                     {blog.title}
                   </h2>
-                  <p className="text-text-muted text-sm line-clamp-3 mb-4 flex-grow font-serif leading-relaxed">
+                  <p className="text-text-muted text-xs sm:text-sm line-clamp-3 mb-4 flex-grow font-serif leading-relaxed">
                     {blog.excerpt}
                   </p>
                   <span className="text-accent-secondary font-semibold text-sm group-hover:underline mt-auto inline-block">Read Full Article &rarr;</span>

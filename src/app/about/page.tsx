@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 
 export default function AboutUs() {
   return (
-    <div className="bg-bg-main py-12 md:py-20 min-h-[80vh]">
-      <div className="max-w-4xl mx-auto px-6 md:px-12 bg-white md:rounded-3xl shadow-sm border border-border pb-16 pt-10">
-        <header className="mb-10 border-b border-border pb-8 text-center">
-          <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4">
+    <div className="bg-bg-main py-6 sm:py-12 md:py-20 min-h-[80vh]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border border-border pb-12 pt-6 sm:pb-16 sm:pt-10">
+        <header className="mb-8 sm:mb-10 border-b border-border pb-6 sm:pb-8 text-center">
+          <h1 className="font-heading text-2xl sm:text-3xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-3 sm:mb-4">
             About Hotels With Bathtubs
           </h1>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+          <p className="text-text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
             Your independent, expert guide to discovering verified luxury hotels with guaranteed private in-room bathtubs &amp; jacuzzi suites worldwide.
           </p>
         </header>

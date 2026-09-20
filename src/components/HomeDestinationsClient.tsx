@@ -69,7 +69,7 @@ export default function HomeDestinationsClient({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
           {usaCities.map((item, idx) => (
             <CityCard
               key={`${item._id.city}-${item._id.country}`}
@@ -106,7 +106,7 @@ export default function HomeDestinationsClient({
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
           {internationalCities.map((item, idx) => (
             <CityCard
               key={`${item._id.city}-${item._id.country}`}
@@ -158,7 +158,7 @@ export default function HomeDestinationsClient({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
           {indiaCities.map((item, idx) => (
             <CityCard
               key={`${item._id.city}-${item._id.country}`}
@@ -177,8 +177,8 @@ export default function HomeDestinationsClient({
   return (
     <div className="space-y-10">
       {/* Interactive Region Selection Bar */}
-      <div className="bg-gray-50/90 border border-border rounded-2xl p-3 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-2xs">
-        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+      <div className="bg-gray-50/90 border border-border rounded-2xl p-2.5 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-2xs w-full min-w-0">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 pb-1 md:pb-0">
           <button
             onClick={() => handleTabChange('auto')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${

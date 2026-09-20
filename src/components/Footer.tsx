@@ -69,6 +69,10 @@ const regionMapping: Record<string, string> = {
   'Malaysia': 'Asia & Middle East',
   'Maldives': 'Asia & Middle East',
   'Turkey': 'Asia & Middle East',
+  'South Korea': 'Asia & Middle East',
+  'Taiwan': 'Asia & Middle East',
+  'Vietnam': 'Asia & Middle East',
+  'Sri Lanka': 'Asia & Middle East',
 
   // Tropical Islands & Southern Escapes
   'French Polynesia': 'Tropical Islands & Southern Escapes',
@@ -355,17 +359,17 @@ export default async function Footer() {
             </div>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {Object.entries(regionGroups).filter(([_, cities]) => cities.length > 0).map(([region, cities]) => (
-              <div key={region} className="bg-white p-6 rounded-2xl border border-border shadow-2xs">
-                <h4 className="font-heading font-bold text-accent-secondary text-base mb-4 flex items-center gap-2">
+              <div key={region} className="bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-2xs">
+                <h4 className="font-heading font-bold text-accent-secondary text-base mb-3 sm:mb-4 flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
                   <span>{region}</span>
                   <span className="text-xs text-text-muted font-sans font-normal ml-auto">
                     {cities.length} {cities.length === 1 ? 'Destination' : 'Destinations'}
                   </span>
                 </h4>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {cities.sort((a, b) => a.city.localeCompare(b.city)).map(loc => {
                     const countrySlug = resolveCountry(loc.country).slug;
                     const citySlug = slugify(loc.city);
@@ -373,7 +377,7 @@ export default async function Footer() {
                       <Link
                         key={`${countrySlug}-${citySlug}`}
                         href={`/${countrySlug}/${citySlug}`}
-                        className="inline-flex items-center gap-2 px-3.5 py-2 bg-gray-50 hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all group shadow-2xs hover:shadow-sm"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gray-50 hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all group shadow-2xs hover:shadow-sm"
                       >
                         <span>{loc.city}</span>
                         <span className="text-2xs text-text-muted group-hover:text-white/80 font-normal">
@@ -426,72 +430,72 @@ export default async function Footer() {
           </div>
         </section>
 
-        {/* What Makes Us Different - Differentiator Tiles */}
+        {/* What Makes Us Different - Differentiator Tiles (2x2 on mobile, 4-col on md) */}
         <section className="mb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-white p-5 rounded-xl border border-border shadow-2xs">
-              <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+            <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2.5 sm:mb-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-sm mb-1.5">Triple Verified</h4>
-              <p className="text-xs text-text-muted">Independently cross-checked across 3 major platforms</p>
+              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Triple Verified</h4>
+              <p className="text-2xs sm:text-xs text-text-muted">Cross-checked across 3 major platforms</p>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-border shadow-2xs">
-              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center mb-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center mb-2.5 sm:mb-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-sm mb-1.5">Guaranteed Tubs</h4>
-              <p className="text-xs text-text-muted">Confirmed in-room hot tubs and jacuzzi suites</p>
+              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Guaranteed Tubs</h4>
+              <p className="text-2xs sm:text-xs text-text-muted">Confirmed in-room hot tubs &amp; jacuzzis</p>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-border shadow-2xs">
-              <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2.5 sm:mb-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-sm mb-1.5">Direct Booking</h4>
-              <p className="text-xs text-text-muted">Direct links to official trusted travel partners</p>
+              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Direct Booking</h4>
+              <p className="text-2xs sm:text-xs text-text-muted">Direct links to official travel partners</p>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-border shadow-2xs">
-              <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mb-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mb-2.5 sm:mb-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-sm mb-1.5">Curated Stays</h4>
-              <p className="text-xs text-text-muted">Handpicked luxury hotels for romantic escapes</p>
+              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Curated Stays</h4>
+              <p className="text-2xs sm:text-xs text-text-muted">Handpicked luxury romantic escapes</p>
             </div>
           </div>
         </section>
 
         {/* High-Converting Bottom Return-to-Destinations Action Banner */}
-        <section className="my-14 bg-gradient-to-r from-accent-secondary via-[#002b66] to-[#0f4a7c] text-white rounded-3xl p-8 sm:p-12 text-center shadow-xl relative overflow-hidden">
+        <section className="my-10 sm:my-14 bg-gradient-to-r from-accent-secondary via-[#002b66] to-[#0f4a7c] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-12 text-center shadow-xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
             <span className="px-3 py-1 bg-white/20 backdrop-blur-xs text-white text-xs font-bold rounded-full uppercase tracking-wider inline-block mb-3">
               Start Your Romantic Escape
             </span>
-            <h3 className="font-heading text-2xl sm:text-4xl font-extrabold mb-3 leading-tight">
+            <h3 className="font-heading text-xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3 leading-tight">
               Ready to Book Your Luxury Bathtub Stay?
             </h3>
-            <p className="text-white/85 text-sm sm:text-base mb-8 max-w-xl mx-auto">
+            <p className="text-white/85 text-xs sm:text-base mb-6 sm:mb-8 max-w-xl mx-auto">
               Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
               <a
                 href="/#destinations"
-                className="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
+                className="bg-accent hover:bg-accent-hover text-white px-6 sm:px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
               >
                 <span>Browse All Destinations</span>
                 <span>&uarr;</span>
               </a>
               <Link
                 href="/blog"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all backdrop-blur-xs"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 sm:px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all backdrop-blur-xs inline-flex items-center justify-center"
               >
                 Read Travel Inspiration &rarr;
               </Link>

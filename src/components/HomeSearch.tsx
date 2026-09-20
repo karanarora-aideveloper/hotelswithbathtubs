@@ -125,10 +125,10 @@ export default function HomeSearch() {
             onKeyDown={handleKeyDown}
             placeholder={
               geo.isIndia
-                ? "Search cities with in-room bathtubs (e.g. Goa, Udaipur, Manali)..."
-                : "Search cities with in-room bathtubs (e.g. New York, Las Vegas, Miami)..."
+                ? "Search city with bathtub (e.g. Goa, Udaipur, Manali)..."
+                : "Search city with bathtub (e.g. New York, Las Vegas, Miami)..."
             }
-            className="w-full px-4 md:px-6 py-3 md:py-4 text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all"
+            className="w-full px-4 md:px-6 py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all"
           />
 
           {isOpen && query.trim() && (

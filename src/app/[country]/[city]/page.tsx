@@ -300,67 +300,71 @@ export default async function CityHotelsPage({
       <StructuredData data={hotelListSchema} />
       <StructuredData data={faqSchema} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
-        <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link> &rsaquo; Hotels with Bathtubs in {cityName}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
+        <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+        <span>&rsaquo;</span>
+        <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link>
+        <span>&rsaquo;</span>
+        <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
       </div>
 
-            <header className="relative py-20 sm:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
-              <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-                <div className="bg-white/20 border border-white/40 backdrop-blur-md px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-6 flex items-center gap-2">
-                  <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated
-                </div>
-                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-                  {countrySlug === 'usa'
-                    ? `Hotels with Bathtubs & Soaking Tubs in ${cityName}`
-                    : `Hotels with Bathtub in ${cityName} for Couples & Romantic Stays`}
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl font-medium opacity-90 max-w-2xl mx-auto">
-                  {countrySlug === 'usa'
-                    ? `${rawHotels.length}+ verified hotels with private in-room deep soaking tubs & jacuzzi suites in ${cityName}, ${countryName} — every room verified, no shared facilities.`
-                    : `${rawHotels.length}+ verified hotels with private in-room bathtubs & jacuzzi suites in ${cityName}, ${countryName} — every listing triple-checked, no shared spa tubs.`}
-                </p>
-              </div>
-            </header>
+      <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
+            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated
+          </div>
+          <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
+            {countrySlug === 'usa'
+              ? `Hotels with Bathtubs & Soaking Tubs in ${cityName}`
+              : `Hotels with Bathtub in ${cityName} for Couples & Romantic Stays`}
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
+            {countrySlug === 'usa'
+              ? `${rawHotels.length}+ verified hotels with private in-room deep soaking tubs & jacuzzi suites in ${cityName}, ${countryName} — every room verified, no shared facilities.`
+              : `${rawHotels.length}+ verified hotels with private in-room bathtubs & jacuzzi suites in ${cityName}, ${countryName} — every listing triple-checked, no shared spa tubs.`}
+          </p>
+        </div>
+      </header>
 
-            {/* Trust Banner with SVGs */}
-            <div className="trust-banner max-w-4xl mx-4 md:mx-auto -mt-8 relative z-20 bg-white rounded-2xl shadow-xl flex flex-wrap justify-center gap-4 md:gap-8 p-4 md:p-5 border border-border text-xs sm:text-sm">
-              <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-                <svg className="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Expedia, Agoda'} &amp; Booking.com</span>
-              </div>
-              <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-                <svg className="w-5 h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                </svg>
-                <span>Guaranteed Bathtubs</span>
-              </div>
-              <div className="flex items-center gap-2 font-semibold text-accent-secondary">
-                <svg className="w-5 h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                </svg>
-                <span>Trusted Booking Links</span>
-              </div>
-            </div>
+      {/* Trust Banner with SVGs (Responsive 3-column / stacked) */}
+      <div className="trust-banner max-w-4xl mx-3 sm:mx-4 md:mx-auto -mt-6 sm:-mt-8 relative z-20 bg-white rounded-2xl shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-6 p-3.5 sm:p-5 border border-border text-xs sm:text-sm">
+        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="text-center sm:text-left">Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Expedia, Agoda'} &amp; Booking.com</span>
+        </div>
+        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+          <span>Guaranteed In-Room Tubs</span>
+        </div>
+        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+          <span>Trusted Direct Links</span>
+        </div>
+      </div>
 
-            {/* SEO Content Section */}
-            <section className="max-w-4xl mx-auto px-4 sm:px-8 py-10">
-              <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-6 sm:p-8 shadow-xs">
-                <div dangerouslySetInnerHTML={{
-                  __html: generateCityPageContent(cityName, countryName, rawHotels.length)
-                }} />
-              </div>
-            </section>
+      {/* SEO Content Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
+        <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs">
+          <div dangerouslySetInnerHTML={{
+            __html: generateCityPageContent(cityName, countryName, rawHotels.length)
+          }} />
+        </div>
+      </section>
 
-            {/* Editorial & Affiliate Disclosure */}
-            <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-4 mb-8 text-center">
-              <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-                <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or Expedia'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
-              </p>
-            </div>
+      {/* Editorial & Affiliate Disclosure */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-2 mb-6 sm:mb-8 text-center">
+        <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
+          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or Expedia'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
+        </p>
+      </div>
 
-            <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12">
               <CityHotelsClient
                 hotels={hotels}
                 cityName={cityName}

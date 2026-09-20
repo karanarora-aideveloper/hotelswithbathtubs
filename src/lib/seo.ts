@@ -2287,6 +2287,108 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Walkable and bike-friendly historic neighborhoods, palaces, and harbor baths',
       'Every hotel suite vetted on Booking.com and Agoda for guaranteed tub amenities'
     ]
+  },
+
+  // South Korea - Seoul
+  'seoul-south-korea': {
+    intro: 'Seoul pulses with cutting-edge design, vibrant nightlife, and luxurious high-rise hospitality. Discover five-star skyscraper suites and boutique design hotels featuring floor-to-ceiling skyline bathtubs, deep soaking tubs overlooking the Han River, and Korean herbal spa preparations.',
+    amenities: [
+      'Floor-to-ceiling picture window bathtubs with panoramic Seoul skyline and Namsan Tower views',
+      'Heated hydrotherapy whirlpool tubs with chromatic mood lighting',
+      'Traditional Korean herbal bath salts (hanbang) and luxury designer toiletries',
+      'Spacious marble bathrooms featuring separate walk-in rain showers and Toto washlets'
+    ],
+    whyChoose: [
+      'Stunning high-altitude romance overlooking Gangnam and central Seoul neon skylines',
+      'World-class Korean culinary culture, K-beauty wellness spas, and vibrant night markets',
+      'Ultra-modern luxury suites in iconic towers like Lotte World Tower and Signiel',
+      'Every bathtub listing independently verified across Booking.com and Agoda'
+    ]
+  },
+
+  // South Korea - Jeju
+  'jeju-south-korea': {
+    intro: 'Jeju Island, Korea’s volcanic paradise and premier honeymoon haven, offers pristine coastlines, Hallasan mountain backdrops, and secluded luxury villas. Unwind in private outdoor basalt stone hot tubs, oceanfront whirlpools, and forest spa suites.',
+    amenities: [
+      'Private outdoor hot tubs carved from authentic Jeju volcanic basalt rock',
+      'Oceanfront balcony jacuzzis overlooking the East China Sea and sunrise peaks',
+      'Aromatherapy botanical baths infused with Jeju green tea and tangerine oils',
+      'Secluded pool villas with heated connected soaking baths and private sundecks'
+    ],
+    whyChoose: [
+      'South Korea’s premier honeymoon and romantic island retreat',
+      'Spectacular natural wonders including Seongsan Ilchulbong, waterfalls, and white sand beaches',
+      'Subtropical climate offering year-round warm soaking under starry coastal skies',
+      'Guaranteed private in-room bathtubs verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Taiwan - Taipei
+  'taipei-taiwan': {
+    intro: 'Taipei blends ancient thermal hot spring traditions with vibrant metropolis luxury. Experience world-class hotels in Beitou and central Taipei featuring natural geothermal white-sulfur spring tubs, Japanese-style hinoki wood baths, and mountain-view spa suites.',
+    amenities: [
+      'In-room private natural geothermal hot spring tubs fed by Beitou white-sulfur springs',
+      'Aromatic Japanese cedarwood (hinoki) and green serpentine stone soaking baths',
+      'Taiwanese high-mountain oolong tea bath amenities and artisanal herbal infusions',
+      'Floor-to-ceiling glass bathrooms framing Yangmingshan National Park greenery'
+    ],
+    whyChoose: [
+      'One of the world’s few capital cities with direct natural volcanic hot springs in hotel rooms',
+      'Legendary night market gastronomy, Michelin-starred dining, and rich cultural heritage',
+      'Peaceful mountain wellness just 30 minutes from vibrant downtown Taipei',
+      'Triple-verified accommodations ensuring authentic in-room hot spring tubs'
+    ]
+  },
+
+  // Japan - Hakone
+  'hakone-japan': {
+    intro: 'Hakone is Japan’s most celebrated onsen sanctuary, framed by cedar-forested valleys, Lake Ashi, and Mount Fuji. Stay in authentic luxury ryokans and modern onsen resorts featuring private outdoor rotenburo baths, natural thermal springs, and multi-course kaiseki banquets.',
+    amenities: [
+      'Private open-air rotenburo baths with direct views of forested valleys and Mount Fuji',
+      'Natural mineral onsen spring water continuously flowing into fragrant hinoki wood tubs',
+      'Traditional tatami guestrooms with private terrace cedarwood soaking baths',
+      'Yukata robes, wooden geta sandals, and artisanal Japanese hot spring bath salts'
+    ],
+    whyChoose: [
+      'Japan’s ultimate romantic hot spring haven, just 90 minutes from Tokyo',
+      'Breathtaking scenery across Lake Ashi, Hakone Shrine torii gate, and alpine ropeways',
+      'Sublime traditional hospitality (omotenashi) and exquisite private kaiseki dining',
+      'Every private onsen bath suite verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Vietnam - Da Nang
+  'da-nang-vietnam': {
+    intro: 'Da Nang is Vietnam’s premier coastal playground, known for powdery My Khe beaches, the Marble Mountains, and proximity to historic Hoi An. Relax in beachfront resorts and clifftop villas featuring oversized terrazzo soaking tubs, ocean-view jacuzzis, and private plunge pools.',
+    amenities: [
+      'Oversized freestanding terrazzo and stone soaking tubs overlooking the East Sea',
+      'Private oceanfront balcony jacuzzis with sweeping views of the Son Tra Peninsula',
+      'Tropical outdoor garden bathtubs sheltered under lush frangipani palms',
+      'Vietnamese lemongrass and lotus flower bath preparations with luxury spa linens'
+    ],
+    whyChoose: [
+      'World-class beach resorts offering incredible luxury value for couples',
+      'Golden Dragon Bridge, Ba Na Hills, and UNESCO-listed Hoi An Ancient Town minutes away',
+      'Vibrant coastal culinary scene featuring fresh seafood and French-Vietnamese fusion',
+      'Triple-verified bathtub guarantees on Booking.com and Agoda'
+    ]
+  },
+
+  // Sri Lanka - Galle
+  'galle-sri-lanka': {
+    intro: 'Galle offers timeless colonial romance on Sri Lanka’s southern coast, anchored by the 17th-century UNESCO World Heritage Dutch Fort. Indulge in restored merchant mansions and oceanfront retreats featuring vintage roll-top clawfoot tubs, private plunge whirlpools, and Ayurvedic herbal baths.',
+    amenities: [
+      'Vintage roll-top clawfoot tubs inside restored Dutch colonial mansions',
+      'Veranda-facing soaking tubs overlooking tropical spice gardens and Indian Ocean sunsets',
+      'Ayurvedic herbal bath treatments prepared with Ceylon cinnamon and sandalwood oils',
+      'High timber-beamed ceilings, four-poster canopy beds, and open-air rain showers'
+    ],
+    whyChoose: [
+      'Atmospheric cobblestone alleys, boutique art galleries, and historic rampart walks',
+      'Golden southern beaches of Unawatuna and Mirissa just minutes away for whale watching',
+      'Tranquil tropical sanctuary blending European heritage with warm Sri Lankan hospitality',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
   }
 
 };

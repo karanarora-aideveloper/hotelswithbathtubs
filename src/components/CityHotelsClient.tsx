@@ -124,25 +124,25 @@ export default function CityHotelsClient({
         label: 'Check on MakeMyTrip', 
         source: 'MakeMyTrip', 
         className: isPrimary 
-          ? 'bg-accent hover:bg-accent-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' 
-          : 'bg-amber-600 hover:bg-amber-700 text-white text-center py-2 px-4 rounded-xl font-semibold transition-colors text-xs shadow-xs flex items-center justify-center gap-2' 
+          ? 'bg-accent hover:bg-accent-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' 
+          : 'bg-amber-600 hover:bg-amber-700 text-white text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs shadow-xs flex items-center justify-center gap-2 w-full' 
       },
       booking: { 
         label: 'Check on Booking.com', 
         source: 'Booking.com', 
         className: isPrimary 
-          ? 'bg-accent-secondary hover:bg-accent-secondary-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2' 
-          : 'bg-accent-secondary/90 hover:bg-accent-secondary text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2' 
+          ? 'bg-accent-secondary hover:bg-accent-secondary-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2 w-full' 
+          : 'bg-accent-secondary/90 hover:bg-accent-secondary text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2 w-full' 
       },
       agoda: { 
         label: 'Check on Agoda', 
         source: 'Agoda', 
         className: isPrimary 
-          ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2' 
-          : 'bg-emerald-600/90 hover:bg-emerald-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2' 
+          ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2 w-full' 
+          : 'bg-emerald-600/90 hover:bg-emerald-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2 w-full' 
       },
-      trivago: { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
-      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2' },
+      trivago: { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' },
+      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' },
       google: null, // don't show Google search links as booking buttons
     };
     if (!provider || !config[provider]) return null;
@@ -158,10 +158,10 @@ export default function CityHotelsClient({
   return (
     <div>
       {/* Interactive Bathtub & Feature Filters */}
-      <div className="bg-white border border-border rounded-2xl p-4 sm:p-5 shadow-2xs mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white border border-border rounded-2xl p-3 sm:p-5 shadow-2xs mb-8 flex flex-col md:flex-row items-center justify-between gap-4 w-full min-w-0">
         {/* Filter Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
-          <span className="text-xs font-bold text-text-muted uppercase tracking-wider hidden lg:inline mr-1">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 md:w-auto pb-1 md:pb-0">
+          <span className="text-xs font-bold text-text-muted uppercase tracking-wider hidden lg:inline mr-1 flex-shrink-0">
             Filter Tubs:
           </span>
           <button
@@ -238,10 +238,10 @@ export default function CityHotelsClient({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search hotel name..."
-            className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-text-main placeholder-text-muted focus:outline-hidden focus:border-accent focus:bg-white transition-all"
+            className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-base sm:text-xs text-text-main placeholder-text-muted focus:outline-hidden focus:border-accent focus:bg-white transition-all"
           />
           <svg
-            className="w-4 h-4 text-text-muted absolute left-3 top-2.5"
+            className="w-4 h-4 text-text-muted absolute left-3 top-3"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -256,7 +256,7 @@ export default function CityHotelsClient({
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="absolute right-2.5 top-2.5 text-xs text-text-muted hover:text-text-main"
+              className="absolute right-2.5 top-3 text-xs text-text-muted hover:text-text-main"
             >
               ✕
             </button>
@@ -265,7 +265,7 @@ export default function CityHotelsClient({
       </div>
 
       {/* Booking Verification Tip Banner */}
-      <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-4 sm:p-5 mb-8 flex items-start gap-3 shadow-2xs">
+      <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-3.5 sm:p-5 mb-8 flex items-start gap-3 shadow-2xs">
         <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
           <span className="text-base">💡</span>
         </div>
@@ -277,7 +277,7 @@ export default function CityHotelsClient({
 
       {/* Hotel Cards Grid */}
       {filteredHotels.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredHotels.map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
               makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda',
@@ -312,8 +312,8 @@ export default function CityHotelsClient({
                   )}
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-heading text-xl font-bold text-accent-secondary mb-1">{h.name}</h3>
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-accent-secondary mb-1">{h.name}</h3>
                   {h.rating && h.reviewsCount && (
                     <div className="flex items-center gap-1.5 mb-2 text-sm font-bold text-gray-800">
                       <span className="text-amber-500 text-base">★</span>

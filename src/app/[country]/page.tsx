@@ -184,7 +184,8 @@ export default async function CountryHubPage({
     'costa-rica': 'CR', 'saint-lucia': 'LC', 'jamaica': 'JM', 'bahamas': 'BS',
     'dominican-republic': 'DO', 'turks-and-caicos': 'TC', 'barbados': 'BB',
     'aruba': 'AW', 'iceland': 'IS', 'norway': 'NO', 'finland': 'FI',
-    'sweden': 'SE', 'denmark': 'DK',
+    'sweden': 'SE', 'denmark': 'DK', 'south-korea': 'KR', 'taiwan': 'TW',
+    'vietnam': 'VN', 'sri-lanka': 'LK',
   };
 
   const collectionSchema = {
@@ -258,46 +259,48 @@ export default async function CountryHubPage({
         <StructuredData data={cityListSchema}>
           <StructuredData data={faqSchema}>
             <>
-              <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 text-xs sm:text-sm font-medium text-text-muted">
-              <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; Hotels with Bathtubs in {countryName}
-            </div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
+                <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+                <span>&rsaquo;</span>
+                <span className="text-text-main font-semibold">Hotels with Bathtubs in {countryName}</span>
+              </div>
 
-            <header className="relative py-20 sm:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
+            <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
               <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-                <div className="bg-white/20 border border-white/40 backdrop-blur-md px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-6 flex items-center gap-2">
+                <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
                   <span>🌍</span> {cities.length} {cities.length === 1 ? 'City' : 'Cities'} · {totalHotels} Verified Stays
                 </div>
-                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
                   Hotels with Bathtub in Room in {countryName}
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl font-medium opacity-90 max-w-2xl mx-auto">
+                <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
                   Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis, triple-verified for couples.
                 </p>
               </div>
             </header>
 
-            <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
+            <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
               {/* Country Hub Editorial Context */}
-              <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-6 sm:p-8 shadow-xs mb-12">
+              <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs mb-8 sm:mb-12">
                 <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
                   Why Book a Bathtub Hotel in {countryName}?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="text-gray-700 leading-relaxed mb-3 text-xs sm:text-sm md:text-base">
                   Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
                   Every property featured across our {countryName} destinations is triple-verified across MakeMyTrip, Agoda, and Booking.com to confirm that your chosen room tier guarantees a private in-room soaking tub or whirlpool jacuzzi.
                 </p>
               </div>
 
-              <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-3">
+              <div className="flex items-center justify-between mb-6 sm:mb-8 border-b border-gray-200 pb-3">
                 <div>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">Romantic Destinations</h2>
-                  <p className="text-text-muted text-sm mt-1">Select a city in {countryName} to find your perfect stay with private tubs</p>
+                  <h2 className="font-heading text-xl sm:text-3xl font-bold text-accent-secondary">Romantic Destinations</h2>
+                  <p className="text-text-muted text-xs sm:text-sm mt-1">Select a city in {countryName} to find your perfect stay with private tubs</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
                 {cities.map((item: any, idx: number) => (
                   <CityCard
                     key={`${item._id.city}-${item._id.country}`}
