@@ -186,7 +186,8 @@ export default async function CountryHubPage({
     'aruba': 'AW', 'iceland': 'IS', 'norway': 'NO', 'finland': 'FI',
     'sweden': 'SE', 'denmark': 'DK', 'south-korea': 'KR', 'taiwan': 'TW',
     'vietnam': 'VN', 'sri-lanka': 'LK', 'croatia': 'HR', 'morocco': 'MA',
-    'tanzania': 'TZ',
+    'tanzania': 'TZ', 'chile': 'CL', 'argentina': 'AR', 'peru': 'PE',
+    'colombia': 'CO',
   };
 
   const collectionSchema = {

@@ -103,6 +103,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'croatia': { dbCountry: 'Croatia', slug: 'croatia', displayName: 'Croatia' },
   'morocco': { dbCountry: 'Morocco', slug: 'morocco', displayName: 'Morocco' },
   'tanzania': { dbCountry: 'Tanzania', slug: 'tanzania', displayName: 'Tanzania' },
+  'chile': { dbCountry: 'Chile', slug: 'chile', displayName: 'Chile' },
+  'argentina': { dbCountry: 'Argentina', slug: 'argentina', displayName: 'Argentina' },
+  'peru': { dbCountry: 'Peru', slug: 'peru', displayName: 'Peru' },
+  'colombia': { dbCountry: 'Colombia', slug: 'colombia', displayName: 'Colombia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

@@ -79,6 +79,13 @@ BATCHES = {
         ("Marrakech", "Morocco"),
         ("Zanzibar", "Tanzania"),
     ],
+    "latin_america": [
+        ("Santiago", "Chile"),
+        ("Bariloche", "Argentina"),
+        ("Mendoza", "Argentina"),
+        ("Cusco", "Peru"),
+        ("Cartagena", "Colombia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

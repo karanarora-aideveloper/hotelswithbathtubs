@@ -2474,6 +2474,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Historic Stone Town UNESCO romance balanced with private island tranquility',
       'Every bathtub listing independently verified across Booking.com and Agoda'
     ]
+  },
+
+  // Chile - Santiago
+  'santiago-chile': {
+    intro: 'Santiago blends cosmopolitan sophistication with breathtaking backdrops of the snow-capped Andes Mountains. Stay in boutique design hotels and five-star high-rises in Vitacura and Lastarria featuring rooftop whirlpool tubs, deep marble soaking baths, and Chilean vinotherapy bath soaks.',
+    amenities: [
+      'Panoramic picture-window bathtubs with soaring views of the snow-capped Andes',
+      'Private rooftop terrace jacuzzi suites overlooking the illuminated Santiago skyline',
+      'Artisanal Chilean red wine and grape-seed antioxidant bath extracts with organic salts',
+      'Spacious marble bathrooms with separate walk-in rain showers and designer amenities'
+    ],
+    whyChoose: [
+      'Gateway to Chile’s celebrated Maipo Valley wineries, Andes ski resorts, and coastal Valparaíso',
+      'Vibrant culinary scene with world-ranked restaurants and sophisticated rooftop nightlife',
+      'Year-round mountain views paired with luxury urban design hospitality',
+      'Every bathtub listing independently verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Argentina - Bariloche
+  'bariloche-argentina': {
+    intro: 'San Carlos de Bariloche, nestled in the heart of Argentine Patagonia, is the romantic alpine jewel of South America. Unwind in lakeside luxury lodges and mountain chalets featuring private cedarwood hot tubs, bubbling hydrotherapy tubs, and sweeping views of Lake Nahuel Huapi.',
+    amenities: [
+      'Heated outdoor cedarwood hot tubs overlooking Lake Nahuel Huapi and the Patagonian Andes',
+      'Deep freestanding soaking bathtubs positioned beside wood-burning fireplaces',
+      'Patagonian rosehip (rosa mosqueta) and lavender bath infusions with luxury wool robes',
+      'Private wooden balconies framing alpine pine forests and snow-dusted peaks'
+    ],
+    whyChoose: [
+      'The "Switzerland of South America" — ultimate Patagonian honeymoon and winter romance',
+      'Artisanal chocolate shops, Swiss-style fondues, and world-class craft breweries',
+      'Sailing on glacial lakes, alpine hiking, and snow sports at Cerro Catedral',
+      'Guaranteed private in-room bathtubs verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Argentina - Mendoza
+  'mendoza-argentina': {
+    intro: 'Mendoza is the world capital of Malbec, cradled beneath the towering peaks of the High Andes. Experience private vineyard villas and luxury wine lodges featuring outdoor soaking tubs overlooking rows of vines, Malbec vinotherapy spa baths, and private mountain-view pools.',
+    amenities: [
+      'Private vineyard-facing outdoor soaking tubs surrounded by lush Malbec vines',
+      'Antioxidant-rich vinotherapy grape-extract bath rituals with Mendoza thermal salts',
+      'Freestanding designer bathtubs with direct, unobstructed views of Mount Aconcagua foothills',
+      'Private sun decks, outdoor fireplaces, and plunge pools connected to master bath suites'
+    ],
+    whyChoose: [
+      'South America’s premier wine and gastronomy destination for couples',
+      'Exclusive boutique vineyard fincas in the Uco Valley and Luján de Cuyo',
+      'Horseback rides through vineyards at sunset paired with world-class cellar dining',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // Peru - Cusco
+  'cusco-peru': {
+    intro: 'Cusco, the historic capital of the Inca Empire, is a city of timeless Andean mystique and colonial charm. Stay in converted 16th-century monasteries and boutique heritage palaces featuring hand-carved stone bathtubs, private heated courtyard jacuzzis, and oxygen-enriched spa suites.',
+    amenities: [
+      'Hand-carved Andean stone and marble soaking bathtubs in historic colonial courtyards',
+      'Oxygen-enriched luxury suites with heated whirlpool tubs for ultimate high-altitude comfort',
+      'Sacred Valley herbal bath preparations with Andean muña mint, eucalyptus, and pink Maras salt',
+      'Original Inca stone walls, Spanish colonial frescoes, and antique brass fixtures'
+    ],
+    whyChoose: [
+      'UNESCO World Heritage cultural sanctuary and direct gateway to Machu Picchu',
+      'Incomparable atmospheric romance of cobblestone alleys and ancient Inca stonework',
+      'World-renowned Novoandina gastronomy and authentic Peruvian hospitality',
+      'Triple-verified accommodations ensuring genuine in-room soaking tubs'
+    ]
+  },
+
+  // Colombia - Cartagena
+  'cartagena-colombia': {
+    intro: 'Cartagena de Indias is the jewel of the Colombian Caribbean, wrapped in 400-year-old stone walls, bougainvillea balconies, and tropical romance. Experience restored 17th-century colonial mansions featuring private rooftop jacuzzis, open-air garden tubs, and Caribbean sea-breeze spa suites.',
+    amenities: [
+      'Private rooftop jacuzzi pools and soaking tubs overlooking historic church domes and the Caribbean Sea',
+      'Open-air tropical courtyard bathtubs surrounded by lush palms and coral stone walls',
+      'Colombian organic coffee and cacao body scrubs with artisanal coconut bath oils',
+      'High timber-beamed ceilings, colonial shuttered windows, and private sunset verandas'
+    ],
+    whyChoose: [
+      'One of the world’s most enchanting and vibrant colonial walled cities for couples',
+      'Sensory delight of horse-drawn carriages, salsa clubs, and world-class Caribbean dining',
+      'Day trips to the pristine coral reefs and turquoise waters of the Rosario Islands',
+      'Every bathtub listing independently confirmed on Booking.com and Agoda'
+    ]
   }
 
 };
