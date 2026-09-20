@@ -2559,6 +2559,108 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Day trips to the pristine coral reefs and turquoise waters of the Rosario Islands',
       'Every bathtub listing independently confirmed on Booking.com and Agoda'
     ]
+  },
+
+  // Switzerland - Interlaken
+  'interlaken-switzerland': {
+    intro: 'Interlaken sits majestically between the turquoise waters of Lake Thun and Lake Brienz, framed by the towering peaks of the Eiger, Mönch, and Jungfrau. Stay in alpine grand hotels and mountain chalets featuring cedarwood outdoor hot tubs, private whirlpool suites, and glacier-view soaking bathtubs.',
+    amenities: [
+      'Panoramic glacier-view soaking tubs overlooking the Jungfrau massif and alpine lakes',
+      'Private balcony jacuzzis framed by turquoise waters and snow-dusted Swiss peaks',
+      'Swiss alpine pine (Arve) and mountain chamomile bath preparations with heated robes',
+      'En-suite Swiss stone saunas paired with deep hydrotherapy bubbling baths'
+    ],
+    whyChoose: [
+      'Europe’s premier alpine adventure and luxury wellness haven for couples',
+      'Gateway to Jungfraujoch "Top of Europe", Grindelwald, and scenic mountain railways',
+      'Pristine crystal-clear glacial air and peaceful lakeside walking promenades',
+      'Every bathtub listing independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // Switzerland - Lucerne
+  'lucerne-switzerland': {
+    intro: 'Lucerne is the romantic heart of central Switzerland, where medieval covered bridges and preserved towers overlook Lake Lucerne and Mount Pilatus. Experience historic Belle Époque lakefront palaces featuring freestanding marble tubs, private jacuzzis, and sweeping lake-and-mountain vistas.',
+    amenities: [
+      'Freestanding Italian marble soaking tubs positioned beside panoramic lake-view picture windows',
+      'Private rooftop penthouse jacuzzis with sweeping views of Mount Pilatus and Mount Rigi',
+      'Artisanal Swiss herbal bath oils infused with edelweiss and alpine meadow florals',
+      'Belle Époque high ceilings, ornate chandeliers, and private balconies over Lake Lucerne'
+    ],
+    whyChoose: [
+      'Picture-postcard Swiss romantic destination centered on the historic Chapel Bridge',
+      'Paddle steamer cruises across Lake Lucerne and scenic cogwheel train excursions',
+      'World-class luxury watch boutiques, Michelin-starred dining, and serene lakefront walks',
+      'Triple-verified accommodations ensuring authentic in-room soaking tubs'
+    ]
+  },
+
+  // Austria - Innsbruck
+  'innsbruck-austria': {
+    intro: 'Innsbruck, the imperial capital of the Austrian Tyrol, is dramatically encircled by the towering jagged peaks of the Nordkette range. Relax in boutique alpine hotels and ski lodges featuring traditional Tyrolean wooden hot tubs, private whirlpool suites, and fireside soaking baths.',
+    amenities: [
+      'Tyrolean stone pine (Zirbe) wood soaking tubs with natural aromatic resins',
+      'Panoramic floor-to-ceiling window bathtubs framing the towering Nordkette mountain range',
+      'Private terrace hot tubs perfect for post-ski mountain stargazing',
+      'Organic Tyrolean alpine herb and mountain arnica bath salts with plush wool throws'
+    ],
+    whyChoose: [
+      'Unique fusion of imperial Habsburg history and high-altitude alpine ski culture',
+      'Funicular designed by Zaha Hadid ascending from the historic imperial center straight into the mountains',
+      'Cozy Tyrolean culinary warmth, strudels, and romantic winter Christmas markets',
+      'Guaranteed private in-room bathtubs verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Poland - Krakow
+  'krakow-poland': {
+    intro: 'Krakow, the ancient royal capital of Poland, weaves gothic grandeur, cobblestone charm, and romantic medieval lore. Discover boutique heritage hotels and restored merchant palaces in the Old Town and Kazimierz featuring vintage freestanding clawfoot tubs, deep marble baths, and heated courtyard spa suites.',
+    amenities: [
+      'Vintage freestanding roll-top clawfoot tubs inside restored Renaissance merchant palaces',
+      'Deep Italian marble bathtubs paired with walk-in rainfall showers and heated stone floors',
+      'Artisanal Polish linden blossom honey and beeswax bath infusions with luxury spa amenities',
+      'Historic vaulted brick ceilings, original 16th-century wooden beams, and candlelit ambiance'
+    ],
+    whyChoose: [
+      'One of Europe’s best-preserved and most affordable UNESCO World Heritage romantic cities',
+      'Enchanting cobblestone carriage rides around Rynek Główny (Europe’s largest medieval square)',
+      'Rich bohemian café culture, hidden cellar wine bars, and thriving culinary creativity',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
+  },
+
+  // Poland - Zakopane
+  'zakopane-poland': {
+    intro: 'Zakopane is Poland’s winter wonderland, nestled at the foot of the dramatic granite peaks of the Tatra Mountains. Unwind in authentic Goral highlander timber chalets and luxury mountain lodges featuring outdoor cedarwood hot tubs, geothermal mineral pools, and fireside whirlpool suites.',
+    amenities: [
+      'Heated outdoor cedarwood hot tubs surrounded by snow-covered spruce forests and Tatra peaks',
+      'Private in-chalet hydrotherapy whirlpool baths beside roaring stone fireplaces',
+      'Thermal mineral bath soaks infused with native Tatra pine, spruce, and mountain juniper',
+      'Hand-carved wooden interiors reflecting authentic Zakopane alpine architectural heritage'
+    ],
+    whyChoose: [
+      'Poland’s premier mountain romance destination for winter snowscapes and summer hiking',
+      'Thermal bath culture fed by natural geothermal subterranean springs across Podhale',
+      'Vibrant highlander folklore, traditional grilled oscypek cheese, and fireside evenings',
+      'Triple-verified room tiers ensuring authentic in-room or private terrace hot tubs'
+    ]
+  },
+
+  // Slovenia - Bled
+  'bled-slovenia': {
+    intro: 'Lake Bled is a real-life fairytale nestled in the Julian Alps, featuring a cliff-perched medieval castle and an emerald lake surrounding a romantic church island. Indulge in boutique lakeside villas and eco-luxury resorts boasting private geothermal spring hot tubs, wooden tubs, and castle-view balconies.',
+    amenities: [
+      'Private terrace hot tubs and jacuzzi suites framing the iconic island church and Bled Castle',
+      'Natural geothermal spring water piped directly into deep wooden soaking bathtubs',
+      'Slovenian wild alpine blossom and raw organic forest honey bath rituals',
+      'Panoramic glass suites with unobstructed vistas of the emerald waters and Julian Alps'
+    ],
+    whyChoose: [
+      'Widely regarded as one of the most romantic and photogenic lake destinations on Earth',
+      'Traditional wooden pletna boat rides to the island to ring the wishing bell with your partner',
+      'Tranquil Julian Alps walking trails, Vintgar Gorge, and world-famous Bled cream cake',
+      'Every bathtub listing independently verified across Booking.com and Agoda'
+    ]
   }
 
 };

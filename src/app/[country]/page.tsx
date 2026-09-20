@@ -187,7 +187,7 @@ export default async function CountryHubPage({
     'sweden': 'SE', 'denmark': 'DK', 'south-korea': 'KR', 'taiwan': 'TW',
     'vietnam': 'VN', 'sri-lanka': 'LK', 'croatia': 'HR', 'morocco': 'MA',
     'tanzania': 'TZ', 'chile': 'CL', 'argentina': 'AR', 'peru': 'PE',
-    'colombia': 'CO',
+    'colombia': 'CO', 'poland': 'PL', 'slovenia': 'SI',
   };
 
   const collectionSchema = {

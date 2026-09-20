@@ -86,6 +86,19 @@ BATCHES = {
         ("Cusco", "Peru"),
         ("Cartagena", "Colombia"),
     ],
+    "central_europe_alpine": [
+        ("Interlaken", "Switzerland"),
+        ("Lucerne", "Switzerland"),
+        ("Innsbruck", "Austria"),
+        ("Krakow", "Poland"),
+        ("Zakopane", "Poland"),
+        ("Bled", "Slovenia"),
+    ],
+    "central_europe_catchup": [
+        ("Lucerne", "Switzerland"),
+        ("Innsbruck", "Austria"),
+        ("Krakow", "Poland"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"
@@ -133,11 +146,14 @@ def is_stub_page(driver):
 
 def goto_with_retry(driver, url, max_attempts=3, cooldown=30):
     for attempt in range(1, max_attempts + 1):
-        driver.get(url)
-        time.sleep(5)
-        if not is_stub_page(driver):
-            return True
-        print(f"  ⚠️ Stub/blocked (attempt {attempt}/{max_attempts}), cooling {cooldown}s...")
+        try:
+            driver.get(url)
+            time.sleep(5)
+            if not is_stub_page(driver):
+                return True
+            print(f"  ⚠️ Stub/blocked (attempt {attempt}/{max_attempts}), cooling {cooldown}s...")
+        except Exception as e:
+            print(f"  ⚠️ Network/driver error (attempt {attempt}/{max_attempts}): {e}")
         if attempt < max_attempts:
             time.sleep(cooldown)
             cooldown = min(cooldown * 2, 120)
@@ -380,9 +396,14 @@ def main():
     all_hotels = []
     try:
         for idx, (city, country) in enumerate(CITIES_TO_SCRAPE):
-            city_hotels = scrape_city(driver, city, country)
-            all_hotels.extend(city_hotels)
-            print(f"\n✅ {city}, {country}: {len(city_hotels)} hotels collected")
+            try:
+                city_hotels = scrape_city(driver, city, country)
+                all_hotels.extend(city_hotels)
+                print(f"\n✅ {city}, {country}: {len(city_hotels)} hotels collected")
+                if city_hotels:
+                    save_to_mongo(city_hotels)
+            except Exception as ce:
+                print(f"\n❌ Error scraping {city}, {country}: {ce}")
             if idx < len(CITIES_TO_SCRAPE) - 1:
                 print("💤 Pausing 12s between destinations...")
                 time.sleep(12)
@@ -392,11 +413,6 @@ def main():
     print(f"\n{'='*60}")
     print(f"TOTAL SCRAPED: {len(all_hotels)} hotels across {len(CITIES_TO_SCRAPE)} destinations")
     print(f"{'='*60}")
-
-    if all_hotels:
-        save_to_mongo(all_hotels)
-    else:
-        print("❌ No hotels scraped.")
 
 
 if __name__ == "__main__":

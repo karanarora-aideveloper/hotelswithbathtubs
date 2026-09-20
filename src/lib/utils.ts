@@ -107,6 +107,8 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'argentina': { dbCountry: 'Argentina', slug: 'argentina', displayName: 'Argentina' },
   'peru': { dbCountry: 'Peru', slug: 'peru', displayName: 'Peru' },
   'colombia': { dbCountry: 'Colombia', slug: 'colombia', displayName: 'Colombia' },
+  'poland': { dbCountry: 'Poland', slug: 'poland', displayName: 'Poland' },
+  'slovenia': { dbCountry: 'Slovenia', slug: 'slovenia', displayName: 'Slovenia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {
