@@ -125,6 +125,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'lithuania': { dbCountry: 'Lithuania', slug: 'lithuania', displayName: 'Lithuania' },
   'georgia': { dbCountry: 'Georgia', slug: 'georgia', displayName: 'Georgia' },
   'azerbaijan': { dbCountry: 'Azerbaijan', slug: 'azerbaijan', displayName: 'Azerbaijan' },
+  'cyprus': { dbCountry: 'Cyprus', slug: 'cyprus', displayName: 'Cyprus' },
+  'malta': { dbCountry: 'Malta', slug: 'malta', displayName: 'Malta' },
+  'tunisia': { dbCountry: 'Tunisia', slug: 'tunisia', displayName: 'Tunisia' },
+  'egypt': { dbCountry: 'Egypt', slug: 'egypt', displayName: 'Egypt' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

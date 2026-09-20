@@ -2933,6 +2933,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled five-star luxury standards at exceptional value with panoramic penthouse views',
       'All listings verified across major booking channels for private in-room and suite bathtub installations'
     ]
+  },
+
+  // Cyprus - Paphos
+  'paphos-cyprus': {
+    intro: 'Paphos is the mythological birthplace of Aphrodite, the ancient Greek goddess of love and beauty, graced by year-round Mediterranean sunshine, ancient mosaics, and turquoise coastal waters. Discover premier beachfront resorts and cliffside boutique retreats featuring private sea-view plunge pools, deep freestanding marble soaking tubs, and sunset jacuzzi suites.',
+    amenities: [
+      'Freestanding Italian marble soaking bathtubs facing unobstructed Mediterranean Sea horizons',
+      'Private terrace jacuzzi hot tubs and heated plunge pool suites overlooking Aphrodite’s Rock',
+      'Botanical bath rituals infused with Cypriot extra virgin olive oil, wild coastal lavender, and sea salts',
+      'Open-concept bathroom sanctuaries with double rain showers, chromotherapy lighting, and luxury European toiletries'
+    ],
+    whyChoose: [
+      'The legendary Mediterranean island of romance, bathed in over 300 days of warm sunshine per year',
+      'Effortless explorations of UNESCO World Heritage Kato Paphos mosaics and ancient Tombs of the Kings',
+      'Idyllic sunset catamaran cruises around the Akamas Peninsula and Blue Lagoon',
+      '100% verified in-room and terrace bathtub amenities cross-checked across Booking.com and Agoda'
+    ]
+  },
+
+  // Malta - Valletta
+  'valletta-malta': {
+    intro: 'Valletta, the sun-kissed Baroque fortress capital built by the Knights of St. John, is a UNESCO World Heritage marvel of honey-hued limestone palaces and dramatic Grand Harbour sea views. Experience boutique luxury stays in restored 16th-century knight palazzos boasting vintage roll-top clawfoot tubs, private rooftop jacuzzi suites, and heated stone spa bathrooms.',
+    amenities: [
+      'Vintage roll-top clawfoot soaking bathtubs nestled beneath authentic Baroque limestone vaulted ceilings',
+      'Private rooftop jacuzzi tubs overlooking the majestic battlements of the Grand Harbour and the Three Cities',
+      'Therapeutic Mediterranean sea-salt infusions paired with native wild thyme and rosemary essential oils',
+      'Elegant marble bathrooms complete with plush robes, towel warmers, and artisanal Maltese bath salts'
+    ],
+    whyChoose: [
+      'One of the world\'s most concentrated and walkable historic open-air museum cities',
+      'Romantic evening dgħajsa water taxi rides across the Grand Harbour and candlelit courtyard dining',
+      'Proximity to St. John\'s Co-Cathedral, Caravaggio masterpieces, and the Upper Barrakka Gardens',
+      'Every bathtub listing independently verified for authentic in-room soaking amenities'
+    ]
+  },
+
+  // Tunisia - Sidi Bou Said
+  'sidi-bou-said-tunisia': {
+    intro: 'Sidi Bou Said is the iconic clifftop jewel of North Africa, famed for its brilliant cobalt blue doors, whitewashed bougainvillea-draped walls, and breathtaking views over the Gulf of Tunis. Unwind in authentic Arab-Andalusian palace hotels and luxury boutique riads featuring hand-painted ceramic mosaic plunge tubs, traditional private hammam steam rooms, and sea-facing soaking suites.',
+    amenities: [
+      'Deep mosaic-tiled plunge tubs and hand-carved marble bathtubs inspired by royal Andalusian palaces',
+      'Private clifftop terrace jacuzzis framing sweeping vistas of the turquoise Mediterranean Sea',
+      'Sensory Tunisian beauty rituals including organic orange blossom water, jasmine oils, and pure rhassoul clay',
+      'Moorish archway bathrooms with brass fittings, candle niches, and heated marble seating benches'
+    ],
+    whyChoose: [
+      'One of the Mediterranean\'s most photogenic and romantic artistic villages, beloved by painters and writers',
+      'Sip fragrant pine nut mint tea at Café des Délices while watching fiery Mediterranean sunsets',
+      'Minutes from the UNESCO-listed ancient ruins of Carthage and the vibrant artisan souqs of Tunis',
+      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // Egypt - Aswan
+  'aswan-egypt': {
+    intro: 'Aswan is Egypt\'s most serene and soul-stirring Nile sanctuary, where ancient golden sand dunes meet the tranquil waters of the Nile amidst granite boulders and lush palm islands. Indulge in timeless historic palace hotels—including the legendary Old Cataract where Agatha Christie penned her masterpieces—offering freestanding clawfoot bathtubs, private Nile-view jacuzzi balconies, and regal spa suites.',
+    amenities: [
+      'Freestanding Victorian roll-top soaking tubs positioned for panoramic sunset views across the Nile River',
+      'Private riverfront balcony jacuzzi tubs watching traditional white-sailed feluccas glide past Elephantine Island',
+      'Signature Egyptian Cleopatra bath rituals infused with warm milk, wild desert honey, and blue lotus oil',
+      'Grand palatial bathrooms featuring antique brass fixtures, chandeliers, and luxury French spa products'
+    ],
+    whyChoose: [
+      'A timeless, poetic romantic escape steeped in ancient Egyptian history and Old World colonial glamour',
+      'Private sunset felucca sailing journeys around the botanical gardens of Kitchener’s Island and Philae Temple',
+      'Peaceful Nubian warmth, world-class riverfront high tea, and unforgettable desert tranquility',
+      'All listings verified across major booking channels for guaranteed private in-room soaking facilities'
+    ]
+  },
+
+  // Egypt - Sharm El Sheikh
+  'sharm-el-sheikh-egypt': {
+    intro: 'Sharm El Sheikh is the ultimate Red Sea luxury coastal retreat, perched where the dramatic pink granite mountains of Sinai meet warm turquoise waters and pristine coral reefs. Discover world-class beachfront spa resorts and private cliffside villas boasting oceanfront infinity tubs, private heated balcony jacuzzis, and expansive marble bathroom suites with views of Tiran Island.',
+    amenities: [
+      'Private terrace and balcony heated jacuzzi tubs framing unobstructed views of the Red Sea and Tiran Island',
+      'Deep freestanding soaking bathtubs positioned beside floor-to-ceiling glass windows facing the private beach',
+      'Mineral-rich Red Sea salt scrubs and nourishing Sinai desert botanical aromatherapy oils',
+      'Spacious marble bathrooms featuring couple\'s walk-in rain showers and private outdoor sunbeds'
+    ],
+    whyChoose: [
+      'World-famous diving and snorkeling waters with vibrant coral reefs right off the hotel’s private jetty',
+      'Romantic private candlelit beach cabana dinners under star-studded desert skies',
+      'Seamless excursions to Ras Mohammed National Park, Mount Sinai, and Bedouin desert camps',
+      '100% verified private in-room and terrace bathtubs cross-checked across Booking.com and Agoda'
+    ]
   }
 
 };

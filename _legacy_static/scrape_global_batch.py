@@ -125,6 +125,13 @@ BATCHES = {
         ("Tbilisi", "Georgia"),
         ("Baku", "Azerbaijan"),
     ],
+    "southern_med_north_africa": [
+        ("Paphos", "Cyprus"),
+        ("Valletta", "Malta"),
+        ("Sidi Bou Said", "Tunisia"),
+        ("Aswan", "Egypt"),
+        ("Sharm El Sheikh", "Egypt"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

@@ -191,6 +191,7 @@ export default async function CountryHubPage({
     'qatar': 'QA', 'oman': 'OM', 'bahrain': 'BH', 'jordan': 'JO', 'saudi-arabia': 'SA',
     'philippines': 'PH', 'cambodia': 'KH', 'laos': 'LA', 'nepal': 'NP',
     'estonia': 'EE', 'latvia': 'LV', 'lithuania': 'LT', 'georgia': 'GE', 'azerbaijan': 'AZ',
+    'cyprus': 'CY', 'malta': 'MT', 'tunisia': 'TN', 'egypt': 'EG',
   };
 
   const collectionSchema = {
