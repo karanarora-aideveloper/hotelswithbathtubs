@@ -55,6 +55,9 @@ export const metadata: Metadata = {
     description: "Discover 1,550+ verified hotels with private in-room bathtubs and jacuzzis across 165+ destinations in 59 countries. Triple-verified on Booking.com & Agoda.",
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
+  other: {
+    'p:domain_verify': '4ed9df0b1a0e78a628fd7d03f7592100',
+  },
 };
 
 export default async function RootLayout({

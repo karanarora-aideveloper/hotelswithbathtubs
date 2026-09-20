@@ -29,6 +29,15 @@ export function middleware(req: NextRequest) {
   requestHeaders.set('x-pathname', url.pathname);
 
   if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
+    // In local development, allow access without requiring basic auth
+    if (process.env.NODE_ENV === 'development') {
+      return NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      });
+    }
+
     const basicAuth = req.headers.get('authorization');
 
     const adminUser = process.env.ADMIN_USER;

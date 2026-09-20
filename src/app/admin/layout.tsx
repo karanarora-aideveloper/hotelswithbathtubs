@@ -41,6 +41,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/social" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors">
             Social Media Planner
           </Link>
+          <Link href="/admin/pinterest" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors flex items-center justify-between">
+            <span>Pinterest Studio</span>
+            <span className="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full font-bold">📌 API</span>
+          </Link>
           <Link href="/admin/tracker" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors">
             Affiliate Tracker & Strategy
           </Link>
