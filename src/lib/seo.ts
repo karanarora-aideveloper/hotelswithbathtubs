@@ -2117,6 +2117,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Renowned warm hospitality and safe, couple-friendly island atmosphere',
       'All listings verified across Booking.com and Agoda with guaranteed tubs'
     ]
+  },
+
+  // USA - Honolulu (Hawaii)
+  'honolulu-usa': {
+    intro: 'Honolulu and iconic Waikiki Beach blend vibrant Pacific island culture with high-rise luxury. Discover romantic oceanfront suites featuring deep Japanese soaking tubs, private balcony jacuzzis overlooking Diamond Head, and golden Pacific sunsets.',
+    amenities: [
+      'Deep Japanese-style soaking tubs framing panoramic Waikiki Pacific views',
+      'Private oceanfront balcony jacuzzi tubs for romantic sunset viewing',
+      'Hawaiian kukui nut and plumeria flower organic bath amenities',
+      'Spacious marble bathrooms with double vanities and walk-in rain showers'
+    ],
+    whyChoose: [
+      'America’s premier tropical honeymoon capital with legendary surf and sunsets',
+      'World-class luxury beachfront resorts with full couple-friendly privacy',
+      'Direct access to Kalakaua Avenue shopping, fine dining, and catamaran sails',
+      'Every listing verified across Booking.com and Agoda for guaranteed private tubs'
+    ]
+  },
+
+  // USA - Maui (Hawaii)
+  'maui-usa': {
+    intro: 'Maui is the quintessential romantic island paradise. From the golden crescents of Wailea to the dramatic coastline of Kapalua, experience world-famous luxury resorts featuring open-air stone soaking tubs, private plunge pools, and sunset views toward Lanai.',
+    amenities: [
+      'Outdoor natural volcanic stone soaking tubs on secluded tropical lanais',
+      'Private oceanfront plunge pools and hydrotherapy whirlpool jacuzzis',
+      'Hawaiian hibiscus bath infusions and soothing coconut milk bath salts',
+      'Floor-to-ceiling sliding pocket doors framing dramatic whale-watching waters'
+    ],
+    whyChoose: [
+      'Consistently ranked the #1 honeymoon island in the United States',
+      'Iconic romantic road trips along the Road to Hana and Haleakala sunrise',
+      'Unmatched couple privacy in standalone 5-star ocean villas and luxury suites',
+      'Strictly confirmed private in-room or private lanai tubs on all listings'
+    ]
+  },
+
+  // USA - Napa Valley (California)
+  'napa-usa': {
+    intro: 'Napa Valley is the pinnacle of California wine country romance. Unwind amidst rolling vineyard hills in luxury vineyard estate suites featuring outdoor soaking clawfoot tubs, private cedar hot tubs, and cozy indoor fireplaces.',
+    amenities: [
+      'Private outdoor clawfoot bathtubs overlooking picturesque Cabernet vineyards',
+      'Aromatic grape-seed and lavender mineral bath salts crafted locally in Napa',
+      'Handcrafted cedar-wood hot tubs on secluded private garden sundecks',
+      'Dual-sided fireplaces warming both master bedroom and deep soaking bath'
+    ],
+    whyChoose: [
+      'World-famous Michelin-starred dining, legendary wineries, and private tastings',
+      'Intimate boutique luxury lodges offering discreet couple privacy',
+      'Scenic hot air balloon rides over misty morning vine canopies',
+      'Independent verification confirming guaranteed private in-room bathtubs'
+    ]
+  },
+
+  // USA - Key West (Florida)
+  'key-west-usa': {
+    intro: 'Key West, at the southernmost tip of the continental United States, offers relaxed Caribbean bohemian charm and historic elegance. Discover historic Victorian conch cottages and seaside luxury resorts with secluded courtyard clawfoot tubs and private jacuzzis.',
+    amenities: [
+      'Private courtyard clawfoot bathtubs surrounded by tropical palm gardens',
+      'Secluded sundeck jacuzzis perfect for warm tropical evenings under the stars',
+      'Handcrafted tropical bath soaps scented with Key lime and coconut',
+      'Private balconies enjoying world-famous Key West sunset views'
+    ],
+    whyChoose: [
+      'Vibrant nightlife on Duval Street balanced with tranquil hidden alley romance',
+      'Year-round subtropical warmth, snorkeling on coral reefs, and sailing cruises',
+      'Charming adults-only boutique inns designed specifically for couples',
+      'Triple-verified room tiers to guarantee private in-room tubs'
+    ]
+  },
+
+  // USA - Charleston (South Carolina)
+  'charleston-usa': {
+    intro: 'Charleston is the heart of southern romance, with cobblestone streets, gas-lit lanterns, and grand Antebellum mansions. Stay in historic boutique hotels featuring deep clawfoot soaking tubs, Italian marble bathrooms, and wrought-iron garden balconies.',
+    amenities: [
+      'Vintage freestanding clawfoot soaking tubs in historic restored suites',
+      'Italian Carrera marble bathrooms with oversized walk-in rain showers',
+      'Artisanal southern magnolia bath oils and plush Turkish cotton robes',
+      'Private balconies overlooking historic garden courtyards and church steeples'
+    ],
+    whyChoose: [
+      'Voted America’s most romantic city for couple weekend getaways',
+      'Celebrated Lowcountry culinary scene, carriage rides, and historic charm',
+      'Exceptional boutique hospitality with evening wine receptions and turndown',
+      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+    ]
   }
 
 };
