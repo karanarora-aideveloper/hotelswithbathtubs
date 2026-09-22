@@ -161,6 +161,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'vanuatu': { dbCountry: 'Vanuatu', slug: 'vanuatu', displayName: 'Vanuatu' },
   'new-caledonia': { dbCountry: 'New Caledonia', slug: 'new-caledonia', displayName: 'New Caledonia' },
   'new caledonia': { dbCountry: 'New Caledonia', slug: 'new-caledonia', displayName: 'New Caledonia' },
+  'madagascar': { dbCountry: 'Madagascar', slug: 'madagascar', displayName: 'Madagascar' },
+  'mozambique': { dbCountry: 'Mozambique', slug: 'mozambique', displayName: 'Mozambique' },
+  'botswana': { dbCountry: 'Botswana', slug: 'botswana', displayName: 'Botswana' },
+  'zambia': { dbCountry: 'Zambia', slug: 'zambia', displayName: 'Zambia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

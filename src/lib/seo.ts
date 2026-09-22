@@ -3681,6 +3681,74 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Sophisticated waterfront promenades, duty-free French boutiques, and vibrant marina culture',
       'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
     ]
+  },
+
+  // Madagascar - Nosy Be
+  'nosy-be-madagascar': {
+    intro: 'Nosy Be, the legendary "Perfume Island" off the northwest coast of Madagascar, captivates travelers with fragrant ylang-ylang plantations, turquoise waters, and ancient volcanic crater lakes. Discover eco-luxury beachfront villas and hilltop boutique lodges featuring open-air stone bathtubs, private cliffside plunge whirlpools, and tropical garden soaking baths with sunset vistas across the Mozambique Channel.',
+    amenities: [
+      'Hand-crafted natural granite and volcanic stone bathtubs set in open-air oceanfront pavilions',
+      'Private wooden deck whirlpool tubs with sweeping vistas of the Mozambique Channel and coral reefs',
+      'Wild organic ylang-ylang, vanilla pod, and lemongrass aromatherapy bath preparations',
+      'Ensuite bathrooms with open-air bamboo rainfall showers and exotic hardwood double vanities'
+    ],
+    whyChoose: [
+      'Untouched tropical island paradise famous for lemur wildlife sanctuaries, whale sharks, and coral atolls',
+      'Sensory bliss from rolling ylang-ylang, coffee, and clove plantations perfuming the tropical breeze',
+      'Intimate barefoot luxury eco-villas offering total privacy and authentic Malagasy hospitality',
+      'Triple-verified private in-room and terrace soaking tubs for unforgettable romantic escapes'
+    ]
+  },
+
+  // Mozambique - Vilanculos
+  'vilanculos-mozambique': {
+    intro: 'Vilanculos is the gateway to the enchanting Bazaruto Archipelago, a marine national park renowned for towering coastal dunes, blindingly white sandbars, and luminous cobalt waters. Indulge in thatched beachfront luxury villas and cliffside eco-resorts featuring private sand dune plunge whirlpools, freestanding deep soaking tubs, and open-air decks for stargazing over the Indian Ocean.',
+    amenities: [
+      'Open-air freestanding soaking bathtubs situated just steps from the powder-white sand beaches',
+      'Private oceanfront deck whirlpool spas overlooking shifting turquoise sandbars and dhow boats',
+      'Hand-harvested Mozambique sea salt scrubs and pure virgin coconut oil bath infusions',
+      'Spacious outdoor timber bathrooms with couple rain showers and panoramic ocean views'
+    ],
+    whyChoose: [
+      'Gateway to the world-class Bazaruto Archipelago Marine National Park with dugongs, dolphins, and flamingos',
+      'Romantic traditional dhow sailboat sunset cruises and private sandbank picnics in turquoise waters',
+      'Exquisite fresh seafood, cashew nuts, and authentic Mozambican-Portuguese culinary fusion',
+      'Guaranteed private in-room and deck tubs independently verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Botswana - Maun
+  'maun-botswana': {
+    intro: 'Maun is the world-renowned safari capital and gateway to the UNESCO-listed Okavango Delta, the planet\'s largest inland river delta and one of the last great wilderness sanctuaries on Earth. Experience ultra-luxury safari tented suites and riverfront bush lodges featuring private wooden deck clawfoot tubs, sunken plunge whirlpools, and starlit soaking baths with views of passing elephants and hippos.',
+    amenities: [
+      'Outdoor copper and rolled-tin clawfoot soaking tubs set on elevated private wooden safari decks',
+      'Private plunge whirlpools with panoramic vistas over Okavango Delta lagoons and floodplains',
+      'Kalahari mineral bath soaks with wild indigenous botanicals and essential oils',
+      'Unobstructed sunset views of African wildlife drinking at waterholes directly from your bath'
+    ],
+    whyChoose: [
+      'Premier African safari honeymoon destination offering unmatched wildlife encounters and mokoro canoe safaris',
+      'Exclusive low-density ecotourism ensuring absolute wilderness intimacy and silence',
+      'Spectacular stargazing under the crystalline Southern African night skies from your private tub',
+      '100% verified private in-room and outdoor bush soaking tubs'
+    ]
+  },
+
+  // Zambia - Livingstone
+  'livingstone-zambia': {
+    intro: 'Livingstone, located on the northern banks of the mighty Zambezi River, provides a thrilling and romantic sanctuary just moments from the awe-inspiring roar of Victoria Falls (Mosi-oa-Tunya). Relax in colonial riverfront lodges and treehouse luxury chalets featuring open-air Victorian clawfoot tubs, private river-edge jacuzzi decks, and private plunge pools gazing across the Zambezi.',
+    amenities: [
+      'Open-air Victorian clawfoot soaking tubs with direct views of the sunset-painted Zambezi River',
+      'Private riverside deck jacuzzi tubs where you can listen to the gentle roar of Victoria Falls',
+      'African marula and baobab oil bath infusions designed for deep restorative relaxation after safari walks',
+      'Canopied mosquito-netted open-air bathrooms with vintage brass fittings and river stone floors'
+    ],
+    whyChoose: [
+      'Unrivaled access to Victoria Falls, Devil\'s Pool, and romantic Zambezi sunset luxury boat cruises',
+      'Abundant wildlife sightings with elephants and hippos frequently wandering along the riverbanks',
+      'Rich explorer heritage, aviation safaris, and authentic Zambian cultural warmth',
+      'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
+    ]
   }
 };
 
