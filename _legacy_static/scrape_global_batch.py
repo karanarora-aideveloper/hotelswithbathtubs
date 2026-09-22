@@ -147,6 +147,14 @@ BATCHES = {
         ("Bocas del Toro", "Panama"),
         ("Panama City", "Panama"),
     ],
+    "sub_saharan_africa": [
+        ("Diani Beach", "Kenya"),
+        ("Masai Mara", "Kenya"),
+        ("Musanze", "Rwanda"),
+        ("Kigali", "Rwanda"),
+        ("Victoria Falls", "Zimbabwe"),
+        ("Sossusvlei", "Namibia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

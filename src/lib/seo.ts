@@ -3205,6 +3205,108 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Ultra-luxurious 5-star hotel towers and romantic boutique mansions at competitive global rates',
       'Every bathtub listing independently verified across trusted global booking platforms'
     ]
+  },
+
+  // Kenya - Diani Beach
+  'diani-beach-kenya': {
+    intro: 'Diani Beach is widely acclaimed as Africa\'s leading beach destination, renowned for its powdery white sands, turquoise Indian Ocean waters, and swaying coconut palms. Discover secluded Swahili-inspired boutique villas and oceanfront luxury resorts featuring private open-air plunge pools, jacuzzi terraces, and deep marble bathtubs surrounded by lush coastal gardens.',
+    amenities: [
+      'Private beachfront terrace jacuzzis overlooking coral lagoons and palm canopies',
+      'Open-air freestanding stone soaking tubs enveloped by fragrant tropical gardens',
+      'Artisan Swahili essential oils and organic coconut milk bath infusions',
+      'Sunken outdoor plunge tubs in standalone thatched-roof private bandas'
+    ],
+    whyChoose: [
+      'Africa\'s premier tropical honeymoon haven with warm turquoise waters and pristine coral reefs',
+      'Traditional dhow sailing, dolphin safaris at Kisite-Mpunguti, and sunset beach horseback rides',
+      'World-class seafood dining and serene privacy along miles of uncrowded sand',
+      'Rigorously verified private in-room and terrace jacuzzi suites'
+    ]
+  },
+
+  // Kenya - Masai Mara
+  'masai-mara-kenya': {
+    intro: 'The Masai Mara is the world\'s most legendary safari wilderness, famed for the Great Migration and breathtaking savannah horizons. Experience the pinnacle of bush luxury in exclusive tented camps featuring iconic open-air copper bathtubs, heated wooden cedar tubs, and private veranda jacuzzi pools with unobstructed views of roaming wildlife.',
+    amenities: [
+      'Hand-beaten freestanding copper soaking tubs perched on elevated wooden game-viewing decks',
+      'Lantern-lit evening bush bath preparations with warm water under African stars',
+      'Panoramic savannah views overlooking elephant corridors and Mara River crossing points',
+      'Organic botanicals, lemongrass bath salts, and luxury bush spa treatments'
+    ],
+    whyChoose: [
+      'Bucket-list romantic safari with Big Five game drives and dawn hot air balloon flights',
+      'Intimate all-inclusive luxury camps offering personalized butler service and campfire storytelling',
+      'The quintessential African bush bath experience surrounded by raw wilderness',
+      'Every property independently confirmed for authentic private veranda and ensuite soaking baths'
+    ]
+  },
+
+  // Rwanda - Musanze
+  'musanze-rwanda': {
+    intro: 'Musanze is the mystical gateway to Volcanoes National Park, where volcanic peaks rise dramatically into mist-shrouded bamboo forests. Retreat to world-class eco-luxury lodges featuring volcanic stone fireplaces, heated cedar tubs, and deep freestanding soaking baths framing views of the Virunga volcanoes after an unforgettable day of mountain gorilla trekking.',
+    amenities: [
+      'Deep volcanic stone bathtubs heated by roaring in-suite wood-burning fireplaces',
+      'Private veranda cedarwood hot tubs overlooking Mount Bisoke and Karisimbi',
+      'Handcrafted eucalyptus and Rwandan wild herb bath preparations',
+      'Heated bathroom floors, copper soaking tubs, and plush artisan bathrobes'
+    ],
+    whyChoose: [
+      'Life-changing mountain gorilla and golden monkey trekking in pristine cloud forests',
+      'Ultra-exclusive architectural lodges celebrated as global benchmarks in sustainable luxury',
+      'Soulful Rwandan hospitality, farm-to-table cuisine, and tranquil mountain serenity',
+      'Guaranteed private in-room soaking amenities confirmed across trusted booking channels'
+    ]
+  },
+
+  // Rwanda - Kigali
+  'kigali-rwanda': {
+    intro: 'Kigali is revered as Africa\'s cleanest, safest, and most progressive capital, set across scenic rolling emerald hills. Stay in refined 5-star international hotels and stylish boutique retreats featuring panoramic hilltop bathtubs, marble jacuzzi suites, and lush garden terraces overlooking the twinkling city lights.',
+    amenities: [
+      'Floor-to-ceiling glass bathtubs with panoramic views across Kigali\'s rolling green hills',
+      'Deep Italian marble soaking tubs and dual rain shower installations',
+      'Private penthouse jacuzzi terraces overlooking the vibrant city skyline',
+      'Premium locally-sourced volcanic spa products and aromatic herbal teas'
+    ],
+    whyChoose: [
+      'Vibrant cultural renaissance with inspiring contemporary art galleries and artisan coffee houses',
+      'Impeccably clean, peaceful, and sophisticated urban sanctuary for couples',
+      'Ideal beginning or relaxing finale to a Rwandan safari and gorilla expedition',
+      'Verified in-room bathtub and jacuzzi amenities across all listed properties'
+    ]
+  },
+
+  // Zimbabwe - Victoria Falls
+  'victoria-falls-zimbabwe': {
+    intro: 'Victoria Falls, locally known as Mosi-oa-Tunya (\'The Smoke That Thunders\'), is one of the Seven Natural Wonders of the World. Indulge in colonial-era grand hotels and secluded Zambezi riverfront lodges boasting private plunge tubs, cliffside whirlpools, and deep clawfoot soaking tubs listening to the distant roar of the falls.',
+    amenities: [
+      'Private Zambezi river-view soaking tubs positioned for hippo and sunset boat vistas',
+      'Restored colonial Victorian clawfoot roll-top bathtubs with antique brass fixtures',
+      'Cliff-edge jacuzzi pools overlooking the dramatic Batoka Gorge',
+      'African marula oil bath infusions and therapeutic riverside massage rituals'
+    ],
+    whyChoose: [
+      'Awe-inspiring close encounters with one of the planet\'s greatest natural spectacles',
+      'Sunset cruises on the Zambezi, helicopter flights over the falls, and private island dinners',
+      'Timeless romance blending historic heritage elegance with untamed wilderness adventure',
+      'Triple-verified private in-room and veranda tubs without misleading photos'
+    ]
+  },
+
+  // Namibia - Sossusvlei
+  'sossusvlei-namibia': {
+    intro: 'Sossusvlei is an otherworldly desert wonderland in the ancient Namib Desert, famous for monumental crimson sand dunes and the ethereal white clay pan of Deadvlei. Stay in award-winning luxury desert lodges boasting outdoor sunken tubs, stargazing sundecks, and private pool-villas designed for absolute romantic isolation beneath the southern hemisphere\'s clearest night skies.',
+    amenities: [
+      'Outdoor sunken desert soaking tubs with unobstructed views of the crimson sand dunes',
+      'Private rooftop star-beds with adjoining heated whirlpool spas for celestial stargazing',
+      'Eco-conscious solar-heated hot tubs integrated into desert stone architecture',
+      'Handcrafted desert mineral bath crystals and natural aloe vera skin soothers'
+    ],
+    whyChoose: [
+      'The oldest desert on earth offering mesmerizing tranquility, silence, and surreal photographic beauty',
+      'Dark Sky Reserve certification providing world-class astronomical stargazing',
+      'Sunrise balloon flights over towering Dune 45 and Big Daddy',
+      'Every luxury desert suite verified for authentic private outdoor and indoor soaking amenities'
+    ]
   }
 };
 

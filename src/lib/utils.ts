@@ -135,6 +135,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'belize': { dbCountry: 'Belize', slug: 'belize', displayName: 'Belize' },
   'guatemala': { dbCountry: 'Guatemala', slug: 'guatemala', displayName: 'Guatemala' },
   'panama': { dbCountry: 'Panama', slug: 'panama', displayName: 'Panama' },
+  'kenya': { dbCountry: 'Kenya', slug: 'kenya', displayName: 'Kenya' },
+  'rwanda': { dbCountry: 'Rwanda', slug: 'rwanda', displayName: 'Rwanda' },
+  'zimbabwe': { dbCountry: 'Zimbabwe', slug: 'zimbabwe', displayName: 'Zimbabwe' },
+  'namibia': { dbCountry: 'Namibia', slug: 'namibia', displayName: 'Namibia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {
