@@ -195,6 +195,7 @@ export default async function CountryHubPage({
     'uzbekistan': 'UZ', 'kazakhstan': 'KZ', 'mongolia': 'MN',
     'belize': 'BZ', 'guatemala': 'GT', 'panama': 'PA',
     'kenya': 'KE', 'rwanda': 'RW', 'zimbabwe': 'ZW', 'namibia': 'NA',
+    'montenegro': 'ME', 'albania': 'AL', 'bosnia-and-herzegovina': 'BA', 'north-macedonia': 'MK',
   };
 
   const collectionSchema = {

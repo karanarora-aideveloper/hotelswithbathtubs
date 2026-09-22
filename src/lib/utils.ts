@@ -139,6 +139,14 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'rwanda': { dbCountry: 'Rwanda', slug: 'rwanda', displayName: 'Rwanda' },
   'zimbabwe': { dbCountry: 'Zimbabwe', slug: 'zimbabwe', displayName: 'Zimbabwe' },
   'namibia': { dbCountry: 'Namibia', slug: 'namibia', displayName: 'Namibia' },
+  'montenegro': { dbCountry: 'Montenegro', slug: 'montenegro', displayName: 'Montenegro' },
+  'albania': { dbCountry: 'Albania', slug: 'albania', displayName: 'Albania' },
+  'bosnia-and-herzegovina': { dbCountry: 'Bosnia and Herzegovina', slug: 'bosnia-and-herzegovina', displayName: 'Bosnia and Herzegovina' },
+  'bosnia and herzegovina': { dbCountry: 'Bosnia and Herzegovina', slug: 'bosnia-and-herzegovina', displayName: 'Bosnia and Herzegovina' },
+  'bosnia': { dbCountry: 'Bosnia and Herzegovina', slug: 'bosnia-and-herzegovina', displayName: 'Bosnia and Herzegovina' },
+  'north-macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
+  'north macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
+  'macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

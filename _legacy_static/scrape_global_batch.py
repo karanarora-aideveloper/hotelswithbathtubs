@@ -155,6 +155,15 @@ BATCHES = {
         ("Victoria Falls", "Zimbabwe"),
         ("Sossusvlei", "Namibia"),
     ],
+    "balkans_southeast_europe": [
+        ("Kotor", "Montenegro"),
+        ("Budva", "Montenegro"),
+        ("Saranda", "Albania"),
+        ("Ksamil", "Albania"),
+        ("Sarajevo", "Bosnia and Herzegovina"),
+        ("Mostar", "Bosnia and Herzegovina"),
+        ("Ohrid", "North Macedonia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

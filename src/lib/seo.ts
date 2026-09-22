@@ -3307,6 +3307,125 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Sunrise balloon flights over towering Dune 45 and Big Daddy',
       'Every luxury desert suite verified for authentic private outdoor and indoor soaking amenities'
     ]
+  },
+
+  // Montenegro - Kotor
+  'kotor-montenegro': {
+    intro: 'Kotor is the jewel of the Adriatic, nestled at the deepest point of the dramatic, fjord-like Bay of Boka beneath towering limestone cliffs. Stay in restored Venetian stone palazzos and boutique waterfront retreats featuring private balcony jacuzzis and freestanding roll-top baths overlooking tranquil sapphire waters and passing sailboats.',
+    amenities: [
+      'Private bay-view terrace jacuzzis overlooking the fjord-like waters of Boka Bay',
+      'Freestanding Victorian cast-iron bathtubs set against original 17th-century exposed stone walls',
+      'Organic Mediterranean sea salts and local lavender and rosemary bath oils',
+      'Private waterfront stone jetty loungers and adjoining ensuite whirlpool tubs'
+    ],
+    whyChoose: [
+      'UNESCO World Heritage medieval Old Town filled with winding cobbled lanes and Venetian architecture',
+      'Serene and dramatic coastal fjord scenery unique to Southern Europe',
+      'Romantic sunset boat cruises to Our Lady of the Rocks and Perast',
+      'Guaranteed private in-room or terrace tubs confirmed on every listing'
+    ]
+  },
+
+  // Montenegro - Budva
+  'budva-montenegro': {
+    intro: 'Budva is the pulsating heart of the Montenegrin Riviera, combining medieval walled town charm with sun-drenched Adriatic beaches and glamorous superyacht marinas. Experience cliffside luxury resorts and boutique design hotels featuring infinity-view jacuzzi suites and deep marble soaking tubs gazing out over the azure Adriatic and the iconic islet of Sveti Stefan.',
+    amenities: [
+      'Cliffside heated infinity jacuzzis overlooking the open Adriatic Sea and Sveti Stefan',
+      'Deep circular marble soaking tubs with floor-to-ceiling panoramic glass windows',
+      'Hydromassage jets, aromatherapy steam showers, and champagne bath amenities',
+      'Private sundeck plunge tubs surrounded by olive groves and coastal pine trees'
+    ],
+    whyChoose: [
+      'Glamorous Mediterranean coastal atmosphere with upscale beach clubs and Michelin-worthy seafood',
+      'Historic Venetian Old Town surrounded by fortified stone walls and lively plazas',
+      'Proximity to scenic coastal coves like Mogren, Queen\'s Beach, and Miločer',
+      'Every bathtub listing strictly checked for genuine in-room or private terrace installation'
+    ]
+  },
+
+  // Albania - Saranda
+  'saranda-albania': {
+    intro: 'Saranda is the sun-kissed crown of the Albanian Riviera, horseshoeing around a sparkling Ionian Sea bay facing the Greek island of Corfu. Discover contemporary beachfront boutique hotels and luxury penthouse suites offering private sea-view jacuzzis and deep soaking tubs positioned for breathtaking Mediterranean sunsets.',
+    amenities: [
+      'Sunset-facing private balcony jacuzzis overlooking the Ionian Sea and Corfu skyline',
+      'Freestanding oval soaking tubs framed by floor-to-ceiling glass balconies',
+      'Mediterranean herbal bath essences, organic olive oil soaps, and plush towels',
+      'Private terrace sunbeds with adjoining whirlpool tubs for intimate evening stargazing'
+    ],
+    whyChoose: [
+      'Incredible Mediterranean luxury value along Europe\'s fastest-emerging Riviera',
+      'Gateway to the UNESCO World Heritage ancient ruins of Butrint and the turquoise Blue Eye spring',
+      'Vibrant coastal promenade with fresh seafood tavernas and lively seaside cafes',
+      'Independently verified private in-room and terrace jacuzzi amenities'
+    ]
+  },
+
+  // Albania - Ksamil
+  'ksamil-albania': {
+    intro: 'Ksamil is celebrated as the \'Maldives of Europe\', famed for its powdery white sand coves, crystalline turquoise waters, and idyllic offshore uninhabited islets. Stay in intimate coastal boutique villas and luxury resorts featuring private sea-view plunge pools and panoramic jacuzzi suites just steps from translucent waters.',
+    amenities: [
+      'Private terrace jacuzzi plunge tubs with direct panoramic views of the Ksamil islands',
+      'Deep freestanding soaking tubs situated next to open-air private sea-breeze balconies',
+      'Organic botanical bath infusions crafted from Mediterranean wildflowers',
+      'In-room champagne chilled and served beside private whirlpool baths'
+    ],
+    whyChoose: [
+      'Crystal-clear turquoise waters and white sand beaches rivaling tropical island destinations',
+      'Peaceful island boat excursions, paddleboarding, and secluded sunset swimming spots',
+      'Exceptional romantic boutique hospitality at affordable European rates',
+      'Verified authentic private in-suite and terrace soaking installations'
+    ]
+  },
+
+  // Bosnia and Herzegovina - Sarajevo
+  'sarajevo-bosnia-and-herzegovina': {
+    intro: 'Sarajevo is the historic crossroads where East meets West, set within a picturesque valley ringed by the Dinaric Alps. Retreat to enchanting Ottoman-era boutique hotels and upscale luxury towers featuring authentic Turkish-style hammam soaking baths, private jacuzzi suites, and panoramic mountain views.',
+    amenities: [
+      'Handcrafted Turkish copper and stone hammam bathtubs in atmospheric vaulted suites',
+      'Skyline jacuzzi tubs overlooking the minarets and church spires of Baščaršija',
+      'Traditional herbal bath salts, Turkish peshtemal cotton towels, and rosewater soaks',
+      'Cozy fireplace suites with adjoining deep soaking bathtubs for snowy alpine evenings'
+    ],
+    whyChoose: [
+      'Captivating fusion of Ottoman and Austro-Hungarian architecture, culture, and rich history',
+      'World-famous traditional Bosnian coffee culture, bazaar exploration, and hearty gastronomy',
+      'Cozy mountain-encircled ambiance perfect for romantic winter or autumn retreats',
+      'Every listed property confirmed for verified private in-room tubs'
+    ]
+  },
+
+  // Bosnia and Herzegovina - Mostar
+  'mostar-bosnia-and-herzegovina': {
+    intro: 'Mostar is an architectural masterpiece of the Balkans, world-renowned for its graceful 16th-century stone arch Stari Most spanning the emerald Neretva River. Experience romantic stone-walled boutique havens and riverside villas offering deep freestanding bathtubs and private hot tubs with direct views of the ancient bridge.',
+    amenities: [
+      'Private balcony jacuzzi tubs with direct, illuminated evening views of the iconic Old Bridge',
+      'Freestanding roll-top soaking bathtubs surrounded by ancient exposed river-stone walls',
+      'Local lavender bath salts and artisan olive oil toiletries',
+      'River-facing open-air terraces with tranquil water sounds echoing below'
+    ],
+    whyChoose: [
+      'One of the most picturesque and romantic UNESCO World Heritage bridges on earth',
+      'Candlelit riverside dining tasting Herzegovina\'s renowned Žilavka and Blatina wines',
+      'Magical Old Bazaar cobblestone strolls with artisan coppersmiths and lantern shops',
+      'Strictly verified private tubs ensuring unobstructed river and bridge vistas'
+    ]
+  },
+
+  // North Macedonia - Ohrid
+  'ohrid-north-macedonia': {
+    intro: 'Lake Ohrid is one of Europe\'s oldest and deepest lakes, a dual UNESCO Natural and Cultural World Heritage marvel surrounded by dramatic peaks and ancient cliffside monasteries. Indulge in lakeside boutique villas and luxury spa hotels featuring private lakefront balcony jacuzzis and deep soaking baths overlooking crystal-clear freshwater horizons.',
+    amenities: [
+      'Private lake-view balcony jacuzzis framing the tranquil blue waters of Lake Ohrid',
+      'Deep freestanding soaking tubs positioned for serene panoramic lake sunrises and sunsets',
+      'Local Macedonian herb and wildflower bath infusions and organic spa amenities',
+      'Private wooden lakeside sundecks and adjoining luxury hydrotherapy suites'
+    ],
+    whyChoose: [
+      'A serene, unspoiled European lake paradise with millennia of history and crystal-clear water',
+      'Cliffside Byzantine churches like Saint John at Kaneo perched dramatically over the lake',
+      'Exceptional lakeside dining featuring fresh Ohrid trout and award-winning Macedonian wines',
+      '100% verified private in-room and balcony soaking facilities'
+    ]
   }
 };
 

@@ -67,6 +67,10 @@ const regionMapping: Record<string, string> = {
   'Georgia': 'United Kingdom & Europe',
   'Cyprus': 'United Kingdom & Europe',
   'Malta': 'United Kingdom & Europe',
+  'Montenegro': 'United Kingdom & Europe',
+  'Albania': 'United Kingdom & Europe',
+  'Bosnia and Herzegovina': 'United Kingdom & Europe',
+  'North Macedonia': 'United Kingdom & Europe',
 
   // Asia & Middle East
   'Singapore': 'Asia & Middle East',
