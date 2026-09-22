@@ -3528,6 +3528,74 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Exceptional tropical island hospitality with unique Afro-Portuguese Creole culture',
       'Triple-verified private in-room and terrace tubs for guaranteed romance'
     ]
+  },
+
+  // Bermuda - Hamilton
+  'hamilton-bermuda': {
+    intro: 'Hamilton, the historic pastel-hued capital of Bermuda, offers an idyllic Atlantic sanctuary where British colonial charm meets world-famous pink sand beaches. Stay in legendary harborfront resorts and secluded boutique estates featuring deep marble soaking tubs, panoramic ocean-facing hydrotherapy baths, and private veranda whirlpools overlooking Bermuda\'s turquoise Great Sound.',
+    amenities: [
+      'Deep marble soaking tubs with sweeping views of Hamilton Harbour and sailing yachts',
+      'Private terrace hydrotherapy whirlpools overlooking Bermuda’s pastel waterfront',
+      'Artisanal cedarwood and Bermuda sea salt bath infusions with fragrant oleander aromas',
+      'Dual vanity spa ensuites with rainfall showers and Molton Brown toiletries'
+    ],
+    whyChoose: [
+      'Iconic pink sand beaches, crystal-clear turquoise waters, and world-class offshore reef diving',
+      'Timeless British colonial sophistication, harborfront fine dining, and historic parish tranquility',
+      'Effortless luxury romantic escape just a short direct flight from the US East Coast',
+      'Guaranteed private in-room and terrace tubs verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Bahamas - Exuma
+  'exuma-bahamas': {
+    intro: 'Exuma is the crown jewel of the Out Islands of the Bahamas, an archipelago of 365 pristine cays surrounded by the most luminous sapphire and turquoise water on Earth. Discover ultra-luxury beachfront villas, private island sanctuaries, and secluded boutique hideaways featuring open-air freestanding bathtubs, oceanfront plunge whirlpools, and private deck hot tubs beneath starry tropical skies.',
+    amenities: [
+      'Open-air freestanding soaking tubs set on secluded private decks just steps from powdery sand',
+      'Oceanfront jacuzzi spas with panoramic vistas of shifting turquoise sandbars',
+      'Bahamian sea salt soaks blended with coconut oil and wild tropical hibiscus blossoms',
+      'Outdoor bamboo rainfall showers coupled with oversized couple soaking tubs'
+    ],
+    whyChoose: [
+      'World-famous sapphire waters, deserted sandbars, and intimate swimming pig encounters',
+      'Pure Out Island privacy and untouched natural romance far from cruise ship crowds',
+      'World-class private boating, bonefishing, and snorkeling in crystal-clear visibility',
+      'Triple-verified private in-room and deck soaking tubs for an unforgettable honeymoon'
+    ]
+  },
+
+  // Greenland - Ilulissat
+  'ilulissat-greenland': {
+    intro: 'Ilulissat sits beside the UNESCO-listed Ilulissat Icefjord in Disko Bay, where colossal icebergs drift past the coastline in an awe-inspiring Arctic spectacle. Experience world-class eco-luxury lodges and boutique fjord hotels featuring heated panoramic soaking tubs, private cliff-edge hot tubs, and deep jacuzzi baths with front-row views of floating icebergs and dancing Northern Lights.',
+    amenities: [
+      'Heated outdoor cliff-edge hot tubs gazing directly onto colossal drifting icebergs in Disko Bay',
+      'Deep soaking tubs framed by floor-to-ceiling windows for Northern Lights viewing from the bath',
+      'Arctic mineral bath soaks infused with hand-foraged Greenlandic herbs and glacial salts',
+      'Cozy Nordic cedarwood sauna access directly connected to private jacuzzi suites'
+    ],
+    whyChoose: [
+      'Witness the breathtaking drama of the UNESCO World Heritage Ilulissat Icefjord and Sermeq Kujalleq glacier',
+      'Romantic Arctic wilderness luxury under midnight sun in summer or ethereal Aurora Borealis in winter',
+      'Dog sledding, whale watching safari cruises, and immersive Greenlandic Inuit culture',
+      'Every bathtub suite independently inspected and verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Faroe Islands - Torshavn
+  'torshavn-faroe-islands': {
+    intro: 'Torshavn, one of the world\'s most charming and remote Nordic capitals, rests among the dramatic emerald cliffs and tempestuous seas of the Faroe Islands. Stay in turf-roofed boutique hotels and architectural ocean lodges featuring cedarwood outdoor hot tubs, deep ceramic soaking tubs, and private harbor-view spa baths surrounded by dramatic fjords and cascading waterfalls.',
+    amenities: [
+      'Outdoor cedarwood hot tubs with dramatic views of the North Atlantic and misty fjords',
+      'Deep freestanding soaking bathtubs tucked beneath cozy turf roofs and Nordic timber beams',
+      'Faröese seaweed and botanical mineral bath infusions for deeply restorative thermal soaks',
+      'Heated slate bathroom floors, rainfall spa showers, and designer Nordic amenities'
+    ],
+    whyChoose: [
+      'Unsurpassed North Atlantic isolation, dramatic sea stacks, and postcard-perfect turf-roofed villages',
+      'World-renowned New Nordic culinary excellence and intimate Scandinavian hygge atmosphere',
+      'Pristine hiking along dramatic sea cliffs, puffin colonies, and mystical waterfalls',
+      '100% verified private in-room bathtubs and private outdoor hot tubs'
+    ]
   }
 };
 

@@ -178,6 +178,12 @@ BATCHES = {
         ("Lanzarote", "Spain"),
         ("Santa Maria", "Cape Verde"),
     ],
+    "atlantic_remote_gems": [
+        ("Hamilton", "Bermuda"),
+        ("Exuma", "Bahamas"),
+        ("Ilulissat", "Greenland"),
+        ("Torshavn", "Faroe Islands"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

@@ -151,6 +151,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'cape verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
   'cabo-verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
   'cabo verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
+  'bermuda': { dbCountry: 'Bermuda', slug: 'bermuda', displayName: 'Bermuda' },
+  'greenland': { dbCountry: 'Greenland', slug: 'greenland', displayName: 'Greenland' },
+  'faroe-islands': { dbCountry: 'Faroe Islands', slug: 'faroe-islands', displayName: 'Faroe Islands' },
+  'faroe islands': { dbCountry: 'Faroe Islands', slug: 'faroe-islands', displayName: 'Faroe Islands' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {
