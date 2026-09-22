@@ -184,6 +184,13 @@ BATCHES = {
         ("Ilulissat", "Greenland"),
         ("Torshavn", "Faroe Islands"),
     ],
+    "oceania_south_pacific": [
+        ("Rarotonga", "Cook Islands"),
+        ("Aitutaki", "Cook Islands"),
+        ("Apia", "Samoa"),
+        ("Port Vila", "Vanuatu"),
+        ("Noumea", "New Caledonia"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

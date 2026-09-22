@@ -175,12 +175,33 @@ export default async function CityHotelsPage({
     landmarkDistance: h.landmarkDistance,
   }));
 
-  // Fetch related blogs where title or slug contains the city name
+const CITY_ALIASES_MAP: Record<string, string[]> = {
+  'new york': ['new york', 'nyc', 'new-york-city', 'manhattan'],
+  'las vegas': ['las vegas', 'vegas'],
+  'los angeles': ['los angeles', 'la'],
+  'san francisco': ['san francisco', 'sf'],
+  'new orleans': ['new orleans', 'nola'],
+  'delhi': ['delhi', 'new delhi', 'mahipalpur'],
+  'bangalore': ['bangalore', 'bengaluru'],
+  'kolkata': ['kolkata', 'calcutta'],
+};
+
+  // Fetch related blogs where city, title, or slug matches the destination or known aliases
+  const cityKey = rawCity.toLowerCase();
+  const searchTerms = Array.from(new Set([cityKey, ...(CITY_ALIASES_MAP[cityKey] || [])]));
+  const blogOrConditions: any[] = [
+    { city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
+  ];
+  for (const term of searchTerms) {
+    const termEscaped = escapeRegex(term);
+    const slugEscaped = escapeRegex(term.replace(/\s+/g, '-'));
+    blogOrConditions.push({ title: new RegExp(`\\b${termEscaped}\\b`, 'i') });
+    blogOrConditions.push({ slug: new RegExp(`\\b${slugEscaped}\\b`, 'i') });
+    blogOrConditions.push({ slug: new RegExp(slugEscaped, 'i') });
+  }
+
   const relatedBlogs = await Blog.find({
-    $or: [
-      { title: new RegExp(`\\b${escapeRegex(rawCity)}\\b`, 'i') },
-      { slug: new RegExp(`\\b${escapeRegex(rawCity)}\\b`, 'i') }
-    ],
+    $or: blogOrConditions,
     published: true
   }).limit(3).sort({ createdAt: -1 });
 
@@ -364,6 +385,28 @@ export default async function CityHotelsPage({
         </p>
       </div>
 
+      {relatedBlogs.length > 0 && (
+        <div className="max-w-4xl mx-auto px-4 sm:px-8 mb-8">
+          <div className="bg-gradient-to-r from-accent/10 via-accent-secondary/5 to-transparent border border-accent/25 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl flex-shrink-0">📖</span>
+              <div>
+                <span className="text-2xs font-bold text-accent uppercase tracking-wider">Curated Destination Guide</span>
+                <p className="font-heading font-bold text-accent-secondary text-sm sm:text-base line-clamp-1">
+                  {relatedBlogs[0].title}
+                </p>
+              </div>
+            </div>
+            <Link
+              href={`/blog/${relatedBlogs[0].slug}`}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-xl transition-colors whitespace-nowrap shadow-xs"
+            >
+              Read Guide &rarr;
+            </Link>
+          </div>
+        </div>
+      )}
+
       <section className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12">
               <CityHotelsClient
                 hotels={hotels}
@@ -445,7 +488,13 @@ export default async function CityHotelsPage({
                             </div>
                           )}
                           <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                            <p className="text-accent font-semibold text-xs sm:text-sm mb-2">{blog.date}</p>
+                            {blog.date && (
+                              <p className="text-accent font-semibold text-xs sm:text-sm mb-2">
+                                {isNaN(new Date(blog.date).getTime())
+                                  ? blog.date
+                                  : new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </p>
+                            )}
                             <h3 className="font-heading text-lg sm:text-xl font-bold text-text-main mb-2 sm:mb-3 group-hover:text-accent transition-colors line-clamp-2">
                               {blog.title}
                             </h3>

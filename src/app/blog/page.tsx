@@ -33,9 +33,20 @@ export const metadata = {
   },
 };
 
+function formatBlogDate(dateStr?: string, fallbackDate?: Date): string {
+  if (!dateStr && !fallbackDate) return '';
+  const d = new Date(dateStr || fallbackDate!);
+  if (!isNaN(d.getTime())) {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  return dateStr || '';
+}
+
 export default async function BlogIndex() {
   await connectToDatabase();
   const blogs = await Blog.find({ published: true }).sort({ createdAt: -1 });
+  const featured = blogs[0];
+  const listBlogs = blogs.slice(1);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -79,46 +90,42 @@ export default async function BlogIndex() {
             </p>
           </header>
 
-          {/* Featured Post: Singapore */}
-          {(() => {
-            const featured = blogs.find((b: any) => b.slug === 'hotels-with-bathtubs-in-singapore');
-            if (!featured) return null;
-            return (
-              <Link href={`/blog/${featured.slug}`} className="group block mb-10 bg-gradient-to-r from-accent-secondary/5 to-accent/5 border-2 border-accent/20 rounded-2xl overflow-hidden hover:shadow-xl transition-all">
-                <div className="p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">✨ New</span>
-                      <span className="text-accent font-semibold text-xs">{featured.date}</span>
-                    </div>
-                    <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mb-3 group-hover:text-accent transition-colors text-wrap-balance">
-                      {featured.title}
-                    </h2>
-                    <p className="text-text-muted text-sm sm:text-base leading-relaxed mb-4 font-serif line-clamp-3">
-                      {featured.excerpt}
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-accent-secondary font-bold text-sm group-hover:underline">
-                      Read the Singapore Guide →
-                    </span>
+          {/* Dynamic Featured Post */}
+          {featured && (
+            <Link href={`/blog/${featured.slug}`} className="group block mb-10 bg-gradient-to-r from-accent-secondary/5 to-accent/5 border-2 border-accent/20 rounded-2xl overflow-hidden hover:shadow-xl transition-all">
+              <div className="p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">✨ Latest Guide</span>
+                    <span className="text-accent font-semibold text-xs">{formatBlogDate(featured.date, featured.createdAt)}</span>
                   </div>
-                  {featured.image && (
-                    <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
-                      <ProgressiveImage
-                        src={featured.image}
-                        alt={featured.title}
-                        priority
-                        sizes="(max-width: 768px) 100vw, 320px"
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
+                  <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mb-3 group-hover:text-accent transition-colors text-wrap-balance">
+                    {featured.title}
+                  </h2>
+                  <p className="text-text-muted text-sm sm:text-base leading-relaxed mb-4 font-serif line-clamp-3">
+                    {featured.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-accent-secondary font-bold text-sm group-hover:underline">
+                    Read Full Guide &rarr;
+                  </span>
                 </div>
-              </Link>
-            );
-          })()}
+                {featured.image && (
+                  <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
+                    <ProgressiveImage
+                      src={featured.image}
+                      alt={featured.title}
+                      priority
+                      sizes="(max-width: 768px) 100vw, 320px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+            </Link>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {blogs.map((blog: any, idx: number) => (
+            {listBlogs.map((blog: any, idx: number) => (
               <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                 {blog.image && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
@@ -132,7 +139,7 @@ export default async function BlogIndex() {
                   </div>
                 )}
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                  <p className="text-accent font-semibold text-xs sm:text-sm mb-2">{blog.date}</p>
+                  <p className="text-accent font-semibold text-xs sm:text-sm mb-2">{formatBlogDate(blog.date, blog.createdAt)}</p>
                   <h2 className="font-heading text-lg sm:text-xl font-bold text-text-main mb-2 sm:mb-3 group-hover:text-accent transition-colors line-clamp-2">
                     {blog.title}
                   </h2>

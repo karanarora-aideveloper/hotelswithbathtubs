@@ -197,6 +197,7 @@ export default async function CountryHubPage({
     'kenya': 'KE', 'rwanda': 'RW', 'zimbabwe': 'ZW', 'namibia': 'NA',
     'montenegro': 'ME', 'albania': 'AL', 'bosnia-and-herzegovina': 'BA', 'north-macedonia': 'MK',
     'cape-verde': 'CV', 'bermuda': 'BM', 'greenland': 'GL', 'faroe-islands': 'FO',
+    'cook-islands': 'CK', 'samoa': 'WS', 'vanuatu': 'VU', 'new-caledonia': 'NC',
   };
 
   const collectionSchema = {

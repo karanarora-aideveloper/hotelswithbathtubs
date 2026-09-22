@@ -3596,6 +3596,91 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pristine hiking along dramatic sea cliffs, puffin colonies, and mystical waterfalls',
       '100% verified private in-room bathtubs and private outdoor hot tubs'
     ]
+  },
+
+  // Cook Islands - Rarotonga
+  'rarotonga-cook-islands': {
+    intro: 'Rarotonga, the vibrant Polynesian heart of the Cook Islands, is surrounded by a dazzling turquoise reef lagoon and mist-shrouded volcanic peaks. Unwind in beachfront boutique sanctuaries and private garden villas featuring open-air clawfoot bathtubs, private plunge whirlpools, and romantic outdoor soaking baths enveloped by fragrant frangipani and hibiscus.',
+    amenities: [
+      'Open-air freestanding clawfoot soaking tubs nestled within private tropical garden courtyards',
+      'Lagoon-front deck whirlpools with uninterrupted views of Muri Lagoon and coral motus',
+      'Polynesian monoi coconut oil bath soaks infused with hand-picked gardenia and sea salt',
+      'Ensuite bathrooms with private open-air rainfall bamboo showers and his-and-hers vanities'
+    ],
+    whyChoose: [
+      'Pure Polynesian warmth, traditional island nights, and barefoot tropical beach romance',
+      'Snorkeling with tropical fish and paddleboarding straight from your villa terrace into calm lagoons',
+      'Intimate low-rise island vibe where no building is taller than a coconut palm',
+      '100% verified private in-room and garden soaking amenities across Booking.com and Agoda'
+    ]
+  },
+
+  // Cook Islands - Aitutaki
+  'aitutaki-cook-islands': {
+    intro: 'Aitutaki boasts what is widely celebrated as the world’s most magnificent lagoon, an ethereal expanse of translucent turquoise and sapphire water dotted with powder-white sandbars. Indulge in exclusive overwater bungalows and secluded beachfront hideaways featuring ocean-edge infinity jacuzzis, deep couples soaking tubs, and open-air bathrooms under the Southern Cross.',
+    amenities: [
+      'Private overwater bungalow decks with built-in whirlpool tubs overlooking crystal turquoise waters',
+      'Deep freestanding stone bathtubs with panoramic floor-to-ceiling vistas of the Aitutaki lagoon',
+      'Aromatherapeutic island bath rituals with wild coconut cream, vanilla pods, and sea minerals',
+      'Steps descending directly from your private sun deck into warm, bath-temperature lagoon water'
+    ],
+    whyChoose: [
+      'Arguably the most breathtaking tropical lagoon on the planet for ultimate honeymoon seclusion',
+      'Private boat charters to One Foot Island and deserted sandbanks for unforgettable picnics',
+      'Unspoiled natural paradise with supreme privacy far from mass tourism',
+      'Triple-verified private in-room and overwater tub facilities'
+    ]
+  },
+
+  // Samoa - Apia
+  'apia-samoa': {
+    intro: 'Apia, nestled on the lush volcanic island of Upolu in Samoa, embodies the authentic and timeless spirit of Fa\'a Samoa (The Samoan Way). Experience romantic colonial-style boutique hotels and coastal cliffside resorts featuring volcanic basalt stone soaking tubs, private garden fales with open-air whirlpool baths, and natural hot spring water soaks beneath coconut palm canopies.',
+    amenities: [
+      'Hand-carved volcanic black stone soaking tubs in secluded open-air tropical bathroom fales',
+      'Private garden whirlpools surrounded by lush ferns, ginger blossoms, and bird of paradise flowers',
+      'Organic Samoan coconut oil (Popo) and nonu fruit bath infusions with sea minerals',
+      'Spacious covered verandas with traditional thatched fales and private outdoor spa baths'
+    ],
+    whyChoose: [
+      'Authentic South Pacific culture, ancient Polynesian hospitality, and peaceful island rhythm',
+      'Swimming in natural volcanic wonders like the world-famous To Sua Ocean Trench and Lalomanu Beach',
+      'Lush tropical rainforest waterfalls, coastal blowholes, and serene mountain vistas',
+      'Guaranteed private in-room and garden bathtubs verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Vanuatu - Port Vila
+  'port-vila-vanuatu': {
+    intro: 'Port Vila, the lively island capital of Vanuatu on Efate, is an extraordinary South Pacific haven of turquoise lagoons, cascading waterfalls, and active volcanic wonders. Retreat to private island luxury villas and clifftop boutique resorts featuring overwater jacuzzi suites, sunken terrazzo bathtubs, and oceanfront hot tubs overlooking tranquil Mele Bay.',
+    amenities: [
+      'Sunken terrazzo bathtubs and private outdoor whirlpools with sweeping views of Mele Bay',
+      'Private overwater and beach villas with direct plunge tubs and sunset cocktail decks',
+      'Volcanic mineral and sulfur clay spa bath preparations sourced from surrounding volcanic islands',
+      'Private outdoor tropical rain showers and romantic double deep soaking tubs'
+    ],
+    whyChoose: [
+      'Thrilling South Pacific adventure combined with ultra-romantic private island sanctuaries',
+      'World-famous underwater post office, Mele Cascades waterfalls, and pristine coral reefs',
+      'Friendly Melanesian hospitality and vibrant French-Melanesian fusion dining along the waterfront',
+      '100% verified private in-room and terrace tubs for romantic couples'
+    ]
+  },
+
+  // New Caledonia - Noumea
+  'noumea-new-caledonia': {
+    intro: 'Noumea, the cosmopolitan capital of New Caledonia, fuses chic French Riviera elegance with South Pacific tropical splendor on the world\'s largest enclosed coral reef lagoon. Stay in five-star beachfront palaces and overwater lagoon bungalows in Anse Vata and Baie des Citrons featuring deep hydrotherapy soaking tubs, private oceanfront whirlpool decks, and sunset Champagne baths.',
+    amenities: [
+      'Deep marble hydrotherapy bathtubs overlooking the turquoise UNESCO World Heritage lagoon',
+      'Private overwater terrace hot tubs with panoramic sunset views across the coral barrier reef',
+      'French luxury bath amenities, aromatic lavender sea salts, and chilled French Champagne setups',
+      'Sunken bathtub suites with direct views of palm-fringed bays and sailing catamarans'
+    ],
+    whyChoose: [
+      'The "Paris of the Pacific": world-class French haute cuisine paired with tropical lagoon bliss',
+      'Explore the UNESCO-listed Great Lagoon with crystal-clear visibility, sea turtles, and coral islets',
+      'Sophisticated waterfront promenades, duty-free French boutiques, and vibrant marina culture',
+      'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
+    ]
   }
 };
 

@@ -155,6 +155,12 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'greenland': { dbCountry: 'Greenland', slug: 'greenland', displayName: 'Greenland' },
   'faroe-islands': { dbCountry: 'Faroe Islands', slug: 'faroe-islands', displayName: 'Faroe Islands' },
   'faroe islands': { dbCountry: 'Faroe Islands', slug: 'faroe-islands', displayName: 'Faroe Islands' },
+  'cook-islands': { dbCountry: 'Cook Islands', slug: 'cook-islands', displayName: 'Cook Islands' },
+  'cook islands': { dbCountry: 'Cook Islands', slug: 'cook-islands', displayName: 'Cook Islands' },
+  'samoa': { dbCountry: 'Samoa', slug: 'samoa', displayName: 'Samoa' },
+  'vanuatu': { dbCountry: 'Vanuatu', slug: 'vanuatu', displayName: 'Vanuatu' },
+  'new-caledonia': { dbCountry: 'New Caledonia', slug: 'new-caledonia', displayName: 'New Caledonia' },
+  'new caledonia': { dbCountry: 'New Caledonia', slug: 'new-caledonia', displayName: 'New Caledonia' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

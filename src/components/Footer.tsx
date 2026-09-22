@@ -136,6 +136,10 @@ const regionMapping: Record<string, string> = {
   'Namibia': 'Tropical Islands & Southern Escapes',
   'Cape Verde': 'Tropical Islands & Southern Escapes',
   'Bermuda': 'Tropical Islands & Southern Escapes',
+  'Cook Islands': 'Tropical Islands & Southern Escapes',
+  'Samoa': 'Tropical Islands & Southern Escapes',
+  'Vanuatu': 'Tropical Islands & Southern Escapes',
+  'New Caledonia': 'Tropical Islands & Southern Escapes',
 };
 
 
