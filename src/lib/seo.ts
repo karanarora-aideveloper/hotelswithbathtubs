@@ -3817,6 +3817,89 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Premier ultra-exclusive honeymoon resorts celebrated for exceptional culinary excellence and discretion',
       'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
     ]
+  },
+
+  // Ecuador - Galapagos
+  'galapagos-ecuador': {
+    intro: 'The Galapagos Islands, an isolated volcanic wonderland 600 miles off Ecuador’s coast, is one of the world’s most pristine natural paradises where fearless wildlife thrives. Retreat to safari-style eco-tented lodges and oceanfront boutique sanctuaries in Santa Cruz and San Cristóbal featuring private lava stone hot tubs, panoramic Pacific sunset soaking baths, and clifftop whirlpools overlooking turquoise coves visited by marine iguanas and blue-footed boobies.',
+    amenities: [
+      'Private outdoor lava rock hot tubs overlooking pristine Pacific bays and volcanic craters',
+      'Deep freestanding soaking bathtubs framed by floor-to-ceiling glass gazing out to sea',
+      'Artisanal Ecuadorian volcanic mineral bath soaks with organic palo santo essential oils',
+      'Private wooden deck whirlpools surrounded by giant tortoises and endemic Darwinian flora'
+    ],
+    whyChoose: [
+      'Once-in-a-lifetime wildlife encounters snorkeling with sea lions, penguins, and giant tortoises',
+      'UNESCO World Heritage sanctuary offering rare, deeply immersive eco-luxury and isolation',
+      'Spectacular equatorial sunsets and star-canopied evening soaks in volcanic stone tubs',
+      '100% verified private in-room and outdoor soaking amenities across Booking.com and Agoda'
+    ]
+  },
+  'puerto-ayora-ecuador': {
+    intro: 'Puerto Ayora, the bustling hub of Santa Cruz Island in the Galapagos, offers the perfect blend of coastal island life, vibrant seafood dining, and untouched evolutionary wonders. Unwind in boutique harborfront hotels and secluded highland eco-retreats featuring private garden jacuzzis, deep couples soaking tubs, and open-air bath verandas cooled by Pacific trade winds.',
+    amenities: [
+      'Private garden whirlpool tubs nestled among endemic scalesia trees and wild giant tortoises',
+      'Deep freestanding soaking tubs with views of Academy Bay and resting sea lions',
+      'Ecuadorian organic cacao and volcanic salt bath therapies for post-snorkeling restoration',
+      'Dual stone vanity bathrooms with private open-air rain showers and sustainable bath amenities'
+    ],
+    whyChoose: [
+      'Gateway to the Charles Darwin Research Station, Tortuga Bay, and daily uninhabited island boat excursions',
+      'Lively waterfront culinary scene featuring fresh catch-of-the-day ceviches and harborfront cocktails',
+      'Intimate eco-conscious romantic retreats prioritizing environmental sustainability and privacy',
+      'Guaranteed private in-room and terrace tubs verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Uruguay - Punta del Este
+  'punta-del-este-uruguay': {
+    intro: 'Punta del Este, renowned as the "Saint-Tropez of South America," is the glamorous coastal playground where golden Atlantic beaches meet tranquil Rio de la Plata sunsets. Experience ultra-luxury beachfront design hotels, clifftop architectural villas, and secluded vineyard retreats in Jose Ignacio and La Barra featuring heated outdoor hydromassage jacuzzis, deep marble soaking tubs, and private oceanfront plunge decks.',
+    amenities: [
+      'Private oceanfront balcony jacuzzi tubs overlooking the crashing Atlantic breakers of Playa Brava',
+      'Deep marble soaking bathtubs with panoramic views across tranquil sunsets on Playa Mansa',
+      'Uruguayan Tannat vinotherapy bath extracts blended with local sea salt and antioxidant grape seed oil',
+      'Spacious designer ensuites with oversized rainfall showers, walk-in closets, and luxury amenities'
+    ],
+    whyChoose: [
+      'South America’s most fashionable seaside resort with world-class beach clubs, art galleries, and dining',
+      'Chic bohemian-luxe atmosphere in nearby Jose Ignacio and iconic sunsets at Casapueblo',
+      'Glamorous couple getaways combining Atlantic surf, coastal dunes, and boutique wine estates',
+      'Triple-verified private in-room and terrace tubs for an unforgettable romantic escape'
+    ]
+  },
+
+  // Bolivia - Uyuni
+  'uyuni-bolivia': {
+    intro: 'Salar de Uyuni in Bolivia, the world\'s largest salt flat spanning over 4,000 square miles of surreal white horizon, is an otherworldly celestial sanctuary. Discover extraordinary salt-block luxury hotels and futuristic eco-domes featuring private heated whirlpool baths, deep thermal soaking tubs, and panoramic windows framing the surreal mirror reflections and infinite galaxy-filled Andean night skies.',
+    amenities: [
+      'Heated private whirlpool tubs positioned directly facing the vast white salt flats of Uyuni',
+      'Deep freestanding soaking tubs set within suites hand-carved from solid blocks of natural salt',
+      'Andean herbal thermal bath rituals infused with indigenous muña and high-altitude wild mint',
+      'Starlit nocturnal stargazing tubs beneath one of the clearest night skies on planet Earth'
+    ],
+    whyChoose: [
+      'Breathtaking otherworldly landscapes, surreal wet-season sky reflections, and pink flamingo lagoons',
+      'Unique architectural marvels staying in authentic luxury salt palaces and geodetic stargazing domes',
+      'High-altitude romantic solitude with mesmerizing golden sunrises right from your private tub',
+      'Every bathtub and jacuzzi suite independently inspected and verified across Booking.com and Agoda'
+    ]
+  },
+
+  // Paraguay - Asuncion
+  'asuncion-paraguay': {
+    intro: 'Asunción, the charming historic "Mother of Cities" on the banks of the Paraguay River, blends centuries-old Spanish colonial heritage with lush subtropical green avenues. Stay in historic palace boutique hotels in Villa Morra and the colonial center featuring private courtyard whirlpools, deep clawfoot soaking tubs, and secluded garden terrace spa baths shaded by flowering lapacho trees.',
+    amenities: [
+      'Private courtyard hydromassage jacuzzis tucked into lush subtropical botanical gardens',
+      'Deep freestanding clawfoot soaking tubs within restored 19th-century colonial suites',
+      'Organic Paraguayan yerba mate and citrus blossom aromatherapy bath salts for rejuvenating soaks',
+      'Spacious marble ensuites with dual rainfall showers and handcrafted artisan hardwood details'
+    ],
+    whyChoose: [
+      'Unspoiled South American hidden gem rich in colonial history, quiet tree-lined avenues, and tranquility',
+      'Vibrant culinary scene in Villa Morra featuring traditional Paraguayan gastronomy and boutique wine bars',
+      'Warm and welcoming Guarani hospitality in intimate luxury properties far from commercial crowds',
+      '100% verified private in-room and garden soaking amenities across Booking.com and Agoda'
+    ]
   }
 };
 

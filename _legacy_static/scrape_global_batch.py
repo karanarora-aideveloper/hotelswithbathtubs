@@ -203,6 +203,12 @@ BATCHES = {
         ("Willemstad", "Curacao"),
         ("Saint Johns", "Antigua and Barbuda"),
     ],
+    "south_america_pacific_wonders": [
+        ("Galapagos", "Ecuador"),
+        ("Punta del Este", "Uruguay"),
+        ("Uyuni", "Bolivia"),
+        ("Asuncion", "Paraguay"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

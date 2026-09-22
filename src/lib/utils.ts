@@ -172,6 +172,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'antigua-and-barbuda': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
   'antigua and barbuda': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
   'antigua': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
+  'ecuador': { dbCountry: 'Ecuador', slug: 'ecuador', displayName: 'Ecuador' },
+  'uruguay': { dbCountry: 'Uruguay', slug: 'uruguay', displayName: 'Uruguay' },
+  'bolivia': { dbCountry: 'Bolivia', slug: 'bolivia', displayName: 'Bolivia' },
+  'paraguay': { dbCountry: 'Paraguay', slug: 'paraguay', displayName: 'Paraguay' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

@@ -200,6 +200,7 @@ export default async function CountryHubPage({
     'cook-islands': 'CK', 'samoa': 'WS', 'vanuatu': 'VU', 'new-caledonia': 'NC',
     'madagascar': 'MG', 'mozambique': 'MZ', 'botswana': 'BW', 'zambia': 'ZM',
     'honduras': 'HN', 'nicaragua': 'NI', 'curacao': 'CW', 'antigua-and-barbuda': 'AG',
+    'ecuador': 'EC', 'uruguay': 'UY', 'bolivia': 'BO', 'paraguay': 'PY',
   };
 
   const collectionSchema = {
