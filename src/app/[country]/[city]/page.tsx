@@ -11,7 +11,7 @@ import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
-export const revalidate = 3600;
+export const revalidate = false;
 
 export async function generateStaticParams() {
   await connectToDatabase();

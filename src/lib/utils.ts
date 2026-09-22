@@ -165,6 +165,13 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'mozambique': { dbCountry: 'Mozambique', slug: 'mozambique', displayName: 'Mozambique' },
   'botswana': { dbCountry: 'Botswana', slug: 'botswana', displayName: 'Botswana' },
   'zambia': { dbCountry: 'Zambia', slug: 'zambia', displayName: 'Zambia' },
+  'honduras': { dbCountry: 'Honduras', slug: 'honduras', displayName: 'Honduras' },
+  'nicaragua': { dbCountry: 'Nicaragua', slug: 'nicaragua', displayName: 'Nicaragua' },
+  'curacao': { dbCountry: 'Curacao', slug: 'curacao', displayName: 'Curaçao' },
+  'curaçao': { dbCountry: 'Curacao', slug: 'curacao', displayName: 'Curaçao' },
+  'antigua-and-barbuda': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
+  'antigua and barbuda': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
+  'antigua': { dbCountry: 'Antigua and Barbuda', slug: 'antigua-and-barbuda', displayName: 'Antigua & Barbuda' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

@@ -11,8 +11,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Project: Hotels With Bathtubs (hotelswithbathtubs.com)
 
 ## Vercel Deployment & Account Info
-- **Vercel Account/Team**: `arorakaran869` (`team_UALwu9SFfH3mdnBpT2jbhbQa`)
-- **Vercel Project**: `hotelswithbathtubs` (`prj_tyntNwUH5zdMrZ7LHG7umiZbYNL9`)
+- **Vercel Account/Team**: `addyfunstudios` (`team_mIp1O3Zz4EecQEZo1sKUBfVY`)
+- **Vercel Project**: `hotelswithbathtubs` (`prj_WISY3tDfdnPoxTCLysxlFYj5IMm0`)
 - **Custom Domains**: `https://hotelswithbathtubs.com` & `https://www.hotelswithbathtubs.com`
 - **Image Storage & Delivery**: All images are hosted on **Cloudflare R2** (`dreamwave` bucket) at `https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/` ($0 egress fees). DO NOT use Vercel Blob or upload assets to Vercel.
 - **Vercel Zero-Overload Rule**: `images: { unoptimized: true }` is enabled in `next.config.ts`. All images are served directly from Cloudflare R2 without routing through Vercel's `/_next/image` optimization service. This guarantees **0 / 1,000** image optimization quota usage and **0 GB** image bandwidth on Vercel Hobby.

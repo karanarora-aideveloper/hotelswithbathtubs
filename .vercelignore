@@ -1,0 +1,26 @@
+# Ignore large non-production assets and scratch data from Vercel deployments
+_legacy_static/
+raw_html/
+scratch/
+audit_reports/
+blog_posts/
+archive/
+.pinterest_browser_profile/
+.playwright-mcp/
+.agents/
+
+# Scraper scripts and test harnesses
+scrape-*.mjs
+test-*.mjs
+upload-to-r2.js
+*.html
+
+# Data dumps and scrapes
+*_hotels.json
+hotel_database.json
+
+# Local envs & logs
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

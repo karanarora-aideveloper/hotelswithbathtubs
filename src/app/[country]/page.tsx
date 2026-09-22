@@ -6,7 +6,7 @@ import CityCard from '@/components/CityCard';
 import StructuredData from '@/components/StructuredData';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 
-export const revalidate = 3600;
+export const revalidate = false;
 
 export async function generateStaticParams() {
   await connectToDatabase();

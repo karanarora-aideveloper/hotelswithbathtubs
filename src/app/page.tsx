@@ -7,8 +7,8 @@ import HomeDestinationsClient from '@/components/HomeDestinationsClient';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 
-// Force dynamic or revalidate since it's a directory
-export const revalidate = 3600; // Revalidate every hour
+// Static page generation with on-demand cache
+export const revalidate = false;
 
 // Page-level metadata — overrides layout.tsx defaults
 // Front-loaded for high-impression GSC head terms: "hotels with bathtub", "bathtub in room", "jacuzzi suites"
