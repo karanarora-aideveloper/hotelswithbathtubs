@@ -3103,8 +3103,109 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Absolute tranquility, pure mountain air, and unmatched celestial stargazing with zero light pollution',
       'Every bathtub listing independently verified for authentic private in-room and terrace amenities'
     ]
-  }
+  },
 
+  // Belize - Ambergris Caye
+  'ambergris-caye-belize': {
+    intro: 'Ambergris Caye is Belize\'s premier tropical paradise, fringed by the world-famous Belize Barrier Reef and turquoise Caribbean shallows. Unwind in beachfront boutique resorts and luxury overwater cabanas boasting private open-air jacuzzi tubs and deep soaking baths surrounded by swaying palms and ocean breezes.',
+    amenities: [
+      'Private oceanfront sundeck jacuzzis with panoramic views of the barrier reef',
+      'Open-air coral-stone soaking tubs beneath tropical outdoor palapas',
+      'Handcrafted artisan bath salts infused with organic coconut and Caribbean sea minerals',
+      'Plunge pools and deep soaking tubs in standalone thatch-roof casitas'
+    ],
+    whyChoose: [
+      'World-class snorkeling and diving at Hol Chan Marine Reserve and the Great Blue Hole',
+      'Golf cart cruising, barefoot beachfront dining, and laid-back Caribbean island vibes in San Pedro',
+      'Ultra-private boutique beachfront villas tailored for romantic honeymoons and milestone escapes',
+      'Every bathtub and jacuzzi suite independently confirmed for verified private in-room use'
+    ]
+  },
+
+  // Belize - Placencia
+  'placencia-belize': {
+    intro: 'Placencia is a tranquil sixteen-mile emerald peninsula in southern Belize renowned for its golden beaches and relaxed barefoot luxury. Retreat to oceanfront eco-luxury resorts and secluded Maya Beach villas featuring deep stone soaking tubs, private plunge pools, and open-air rain showers.',
+    amenities: [
+      'Deep freestanding stone soaking bathtubs overlooking private golden sand beaches',
+      'Veranda jacuzzi tubs enveloped by lush tropical gardens and sea grape trees',
+      'Natural organic botanicals, botanical bath oils, and coconut milk soaks',
+      'Private lagoon-facing plunge tubs with breathtaking sunset views over the Maya Mountains'
+    ],
+    whyChoose: [
+      'Uncrowded palm-lined beaches, tranquil Caribbean waters, and charming colorful boardwalks',
+      'Gateway to world-class whale shark encounters, barrier reef diving, and jungle monkey river tours',
+      'Intimate eco-chic luxury estates with bespoke farm-to-table culinary experiences',
+      'Every bathtub listing rigorously verified for genuine private in-room or veranda placement'
+    ]
+  },
+
+  // Guatemala - Lake Atitlan
+  'lake-atitlan-guatemala': {
+    intro: 'Lake Atitlan is celebrated as one of the most stunning alpine lakes on earth, framed by three majestic volcanic peaks and vibrant Maya villages. Indulge in cliffside boutique eco-lodges featuring solar-heated cedar hot tubs and panoramic stone soaking baths framing mist-shrouded volcanic waters.',
+    amenities: [
+      'Cliffside heated cedarwood hot tubs overlooking San Pedro and Tolimán volcanoes',
+      'Handcrafted natural volcanic stone bathtubs integrated into open glass-walled suites',
+      'Herbal bath infusions made with highland lavender, eucalyptus, and local medicinal plants',
+      'Private infinity plunge tubs set upon terraced hillside gardens above the lake'
+    ],
+    whyChoose: [
+      'Mesmerizing sunrises and sunsets painting dramatic volcanic silhouettes across sacred waters',
+      'Rich indigenous Mayan culture, colorful artisan textile markets, and peaceful kayak excursions',
+      'Exceptional tranquility and romantic seclusion far removed from commercial tourist corridors',
+      'Strictly verified private soaking tubs offering unobstructed, direct lake views'
+    ]
+  },
+
+  // Guatemala - Antigua
+  'antigua-guatemala': {
+    intro: 'Antigua Guatemala is a UNESCO World Heritage treasure, famed for its preserved 16th-century Spanish colonial architecture, cobblestone avenues, and dramatic volcanic backdrops. Experience romantic convent-palace hotels and luxury courtyard retreats with deep roll-top bathtubs, private jacuzzis, and wood-burning fireplaces.',
+    amenities: [
+      'Restored Spanish colonial suites with deep cast-iron roll-top and clawfoot tubs',
+      'Private courtyard garden jacuzzi pools framed by bougainvillea and colonial arches',
+      'Artisan handmade bath soaps crafted with Guatemalan cocoa and volcanic minerals',
+      'Fireside luxury bathrooms with antique brass fixtures and hand-painted Talavera tiles'
+    ],
+    whyChoose: [
+      'Enchanting colonial ambiance with candlelit courtyards, cobblestone lanes, and baroque church ruins',
+      'World-class specialty coffee culture, gourmet volcanic dining, and views of Volcán de Agua and Fuego',
+      'Boutique historical hotels offering exceptional colonial charm, romance, and warm hospitality',
+      'Every bathtub suite triple-checked for private in-room and courtyard installations'
+    ]
+  },
+
+  // Panama - Bocas del Toro
+  'bocas-del-toro-panama': {
+    intro: 'Bocas del Toro is an idyllic Caribbean archipelago in Panama where lush tropical rainforest meets crystalline turquoise waters and vibrant coral reefs. Stay in eco-luxury overwater bungalows and private island retreats boasting private overwater jacuzzis and ocean-view soaking tubs.',
+    amenities: [
+      'Private overwater sun deck jacuzzis perched above turquoise Caribbean waters and coral reefs',
+      'Deep freestanding soaking bathtubs with floor-to-ceiling rainforest canopy or ocean views',
+      'Organic coconut oil bath infusions, marine salts, and natural bamboo spa accessories',
+      'Direct lagoon access and private hammock nets positioned right alongside your outdoor tub'
+    ],
+    whyChoose: [
+      'Unrivaled tropical seclusion in authentic overwater villas and secluded private island sanctuaries',
+      'Snorkeling with starfish, bioluminescent night bays, and surfing world-class Caribbean breaks',
+      'A perfect blend of relaxed bohemian charm and luxurious eco-resort romance',
+      '100% verified private overwater and beachfront soaking facilities'
+    ]
+  },
+
+  // Panama - Panama City
+  'panama-city-panama': {
+    intro: 'Panama City captivates with its dynamic contrast between glittering Pacific skyscrapers and the historic charm of UNESCO-listed Casco Viejo. Discover boutique heritage palaces with romantic clawfoot tubs and high-rise luxury towers featuring floor-to-ceiling skyline and ocean-view jacuzzi suites.',
+    amenities: [
+      'Floor-to-ceiling window bathtubs overlooking the Pacific Ocean and the Panama Canal entrance',
+      'Historic Casco Viejo suites with restored French-colonial clawfoot soaking tubs',
+      'Rooftop jacuzzi plunge tubs with panoramic skyline and sunset views over the bay',
+      'Premium spa bath amenities, marble bathrooms, and hydrotherapy jet installations'
+    ],
+    whyChoose: [
+      'Cosmopolitan international dining, vibrant rooftop cocktail bars, and rich historic architecture',
+      'Fascinating cultural blend of modern global capital, tropical rainforests, and historic canal heritage',
+      'Ultra-luxurious 5-star hotel towers and romantic boutique mansions at competitive global rates',
+      'Every bathtub listing independently verified across trusted global booking platforms'
+    ]
+  }
 };
 
 export function getCityContent(city: string, country: string): typeof cityIntroContent['default'] {

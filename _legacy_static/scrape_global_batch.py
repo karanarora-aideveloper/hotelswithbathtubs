@@ -139,6 +139,14 @@ BATCHES = {
         ("Ulaanbaatar", "Mongolia"),
         ("Terelj", "Mongolia"),
     ],
+    "central_america_caribbean": [
+        ("Ambergris Caye", "Belize"),
+        ("Placencia", "Belize"),
+        ("Lake Atitlan", "Guatemala"),
+        ("Antigua", "Guatemala"),
+        ("Bocas del Toro", "Panama"),
+        ("Panama City", "Panama"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

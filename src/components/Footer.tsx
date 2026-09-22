@@ -121,6 +121,9 @@ const regionMapping: Record<string, string> = {
   'Colombia': 'Tropical Islands & Southern Escapes',
   'Tunisia': 'Tropical Islands & Southern Escapes',
   'Egypt': 'Tropical Islands & Southern Escapes',
+  'Belize': 'Tropical Islands & Southern Escapes',
+  'Guatemala': 'Tropical Islands & Southern Escapes',
+  'Panama': 'Tropical Islands & Southern Escapes',
 };
 
 
