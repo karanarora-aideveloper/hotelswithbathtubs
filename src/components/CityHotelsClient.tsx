@@ -1,10 +1,16 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
+import {
+  recordHotelImpression,
+  recordFilterDeadEnd,
+  recordFilterReset,
+  recordFilterChange,
+} from '@/lib/gtag';
 
 type HotelData = {
   _id?: string;
@@ -96,6 +102,50 @@ export default function CityHotelsClient({
     });
   }, [uniqueHotels, selectedFilter, searchTerm]);
 
+  // Track dead-end filter pain point (when filter/search yields 0 hotels)
+  useEffect(() => {
+    if (filteredHotels.length === 0 && (selectedFilter !== 'all' || searchTerm.trim())) {
+      recordFilterDeadEnd(selectedFilter, searchTerm.trim(), cityName);
+    }
+  }, [filteredHotels.length, selectedFilter, searchTerm, cityName]);
+
+  // Track hotel card impressions as cards enter the viewport
+  useEffect(() => {
+    const cards = document.querySelectorAll<HTMLElement>('[data-hotel-card]');
+    if (cards.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const name = el.getAttribute('data-hotel-name');
+            const pos = parseInt(el.getAttribute('data-hotel-position') || '1', 10);
+            const hasPrice = el.getAttribute('data-has-price') === 'true';
+            if (name) {
+              recordHotelImpression(name, pos, hasPrice);
+            }
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [filteredHotels]);
+
+  const handleFilterClick = (filter: 'all' | 'jacuzzi' | 'soaking' | 'tripled') => {
+    setSelectedFilter(filter);
+    recordFilterChange(filter, counts[filter]);
+  };
+
+  const handleResetFilters = () => {
+    setSelectedFilter('all');
+    setSearchTerm('');
+    recordFilterReset(cityName);
+  };
+
   // Detect what kind of URL is stored in any booking field
   type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | null;
   function getUrlProvider(url?: string): UrlProvider {
@@ -165,7 +215,7 @@ export default function CityHotelsClient({
             Filter Tubs:
           </span>
           <button
-            onClick={() => setSelectedFilter('all')}
+            onClick={() => handleFilterClick('all')}
             aria-pressed={selectedFilter === 'all'}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedFilter === 'all'
@@ -181,7 +231,7 @@ export default function CityHotelsClient({
 
           {counts.jacuzzi > 0 && (
             <button
-              onClick={() => setSelectedFilter('jacuzzi')}
+              onClick={() => handleFilterClick('jacuzzi')}
               aria-pressed={selectedFilter === 'jacuzzi'}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
                 selectedFilter === 'jacuzzi'
@@ -198,7 +248,7 @@ export default function CityHotelsClient({
 
           {counts.soaking > 0 && (
             <button
-              onClick={() => setSelectedFilter('soaking')}
+              onClick={() => handleFilterClick('soaking')}
               aria-pressed={selectedFilter === 'soaking'}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
                 selectedFilter === 'soaking'
@@ -215,7 +265,7 @@ export default function CityHotelsClient({
 
           {counts.tripled > 0 && (
             <button
-              onClick={() => setSelectedFilter('tripled')}
+              onClick={() => handleFilterClick('tripled')}
               aria-pressed={selectedFilter === 'tripled'}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
                 selectedFilter === 'tripled'
@@ -293,6 +343,10 @@ export default function CityHotelsClient({
               <div
                 key={h._id || i}
                 id={`hotel-${slugify(h.name)}`}
+                data-hotel-card="true"
+                data-hotel-name={h.name}
+                data-hotel-position={i + 1}
+                data-has-price={!!h.price}
                 style={{ contentVisibility: 'auto', containIntrinsicSize: '420px' }}
                 className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group scroll-mt-24"
               >
@@ -438,10 +492,7 @@ export default function CityHotelsClient({
             Try resetting your bathtub filter or clearing the search keyword.
           </p>
           <button
-            onClick={() => {
-              setSelectedFilter('all');
-              setSearchTerm('');
-            }}
+            onClick={handleResetFilters}
             className="px-4 py-2 bg-accent text-white font-bold rounded-xl text-xs shadow-sm hover:bg-accent-hover transition-colors"
           >
             Reset Filters

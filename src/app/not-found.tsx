@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import NotFoundTracker from '@/components/NotFoundTracker';
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-8 py-20">
+      <NotFoundTracker />
       <span className="text-6xl mb-6">🛁</span>
       <h1 className="font-heading text-4xl font-extrabold text-accent-secondary mb-4">Page Not Found</h1>
       <p className="text-text-muted text-lg mb-8 max-w-md">

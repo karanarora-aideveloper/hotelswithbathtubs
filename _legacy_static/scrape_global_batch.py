@@ -164,6 +164,20 @@ BATCHES = {
         ("Mostar", "Bosnia and Herzegovina"),
         ("Ohrid", "North Macedonia"),
     ],
+    "atlantic_macaronesia": [
+        ("Funchal", "Portugal"),
+        ("Ponta Delgada", "Portugal"),
+        ("Tenerife", "Spain"),
+        ("Gran Canaria", "Spain"),
+        ("Lanzarote", "Spain"),
+        ("Santa Maria", "Cape Verde"),
+    ],
+    "atlantic_catchup": [
+        ("Tenerife", "Spain"),
+        ("Gran Canaria", "Spain"),
+        ("Lanzarote", "Spain"),
+        ("Santa Maria", "Cape Verde"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"
@@ -444,30 +458,50 @@ def save_to_mongo(all_hotels):
     client.close()
 
 
-def main():
+def get_chrome_version():
+    try:
+        out = subprocess.check_output(
+            ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version']
+        ).decode('utf-8')
+        m = re.search(r'Chrome\s+(\d+)', out)
+        if m:
+            return int(m.group(1))
+    except Exception:
+        pass
+    return 153
+
+
+def init_driver():
     if not hasattr(uc.ChromeOptions, 'headless'):
         uc.ChromeOptions.headless = property(lambda self: False)
     options = uc.ChromeOptions()
     options.add_argument('--window-size=1440,900')
-
-    def get_chrome_version():
-        try:
-            out = subprocess.check_output(
-                ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--version']
-            ).decode('utf-8')
-            m = re.search(r'Chrome\s+(\d+)', out)
-            if m:
-                return int(m.group(1))
-        except Exception:
-            pass
-        return 153
-
     driver = uc.Chrome(options=options, version_main=get_chrome_version())
     time.sleep(2)
+    return driver
+
+
+def is_driver_healthy(driver):
+    try:
+        _ = driver.current_url
+        return True
+    except Exception:
+        return False
+
+
+def main():
+    driver = init_driver()
     all_hotels = []
     try:
         for idx, (city, country) in enumerate(CITIES_TO_SCRAPE):
             try:
+                if not is_driver_healthy(driver):
+                    print("  ⚠️ Driver session lost, recreating Chrome instance...")
+                    try:
+                        driver.quit()
+                    except Exception:
+                        pass
+                    driver = init_driver()
                 city_hotels = scrape_city(driver, city, country)
                 all_hotels.extend(city_hotels)
                 print(f"\n✅ {city}, {country}: {len(city_hotels)} hotels collected")
@@ -479,7 +513,10 @@ def main():
                 print("💤 Pausing 12s between destinations...")
                 time.sleep(12)
     finally:
-        driver.quit()
+        try:
+            driver.quit()
+        except Exception:
+            pass
 
     print(f"\n{'='*60}")
     print(f"TOTAL SCRAPED: {len(all_hotels)} hotels across {len(CITIES_TO_SCRAPE)} destinations")

@@ -147,6 +147,10 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'north-macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
   'north macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
   'macedonia': { dbCountry: 'North Macedonia', slug: 'north-macedonia', displayName: 'North Macedonia' },
+  'cape-verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
+  'cape verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
+  'cabo-verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
+  'cabo verde': { dbCountry: 'Cape Verde', slug: 'cape-verde', displayName: 'Cape Verde' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {

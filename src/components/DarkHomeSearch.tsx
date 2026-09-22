@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
 import { useGeo } from '@/lib/useGeo';
+import {
+  recordSearchZeroResults,
+  recordSearchAbandoned,
+  recordSearchSelection,
+} from '@/lib/gtag';
 
 type Match = { country: string; city: string };
 
@@ -30,12 +35,15 @@ export default function DarkHomeSearch() {
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        if (isOpen && query.trim().length >= 3 && !isNavigating) {
+          recordSearchAbandoned(query.trim(), query.trim().length);
+        }
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isOpen, query, isNavigating]);
 
   const allMatches: Match[] = Object.entries(locations).flatMap(([country, cities]) =>
     cities.map((city) => ({ country, city }))
@@ -59,11 +67,27 @@ export default function DarkHomeSearch() {
         })
     : [];
 
+  // Track search zero results when user pauses typing and no results match
+  useEffect(() => {
+    if (
+      isOpen &&
+      cleanQuery.length >= 2 &&
+      filtered.length === 0 &&
+      Object.keys(locations).length > 0
+    ) {
+      const timer = setTimeout(() => {
+        recordSearchZeroResults(query.trim(), 'dark_search_empty');
+      }, 750);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, cleanQuery, filtered.length, locations, query]);
+
   function getTargetUrl(match: Match) {
     return `/${slugify(match.country)}/${slugify(match.city)}`;
   }
 
   function goToCity(match: Match) {
+    recordSearchSelection(match.city, match.country, query.trim());
     setIsOpen(false);
     setIsNavigating(true);
     router.push(getTargetUrl(match));
@@ -75,14 +99,20 @@ export default function DarkHomeSearch() {
         ? filtered[activeIndex] 
         : filtered[0];
       goToCity(selected);
+    } else if (query.trim().length > 0) {
+      recordSearchZeroResults(query.trim(), 'dark_search_submit');
     }
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (!isOpen || filtered.length === 0) {
-      if (e.key === 'Enter' && filtered.length > 0) {
+      if (e.key === 'Enter') {
         e.preventDefault();
-        goToCity(filtered[0]);
+        if (filtered.length > 0) {
+          goToCity(filtered[0]);
+        } else if (query.trim().length > 0) {
+          recordSearchZeroResults(query.trim(), 'dark_search_enter');
+        }
       }
       return;
     }

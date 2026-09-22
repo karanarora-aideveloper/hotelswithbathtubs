@@ -1,6 +1,7 @@
 'use client';
 
 import { trackEvent } from '@/lib/analytics';
+import { recordBookingConversion } from '@/lib/gtag';
 import { wrapOutboundAffiliateLink } from '@/lib/affiliate';
 
 export default function OutboundLink({
@@ -33,6 +34,14 @@ export default function OutboundLink({
           city_name: cityName,
           booking_source: source || 'MakeMyTrip',
           destination_url: affiliateLink,
+        });
+
+        // Track to Google Analytics 4 & mark session converted
+        recordBookingConversion({
+          hotelName,
+          cityName,
+          bookingSource: source || 'MakeMyTrip',
+          destinationUrl: affiliateLink,
         });
       }}
     >

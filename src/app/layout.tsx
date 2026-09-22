@@ -9,6 +9,8 @@ import connectToDatabase from "@/lib/mongodb";
 import Settings from "@/models/Settings";
 import NavigationProgressBar from "@/components/NavigationProgressBar";
 import MixpanelProvider from "@/components/MixpanelProvider";
+import { GoogleAnalytics } from '@next/third-parties/google';
+import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
@@ -67,6 +69,11 @@ export default async function RootLayout({
 }>) {
   await connectToDatabase();
   const settings = await Settings.findOne();
+  const gaId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
+    process.env.NEXT_PUBLIC_GA_ID ||
+    settings?.googleAnalyticsId ||
+    '';
   
   return (
     <html lang="en">
@@ -83,6 +90,8 @@ export default async function RootLayout({
 
         <Footer />
         <MixpanelProvider />
+        {gaId && <GoogleAnalytics gaId={gaId} />}
+        <GoogleAnalyticsProvider gaId={gaId} />
         
       </body>
     </html>

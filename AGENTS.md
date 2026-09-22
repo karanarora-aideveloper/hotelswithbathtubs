@@ -18,77 +18,44 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Vercel Zero-Overload Rule**: `images: { unoptimized: true }` is enabled in `next.config.ts`. All images are served directly from Cloudflare R2 without routing through Vercel's `/_next/image` optimization service. This guarantees **0 / 1,000** image optimization quota usage and **0 GB** image bandwidth on Vercel Hobby.
 ---
 
-# Analytics Tracking — Mixpanel
+# Analytics Tracking — Mixpanel & Google Analytics 4 (GA4)
 
-This project uses **Mixpanel** for all product analytics. Mixpanel is the single source of truth for event tracking, user identification, and behavioral data. Do not introduce any other analytics tools, SDKs, or tracking libraries without explicit instruction from a user.
-
----
-
-## Before You Add or Modify Any Tracking
-
-⛔ **Do not write Mixpanel tracking code without reading this file first.**
-
-Wrong assumptions about platform, identity, or consent will produce broken Mixpanel data that requires manual cleanup or data deletion requests.
-
-### Mandatory checklist before writing any Mixpanel code
-
-- [x] Confirm you are using the correct Mixpanel SDK for this project's platform (see Tech Stack below)
-- [x] Check if this project routes data through a CDP — if yes, send Mixpanel events through the CDP, not the Mixpanel SDK directly
-- [x] Check if consent gating is required — if this project serves EU or California users, no Mixpanel events may fire before user consent
-- [x] Review the existing Mixpanel tracking plan below before adding new events
+This project uses **Mixpanel** and **Google Analytics 4 (GA4)** for product analytics, outbound affiliate conversion measurement, and specialized user churn / pain point tracking.
 
 ---
 
-## Tech Stack
+## Google Analytics 4 (GA4) Integration & Churn Telemetry
 
-| Detail | Value |
-|---|---|
-| **Platform** | Next.js App Router (React 19) |
-| **Mixpanel SDK** | `mixpanel-browser` |
-| **SDK version** | `^2.55.0` |
-| **Tracking method** | client-side |
-| **CDP (if any)** | none |
-| **Consent required** | no |
-| **Mixpanel project token location** | `.env.local` -> `NEXT_PUBLIC_MIXPANEL_TOKEN` |
+Google Analytics 4 is integrated via `@next/third-parties/google` and our custom telemetry layer (`src/lib/gtag.ts` and `src/components/GoogleAnalyticsProvider.tsx`).
 
----
+### Configuration
+- **Measurement ID Location**: `.env.local` -> `NEXT_PUBLIC_GA_MEASUREMENT_ID` (or MongoDB `Settings.googleAnalyticsId` managed in `/admin/seo`).
+- **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
 
-## Mixpanel Initialization
+### GA4 Events & Churn / Pain Point Tracking Plan
 
-Mixpanel is initialized in:
-
-**File:** `src/lib/analytics.ts`
-**Provider:** `src/components/MixpanelProvider.tsx`
-
-```typescript
-// Mixpanel is initialized client-side once at app startup
-initMixpanel();
-```
-
-**Do not:**
-- Initialize Mixpanel in multiple places
-- Create separate Mixpanel instances per component or module
-- Import Mixpanel directly in feature files — use the shared helpers in `src/lib/analytics.ts`
-
----
-
-## Mixpanel Identity
-
-Mixpanel identity is managed through:
-- *Out of Scope:* This project is a public travel directory and blog with no signup/login paths for visitors (only basic auth for `/admin`).
+| GA4 Event | Trigger / Condition | Key Parameters | Purpose / Pain Point Identified |
+|---|---|---|---|
+| `page_view` | User loads or transitions to a route | `page_location`, `page_path`, `page_title`, `page_type`, `country`, `city` | Baseline navigation & funnel entry |
+| `user_churn` | Page unmount, visibility hidden, or tab close without conversion | `churn_type`, `page_path`, `page_type`, `country`, `city`, `time_spent_seconds`, `max_scroll_depth`, `last_visible_section`, `hotels_viewed_count`, `has_converted`, `failed_search`, `failed_filter` | **Primary Churn Metric**. Pinpoints where and why user exited (`quick_bounce`, `shallow_browse`, `engaged_no_click`, `search_abandoned`, `filter_dead_end`, `rage_click_churn`, `converted_exit`) |
+| `search_zero_results` | User searches for a destination that returns 0 matches | `search_term`, `search_source`, `page_path`, `page_type` | **Pain Point**: Missing city / destination inventory demand |
+| `search_abandoned` | User types query (>= 3 chars) but dismisses dropdown without selection | `search_term`, `chars_count`, `page_path` | **Pain Point**: Search UX or incomplete autocomplete matches |
+| `search_selection` | User clicks or selects a city from search | `selected_city`, `selected_country`, `search_term`, `page_path` | Search success & destination intent |
+| `filter_dead_end` | Bathtub filter or hotel keyword returns 0 hotels | `filter_type`, `filter_query`, `city_name`, `page_path` | **Pain Point**: City lacks specific tub type (e.g. Jacuzzi) or hotel |
+| `filter_reset` | User clicks "Reset Filters" after a dead end | `city_name`, `page_path` | Recovery from dead-end filter |
+| `filter_applied` | User toggles bathtub filter pill | `filter_type`, `result_count`, `city_name`, `page_path` | Filter usage & preference trends |
+| `hotel_card_view` | Hotel card enters viewport (>= 30% visibility) | `hotel_name`, `hotel_position`, `has_price`, `city`, `country`, `page_path` | Exact hotels seen before drop-off |
+| `scroll_depth` | User reaches scroll milestones (25%, 50%, 75%, 90%, 100%) | `percent`, `page_path`, `page_type`, `country`, `city` | Drop-off curve & engagement cliff |
+| `exit_intent` | Desktop cursor rapidly moves to browser top bar | `time_spent_seconds`, `max_scroll_depth`, `last_visible_section`, `page_path`, `city`, `country` | Pre-churn hesitation signal |
+| `rage_click` | User clicks 3+ times within 1200ms in a 40px radius | `element_tag`, `element_text`, `element_class`, `page_path`, `page_type` | **Pain Point**: Unresponsive elements, broken buttons, misleading UI |
+| `page_not_found` | User hits a 404 page | `missing_path`, `referrer` | **Pain Point**: Broken internal links or dead backlinks |
+| `hotel_booking_click` | User clicks outbound affiliate link (MakeMyTrip, Booking.com, Agoda) | `hotel_name`, `city_name`, `country_name`, `booking_source`, `destination_url`, `time_to_click_seconds`, `hotels_viewed_count` | **Primary Conversion Event** (marks session as `converted_exit`) |
 
 ---
 
 ## Mixpanel Tracking Plan
 
-These are the Mixpanel events currently tracked in this project. **All new Mixpanel events must follow the same conventions.**
-
-### Naming conventions
-
-- Mixpanel event names: `snake_case`, past tense verb + noun (e.g., `hotel_booking_click`)
-- Mixpanel property names: `snake_case` (e.g., `hotel_name`, `booking_source`)
-- No abbreviations in Mixpanel event or property names — use full words
-- Boolean Mixpanel properties: use `is_` prefix (e.g., `is_first_time`)
+These are the Mixpanel events currently tracked in this project. All new Mixpanel events must follow the same conventions.
 
 ### Current Mixpanel events
 
@@ -111,30 +78,8 @@ These properties are automatically attached to **every** event fired during the 
 
 ---
 
-## How to Add a New Mixpanel Event
-
-1. **Check the tracking plan above** — if the Mixpanel event already exists, use it. Do not create duplicate Mixpanel events.
-2. **Name the Mixpanel event** using the conventions above: `snake_case`, past tense, descriptive.
-3. **Define Mixpanel properties** — only include properties available at the moment the event fires. Do not fetch additional data just for Mixpanel tracking.
-4. **Place the Mixpanel tracking call** at the right moment using `trackEvent()` from `src/lib/analytics.ts`.
-5. **Update this file** — add the new Mixpanel event to the tracking plan table above.
-6. **Verify in Mixpanel Live View** — confirm the event appears in Mixpanel with correct properties before considering it done.
-
-### Mixpanel event template
-
-```typescript
-import { trackEvent } from '@/lib/analytics';
-
-trackEvent('[event_name]', {
-  property_name: value,
-});
-```
-
----
-
 ## What Not to Do
 
-- **Do not introduce other analytics tools.** This project uses Mixpanel. All tracking goes through Mixpanel.
-- **Do not track PII as Mixpanel properties** — no emails, full names, phone numbers, or payment details in Mixpanel event properties.
-- **Do not fire Mixpanel events inside loops** — each Mixpanel event call is a network request.
-- **Do not hardcode the Mixpanel project token** — read it from environment config.
+- **Do not track PII as properties** — no emails, full names, phone numbers, or payment details.
+- **Do not fire analytics events inside loops** — each event call is a network request.
+- **Do not hardcode tokens or measurement IDs** — read them from environment config or database settings.

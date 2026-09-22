@@ -3426,6 +3426,108 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Exceptional lakeside dining featuring fresh Ohrid trout and award-winning Macedonian wines',
       '100% verified private in-room and balcony soaking facilities'
     ]
+  },
+
+  // Portugal (Madeira) - Funchal
+  'funchal-portugal': {
+    intro: 'Funchal is the enchanting subtropical capital of Madeira, climbing steep volcanic slopes carpeted with botanical gardens and banana plantations above the deep blue Atlantic. Retreat to cliffside luxury quintas and 5-star oceanfront resorts featuring private hot tubs and panoramic freestanding bathtubs positioned for golden Atlantic sunrises and dolphin-watching horizons.',
+    amenities: [
+      'Clifftop heated jacuzzi terraces overlooking the endless Atlantic Ocean and Funchal bay',
+      'Deep freestanding soaking tubs framed by floor-to-ceiling subtropical garden vistas',
+      'Madeiran eucalyptus bath crystals and artisan botanical flower essences',
+      'Private sun terraces with hydromassage loungers and Madeira wine tastings'
+    ],
+    whyChoose: [
+      'Year-round spring-like climate, lush volcanic hiking along levada trails, and dramatic mountain peaks',
+      'Historic Portuguese colonial quintas offering peerless old-world elegance and warmth',
+      'World-class seafood dining, Madeira wine lodges, and vibrant cable car rides to Monte',
+      'Every bathtub listing strictly verified for private in-suite or private terrace facilities'
+    ]
+  },
+
+  // Portugal (Azores) - Ponta Delgada
+  'ponta-delgada-portugal': {
+    intro: 'Ponta Delgada is the vibrant gateway to the volcanic Azores archipelago on São Miguel Island, where emerald crater lakes meet natural geothermal hot springs and dramatic Atlantic coastlines. Experience boutique manor houses and luxury eco-resorts featuring geothermal mineral soaking tubs and private garden jacuzzis enveloped by hydrangeas and volcanic stone.',
+    amenities: [
+      'Private geothermal hot-spring soaking tubs heated by natural volcanic energy',
+      'Black basalt stone bathtubs set in lush botanical greenhouse courtyards',
+      'Azorean volcanic mineral bath salts and organic pineapple-infused bath therapies',
+      'Heated outdoor whirlpool spas surrounded by ancient fern trees and hydrangeas'
+    ],
+    whyChoose: [
+      'Untouched volcanic wonderland featuring Sete Cidades twin lakes and Furnas thermal springs',
+      'World-renowned whale and dolphin watching in the deep Atlantic',
+      'Exceptional tranquility, clean air, and farm-to-table Azorean gastronomy',
+      'Guaranteed private in-room and terrace tubs independently confirmed'
+    ]
+  },
+
+  // Spain (Canary Islands) - Tenerife
+  'tenerife-spain': {
+    intro: 'Tenerife is the largest of the Canary Islands, crowned by Mount Teide and fringed by volcanic black sand beaches and dramatic sea cliffs. Indulge in 5-star cliffside palaces and adults-only boutique resorts in Costa Adeje and Alcalá, boasting private oceanfront whirlpool tubs, Bali-bed jacuzzi decks, and deep marble baths with views of La Gomera.',
+    amenities: [
+      'Ocean-facing private balcony jacuzzis framing golden Atlantic sunsets over La Gomera',
+      'Deep freestanding marble soaking baths integrated into open-plan luxury suites',
+      'Volcanic basalt spa stone therapy and organic aloe vera bath infusions',
+      'Private rooftop whirlpool solariums with panoramic views of Mount Teide'
+    ],
+    whyChoose: [
+      'Europe\'s premier winter-sun haven with mild weather and sunny days year-round',
+      'UNESCO World Heritage Teide National Park offering star-studded nocturnal skies and cable car vistas',
+      'Award-winning Michelin-starred dining and world-class luxury resort infrastructure',
+      'Strictly verified private tubs ensuring complete couple seclusion'
+    ]
+  },
+
+  // Spain (Canary Islands) - Gran Canaria
+  'gran-canaria-spain': {
+    intro: 'Gran Canaria is a \'miniature continent\' renowned for dramatic microclimates, from the sweeping Saharan dunes of Maspalomas to lush pine-clad central peaks. Stay in luxury seaside wellness retreats and boutique cliffside havens featuring private terrace plunge tubs and deep soaking whirlpool baths overlooking golden dunes and turquoise Atlantic surf.',
+    amenities: [
+      'Private terrace jacuzzis overlooking the Maspalomas dunes and the Atlantic Ocean',
+      'Deep circular soaking tubs with chromotherapy lighting and hydromassage jets',
+      'Natural Canarian aloe vera skincare and ocean mineral bath salts',
+      'Private palm-shaded sundecks with adjoining heated hydrotherapy pools'
+    ],
+    whyChoose: [
+      'Dramatic golden sand dunes, dramatic mountain calderas, and charming whitewashed coastal villages',
+      'Premier wellness and thalassotherapy spas celebrated throughout Europe',
+      'Intimate boutique hotels designed for couples seeking year-round warmth and privacy',
+      'Every bathtub accommodation verified for authentic private installations'
+    ]
+  },
+
+  // Spain (Canary Islands) - Lanzarote
+  'lanzarote-spain': {
+    intro: 'Lanzarote is a mesmerizing volcanic paradise shaped by César Manrique\'s iconic organic architecture and alien lava fields. Discover ultra-stylish design villas and boutique eco-lodges featuring private volcanic stone hot tubs, sunken indoor-outdoor bathtubs, and panoramic terraces gazing across lunar Timanfaya landscapes to the Atlantic.',
+    amenities: [
+      'Sunken volcanic stone soaking bathtubs integrated into natural black lava bedrock',
+      'Private terrace jacuzzis with sweeping views of the Atlantic and Timanfaya volcanic cones',
+      'Local Malvasía volcanic wine served alongside candlelit evening hydrotherapy baths',
+      'Organic aloe vera and sea salt scrub preparations crafted on the island'
+    ],
+    whyChoose: [
+      'Surreal, otherworldly volcanic landscapes and pristine golden coves like Papagayo',
+      'Striking whitewashed architectural harmony and captivating César Manrique cultural sites',
+      'Renowned UNESCO Biosphere Reserve offering peaceful, contemplative romantic isolation',
+      '100% verified private in-room and courtyard soaking amenities'
+    ]
+  },
+
+  // Cape Verde - Santa Maria
+  'santa-maria-cape-verde': {
+    intro: 'Santa Maria on Sal Island is Cape Verde\'s sun-drenched coastal haven, where powdery golden sand dunes meet the turquoise waters of the mid-Atlantic. Experience 5-star beachfront resorts and romantic boutique suites featuring private open-air jacuzzis and deep freestanding soaking tubs cooled by Atlantic trade winds.',
+    amenities: [
+      'Private beachfront terrace jacuzzis overlooking turquoise Atlantic surf and golden sands',
+      'Freestanding deep soaking bathtubs with open-air tropical sea breeze ventilation',
+      'Hand-harvested Cabo Verde sea salt bath soaks and natural coconut oil moisturizers',
+      'Private cabana sun loungers and adjoining ensuite whirlpool baths'
+    ],
+    whyChoose: [
+      '\'No Stress\' island philosophy offering pure relaxation, warmth, and soulful Morna music',
+      'Year-round sunshine, kite-surfing, turtle watching, and pristine turquoise swimming lagoons',
+      'Exceptional tropical island hospitality with unique Afro-Portuguese Creole culture',
+      'Triple-verified private in-room and terrace tubs for guaranteed romance'
+    ]
   }
 };
 
