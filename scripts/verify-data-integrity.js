@@ -13,7 +13,7 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
 
-const PREVIOUS_BASELINE = 2399;
+const PREVIOUS_BASELINE = 2439;
 
 async function verifyIntegrity() {
   console.log('\n🔒 RUNNING ZERO DATA LOSS & INTEGRITY AUDIT...\n');

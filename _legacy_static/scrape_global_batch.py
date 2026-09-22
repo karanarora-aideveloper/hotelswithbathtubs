@@ -197,6 +197,12 @@ BATCHES = {
         ("Maun", "Botswana"),
         ("Livingstone", "Zambia"),
     ],
+    "central_america_caribbean_gems": [
+        ("Roatan", "Honduras"),
+        ("San Juan del Sur", "Nicaragua"),
+        ("Willemstad", "Curacao"),
+        ("Saint Johns", "Antigua and Barbuda"),
+    ],
 }
 
 batch_key = sys.argv[1].lower() if len(sys.argv) > 1 else "caribbean"

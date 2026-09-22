@@ -3749,6 +3749,74 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Rich explorer heritage, aviation safaris, and authentic Zambian cultural warmth',
       'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
     ]
+  },
+
+  // Honduras - Roatan
+  'roatan-honduras': {
+    intro: 'Roatan, the premier gem of the Bay Islands of Honduras, rests along the world’s second-largest barrier reef, the Mesoamerican Barrier Reef. Experience clifftop boutique dive resorts and luxury beachfront villas in West Bay and Sandy Bay featuring panoramic ocean-facing whirlpool balconies, deep soaking bathtubs tucked into tropical ironwood decks, and Caribbean sunset plunge pools.',
+    amenities: [
+      'Private oceanfront balcony jacuzzi tubs with direct views over turquoise coral reef drop-offs',
+      'Deep freestanding soaking bathtubs framed by louvered mahogany shutters and sea breezes',
+      'Aromatherapeutic Caribbean coconut oil and sea mineral bath salts with fresh gardenia petals',
+      'Ensuite bathrooms with open-air rainfall stone showers and double artisan hardwood vanities'
+    ],
+    whyChoose: [
+      'World-class scuba diving and snorkeling directly from white powder beaches on the Mesoamerican Reef',
+      'Laid-back Caribbean charm, dolphin encounters, and vibrant tropical reef marine life',
+      'Secluded luxury hill-and-beach retreats designed for intimate honeymoon romance',
+      '100% verified private in-room and balcony soaking tubs across Booking.com and Agoda'
+    ]
+  },
+
+  // Nicaragua - San Juan del Sur
+  'san-juan-del-sur-nicaragua': {
+    intro: 'San Juan del Sur, on Nicaragua\'s picturesque Emerald Coast, blends vibrant surf culture with dramatic Pacific ocean bluffs and tranquil secluded coves. Stay in architectural clifftop eco-lodges and luxury design villas featuring infinity-edge soaking tubs, private cliffside whirlpools overlooking crashing Pacific breakers, and open-air bathrooms gazing toward spectacular fiery sunsets.',
+    amenities: [
+      'Private cliff-edge plunge whirlpools with panoramic vistas over the Pacific surf and crescent bay',
+      'Deep polished concrete and stone soaking tubs open to warm offshore Pacific trade winds',
+      'Artisanal volcanic clay and organic Nicaraguan coffee body scrubs and restorative bath soaks',
+      'Open-air bamboo rain showers coupled with oversized dual soaking bathtubs'
+    ],
+    whyChoose: [
+      'World-class Pacific surfing, turtle nesting beaches, and dramatic coastal cliff landscapes',
+      'Incredible value for ultra-luxury private villa stays and eco-chic architectural retreats',
+      'Vibrant coastal town energy balanced with supreme secluded cove privacy',
+      'Guaranteed private in-room and terrace tubs verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Curacao - Willemstad
+  'willemstad-curacao': {
+    intro: 'Willemstad, the vibrant UNESCO World Heritage capital of Curaçao, enchants with its iconic candy-colored Dutch colonial waterfront, turquoise hidden coves, and lively European-Caribbean fusion. Indulge in restored historic boutique mansions and luxury coastal resorts featuring private plunge whirlpools, freestanding designer soaking tubs, and open-air oceanfront bath terraces.',
+    amenities: [
+      'Private oceanfront terrace hydrotherapy tubs overlooking turquoise Caribbean lagoons',
+      'Freestanding designer soaking bathtubs nestled within historic 18th-century Dutch colonial suites',
+      'Curaçao Blue liqueur and aloe vera cooling bath preparations with natural sea salts',
+      'Ensuite marble bathrooms with double rain showers and luxurious French-Caribbean amenities'
+    ],
+    whyChoose: [
+      'UNESCO-listed Handelskade harborfront charm with colorful Dutch baroque merchant architecture',
+      'Secluded limestone coves like Grote Knip and Playa Lagun with crystal-clear turquoise waters',
+      'Outside the Atlantic hurricane belt, ensuring idyllic romantic sunshine year-round',
+      'Triple-verified private in-room and terrace tubs for romantic couples'
+    ]
+  },
+
+  // Antigua and Barbuda - Saint John's
+  'saint-johns-antigua-and-barbuda': {
+    intro: 'Saint John\'s, the historic gateway to Antigua\'s legendary 365 white-sand beaches, offers a classic Caribbean paradise where British naval heritage meets barefoot luxury. Discover five-star clifftop sanctuaries and beachfront villa resorts featuring private infinity jacuzzis, freestanding deep marble soaking tubs, and sunset cocktail tubs gazing across Dickenson Bay and English Harbour.',
+    amenities: [
+      'Private clifftop infinity whirlpools with panoramic vistas of Antigua’s shimmering turquoise coastline',
+      'Deep freestanding marble soaking bathtubs with floor-to-ceiling Caribbean ocean views',
+      'Antiguan sea salt bath soaks infused with lemongrass, frangipani, and organic coconut nectar',
+      'Spacious wraparound teak verandas with private outdoor couples hydrotherapy tubs'
+    ],
+    whyChoose: [
+      'Legendary "beach for every day of the year" with some of the softest white powder sand in the West Indies',
+      'Rich sailing heritage, world-class yachting regattas, and historic Nelson\'s Dockyard UNESCO romance',
+      'Premier ultra-exclusive honeymoon resorts celebrated for exceptional culinary excellence and discretion',
+      'Every bathtub suite independently inspected and verified across Booking.com and Agoda'
+    ]
   }
 };
 
