@@ -1,0 +1,463 @@
+{
+  "Albania": [
+    "Ksamil",
+    "Saranda"
+  ],
+  "Antigua and Barbuda": [
+    "Saint Johns"
+  ],
+  "Argentina": [
+    "Bariloche",
+    "Mendoza"
+  ],
+  "Aruba": [
+    "Palm Beach"
+  ],
+  "Australia": [
+    "Sydney"
+  ],
+  "Austria": [
+    "Innsbruck",
+    "Salzburg",
+    "Vienna"
+  ],
+  "Azerbaijan": [
+    "Baku"
+  ],
+  "Bahamas": [
+    "Exuma",
+    "Nassau"
+  ],
+  "Bahrain": [
+    "Manama"
+  ],
+  "Barbados": [
+    "Bridgetown"
+  ],
+  "Belize": [
+    "Ambergris Caye",
+    "Placencia"
+  ],
+  "Bermuda": [
+    "Hamilton"
+  ],
+  "Bolivia": [
+    "Uyuni"
+  ],
+  "Bosnia and Herzegovina": [
+    "Mostar",
+    "Sarajevo"
+  ],
+  "Botswana": [
+    "Maun"
+  ],
+  "Brazil": [
+    "Rio de Janeiro"
+  ],
+  "Cambodia": [
+    "Siem Reap"
+  ],
+  "Canada": [
+    "Banff"
+  ],
+  "Cape Verde": [
+    "Santa Maria"
+  ],
+  "Chile": [
+    "Santiago"
+  ],
+  "Colombia": [
+    "Cartagena"
+  ],
+  "Cook Islands": [
+    "Aitutaki",
+    "Rarotonga"
+  ],
+  "Costa Rica": [
+    "San Jose"
+  ],
+  "Croatia": [
+    "Dubrovnik"
+  ],
+  "Curacao": [
+    "Willemstad"
+  ],
+  "Cyprus": [
+    "Paphos"
+  ],
+  "Czechia": [
+    "Prague"
+  ],
+  "Denmark": [
+    "Copenhagen"
+  ],
+  "Dominican Republic": [
+    "Punta Cana"
+  ],
+  "Ecuador": [
+    "Galapagos"
+  ],
+  "Egypt": [
+    "Aswan",
+    "Sharm El Sheikh"
+  ],
+  "Estonia": [
+    "Tallinn"
+  ],
+  "Faroe Islands": [
+    "Torshavn"
+  ],
+  "Fiji": [
+    "Fiji"
+  ],
+  "Finland": [
+    "Rovaniemi"
+  ],
+  "France": [
+    "Nice",
+    "Paris"
+  ],
+  "French Polynesia": [
+    "Bora Bora"
+  ],
+  "Georgia": [
+    "Tbilisi"
+  ],
+  "Germany": [
+    "Berlin",
+    "Munich"
+  ],
+  "Greece": [
+    "Santorini"
+  ],
+  "Greenland": [
+    "Ilulissat"
+  ],
+  "Guatemala": [
+    "Antigua",
+    "Lake Atitlan"
+  ],
+  "Honduras": [
+    "Roatan"
+  ],
+  "Hungary": [
+    "Budapest"
+  ],
+  "Iceland": [
+    "Reykjavik"
+  ],
+  "India": [
+    "Agra",
+    "Ahmedabad",
+    "Alibaug",
+    "Alleppey",
+    "Amritsar",
+    "Bangalore",
+    "Bhopal",
+    "Chandigarh",
+    "Chikmagalur",
+    "Coimbatore",
+    "Coorg",
+    "Daman",
+    "Darjeeling",
+    "Delhi",
+    "Dharamshala",
+    "Digha",
+    "Faridabad",
+    "Gandhinagar",
+    "Goa",
+    "Gurgaon",
+    "Gwalior",
+    "Haridwar",
+    "Igatpuri",
+    "Indore",
+    "Jaipur",
+    "Jaisalmer",
+    "Jodhpur",
+    "Karjat",
+    "Kochi",
+    "Kodaikanal",
+    "Kolhapur",
+    "Kolkata",
+    "Lavasa",
+    "Lonavala",
+    "Lucknow",
+    "Mahabaleshwar",
+    "Mahabalipuram",
+    "Manali",
+    "Mandarmani",
+    "Matheran",
+    "Mathura",
+    "Mount Abu",
+    "Mumbai",
+    "Munnar",
+    "Mussoorie",
+    "Nainital",
+    "Nashik",
+    "Ooty",
+    "Panchgani",
+    "Panvel",
+    "Pondicherry",
+    "Pune",
+    "Puri",
+    "Rajkot",
+    "Rishikesh",
+    "Saputara",
+    "Shillong",
+    "Shimla",
+    "Shirdi",
+    "Siliguri",
+    "Udaipur",
+    "Wayanad",
+    "Yercaud",
+    "Zirakpur"
+  ],
+  "Indonesia": [
+    "Bali"
+  ],
+  "Ireland": [
+    "Dublin"
+  ],
+  "Italy": [
+    "Florence",
+    "Milan",
+    "Positano",
+    "Rome",
+    "Venice"
+  ],
+  "Jamaica": [
+    "Montego Bay"
+  ],
+  "Japan": [
+    "Hakone",
+    "Kyoto",
+    "Tokyo"
+  ],
+  "Jordan": [
+    "Dead Sea"
+  ],
+  "Kazakhstan": [
+    "Almaty"
+  ],
+  "Kenya": [
+    "Diani Beach",
+    "Masai Mara"
+  ],
+  "Laos": [
+    "Luang Prabang"
+  ],
+  "Latvia": [
+    "Riga"
+  ],
+  "Lithuania": [
+    "Vilnius"
+  ],
+  "Madagascar": [
+    "Nosy Be"
+  ],
+  "Malaysia": [
+    "Kuala Lumpur"
+  ],
+  "Maldives": [
+    "Maldives"
+  ],
+  "Malta": [
+    "Valletta"
+  ],
+  "Mauritius": [
+    "Mauritius"
+  ],
+  "Mexico": [
+    "Cancun",
+    "Mexico City"
+  ],
+  "Mongolia": [
+    "Terelj",
+    "Ulaanbaatar"
+  ],
+  "Montenegro": [
+    "Budva",
+    "Kotor"
+  ],
+  "Morocco": [
+    "Marrakech"
+  ],
+  "Mozambique": [
+    "Vilanculos"
+  ],
+  "Namibia": [
+    "Sossusvlei"
+  ],
+  "Nepal": [
+    "Pokhara"
+  ],
+  "Netherlands": [
+    "Amsterdam"
+  ],
+  "New Caledonia": [
+    "Noumea"
+  ],
+  "New Zealand": [
+    "Auckland",
+    "Queenstown"
+  ],
+  "Nicaragua": [
+    "San Juan del Sur"
+  ],
+  "North Macedonia": [
+    "Ohrid"
+  ],
+  "Norway": [
+    "Tromso"
+  ],
+  "Oman": [
+    "Jabal Akhdar",
+    "Muscat"
+  ],
+  "Panama": [
+    "Bocas del Toro",
+    "Panama City"
+  ],
+  "Paraguay": [
+    "Asuncion"
+  ],
+  "Peru": [
+    "Cusco"
+  ],
+  "Philippines": [
+    "Boracay",
+    "El Nido"
+  ],
+  "Poland": [
+    "Krakow",
+    "Zakopane"
+  ],
+  "Portugal": [
+    "Funchal",
+    "Lisbon",
+    "Ponta Delgada"
+  ],
+  "Qatar": [
+    "Doha"
+  ],
+  "Rwanda": [
+    "Kigali",
+    "Musanze"
+  ],
+  "Saint Lucia": [
+    "Soufriere"
+  ],
+  "Samoa": [
+    "Apia"
+  ],
+  "Saudi Arabia": [
+    "AlUla"
+  ],
+  "Seychelles": [
+    "Seychelles"
+  ],
+  "Singapore": [
+    "Singapore"
+  ],
+  "Slovenia": [
+    "Bled"
+  ],
+  "South Africa": [
+    "Cape Town"
+  ],
+  "South Korea": [
+    "Jeju",
+    "Seoul"
+  ],
+  "Spain": [
+    "Barcelona",
+    "Gran Canaria",
+    "Lanzarote",
+    "Madrid",
+    "Tenerife"
+  ],
+  "Sri Lanka": [
+    "Galle"
+  ],
+  "Sweden": [
+    "Stockholm"
+  ],
+  "Switzerland": [
+    "Interlaken",
+    "Lucerne",
+    "Zermatt",
+    "Zurich"
+  ],
+  "Taiwan": [
+    "Taipei"
+  ],
+  "Tanzania": [
+    "Zanzibar"
+  ],
+  "Thailand": [
+    "Bangkok",
+    "Phuket"
+  ],
+  "Tunisia": [
+    "Sidi Bou Said"
+  ],
+  "Turkey": [
+    "Cappadocia"
+  ],
+  "Turks and Caicos": [
+    "Providenciales"
+  ],
+  "UAE": [
+    "Abu Dhabi",
+    "Dubai"
+  ],
+  "UK": [
+    "Edinburgh",
+    "London",
+    "Manchester"
+  ],
+  "USA": [
+    "Aspen",
+    "Austin",
+    "Baltimore",
+    "Boston",
+    "Charleston",
+    "Chicago",
+    "Honolulu",
+    "Kansas City",
+    "Key West",
+    "Lake Tahoe",
+    "Las Vegas",
+    "Los Angeles",
+    "Maui",
+    "Miami",
+    "Napa",
+    "Nashville",
+    "New Orleans",
+    "New York",
+    "Orlando",
+    "San Diego",
+    "San Francisco",
+    "Scottsdale",
+    "Seattle"
+  ],
+  "Uruguay": [
+    "Punta del Este"
+  ],
+  "Uzbekistan": [
+    "Bukhara",
+    "Samarkand"
+  ],
+  "Vanuatu": [
+    "Port Vila"
+  ],
+  "Vietnam": [
+    "Da Nang"
+  ],
+  "Zambia": [
+    "Livingstone"
+  ],
+  "Zimbabwe": [
+    "Victoria Falls"
+  ]
+}

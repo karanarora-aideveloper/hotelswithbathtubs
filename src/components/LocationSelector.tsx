@@ -31,9 +31,9 @@ export default function LocationSelector() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch available locations from DB
-    fetch('/api/locations')
-      .then(res => res.json())
+    // Fetch available locations
+    fetch('/locations.json')
+      .then((res) => (res.ok ? res.json() : fetch('/api/locations').then((r) => r.json())))
       .then(data => {
         if (!data.error) {
           setLocations(data);

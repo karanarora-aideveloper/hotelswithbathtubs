@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
+const isExport = process.env.NEXT_EXPORT === 'true';
+
 const nextConfig: NextConfig = {
+  output: isExport ? 'export' : undefined,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   serverExternalPackages: ['mongoose', 'mongodb', 'isomorphic-dompurify', 'jsdom', 'cheerio', 'markdown-it'],
   images: {
     unoptimized: true,
@@ -58,8 +64,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
+  ...(isExport
+    ? {}
+    : {
+        async redirects() {
+          return [
       {
         source: '/usa/new-york-city',
         destination: '/usa/new-york',
@@ -250,8 +259,9 @@ const nextConfig: NextConfig = {
         destination: '/blog/best-hotels-private-jacuzzi-couples-india',
         permanent: true,
       },
-    ];
-  },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;

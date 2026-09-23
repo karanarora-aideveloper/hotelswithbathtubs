@@ -24,8 +24,8 @@ export default function DarkHomeSearch() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('/api/locations')
-      .then((res) => res.json())
+    fetch('/locations.json')
+      .then((res) => (res.ok ? res.json() : fetch('/api/locations').then((r) => r.json())))
       .then((data) => {
         if (!data.error) setLocations(data);
       })

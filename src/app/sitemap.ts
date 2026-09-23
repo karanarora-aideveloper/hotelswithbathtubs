@@ -4,6 +4,8 @@ import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
 import { slugify, resolveCountry } from '@/lib/utils';
 
+export const dynamic = 'force-static';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.hotelswithbathtubs.com';
   const fallbackDate = new Date('2026-09-08T00:00:00.000Z');
