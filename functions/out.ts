@@ -55,3 +55,5 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
     return new Response('Invalid URL format', { status: 400 });
   }
 }
+
+export const onRequestHead = onRequestGet;
