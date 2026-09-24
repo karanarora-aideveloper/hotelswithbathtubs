@@ -15,7 +15,12 @@ dotenv.config({ path: path.join(rootDir, '.env') });
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-  console.error('❌ MONGODB_URI is not defined in environment variables.');
+  const publicLocations = path.join(rootDir, 'public', 'locations.json');
+  if (fs.existsSync(publicLocations)) {
+    console.log('⚠️ MONGODB_URI is not set. Using existing public/locations.json.');
+    process.exit(0);
+  }
+  console.error('❌ MONGODB_URI is not defined in environment variables and no cached locations.json found.');
   process.exit(1);
 }
 
