@@ -389,10 +389,11 @@ export default async function Footer() {
             </div>
           </div>
           <div className="flex flex-wrap gap-2.5">
-            {countryHubList.map(country => (
+            {countryHubList.slice(0, 20).map(country => (
               <Link
                 key={country.slug}
                 href={`/${country.slug}`}
+                prefetch={false}
                 className="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-bold text-accent-secondary transition-all group shadow-2xs hover:shadow-sm"
               >
                 <span>{country.name}</span>
@@ -401,6 +402,27 @@ export default async function Footer() {
                 </span>
               </Link>
             ))}
+            {countryHubList.length > 20 && (
+              <details className="w-full mt-2 group">
+                <summary className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover cursor-pointer py-1.5 px-3 bg-accent/5 rounded-lg border border-accent/15">
+                  <span>View All {countryHubList.length} Countries (+{countryHubList.length - 20} more)</span>
+                  <span className="group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <div className="flex flex-wrap gap-2 pt-3">
+                  {countryHubList.slice(20).map(country => (
+                    <Link
+                      key={country.slug}
+                      href={`/${country.slug}`}
+                      prefetch={false}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white hover:bg-accent hover:text-white border border-gray-200 rounded-lg text-xs font-medium text-text-main transition-all shadow-2xs"
+                    >
+                      <span>{country.name}</span>
+                      <span className="text-3xs text-text-muted font-normal">({country.hotelCount})</span>
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            )}
           </div>
         </section>
 
@@ -422,35 +444,67 @@ export default async function Footer() {
           </div>
           
           <div className="space-y-6 sm:space-y-8">
-            {Object.entries(regionGroups).filter(([_, cities]) => cities.length > 0).map(([region, cities]) => (
-              <div key={region} className="bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-2xs">
-                <p className="font-heading font-bold text-accent-secondary text-base mb-3 sm:mb-4 flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
-                  <span>{region}</span>
-                  <span className="text-xs text-text-muted font-sans font-normal ml-auto">
-                    {cities.length} {cities.length === 1 ? 'Destination' : 'Destinations'}
-                  </span>
-                </p>
-                <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                  {cities.sort((a, b) => a.city.localeCompare(b.city)).map(loc => {
-                    const countrySlug = resolveCountry(loc.country).slug;
-                    const citySlug = slugify(loc.city);
-                    return (
-                      <Link
-                        key={`${countrySlug}-${citySlug}`}
-                        href={`/${countrySlug}/${citySlug}`}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gray-50 hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all group shadow-2xs hover:shadow-sm"
-                      >
-                        <span>{loc.city}</span>
-                        <span className="text-xs text-text-muted group-hover:text-white/80 font-normal">
-                          ({loc.hotelCount})
-                        </span>
-                      </Link>
-                    );
-                  })}
+            {Object.entries(regionGroups).filter(([_, cities]) => cities.length > 0).map(([region, cities]) => {
+              const sortedCities = cities.sort((a, b) => a.city.localeCompare(b.city));
+              const topCities = sortedCities.slice(0, 8);
+              const extraCities = sortedCities.slice(8);
+
+              return (
+                <div key={region} className="bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-2xs">
+                  <p className="font-heading font-bold text-accent-secondary text-base mb-3 sm:mb-4 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
+                    <span>{region}</span>
+                    <span className="text-xs text-text-muted font-sans font-normal ml-auto">
+                      {cities.length} {cities.length === 1 ? 'Destination' : 'Destinations'}
+                    </span>
+                  </p>
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
+                    {topCities.map(loc => {
+                      const countrySlug = resolveCountry(loc.country).slug;
+                      const citySlug = slugify(loc.city);
+                      return (
+                        <Link
+                          key={`${countrySlug}-${citySlug}`}
+                          href={`/${countrySlug}/${citySlug}`}
+                          prefetch={false}
+                          className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gray-50 hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all group shadow-2xs hover:shadow-sm"
+                        >
+                          <span>{loc.city}</span>
+                          <span className="text-xs text-text-muted group-hover:text-white/80 font-normal">
+                            ({loc.hotelCount})
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  {extraCities.length > 0 && (
+                    <details className="mt-3 group">
+                      <summary className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover cursor-pointer py-1 px-2.5 bg-accent/5 rounded-lg border border-accent/15">
+                        <span>+{extraCities.length} more {region} destinations</span>
+                        <span className="group-open:rotate-180 transition-transform">▼</span>
+                      </summary>
+                      <div className="flex flex-wrap gap-2 pt-2.5">
+                        {extraCities.map(loc => {
+                          const countrySlug = resolveCountry(loc.country).slug;
+                          const citySlug = slugify(loc.city);
+                          return (
+                            <Link
+                              key={`${countrySlug}-${citySlug}`}
+                              href={`/${countrySlug}/${citySlug}`}
+                              prefetch={false}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white hover:bg-accent hover:text-white border border-gray-200 rounded-lg text-xs font-medium text-text-main transition-all shadow-2xs"
+                            >
+                              <span>{loc.city}</span>
+                              <span className="text-3xs text-text-muted font-normal">({loc.hotelCount})</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

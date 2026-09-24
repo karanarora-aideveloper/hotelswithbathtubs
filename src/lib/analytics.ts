@@ -1,80 +1,116 @@
-import mixpanel from 'mixpanel-browser';
+import type mixpanel from 'mixpanel-browser';
 
-const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!;
+type MixpanelInstance = typeof mixpanel;
+
+let mixpanelInstance: MixpanelInstance | null = null;
+let mixpanelPromise: Promise<MixpanelInstance> | null = null;
+
+async function getMixpanel(): Promise<MixpanelInstance> {
+  if (mixpanelInstance) return mixpanelInstance;
+  if (!mixpanelPromise) {
+    mixpanelPromise = import('mixpanel-browser').then((m) => {
+      mixpanelInstance = (m.default || m) as MixpanelInstance;
+      return mixpanelInstance;
+    });
+  }
+  return mixpanelPromise;
+}
+
+const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || 'c19e5d48a1097faea5ce6f9a0fc44e3d';
 let isMixpanelInitialized = false;
-// True only after the SDK's `loaded` callback fires — persistence is ready at this point
 let isMixpanelReady = false;
-// Super-property queue: register() calls that arrive before `loaded` fires are buffered
-const pendingSuperProps: Record<string, any>[] = [];
+const pendingSuperProps: Record<string, unknown>[] = [];
 
 export const initMixpanel = () => {
   if (typeof window !== 'undefined' && !isMixpanelInitialized) {
-    isMixpanelInitialized = true; // set before init so re-entrant calls don't double-init
-    mixpanel.init(MIXPANEL_TOKEN, {
-      debug: process.env.NODE_ENV !== 'production',
-      track_pageview: false,
-      persistence: 'localStorage',
-      batch_requests: false, // Deliver immediately
-      loaded: () => {
-        isMixpanelReady = true;
-        // Flush any register() calls that arrived before the SDK was ready
-        if (pendingSuperProps.length > 0) {
-          const merged = Object.assign({}, ...pendingSuperProps);
-          mixpanel.register(merged);
-          pendingSuperProps.length = 0;
-        }
-      },
-    });
+    isMixpanelInitialized = true;
+    const runInit = async () => {
+      try {
+        const mp = await getMixpanel();
+        mp.init(MIXPANEL_TOKEN, {
+          debug: process.env.NODE_ENV !== 'production',
+          track_pageview: false,
+          persistence: 'localStorage',
+          batch_requests: false,
+          loaded: () => {
+            isMixpanelReady = true;
+            if (pendingSuperProps.length > 0) {
+              const merged = Object.assign({}, ...pendingSuperProps);
+              mp.register(merged);
+              pendingSuperProps.length = 0;
+            }
+          },
+        });
+      } catch (err) {
+        console.warn('[Mixpanel] Init deferred failed:', err);
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => runInit());
+    } else {
+      setTimeout(runInit, 150);
+    }
   }
 };
 
-
-export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
+export const trackEvent = async (eventName: string, properties?: Record<string, any>) => {
   if (typeof window !== 'undefined') {
-    initMixpanel();
     const ignoreTracking = localStorage.getItem('ignore_ga');
     if (ignoreTracking === 'true') {
       console.log(`[Mixpanel Blocked] Event: ${eventName}`, properties);
       return;
     }
-    if (!isMixpanelReady) return; // don't fire track before SDK is fully ready
+    initMixpanel();
     try {
-      mixpanel.track(eventName, properties);
+      const mp = await getMixpanel();
+      if (!isMixpanelReady) {
+        setTimeout(() => {
+          try { mp.track(eventName, properties); } catch (_) {}
+        }, 300);
+        return;
+      }
+      mp.track(eventName, properties);
     } catch (e) {
       console.warn('[Mixpanel] track failed:', e);
     }
   }
 };
 
-export const registerSuperProperties = (properties: Record<string, any>) => {
+export const registerSuperProperties = async (properties: Record<string, any>) => {
   if (typeof window !== 'undefined') {
     initMixpanel();
-    if (isMixpanelReady) {
+    if (isMixpanelReady && mixpanelInstance) {
       try {
-        mixpanel.register(properties);
+        mixpanelInstance.register(properties);
       } catch (e) {
         console.warn('[Mixpanel] register failed:', e);
       }
     } else {
-      // Buffer until the loaded callback fires
       pendingSuperProps.push(properties);
     }
   }
 };
 
-export const identifyUser = (userId: string, profileProperties?: Record<string, any>) => {
+export const identifyUser = async (userId: string, profileProperties?: Record<string, any>) => {
   if (typeof window !== 'undefined') {
     initMixpanel();
-    mixpanel.identify(userId);
-    if (profileProperties) {
-      mixpanel.people.set(profileProperties);
-    }
+    try {
+      const mp = await getMixpanel();
+      mp.identify(userId);
+      if (profileProperties) {
+        mp.people.set(profileProperties);
+      }
+    } catch (_) {}
   }
 };
 
-export const resetUser = () => {
+export const resetUser = async () => {
   if (typeof window !== 'undefined') {
     initMixpanel();
-    mixpanel.reset();
+    try {
+      const mp = await getMixpanel();
+      mp.reset();
+    } catch (_) {}
   }
 };

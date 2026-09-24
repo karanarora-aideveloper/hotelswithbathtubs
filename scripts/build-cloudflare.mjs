@@ -71,6 +71,12 @@ async function build() {
       fs.copyFileSync(publicLocations, outLocations);
     }
 
+    const publicHeaders = path.join(rootDir, 'public/_headers');
+    const outHeaders = path.join(rootDir, 'out/_headers');
+    if (fs.existsSync(publicHeaders)) {
+      fs.copyFileSync(publicHeaders, outHeaders);
+    }
+
     console.log('\n✨ Cloudflare Pages static build completed successfully in out/ directory!');
   } finally {
     restoreAll();

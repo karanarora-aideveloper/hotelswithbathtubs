@@ -14,5 +14,22 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(url.toString(), 301);
   }
 
-  return context.next();
+  const response = await context.next();
+
+  // Attach Edge CDN caching headers for HTML pages (sub-50ms TTFB worldwide)
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('text/html')) {
+    const newHeaders = new Headers(response.headers);
+    newHeaders.set(
+      'Cache-Control',
+      'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800'
+    );
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders,
+    });
+  }
+
+  return response;
 }

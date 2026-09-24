@@ -37,7 +37,7 @@ export default function CityCard({
   return (
     <Link
       href={targetUrl}
-      prefetch={true}
+      prefetch={false}
       onClick={handleClick}
       style={{ contentVisibility: 'auto', containIntrinsicSize: '380px' }}
       className={`bg-white rounded-2xl overflow-hidden border border-border shadow-sm transition-all flex flex-col group text-left cursor-pointer ${

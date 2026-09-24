@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit, Lora, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Outfit, Lora } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -15,9 +15,6 @@ import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
-
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
-const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
 
 
 export const viewport: Viewport = {
@@ -77,7 +74,7 @@ export default async function RootLayout({
   
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} ${lora.variable} ${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
+      <body className={`${inter.variable} ${outfit.variable} ${lora.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <Suspense fallback={null}>
           <NavigationProgressBar />
         </Suspense>
