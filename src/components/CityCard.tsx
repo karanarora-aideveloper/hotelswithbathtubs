@@ -67,9 +67,9 @@ export default function CityCard({
       </div>
 
       <div className="p-4 sm:p-6 flex flex-col flex-grow">
-        <h3 className="font-heading text-lg sm:text-xl font-bold text-accent-secondary mb-1 group-hover:text-accent transition-colors">
+        <span className="block font-heading text-lg sm:text-xl font-bold text-accent-secondary mb-1 group-hover:text-accent transition-colors">
           {city}
-        </h3>
+        </span>
         <p className="text-xs sm:text-sm text-text-muted font-medium mb-3.5 sm:mb-5">
           {hotelCount} Verified Hotels {isInternational ? `• ${country}` : ''}
         </p>

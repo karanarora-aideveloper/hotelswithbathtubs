@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     template: "%s | Hotels With Bathtubs",
     default: "Hotels with Bathtub in Room & Jacuzzi Suites (2026)",
   },
-  description: "Discover 2,250+ verified hotels with private in-room bathtubs and jacuzzis across 215+ destinations in 92 countries. Triple-verified across Booking.com & Agoda for romantic getaways.",
+  description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com',
   },
   openGraph: {
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Discover 2,250+ verified hotels with private in-room bathtubs and jacuzzis across 215+ destinations in 92 countries. Triple-verified on Booking.com & Agoda.",
+    description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Discover 2,250+ verified hotels with private in-room bathtubs and jacuzzis across 215+ destinations in 92 countries. Triple-verified on Booking.com & Agoda.",
+    description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
   other: {

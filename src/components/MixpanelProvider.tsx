@@ -124,12 +124,12 @@ function MixpanelTracker() {
       if (isExternal && !isAffiliateRedirect) {
         trackEvent('outbound_exit_click', {
           destination_url: href,
-          link_text: target.innerText || target.getAttribute('aria-label') || 'Exit Link',
+          link_text: (target.textContent || target.getAttribute('aria-label') || 'Exit Link').trim().slice(0, 80),
         });
       }
     };
 
-    document.addEventListener('click', handleExitClicks);
+    document.addEventListener('click', handleExitClicks, { passive: true });
     return () => {
       document.removeEventListener('click', handleExitClicks);
     };

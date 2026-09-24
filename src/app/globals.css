@@ -118,17 +118,7 @@
 
 /* Custom CSS to mimic the old OTA styling but mapped to Tailwind */
 html {
-  font-size: 14px;
-}
-@media (min-width: 640px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media (min-width: 1024px) {
-  html {
-    font-size: 16px;
-  }
+  font-size: 16px;
 }
 
 body {

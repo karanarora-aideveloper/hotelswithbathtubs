@@ -125,7 +125,7 @@ export default function HomeDestinationsClient({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
             </div>
-            <h3 className="font-heading text-base font-bold text-accent-secondary mb-1">More Cities Coming Soon</h3>
+            <p className="font-heading text-base font-bold text-accent-secondary mb-1">More Cities Coming Soon</p>
             <p className="text-xs text-text-muted leading-relaxed mb-3">Continuously adding verified boutique stays across Europe &amp; Asia.</p>
             <span className="text-2xs font-semibold text-accent uppercase tracking-wider">Audited Weekly</span>
           </div>
@@ -181,63 +181,63 @@ export default function HomeDestinationsClient({
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 pb-1 md:pb-0">
           <button
             onClick={() => handleTabChange('auto')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
+            className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedTab === 'auto'
                 ? 'bg-accent-secondary text-white shadow-sm'
                 : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
             }`}
           >
             <span>📍 For You</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-2xs ${selectedTab === 'auto' ? 'bg-white/20' : 'bg-gray-100'}`}>
+            <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'auto' ? 'bg-white/20' : 'bg-gray-100'}`}>
               {isIndiaVisitor ? '🇮🇳 India' : '🇺🇸 USA'}
             </span>
           </button>
 
           <button
             onClick={() => handleTabChange('usa')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
+            className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedTab === 'usa'
                 ? 'bg-accent-secondary text-white shadow-sm'
                 : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
             }`}
           >
             <span>🇺🇸 United States</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-2xs ${selectedTab === 'usa' ? 'bg-white/20' : 'bg-gray-100'}`}>
+            <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'usa' ? 'bg-white/20' : 'bg-gray-100'}`}>
               {usaCities.length}
             </span>
           </button>
 
           <button
             onClick={() => handleTabChange('india')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
+            className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedTab === 'india'
                 ? 'bg-accent-secondary text-white shadow-sm'
                 : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
             }`}
           >
             <span>🇮🇳 India</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-2xs ${selectedTab === 'india' ? 'bg-white/20' : 'bg-gray-100'}`}>
+            <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'india' ? 'bg-white/20' : 'bg-gray-100'}`}>
               {indiaCities.length}
             </span>
           </button>
 
           <button
             onClick={() => handleTabChange('global')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
+            className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedTab === 'global'
                 ? 'bg-accent-secondary text-white shadow-sm'
                 : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
             }`}
           >
             <span>🌍 Global</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-2xs ${selectedTab === 'global' ? 'bg-white/20' : 'bg-gray-100'}`}>
+            <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'global' ? 'bg-white/20' : 'bg-gray-100'}`}>
               {internationalCities.length}
             </span>
           </button>
 
           <button
             onClick={() => handleTabChange('all')}
-            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
+            className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${
               selectedTab === 'all'
                 ? 'bg-accent text-white shadow-sm'
                 : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'

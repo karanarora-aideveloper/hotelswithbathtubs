@@ -16,7 +16,7 @@ export const metadata = {
   title: {
     absolute: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
   },
-  description: 'Find 2,500+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 111 countries. Triple-checked on Booking.com & Agoda.',
+  description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
   alternates: {
     canonical: '/',
     languages: {
@@ -32,7 +32,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
-    description: 'Find 2,500+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 111 countries. Triple-checked on Booking.com & Agoda.',
+    description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -48,7 +48,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
-    description: 'Find 2,500+ verified hotels with private bathtubs in room, jacuzzi suites & deep soaking tubs across 111 countries. Triple-checked on Booking.com & Agoda.',
+    description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -117,7 +117,10 @@ export default async function Home() {
     },
     "sameAs": [
       "https://www.facebook.com/hotelswithbathtubs",
-      "https://www.instagram.com/hotelswithbathtubs"
+      "https://www.instagram.com/hotelswithbathtubs",
+      "https://x.com/hotelsbathtubs",
+      "https://www.linkedin.com/company/hotelswithbathtubs",
+      "https://www.youtube.com/@hotelswithbathtubs"
     ]
   };
 
@@ -134,7 +137,14 @@ export default async function Home() {
       "name": "Karan Arora",
       "jobTitle": "Founder & Luxury Hotel Scout"
     },
-    "areaServed": "Worldwide"
+    "areaServed": "Worldwide",
+    "sameAs": [
+      "https://www.facebook.com/hotelswithbathtubs",
+      "https://www.instagram.com/hotelswithbathtubs",
+      "https://x.com/hotelsbathtubs",
+      "https://www.linkedin.com/company/hotelswithbathtubs",
+      "https://www.youtube.com/@hotelswithbathtubs"
+    ]
   };
 
   const faqSchema = {
@@ -209,7 +219,7 @@ export default async function Home() {
           </div>
 
           {/* Trust Strip with Clean Trust Badges (2x2 on mobile, flex on desktop) */}
-          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 md:gap-8 p-3 sm:p-5 mb-8 sm:mb-10 bg-white border-b border-border shadow-xs mx-3 sm:mx-4 md:mx-auto max-w-4xl rounded-b-2xl text-2xs sm:text-xs md:text-sm">
+          <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 md:gap-8 p-3.5 sm:p-5 mb-8 sm:mb-10 bg-white border-b border-border shadow-xs mx-3 sm:mx-4 md:mx-auto max-w-4xl rounded-b-2xl text-xs sm:text-sm">
             <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -228,7 +238,7 @@ export default async function Home() {
               </svg>
               <span>Trusted Direct Links</span>
             </div>
-            <div className="flex items-center justify-start sm:justify-center gap-1.5 px-2 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-semibold text-3xs sm:text-xs">
+            <div className="flex items-center justify-start sm:justify-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-semibold text-xs">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
               <span className="truncate">Active &amp; Audited</span>
             </div>
@@ -263,7 +273,7 @@ export default async function Home() {
                       Confirmed "Bathtub", "Jacuzzi", or "Jacuzzi/Bathtub" room tags in verified listings.
                     </p>
                   </div>
-                  <span className="text-2xs font-semibold text-emerald-700 mt-3 block">✓ Verified Amenity Tags</span>
+                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Amenity Tags</span>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs flex flex-col justify-between">
@@ -276,7 +286,7 @@ export default async function Home() {
                       Cross-referenced against Agoda's explicit "Bathtub" and private jacuzzi room facility filter.
                     </p>
                   </div>
-                  <span className="text-2xs font-semibold text-emerald-700 mt-3 block">✓ Verified Facilities</span>
+                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Facilities</span>
                 </div>
 
                 <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs flex flex-col justify-between">
@@ -289,7 +299,7 @@ export default async function Home() {
                       Validated in room specifications for genuine in-room hot tubs and deep soaking tubs.
                     </p>
                   </div>
-                  <span className="text-2xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
+                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
                 </div>
               </div>
             </div>

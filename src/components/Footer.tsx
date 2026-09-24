@@ -322,9 +322,9 @@ export default async function Footer() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-gray-100">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent">Editorial &amp; Travel Inspiration</span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mt-1">
+                <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mt-1">
                   Romantic Getaways &amp; Jacuzzi Hotel Guides
-                </h3>
+                </h2>
               </div>
               <Link
                 href="/blog"
@@ -351,14 +351,14 @@ export default async function Footer() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
-                    <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-accent-secondary font-bold text-2xs px-2.5 py-1 rounded-full shadow-2xs uppercase tracking-wider">
+                    <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-accent-secondary font-bold text-xs px-2.5 py-1 rounded-full shadow-2xs uppercase tracking-wider">
                       {blog.date}
                     </span>
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
-                    <h4 className="font-heading font-bold text-accent-secondary group-hover:text-accent transition-colors text-lg leading-snug mb-2 line-clamp-2">
+                    <h3 className="font-heading font-bold text-accent-secondary group-hover:text-accent transition-colors text-lg leading-snug mb-2 line-clamp-2">
                       {blog.title}
-                    </h4>
+                    </h3>
                     {blog.excerpt && (
                       <p className="text-xs sm:text-sm text-text-muted line-clamp-2 font-serif leading-relaxed mb-4">
                         {blog.excerpt}
@@ -384,7 +384,7 @@ export default async function Footer() {
               </svg>
             </div>
             <div>
-              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">Browse by Country</h3>
+              <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-accent-secondary">Browse by Country</h2>
               <p className="text-xs sm:text-sm text-text-muted mt-0.5">Explore verified hotels with private bathtubs and jacuzzis across top travel destinations</p>
             </div>
           </div>
@@ -396,7 +396,7 @@ export default async function Footer() {
                 className="inline-flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-bold text-accent-secondary transition-all group shadow-2xs hover:shadow-sm"
               >
                 <span>{country.name}</span>
-                <span className="text-2xs text-text-muted group-hover:text-white/80 font-normal">
+                <span className="text-xs text-text-muted group-hover:text-white/80 font-normal">
                   ({country.hotelCount})
                 </span>
               </Link>
@@ -415,7 +415,7 @@ export default async function Footer() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">Browse Hotels by Region</h3>
+                <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-accent-secondary">Browse Hotels by Region</h2>
                 <p className="text-xs sm:text-sm text-text-muted mt-0.5">Quickly jump to verified stays grouped by geographic travel zones</p>
               </div>
             </div>
@@ -424,13 +424,13 @@ export default async function Footer() {
           <div className="space-y-6 sm:space-y-8">
             {Object.entries(regionGroups).filter(([_, cities]) => cities.length > 0).map(([region, cities]) => (
               <div key={region} className="bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-2xs">
-                <h4 className="font-heading font-bold text-accent-secondary text-base mb-3 sm:mb-4 flex items-center gap-2">
+                <p className="font-heading font-bold text-accent-secondary text-base mb-3 sm:mb-4 flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
                   <span>{region}</span>
                   <span className="text-xs text-text-muted font-sans font-normal ml-auto">
                     {cities.length} {cities.length === 1 ? 'Destination' : 'Destinations'}
                   </span>
-                </h4>
+                </p>
                 <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {cities.sort((a, b) => a.city.localeCompare(b.city)).map(loc => {
                     const countrySlug = resolveCountry(loc.country).slug;
@@ -442,7 +442,7 @@ export default async function Footer() {
                         className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-gray-50 hover:bg-accent-secondary hover:text-white border border-gray-200 hover:border-accent-secondary rounded-xl text-xs sm:text-sm font-semibold text-text-main transition-all group shadow-2xs hover:shadow-sm"
                       >
                         <span>{loc.city}</span>
-                        <span className="text-2xs text-text-muted group-hover:text-white/80 font-normal">
+                        <span className="text-xs text-text-muted group-hover:text-white/80 font-normal">
                           ({loc.hotelCount})
                         </span>
                       </Link>
@@ -462,30 +462,30 @@ export default async function Footer() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
               </svg>
             </div>
-            <h3 className="font-heading text-2xl font-bold text-accent-secondary">Frequently Asked Questions</h3>
+            <h2 className="font-heading text-2xl font-bold text-accent-secondary">Frequently Asked Questions</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-5 rounded-xl border border-border">
-              <h4 className="font-bold text-text-main mb-2 text-sm">How do you verify hotel bathtubs?</h4>
-              <p className="text-xs text-text-muted leading-relaxed">
+              <h3 className="font-bold text-text-main mb-2 text-sm sm:text-base">How do you verify hotel bathtubs?</h3>
+              <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
                 We independently inspect room specifications across MakeMyTrip, Agoda, and Booking.com. Only hotels confirming in-room tubs or jacuzzis across all three platforms are featured.
               </p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-border">
-              <h4 className="font-bold text-text-main mb-2 text-sm">Are bathtubs guaranteed in every room?</h4>
-              <p className="text-xs text-text-muted leading-relaxed">
+              <h3 className="font-bold text-text-main mb-2 text-sm sm:text-base">Are bathtubs guaranteed in every room?</h3>
+              <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
                 Yes! We only list properties where private in-room bathtubs or jacuzzis are explicitly documented room amenities, eliminating misleading shower-only photos.
               </p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-border">
-              <h4 className="font-bold text-text-main mb-2 text-sm">Which destinations do you cover?</h4>
-              <p className="text-xs text-text-muted leading-relaxed">
+              <h3 className="font-bold text-text-main mb-2 text-sm sm:text-base">Which destinations do you cover?</h3>
+              <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
                 We curate 60+ romantic destinations across India, Southeast Asia, the Middle East, Europe, and the US, including Manali, Goa, Udaipur, Dubai, London, and Bali.
               </p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-border">
-              <h4 className="font-bold text-text-main mb-2 text-sm">How do bookings work?</h4>
-              <p className="text-xs text-text-muted leading-relaxed">
+              <h3 className="font-bold text-text-main mb-2 text-sm sm:text-base">How do bookings work?</h3>
+              <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
                 We provide direct links to verified online travel agencies (MakeMyTrip, Agoda, and Booking.com) so you can compare live rates and book directly with the provider.
               </p>
             </div>
@@ -501,8 +501,8 @@ export default async function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Triple Verified</h4>
-              <p className="text-2xs sm:text-xs text-text-muted">Cross-checked across 3 major platforms</p>
+              <p className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Triple Verified</p>
+              <p className="text-xs text-text-muted">Cross-checked across 3 major platforms</p>
             </div>
             <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center mb-2.5 sm:mb-3">
@@ -510,8 +510,8 @@ export default async function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Guaranteed Tubs</h4>
-              <p className="text-2xs sm:text-xs text-text-muted">Confirmed in-room hot tubs &amp; jacuzzis</p>
+              <p className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Guaranteed Tubs</p>
+              <p className="text-xs text-text-muted">Confirmed in-room hot tubs &amp; jacuzzis</p>
             </div>
             <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mb-2.5 sm:mb-3">
@@ -519,8 +519,8 @@ export default async function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Direct Booking</h4>
-              <p className="text-2xs sm:text-xs text-text-muted">Direct links to official travel partners</p>
+              <p className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Direct Booking</p>
+              <p className="text-xs text-text-muted">Direct links to official travel partners</p>
             </div>
             <div className="bg-white p-3.5 sm:p-5 rounded-xl border border-border shadow-2xs">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center mb-2.5 sm:mb-3">
@@ -529,8 +529,8 @@ export default async function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
               </div>
-              <h4 className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Curated Stays</h4>
-              <p className="text-2xs sm:text-xs text-text-muted">Handpicked luxury romantic escapes</p>
+              <p className="font-bold text-text-main text-xs sm:text-sm mb-1 sm:mb-1.5">Curated Stays</p>
+              <p className="text-xs text-text-muted">Handpicked luxury romantic escapes</p>
             </div>
           </div>
         </section>
@@ -541,9 +541,9 @@ export default async function Footer() {
             <span className="px-3 py-1 bg-white/20 backdrop-blur-xs text-white text-xs font-bold rounded-full uppercase tracking-wider inline-block mb-3">
               Start Your Romantic Escape
             </span>
-            <h3 className="font-heading text-xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3 leading-tight">
+            <p className="font-heading text-xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3 leading-tight">
               Ready to Book Your Luxury Bathtub Stay?
-            </h3>
+            </p>
             <p className="text-white/85 text-xs sm:text-base mb-6 sm:mb-8 max-w-xl mx-auto">
               Explore our full directory of verified hotels with private bathtubs and jacuzzis across India and global destinations.
             </p>
@@ -565,32 +565,98 @@ export default async function Footer() {
           </div>
         </section>
 
-        {/* Footer Bottom Links & Brand */}
+        {/* Footer Bottom Links, Social Media & Brand */}
         <div className="pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
             <div className="flex items-start gap-4">
               <Logo className="w-12 h-10 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-heading text-lg font-bold text-accent-secondary mb-1">Hotels with Bathtubs</h4>
+                <p className="font-heading text-lg font-bold text-accent-secondary mb-1">Hotels with Bathtubs</p>
                 <p className="text-xs text-text-muted max-w-sm leading-relaxed">
                   Discover premium hotels with private bathtubs and jacuzzis. Triple-verified across MakeMyTrip, Agoda &amp; Booking.com for romantic getaways.
                 </p>
               </div>
             </div>
-            <div className="text-left md:text-right">
-              <p className="text-xs text-text-muted font-medium mb-3">&copy; 2026 HotelsWithBathtubs.com</p>
-              <div className="flex gap-4 flex-wrap justify-start md:justify-end text-xs">
-                <Link href="/blog" className="text-text-muted hover:text-accent font-medium transition-colors">Travel Blog</Link>
-                <Link href="/about" className="text-text-muted hover:text-accent font-medium transition-colors">About Us</Link>
-                <Link href="/affiliate-policy" className="text-text-muted hover:text-accent font-medium transition-colors">Affiliate Policy</Link>
-                <Link href="/privacy" className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
-                <Link href="/terms" className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>
-                <Link href="/cookies" className="text-text-muted hover:text-accent font-medium transition-colors">Cookies</Link>
-              </div>
+
+            {/* Social Media Presence Links */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-text-muted mr-1 hidden sm:inline">Follow Us:</span>
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/hotelswithbathtubs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Hotels with Bathtubs on Facebook"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#1877F2] text-[#1877F2] hover:text-white border border-gray-200 hover:border-[#1877F2] flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/hotelswithbathtubs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Hotels with Bathtubs on Instagram"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#E4405F] text-[#E4405F] hover:text-white border border-gray-200 hover:border-[#E4405F] flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/hotelsbathtubs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Hotels with Bathtubs on X"
+                className="w-9 h-9 rounded-full bg-white hover:bg-black text-black hover:text-white border border-gray-200 hover:border-black flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/company/hotelswithbathtubs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Hotels with Bathtubs on LinkedIn"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-gray-200 hover:border-[#0A66C2] flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              {/* YouTube */}
+              <a
+                href="https://www.youtube.com/@hotelswithbathtubs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Subscribe to Hotels with Bathtubs on YouTube"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#FF0000] text-[#FF0000] hover:text-white border border-gray-200 hover:border-[#FF0000] flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
             </div>
           </div>
-          <p className="text-center text-xs text-text-muted/70 pt-4 border-t border-border">
-            All rights reserved. Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified amenities worldwide.
+
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-muted pt-4 border-t border-border">
+            <p className="font-medium">&copy; 2026 HotelsWithBathtubs.com. All rights reserved.</p>
+            <div className="flex gap-4 flex-wrap justify-center sm:justify-end">
+              <Link href="/blog" className="text-text-muted hover:text-accent font-medium transition-colors">Travel Blog</Link>
+              <Link href="/about" className="text-text-muted hover:text-accent font-medium transition-colors">About Us</Link>
+              <Link href="/affiliate-policy" className="text-text-muted hover:text-accent font-medium transition-colors">Affiliate Policy</Link>
+              <Link href="/privacy" className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
+              <Link href="/terms" className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>
+              <Link href="/cookies" className="text-text-muted hover:text-accent font-medium transition-colors">Cookies</Link>
+            </div>
+          </div>
+          <p className="text-center text-xs text-text-muted/70 pt-3">
+            Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified in-room bathtubs &amp; jacuzzis worldwide.
           </p>
         </div>
       </div>

@@ -183,7 +183,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
     if (context.page_type === 'admin') return;
 
     const sections = document.querySelectorAll(
-      'header, main > section, article, footer, [id], [data-section]'
+      'header, main > section, article, footer, [data-section]'
     );
 
     if (sections.length === 0) return;
@@ -262,7 +262,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
         if (dist < 40) {
           recordRageClick(
             target.tagName.toLowerCase(),
-            target.innerText || target.getAttribute('aria-label') || '',
+            (target.textContent || target.getAttribute('aria-label') || '').trim().slice(0, 80),
             target.className || ''
           );
           clickHistory.current = []; // Reset after firing
@@ -270,7 +270,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
       }
     };
 
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick, { passive: true });
     return () => document.removeEventListener('click', handleClick);
   }, [pathname]);
 
