@@ -74,6 +74,10 @@ export default async function RootLayout({
   
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
+        <link rel="dns-prefetch" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} ${lora.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <Suspense fallback={null}>
           <NavigationProgressBar />

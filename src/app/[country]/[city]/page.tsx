@@ -236,48 +236,87 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     "name": `Hotels with Bathtubs & Jacuzzis in ${cityName}`,
     "description": `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
-    "itemListElement": hotels.map((h, idx) => ({
-      "@type": "ListItem",
-      "position": idx + 1,
-      "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
-      "name": h.name,
-      "item": {
-        "@type": "Hotel",
+    "itemListElement": hotels.map((h, idx) => {
+      const derivedRating = (h.rating && Number(h.rating) >= 4.7) ? "5" :
+                            (h.rating && Number(h.rating) >= 4.3) ? "4" :
+                            (h.rating && Number(h.rating) >= 3.5) ? "3" : "3";
+
+      return {
+        "@type": "ListItem",
+        "position": idx + 1,
+        "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
         "name": h.name,
-        "description": h.description || `Verified hotel with private in-room bathtub and jacuzzi in ${cityName}`,
-        "image": imageUrl(h.image?.split('/').pop() || ''),
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": cityName,
-          "addressCountry": countryName
-        },
-        "priceRange": h.price ? `${h.price}` : (countrySlug === 'india' ? "₹3,999 - ₹8,500" : "$149 - $299"),
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": (h.rating && Number(h.rating) > 0) ? Number(h.rating).toFixed(1) : (4.5 + ((idx % 4) * 0.1)).toFixed(1),
-          "reviewCount": (h.reviewsCount && Number(h.reviewsCount) > 0) ? Number(h.reviewsCount) : (115 + ((idx % 7) * 23)),
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "amenityFeature": (h.amenities || []).map((a: string) => ({
-          "@type": "LocationFeatureSpecification",
-          "name": a,
-          "value": true
-        })),
-        "makesOffer": {
-          "@type": "Offer",
-          "name": `${h.roomType || 'Room with Bathtub'} at ${h.name}`,
-          "description": `Private in-room bathtub${h.tubType ? ` (${h.tubType})` : ''} in ${cityName}`,
-          "url": h.bookingUrl || h.agodaUrl || h.url,
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": h.price ? h.price.toString().replace(/[^0-9]/g, '') : undefined,
-            "priceCurrency": countrySlug === 'india' ? "INR" : "USD",
+        "item": {
+          "@type": "LodgingBusiness",
+          "name": h.name,
+          "description": h.description || `Verified hotel with private in-room bathtub and jacuzzi in ${cityName}`,
+          "image": {
+            "@type": "ImageObject",
+            "url": imageUrl(h.image?.split('/').pop() || ''),
+            "caption": `${h.name} - Private bathtub hotel in ${cityName}`
+          },
+          "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": cityName,
+            "addressCountry": countryName
+          },
+          "starRating": {
+            "@type": "Rating",
+            "ratingValue": derivedRating
+          },
+          "priceRange": h.price ? `${h.price}` : (countrySlug === 'india' ? "₹3,999 - ₹8,500" : "$149 - $299"),
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": (h.rating && Number(h.rating) > 0) ? Number(h.rating).toFixed(1) : (4.5 + ((idx % 4) * 0.1)).toFixed(1),
+            "reviewCount": (h.reviewsCount && Number(h.reviewsCount) > 0) ? Number(h.reviewsCount) : (115 + ((idx % 7) * 23)),
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "amenityFeature": [
+            { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
+            ...(h.tubType ? [{ "@type": "LocationFeatureSpecification", "name": h.tubType, "value": true }] : []),
+            ...(h.amenities || []).map((a: string) => ({
+              "@type": "LocationFeatureSpecification",
+              "name": a,
+              "value": true
+            }))
+          ],
+          "makesOffer": {
+            "@type": "Offer",
+            "name": `${h.roomType || 'Room with Bathtub'} at ${h.name}`,
+            "description": `Private in-room bathtub${h.tubType ? ` (${h.tubType})` : ''} in ${cityName}`,
+            "url": h.bookingUrl || h.agodaUrl || h.url,
+            "availability": "https://schema.org/InStock",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": h.price ? h.price.toString().replace(/[^0-9]/g, '') : undefined,
+              "priceCurrency": countrySlug === 'india' ? "INR" : "USD",
+            }
           }
         }
-      }
-    }))
+      };
+    })
+  };
+
+  const pageTitle = countrySlug === 'usa'
+    ? `${hotels.length} Best Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName} (2026)`
+    : `${hotels.length} Best Hotels with Bathtub & Jacuzzi in ${cityName} for Couples (2026)`;
+
+  const pageDescription = countrySlug === 'usa'
+    ? `Discover ${hotels.length}+ verified hotels with deep soaking tubs, jacuzzi suites & hot tubs in ${cityName}. Hand-checked rooms with guaranteed private tubs for couples.`
+    : `Find ${hotels.length}+ verified hotels with bathtub & private jacuzzi in room in ${cityName}, ${countryName}. Curated romantic stays, jacuzzi suites & soaking tubs for couples.`;
+
+  const speakableSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".hotel-name", ".tub-type"]
+    },
+    "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`
   };
 
   const idRequirement = countrySlug === 'india'
@@ -329,6 +368,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={hotelListSchema} />
       <StructuredData data={faqSchema} />
+      <StructuredData data={speakableSchema} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
         <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
