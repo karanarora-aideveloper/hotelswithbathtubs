@@ -167,7 +167,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   // Structured Data Schemas
   // Strip markdown syntax to get plain text for wordCount/articleBody
   const plainText = blog.content
-    ? blog.content.replace(/#{1,6}\s+/g, '').replace(/[*_`[\]()!#>-]/g, '').replace(/\s+/g, ' ').trim()
+    ? blog.content
+        .replace(/#{1,6}\s+/g, '')         // strip markdown headings
+        .replace(/<[^>]+>/g, '')            // strip any HTML tags
+        .replace(/[*_`[\]()!#>]/g, '')      // strip markdown syntax chars
+        .replace(/\s+/g, ' ')
+        .trim()
     : '';
   const wordCount = plainText ? plainText.split(/\s+/).length : undefined;
 
