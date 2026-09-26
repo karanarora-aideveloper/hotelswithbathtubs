@@ -69,10 +69,22 @@ export default async function BlogIndex() {
 
   const blogListSchema = {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Travel Blog & Jacuzzi Hotel Guides",
+    "@type": "Blog",
+    "name": "Hotels With Bathtubs — Travel Guides & Jacuzzi Hotel Tips",
     "description": "Curated guides, tips, and reviews for romantic hotel suites with private bathtubs and jacuzzis.",
-    "url": "https://www.hotelswithbathtubs.com/blog"
+    "url": "https://www.hotelswithbathtubs.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hotels with Bathtubs",
+      "url": "https://www.hotelswithbathtubs.com"
+    },
+    "blogPost": blogs.slice(0, 10).map((b: any) => ({
+      "@type": "BlogPosting",
+      "headline": b.title,
+      "url": `https://www.hotelswithbathtubs.com/blog/${b.slug}`,
+      "datePublished": b.date ? new Date(b.date).toISOString() : b.createdAt?.toISOString(),
+      "description": b.excerpt ? (b.excerpt.length > 155 ? b.excerpt.substring(0, 152) + '...' : b.excerpt) : undefined,
+    })),
   };
 
   return (

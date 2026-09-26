@@ -59,9 +59,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
 
   // SERP-optimised title: front-loaded, year for freshness, trust hook
-  const geoMarkets = ['usa', 'uk', 'uae', 'singapore', 'france', 'italy', 'spain', 'japan', 'australia', 'germany', 'greece', 'switzerland', 'netherlands', 'canada'];
-  const useAbsoluteTitle = geoMarkets.includes(countrySlug);
-  const pageTitle = `Best Hotels with Bathtub in ${countryName} (2026) | Verified Stays`;
+  // India gets shorter title (was 80 chars, Google truncates at ~60) 
+  const pageTitle = countrySlug === 'india'
+    ? `Best Hotels with Bathtub & Jacuzzi in India (2026)`
+    : `Best Hotels with Bathtub in ${countryName} (2026) | Verified Stays`;
   const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for couples & romantic stays.`;
 
   // hreflang: geographic locale signals for all priority markets
@@ -79,7 +80,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const localeCode = hreflangMap[countrySlug];
 
   return {
-    title: useAbsoluteTitle ? { absolute: pageTitle } : pageTitle,
+    title: { absolute: pageTitle },
     description: pageDescription,
     alternates: {
       canonical: `/${countrySlug}`,

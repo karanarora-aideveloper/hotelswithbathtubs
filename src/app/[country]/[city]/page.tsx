@@ -74,8 +74,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : `${hotelCount} Best Hotels with Bathtub & Jacuzzi in ${cityName} for Couples (2026)`;
 
   const pageDescription = countrySlug === 'usa'
-    ? `Discover ${hotelCount}+ verified hotels with deep soaking tubs, private jacuzzi suites & hot tubs in ${cityName}. Hand-checked rooms with guaranteed private tubs for couples.`
-    : `Find ${hotelCount}+ verified hotels with bathtub & private jacuzzi in room in ${cityName}, ${countryName}. Curated romantic stays, jacuzzi suites & deep soaking tubs for couples.`;
+    ? `Discover ${hotelCount}+ verified hotels with deep soaking tubs, jacuzzi suites & hot tubs in ${cityName}. Hand-checked rooms with guaranteed private tubs for couples.`
+    : `Find ${hotelCount}+ verified hotels with bathtub & private jacuzzi in room in ${cityName}, ${countryName}. Curated romantic stays, jacuzzi suites & soaking tubs for couples.`;
 
 
   return {
@@ -263,7 +263,19 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           "@type": "LocationFeatureSpecification",
           "name": a,
           "value": true
-        }))
+        })),
+        "makesOffer": {
+          "@type": "Offer",
+          "name": `${h.roomType || 'Room with Bathtub'} at ${h.name}`,
+          "description": `Private in-room bathtub${h.tubType ? ` (${h.tubType})` : ''} in ${cityName}`,
+          "url": h.bookingUrl || h.agodaUrl || h.url,
+          "availability": "https://schema.org/InStock",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": h.price ? h.price.toString().replace(/[^0-9]/g, '') : undefined,
+            "priceCurrency": countrySlug === 'india' ? "INR" : "USD",
+          }
+        }
       }
     }))
   };

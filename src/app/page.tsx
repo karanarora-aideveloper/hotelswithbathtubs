@@ -18,7 +18,7 @@ export const metadata = {
   },
   description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.hotelswithbathtubs.com/',
     languages: {
       'en-US': 'https://www.hotelswithbathtubs.com/usa',
       'en-GB': 'https://www.hotelswithbathtubs.com/uk',
@@ -27,7 +27,7 @@ export const metadata = {
       'en-IN': 'https://www.hotelswithbathtubs.com/india',
       'en-AU': 'https://www.hotelswithbathtubs.com/australia',
       'en-CA': 'https://www.hotelswithbathtubs.com/canada',
-      'x-default': 'https://www.hotelswithbathtubs.com',
+      'x-default': 'https://www.hotelswithbathtubs.com/',
     },
   },
   openGraph: {
@@ -186,9 +186,23 @@ export default async function Home() {
     ]
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Hotels with Bathtub in Room & Jacuzzi Suites",
+        "item": "https://www.hotelswithbathtubs.com/"
+      }
+    ]
+  };
+
   return (
     <StructuredData data={schema}>
       <StructuredData data={organizationSchema} />
+      <StructuredData data={breadcrumbSchema} />
       <StructuredData data={faqSchema}>
         <>
           <header className="relative pt-20 sm:pt-28 md:pt-32 pb-32 sm:pb-40 md:pb-44 px-4 sm:px-8 text-center bg-accent-secondary hero-overlay overflow-hidden">

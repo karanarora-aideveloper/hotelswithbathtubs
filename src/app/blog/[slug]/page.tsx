@@ -56,7 +56,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (blog) {
     const title = blog.title;
-    const description = blog.excerpt || `Read our curated travel guide: ${blog.title}. Discover top romantic hotels with bathtubs and jacuzzis.`;
+    const rawDesc = blog.excerpt || `Read our curated travel guide: ${blog.title}. Discover top romantic hotels with bathtubs and jacuzzis.`;
+    // Cap at 155 chars to prevent Google from rewriting the snippet
+    const description = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc;
     const ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
 
     return {
@@ -163,6 +165,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   // Structured Data Schemas
+  // Strip markdown syntax to get plain text for wordCount/articleBody
+  const plainText = blog.content
+    ? blog.content.replace(/#{1,6}\s+/g, '').replace(/[*_`[\]()!#>-]/g, '').replace(/\s+/g, ' ').trim()
+    : '';
+  const wordCount = plainText ? plainText.split(/\s+/).length : undefined;
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -188,7 +196,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`
-    }
+    },
+    ...(wordCount ? { "wordCount": wordCount } : {}),
+    ...(plainText ? { "articleBody": plainText.substring(0, 500) } : {}),
   };
 
   // Parse FAQ from markdown content with flexible header matching
