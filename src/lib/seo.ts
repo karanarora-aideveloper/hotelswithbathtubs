@@ -3918,6 +3918,7 @@ export function generateCityPageContent(
   const formattedCity = titleCase(city);
   const formattedCountry = titleCase(country);
   const isIndia = country.toLowerCase() === 'india';
+  const isUSA = country.toLowerCase() === 'usa' || country.toLowerCase() === 'united states';
   const content = getCityContent(city, country);
 
   const amenitiesList = content.amenities.map(a => `<li><strong>${a.split(' ')[0]}</strong> ${a.slice(a.indexOf(' ') + 1)}</li>`).join('');
@@ -3939,12 +3940,33 @@ export function generateCityPageContent(
       <li><strong>Expedia:</strong> Trusted international booking partner with flexible stay options.</li>
     `;
 
+  // US-specific section: targets "soaking tub", "jacuzzi suite", "hot tub in room" queries
+  const usaSection = isUSA ? `
+    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Soaking Tubs, Jacuzzi Suites &amp; Hot Tubs in ${formattedCity}</h3>
+    <p class="text-gray-700 leading-relaxed mb-3">US travelers search for several types of in-room tub experiences. Here's what to expect in ${formattedCity}:</p>
+    <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-5">
+      <li><strong>Deep soaking tubs</strong> — Japanese-style or freestanding baths that fill 20–24 inches deep. No jets. The most common type in boutique hotels.</li>
+      <li><strong>Jacuzzi suites / whirlpool suites</strong> — Jetted tubs with hydrotherapy massage jets. Found in premium room tiers at luxury properties.</li>
+      <li><strong>Hot tubs in room</strong> — Private to your room only (not shared). Found at select resort properties.</li>
+      <li><strong>Roman soaking tubs</strong> — Oversized, wide, shallow marble tubs. The classic Vegas-style resort tub.</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-4">Every listing has been <strong>individually verified</strong> — not a shared spa, not a walk-in shower. Triple-checked across ${verificationSources}.</p>
+  ` : '';
+
+  const h2 = isUSA
+    ? `Jacuzzi Suites &amp; Hotels With Soaking Tubs in ${formattedCity}`
+    : `Why Book a Hotel Room with a Bathtub in ${formattedCity}, ${formattedCountry}?`;
+
+  const introLine2 = isUSA
+    ? `Browse <strong>${hotelCount}+ verified hotels</strong> with private soaking tubs, jacuzzi suites, and in-room hot tubs in ${formattedCity} — each individually confirmed across ${verificationSources}.`
+    : `Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across ${verificationSources} to guarantee private in-room tubs without misleading photos.`;
+
   return `
-    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">Why Book a Hotel Room with a Bathtub in ${formattedCity}, ${formattedCountry}?</h2>
+    <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">${h2}</h2>
     <p class="text-gray-700 leading-relaxed mb-4">${content.intro}</p>
-    <p class="text-gray-700 leading-relaxed mb-6">Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across ${verificationSources} to guarantee private in-room tubs without misleading photos.</p>
-    
-    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Popular Bathtub Amenities in ${formattedCity}</h3>
+    <p class="text-gray-700 leading-relaxed mb-6">${introLine2}</p>
+    ${usaSection}
+    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">${isUSA ? 'Suite Amenities &amp; Features' : `Popular Bathtub Amenities in ${formattedCity}`}</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-6">
       ${amenitiesList}
     </ul>
