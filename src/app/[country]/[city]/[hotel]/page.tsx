@@ -14,14 +14,35 @@ export async function generateStaticParams() {
   await connectToDatabase();
   const hotels = await Hotel.find({ flagged: { $ne: true } }).select('country city slug name');
 
-  return hotels.map((h: any) => {
+  const params: Array<{ country: string; city: string; hotel: string }> = [];
+  const seen = new Set<string>();
+
+  for (const h of hotels) {
     const countryInfo = resolveCountry(h.country);
-    return {
-      country: countryInfo.slug,
-      city: slugify(h.city),
-      hotel: h.slug || slugify(h.name),
-    };
-  });
+    const countrySlug = countryInfo.slug;
+    const citySlug = slugify(h.city);
+
+    // 1. Primary slug from DB (e.g. hotel-mayfair-waves-puri)
+    if (h.slug) {
+      const key1 = `${countrySlug}/${citySlug}/${h.slug}`;
+      if (!seen.has(key1)) {
+        seen.add(key1);
+        params.push({ country: countrySlug, city: citySlug, hotel: h.slug });
+      }
+    }
+
+    // 2. Clean name-only slug without city suffix (e.g. hotel-mayfair-waves)
+    const nameSlug = slugify(h.name);
+    if (nameSlug) {
+      const key2 = `${countrySlug}/${citySlug}/${nameSlug}`;
+      if (!seen.has(key2)) {
+        seen.add(key2);
+        params.push({ country: countrySlug, city: citySlug, hotel: nameSlug });
+      }
+    }
+  }
+
+  return params;
 }
 
 async function getHotel(countryParam: string, cityParam: string, hotelParam: string) {
@@ -31,7 +52,21 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
   const hotelSlug = decodeURIComponent(hotelParam);
 
   let hotel = await Hotel.findOne({ slug: hotelSlug, flagged: { $ne: true } });
-  
+
+  const citySlug = slugify(rawCity);
+
+  // Fallback 1: If slug is missing -city suffix (e.g. hotel-mayfair-waves), try with -city
+  if (!hotel && !hotelSlug.endsWith(`-${citySlug}`)) {
+    hotel = await Hotel.findOne({ slug: `${hotelSlug}-${citySlug}`, flagged: { $ne: true } });
+  }
+
+  // Fallback 2: If slug has redundant -city suffix, try stripped
+  if (!hotel && hotelSlug.endsWith(`-${citySlug}`)) {
+    const strippedSlug = hotelSlug.slice(0, -(citySlug.length + 1));
+    hotel = await Hotel.findOne({ slug: strippedSlug, flagged: { $ne: true } });
+  }
+
+  // Fallback 3: Lookup by hotel name and city regex
   if (!hotel) {
     const rawHotelName = hotelSlug.replace(/-/g, ' ');
     hotel = await Hotel.findOne({

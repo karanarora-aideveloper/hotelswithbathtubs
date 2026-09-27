@@ -16,6 +16,19 @@ export async function onRequest(context: EventContext): Promise<Response> {
 
   const response = await context.next();
 
+  // If 404 on a 3-segment route (/country/city/hotel-slug), check if appending -city resolves it
+  if (response.status === 404) {
+    const segments = url.pathname.split('/').filter(Boolean);
+    if (segments.length === 3 && segments[0] !== 'api' && segments[0] !== '_next') {
+      const [country, city, hotelSlug] = segments;
+      const citySlug = city.toLowerCase();
+      if (!hotelSlug.endsWith(`-${citySlug}`)) {
+        url.pathname = `/${country}/${city}/${hotelSlug}-${citySlug}`;
+        return Response.redirect(url.toString(), 301);
+      }
+    }
+  }
+
   // Attach Edge CDN caching headers for HTML pages (sub-50ms TTFB worldwide)
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('text/html')) {

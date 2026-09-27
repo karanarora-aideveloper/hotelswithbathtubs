@@ -18,6 +18,7 @@ import {
 type HotelData = {
   _id?: string;
   name: string;
+  slug?: string;
   city: string;
   country: string;
   image: string;
@@ -483,7 +484,7 @@ export default function CityHotelsClient({
                 </div>
 
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                  <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${slugify(h.name)}`} className="group/link">
+                  <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link">
                     <h3 className="font-heading text-lg sm:text-xl font-bold text-accent-secondary mb-1 group-hover/link:text-accent transition-colors">{h.name}</h3>
                   </Link>
                   {h.rating && h.reviewsCount && (
@@ -586,7 +587,7 @@ export default function CityHotelsClient({
                   </div>
 
                   <div className="mt-4 text-center">
-                    <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${slugify(h.name)}`} className="text-xs font-bold text-accent-secondary hover:text-accent transition-colors inline-block mt-1">
+                    <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-xs font-bold text-accent-secondary hover:text-accent transition-colors inline-block mt-1">
                       View Details &rarr;
                     </Link>
                   </div>

@@ -158,6 +158,7 @@ export default async function CityHotelsPage({
     name: h.name,
     city: h.city,
     country: h.country,
+    slug: h.slug || slugify(h.name),
     image: h.image,
     url: h.url,
     agodaUrl: h.agodaUrl,
