@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { slugify } from '@/lib/utils';
 import { useGeo } from '@/lib/useGeo';
 import {
   recordSearchZeroResults,
@@ -11,30 +10,66 @@ import {
   recordSearchSelection,
 } from '@/lib/gtag';
 
-type Match = { country: string; city: string };
+export type SearchItem = {
+  type: 'city' | 'hotel' | 'country';
+  title: string;
+  subtitle: string;
+  url: string;
+  badge?: string;
+  count?: number;
+};
+
+type SearchData = {
+  countries?: [string, string, number][]; // [name, slug, count]
+  cities?: [string, string, string, string, number][]; // [name, country, countrySlug, citySlug, count]
+  hotels?: [string, string, string, string][]; // [name, city, country, url]
+};
 
 export default function HomeSearch() {
   const router = useRouter();
   const { geo } = useGeo();
-  const [locations, setLocations] = useState<Record<string, string[]>>({});
+  const [searchData, setSearchData] = useState<SearchData | null>(null);
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isNavigating, setIsNavigating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Load search index on mount
   useEffect(() => {
-    fetch('/locations.json')
-      .then((res) => (res.ok ? res.json() : fetch('/api/locations').then((r) => r.json())))
-      .then((data) => {
-        if (!data.error) setLocations(data);
+    fetch('/search-data.json')
+      .then((res) => {
+        if (res.ok) return res.json();
+        // Fallback to locations.json if search-data.json not ready
+        return fetch('/locations.json')
+          .then((r) => r.json())
+          .then((locMap) => {
+            const cities: [string, string, string, string, number][] = [];
+            const countries: [string, string, number][] = [];
+            for (const [country, cityList] of Object.entries(locMap as Record<string, string[]>)) {
+              countries.push([country, country.toLowerCase().replace(/\s+/g, '-'), cityList.length]);
+              for (const city of cityList) {
+                cities.push([
+                  city,
+                  country,
+                  country.toLowerCase().replace(/\s+/g, '-'),
+                  city.toLowerCase().replace(/\s+/g, '-'),
+                  1,
+                ]);
+              }
+            }
+            return { countries, cities, hotels: [] };
+          });
+      })
+      .then((data: SearchData) => {
+        setSearchData(data);
       })
       .catch(console.error);
 
-    // Reset isNavigating on mount in case of back-button navigation
     setIsNavigating(false);
   }, []);
 
+  // Handle clicking outside the search component
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -48,64 +83,114 @@ export default function HomeSearch() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen, query, isNavigating]);
 
-  // Flatten { "India": ["Kolkata", "Gwalior"] } into a searchable list
-  const allMatches: Match[] = Object.entries(locations).flatMap(([country, cities]) =>
-    cities.map((city) => ({ country, city }))
-  );
+  // Clean, tokenized query matching
+  const cleanQuery = query.toLowerCase().replace(/,/g, ' ').replace(/\s+/g, ' ').trim();
+  const tokens = useMemo(() => cleanQuery.split(' ').filter(Boolean), [cleanQuery]);
 
-  const cleanQuery = query.trim().toLowerCase();
-  
-  // Sort matches so exact and prefix matches appear first
-  const filtered = cleanQuery
-    ? allMatches
-        .filter((m) => m.city.toLowerCase().includes(cleanQuery))
-        .sort((a, b) => {
-          const aExact = a.city.toLowerCase() === cleanQuery ? -1 : 1;
-          const bExact = b.city.toLowerCase() === cleanQuery ? -1 : 1;
-          if (aExact !== bExact) return aExact - bExact;
+  // Compute matched items
+  const filtered: SearchItem[] = useMemo(() => {
+    if (!cleanQuery || !searchData) return [];
 
-          const aStarts = a.city.toLowerCase().startsWith(cleanQuery) ? -1 : 1;
-          const bStarts = b.city.toLowerCase().startsWith(cleanQuery) ? -1 : 1;
-          if (aStarts !== bStarts) return aStarts - bStarts;
+    const results: SearchItem[] = [];
 
-          return a.city.localeCompare(b.city);
-        })
-    : [];
+    // Helper: checks if all query tokens are present in target string
+    const matchAllTokens = (target: string) => {
+      const lower = target.toLowerCase();
+      return tokens.every((t) => lower.includes(t));
+    };
 
-  // Track search zero results when user pauses typing and no results match
+    // 1. Search Cities (Priority)
+    if (searchData.cities) {
+      for (const [cityName, countryName, countrySlug, citySlug, count] of searchData.cities) {
+        const fullCityString = `${cityName} ${countryName}`;
+        if (matchAllTokens(fullCityString)) {
+          const isExact = cityName.toLowerCase() === cleanQuery;
+          const isPrefix = cityName.toLowerCase().startsWith(cleanQuery);
+          results.push({
+            type: 'city',
+            title: cityName,
+            subtitle: countryName,
+            url: `/${countrySlug}/${citySlug}`,
+            badge: `${count} ${count === 1 ? 'hotel' : 'hotels'}`,
+            count: isExact ? 1000 : isPrefix ? 500 : 100,
+          });
+        }
+      }
+    }
+
+    // 2. Search Hotels (Direct hotel match, e.g. "Mayfair", "The Greenwich")
+    if (searchData.hotels) {
+      for (const [hotelName, cityName, countryName, url] of searchData.hotels) {
+        const fullHotelString = `${hotelName} ${cityName} ${countryName}`;
+        if (matchAllTokens(fullHotelString)) {
+          const isExact = hotelName.toLowerCase() === cleanQuery;
+          const isPrefix = hotelName.toLowerCase().startsWith(cleanQuery);
+          results.push({
+            type: 'hotel',
+            title: hotelName,
+            subtitle: `${cityName}, ${countryName}`,
+            url,
+            badge: 'Bathtub Hotel',
+            count: isExact ? 900 : isPrefix ? 400 : 50,
+          });
+        }
+      }
+    }
+
+    // 3. Search Countries
+    if (searchData.countries) {
+      for (const [countryName, countrySlug, count] of searchData.countries) {
+        if (matchAllTokens(countryName)) {
+          const isExact = countryName.toLowerCase() === cleanQuery;
+          results.push({
+            type: 'country',
+            title: countryName,
+            subtitle: `Explore all bathtub hotels in ${countryName}`,
+            url: `/${countrySlug}`,
+            badge: `${count} cities`,
+            count: isExact ? 800 : 20,
+          });
+        }
+      }
+    }
+
+    // Sort by relevance score
+    results.sort((a, b) => (b.count || 0) - (a.count || 0));
+
+    // Limit to top 8 distinct items for snappy presentation
+    return results.slice(0, 8);
+  }, [cleanQuery, tokens, searchData]);
+
+  // Zero results tracking when user pauses
   useEffect(() => {
     if (
       isOpen &&
       cleanQuery.length >= 2 &&
       filtered.length === 0 &&
-      Object.keys(locations).length > 0
+      searchData &&
+      (searchData.cities?.length || 0) > 0
     ) {
       const timer = setTimeout(() => {
         recordSearchZeroResults(query.trim(), 'home_search_empty');
       }, 750);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, cleanQuery, filtered.length, locations, query]);
+  }, [isOpen, cleanQuery, filtered.length, searchData, query]);
 
-  function getTargetUrl(match: Match) {
-    return `/${slugify(match.country)}/${slugify(match.city)}`;
-  }
-
-  function goToCity(match: Match) {
-    recordSearchSelection(match.city, match.country, query.trim());
+  function navigateToItem(item: SearchItem) {
+    recordSearchSelection(item.title, item.subtitle, query.trim());
     setIsOpen(false);
     setIsNavigating(true);
-    router.push(getTargetUrl(match));
+    router.push(item.url);
   }
 
   function handleSearchClick() {
     if (filtered.length > 0) {
-      const selected = activeIndex >= 0 && activeIndex < filtered.length 
-        ? filtered[activeIndex] 
-        : filtered[0];
-      goToCity(selected);
+      const selected = activeIndex >= 0 && activeIndex < filtered.length ? filtered[activeIndex] : filtered[0];
+      navigateToItem(selected);
     } else if (query.trim().length > 0) {
       recordSearchZeroResults(query.trim(), 'home_search_submit');
+      setIsOpen(true);
     }
   }
 
@@ -114,9 +199,10 @@ export default function HomeSearch() {
       if (e.key === 'Enter') {
         e.preventDefault();
         if (filtered.length > 0) {
-          goToCity(filtered[0]);
+          navigateToItem(filtered[0]);
         } else if (query.trim().length > 0) {
           recordSearchZeroResults(query.trim(), 'home_search_enter');
+          setIsOpen(true);
         }
       }
       return;
@@ -130,10 +216,8 @@ export default function HomeSearch() {
       setActiveIndex((i) => (i <= 0 ? filtered.length - 1 : i - 1));
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      const selected = activeIndex >= 0 && activeIndex < filtered.length 
-        ? filtered[activeIndex] 
-        : filtered[0];
-      goToCity(selected);
+      const selected = activeIndex >= 0 && activeIndex < filtered.length ? filtered[activeIndex] : filtered[0];
+      navigateToItem(selected);
     } else if (e.key === 'Escape') {
       setIsOpen(false);
     }
@@ -155,41 +239,101 @@ export default function HomeSearch() {
             onKeyDown={handleKeyDown}
             placeholder={
               geo.isIndia
-                ? "Search city with bathtub (e.g. Goa, Udaipur, Manali)..."
-                : "Search city with bathtub (e.g. New York, Las Vegas, Miami)..."
+                ? 'Search city or hotel (e.g. Puri, Goa, Udaipur, Taj)...'
+                : 'Search city or hotel (e.g. New York, Miami, Four Seasons)...'
             }
-            className="w-full px-4 md:px-6 py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all"
+            className="w-full px-4 md:px-6 py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all pr-10"
           />
 
+          {query && (
+            <button
+              onClick={() => {
+                setQuery('');
+                setIsOpen(false);
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+              aria-label="Clear search"
+            >
+              ✕
+            </button>
+          )}
+
           {isOpen && query.trim() && (
-            <div className="absolute top-full mt-2 left-0 right-0 bg-white border border-border shadow-xl rounded-xl overflow-hidden z-30 max-h-72 overflow-y-auto text-left">
+            <div className="absolute top-full mt-2 left-0 right-0 bg-white border border-border shadow-2xl rounded-2xl overflow-hidden z-30 max-h-96 overflow-y-auto text-left divide-y divide-gray-100 animate-in fade-in slide-in-from-top-1 duration-150">
               {filtered.length === 0 ? (
-                <div className="p-4 text-sm text-gray-500 text-center">
-                  No matching city — we don't have listings there yet.
+                <div className="p-6 text-center">
+                  <p className="text-2xl mb-2">🔍</p>
+                  <p className="text-sm font-semibold text-gray-800">
+                    No results for &ldquo;{query}&rdquo;
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1 mb-4">
+                    Try searching for another city, hotel name, or popular destination:
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {(geo.isIndia
+                      ? [
+                          { name: 'Puri', url: '/india/puri' },
+                          { name: 'Goa', url: '/india/goa' },
+                          { name: 'Udaipur', url: '/india/udaipur' },
+                          { name: 'Manali', url: '/india/manali' },
+                          { name: 'Jaipur', url: '/india/jaipur' },
+                        ]
+                      : [
+                          { name: 'New York', url: '/usa/new-york' },
+                          { name: 'Miami', url: '/usa/miami' },
+                          { name: 'Las Vegas', url: '/usa/las-vegas' },
+                          { name: 'Chicago', url: '/usa/chicago' },
+                          { name: 'London', url: '/uk/london' },
+                        ]
+                    ).map((sug) => (
+                      <Link
+                        key={sug.name}
+                        href={sug.url}
+                        onClick={() => setIsOpen(false)}
+                        className="text-xs font-semibold px-3 py-1.5 bg-gray-100 hover:bg-accent/10 hover:text-accent text-gray-700 rounded-lg transition-colors"
+                      >
+                        {sug.name} &rarr;
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               ) : (
-                filtered.map((m, i) => {
-                  const targetUrl = getTargetUrl(m);
-                  return (
-                    <Link
-                      key={`${m.country}-${m.city}`}
-                      href={targetUrl}
-                      prefetch={true}
-                      onMouseDown={(e) => e.stopPropagation()}
-                      onClick={() => {
-                        setIsOpen(false);
-                        setIsNavigating(true);
-                      }}
-                      onMouseEnter={() => setActiveIndex(i)}
-                      className={`w-full text-left px-4 py-3 text-sm font-semibold border-b border-gray-100 last:border-0 transition-colors flex items-center justify-between block ${
-                        i === activeIndex ? 'bg-accent/10 text-accent' : 'text-text-main hover:bg-accent/10 hover:text-accent'
-                      }`}
-                    >
-                      <span className="font-bold">{m.city}, {m.country}</span>
-                      <span className="text-xs font-normal text-accent group-hover:underline">View Hotels &rarr;</span>
-                    </Link>
-                  );
-                })
+                filtered.map((item, i) => (
+                  <Link
+                    key={`${item.type}-${item.url}`}
+                    href={item.url}
+                    prefetch={true}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setIsNavigating(true);
+                      recordSearchSelection(item.title, item.subtitle, query.trim());
+                    }}
+                    onMouseEnter={() => setActiveIndex(i)}
+                    className={`w-full text-left px-4 py-3.5 text-sm transition-colors flex items-center justify-between group ${
+                      i === activeIndex
+                        ? 'bg-accent/10 text-accent'
+                        : 'text-text-main hover:bg-accent/10 hover:text-accent'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-lg flex-shrink-0">
+                        {item.type === 'hotel' ? '🏨' : item.type === 'city' ? '📍' : '🌍'}
+                      </span>
+                      <div className="truncate">
+                        <div className="font-bold text-gray-900 group-hover:text-accent truncate">
+                          {item.title}
+                        </div>
+                        <div className="text-xs text-gray-500 truncate">{item.subtitle}</div>
+                      </div>
+                    </div>
+                    {item.badge && (
+                      <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 group-hover:bg-accent/20 group-hover:text-accent flex-shrink-0 ml-3">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                ))
               )}
             </div>
           )}
@@ -198,7 +342,7 @@ export default function HomeSearch() {
         <button
           onClick={handleSearchClick}
           disabled={isNavigating}
-          className={`bg-gradient-to-br from-accent to-accent-hover text-white px-8 md:px-10 py-3 md:py-4 text-base md:text-lg font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/30 transition-all w-full md:w-auto flex items-center justify-center gap-2 ${
+          className={`bg-gradient-to-br from-accent to-accent-hover text-white px-8 md:px-10 py-3.5 md:py-4 text-base md:text-lg font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/30 transition-all w-full md:w-auto flex items-center justify-center gap-2 flex-shrink-0 ${
             isNavigating ? 'opacity-80 cursor-wait' : ''
           }`}
         >

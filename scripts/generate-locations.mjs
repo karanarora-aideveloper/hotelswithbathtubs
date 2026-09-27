@@ -24,12 +24,36 @@ if (!MONGODB_URI) {
   process.exit(1);
 }
 
+function slugify(text) {
+  if (!text) return '';
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
+const countrySlugMap = {
+  'united states': 'usa',
+  'united-states': 'usa',
+  'usa': 'usa',
+  'united kingdom': 'uk',
+  'united-kingdom': 'uk',
+  'uk': 'uk',
+  'united arab emirates': 'uae',
+  'united-arab-emirates': 'uae',
+  'uae': 'uae',
+};
+
 // Simple schema matching Hotel collection
 const HotelSchema = new mongoose.Schema(
   {
+    name: String,
+    slug: String,
     country: String,
     city: String,
     flagged: Boolean,
+    rating: Number,
   },
   { collection: 'hotels' }
 );
@@ -37,10 +61,11 @@ const HotelSchema = new mongoose.Schema(
 const Hotel = mongoose.models.Hotel || mongoose.model('Hotel', HotelSchema);
 
 async function generateLocations() {
-  console.log('📍 Connecting to MongoDB to generate locations.json...');
+  console.log('📍 Connecting to MongoDB to generate locations.json and search-data.json...');
   try {
     await mongoose.connect(MONGODB_URI);
 
+    // 1. Generate standard locations.json (for backward compatibility)
     const locations = await Hotel.aggregate([
       { $match: { flagged: { $ne: true } } },
       {
@@ -78,11 +103,64 @@ async function generateLocations() {
 
     const totalCountries = Object.keys(locationMap).length;
     const totalCities = Object.values(locationMap).reduce((sum, cities) => sum + cities.length, 0);
-
     console.log(`✅ locations.json generated successfully: ${totalCountries} countries, ${totalCities} cities.`);
-    console.log(`💾 Saved to: ${outputPath}`);
+
+    // 2. Generate comprehensive search-data.json (Hotels, Cities, Countries)
+    const allHotels = await Hotel.find({ flagged: { $ne: true } })
+      .select('name city country slug')
+      .sort({ rating: -1 })
+      .lean();
+
+    const countryStats = {};
+    const cityStats = {};
+    const hotelList = [];
+
+    for (const h of allHotels) {
+      if (!h.name || !h.city || !h.country) continue;
+      const country = h.country.trim();
+      const city = h.city.trim();
+      const countrySlug = countrySlugMap[country.toLowerCase()] || slugify(country);
+      const citySlug = slugify(city);
+      const hotelSlug = h.slug || `${slugify(h.name)}-${citySlug}`;
+
+      // Aggregate country count
+      if (!countryStats[country]) {
+        countryStats[country] = { name: country, slug: countrySlug, count: 0 };
+      }
+      countryStats[country].count++;
+
+      // Aggregate city count
+      const cityKey = `${countrySlug}:${citySlug}`;
+      if (!cityStats[cityKey]) {
+        cityStats[cityKey] = { name: city, country, countrySlug, citySlug, count: 0 };
+      }
+      cityStats[cityKey].count++;
+
+      // Add hotel entry: [hotelName, cityName, countryName, url]
+      hotelList.push([
+        h.name.trim(),
+        city,
+        country,
+        `/${countrySlug}/${citySlug}/${hotelSlug}`,
+      ]);
+    }
+
+    const searchData = {
+      countries: Object.values(countryStats).map((c) => [c.name, c.slug, c.count]),
+      cities: Object.values(cityStats).map((c) => [c.name, c.country, c.countrySlug, c.citySlug, c.count]),
+      hotels: hotelList,
+    };
+
+    const searchDataPath = path.join(publicDir, 'search-data.json');
+    fs.writeFileSync(searchDataPath, JSON.stringify(searchData), 'utf-8');
+
+    const searchDataSize = (fs.statSync(searchDataPath).size / 1024).toFixed(1);
+    console.log(`✅ search-data.json generated successfully (${searchDataSize} KB):`);
+    console.log(`   - ${searchData.hotels.length} hotels`);
+    console.log(`   - ${searchData.cities.length} cities`);
+    console.log(`   - ${searchData.countries.length} countries`);
   } catch (err) {
-    console.error('❌ Error generating locations.json:', err);
+    console.error('❌ Error generating search data:', err);
     process.exit(1);
   } finally {
     await mongoose.disconnect();
