@@ -1,4 +1,5 @@
 import type mixpanel from 'mixpanel-browser';
+import { isUserExcluded } from '@/lib/exclusion';
 
 type MixpanelInstance = typeof mixpanel;
 
@@ -23,6 +24,7 @@ const pendingSuperProps: Record<string, unknown>[] = [];
 
 export const initMixpanel = () => {
   if (typeof window !== 'undefined' && !isMixpanelInitialized) {
+    if (isUserExcluded()) return;
     isMixpanelInitialized = true;
     const runInit = async () => {
       try {
@@ -56,9 +58,10 @@ export const initMixpanel = () => {
 
 export const trackEvent = async (eventName: string, properties?: Record<string, any>) => {
   if (typeof window !== 'undefined') {
-    const ignoreTracking = localStorage.getItem('ignore_ga');
-    if (ignoreTracking === 'true') {
-      console.log(`[Mixpanel Blocked] Event: ${eventName}`, properties);
+    if (isUserExcluded()) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`[Mixpanel Blocked via Exclusion] Event: ${eventName}`, properties);
+      }
       return;
     }
     initMixpanel();

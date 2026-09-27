@@ -20,16 +20,13 @@ export const GA_MEASUREMENT_ID =
 
 
 
+import { isUserExcluded } from '@/lib/exclusion';
+
 /**
- * Check if current user has opted out or flagged internal traffic via /admin
+ * Check if current user has opted out or flagged internal traffic via /admin or ?exclude=true
  */
 export const isGAExcluded = (): boolean => {
-  if (typeof window === 'undefined') return false;
-  try {
-    return localStorage.getItem('ignore_ga') === 'true';
-  } catch {
-    return false;
-  }
+  return isUserExcluded();
 };
 
 /**
@@ -38,12 +35,15 @@ export const isGAExcluded = (): boolean => {
 export const applyGAExclusion = (gaId?: string) => {
   if (typeof window === 'undefined') return;
   const id = gaId || GA_MEASUREMENT_ID;
-  if (!id) return;
 
   if (isGAExcluded()) {
-    window[`ga-disable-${id}`] = true;
+    if (id) window[`ga-disable-${id}`] = true;
+    window['ga-disable-G-TETR30WPYM'] = true;
+    window['ga-disable-G-2VDZWWBGD3'] = true;
   } else {
-    delete window[`ga-disable-${id}`];
+    if (id) delete window[`ga-disable-${id}`];
+    delete window['ga-disable-G-TETR30WPYM'];
+    delete window['ga-disable-G-2VDZWWBGD3'];
   }
 };
 

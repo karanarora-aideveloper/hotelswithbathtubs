@@ -5,6 +5,7 @@ import { PostHogProvider } from 'posthog-js/react';
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { isUserExcluded } from '@/lib/exclusion';
 
 function PostHogPageView() {
   const pathname = usePathname();
@@ -12,6 +13,8 @@ function PostHogPageView() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    if (isUserExcluded()) return;
+
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
     posthog.capture('$pageview', { $current_url: url });
   }, [pathname, searchParams]);
@@ -24,6 +27,14 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
     const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
     if (!key) return;
 
+    // Check if user is excluded (admin or developer)
+    if (isUserExcluded()) {
+      try {
+        posthog.opt_out_capturing();
+      } catch (_) {}
+      return;
+    }
+
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
       // Session recordings — see exactly what real users do
@@ -34,15 +45,17 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
       // Autocapture: records all clicks, form submissions, page loads automatically
       autocapture: {
         url_allowlist: ['hotelswithbathtubs.com'],
-        element_allowlist: ['a', 'button', 'input', 'select', '[data-ph-capture]'],
+        element_allowlist: ['a', 'button', 'form', 'input', 'select'],
       },
       // Don't capture pageviews automatically — we do it manually above
       capture_pageview: false,
       // Respect user privacy
       respect_dnt: false,
-      // Disable in local dev
+      // Disable in local dev or if excluded
       loaded: (ph) => {
-        if (process.env.NODE_ENV === 'development') ph.opt_out_capturing();
+        if (process.env.NODE_ENV === 'development' || isUserExcluded()) {
+          ph.opt_out_capturing();
+        }
       },
     });
   }, []);
@@ -62,10 +75,21 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
 
 export function phCapture(event: string, props?: Record<string, unknown>) {
   if (typeof window === 'undefined') return;
-  try { posthog.capture(event, props); } catch (_) {}
+  if (isUserExcluded()) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`[PostHog Blocked via Exclusion] ${event}:`, props);
+    }
+    return;
+  }
+  try {
+    posthog.capture(event, props);
+  } catch (_) {}
 }
 
 export function phIdentify(userId: string, traits?: Record<string, unknown>) {
   if (typeof window === 'undefined') return;
-  try { posthog.identify(userId, traits); } catch (_) {}
+  if (isUserExcluded()) return;
+  try {
+    posthog.identify(userId, traits);
+  } catch (_) {}
 }

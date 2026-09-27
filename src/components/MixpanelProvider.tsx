@@ -3,6 +3,7 @@
 import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { initMixpanel, trackEvent, registerSuperProperties } from '@/lib/analytics';
+import { isUserExcluded } from '@/lib/exclusion';
 
 // Helper to parse city, country and page metadata from current route path
 const getRouteContext = (path: string) => {
@@ -39,35 +40,36 @@ function MixpanelTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Initialize Mixpanel once on client mount
+  // Initialize Mixpanel once on client mount (if not excluded)
   useEffect(() => {
+    if (isUserExcluded()) return;
     initMixpanel();
   }, []);
 
   // Update dynamic super properties (city/country context) and track page_view on route change
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const context = getRouteContext(pathname);
-      
-      // Clean up undefined parameters before registering
-      const cleanContext = Object.fromEntries(
-        Object.entries(context).filter(([_, v]) => v !== undefined)
-      );
+    if (typeof window === 'undefined' || isUserExcluded()) return;
+    const context = getRouteContext(pathname);
+    
+    // Clean up undefined parameters before registering
+    const cleanContext = Object.fromEntries(
+      Object.entries(context).filter(([_, v]) => v !== undefined)
+    );
 
-      // Register current city & country as super properties so they attach to all subsequent click/exit events
-      registerSuperProperties(cleanContext);
+    // Register current city & country as super properties so they attach to all subsequent click/exit events
+    registerSuperProperties(cleanContext);
 
-      const url = window.location.href;
-      trackEvent('page_view', {
-        path: pathname,
-        url: url,
-        title: document.title,
-      });
-    }
+    const url = window.location.href;
+    trackEvent('page_view', {
+      path: pathname,
+      url: url,
+      title: document.title,
+    });
   }, [pathname, searchParams]);
 
   // Track per-page time spent — fires on every route change (SPA nav) AND on unmount
   useEffect(() => {
+    if (typeof window === 'undefined' || isUserExcluded()) return;
     const startTime = Date.now();
     const capturedPath = pathname;
     const capturedContext = getRouteContext(capturedPath);
@@ -84,6 +86,7 @@ function MixpanelTracker() {
 
   // Track site_exit on tab close / hard navigation — beforeunload + visibilitychange for iOS Safari
   useEffect(() => {
+    if (typeof window === 'undefined' || isUserExcluded()) return;
     const startTime = Date.now();
 
     const handleExit = () => {
@@ -111,6 +114,7 @@ function MixpanelTracker() {
 
   // Track generic non-affiliate outbound links (other exits)
   useEffect(() => {
+    if (typeof window === 'undefined' || isUserExcluded()) return;
     const handleExitClicks = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest('a');
       if (!target) return;

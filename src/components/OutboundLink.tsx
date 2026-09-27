@@ -4,6 +4,8 @@ import { trackEvent } from '@/lib/analytics';
 import { recordBookingConversion } from '@/lib/gtag';
 import { wrapOutboundAffiliateLink } from '@/lib/affiliate';
 import posthog from 'posthog-js';
+import { isUserExcluded } from '@/lib/exclusion';
+
 
 
 export default function OutboundLink({
@@ -48,12 +50,14 @@ export default function OutboundLink({
           destinationUrl: affiliateLink,
         });
 
-        // Track to PostHog — links to session recording
+        // Track to PostHog — links to session recording (if not excluded)
         try {
-          posthog.capture('hotel_booking_click', {
-            ...eventProps,
-            $set: { last_booking_source: source, last_booked_city: cityName },
-          });
+          if (!isUserExcluded()) {
+            posthog.capture('hotel_booking_click', {
+              ...eventProps,
+              $set: { last_booking_source: source, last_booked_city: cityName },
+            });
+          }
         } catch (_) {}
       }}
     >

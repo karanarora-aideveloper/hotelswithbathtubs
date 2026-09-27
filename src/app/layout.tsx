@@ -12,6 +12,7 @@ import MixpanelProvider from "@/components/MixpanelProvider";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 import { PostHogProviderWrapper } from '@/components/PostHogProvider';
+import InternalTrafficBadge from '@/components/InternalTrafficBadge';
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -80,6 +81,37 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
         <link rel="dns-prefetch" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
         <link rel="preconnect" href="https://us.i.posthog.com" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var q = new URLSearchParams(window.location.search);
+                  if (q.get('exclude') === 'true' || q.get('admin_mode') === 'true' || q.get('ignore_analytics') === 'true' || q.get('ignore_ga') === 'true' || q.get('dev') === 'true') {
+                    localStorage.setItem('ignore_ga', 'true');
+                    localStorage.setItem('ignore_analytics', 'true');
+                    document.cookie = "ignore_analytics=true; path=/; max-age=31536000; SameSite=Lax";
+                  }
+                  if (q.get('include_analytics') === 'true' || q.get('unexclude') === 'true') {
+                    localStorage.removeItem('ignore_ga');
+                    localStorage.removeItem('ignore_analytics');
+                    document.cookie = "ignore_analytics=; path=/; max-age=0; SameSite=Lax";
+                  }
+                  var isExcluded = localStorage.getItem('ignore_ga') === 'true' || 
+                                   localStorage.getItem('ignore_analytics') === 'true' || 
+                                   document.cookie.indexOf('ignore_analytics=true') !== -1;
+                  if (isExcluded) {
+                    window['ga-disable-G-TETR30WPYM'] = true;
+                    window['ga-disable-G-2VDZWWBGD3'] = true;
+                    ${gaId ? `window['ga-disable-${gaId}'] = true;` : ''}
+                    window['__HWB_ANALYTICS_EXCLUDED__'] = true;
+                    console.log('%c[HotelsWithBathtubs] Admin/Developer Traffic Excluded (GA4, PostHog, Mixpanel Disabled)', 'background: #0f172a; color: #38bdf8; font-size: 11px; padding: 4px 8px; border-radius: 4px;');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${outfit.variable} ${lora.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <PostHogProviderWrapper>
@@ -97,9 +129,9 @@ export default async function RootLayout({
           <MixpanelProvider />
           {gaId && <GoogleAnalytics gaId={gaId} />}
           <GoogleAnalyticsProvider gaId={gaId} />
+          <InternalTrafficBadge />
         </PostHogProviderWrapper>
       </body>
     </html>
-
   );
 }

@@ -7,6 +7,7 @@ import ProgressiveImage from '@/components/ProgressiveImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
 import posthog from 'posthog-js';
+import { isUserExcluded } from '@/lib/exclusion';
 import {
   recordHotelImpression,
   recordFilterDeadEnd,
@@ -227,13 +228,15 @@ export default function CityHotelsClient({
     setSelectedFilter(filter);
     recordFilterChange(filter, counts[filter]);
     try {
-      posthog.capture('filter_applied', {
-        filter_type: 'category',
-        filter_value: filter,
-        result_count: counts[filter],
-        city: cityName,
-        country: countryName,
-      });
+      if (!isUserExcluded()) {
+        posthog.capture('filter_applied', {
+          filter_type: 'category',
+          filter_value: filter,
+          result_count: counts[filter],
+          city: cityName,
+          country: countryName,
+        });
+      }
     } catch (_) {}
   };
 
@@ -244,7 +247,11 @@ export default function CityHotelsClient({
     setSelectedTubCategory('all');
     setSortBy('recommended');
     recordFilterReset(cityName);
-    try { posthog.capture('filter_reset', { city: cityName }); } catch (_) {}
+    try {
+      if (!isUserExcluded()) {
+        posthog.capture('filter_reset', { city: cityName });
+      }
+    } catch (_) {}
   };
 
   // Detect what kind of URL is stored in any booking field
