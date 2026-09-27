@@ -5,8 +5,7 @@ export const R2_PUBLIC_BASE_URL =
   process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
   'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs';
 
-export const DEFAULT_HOTEL_IMAGE =
-  `${R2_PUBLIC_BASE_URL}/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp`;
+export const DEFAULT_HOTEL_IMAGE = '/pexels_bathtub_6957081.jpeg';
 
 export function imageUrl(src?: string): string {
   if (!src || src.trim() === '') {
