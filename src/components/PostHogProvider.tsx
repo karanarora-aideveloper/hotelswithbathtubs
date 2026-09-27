@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { isUserExcluded } from '@/lib/exclusion';
+import { getRouteContext } from '@/lib/routeContext';
 
 function PostHogPageView() {
   const pathname = usePathname();
@@ -15,8 +16,60 @@ function PostHogPageView() {
     if (typeof window === 'undefined') return;
     if (isUserExcluded()) return;
 
+    const context = getRouteContext(pathname);
+    if (context.page_type === 'admin') return;
+
     const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-    posthog.capture('$pageview', { $current_url: url });
+    const deviceCategory = window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1024 ? 'tablet' : 'desktop';
+    const viewportSize = `${window.innerWidth}x${window.innerHeight}`;
+
+    // Register super properties so ALL subsequent autocaptured events inherit context
+    try {
+      posthog.register({
+        current_page_type: context.page_type,
+        current_country: context.country || 'global',
+        current_city: context.city || 'global',
+        device_category: deviceCategory,
+      });
+    } catch (_) {}
+
+    // Capture standard pageview with rich retention & churn attributes
+    posthog.capture('$pageview', {
+      $current_url: url,
+      page_path: pathname,
+      page_type: context.page_type,
+      country: context.country || 'global',
+      city: context.city || 'global',
+      hotel: context.hotel,
+      device_category: deviceCategory,
+      viewport_size: viewportSize,
+      referrer: document.referrer || 'direct',
+      // Person Properties for Cohort & Retention Analysis
+      $set_once: {
+        initial_landing_page: pathname,
+        initial_referrer: document.referrer || 'direct',
+        initial_country: context.country || 'global',
+        initial_city: context.city || 'global',
+        initial_device_category: deviceCategory,
+      },
+      $set: {
+        last_visited_page: pathname,
+        last_visited_city: context.city || 'none',
+        last_visited_country: context.country || 'none',
+        last_device_category: deviceCategory,
+        last_active_at: new Date().toISOString(),
+      },
+    });
+
+    // Explicit hotel detail view event for hotel-level conversion funnels
+    if (context.page_type === 'hotel_detail' && context.hotel) {
+      posthog.capture('hotel_detail_view', {
+        hotel_slug: context.hotel,
+        city: context.city,
+        country: context.country,
+        page_path: pathname,
+      });
+    }
   }, [pathname, searchParams]);
 
   return null;
@@ -37,21 +90,21 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
 
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
-      // Session recordings — see exactly what real users do
+      // Always maintain person profiles for anonymous travelers to calculate accurate D1/D7 retention
+      person_profiles: 'always',
+      // Full session recordings — see exact drop-offs, hesitation, and rage clicks
       session_recording: {
         maskAllInputs: false,
         maskInputOptions: { password: true },
       },
-      // Autocapture: records all clicks, form submissions, page loads automatically
+      // Autocapture: captures clicks, inputs, buttons, and navigation
       autocapture: {
         url_allowlist: ['hotelswithbathtubs.com'],
         element_allowlist: ['a', 'button', 'form', 'input', 'select'],
       },
-      // Don't capture pageviews automatically — we do it manually above
+      // Manual pageview tracking in PostHogPageView above
       capture_pageview: false,
-      // Respect user privacy
       respect_dnt: false,
-      // Disable in local dev or if excluded
       loaded: (ph) => {
         if (process.env.NODE_ENV === 'development' || isUserExcluded()) {
           ph.opt_out_capturing();
@@ -71,7 +124,6 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
 }
 
 // ─── Typed PostHog event helpers ──────────────────────────────────────────────
-// Use these instead of calling posthog.capture() directly — keeps events consistent
 
 export function phCapture(event: string, props?: Record<string, unknown>) {
   if (typeof window === 'undefined') return;
