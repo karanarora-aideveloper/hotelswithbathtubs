@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import posthog from 'posthog-js';
+
 
 const STORAGE_KEY = 'hwb_favorites';
 
@@ -50,6 +52,19 @@ export function useFavorites() {
       const exists = prev.some((f) => f._id === hotel._id);
       const next = exists ? prev.filter((f) => f._id !== hotel._id) : [...prev, hotel];
       saveFavorites(next);
+      // Track to PostHog
+      try {
+        posthog.capture('wishlist_action', {
+          action: exists ? 'remove' : 'add',
+          hotel_name: hotel.name,
+          city: hotel.city,
+          country: hotel.country,
+          tub_type: hotel.tubType,
+          price: hotel.price,
+          rating: hotel.rating,
+          total_wishlist_count: next.length,
+        });
+      } catch (_) {}
       return next;
     });
   }, []);

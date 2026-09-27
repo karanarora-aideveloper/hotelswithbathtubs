@@ -24,6 +24,7 @@
     "mixpanel-browser": "^2.82.1",
     "mongoose": "^9.9.2",
     "next": "16.3.1",
+    "posthog-js": "^1.434.15",
     "puppeteer": "^24.43.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
