@@ -205,7 +205,7 @@ export default async function Home() {
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={faqSchema}>
         <>
-          <header className="relative pt-20 sm:pt-28 md:pt-32 pb-32 sm:pb-40 md:pb-44 px-4 sm:px-8 text-center bg-accent-secondary hero-overlay overflow-hidden">
+          <header className="relative pt-24 sm:pt-32 pb-36 sm:pb-48 px-4 sm:px-8 text-center overflow-hidden">
             <img
               src="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
               alt="Hotels with Bathtubs - Verified Luxury Suites"
@@ -214,18 +214,17 @@ export default async function Home() {
               decoding="async"
               className="object-cover object-center absolute inset-0 z-0 w-full h-full"
             />
-            <div className="relative z-10 max-w-4xl mx-auto text-white">
-              <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-extrabold mb-3 sm:mb-4 drop-shadow-lg leading-tight">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/10 z-[1]" />
+            <div className="relative z-[2] max-w-3xl mx-auto text-white">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black mb-4 drop-shadow-xl leading-tight tracking-tight">
                 Hotels with Bathtub in Room &amp; Jacuzzi Suites (2026)
               </h1>
-              <p className="text-sm sm:text-lg md:text-xl font-medium drop-shadow-md mb-6 sm:mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed">
-                2,500+ verified hotels with private bathtubs in room, jacuzzi suites &amp; deep soaking tubs across 111 countries — every listing triple-checked on Booking.com &amp; Agoda. No misleading photos. Guaranteed private tubs.
-              </p>
+              <p className="text-lg sm:text-xl text-white/85 font-medium mb-10 drop-shadow-md max-w-2xl mx-auto leading-relaxed">Every listing verified. Every bathtub guaranteed. <br className="hidden sm:block" />No booking surprises, ever.</p>
             </div>
           </header>
           
           {/* Main Search Panel + Direct Inspiration Navigation */}
-          <div className="relative z-20 max-w-4xl mx-3 sm:mx-4 md:mx-auto -mt-16 sm:-mt-20 bg-white p-3.5 sm:p-6 rounded-2xl shadow-2xl border border-black/5">
+          <div className="relative z-20 max-w-3xl mx-4 md:mx-auto -mt-16 sm:-mt-20 bg-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-gray-100">
             <HomeSearch />
             
             {/* Above-The-Fold Inspiration Shortcuts (Geo-Adaptive) */}
@@ -233,20 +232,20 @@ export default async function Home() {
           </div>
 
           {/* Trust Strip with Clean Trust Badges (2x2 on mobile, flex on desktop) */}
-          <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 md:gap-8 p-3.5 sm:p-5 mb-8 sm:mb-10 bg-white border-b border-border shadow-xs mx-3 sm:mx-4 md:mx-auto max-w-4xl rounded-b-2xl text-xs sm:text-sm">
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 py-4 px-4 mb-8 sm:mb-10 bg-white border-b border-gray-100 max-w-5xl mx-auto text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="truncate sm:whitespace-normal">Triple-Platform Verified</span>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
               <span>Guaranteed Tubs</span>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-accent-secondary">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
@@ -259,62 +258,48 @@ export default async function Home() {
           </div>
 
           {/* Streamlined & Consolidated Proof Module */}
-          <section id="verification" className="max-w-5xl mx-auto px-4 sm:px-8 py-6 sm:py-12 scroll-mt-24">
-            <div className="bg-gradient-to-br from-accent/5 to-accent-secondary/5 border border-accent/20 rounded-2xl sm:rounded-3xl p-4 sm:p-10 shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-accent/15">
+          <section id="verification" className="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-2">How We Verify Every Hotel</h2>
+            <p className="text-gray-500 text-sm mb-8">Triple-checked across three platforms — so you book with full confidence.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
                 <div>
-                  <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-accent-secondary">
-                    Our Triple-Verification Promise
-                  </h2>
-                  <p className="text-text-muted text-sm mt-1">
-                    Eliminating misleading photos so you enjoy guaranteed in-room bathtubs and jacuzzis.
+                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                    <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">1</span>
+                    <span>MakeMyTrip Audit</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                    Confirmed "Bathtub", "Jacuzzi", or "Jacuzzi/Bathtub" room tags in verified listings.
                   </p>
                 </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-full shadow-2xs self-start md:self-auto">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span>Independently Checked &amp; Active</span>
-                </div>
+                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Amenity Tags</span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 font-bold text-accent-secondary mb-2 text-base">
-                      <span className="w-7 h-7 rounded-full bg-accent-secondary text-white text-xs flex items-center justify-center font-bold">1</span>
-                      <span>MakeMyTrip Audit</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-                      Confirmed "Bathtub", "Jacuzzi", or "Jacuzzi/Bathtub" room tags in verified listings.
-                    </p>
+              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                    <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">2</span>
+                    <span>Agoda Facility Check</span>
                   </div>
-                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Amenity Tags</span>
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                    Cross-referenced against Agoda's explicit "Bathtub" and private jacuzzi room facility filter.
+                  </p>
                 </div>
+                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Facilities</span>
+              </div>
 
-                <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 font-bold text-accent-secondary mb-2 text-base">
-                      <span className="w-7 h-7 rounded-full bg-accent-secondary text-white text-xs flex items-center justify-center font-bold">2</span>
-                      <span>Agoda Facility Check</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-                      Cross-referenced against Agoda's explicit "Bathtub" and private jacuzzi room facility filter.
-                    </p>
+              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                    <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">3</span>
+                    <span>Booking.com Validation</span>
                   </div>
-                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Facilities</span>
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                    Validated in room specifications for genuine in-room hot tubs and deep soaking tubs.
+                  </p>
                 </div>
-
-                <div className="bg-white p-5 rounded-2xl border border-border shadow-2xs flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 font-bold text-accent-secondary mb-2 text-base">
-                      <span className="w-7 h-7 rounded-full bg-accent-secondary text-white text-xs flex items-center justify-center font-bold">3</span>
-                      <span>Booking.com Validation</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-                      Validated in room specifications for genuine in-room hot tubs and deep soaking tubs.
-                    </p>
-                  </div>
-                  <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
-                </div>
+                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
               </div>
             </div>
           </section>

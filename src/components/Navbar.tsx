@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Logo from '@/components/Logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,35 +42,34 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  if (pathname?.startsWith('/redesign')) {
+    return null;
+  }
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border/80 shadow-2xs">
+    <header className="sticky top-0 z-50 bg-white h-[60px] border-b border-gray-200 shadow-[0_1px_0_0_rgba(0,0,0,0.06)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-15 sm:h-16">
+        <div className="flex items-center justify-between h-[60px]">
           {/* Brand Logo & Name */}
           <Link
             href="/"
             className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           >
-            <Logo className="w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 transition-transform group-hover:scale-105" />
+            <div className="w-9 h-9 bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] rounded-lg flex-shrink-0 flex items-center justify-center text-lg transition-transform group-hover:scale-105">
+              🛁
+            </div>
             <div className="flex flex-col items-start text-left min-w-0">
-              <span className="font-heading text-base sm:text-lg font-extrabold tracking-tight text-accent-secondary leading-tight">
-                Hotels With Bathtubs
+              <span className="font-heading text-[15px] font-black tracking-tight text-gray-900 leading-tight">
+                Hotels<span className="text-[#1a6fde]">WithBathtubs</span>
               </span>
-              <p className="text-text-muted text-2xs font-medium hidden sm:block">
-                Verified Luxury In-Room Tubs &amp; Jacuzzis
+              <p className="text-gray-400 text-[9.5px] font-medium hidden sm:block normal-case">
+                Soak in. No Surprises.
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation Links (Visible on lg: 1024px and up to prevent tablet clipping) */}
           <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-text-main">
-            <Link
-              href="/usa"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-accent-secondary border border-amber-200/80 rounded-lg text-xs font-bold transition-all shadow-2xs"
-            >
-              <span>🇺🇸</span>
-              <span>USA Stays</span>
-            </Link>
             <Link href="/#destinations" className="hover:text-accent transition-colors">
               Destinations
             </Link>
@@ -95,7 +93,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/#destinations"
-              className="bg-accent hover:bg-accent-hover text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-2xs hover:shadow-md transform hover:-translate-y-0.5 whitespace-nowrap ml-1"
+              className="bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-2xs hover:shadow-md transform hover:-translate-y-0.5 whitespace-nowrap ml-1"
             >
               Browse 150+ Destinations &rarr;
             </Link>
@@ -145,9 +143,11 @@ export default function Navbar() {
         {/* Drawer Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border/80 bg-gray-50/50">
           <div className="flex items-center gap-2.5">
-            <Logo className="w-7 h-7 flex-shrink-0" />
-            <span className="font-heading text-sm font-extrabold text-accent-secondary">
-              Hotels With Bathtubs
+            <div className="w-7 h-7 bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] rounded-lg flex-shrink-0 flex items-center justify-center text-sm">
+              🛁
+            </div>
+            <span className="font-heading text-sm font-black text-gray-900">
+              Hotels<span className="text-[#1a6fde]">WithBathtubs</span>
             </span>
           </div>
           <button
@@ -322,7 +322,7 @@ export default function Navbar() {
           <Link
             href="/#destinations"
             onClick={() => setIsOpen(false)}
-            className="w-full bg-accent hover:bg-accent-hover text-white text-sm font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+            className="w-full bg-[#1a6fde] hover:bg-[#1559b8] text-white text-sm font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
           >
             <span>Explore 150+ Destinations</span>
             <span>&rarr;</span>

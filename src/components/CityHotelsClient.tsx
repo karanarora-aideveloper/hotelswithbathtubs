@@ -283,25 +283,25 @@ export default function CityHotelsClient({
         label: 'Check on MakeMyTrip', 
         source: 'MakeMyTrip', 
         className: isPrimary 
-          ? 'bg-accent hover:bg-accent-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' 
-          : 'bg-amber-600 hover:bg-amber-700 text-white text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs shadow-xs flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-[13px] px-4 py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full' 
+          : 'bg-amber-600 hover:bg-amber-700 text-white text-center py-2 px-4 rounded-xl font-semibold transition-colors text-xs shadow-sm flex items-center justify-center gap-2 w-full' 
       },
       booking: { 
         label: 'Check on Booking.com', 
         source: 'Booking.com', 
         className: isPrimary 
-          ? 'bg-accent-secondary hover:bg-accent-secondary-hover text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2 w-full' 
-          : 'bg-accent-secondary/90 hover:bg-accent-secondary text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-[13px] px-4 py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full' 
+          : 'bg-slate-800 hover:bg-slate-900 text-white text-center py-2 px-4 rounded-xl font-bold transition-colors text-xs shadow-sm flex items-center justify-center gap-2 w-full' 
       },
       agoda: { 
         label: 'Check on Agoda', 
         source: 'Agoda', 
         className: isPrimary 
-          ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3 px-4 rounded-xl font-bold transition-colors text-sm shadow-md flex items-center justify-center gap-2 w-full' 
-          : 'bg-emerald-600/90 hover:bg-emerald-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-xs flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-[13px] px-4 py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full' 
+          : 'bg-emerald-600/90 hover:bg-emerald-700 text-white text-center py-2 px-4 rounded-xl font-bold transition-colors text-xs shadow-sm flex items-center justify-center gap-2 w-full' 
       },
-      trivago: { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' },
-      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-sm shadow-sm flex items-center justify-center gap-2 w-full' },
+      trivago: { label: 'Compare on Trivago', source: 'Trivago', className: 'bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-xl font-bold transition-colors text-xs shadow-sm flex items-center justify-center gap-2 w-full' },
+      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', className: 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-2 px-4 rounded-xl font-bold transition-colors text-xs shadow-sm flex items-center justify-center gap-2 w-full' },
       google: null, // don't show Google search links as booking buttons
     };
     if (!provider || !config[provider]) return null;
@@ -317,7 +317,7 @@ export default function CityHotelsClient({
   return (
     <div>
       {/* Interactive Bathtub & Feature Filters */}
-      <div className="bg-white border border-border rounded-2xl p-3 sm:p-5 shadow-2xs mb-8 flex flex-col gap-4 w-full min-w-0">
+      <div className="bg-white px-4 py-3 rounded-xl border border-gray-200 shadow-sm mb-4 flex flex-col gap-4 w-full min-w-0">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full min-w-0">
           {/* Quick Hotel Name / Amenity Search */}
           <div className="w-full md:w-64 relative flex-shrink-0">
@@ -326,45 +326,50 @@ export default function CityHotelsClient({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search hotel name..."
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm text-text-main placeholder-text-muted focus:outline-none focus:border-accent focus:bg-white transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#1a6fde] focus:bg-white transition-all"
             />
-            <svg className="w-4 h-4 text-text-muted absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <svg className="w-4 h-4 text-gray-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-2.5 text-xs text-text-muted hover:text-text-main"
+                className="absolute right-2.5 top-2.5 text-xs text-gray-500 hover:text-gray-900"
               >
                 ✕
               </button>
             )}
           </div>
 
-          {/* Sort Dropdown */}
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <span className="text-xs font-bold text-text-muted uppercase tracking-wider hidden lg:inline flex-shrink-0">Sort By:</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="w-full md:w-auto bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-bold text-text-main focus:outline-none focus:border-accent"
+          {/* Sort Buttons */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full md:w-auto">
+            <button
+              onClick={() => setSortBy('recommended')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'recommended' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
             >
-              <option value="recommended">Recommended</option>
-              <option value="rating">Rating ↓</option>
-              <option value="price_asc">Price ↑ (Low to High)</option>
-              <option value="price_desc">Price ↓ (High to Low)</option>
-              <option value="reviews">Reviews ↓</option>
-            </select>
+              Recommended
+            </button>
+            <button
+              onClick={() => setSortBy('price_asc')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'price_asc' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+            >
+              Price ↑
+            </button>
+            <button
+              onClick={() => setSortBy('rating')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'rating' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+            >
+              Top Rated
+            </button>
           </div>
         </div>
 
         {/* Tub Category Filter Row */}
         {availableTubCategories.length > 0 && (
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full py-1">
-            <span className="text-xs font-bold text-text-muted uppercase tracking-wider hidden lg:inline mr-1 flex-shrink-0">Tub Type:</span>
             <button
               onClick={() => setSelectedTubCategory('all')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${selectedTubCategory === 'all' ? 'bg-accent text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${selectedTubCategory === 'all' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-white text-gray-600 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'}`}
             >
               All Types
             </button>
@@ -372,7 +377,7 @@ export default function CityHotelsClient({
               <button
                 key={cat.category}
                 onClick={() => setSelectedTubCategory(cat.category)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${selectedTubCategory === cat.category ? 'bg-accent text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+                className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${selectedTubCategory === cat.category ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-white text-gray-600 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'}`}
               >
                 <span>{cat.emoji}</span> {cat.category}
               </button>
@@ -382,28 +387,27 @@ export default function CityHotelsClient({
 
         {/* Price Filter Row */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full py-1">
-          <span className="text-xs font-bold text-text-muted uppercase tracking-wider hidden lg:inline mr-1 flex-shrink-0">Price Range:</span>
           <button
             onClick={() => setPriceRange('all')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'all' ? 'bg-accent-secondary text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'all' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
             All Prices
           </button>
           <button
             onClick={() => setPriceRange('budget')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'budget' ? 'bg-accent-secondary text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'budget' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
             Budget ({"<"} {currencySymbol}{BUDGET_MAX.toLocaleString()})
           </button>
           <button
             onClick={() => setPriceRange('mid')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'mid' ? 'bg-accent-secondary text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'mid' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
             Mid-range ({currencySymbol}{BUDGET_MAX.toLocaleString()} - {currencySymbol}{LUXURY_MIN.toLocaleString()})
           </button>
           <button
             onClick={() => setPriceRange('luxury')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'luxury' ? 'bg-accent-secondary text-white' : 'bg-gray-100 text-text-main hover:bg-gray-200'}`}
+            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'luxury' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
             Luxury ({currencySymbol}{LUXURY_MIN.toLocaleString()}+)
           </button>
@@ -423,7 +427,7 @@ export default function CityHotelsClient({
 
       {/* Hotel Cards Grid */}
       {filteredHotels.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {filteredHotels.map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
               makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda',
@@ -444,22 +448,22 @@ export default function CityHotelsClient({
                 data-hotel-position={i + 1}
                 data-has-price={!!h.price}
                 style={{ contentVisibility: 'auto', containIntrinsicSize: '420px' }}
-                className="bg-white rounded-2xl border border-border shadow-sm hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 transition-all flex flex-col group scroll-mt-24"
+                className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#1a6fde] hover:shadow-[0_0_0_3px_rgba(26,111,222,0.12)] transition-all cursor-pointer flex flex-col group scroll-mt-24 overflow-hidden"
               >
-                <div className="relative aspect-[16/10]">
+                <div className="relative h-44 w-full bg-gray-100 shrink-0 overflow-hidden">
                   <ProgressiveImage
                     src={h.image}
                     alt={`${h.name} - Hotel with Bathtub in ${cityName}`}
                     priority={i < 2}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="group-hover:scale-105 transition-transform duration-500 rounded-t-2xl object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   {verifiedSources.length > 0 && (
                     <div className="absolute top-4 left-4 group/tooltip flex z-20">
-                      <span className="bg-emerald-700/95 backdrop-blur-xs text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 cursor-help">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                        <span>✓ Verified on {verifiedSources.join(', ')}</span>
-                        <button type="button" className="ml-0.5 opacity-80 hover:opacity-100 focus:opacity-100 bg-emerald-800 rounded-full w-4 h-4 flex items-center justify-center text-[10px] outline-none">i</button>
+                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 cursor-help">
+                        <span className="font-black">✓</span>
+                        <span>Verified on {verifiedSources.join(', ')}</span>
+                        <button type="button" className="ml-0.5 opacity-80 hover:opacity-100 focus:opacity-100 bg-emerald-200 text-emerald-800 rounded-full w-4 h-4 flex items-center justify-center text-[10px] outline-none">i</button>
                       </span>
                       <div className="absolute top-full left-0 mt-2 w-64 p-3 bg-gray-900 text-white text-xs rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:visible transition-all z-30 pointer-events-none">
                         We manually check every hotel across Booking.com, Agoda, and MakeMyTrip to confirm the specific room tier includes a private bathtub. Last verified: {h.crossVerifiedAt || 'Sep 2026'}.
@@ -483,15 +487,14 @@ export default function CityHotelsClient({
                   </a>
                 </div>
 
-                <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                <div className="p-4 sm:p-6 flex flex-col flex-grow gap-1">
                   <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link">
-                    <h3 className="font-heading text-lg sm:text-xl font-bold text-accent-secondary mb-1 group-hover/link:text-accent transition-colors">{h.name}</h3>
+                    <h2 className="text-[15px] font-bold text-gray-900 leading-snug line-clamp-2 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
                   </Link>
                   {h.rating && h.reviewsCount && (
-                    <div className="flex items-center gap-1.5 mb-2 text-sm font-bold text-gray-800">
-                      <span className="text-amber-500 text-base">★</span>
-                      <span>{h.rating}</span>
-                      <span className="text-text-muted text-xs font-normal">({h.reviewsCount} verified reviews)</span>
+                    <div className="flex items-center gap-1 text-[10px] mb-1">
+                      <span className="text-amber-500 font-black">★ {h.rating}</span>
+                      <span className="text-gray-400">({h.reviewsCount.toLocaleString()} reviews)</span>
                     </div>
                   )}
                   <p className="text-sm text-text-muted font-medium mb-3 flex items-center gap-1.5 flex-wrap">
@@ -553,13 +556,15 @@ export default function CityHotelsClient({
                     })}
                   </ul>
 
+                  <div className="flex-1" />
+
                   {/* Starting Price & Outbound Booking Actions */}
                   {h.price && (
-                    <div className="flex items-baseline justify-between py-2 border-t border-dashed border-gray-200 mb-3">
-                      <span className="text-2xs uppercase tracking-wider text-text-muted font-bold">Rates From</span>
-                      <div className="text-right">
-                        <span className="text-lg font-black text-accent-secondary">{h.price}</span>
-                        <span className="text-2xs text-text-muted ml-1">/ night</span>
+                    <div className="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto mb-3">
+                      <div>
+                        <span className="text-[10px] text-gray-400 font-medium block leading-none mb-0.5">From</span>
+                        <span className="text-[17px] font-black text-gray-900">{h.price}</span>
+                        <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>
                       </div>
                     </div>
                   )}
