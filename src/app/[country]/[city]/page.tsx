@@ -419,50 +419,28 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         </div>
       </div>
 
-      {/* SEO Content Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
-        <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs">
-          <div dangerouslySetInnerHTML={{
-            __html: generateCityPageContent(cityName, countryName, rawHotels.length)
-          }} />
-        </div>
-      </section>
-
       {/* Editorial & Affiliate Disclosure */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-2 mb-6 sm:mb-8 text-center">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
         <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
           <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or Expedia'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
         </p>
       </div>
 
-      {relatedBlogs.length > 0 && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 mb-8">
-          <div className="bg-gradient-to-r from-accent/10 via-accent-secondary/5 to-transparent border border-accent/25 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl flex-shrink-0">📖</span>
-              <div>
-                <span className="text-2xs font-bold text-accent uppercase tracking-wider">Curated Destination Guide</span>
-                <p className="font-heading font-bold text-accent-secondary text-sm sm:text-base line-clamp-1">
-                  {relatedBlogs[0].title}
-                </p>
-              </div>
-            </div>
-            <Link
-              href={`/blog/${relatedBlogs[0].slug}`}
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-xl transition-colors whitespace-nowrap shadow-xs"
-            >
-              Read Guide &rarr;
-            </Link>
+      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-8">
+        <CityHotelsClient
+          hotels={hotels}
+          cityName={cityName}
+          countryName={countryName}
+        />
+
+        {/* SEO Content Section */}
+        <div className="max-w-4xl mx-auto mt-14 sm:mt-20">
+          <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-2xs">
+            <div dangerouslySetInnerHTML={{
+              __html: generateCityPageContent(cityName, countryName, rawHotels.length)
+            }} />
           </div>
         </div>
-      )}
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12">
-              <CityHotelsClient
-                hotels={hotels}
-                cityName={cityName}
-                countryName={countryName}
-              />
 
               {/* Frequently Asked Questions Section (SEO & Conversion) */}
               <section className="mt-20 pt-12 border-t border-gray-200">

@@ -342,7 +342,7 @@ export default function HomeSearch() {
         <button
           onClick={handleSearchClick}
           disabled={isNavigating}
-          className={`bg-gradient-to-br from-accent to-accent-hover text-white px-8 md:px-10 py-3.5 md:py-4 text-base md:text-lg font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/30 transition-all w-full md:w-auto flex items-center justify-center gap-2 flex-shrink-0 ${
+          className={`bg-[#1a6fde] hover:bg-[#1559b8] text-white px-8 md:px-10 py-3.5 md:py-4 text-base md:text-lg font-bold rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#1a6fde]/25 transition-all w-full md:w-auto flex items-center justify-center gap-2 flex-shrink-0 ${
             isNavigating ? 'opacity-80 cursor-wait' : ''
           }`}
         >
