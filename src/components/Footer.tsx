@@ -313,7 +313,7 @@ export default async function Footer() {
   const countryHubList = Array.from(countryHubMap.values()).sort((a, b) => b.hotelCount - a.hotelCount);
 
   return (
-    <footer className="mt-16 bg-gray-50 text-text-main border-t border-border">
+    <footer id="global-site-footer" className="mt-16 bg-gray-50 text-text-main border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
 
         {/* Travel Blog Section - Visually Rich Editorial Cards */}

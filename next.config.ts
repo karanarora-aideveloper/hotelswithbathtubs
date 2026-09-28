@@ -4,6 +4,7 @@ const isExport = process.env.NEXT_EXPORT === 'true';
 
 const nextConfig: NextConfig = {
   output: isExport ? 'export' : undefined,
+  staticPageGenerationTimeout: 180,
   typescript: {
     ignoreBuildErrors: true,
   },

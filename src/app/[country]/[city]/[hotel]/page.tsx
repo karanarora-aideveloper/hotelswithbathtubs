@@ -7,37 +7,64 @@ import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export const revalidate = false;
 
-export async function generateStaticParams() {
-  await connectToDatabase();
-  const hotels = await Hotel.find({ flagged: { $ne: true } }).select('country city slug name');
+// In-memory cache for ultra-fast static page generation without MongoDB connection pool exhaustion
+let memoryHotelMap: Map<string, any> | null = null;
 
+async function getCachedHotelMap() {
+  if (memoryHotelMap) return memoryHotelMap;
+
+  let allHotels: any[] = [];
+  const cachePath = path.join(process.cwd(), '.cache', 'all-hotels.json');
+  if (fs.existsSync(cachePath)) {
+    try {
+      allHotels = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+    } catch {
+      allHotels = [];
+    }
+  }
+
+  if (!allHotels.length) {
+    await connectToDatabase();
+    allHotels = await Hotel.find({ flagged: { $ne: true } }).lean();
+  }
+
+  const map = new Map<string, any>();
+  for (const h of allHotels) {
+    if (h.slug) map.set(h.slug, h);
+    const nSlug = slugify(h.name);
+    if (nSlug && !map.has(nSlug)) map.set(nSlug, h);
+    if (h.city) {
+      const cSlug = slugify(h.city);
+      map.set(`${cSlug}/${h.slug}`, h);
+      map.set(`${cSlug}/${nSlug}`, h);
+    }
+  }
+  memoryHotelMap = map;
+  return memoryHotelMap;
+}
+
+export async function generateStaticParams() {
+  const map = await getCachedHotelMap();
   const params: Array<{ country: string; city: string; hotel: string }> = [];
   const seen = new Set<string>();
 
-  for (const h of hotels) {
+  for (const h of map.values()) {
+    if (!h.country || !h.city) continue;
     const countryInfo = resolveCountry(h.country);
     const countrySlug = countryInfo.slug;
     const citySlug = slugify(h.city);
+    const canonicalHotelSlug = h.slug || slugify(h.name);
 
-    // 1. Primary slug from DB (e.g. hotel-mayfair-waves-puri)
-    if (h.slug) {
-      const key1 = `${countrySlug}/${citySlug}/${h.slug}`;
-      if (!seen.has(key1)) {
-        seen.add(key1);
-        params.push({ country: countrySlug, city: citySlug, hotel: h.slug });
-      }
-    }
-
-    // 2. Clean name-only slug without city suffix (e.g. hotel-mayfair-waves)
-    const nameSlug = slugify(h.name);
-    if (nameSlug) {
-      const key2 = `${countrySlug}/${citySlug}/${nameSlug}`;
-      if (!seen.has(key2)) {
-        seen.add(key2);
-        params.push({ country: countrySlug, city: citySlug, hotel: nameSlug });
+    if (canonicalHotelSlug) {
+      const key = `${countrySlug}/${citySlug}/${canonicalHotelSlug}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        params.push({ country: countrySlug, city: citySlug, hotel: canonicalHotelSlug });
       }
     }
   }
@@ -46,36 +73,42 @@ export async function generateStaticParams() {
 }
 
 async function getHotel(countryParam: string, cityParam: string, hotelParam: string) {
-  await connectToDatabase();
   const countryInfo = resolveCountry(countryParam);
   const rawCity = decodeURIComponent(cityParam).replace(/-/g, ' ');
   const hotelSlug = decodeURIComponent(hotelParam);
-
-  let hotel = await Hotel.findOne({ slug: hotelSlug, flagged: { $ne: true } });
-
   const citySlug = slugify(rawCity);
 
-  // Fallback 1: If slug is missing -city suffix (e.g. hotel-mayfair-waves), try with -city
-  if (!hotel && !hotelSlug.endsWith(`-${citySlug}`)) {
-    hotel = await Hotel.findOne({ slug: `${hotelSlug}-${citySlug}`, flagged: { $ne: true } });
+  // Fast-path: Check in-memory map first
+  const map = await getCachedHotelMap();
+  let hotel = map.get(hotelSlug) || map.get(`${citySlug}/${hotelSlug}`);
+
+  // Only query DB at runtime in SSR, NEVER during static export build
+  if (!hotel && process.env.NEXT_EXPORT !== 'true') {
+    await connectToDatabase();
+    hotel = await Hotel.findOne({ slug: hotelSlug, flagged: { $ne: true } }).lean();
+
+    // Fallback 1: If slug is missing -city suffix (e.g. hotel-mayfair-waves), try with -city
+    if (!hotel && !hotelSlug.endsWith(`-${citySlug}`)) {
+      hotel = await Hotel.findOne({ slug: `${hotelSlug}-${citySlug}`, flagged: { $ne: true } }).lean();
+    }
+
+    // Fallback 2: If slug has redundant -city suffix, try stripped
+    if (!hotel && hotelSlug.endsWith(`-${citySlug}`)) {
+      const strippedSlug = hotelSlug.slice(0, -(citySlug.length + 1));
+      hotel = await Hotel.findOne({ slug: strippedSlug, flagged: { $ne: true } }).lean();
+    }
+
+    // Fallback 3: Lookup by hotel name and city
+    if (!hotel) {
+      const rawHotelName = hotelSlug.replace(/-/g, ' ');
+      hotel = await Hotel.findOne({
+        name: new RegExp(`^${escapeRegex(rawHotelName)}$`, 'i'),
+        city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+        flagged: { $ne: true }
+      }).lean();
+    }
   }
 
-  // Fallback 2: If slug has redundant -city suffix, try stripped
-  if (!hotel && hotelSlug.endsWith(`-${citySlug}`)) {
-    const strippedSlug = hotelSlug.slice(0, -(citySlug.length + 1));
-    hotel = await Hotel.findOne({ slug: strippedSlug, flagged: { $ne: true } });
-  }
-
-  // Fallback 3: Lookup by hotel name and city regex
-  if (!hotel) {
-    const rawHotelName = hotelSlug.replace(/-/g, ' ');
-    hotel = await Hotel.findOne({
-      name: new RegExp(`^${escapeRegex(rawHotelName)}$`, 'i'),
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
-      flagged: { $ne: true }
-    });
-  }
-  
   return { hotel, countryInfo, rawCity };
 }
 

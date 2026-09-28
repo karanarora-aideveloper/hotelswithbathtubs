@@ -45,18 +45,8 @@ const countrySlugMap = {
   'uae': 'uae',
 };
 
-// Simple schema matching Hotel collection
-const HotelSchema = new mongoose.Schema(
-  {
-    name: String,
-    slug: String,
-    country: String,
-    city: String,
-    flagged: Boolean,
-    rating: Number,
-  },
-  { collection: 'hotels' }
-);
+// Schema matching Hotel collection (flexible to pull all fields)
+const HotelSchema = new mongoose.Schema({}, { strict: false, collection: 'hotels' });
 
 const Hotel = mongoose.models.Hotel || mongoose.model('Hotel', HotelSchema);
 
@@ -159,6 +149,13 @@ async function generateLocations() {
     console.log(`   - ${searchData.hotels.length} hotels`);
     console.log(`   - ${searchData.cities.length} cities`);
     console.log(`   - ${searchData.countries.length} countries`);
+
+    // 3. Save full hotel cache for static export page rendering
+    const cacheDir = path.join(rootDir, '.cache');
+    if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
+    const fullHotels = await Hotel.find({ flagged: { $ne: true } }).lean();
+    fs.writeFileSync(path.join(cacheDir, 'all-hotels.json'), JSON.stringify(fullHotels), 'utf-8');
+    console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${fullHotels.length} hotels).`);
   } catch (err) {
     console.error('❌ Error generating search data:', err);
     process.exit(1);

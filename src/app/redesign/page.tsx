@@ -34,13 +34,8 @@ async function getData(city: string = 'Delhi') {
   }
 }
 
-export default async function RedesignPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ city?: string }>;
-}) {
-  const resolvedParams = searchParams ? await searchParams : {};
-  const city = resolvedParams?.city || 'Delhi';
+export default async function RedesignPage() {
+  const city = 'Delhi';
   const { hotels, cities } = await getData(city);
 
   return (

@@ -1,145 +1,78 @@
 export default function Logo({ className = "w-10 h-10" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 120 100"
+      viewBox="0 0 100 100"
       className={className}
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label="Hotels With Bathtubs Brand Logo"
     >
-      {/* Define gradients */}
       <defs>
-        <linearGradient id="tub-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#0f4a7c" />
-          <stop offset="100%" stopColor="#002244" />
+        {/* Luxury Champagne Gold Metallic Gradient */}
+        <linearGradient id="hwb-gold" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%" stopColor="#F5DC96" />
+          <stop offset="30%" stopColor="#D4AF37" />
+          <stop offset="70%" stopColor="#E2C265" />
+          <stop offset="100%" stopColor="#99751E" />
         </linearGradient>
-        <linearGradient id="water-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="1" />
+
+        {/* Serene Azure Water Flow Gradient */}
+        <linearGradient id="hwb-azure" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#0284C7" stopOpacity="0.95" />
         </linearGradient>
-        <linearGradient id="rim-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#e5e7eb" />
-          <stop offset="50%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#e5e7eb" />
-        </linearGradient>
-        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.15" />
+
+        {/* Subtle Ambient Drop Shadow for depth on light and dark surfaces */}
+        <filter id="hwb-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#0B192C" floodOpacity="0.18" />
         </filter>
       </defs>
 
-      {/* Bathtub main body - realistic shape */}
-      <g filter="url(#shadow)">
-        {/* Outer tub wall - left side */}
+      <g filter="url(#hwb-shadow)">
+        {/* Freestanding Soaking Tub Basin Outer Contour */}
         <path
-          d="M 12 28 Q 8 40 8 55 Q 8 72 20 78 L 100 78 Q 112 72 112 55 Q 112 40 108 28 Z"
-          fill="url(#tub-gradient)"
-          stroke="#001a33"
-          strokeWidth="0.8"
+          d="M 16 48 C 16 34, 28 32, 50 32 C 72 32, 84 34, 84 48 C 84 70, 72 78, 50 78 C 28 78, 16 70, 16 48 Z"
+          stroke="url(#hwb-gold)"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
 
-        {/* Tub rim - top edge */}
-        <ellipse
-          cx="60"
-          cy="28"
-          rx="49"
-          ry="8"
-          fill="url(#rim-gradient)"
-          stroke="#c4b5a0"
-          strokeWidth="1"
-        />
-
-        {/* Tub bottom - underside depth */}
-        <ellipse
-          cx="60"
-          cy="78"
-          rx="47"
-          ry="6"
-          fill="#001a33"
-          opacity="0.4"
-        />
-
-        {/* Water fill - realistic wave */}
+        {/* Interior Serene Water Bath Glow */}
         <path
-          d="M 15 50 Q 20 46 28 48 T 44 45 T 60 47 T 76 45 T 92 48 Q 100 46 105 50 L 105 65 Q 105 72 100 76 L 20 76 Q 15 72 15 65 Z"
-          fill="url(#water-gradient)"
-          opacity="0.85"
+          d="M 22 50 C 26 44, 38 46, 50 44 C 62 42, 74 46, 78 50 C 76 68, 66 74, 50 74 C 34 74, 24 68, 22 50 Z"
+          fill="url(#hwb-azure)"
+          opacity="0.18"
         />
 
-        {/* Water surface ripples - natural waves */}
+        {/* Fluid Infinity Ripple / Water Wave Ribbon */}
         <path
-          d="M 15 50 Q 20 46 28 48 T 44 45 T 60 47 T 76 45 T 92 48 Q 100 46 105 50"
-          fill="none"
-          stroke="#0ea5e9"
-          strokeWidth="1.2"
-          opacity="0.6"
+          d="M 26 48 C 26 38, 40 38, 50 48 C 60 38, 74 38, 74 48 C 74 58, 60 58, 50 48 C 40 58, 26 58, 26 48 Z"
+          stroke="url(#hwb-gold)"
+          strokeWidth="2.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* Suspended Luminous Gold Pearl / Water Droplet */}
+        <path
+          d="M 50 18 C 50 18, 55.5 25, 55.5 29 C 55.5 32, 53 34.5, 50 34.5 C 47 34.5, 44.5 32, 44.5 29 C 44.5 25, 50 18, 50 18 Z"
+          fill="url(#hwb-gold)"
+        />
+
+        {/* Architectural Pedestal / Plinth Base */}
+        <path
+          d="M 34 84 L 66 84"
+          stroke="url(#hwb-gold)"
+          strokeWidth="2.8"
           strokeLinecap="round"
         />
-
-        {/* Foam bubble effect - left */}
-        <circle
-          cx="25"
-          cy="45"
-          r="2"
-          fill="#ffffff"
-          opacity="0.4"
-        />
-
-        {/* Foam bubble effect - center */}
-        <circle
-          cx="60"
-          cy="42"
-          r="1.5"
-          fill="#ffffff"
-          opacity="0.3"
-        />
-
-        {/* Foam bubble effect - right */}
-        <circle
-          cx="95"
-          cy="46"
-          r="1.8"
-          fill="#ffffff"
-          opacity="0.35"
-        />
-
-        {/* Decorative jets/nozzles - left side */}
-        <rect
-          x="10"
-          y="58"
-          width="3"
-          height="5"
-          rx="1"
-          fill="#0f4a7c"
-          opacity="0.6"
-        />
-
-        {/* Decorative jets/nozzles - right side */}
-        <rect
-          x="107"
-          y="58"
-          width="3"
-          height="5"
-          rx="1"
-          fill="#0f4a7c"
-          opacity="0.6"
-        />
-
-        {/* Highlight on rim - glossy effect */}
-        <ellipse
-          cx="60"
-          cy="26"
-          rx="40"
-          ry="5"
-          fill="#ffffff"
-          opacity="0.15"
-        />
-
-        {/* Inner shadow for depth */}
         <path
-          d="M 16 32 Q 14 42 14 55 Q 14 68 22 74"
-          fill="none"
-          stroke="#000000"
-          strokeWidth="1"
-          opacity="0.1"
+          d="M 40 89 L 60 89"
+          stroke="url(#hwb-gold)"
+          strokeWidth="1.8"
           strokeLinecap="round"
+          opacity="0.75"
         />
       </g>
     </svg>
