@@ -3900,6 +3900,168 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Warm and welcoming Guarani hospitality in intimate luxury properties far from commercial crowds',
       '100% verified private in-room and garden soaking amenities across Booking.com and Agoda'
     ]
+  },
+
+  // USA - Palm Springs
+  'palm-springs-usa': {
+    intro: 'Palm Springs is Southern California’s premier mid-century desert oasis. Discover boutique desert resorts and modernist villas featuring private outdoor clawfoot soaking tubs, secluded patio plunge baths, and mountain-view whirlpools beneath swaying palms.',
+    amenities: [
+      'Private walled patio clawfoot and soaking tubs under starry desert skies',
+      'Mid-century modernist master bathrooms with oversized deep tubs',
+      'Hydrotherapy jetted whirlpools with direct San Jacinto mountain views',
+      'Moroccan and bohemian-inspired sunken tiled bathtubs',
+      'Organic bath salts and citrus-infused desert aromatherapy amenities'
+    ],
+    whyChoose: [
+      'Iconic mid-century modern architecture and retro Hollywood glamor',
+      'Secluded adults-only boutique retreats with complete outdoor bath privacy',
+      'Year-round desert sunshine and dramatic mountain landscapes',
+      'Triple-verified in-room and private patio tub amenities on every listing'
+    ]
+  },
+
+  // USA - Gatlinburg
+  'gatlinburg-usa': {
+    intro: 'Gatlinburg serves as the picturesque gateway to the Great Smoky Mountains. Experience romantic mountain chalets and alpine lodges featuring heart-shaped jacuzzis, private deck hot tubs, and stone-surround jetted whirlpool tubs beside roaring gas fireplaces.',
+    amenities: [
+      'Private bubbling hot tubs on secluded decks overlooking the Smokies',
+      'Romantic heart-shaped jacuzzi suites with mirrored accents and mountain views',
+      'Deep soaking whirlpool tubs positioned next to warm stone fireplaces',
+      'Rustic cedar and log-framed master bathrooms with dual vanity setups',
+      'Forest-facing picture windows for scenic soaking in all four seasons'
+    ],
+    whyChoose: [
+      'America’s favorite mountain honeymoon and anniversary getaway',
+      'Direct proximity to Great Smoky Mountains National Park hiking trails',
+      'Cozy cabin ambiance paired with modern luxury resort comforts',
+      'Every tub and private jacuzzi verified individually across booking platforms'
+    ]
+  },
+
+  // India - Chennai
+  'chennai-india': {
+    intro: 'Chennai, the cultural capital of South India, blends Coromandel coastline serenity with modern cosmopolitan luxury. Discover premier seafront resorts along East Coast Road (ECR) and city-center 5-star hotels featuring sunken marble bathtubs, private jacuzzis, and ocean-facing plunge baths.',
+    amenities: [
+      'Sunken Italian marble soaking tubs in executive and presidential suites',
+      'Private sea-view whirlpool jacuzzi tubs along the East Coast Road (ECR)',
+      'Traditional Ayurvedic herbal bath rituals and premium bath essentials',
+      'Spacious open-concept bathrooms with separate walk-in glass rain showers',
+      'Romantic rose petal and scented candle turn-down bath preparations'
+    ],
+    whyChoose: [
+      'Luxurious seaside escapes overlooking the Bay of Bengal',
+      'World-renowned South Indian hospitality and fine coastal dining',
+      'Convenient urban retreats for business travelers and romantic staycations',
+      '100% verified private in-room bathtubs across MakeMyTrip, Agoda, and Booking.com'
+    ]
+  },
+
+  // USA - Sedona
+  'sedona-usa': {
+    intro: 'Sedona is famed for its mystical red rock formations, energy vortexes, and striking desert beauty. Unwind in luxury canyon resorts and adobe casitas boasting private outdoor soaking tubs, red-rock view jacuzzis, and artisan stone bathtubs designed for transformative relaxation.',
+    amenities: [
+      'Private canyon-facing outdoor soaking tubs with panoramic red rock vistas',
+      'Handcrafted artisan stone and copper soaking bathtubs',
+      'In-suite hydrotherapy whirlpool tubs positioned under starry desert skies',
+      'Southwestern adobe master bathrooms with dual rain showers and fireplaces',
+      'Locally harvested botanical bath salts, sage oils, and soothing clay scrubs'
+    ],
+    whyChoose: [
+      'Unmatched natural beauty and restorative wellness atmosphere',
+      'Ideal retreat for romantic honeymoons, anniversaries, and mindful getaways',
+      'Minutes from iconic hiking trails, scenic canyon drives, and art galleries',
+      'Triple-checked suite listings guaranteeing guaranteed private soaking tubs'
+    ]
+  },
+
+  // India - Noida
+  'noida-india': {
+    intro: 'Noida, the modern commercial and residential powerhouse of the National Capital Region, offers serene luxury escapes. Indulge in 5-star business hotels and boutique retreats boasting expansive marble bathtubs, private executive suite jacuzzis, and skyline-facing soaking baths.',
+    amenities: [
+      'Oversized deep soaking marble tubs with city skyline views',
+      'Executive suite whirlpool jacuzzis with hydrotherapy jets',
+      'High-end bath amenities from Forest Essentials and Kama Ayurveda',
+      'Spacious designer bathrooms with walk-in thermostatic rain showers',
+      'Soundproofed master suites ensuring quiet, intimate relaxation'
+    ],
+    whyChoose: [
+      'Convenient weekend staycation destination for Delhi-NCR couples',
+      'Close access to expressway corridors, premium malls, and golf courses',
+      'Modern 5-star hospitality with contemporary wellness and spa facilities',
+      'Verified in-room bathtubs guaranteed on booking through MakeMyTrip and Agoda'
+    ]
+  },
+
+  // India - Hyderabad
+  'hyderabad-india': {
+    intro: 'Hyderabad, the City of Pearls, weaves aristocratic Nizami grandeur with sleek contemporary comfort. Discover heritage palace stays and 5-star luxury hotels with handcrafted marble bathtubs, private jacuzzi terraces, and lake-view soaking suites.',
+    amenities: [
+      'Royal marble soaking bathtubs inspired by Nizami palace architecture',
+      'Private jacuzzi suites overlooking Hussain Sagar Lake or the HITEC City skyline',
+      'Opulent master bathrooms with antique brass fittings and freestanding tubs',
+      'Custom Ayurvedic and aromatic essential oil bath setups',
+      'Double vanities with integrated mist-free mirrors and walk-in rain showers'
+    ],
+    whyChoose: [
+      'Experience authentic royal heritage at iconic palace hotels like Taj Falaknuma',
+      'World-famous Hyderabadi culinary heritage paired with lavish luxury suites',
+      'Prime locations spanning historic Old City to bustling Jubilee Hills and HITEC City',
+      'Individually verified across MakeMyTrip, Agoda, and Booking.com for guaranteed tubs'
+    ]
+  },
+
+  // India - Kasauli
+  'kasauli-india': {
+    intro: 'Kasauli is a tranquil colonial-era hill station nestled among pine and cedar forests in Himachal Pradesh. Enjoy romantic mountain hideaways and boutique heritage resorts with scenic window-side soaking bathtubs, heated jacuzzis, and valley-facing hot tubs.',
+    amenities: [
+      'Pine forest-facing picture-window soaking tubs with valley vistas',
+      'Heated whirlpool jacuzzi suites built for chilly mountain evenings',
+      'Rustic colonial-style roll-top and clawfoot bathtubs',
+      'Himalayan mineral bath salts and herbal eucalyptus essential oils',
+      'Cozy fireplace-adjacent master bathrooms in private alpine cottages'
+    ],
+    whyChoose: [
+      'Peaceful, unhurried hill station escape easily accessible from Chandigarh and Delhi',
+      'Crisp mountain air, quiet walking trails, and spectacular sunset viewpoints',
+      'Intimate boutique properties and colonial villas offering complete privacy',
+      'Triple-checked listings ensuring confirmed in-room tubs and heating'
+    ]
+  },
+
+  // India - Gokarna
+  'gokarna-india': {
+    intro: 'Gokarna is Karnataka’s coastal sanctuary where untouched golden beaches meet sacred temples and lush Western Ghats. Discover cliffside boutique resorts and eco-luxury beach villas featuring open-air stone bathtubs, private balcony jacuzzis, and ocean-facing plunge baths.',
+    amenities: [
+      'Open-air stone soaking bathtubs surrounded by tropical greenery',
+      'Arabian Sea-facing balcony jacuzzi tubs with sunset panoramas',
+      'Eco-luxury bathrooms with natural skylights and outdoor rain showers',
+      'Ayurvedic bath therapies using coconut oils and indigenous coastal herbs',
+      'Rustic handcrafted terrazzo and granite soaking tubs'
+    ],
+    whyChoose: [
+      'Serene, laid-back beach destination without commercial crowds',
+      'Breathtaking ocean sunsets and cliffside coastal trekking',
+      'Private beach cottages and boutique luxury hideaways for couples',
+      'Verified private in-room and courtyard bathtubs across all booking channels'
+    ]
+  },
+
+  // USA - Poconos
+  'poconos-usa': {
+    intro: 'The Pocono Mountains of Pennsylvania are the birthplace of romantic couple getaways. Experience legendary mountain resorts and private woodland cabins featuring iconic 7-foot Champagne glass whirlpool tubs, private heart-shaped jacuzzis, and in-suite heated swimming pools.',
+    amenities: [
+      'Iconic 7-foot tall Champagne Glass whirlpool tubs with multi-level views',
+      'Private in-room heart-shaped whirlpool tubs with red carpet and mirrored walls',
+      'En-suite heated Roman plunge pools and indoor private swimming pools',
+      'Log-burning wood fireplaces situated directly beside jetted soaking tubs',
+      'All-inclusive couple suites with private dry saunas and steam showers'
+    ],
+    whyChoose: [
+      'World-famous honeymoon and anniversary capital of the East Coast',
+      'Unmatched novelty tubs and suites designed exclusively for romantic couples',
+      'Scenic mountain setting offering hiking, skiing, and lake recreation',
+      'Individually verified across Booking.com and Agoda for guaranteed tub suites'
+    ]
   }
 };
 
