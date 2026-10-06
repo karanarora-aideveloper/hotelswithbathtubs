@@ -148,22 +148,19 @@ export function getSpecificHotelLink(hotel: {
   const isMmtSpecific = (u?: string) => {
     if (!u) return false;
     const lower = u.toLowerCase();
-    return (
-      (lower.includes('hotel-details') || lower.includes('hotelid=')) &&
-      !lower.includes('hotel-listing')
-    );
+    return lower.includes('makemytrip.com') && (lower.includes('hotel-details') || lower.includes('hotelid=') || lower.includes('hotel-listing'));
   };
 
   const isAgodaSpecific = (u?: string) => {
     if (!u) return false;
     const lower = u.toLowerCase();
-    return lower.includes('agoda.com') && (lower.includes('.html') || lower.includes('/hotel/'));
+    return lower.includes('agoda.com') && (lower.includes('partnersearch') || lower.includes('/hotel/') || lower.includes('.html') || lower.includes('search'));
   };
 
   const isBookingSpecific = (u?: string) => {
     if (!u) return false;
     const lower = u.toLowerCase();
-    return lower.includes('booking.com') && (lower.includes('.html') || lower.includes('/hotel/'));
+    return lower.includes('booking.com') && (lower.includes('searchresults') || lower.includes('/hotel/') || lower.includes('.html'));
   };
 
   if (isBookingSpecific(hotel.bookingUrl)) {

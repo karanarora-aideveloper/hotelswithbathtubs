@@ -79,16 +79,19 @@ async function enrichOTAs() {
 
     const updateFields = {};
 
+    const query = cleanHotelNameForOTA(h.name, h.city);
+    const encodedQuery = encodeURIComponent(h.city && !query.toLowerCase().includes(h.city.toLowerCase()) ? `${query} ${h.city}` : query);
+
     // 1. Missing Booking.com URL
     if (!h.bookingUrl || !h.bookingUrl.trim()) {
-      const generatedBooking = `https://www.booking.com/hotel/${isoCode}/${hotelSlug}.html`;
+      const generatedBooking = `https://www.booking.com/searchresults.html?ss=${encodedQuery}&lang=en-us`;
       updateFields.bookingUrl = generatedBooking;
       addedBookingCount++;
     }
 
     // 2. Missing Agoda URL
     if (!h.agodaUrl || !h.agodaUrl.trim()) {
-      const generatedAgoda = `https://www.agoda.com/${hotelSlug}/hotel/${citySlug}-${isoCode}.html`;
+      const generatedAgoda = `https://www.agoda.com/partners/partnersearch.aspx?cid=1972736&hl=en&searchText=${encodedQuery}`;
       updateFields.agodaUrl = generatedAgoda;
       addedAgodaCount++;
     }

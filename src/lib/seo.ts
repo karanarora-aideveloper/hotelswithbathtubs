@@ -4062,7 +4062,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Scenic mountain setting offering hiking, skiing, and lake recreation',
       'Individually verified across Booking.com and Agoda for guaranteed tub suites'
     ]
-  }
+  },
 
   // Italy - Lake Como
   'lake-como-italy': {

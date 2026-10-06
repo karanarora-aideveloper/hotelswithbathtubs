@@ -3,6 +3,9 @@
     "Ksamil",
     "Saranda"
   ],
+  "Anguilla": [
+    "Anguilla"
+  ],
   "Antigua and Barbuda": [
     "Saint Johns"
   ],
@@ -14,6 +17,8 @@
     "Palm Beach"
   ],
   "Australia": [
+    "Hamilton Island",
+    "Melbourne",
     "Sydney"
   ],
   "Austria": [
@@ -34,12 +39,19 @@
   "Barbados": [
     "Bridgetown"
   ],
+  "Belgium": [
+    "Bruges",
+    "Brussels"
+  ],
   "Belize": [
     "Ambergris Caye",
     "Placencia"
   ],
   "Bermuda": [
     "Hamilton"
+  ],
+  "Bhutan": [
+    "Bhutan"
   ],
   "Bolivia": [
     "Uyuni"
@@ -58,7 +70,8 @@
     "Siem Reap"
   ],
   "Canada": [
-    "Banff"
+    "Banff",
+    "Whistler"
   ],
   "Cape Verde": [
     "Santa Maria"
@@ -114,6 +127,8 @@
     "Rovaniemi"
   ],
   "France": [
+    "Chamonix",
+    "Courchevel",
     "Nice",
     "Paris"
   ],
@@ -128,6 +143,7 @@
     "Munich"
   ],
   "Greece": [
+    "Mykonos",
     "Santorini"
   ],
   "Greenland": [
@@ -139,6 +155,9 @@
   ],
   "Honduras": [
     "Roatan"
+  ],
+  "Hong Kong": [
+    "Hong Kong"
   ],
   "Hungary": [
     "Budapest"
@@ -224,7 +243,9 @@
     "Dublin"
   ],
   "Italy": [
+    "Capri",
     "Florence",
+    "Lake Como",
     "Milan",
     "Positano",
     "Rome",
@@ -236,6 +257,8 @@
   "Japan": [
     "Hakone",
     "Kyoto",
+    "Mount Fuji",
+    "Niseko",
     "Tokyo"
   ],
   "Jordan": [
@@ -257,6 +280,9 @@
   "Lithuania": [
     "Vilnius"
   ],
+  "Macau": [
+    "Macau"
+  ],
   "Madagascar": [
     "Nosy Be"
   ],
@@ -274,7 +300,9 @@
   ],
   "Mexico": [
     "Cancun",
-    "Mexico City"
+    "Los Cabos",
+    "Mexico City",
+    "Tulum"
   ],
   "Mongolia": [
     "Terelj",
@@ -342,6 +370,9 @@
     "Lisbon",
     "Ponta Delgada"
   ],
+  "Puerto Rico": [
+    "Puerto Rico"
+  ],
   "Qatar": [
     "Doha"
   ],
@@ -368,7 +399,8 @@
     "Bled"
   ],
   "South Africa": [
-    "Cape Town"
+    "Cape Town",
+    "Kruger National Park"
   ],
   "South Korea": [
     "Jeju",
@@ -384,6 +416,9 @@
   "Sri Lanka": [
     "Galle"
   ],
+  "St. Barthelemy": [
+    "St. Barthelemy"
+  ],
   "Sweden": [
     "Stockholm"
   ],
@@ -397,17 +432,21 @@
     "Taipei"
   ],
   "Tanzania": [
+    "Serengeti",
     "Zanzibar"
   ],
   "Thailand": [
     "Bangkok",
+    "Chiang Mai",
+    "Koh Samui",
     "Phuket"
   ],
   "Tunisia": [
     "Sidi Bou Said"
   ],
   "Turkey": [
-    "Cappadocia"
+    "Cappadocia",
+    "Istanbul"
   ],
   "Turks and Caicos": [
     "Providenciales"
@@ -417,9 +456,11 @@
     "Dubai"
   ],
   "UK": [
+    "Bath",
     "Edinburgh",
     "London",
-    "Manchester"
+    "Manchester",
+    "The Cotswolds"
   ],
   "USA": [
     "Aspen",
