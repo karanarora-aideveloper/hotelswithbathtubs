@@ -176,6 +176,22 @@ const countryMap: Record<string, { dbCountry: string; slug: string; displayName:
   'uruguay': { dbCountry: 'Uruguay', slug: 'uruguay', displayName: 'Uruguay' },
   'bolivia': { dbCountry: 'Bolivia', slug: 'bolivia', displayName: 'Bolivia' },
   'paraguay': { dbCountry: 'Paraguay', slug: 'paraguay', displayName: 'Paraguay' },
+  'hong-kong': { dbCountry: 'Hong Kong', slug: 'hong-kong', displayName: 'Hong Kong' },
+  'hong kong': { dbCountry: 'Hong Kong', slug: 'hong-kong', displayName: 'Hong Kong' },
+  'macau': { dbCountry: 'Macau', slug: 'macau', displayName: 'Macau' },
+  'bhutan': { dbCountry: 'Bhutan', slug: 'bhutan', displayName: 'Bhutan' },
+  'belgium': { dbCountry: 'Belgium', slug: 'belgium', displayName: 'Belgium' },
+  'st-barthelemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st.-barthelemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st-barths': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'saint-barthelemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st.-barthélemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st-barthélemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st. barthélemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'st. barthelemy': { dbCountry: 'St. Barthelemy', slug: 'st-barthelemy', displayName: 'St. Barthélemy' },
+  'anguilla': { dbCountry: 'Anguilla', slug: 'anguilla', displayName: 'Anguilla' },
+  'puerto-rico': { dbCountry: 'Puerto Rico', slug: 'puerto-rico', displayName: 'Puerto Rico' },
+  'puerto rico': { dbCountry: 'Puerto Rico', slug: 'puerto-rico', displayName: 'Puerto Rico' },
 };
 
 export function resolveCountry(raw: string): { dbCountry: string; slug: string; displayName: string; regex: RegExp } {
