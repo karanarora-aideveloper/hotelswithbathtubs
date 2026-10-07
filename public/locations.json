@@ -124,11 +124,13 @@
     "Fiji"
   ],
   "Finland": [
+    "Helsinki",
     "Rovaniemi"
   ],
   "France": [
     "Chamonix",
     "Courchevel",
+    "Lyon",
     "Nice",
     "Paris"
   ],
@@ -140,6 +142,8 @@
   ],
   "Germany": [
     "Berlin",
+    "Frankfurt",
+    "Hamburg",
     "Munich"
   ],
   "Greece": [
@@ -247,8 +251,10 @@
     "Florence",
     "Lake Como",
     "Milan",
+    "Naples",
     "Positano",
     "Rome",
+    "Turin",
     "Venice"
   ],
   "Jamaica": [
@@ -259,6 +265,7 @@
     "Kyoto",
     "Mount Fuji",
     "Niseko",
+    "Osaka",
     "Tokyo"
   ],
   "Jordan": [
@@ -287,7 +294,8 @@
     "Nosy Be"
   ],
   "Malaysia": [
-    "Kuala Lumpur"
+    "Kuala Lumpur",
+    "Penang"
   ],
   "Maldives": [
     "Maldives"
@@ -368,7 +376,8 @@
   "Portugal": [
     "Funchal",
     "Lisbon",
-    "Ponta Delgada"
+    "Ponta Delgada",
+    "Porto"
   ],
   "Puerto Rico": [
     "Puerto Rico"
@@ -411,6 +420,7 @@
     "Gran Canaria",
     "Lanzarote",
     "Madrid",
+    "Seville",
     "Tenerife"
   ],
   "Sri Lanka": [
@@ -423,6 +433,7 @@
     "Stockholm"
   ],
   "Switzerland": [
+    "Geneva",
     "Interlaken",
     "Lucerne",
     "Zermatt",
@@ -457,6 +468,7 @@
   ],
   "UK": [
     "Bath",
+    "Bristol",
     "Edinburgh",
     "London",
     "Manchester",

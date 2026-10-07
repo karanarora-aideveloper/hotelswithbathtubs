@@ -5,17 +5,6 @@ import NotFoundTracker from '@/components/NotFoundTracker';
 export const metadata: Metadata = {
   title: 'Page Not Found',
   description: 'The page you were looking for could not be found.',
-  // The real fix for Search Console's "Alternate page with proper
-  // canonical tag" report on stale/removed URLs (e.g. /rishikesh, a
-  // leftover from the old static site's flat URL structure). Without a
-  // dedicated not-found page, 404s inherited the root layout's canonical
-  // tag pointing at "/", which told Google "this is an alternate of the
-  // homepage" instead of "this page doesn't exist." noindex is the
-  // correct, unambiguous signal for a genuine 404.
-  robots: {
-    index: false,
-    follow: false,
-  },
   alternates: {
     canonical: undefined,
   },

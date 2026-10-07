@@ -4564,6 +4564,210 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Ultra-luxury hospitality at Dorado Beach and historic boutique sanctuaries',
       'Every in-room and outdoor tub verified across Booking.com and partner OTAs'
     ]
+  },
+
+  // Italy - Turin
+  'turin-italy': {
+    intro: 'Turin is Italy’s regal Baroque gem, renowned for its grand boulevards, royal Savoy palaces, and alpine backdrop. Discover five-star neoclassical suites featuring solid Carrara marble soaking tubs and private hydro whirlpool baths.',
+    amenities: [
+      'Solid Carrara marble deep soaking bathtubs with Savoy palace views',
+      'In-room hydro whirlpool jacuzzi suites overlooking historic piazzas',
+      'Art Deco bathroom design with rainfall showers and plush velvet robes',
+      'Piedmontese herbal bath salts and bespoke aromatherapy turn-down'
+    ],
+    whyChoose: [
+      'Italy’s historic first capital boasting aristocratic elegance and chocolate mastery',
+      'World-class Egyptian Museum and royal residences of the House of Savoy',
+      'Intimate boutique palace stays featuring verified private in-room bathtubs',
+      'Guaranteed rate parity and instant confirmation across Booking.com and Agoda'
+    ]
+  },
+
+  // UK - Bristol
+  'bristol-uk': {
+    intro: 'Bristol is the UK’s vibrant maritime and cultural powerhouse, celebrated for its Clifton Georgian architecture and creative energy. Indulge in boutique townhouse stays featuring freestanding cast-iron roll-top bathtubs.',
+    amenities: [
+      'Freestanding cast-iron roll-top bathtubs overlooking Clifton Suspension Bridge',
+      'Historic Georgian vault spa suites with deep stone soaking baths',
+      'Complimentary decanter sherry and Bramley organic botanical bath products',
+      'Dual walk-in rainfall showers and heated Victorian towel rails'
+    ],
+    whyChoose: [
+      'Historic Clifton Village atmosphere surrounded by Brunel’s engineering marvels',
+      'Dynamic harborside dining, independent art, and thriving speakeasy culture',
+      'Romantic Georgian suites featuring guaranteed in-room roll-top bathtubs',
+      'Triple-verified across leading travel platforms with zero shared amenities'
+    ]
+  },
+
+  // Malaysia - Penang
+  'penang-malaysia': {
+    intro: 'Penang is Malaysia’s cultural and culinary jewel, home to George Town’s UNESCO World Heritage architecture. Stay in 19th-century colonial grand dames and Peranakan mansions featuring vintage clawfoot soaking tubs.',
+    amenities: [
+      'Sea-facing vintage clawfoot bathtubs in 1885 colonial heritage suites',
+      'Open-air stone soaking baths set within private Peranakan courtyards',
+      'Champagne bronze freestanding designer bathtubs with infinity pool access',
+      'Bespoke lemongrass and pandan aromatic herbal bath infusions'
+    ],
+    whyChoose: [
+      'World-famous street food capital and UNESCO heritage shophouse culture',
+      'Legendary Sarkies Brothers luxury hospitality on the Andaman Sea waterfront',
+      'Authentic heritage suites with guaranteed private clawfoot and stone tubs',
+      'Verified rates and seamless booking across Agoda and Booking.com'
+    ]
+  },
+
+  // Germany - Frankfurt
+  'frankfurt-germany': {
+    intro: 'Frankfurt unites centuries of imperial history with Germany’s most striking modern skyline. Experience five-star luxury suites featuring oversized Italian marble soaking tubs and private spa jacuzzis.',
+    amenities: [
+      'Oversized Italian marble soaking bathtubs with Frankfurt skyline views',
+      'Freestanding standalone bathtubs stocked with Hermès luxury amenities',
+      'Duplex penthouse suites featuring private hydrotherapy spa bathtubs',
+      'Heated bathroom floors, fogless vanity mirrors, and plush terry robes'
+    ],
+    whyChoose: [
+      'Historic Alte Oper and Römerberg paired with high-energy cosmopolitan dining',
+      'Palatial grand hotel hospitality operating continuously since 1876',
+      'Spacious luxury suites with verified in-room tubs for romantic city breaks',
+      'Triple-verified booking links with flexible cancellation on all partners'
+    ]
+  },
+
+  // Finland - Helsinki
+  'helsinki-finland': {
+    intro: 'Helsinki is the Nordic capital of clean-lined design, sea breezes, and rejuvenating spa culture. Experience boutique design hotels featuring private in-room Finnish saunas and deep freestanding soaking bathtubs.',
+    amenities: [
+      'Master suites equipped with private timber Finnish saunas and soaking tubs',
+      'Portuguese marble master bathrooms with deep freestanding soaking baths',
+      'Nordic botanical pine bath salts and organic birch amenities',
+      'Wintergarden lounge access and holistic St. George and Kämp spa therapies'
+    ],
+    whyChoose: [
+      'The world’s capital of sauna culture, Nordic gastronomy, and sea fortress charm',
+      'Historic 1887 five-star grand luxury right on the Esplanade Park',
+      'Unique private in-room sauna and bathtub pairings for couples',
+      'Individually inspected and triple-verified on Booking.com and Agoda'
+    ]
+  },
+
+  // Switzerland - Geneva
+  'geneva-switzerland': {
+    intro: 'Geneva is Switzerland’s undisputed capital of lakeside elegance, diplomacy, and haute horlogerie. Discover legendary palace hotels along Quai Wilson featuring Lake Geneva and Mont Blanc-facing Carrara marble bathtubs.',
+    amenities: [
+      'Pierre de Paris and Italian Carrara marble bathtubs framing Mont Blanc',
+      'Private lakefront whirlpool bathtubs overlooking the Jet d’Eau',
+      'Guerlain luxury toiletries, private bath butler service, and silk robes',
+      'Heated lakeside terrace plunge pools and Guerlain spa suites'
+    ],
+    whyChoose: [
+      'Unsurpassed alpine grandeur framing the pristine blue waters of Lake Geneva',
+      'Centuries of Swiss watchmaking excellence and Michelin-starred dining',
+      'Ultra-exclusive 5-star palace suites with verified in-room soaking bathtubs',
+      'Direct affiliate reservation links with guaranteed best rate protection'
+    ]
+  },
+
+  // Italy - Naples
+  'naples-italy': {
+    intro: 'Naples is a city of passionate Southern Italian soul, baroque palazzos, and dramatic Gulf views. Discover waterfront hotels and hillside retreats featuring private marble jacuzzis overlooking Mount Vesuvius and Capri.',
+    amenities: [
+      'Waterfront marble jacuzzi bathtubs facing Mount Vesuvius and Capri',
+      'Contemporary Zen suites with glass-walled in-room soaking bathtubs',
+      'Panoramic hillside freestanding tubs overlooking the Bay of Naples',
+      'Aqua di Parma toiletries, private terraces, and rooftop infinity pools'
+    ],
+    whyChoose: [
+      'Authentic Neapolitan culture, world-capital pizza, and ancient Spaccanapoli charm',
+      'Historic 1882 waterfront hospitality along the Santa Lucia harbor',
+      'Romantic suites featuring guaranteed private bathtubs and sea panoramas',
+      'Triple-verified across leading travel platforms with zero shared amenities'
+    ]
+  },
+
+  // Germany - Hamburg
+  'hamburg-germany': {
+    intro: 'Hamburg is Germany’s storied maritime gateway, graced by tranquil lakes and UNESCO brick warehouses. Stay in sculptural waterfront hotels and grand dames featuring oversized soaking tubs overlooking Lake Alster.',
+    amenities: [
+      'Circular freestanding soaking bathtubs framing panoramic Lake Alster views',
+      'Travertine marble bathrooms with deep soaking tubs and rain showers',
+      'Penthouse suites featuring private hydrotherapy whirlpool bathtubs',
+      'Extensive Elysium luxury spa access and rooftop infinity pool facilities'
+    ],
+    whyChoose: [
+      'Serene lakefront walks and historic Speicherstadt warehouse architecture',
+      'World-famous Elbphilharmonie concert hall and vibrant culinary culture',
+      'Sculptural luxury suites with verified in-room tubs for couple getaways',
+      'Guaranteed rate parity and instant confirmation across Booking.com and Agoda'
+    ]
+  },
+
+  // Portugal - Porto
+  'porto-portugal': {
+    intro: 'Porto enchants with its tile-clad hillsides, historic port wine lodges, and dramatic Douro River vistas. Experience luxury wine retreats and restored palazzos featuring freestanding copper soaking tubs.',
+    amenities: [
+      'Freestanding copper barrel soaking tubs overlooking historic Porto and the Douro',
+      'Caudalie Vinothérapie grape-seed bath rituals and aromatherapy bath salts',
+      '18th-century palatial marble bathrooms with deep soaking bathtubs',
+      'Private riverfront balconies with panoramic Dom Luís I Bridge vistas'
+    ],
+    whyChoose: [
+      'World capital of port wine with UNESCO World Heritage Ribeira architecture',
+      'Michelin-starred gastronomy and breathtaking Douro Valley excursions',
+      'Bespoke wine spa suites featuring verified in-room soaking bathtubs',
+      'Triple-verified across leading travel platforms with zero misleading photos'
+    ]
+  },
+
+  // Spain - Seville
+  'seville-spain': {
+    intro: 'Seville is the passionate heart of Andalusia, celebrated for flamenco, Moorish palaces, and orange-blossom courtyards. Stay in historic royal palaces featuring authentic hand-painted Sevillian tile bathtubs.',
+    amenities: [
+      'Handcrafted Andalusian ceramic tile bathrooms with deep marble soaking tubs',
+      'Monolithic sculptural oval freestanding bathtubs in 19th-century bourgeois palaces',
+      'Junior suites with private rooftop terrace plunge tubs and Giralda views',
+      'Organic orange-blossom bath oils and traditional courtyard fountain views'
+    ],
+    whyChoose: [
+      'Royal Alcázar, Seville Cathedral, and authentic flamenco tablaos',
+      'King Alfonso XIII’s commissioned 1929 royal palace hotel experience',
+      'Intimate courtyard palace suites with guaranteed private in-room bathtubs',
+      'Verified rates and seamless booking across Agoda and Booking.com'
+    ]
+  },
+
+  // France - Lyon
+  'lyon-france': {
+    intro: 'Lyon is France’s undisputed gastronomic capital, where two majestic rivers meet Renaissance Old Town charm. Discover luxury palace conversions featuring freestanding bathtubs overlooking the Rhône River.',
+    amenities: [
+      'Freestanding soaking bathtubs housed within the 18th-century Grand Hôtel-Dieu',
+      'Renaissance convent suites atop Fourvière hill with jetted jacuzzi bathtubs',
+      'Vieux-Lyon suites featuring genuine stone fireplaces and cast-iron tubs',
+      'Frédéric Malle luxury bath amenities and heated panoramic outdoor pools'
+    ],
+    whyChoose: [
+      'World capital of French gastronomy and UNESCO World Heritage Vieux-Lyon',
+      'Dramatic hilltop vistas overlooking the Rhône and Saône river confluence',
+      'Historic suites with authentic private soaking tubs verified on all channels',
+      'Direct affiliate reservation links with guaranteed best rate protection'
+    ]
+  },
+
+  // Japan - Osaka
+  'osaka-japan': {
+    intro: 'Osaka is Japan’s vibrant food capital and futuristic nightlife metropolis. Discover luxury sky-high hotels featuring circular freestanding soaking tubs and deep Japanese stone baths overlooking the city lights.',
+    amenities: [
+      'Circular freestanding soaking bathtubs set directly beside floor-to-ceiling skyline windows',
+      'Deep Japanese-style stone soaking tubs with aromatic cedarwood bath salts',
+      'Italian marble executive suites with panoramic views of Osaka Castle',
+      'Diptyque and Byredo designer bath amenities and plush Japanese yukatas'
+    ],
+    whyChoose: [
+      'Legendary Dotonbori street food, vibrant nightlife, and historic Osaka Castle',
+      '“Address in the Sky” 5-star hospitality high above the Nakanoshima canals',
+      'Dramatic in-room soaking bathtubs verified across Booking.com and Agoda',
+      'Effortless bullet-train connectivity to Kyoto, Nara, and Kansai Airport'
+    ]
   }
 
 };
