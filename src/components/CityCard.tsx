@@ -39,7 +39,7 @@ export default function CityCard({
       href={targetUrl}
       prefetch={false}
       onClick={handleClick}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '380px' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 380px' }}
       className={`bg-white rounded-2xl overflow-hidden border border-border shadow-sm transition-all flex flex-col group text-left cursor-pointer ${
         clicked 
           ? 'ring-2 ring-accent border-accent shadow-md opacity-90' 

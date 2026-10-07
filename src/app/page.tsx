@@ -207,6 +207,13 @@ export default async function Home() {
       <StructuredData data={faqSchema}>
         <>
           <header className="relative pt-24 sm:pt-32 pb-36 sm:pb-48 px-4 sm:px-8 text-center overflow-hidden">
+            {/* React 19 auto-hoisted LCP Image Preload */}
+            <link
+              rel="preload"
+              as="image"
+              href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
+              fetchPriority="high"
+            />
             <img
               src="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp"
               alt="Hotels with Bathtubs - Verified Luxury Suites"

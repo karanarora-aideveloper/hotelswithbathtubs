@@ -15,6 +15,10 @@ interface ProgressiveImageProps {
   containerClassName?: string;
 }
 
+// Global in-memory cache of resolved image URLs that have already loaded in this session
+// Prevents skeleton flicker when switching tabs, filtering, or unmounting/remounting cards
+const loadedImageCache = new Set<string>();
+
 export default function ProgressiveImage({
   src,
   alt,
@@ -26,11 +30,11 @@ export default function ProgressiveImage({
   className = '',
   containerClassName = '',
 }: ProgressiveImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const resolvedUrl = imgError ? DEFAULT_HOTEL_IMAGE : imageUrl(src);
+  const [isLoaded, setIsLoaded] = useState<boolean>(() => loadedImageCache.has(resolvedUrl));
 
   const handleImageError = () => {
     if (!imgError) {
@@ -40,9 +44,15 @@ export default function ProgressiveImage({
     }
   };
 
+  const handleLoadSuccess = () => {
+    loadedImageCache.add(resolvedUrl);
+    setIsLoaded(true);
+  };
+
   // If image was already loaded from browser cache before hydration, show it immediately
   useEffect(() => {
     if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      loadedImageCache.add(resolvedUrl);
       setIsLoaded(true);
     }
   }, [resolvedUrl]);
@@ -71,9 +81,9 @@ export default function ProgressiveImage({
         width={!fill ? width : undefined}
         height={!fill ? height : undefined}
         loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
+        fetchPriority={priority ? 'high' : undefined}
         decoding="async"
-        onLoad={() => setIsLoaded(true)}
+        onLoad={handleLoadSuccess}
         onError={handleImageError}
         className={`${
           fill ? 'absolute inset-0 w-full h-full' : ''
