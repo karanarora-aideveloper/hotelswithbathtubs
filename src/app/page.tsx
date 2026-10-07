@@ -4,6 +4,7 @@ import Link from 'next/link';
 import HomeSearch from '@/components/HomeSearch';
 import HomeGeoShortcuts from '@/components/HomeGeoShortcuts';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
+import DreamSoakMatchmaker from '@/components/DreamSoakMatchmaker';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 
@@ -302,6 +303,11 @@ export default async function Home() {
                 <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
               </div>
             </div>
+          </section>
+
+          {/* Interactive Dream Soak Matchmaker Section */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-8">
+            <DreamSoakMatchmaker embedded={true} />
           </section>
 
           {/* Main Destination Discovery Hub (Geo-Adaptive & Interactive Tabs) */}

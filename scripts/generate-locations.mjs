@@ -156,6 +156,40 @@ async function generateLocations() {
     const fullHotels = await Hotel.find({ flagged: { $ne: true } }).lean();
     fs.writeFileSync(path.join(cacheDir, 'all-hotels.json'), JSON.stringify(fullHotels), 'utf-8');
     console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${fullHotels.length} hotels).`);
+
+    // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker
+    const matchmakerHotels = fullHotels.map((h) => {
+      const country = (h.country || '').trim();
+      const city = (h.city || '').trim();
+      const countrySlug = countrySlugMap[country.toLowerCase()] || slugify(country);
+      const citySlug = slugify(city);
+      const hotelSlug = h.slug || `${slugify(h.name)}-${citySlug}`;
+      const numPrice = parseInt((h.price || '').replace(/[^0-9]/g, '') || '0', 10);
+      return {
+        name: (h.name || '').trim(),
+        city,
+        country,
+        countrySlug,
+        citySlug,
+        pageUrl: `/${countrySlug}/${citySlug}/${hotelSlug}`,
+        image: h.image || '',
+        price: h.price || '',
+        numPrice,
+        rating: h.rating || 4.5,
+        reviewsCount: h.reviewsCount || 100,
+        roomType: h.roomType || '',
+        tubType: h.tubType || '',
+        amenities: (h.amenities || []).slice(0, 5),
+        bookingTip: h.bookingTip || '',
+        bookingUrl: h.bookingUrl || '',
+        agodaUrl: h.agodaUrl || '',
+        url: h.url || '',
+      };
+    });
+    const matchmakerPath = path.join(publicDir, 'matchmaker-data.json');
+    fs.writeFileSync(matchmakerPath, JSON.stringify(matchmakerHotels), 'utf-8');
+    const matchmakerSize = (fs.statSync(matchmakerPath).size / 1024).toFixed(1);
+    console.log(`✅ matchmaker-data.json generated successfully (${matchmakerSize} KB, ${matchmakerHotels.length} hotels).`);
   } catch (err) {
     console.error('❌ Error generating search data:', err);
     process.exit(1);

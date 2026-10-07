@@ -69,7 +69,14 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links (Visible on lg: 1024px and up to prevent tablet clipping) */}
-          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-text-main">
+          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-semibold text-text-main">
+            <Link
+              href="/matchmaker"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 text-[#1a6fde] text-xs font-bold transition-all border border-blue-200/80 shadow-2xs hover:scale-105"
+            >
+              <span className="text-sm">✨</span>
+              <span>Matchmaker</span>
+            </Link>
             <Link href="/#destinations" className="hover:text-accent transition-colors">
               Destinations
             </Link>
@@ -164,6 +171,25 @@ export default function Navbar() {
 
         {/* Drawer Content */}
         <div className="flex-1 overflow-y-auto px-5 py-5 space-y-6">
+          {/* Dream Soak Matchmaker Feature Card */}
+          <Link
+            href="/matchmaker"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200/90 rounded-2xl shadow-xs transition-all group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-lg flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+              ✨
+            </div>
+            <div className="min-w-0">
+              <span className="block text-xs font-black text-gray-900 group-hover:text-[#1a6fde] truncate">
+                Dream Soak Matchmaker™
+              </span>
+              <span className="block text-[11px] text-gray-500 font-medium">
+                Find your ideal bathtub in 30 seconds &rarr;
+              </span>
+            </div>
+          </Link>
+
           {/* Quick Destination Hubs */}
           <div>
             <span className="text-2xs font-bold uppercase tracking-wider text-text-muted block mb-2.5">

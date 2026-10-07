@@ -71,6 +71,18 @@ async function build() {
       fs.copyFileSync(publicLocations, outLocations);
     }
 
+    const publicSearchData = path.join(rootDir, 'public/search-data.json');
+    const outSearchData = path.join(rootDir, 'out/search-data.json');
+    if (fs.existsSync(publicSearchData)) {
+      fs.copyFileSync(publicSearchData, outSearchData);
+    }
+
+    const publicMatchmaker = path.join(rootDir, 'public/matchmaker-data.json');
+    const outMatchmaker = path.join(rootDir, 'out/matchmaker-data.json');
+    if (fs.existsSync(publicMatchmaker)) {
+      fs.copyFileSync(publicMatchmaker, outMatchmaker);
+    }
+
     const publicHeaders = path.join(rootDir, 'public/_headers');
     const outHeaders = path.join(rootDir, 'out/_headers');
     if (fs.existsSync(publicHeaders)) {
