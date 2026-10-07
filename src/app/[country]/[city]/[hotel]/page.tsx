@@ -131,13 +131,37 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   
   const pageDescription = `${hotel.name} features ${tubType} in ${roomType}.${price} Verified private in-room bathtub in ${cityName}.`;
 
+  const ogImage = imageUrl(hotel.image);
+  const hotelUrl = `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotel.slug || slugify(hotel.name)}`;
+
   return {
     title: pageTitle,
     description: pageDescription,
     robots: { index: true, follow: true },
     alternates: {
       canonical: `/${countryInfo.slug}/${slugify(rawCity)}/${hotel.slug || slugify(hotel.name)}`,
-    }
+    },
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      url: hotelUrl,
+      siteName: 'Hotels with Bathtubs',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${hotel.name} with bathtub in ${cityName}`,
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: pageDescription,
+      images: [ogImage],
+    },
   };
 }
 

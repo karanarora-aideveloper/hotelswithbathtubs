@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useFavorites } from '@/components/Favorites';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const { favorites } = useFavorites();
+  const favCount = mounted ? favorites.length : 0;
 
   useEffect(() => {
     setMounted(true);
@@ -91,12 +94,17 @@ export default function Navbar() {
             </Link>
             <Link
               href="/wishlist"
-              className="relative hover:text-red-500 transition-colors flex items-center gap-1"
+              className="relative hover:text-rose-500 transition-colors flex items-center p-1"
               title="Your saved hotels"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <svg className="w-5 h-5 text-gray-700 hover:text-rose-500 transition-colors" fill={favCount > 0 ? '#f43f5e' : 'none'} stroke={favCount > 0 ? '#f43f5e' : 'currentColor'} viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
+              {favCount > 0 && (
+                <span className="absolute -top-1 -right-1.5 bg-rose-500 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                  {favCount}
+                </span>
+              )}
             </Link>
             <Link
               href="/#destinations"
@@ -285,6 +293,31 @@ export default function Navbar() {
                   </div>
                 </div>
                 <span className="text-text-muted text-xs">&rarr;</span>
+              </Link>
+
+              <Link
+                href="/wishlist"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-rose-500" fill={favCount > 0 ? '#f43f5e' : 'none'} stroke={favCount > 0 ? '#f43f5e' : 'currentColor'} viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  <div>
+                    <span className="block">Saved Wishlist</span>
+                    <span className="block text-2xs text-text-muted font-normal">
+                      {favCount > 0 ? `${favCount} hotels saved` : 'Your favorite hotels'}
+                    </span>
+                  </div>
+                </div>
+                {favCount > 0 ? (
+                  <span className="bg-rose-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                    {favCount}
+                  </span>
+                ) : (
+                  <span className="text-text-muted text-xs">&rarr;</span>
+                )}
               </Link>
             </nav>
           </div>

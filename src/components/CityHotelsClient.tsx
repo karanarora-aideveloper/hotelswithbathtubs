@@ -94,11 +94,6 @@ export default function CityHotelsClient({
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
 
-  const isIndia = countryName === 'India';
-  const BUDGET_MAX = isIndia ? 8000 : 200;
-  const LUXURY_MIN = isIndia ? 20000 : 500;
-  const currencySymbol = isIndia ? '₹' : '$';
-
   // Deduplicate hotels by URL signature (same hotel added multiple times to DB)
   const uniqueHotels = useMemo(() => {
     const seen = new Set<string>();
@@ -110,6 +105,62 @@ export default function CityHotelsClient({
     });
   }, [hotels]);
 
+  // Dynamically resolve currency symbol and thresholds based on city destination
+  const { currencySymbol, budgetMax, luxuryMin } = useMemo(() => {
+    for (const h of uniqueHotels) {
+      const p = h.price || '';
+      if (p.includes('€')) return { currencySymbol: '€', budgetMax: 180, luxuryMin: 400 };
+      if (p.includes('£')) return { currencySymbol: '£', budgetMax: 150, luxuryMin: 350 };
+      if (p.includes('₹')) return { currencySymbol: '₹', budgetMax: 8000, luxuryMin: 22000 };
+      if (p.includes('¥')) return { currencySymbol: '¥', budgetMax: 25000, luxuryMin: 60000 };
+      if (p.includes('฿')) return { currencySymbol: '฿', budgetMax: 3000, luxuryMin: 9000 };
+      if (p.includes('RM')) return { currencySymbol: 'RM', budgetMax: 400, luxuryMin: 1200 };
+      if (p.includes('CHF')) return { currencySymbol: 'CHF', budgetMax: 250, luxuryMin: 600 };
+      if (p.includes('CA$')) return { currencySymbol: 'CA$', budgetMax: 220, luxuryMin: 500 };
+      if (p.includes('A$')) return { currencySymbol: 'A$', budgetMax: 250, luxuryMin: 550 };
+    }
+    const isIndia = countryName === 'India';
+    return {
+      currencySymbol: isIndia ? '₹' : '$',
+      budgetMax: isIndia ? 8000 : 180,
+      luxuryMin: isIndia ? 22000 : 400,
+    };
+  }, [uniqueHotels, countryName]);
+
+  // Comprehensive bathtub feature matchers (inspects tubType, roomType, and amenities)
+  const isJacuzziHotel = (h: HotelData) => {
+    const tub = (h.tubType || '').toLowerCase();
+    const room = (h.roomType || '').toLowerCase();
+    const ams = (h.amenities || []).join(' ').toLowerCase();
+    return (
+      tub.includes('jacuzzi') ||
+      tub.includes('whirlpool') ||
+      tub.includes('hydro') ||
+      tub.includes('hot tub') ||
+      tub.includes('jet') ||
+      room.includes('jacuzzi') ||
+      room.includes('whirlpool') ||
+      ams.includes('jacuzzi') ||
+      ams.includes('whirlpool') ||
+      ams.includes('hot tub')
+    );
+  };
+
+  const isSoakingHotel = (h: HotelData) => {
+    const tub = (h.tubType || '').toLowerCase();
+    const room = (h.roomType || '').toLowerCase();
+    const ams = (h.amenities || []).join(' ').toLowerCase();
+    const allText = `${tub} ${room} ${ams}`;
+    return (
+      allText.includes('bathtub') ||
+      allText.includes('soaking') ||
+      allText.includes('freestanding') ||
+      allText.includes('clawfoot') ||
+      allText.includes('stone') ||
+      allText.includes('marble') ||
+      allText.includes('onsen')
+    );
+  };
 
   const availableTubCategories = useMemo(() => {
     const map = new Map<string, {emoji: string; color: string}>();
@@ -122,16 +173,10 @@ export default function CityHotelsClient({
     return Array.from(map.entries()).map(([category, {emoji, color}]) => ({category, emoji, color}));
   }, [uniqueHotels]);
 
-  // Counts for filter badges
+  // Counts for filter badges with zero false-negatives
   const counts = useMemo(() => {
-    const jacuzzi = uniqueHotels.filter((h) =>
-      h.amenities?.some((a) => a.toLowerCase().includes('jacuzzi') || a.toLowerCase().includes('hot tub'))
-    ).length;
-
-    const soaking = uniqueHotels.filter((h) =>
-      h.amenities?.some((a) => a.toLowerCase().includes('bathtub') && !a.toLowerCase().includes('jacuzzi'))
-    ).length;
-
+    const jacuzzi = uniqueHotels.filter(isJacuzziHotel).length;
+    const soaking = uniqueHotels.filter(isSoakingHotel).length;
     const tripled = uniqueHotels.filter((h) => h.url && (h.agodaUrl || h.bookingUrl)).length;
 
     return { all: uniqueHotels.length, jacuzzi, soaking, tripled };
@@ -150,12 +195,8 @@ export default function CityHotelsClient({
       }
 
       // Category filter
-      if (selectedFilter === 'jacuzzi') {
-        if (!h.amenities?.some((a) => a.toLowerCase().includes('jacuzzi') || a.toLowerCase().includes('hot tub'))) return false;
-      }
-      if (selectedFilter === 'soaking') {
-        if (!h.amenities?.some((a) => a.toLowerCase().includes('bathtub') && !a.toLowerCase().includes('jacuzzi'))) return false;
-      }
+      if (selectedFilter === 'jacuzzi' && !isJacuzziHotel(h)) return false;
+      if (selectedFilter === 'soaking' && !isSoakingHotel(h)) return false;
       if (selectedFilter === 'tripled') {
         if (!(h.url && (h.agodaUrl || h.bookingUrl))) return false;
       }
@@ -167,9 +208,9 @@ export default function CityHotelsClient({
 
       if (priceRange !== 'all' && h.price) {
         const p = parsePrice(h.price);
-        if (priceRange === 'budget' && p >= BUDGET_MAX) return false;
-        if (priceRange === 'mid' && (p < BUDGET_MAX || p >= LUXURY_MIN)) return false;
-        if (priceRange === 'luxury' && p < LUXURY_MIN) return false;
+        if (priceRange === 'budget' && p >= budgetMax) return false;
+        if (priceRange === 'mid' && (p < budgetMax || p >= luxuryMin)) return false;
+        if (priceRange === 'luxury' && p < luxuryMin) return false;
       }
 
       return true;
@@ -190,7 +231,7 @@ export default function CityHotelsClient({
     });
 
     return result;
-  }, [uniqueHotels, selectedFilter, searchTerm, selectedTubCategory, priceRange, sortBy, BUDGET_MAX, LUXURY_MIN]);
+  }, [uniqueHotels, selectedFilter, searchTerm, selectedTubCategory, priceRange, sortBy, budgetMax, luxuryMin]);
 
   // Track dead-end filter pain point (when filter/search yields 0 hotels)
   useEffect(() => {
@@ -409,21 +450,44 @@ export default function CityHotelsClient({
             onClick={() => setPriceRange('budget')}
             className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'budget' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
-            Budget ({"<"} {currencySymbol}{BUDGET_MAX.toLocaleString()})
+            Budget ({"<"} {currencySymbol}{budgetMax.toLocaleString()})
           </button>
           <button
             onClick={() => setPriceRange('mid')}
             className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'mid' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
-            Mid-range ({currencySymbol}{BUDGET_MAX.toLocaleString()} - {currencySymbol}{LUXURY_MIN.toLocaleString()})
+            Mid-range ({currencySymbol}{budgetMax.toLocaleString()} - {currencySymbol}{luxuryMin.toLocaleString()})
           </button>
           <button
             onClick={() => setPriceRange('luxury')}
             className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'luxury' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
           >
-            Luxury ({currencySymbol}{LUXURY_MIN.toLocaleString()}+)
+            Luxury ({currencySymbol}{luxuryMin.toLocaleString()}+)
           </button>
         </div>
+      </div>
+
+      {/* Matchmaker Discovery Callout */}
+      <div className="bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-blue-50/80 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-lg flex-shrink-0 shadow-xs">
+            ✨
+          </div>
+          <div>
+            <h3 className="font-bold text-gray-900 text-sm sm:text-base leading-snug">
+              Looking for a specific bathtub style or anniversary getaway?
+            </h3>
+            <p className="text-xs text-gray-600 mt-0.5">
+              Take our 30-second Dream Soak Matchmaker to match by tub experience, romantic vibe, and budget worldwide.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/matchmaker"
+          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md whitespace-nowrap flex-shrink-0"
+        >
+          Open Matchmaker &rarr;
+        </Link>
       </div>
 
       {/* Booking Verification Tip Banner */}
