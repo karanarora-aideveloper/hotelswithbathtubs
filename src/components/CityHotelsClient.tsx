@@ -236,9 +236,12 @@ export default function CityHotelsClient({
   // Track dead-end filter pain point (when filter/search yields 0 hotels)
   useEffect(() => {
     if (filteredHotels.length === 0 && (selectedFilter !== 'all' || searchTerm.trim() || selectedTubCategory !== 'all' || priceRange !== 'all')) {
-      recordFilterDeadEnd(selectedFilter, searchTerm.trim(), cityName);
+      const timer = setTimeout(() => {
+        recordFilterDeadEnd(selectedFilter, searchTerm.trim(), cityName);
+      }, 750);
+      return () => clearTimeout(timer);
     }
-  }, [filteredHotels.length, selectedFilter, searchTerm, cityName]);
+  }, [filteredHotels.length, selectedFilter, searchTerm, cityName, selectedTubCategory, priceRange]);
 
   // Track hotel card impressions as cards enter the viewport
   useEffect(() => {

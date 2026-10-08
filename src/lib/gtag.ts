@@ -63,10 +63,13 @@ export const sendGA4Event = (eventName: string, params?: Record<string, any>) =>
   }
 
   // 1. GA4 gtag / dataLayer
+  const eventParams = { ...params, transport_type: 'beacon' };
+  
   if (typeof window.gtag === 'function') {
-    window.gtag('event', eventName, params);
+    window.gtag('event', eventName, eventParams);
   } else if (Array.isArray(window.dataLayer)) {
-    window.dataLayer.push(['event', eventName, params]);
+    // Push as arguments-like array for gtag.js to process when it loads
+    window.dataLayer.push(['event', eventName, eventParams]);
   }
 
   // 2. PostHog Event Stream
