@@ -68,14 +68,15 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // SERP-Optimized Title (50-65 chars): Target top high-volume keywords (Bathtub, Jacuzzi, Couples, Romantic)
+  // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query ("Hotels with Bathtub in [City]")
+  // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
   const pageTitle = countrySlug === 'usa'
-    ? `${hotelCount} Best Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName} (2026)`
-    : `${hotelCount} Best Hotels with Bathtub & Jacuzzi in ${cityName} for Couples (2026)`;
+    ? `Hotels with Bathtubs in ${cityName}: Top ${hotelCount} Stays (2026)`
+    : `Hotels with Bathtub in ${cityName} (${hotelCount} Verified Stays) (2026)`;
 
   const pageDescription = countrySlug === 'usa'
-    ? `Discover ${hotelCount}+ verified hotels with deep soaking tubs, jacuzzi suites & hot tubs in ${cityName}. Hand-checked rooms with guaranteed private tubs for couples.`
-    : `Find ${hotelCount}+ verified hotels with bathtub & private jacuzzi in room in ${cityName}, ${countryName}. Curated romantic stays, jacuzzi suites & soaking tubs for couples.`;
+    ? `Discover ${hotelCount}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
+    : `Find ${hotelCount}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
 
 
   return {
@@ -301,12 +302,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   };
 
   const pageTitle = countrySlug === 'usa'
-    ? `${hotels.length} Best Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName} (2026)`
-    : `${hotels.length} Best Hotels with Bathtub & Jacuzzi in ${cityName} for Couples (2026)`;
+    ? `Hotels with Bathtubs in ${cityName}: Top ${hotels.length} Stays (2026)`
+    : `Hotels with Bathtub in ${cityName} (${hotels.length} Verified Stays) (2026)`;
 
   const pageDescription = countrySlug === 'usa'
-    ? `Discover ${hotels.length}+ verified hotels with deep soaking tubs, jacuzzi suites & hot tubs in ${cityName}. Hand-checked rooms with guaranteed private tubs for couples.`
-    : `Find ${hotels.length}+ verified hotels with bathtub & private jacuzzi in room in ${cityName}, ${countryName}. Curated romantic stays, jacuzzi suites & soaking tubs for couples.`;
+    ? `Discover ${hotels.length}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
+    : `Find ${hotels.length}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
 
   const speakableSchema = {
     "@context": "https://schema.org",
@@ -427,6 +428,28 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       </div>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-8">
+        {/* Quick Answer / Featured Snippet Block (Optimized for Google Position 0) */}
+        <div className="bg-gradient-to-r from-blue-50/70 via-sky-50/50 to-indigo-50/50 border border-blue-200/80 rounded-2xl p-4 sm:p-6 mb-6 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-3xl">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-2xs font-bold text-accent uppercase tracking-wider">Quick Verified Answer</span>
+            </div>
+            <h2 className="font-heading text-base sm:text-lg font-bold text-accent-secondary">
+              What are the best hotels with bathtubs in {cityName}?
+            </h2>
+            <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+              Top verified hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
+              <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
+              All {hotels.length} stays in our directory have been independently verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and Expedia'} to confirm that your private room tier guarantees an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
+            </p>
+          </div>
+          <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
+            <span className="text-2xs text-text-muted font-medium">Verified Stays</span>
+            <span className="font-heading text-xl font-extrabold text-accent">{hotels.length}</span>
+          </div>
+        </div>
+
         <CityHotelsClient
           hotels={hotels}
           cityName={cityName}

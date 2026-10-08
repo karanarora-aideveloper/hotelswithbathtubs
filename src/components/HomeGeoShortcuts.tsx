@@ -4,33 +4,38 @@ import Link from 'next/link';
 import { useGeo } from '@/lib/useGeo';
 
 const US_SHORTCUTS = [
+  { name: 'Orlando', href: '/usa/orlando' },
   { name: 'New York', href: '/usa/new-york' },
   { name: 'Las Vegas', href: '/usa/las-vegas' },
   { name: 'Miami', href: '/usa/miami' },
-  { name: 'Los Angeles', href: '/usa/los-angeles' },
   { name: 'Chicago', href: '/usa/chicago' },
+  { name: 'Los Angeles', href: '/usa/los-angeles' },
+  { name: 'New Orleans', href: '/usa/new-orleans' },
+  { name: 'Edinburgh', href: '/uk/edinburgh' },
   { name: 'London', href: '/uk/london' },
   { name: 'Paris', href: '/france/paris' },
   { name: 'Dubai', href: '/uae/dubai' },
-  { name: 'Goa', href: '/india/goa' },
-  { name: 'Udaipur', href: '/india/udaipur' },
-  { name: 'Manali', href: '/india/manali' },
   { name: 'Singapore', href: '/singapore/singapore' },
   { name: 'Tokyo', href: '/japan/tokyo' },
 ];
 
 const INDIA_SHORTCUTS = [
-  { name: 'Goa', href: '/india/goa' },
-  { name: 'Udaipur', href: '/india/udaipur' },
-  { name: 'Manali', href: '/india/manali' },
-  { name: 'Munnar', href: '/india/munnar' },
-  { name: 'Jaipur', href: '/india/jaipur' },
+  { name: 'Ahmedabad', href: '/india/ahmedabad' },
+  { name: 'Bangalore', href: '/india/bangalore' },
   { name: 'Delhi', href: '/india/delhi' },
   { name: 'Kolkata', href: '/india/kolkata' },
+  { name: 'Goa', href: '/india/goa' },
+  { name: 'Udaipur', href: '/india/udaipur' },
+  { name: 'Jaipur', href: '/india/jaipur' },
+  { name: 'Lucknow', href: '/india/lucknow' },
+  { name: 'Bhopal', href: '/india/bhopal' },
+  { name: 'Manali', href: '/india/manali' },
+  { name: 'Shimla', href: '/india/shimla' },
+  { name: 'Darjeeling', href: '/india/darjeeling' },
+  { name: 'Munnar', href: '/india/munnar' },
   { name: 'New York', href: '/usa/new-york' },
   { name: 'Dubai', href: '/uae/dubai' },
   { name: 'London', href: '/uk/london' },
-  { name: 'Paris', href: '/france/paris' },
   { name: 'Singapore', href: '/singapore/singapore' },
 ];
 

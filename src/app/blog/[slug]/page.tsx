@@ -387,6 +387,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
 
+            {/* Contextual Directory Authority Bridge Card (Resolves Cannibalization & Boosts City Rankings) */}
+            {matchedCity && matchedCityCount > 0 && (
+              <div className="bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl mt-0.5">🛁</span>
+                  <div>
+                    <span className="text-2xs font-bold text-accent uppercase tracking-wider">Verified Live Inventory</span>
+                    <h3 className="font-heading text-sm sm:text-base font-bold text-accent-secondary mt-0.5">
+                      Explore All {matchedCityCount}+ Hotels with Bathtubs in {matchedCity}
+                    </h3>
+                    <p className="text-xs text-text-muted mt-0.5">
+                      Looking for confirmed in-room jacuzzi suites, real guest photos, and live room rates?
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap shadow-xs transition-all flex-shrink-0"
+                >
+                  <span>Browse {matchedCity} Directory</span>
+                  <span>&rarr;</span>
+                </Link>
+              </div>
+            )}
+
             <article
               className="prose prose-base sm:prose-lg md:prose-xl max-w-none break-words overflow-hidden prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
