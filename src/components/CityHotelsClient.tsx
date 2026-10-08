@@ -515,19 +515,19 @@ export default function CityHotelsClient({
               ...(h.bookingUrl ? [providerLabel[getUrlProvider(h.bookingUrl) ?? 'google']].filter(Boolean) : []),
             ].filter((v, i, a) => a.indexOf(v) === i); // dedupe
 
-            const isUSOrGlobal = countryName.toLowerCase() !== 'india';
+            const isIndia = countryName.toLowerCase() === 'india';
             const rawUrls = [h.bookingUrl, h.agodaUrl, h.url]
               .filter((u): u is string => !!u)
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
             
-            const sortedUrls = isUSOrGlobal
-              ? [...rawUrls].sort((a, b) => {
-                  const provA = getUrlProvider(a);
-                  const provB = getUrlProvider(b);
-                  const priority: Record<string, number> = { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
-                  return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
-                })
-              : rawUrls;
+            const sortedUrls = [...rawUrls].sort((a, b) => {
+              const provA = getUrlProvider(a);
+              const provB = getUrlProvider(b);
+              const priority: Record<string, number> = isIndia
+                ? { makemytrip: 1, agoda: 2, booking: 3, trivago: 4, tripadvisor: 5 }
+                : { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
+              return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
+            });
 
             return (
               <div

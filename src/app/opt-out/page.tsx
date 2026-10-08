@@ -4,7 +4,7 @@ import OptOutClient from './OptOutClient';
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Internal Traffic Exclusion | Hotels With Bathtubs',
+  title: 'Internal Traffic Exclusion',
   description: 'Manage internal testing and developer analytics exclusion.',
   robots: {
     index: false,

@@ -112,6 +112,69 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
   return { hotel, countryInfo, rawCity };
 }
 
+function getCurrencyForPrice(price?: string, countrySlug?: string): string {
+  if (price) {
+    if (price.includes('₹')) return 'INR';
+    if (price.includes('£')) return 'GBP';
+    if (price.includes('€')) return 'EUR';
+    if (price.includes('AED')) return 'AED';
+    if (price.includes('S$')) return 'SGD';
+    if (price.includes('A$')) return 'AUD';
+    if (price.includes('C$')) return 'CAD';
+    if (price.includes('¥')) return 'JPY';
+    if (price.includes('฿')) return 'THB';
+    if (price.includes('$')) return 'USD';
+  }
+  const countryCurrencyMap: Record<string, string> = {
+    india: 'INR',
+    uk: 'GBP',
+    uae: 'AED',
+    singapore: 'SGD',
+    australia: 'AUD',
+    canada: 'CAD',
+    japan: 'JPY',
+    thailand: 'THB',
+    indonesia: 'IDR',
+    vietnam: 'VND',
+    france: 'EUR',
+    italy: 'EUR',
+    germany: 'EUR',
+    spain: 'EUR',
+    netherlands: 'EUR',
+    greece: 'EUR',
+    switzerland: 'CHF',
+  };
+  return countryCurrencyMap[countrySlug || ''] || 'USD';
+}
+
+async function getSimilarHotels(countryParam: string, cityParam: string, currentHotelSlug: string) {
+  const rawCity = decodeURIComponent(cityParam).replace(/-/g, ' ');
+  const citySlug = slugify(rawCity);
+  const map = await getCachedHotelMap();
+  
+  const similar: any[] = [];
+  const seen = new Set<string>();
+
+  for (const h of map.values()) {
+    if (!h.city) continue;
+    const hCitySlug = slugify(h.city);
+    const hSlug = h.slug || slugify(h.name);
+    if (hCitySlug === citySlug && hSlug !== currentHotelSlug && !seen.has(hSlug)) {
+      seen.add(hSlug);
+      similar.push(h);
+    }
+  }
+
+  // Sort by rating desc
+  similar.sort((a, b) => {
+    const rA = Number(a.rating) || 4.0;
+    const rB = Number(b.rating) || 4.0;
+    return rB - rA;
+  });
+
+  return similar.slice(0, 4);
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ country: string, city: string, hotel: string }> }) {
   const resolvedParams = await params;
   const { hotel, countryInfo, rawCity } = await getHotel(resolvedParams.country, resolvedParams.city, resolvedParams.hotel);
@@ -124,8 +187,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   }
 
   const cityName = titleCase(rawCity);
-  const pageTitle = `${hotel.name} — ${hotel.tubType || 'Bathtub'} in ${cityName} | Hotels With Bathtubs`;
   const tubType = hotel.tubType || 'Private Bathtub';
+  const pageTitle = `${hotel.name} — ${tubType} in ${cityName}`;
   const roomType = hotel.roomType || 'Room with Bathtub';
   const price = hotel.price ? ` Starting at ${hotel.price}.` : '';
   
@@ -142,7 +205,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       canonical: `/${countryInfo.slug}/${slugify(rawCity)}/${hotel.slug || slugify(hotel.name)}`,
     },
     openGraph: {
-      title: pageTitle,
+      title: `${pageTitle} | Hotels With Bathtubs`,
       description: pageDescription,
       url: hotelUrl,
       siteName: 'Hotels with Bathtubs',
@@ -158,7 +221,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     twitter: {
       card: 'summary_large_image',
-      title: pageTitle,
+      title: `${pageTitle} | Hotels With Bathtubs`,
       description: pageDescription,
       images: [ogImage],
     },
@@ -182,6 +245,7 @@ export default async function HotelDetailPage({
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
   const hotelSlug = hotel.slug || slugify(hotel.name);
+  const similarHotels = await getSimilarHotels(resolvedParams.country, resolvedParams.city, hotelSlug);
   const derivedStars = (hotel.rating && Number(hotel.rating) > 0) ? Number(hotel.rating).toFixed(1) : "4.5";
   const derivedReviews = (hotel.reviewsCount && Number(hotel.reviewsCount) > 0) ? Number(hotel.reviewsCount) : 150;
 
@@ -219,7 +283,7 @@ export default async function HotelDetailPage({
       "priceSpecification": {
         "@type": "PriceSpecification",
         "price": hotel.price ? hotel.price.toString().replace(/[^0-9]/g, '') : undefined,
-        "priceCurrency": countrySlug === 'india' ? "INR" : "USD",
+        "priceCurrency": getCurrencyForPrice(hotel.price, countrySlug),
       }
     }
   };
@@ -312,18 +376,19 @@ export default async function HotelDetailPage({
     );
   }
 
+  const isIndia = countrySlug === 'india';
   const rawUrls = [hotel.bookingUrl, hotel.agodaUrl, hotel.url]
     .filter((u): u is string => !!u)
     .filter((u, idx, arr) => arr.indexOf(u) === idx);
   
-  const sortedUrls = countrySlug !== 'india'
-    ? [...rawUrls].sort((a, b) => {
-        const provA = getUrlProvider(a);
-        const provB = getUrlProvider(b);
-        const priority: Record<string, number> = { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
-        return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
-      })
-    : rawUrls;
+  const sortedUrls = [...rawUrls].sort((a, b) => {
+    const provA = getUrlProvider(a);
+    const provB = getUrlProvider(b);
+    const priority: Record<string, number> = isIndia
+      ? { makemytrip: 1, agoda: 2, booking: 3, trivago: 4, tripadvisor: 5 }
+      : { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
+    return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
+  });
 
   return (
     <>
@@ -481,6 +546,100 @@ export default async function HotelDetailPage({
           </div>
         </div>
       </div>
+
+      {similarHotels.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-8 py-10 border-t border-gray-100">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+                More Verified Bathtub Hotels in {cityName}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Explore alternative romantic stays with guaranteed in-room bathtubs & jacuzzi suites.
+              </p>
+            </div>
+            <Link 
+              href={`/${countrySlug}/${citySlug}`}
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-[#1a6fde] hover:underline"
+            >
+              <span>View all in {cityName}</span>
+              <span>&rarr;</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {similarHotels.map((sim, idx) => {
+              const simSlug = sim.slug || slugify(sim.name);
+              const simUrl = `/${countrySlug}/${citySlug}/${simSlug}`;
+              return (
+                <div
+                  key={sim._id || idx}
+                  className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md hover:border-[#1a6fde] transition-all flex flex-col group overflow-hidden"
+                >
+                  <div className="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
+                    <Image
+                      src={imageUrl(sim.image)}
+                      alt={sim.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-xs flex items-center gap-1 shadow-xs">
+                        <span>✓</span> Verified Bathtub
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-1 text-xs font-bold text-gray-800 mb-1.5">
+                        <span className="text-amber-500">★</span>
+                        <span>{(sim.rating && Number(sim.rating) > 0) ? Number(sim.rating).toFixed(1) : '4.5'}</span>
+                        <span className="text-gray-400 font-normal">({sim.reviewsCount || 120})</span>
+                      </div>
+                      <Link href={simUrl} className="font-heading font-bold text-sm text-gray-900 group-hover:text-[#1a6fde] transition-colors line-clamp-2 mb-2 leading-snug">
+                        {sim.name}
+                      </Link>
+                      {sim.tubType && (
+                        <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-[#1a6fde] font-bold text-[10px] rounded-md border border-blue-100 mb-3">
+                          <span>🛁</span> {sim.tubType}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+                      {sim.price ? (
+                        <div>
+                          <span className="text-[10px] text-gray-400 block leading-none">From</span>
+                          <span className="text-sm font-black text-gray-900">{sim.price}</span>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] text-gray-400">Rates on OTA</span>
+                      )}
+                      <Link
+                        href={simUrl}
+                        className="px-3 py-1.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs rounded-lg transition-colors shadow-xs"
+                      >
+                        View Stay
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 text-center sm:hidden">
+            <Link 
+              href={`/${countrySlug}/${citySlug}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-800 font-bold text-sm rounded-xl hover:bg-gray-200 transition-colors w-full"
+            >
+              <span>View all verified stays in {cityName} &rarr;</span>
+            </Link>
+          </div>
+        </section>
+      )}
     </>
   );
 }

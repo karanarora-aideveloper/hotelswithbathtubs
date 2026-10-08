@@ -3,6 +3,8 @@ import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
 import { slugify, resolveCountry } from '@/lib/utils';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export const dynamic = 'force-static';
 
@@ -11,14 +13,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fallbackDate = new Date('2026-09-08T00:00:00.000Z');
 
   try {
-    await connectToDatabase();
+    // 1. Fetch hotels with country, city, slug, name, and updatedAt
+    // Use .cache/all-hotels.json if available for instant build performance
+    let hotels: any[] = [];
+    const cachePath = path.join(process.cwd(), '.cache', 'all-hotels.json');
+    if (fs.existsSync(cachePath)) {
+      try {
+        hotels = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+      } catch {
+        hotels = [];
+      }
+    }
 
-    // 1. Fetch distinct country/city combinations and track actual update timestamps
-    const hotels = await Hotel.find({ flagged: { $ne: true } }).select('country city updatedAt -_id');
+    if (!hotels.length) {
+      await connectToDatabase();
+      hotels = await Hotel.find({ flagged: { $ne: true } })
+        .select('country city slug name updatedAt -_id')
+        .lean();
+    }
 
     const countryLastMod = new Map<string, Date>();
     const locationLastMod = new Map<string, Date>();
     const locationHotelCount = new Map<string, number>();
+    const hotelRoutes: MetadataRoute.Sitemap = [];
+    const seenHotelUrls = new Set<string>();
 
     // Canonical mapping for consolidated neighborhoods to prevent emitting 301 redirects in sitemap
     const neighborhoodCanonicalMap: Record<string, string> = {
@@ -55,6 +73,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!currLocDate || hotelUpdated > currLocDate) {
         locationLastMod.set(locKey, hotelUpdated);
       }
+
+      // Track individual hotel entity route
+      const hotelSlug = h.slug || slugify(h.name);
+      if (hotelSlug) {
+        const hotelUrl = `${baseUrl}/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
+        if (!seenHotelUrls.has(hotelUrl)) {
+          seenHotelUrls.add(hotelUrl);
+          hotelRoutes.push({
+            url: hotelUrl,
+            lastModified: hotelUpdated,
+            changeFrequency: 'weekly' as const,
+            priority: 0.65,
+          });
+        }
+      }
     }
 
     // Country Hub Routes
@@ -76,7 +109,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }));
 
     // 2. Fetch all published blogs
-    const blogs = await Blog.find({ published: true }).select('slug updatedAt date -_id');
+    let blogs: any[] = [];
+    const blogCachePath = path.join(process.cwd(), '.cache', 'all-blogs.json');
+    if (fs.existsSync(blogCachePath)) {
+      try {
+        blogs = JSON.parse(fs.readFileSync(blogCachePath, 'utf8'));
+      } catch {
+        blogs = [];
+      }
+    }
+    if (!blogs.length) {
+      await connectToDatabase();
+      blogs = await Blog.find({ published: true }).select('slug updatedAt date -_id').lean();
+    }
     
     const blogRoutes = blogs
       .filter(blog => blog.slug && blog.slug.trim() !== '')
@@ -139,7 +184,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     ];
 
-    return [...staticRoutes, ...countryRoutes, ...locationRoutes, ...blogRoutes];
+    return [...staticRoutes, ...countryRoutes, ...locationRoutes, ...blogRoutes, ...hotelRoutes];
   } catch (error) {
     console.error('Failed to build dynamic sitemap:', error);
     // Fallback static sitemap if DB is unreachable
