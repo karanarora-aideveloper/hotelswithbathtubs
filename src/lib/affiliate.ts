@@ -144,6 +144,7 @@ export function getSpecificHotelLink(hotel: {
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  airbnbUrl?: string;
 }): string | null {
   const isMmtSpecific = (u?: string) => {
     if (!u) return false;
@@ -162,7 +163,16 @@ export function getSpecificHotelLink(hotel: {
     const lower = u.toLowerCase();
     return lower.includes('booking.com') && (lower.includes('searchresults') || lower.includes('/hotel/') || lower.includes('.html'));
   };
+  const isAirbnbSpecific = (u?: string) => {
+    if (!u) return false;
+    const lower = u.toLowerCase();
+    return lower.includes('airbnb') && (lower.includes('/rooms/') || lower.includes('/hotel/'));
+  };
 
+
+  if (isAirbnbSpecific(hotel.airbnbUrl)) {
+    return hotel.airbnbUrl!;
+  }
   if (isBookingSpecific(hotel.bookingUrl)) {
     return hotel.bookingUrl!;
   }

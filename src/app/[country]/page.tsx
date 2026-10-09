@@ -138,13 +138,58 @@ export default async function CountryHubPage({
       $group: {
         _id: { city: "$city", country: "$country" },
         hotelCount: { $sum: 1 },
-        image: { $first: "$image" }
+        image: { $first: "$image" },
+        avgRating: { $avg: "$rating" },
+        totalReviews: { $sum: "$reviewsCount" },
+        tubTypes: { $addToSet: "$tubType" },
+        prices: { $push: "$price" },
       }
     },
     { $sort: { hotelCount: -1 as const } }
   ];
 
-  const cities = await Hotel.aggregate<any>(pipeline);
+  const rawCities = await Hotel.aggregate<any>(pipeline);
+  const cities = rawCities.map((c) => {
+    let minP = Infinity;
+    let minPriceStr = '';
+    for (const p of c.prices || []) {
+      if (!p) continue;
+      const num = parseInt(p.replace(/[^0-9]/g, '') || '0', 10);
+      if (num > 0 && num < minP) {
+        minP = num;
+        minPriceStr = p;
+      }
+    }
+    const hasJacuzzi = (c.tubTypes || []).some((t: string) =>
+      /jacuzzi|whirlpool|jet|hot tub/i.test(t || '')
+    );
+    const isIndia = countrySlug === 'india';
+    const curr = minPriceStr
+      ? minPriceStr.includes('$')
+        ? '$'
+        : minPriceStr.includes('€')
+        ? '€'
+        : minPriceStr.includes('£')
+        ? '£'
+        : isIndia
+        ? '₹'
+        : '$'
+      : isIndia
+      ? '₹'
+      : '$';
+    const minPrice = minP !== Infinity ? `${curr}${minP.toLocaleString()}` : isIndia ? '₹2,499' : '$149';
+    const rating = c.avgRating ? Number(c.avgRating.toFixed(1)) : 4.8;
+
+    return {
+      _id: c._id,
+      hotelCount: c.hotelCount,
+      image: c.image,
+      minPrice,
+      rating,
+      totalReviews: c.totalReviews || 0,
+      hasJacuzzi,
+    };
+  });
 
   if (cities.length === 0) {
     notFound();
@@ -325,6 +370,10 @@ export default async function CountryHubPage({
                     hotelCount={item.hotelCount}
                     image={item.image}
                     priority={idx < 4}
+                    minPrice={item.minPrice}
+                    rating={item.rating}
+                    totalReviews={item.totalReviews}
+                    hasJacuzzi={item.hasJacuzzi}
                   />
                 ))}
               </div>

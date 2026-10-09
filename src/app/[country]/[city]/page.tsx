@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
+import ProgressiveImage from '@/components/ProgressiveImage';
 
 export const revalidate = false;
 
@@ -164,6 +165,7 @@ export default async function CityHotelsPage({
     url: h.url,
     agodaUrl: h.agodaUrl,
     bookingUrl: h.bookingUrl,
+    airbnbUrl: h.airbnbUrl,
     amenities: h.amenities || [],
     description: h.description || '',
     rating: h.rating,
@@ -246,7 +248,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       return {
         "@type": "ListItem",
         "position": idx + 1,
-        "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
+        "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`,
         "name": h.name,
         "item": {
           "@type": "LodgingBusiness",
@@ -257,7 +259,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             "url": imageUrl(h.image?.split('/').pop() || ''),
             "caption": `${h.name} - Private bathtub hotel in ${cityName}`
           },
-          "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}#hotel-${slugify(h.name)}`,
+          "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`,
           "address": {
             "@type": "PostalAddress",
             "addressLocality": cityName,
@@ -527,17 +529,16 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                       {relatedBlogs.map((blog: any) => (
                         <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
-                          {blog.image && (
-                            <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                              <Image
-                                src={imageUrl(blog.image)}
-                                alt={blog.title}
-                                fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                            </div>
-                          )}
+                          <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-gray-100">
+                            <ProgressiveImage
+                              key={blog.image || blog.slug}
+                              src={blog.image || DEFAULT_HOTEL_IMAGE}
+                              alt={blog.title}
+                              priority
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
                           <div className="p-5 sm:p-6 flex flex-col flex-grow">
                             {blog.date && (
                               <p className="text-accent font-semibold text-xs sm:text-sm mb-2">

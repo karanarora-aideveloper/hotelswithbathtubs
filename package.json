@@ -9,15 +9,17 @@
     "lint": "eslint",
     "deploy": "/Users/karanarora/mystartups/deploy.sh",
     "build:cf": "node scripts/build-cloudflare.mjs",
-    "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs"
+    "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs --branch main"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1131.0",
     "@next/third-parties": "^16.3.1",
     "@scrapingant/scrapingant-client": "^0.2.1",
     "@tailwindcss/typography": "^0.5.20",
+    "apify-client": "^2.25.0",
     "cheerio": "^1.2.0",
     "dotenv": "^17.4.2",
+    "duck-duck-scrape": "^2.2.7",
     "duckduckgo-images-api": "^1.0.5",
     "isomorphic-dompurify": "^3.19.0",
     "markdown-it": "^15.0.0",

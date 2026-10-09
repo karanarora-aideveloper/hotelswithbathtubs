@@ -325,8 +325,9 @@ function calculateMatchScore(
   }
 
   // 5. Rating & Review Boost
-  if (h.rating) {
-    score += (h.rating - 4.0) * 12;
+  const numericRating = typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0;
+  if (numericRating > 0) {
+    score += (numericRating - 4.0) * 12;
   }
   if (h.reviewsCount && h.reviewsCount > 200) {
     score += 5;
@@ -393,7 +394,14 @@ export default function DreamSoakMatchmaker({
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data: MatchmakerHotel[] = await res.json();
         if (isMounted) {
-          setAllHotels(data);
+          const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
+            ...h,
+            rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 4.5,
+            reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 100,
+            numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
+            amenities: Array.isArray(h.amenities) ? h.amenities : [],
+          }));
+          setAllHotels(cleanData);
           setLoading(false);
         }
       } catch (err) {
@@ -428,7 +436,13 @@ export default function DreamSoakMatchmaker({
     }
 
     // Sort by match score descending, then rating descending
-    scored.sort((a, b) => b.matchScore - a.matchScore || (b.hotel.rating || 0) - (a.hotel.rating || 0));
+    scored.sort((a, b) => {
+      const scoreDiff = b.matchScore - a.matchScore;
+      if (scoreDiff !== 0) return scoreDiff;
+      const rA = typeof a.hotel.rating === 'number' ? a.hotel.rating : parseFloat(a.hotel.rating as any) || 0;
+      const rB = typeof b.hotel.rating === 'number' ? b.hotel.rating : parseFloat(b.hotel.rating as any) || 0;
+      return rB - rA;
+    });
 
     // Deduplicate by name and city
     const seen = new Set<string>();
@@ -913,7 +927,7 @@ export default function DreamSoakMatchmaker({
                         {/* Top Ribbon: Match % and Tub Type */}
                         <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
                           <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 font-black text-xs shadow-md border border-black/5 flex items-center gap-1">
-                            <span className="text-amber-500">★</span> {hotel.rating ? hotel.rating.toFixed(1) : '4.8'}
+                            <span className="text-amber-500">★</span> {typeof hotel.rating === 'number' ? hotel.rating.toFixed(1) : (Number(hotel.rating) > 0 ? Number(hotel.rating).toFixed(1) : '4.8')}
                             <span className="text-[10px] text-gray-400 font-medium">({hotel.reviewsCount || 120})</span>
                           </span>
                           <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs shadow-md flex items-center gap-1">

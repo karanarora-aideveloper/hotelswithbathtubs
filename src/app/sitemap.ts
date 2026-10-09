@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (!hotels.length) {
       await connectToDatabase();
       hotels = await Hotel.find({ flagged: { $ne: true } })
-        .select('country city slug name updatedAt -_id')
+        .select('country city slug name updatedAt image -_id')
         .lean();
     }
 
@@ -84,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: hotelUrl,
             lastModified: hotelUpdated,
             changeFrequency: 'weekly' as const,
-            priority: 0.65,
+            priority: 0.65, images: h.image ? [h.image] : undefined
           });
         }
       }

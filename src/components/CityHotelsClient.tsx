@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
@@ -25,6 +25,7 @@ type HotelData = {
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  airbnbUrl?: string;
   amenities: string[];
   description?: string;
   rating?: number;
@@ -91,8 +92,10 @@ export default function CityHotelsClient({
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'jacuzzi' | 'soaking' | 'tripled'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews'>('recommended');
-  const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury'>('all');
+  const [stayStyle, setStayStyle] = useState<'all' | 'luxury' | 'apartment' | 'boutique'>('all');
+  const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
+  const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
 
   // Deduplicate hotels by URL signature (same hotel added multiple times to DB)
   const uniqueHotels = useMemo(() => {
@@ -106,24 +109,25 @@ export default function CityHotelsClient({
   }, [hotels]);
 
   // Dynamically resolve currency symbol and thresholds based on city destination
-  const { currencySymbol, budgetMax, luxuryMin } = useMemo(() => {
+  const { currencySymbol, budgetMax, midMax, ultraMin } = useMemo(() => {
     for (const h of uniqueHotels) {
       const p = h.price || '';
-      if (p.includes('€')) return { currencySymbol: '€', budgetMax: 180, luxuryMin: 400 };
-      if (p.includes('£')) return { currencySymbol: '£', budgetMax: 150, luxuryMin: 350 };
-      if (p.includes('₹')) return { currencySymbol: '₹', budgetMax: 8000, luxuryMin: 22000 };
-      if (p.includes('¥')) return { currencySymbol: '¥', budgetMax: 25000, luxuryMin: 60000 };
-      if (p.includes('฿')) return { currencySymbol: '฿', budgetMax: 3000, luxuryMin: 9000 };
-      if (p.includes('RM')) return { currencySymbol: 'RM', budgetMax: 400, luxuryMin: 1200 };
-      if (p.includes('CHF')) return { currencySymbol: 'CHF', budgetMax: 250, luxuryMin: 600 };
-      if (p.includes('CA$')) return { currencySymbol: 'CA$', budgetMax: 220, luxuryMin: 500 };
-      if (p.includes('A$')) return { currencySymbol: 'A$', budgetMax: 250, luxuryMin: 550 };
+      if (p.includes('€')) return { currencySymbol: '€', budgetMax: 120, midMax: 240, ultraMin: 450 };
+      if (p.includes('£')) return { currencySymbol: '£', budgetMax: 100, midMax: 200, ultraMin: 400 };
+      if (p.includes('₹')) return { currencySymbol: '₹', budgetMax: 5000, midMax: 12000, ultraMin: 25000 };
+      if (p.includes('¥')) return { currencySymbol: '¥', budgetMax: 15000, midMax: 35000, ultraMin: 65000 };
+      if (p.includes('฿')) return { currencySymbol: '฿', budgetMax: 2000, midMax: 5000, ultraMin: 10000 };
+      if (p.includes('RM')) return { currencySymbol: 'RM', budgetMax: 250, midMax: 600, ultraMin: 1200 };
+      if (p.includes('CHF')) return { currencySymbol: 'CHF', budgetMax: 150, midMax: 300, ultraMin: 600 };
+      if (p.includes('CA$')) return { currencySymbol: 'CA$', budgetMax: 150, midMax: 300, ultraMin: 550 };
+      if (p.includes('A$')) return { currencySymbol: 'A$', budgetMax: 160, midMax: 320, ultraMin: 600 };
     }
     const isIndia = countryName === 'India';
     return {
       currencySymbol: isIndia ? '₹' : '$',
-      budgetMax: isIndia ? 8000 : 180,
-      luxuryMin: isIndia ? 22000 : 400,
+      budgetMax: isIndia ? 5000 : 120,
+      midMax: isIndia ? 12000 : 250,
+      ultraMin: isIndia ? 25000 : 450,
     };
   }, [uniqueHotels, countryName]);
 
@@ -162,15 +166,115 @@ export default function CityHotelsClient({
     );
   };
 
+  const isApartmentStay = (h: HotelData) => {
+    if (h.airbnbUrl) return true;
+    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
+    return (
+      text.includes('apartment') ||
+      text.includes('2bhk') ||
+      text.includes('1bhk') ||
+      text.includes('3bhk') ||
+      text.includes('flat') ||
+      text.includes('villa') ||
+      text.includes('bungalow') ||
+      text.includes('homestay') ||
+      text.includes('studio') ||
+      text.includes('entire home') ||
+      text.includes('b&b')
+    );
+  };
+
+  const isLuxuryHotelStay = (h: HotelData) => {
+    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
+    const p = parsePrice(h.price || '');
+    if (p >= ultraMin) return true;
+    return (
+      text.includes('5-star') ||
+      text.includes('five star') ||
+      text.includes('resort') ||
+      text.includes('palace') ||
+      text.includes('grand') ||
+      text.includes('taj') ||
+      text.includes('oberoi') ||
+      text.includes('leela') ||
+      text.includes('itc') ||
+      text.includes('marriott') ||
+      text.includes('hyatt') ||
+      text.includes('radisson') ||
+      text.includes('shangri-la') ||
+      text.includes('sofitel') ||
+      text.includes('hilton') ||
+      text.includes('kempinski') ||
+      text.includes('four seasons') ||
+      text.includes('st. regis') ||
+      text.includes('rosewood') ||
+      text.includes('ritz')
+    );
+  };
+
+  const isBoutiqueStay = (h: HotelData) => {
+    if (isApartmentStay(h)) return false;
+    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
+    return (
+      text.includes('boutique') ||
+      text.includes('manor') ||
+      text.includes('heritage') ||
+      text.includes('inn') ||
+      text.includes('suites') ||
+      text.includes('haveli') ||
+      text.includes('house') ||
+      text.includes('lodge') ||
+      (h.rating !== undefined && h.rating >= 4.4)
+    );
+  };
+
+  const matchesPerk = (h: HotelData, perk: string) => {
+    const ams = (h.amenities || []).join(' ').toLowerCase();
+    const desc = (h.description || '').toLowerCase();
+    const name = h.name.toLowerCase();
+    const text = `${name} ${desc} ${ams} ${h.roomType || ''}`.toLowerCase();
+
+    if (perk === 'couple') {
+      return (
+        text.includes('couple') ||
+        text.includes('romantic') ||
+        text.includes('honeymoon') ||
+        text.includes('private') ||
+        isJacuzziHotel(h)
+      );
+    }
+    if (perk === 'pool') {
+      return text.includes('pool') || text.includes('swimming');
+    }
+    if (perk === 'breakfast') {
+      return text.includes('breakfast') || ams.includes('breakfast');
+    }
+    if (perk === 'wifi') {
+      return text.includes('wifi') || text.includes('wi-fi') || text.includes('internet');
+    }
+    if (perk === 'agoda') {
+      return !!h.agodaUrl;
+    }
+    if (perk === 'airbnb') {
+      return !!h.airbnbUrl;
+    }
+    return true;
+  };
+
   const availableTubCategories = useMemo(() => {
-    const map = new Map<string, {emoji: string; color: string}>();
-    uniqueHotels.forEach(h => {
+    const map = new Map<string, { emoji: string; color: string; count: number }>();
+    uniqueHotels.forEach((h) => {
       if (h.tubType) {
         const norm = normalizeTubType(h.tubType);
-        map.set(norm.category, {emoji: norm.emoji, color: norm.color});
+        const existing = map.get(norm.category);
+        if (existing) {
+          existing.count++;
+        } else {
+          map.set(norm.category, { emoji: norm.emoji, color: norm.color, count: 1 });
+        }
       }
     });
-    return Array.from(map.entries()).map(([category, {emoji, color}]) => ({category, emoji, color}));
+    return Array.from(map.entries()).map(([category, { emoji, color, count }]) => ({ category, emoji, color, count }));
   }, [uniqueHotels]);
 
   // Counts for filter badges with zero false-negatives
@@ -182,35 +286,114 @@ export default function CityHotelsClient({
     return { all: uniqueHotels.length, jacuzzi, soaking, tripled };
   }, [uniqueHotels]);
 
+  const stayStyleCounts = useMemo(() => {
+    return {
+      all: uniqueHotels.length,
+      luxury: uniqueHotels.filter(isLuxuryHotelStay).length,
+      apartment: uniqueHotels.filter(isApartmentStay).length,
+      boutique: uniqueHotels.filter(isBoutiqueStay).length,
+    };
+  }, [uniqueHotels, ultraMin]);
+
+  const priceRangeCounts = useMemo(() => {
+    let budget = 0;
+    let mid = 0;
+    let luxury = 0;
+    let ultra = 0;
+    uniqueHotels.forEach((h) => {
+      const p = parsePrice(h.price || '');
+      if (p > 0) {
+        if (p < budgetMax) budget++;
+        else if (p <= midMax) mid++;
+        else if (p < ultraMin) luxury++;
+        else ultra++;
+      }
+    });
+    return { budget, mid, luxury, ultra };
+  }, [uniqueHotels, budgetMax, midMax, ultraMin]);
+
+  const perkCounts = useMemo(() => {
+    return {
+      couple: uniqueHotels.filter((h) => matchesPerk(h, 'couple')).length,
+      pool: uniqueHotels.filter((h) => matchesPerk(h, 'pool')).length,
+      breakfast: uniqueHotels.filter((h) => matchesPerk(h, 'breakfast')).length,
+      wifi: uniqueHotels.filter((h) => matchesPerk(h, 'wifi')).length,
+      agoda: uniqueHotels.filter((h) => matchesPerk(h, 'agoda')).length,
+      airbnb: uniqueHotels.filter((h) => matchesPerk(h, 'airbnb')).length,
+    };
+  }, [uniqueHotels]);
+
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (searchTerm.trim()) count++;
+    if (stayStyle !== 'all') count++;
+    if (selectedTubCategory !== 'all') count++;
+    if (priceRange !== 'all') count++;
+    if (selectedPerks.length > 0) count += selectedPerks.length;
+    if (sortBy !== 'recommended') count++;
+    return count;
+  }, [searchTerm, stayStyle, selectedTubCategory, priceRange, selectedPerks, sortBy]);
+
+  const togglePerk = (perk: string) => {
+    setSelectedPerks((prev) =>
+      prev.includes(perk) ? prev.filter((p) => p !== perk) : [...prev, perk]
+    );
+  };
+
   // Filtered hotels list
+  const [visibleCount, setVisibleCount] = useState(24);
+  const observerTarget = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Reset visible count when filters change
+    setVisibleCount(24);
+  }, [searchTerm, selectedFilter, selectedTubCategory, sortBy, priceRange, stayStyle, selectedPerks]);
+
   const filteredHotels = useMemo(() => {
     let result = uniqueHotels.filter((h) => {
       // Text search filter
       if (searchTerm.trim()) {
-        const matchesName = h.name.toLowerCase().includes(searchTerm.trim().toLowerCase());
-        const matchesAmenity = h.amenities?.some((a) =>
-          a.toLowerCase().includes(searchTerm.trim().toLowerCase())
-        );
-        if (!matchesName && !matchesAmenity) return false;
+        const q = searchTerm.trim().toLowerCase();
+        const matchesName = h.name.toLowerCase().includes(q);
+        const matchesNeighborhood = (h.neighborhood || '').toLowerCase().includes(q);
+        const matchesAmenity = h.amenities?.some((a) => a.toLowerCase().includes(q));
+        const matchesTub = (h.tubType || '').toLowerCase().includes(q);
+        if (!matchesName && !matchesNeighborhood && !matchesAmenity && !matchesTub) return false;
       }
 
-      // Category filter
+      // Stay Style filter
+      if (stayStyle === 'luxury' && !isLuxuryHotelStay(h)) return false;
+      if (stayStyle === 'apartment' && !isApartmentStay(h)) return false;
+      if (stayStyle === 'boutique' && !isBoutiqueStay(h)) return false;
+
+      // Category filter (legacy support)
       if (selectedFilter === 'jacuzzi' && !isJacuzziHotel(h)) return false;
       if (selectedFilter === 'soaking' && !isSoakingHotel(h)) return false;
       if (selectedFilter === 'tripled') {
         if (!(h.url && (h.agodaUrl || h.bookingUrl))) return false;
       }
 
+      // Bathtub Category filter
       if (selectedTubCategory !== 'all') {
         const norm = normalizeTubType(h.tubType);
         if (norm.category !== selectedTubCategory) return false;
       }
 
+      // Price Range filter
       if (priceRange !== 'all' && h.price) {
         const p = parsePrice(h.price);
-        if (priceRange === 'budget' && p >= budgetMax) return false;
-        if (priceRange === 'mid' && (p < budgetMax || p >= luxuryMin)) return false;
-        if (priceRange === 'luxury' && p < luxuryMin) return false;
+        if (p > 0) {
+          if (priceRange === 'budget' && p >= budgetMax) return false;
+          if (priceRange === 'mid' && (p < budgetMax || p >= midMax)) return false;
+          if (priceRange === 'luxury' && (p < midMax || p >= ultraMin)) return false;
+          if (priceRange === 'ultra' && p < ultraMin) return false;
+        }
+      }
+
+      // Perks & Deals multi-select filter
+      if (selectedPerks.length > 0) {
+        const matchesAll = selectedPerks.every((perk) => matchesPerk(h, perk));
+        if (!matchesAll) return false;
       }
 
       return true;
@@ -231,17 +414,54 @@ export default function CityHotelsClient({
     });
 
     return result;
-  }, [uniqueHotels, selectedFilter, searchTerm, selectedTubCategory, priceRange, sortBy, budgetMax, luxuryMin]);
+  }, [
+    uniqueHotels,
+    searchTerm,
+    stayStyle,
+    selectedTubCategory,
+    selectedFilter,
+    priceRange,
+    selectedPerks,
+    sortBy,
+    budgetMax,
+    midMax,
+    ultraMin,
+  ]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => Math.min(prev + 24, filteredHotels.length));
+        }
+      },
+      { rootMargin: '400px' }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => observer.disconnect();
+  }, [filteredHotels.length]);
 
   // Track dead-end filter pain point (when filter/search yields 0 hotels)
   useEffect(() => {
-    if (filteredHotels.length === 0 && (selectedFilter !== 'all' || searchTerm.trim() || selectedTubCategory !== 'all' || priceRange !== 'all')) {
+    if (
+      filteredHotels.length === 0 &&
+      (selectedFilter !== 'all' ||
+        searchTerm.trim() ||
+        selectedTubCategory !== 'all' ||
+        priceRange !== 'all' ||
+        stayStyle !== 'all' ||
+        selectedPerks.length > 0)
+    ) {
       const timer = setTimeout(() => {
-        recordFilterDeadEnd(selectedFilter, searchTerm.trim(), cityName);
+        recordFilterDeadEnd(stayStyle !== 'all' ? stayStyle : selectedTubCategory !== 'all' ? selectedTubCategory : selectedFilter, searchTerm.trim(), cityName);
       }, 750);
       return () => clearTimeout(timer);
     }
-  }, [filteredHotels.length, selectedFilter, searchTerm, cityName, selectedTubCategory, priceRange]);
+  }, [filteredHotels.length, selectedFilter, searchTerm, cityName, selectedTubCategory, priceRange, stayStyle, selectedPerks]);
 
   // Track hotel card impressions as cards enter the viewport
   useEffect(() => {
@@ -287,9 +507,11 @@ export default function CityHotelsClient({
 
   const handleResetFilters = () => {
     setSelectedFilter('all');
-    setSearchTerm('');
-    setPriceRange('all');
+    setStayStyle('all');
     setSelectedTubCategory('all');
+    setPriceRange('all');
+    setSelectedPerks([]);
+    setSearchTerm('');
     setSortBy('recommended');
     recordFilterReset(cityName);
     try {
@@ -300,13 +522,14 @@ export default function CityHotelsClient({
   };
 
   // Detect what kind of URL is stored in any booking field
-  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | null;
+  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | null;
   function getUrlProvider(url?: string): UrlProvider {
     if (!url) return null;
     const lower = url.toLowerCase();
     if (lower.includes('makemytrip.com')) return 'makemytrip';
     if (lower.includes('booking.com')) return 'booking';
     if (lower.includes('agoda.com')) return 'agoda';
+    if (lower.includes('airbnb')) return 'airbnb';
     if (lower.includes('trivago')) return 'trivago';
     if (lower.includes('tripadvisor')) return 'tripadvisor';
     if (lower.includes('google.com')) return 'google';
@@ -344,6 +567,13 @@ export default function CityHotelsClient({
           ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
           : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
       },
+      airbnb: { 
+        label: 'Check on Airbnb', 
+        source: 'Airbnb', 
+        className: isPrimary 
+          ? 'bg-[#ff5a5f] hover:bg-[#e04c51] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
       trivago: { 
         label: 'Compare on Trivago', 
         source: 'Trivago', 
@@ -372,108 +602,269 @@ export default function CityHotelsClient({
 
   return (
     <div>
-      {/* Interactive Bathtub & Feature Filters */}
-      <div className="bg-white px-4 py-3 rounded-xl border border-gray-200 shadow-sm mb-4 flex flex-col gap-4 w-full min-w-0">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full min-w-0">
-          {/* Quick Hotel Name / Amenity Search */}
-          <div className="w-full md:w-64 relative flex-shrink-0">
+      {/* Comprehensive Multi-Layer Hotel & Bathtub Filters */}
+      <div className="bg-white px-4 py-4 sm:px-5 sm:py-5 rounded-2xl border border-gray-200 shadow-sm mb-6 flex flex-col gap-3.5 w-full">
+        {/* Row 1: Search, Sort & Reset Bar */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 w-full">
+          {/* Quick Hotel Name / Neighborhood Search */}
+          <div className="w-full md:w-72 relative shrink-0">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search hotel name..."
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#1a6fde] focus:bg-white transition-all"
+              placeholder={`Search ${cityName} hotels, areas...`}
+              className="w-full pl-9 pr-8 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1a6fde] focus:bg-white focus:ring-2 focus:ring-[#1a6fde]/20 transition-all"
             />
-            <svg className="w-4 h-4 text-gray-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <svg className="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-2.5 text-xs text-gray-500 hover:text-gray-900"
+                className="absolute right-2.5 top-2.5 text-xs text-gray-400 hover:text-gray-700 w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-200 transition-colors"
+                title="Clear search"
               >
                 ✕
               </button>
             )}
           </div>
 
-          {/* Sort Buttons */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full md:w-auto">
+          {/* Sort Buttons + Clear */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden lg:inline mr-1">Sort:</span>
             <button
               onClick={() => setSortBy('recommended')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'recommended' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'recommended' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
             >
               Recommended
             </button>
             <button
               onClick={() => setSortBy('price_asc')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'price_asc' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'price_asc' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
             >
               Price ↑
             </button>
             <button
+              onClick={() => setSortBy('price_desc')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'price_desc' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+            >
+              Price ↓
+            </button>
+            <button
               onClick={() => setSortBy('rating')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border flex-shrink-0 ${sortBy === 'rating' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'rating' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
             >
               Top Rated
+            </button>
+            <button
+              onClick={() => setSortBy('reviews')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'reviews' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
+            >
+              Most Reviewed
+            </button>
+
+            {activeFilterCount > 0 && (
+              <button
+                onClick={handleResetFilters}
+                className="ml-auto md:ml-2 px-3 py-1.5 rounded-full text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-all flex items-center gap-1 shrink-0"
+                title="Reset all filters"
+              >
+                <span>✕</span>
+                <span>Reset ({activeFilterCount})</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Row 2: Stay Type Filter */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+            Stay Type:
+          </span>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <button
+              onClick={() => setStayStyle('all')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                stayStyle === 'all'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              All Stays ({uniqueHotels.length})
+            </button>
+            <button
+              onClick={() => setStayStyle('luxury')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                stayStyle === 'luxury'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              🏨 5-Star &amp; Luxury ({stayStyleCounts.luxury})
+            </button>
+            <button
+              onClick={() => setStayStyle('apartment')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                stayStyle === 'apartment'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              🏡 Entire Apartments &amp; Villas ({stayStyleCounts.apartment})
+            </button>
+            <button
+              onClick={() => setStayStyle('boutique')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                stayStyle === 'boutique'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              ✨ Boutique Stays ({stayStyleCounts.boutique})
             </button>
           </div>
         </div>
 
-        {/* Tub Category Filter Row */}
+        {/* Row 3: Bathtub Category Filter */}
         {availableTubCategories.length > 0 && (
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full py-1">
-            <button
-              onClick={() => setSelectedTubCategory('all')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${selectedTubCategory === 'all' ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-white text-gray-600 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'}`}
-            >
-              All Types
-            </button>
-            {availableTubCategories.map(cat => (
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+              Bathtub:
+            </span>
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
               <button
-                key={cat.category}
-                onClick={() => setSelectedTubCategory(cat.category)}
-                className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 ${selectedTubCategory === cat.category ? 'bg-[#1a6fde] text-white border-[#1a6fde]' : 'bg-white text-gray-600 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'}`}
+                onClick={() => setSelectedTubCategory('all')}
+                className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                  selectedTubCategory === 'all'
+                    ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                    : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+                }`}
               >
-                <span>{cat.emoji}</span> {cat.category}
+                All Tub Types
               </button>
-            ))}
+              {availableTubCategories.map((cat) => (
+                <button
+                  key={cat.category}
+                  onClick={() => setSelectedTubCategory(cat.category)}
+                  className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+                    selectedTubCategory === cat.category
+                      ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+                  }`}
+                >
+                  <span>{cat.emoji}</span>
+                  <span>{cat.category}</span>
+                  <span className="text-[10px] opacity-75">({cat.count})</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Price Filter Row */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full py-1">
-          <button
-            onClick={() => setPriceRange('all')}
-            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'all' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
-          >
-            All Prices
-          </button>
-          <button
-            onClick={() => setPriceRange('budget')}
-            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'budget' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
-          >
-            Budget ({"<"} {currencySymbol}{budgetMax.toLocaleString()})
-          </button>
-          <button
-            onClick={() => setPriceRange('mid')}
-            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'mid' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
-          >
-            Mid-range ({currencySymbol}{budgetMax.toLocaleString()} - {currencySymbol}{luxuryMin.toLocaleString()})
-          </button>
-          <button
-            onClick={() => setPriceRange('luxury')}
-            className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex-shrink-0 ${priceRange === 'luxury' ? 'bg-gray-900 text-white border-gray-900' : 'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200'}`}
-          >
-            Luxury ({currencySymbol}{luxuryMin.toLocaleString()}+)
-          </button>
+        {/* Row 4: Price Range Filter */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+            Price:
+          </span>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <button
+              onClick={() => setPriceRange('all')}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                priceRange === 'all'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              All Prices
+            </button>
+            <button
+              onClick={() => setPriceRange('budget')}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                priceRange === 'budget'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              Budget (&lt; {currencySymbol}{budgetMax.toLocaleString()})
+              {priceRangeCounts.budget > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.budget})</span>}
+            </button>
+            <button
+              onClick={() => setPriceRange('mid')}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                priceRange === 'mid'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              Mid-range ({currencySymbol}{budgetMax.toLocaleString()} - {currencySymbol}{midMax.toLocaleString()})
+              {priceRangeCounts.mid > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.mid})</span>}
+            </button>
+            <button
+              onClick={() => setPriceRange('luxury')}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                priceRange === 'luxury'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              Luxury ({currencySymbol}{midMax.toLocaleString()} - {currencySymbol}{ultraMin.toLocaleString()})
+              {priceRangeCounts.luxury > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.luxury})</span>}
+            </button>
+            <button
+              onClick={() => setPriceRange('ultra')}
+              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
+                priceRange === 'ultra'
+                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              Ultra-Luxury ({currencySymbol}{ultraMin.toLocaleString()}+)
+              {priceRangeCounts.ultra > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.ultra})</span>}
+            </button>
+          </div>
+        </div>
+
+        {/* Row 5: Perks & Deals Multi-Select Toggles */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+            Perks &amp; Deals:
+          </span>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            {[
+              { id: 'couple', label: '💑 Couple Friendly', count: perkCounts.couple },
+              { id: 'pool', label: '🏊 Swimming Pool', count: perkCounts.pool },
+              { id: 'breakfast', label: '🍳 Breakfast Included', count: perkCounts.breakfast },
+              { id: 'wifi', label: '📶 Free WiFi', count: perkCounts.wifi },
+              { id: 'agoda', label: '⚡ Agoda Deals', count: perkCounts.agoda },
+              { id: 'airbnb', label: '🏠 Airbnb Stays', count: perkCounts.airbnb },
+            ]
+              .filter((p) => p.count > 0)
+              .map((p) => {
+                const isSelected = selectedPerks.includes(p.id);
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => togglePerk(p.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                        : 'bg-white text-gray-700 border-gray-200 hover:border-emerald-500 hover:text-emerald-700'
+                    }`}
+                  >
+                    <span>{p.label}</span>
+                    <span className="text-[10px] opacity-75">({p.count})</span>
+                    {isSelected && <span className="text-white text-[11px] ml-0.5">✓</span>}
+                  </button>
+                );
+              })}
+          </div>
         </div>
       </div>
 
       {/* Matchmaker Discovery Callout */}
       <div className="bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-blue-50/80 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-lg flex-shrink-0 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-lg shrink-0 shadow-xs">
             ✨
           </div>
           <div>
@@ -487,15 +878,15 @@ export default function CityHotelsClient({
         </div>
         <Link
           href="/matchmaker"
-          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md whitespace-nowrap flex-shrink-0"
+          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md whitespace-nowrap shrink-0"
         >
           Open Matchmaker &rarr;
         </Link>
       </div>
 
       {/* Booking Verification Tip Banner */}
-      <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-3.5 sm:p-5 mb-8 flex items-start gap-3 shadow-2xs">
-        <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+      <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-3.5 sm:p-5 mb-6 flex items-start gap-3 shadow-2xs">
+        <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
           <span className="text-base">💡</span>
         </div>
         <div className="text-xs sm:text-sm text-amber-900 leading-relaxed">
@@ -504,22 +895,86 @@ export default function CityHotelsClient({
         </div>
       </div>
 
+      {/* Active Filter Chips & Results Count Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 px-1">
+        <div className="text-xs sm:text-sm text-gray-700 font-medium">
+          Showing <strong className="text-gray-900 font-black">{filteredHotels.length}</strong> of{' '}
+          <span className="text-gray-500">{uniqueHotels.length} verified stays</span> in{' '}
+          <span className="font-semibold text-gray-900">{cityName}</span>
+          {activeFilterCount > 0 && <span className="text-[#1a6fde] font-semibold ml-1.5">(matching filters)</span>}
+        </div>
+
+        {/* Active filter removable pills */}
+        {activeFilterCount > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {stayStyle !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
+                <span>{stayStyle === 'luxury' ? '🏨 Luxury' : stayStyle === 'apartment' ? '🏡 Apartments' : '✨ Boutique'}</span>
+                <button onClick={() => setStayStyle('all')} className="hover:text-rose-600 ml-0.5">✕</button>
+              </span>
+            )}
+            {selectedTubCategory !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-[#1a6fde]">
+                <span>{selectedTubCategory}</span>
+                <button onClick={() => setSelectedTubCategory('all')} className="hover:text-rose-600 ml-0.5">✕</button>
+              </span>
+            )}
+            {priceRange !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800 capitalize">
+                <span>{priceRange} Price</span>
+                <button onClick={() => setPriceRange('all')} className="hover:text-rose-600 ml-0.5">✕</button>
+              </span>
+            )}
+            {selectedPerks.map((perk) => {
+              const labels: Record<string, string> = {
+                couple: '💑 Couple Friendly',
+                pool: '🏊 Swimming Pool',
+                breakfast: '🍳 Breakfast',
+                wifi: '📶 Free WiFi',
+                agoda: '⚡ Agoda Deals',
+                airbnb: '🏠 Airbnb Stays',
+              };
+              return (
+                <span key={perk} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800">
+                  <span>{labels[perk] || perk}</span>
+                  <button onClick={() => togglePerk(perk)} className="hover:text-rose-600 ml-0.5">✕</button>
+                </span>
+              );
+            })}
+            {searchTerm.trim() && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-900">
+                <span>&ldquo;{searchTerm}&rdquo;</span>
+                <button onClick={() => setSearchTerm('')} className="hover:text-rose-600 ml-0.5">✕</button>
+              </span>
+            )}
+            <button
+              onClick={handleResetFilters}
+              className="text-xs font-bold text-gray-500 hover:text-rose-600 underline ml-1 cursor-pointer"
+            >
+              Clear all
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Hotel Cards Grid */}
       {filteredHotels.length > 0 ? (
+        <>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-          {filteredHotels.map((h, i) => {
+          {filteredHotels.slice(0, visibleCount).map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
               makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda',
-              trivago: 'Trivago', tripadvisor: 'TripAdvisor', google: '',
+              trivago: 'Trivago', tripadvisor: 'TripAdvisor', google: '', airbnb: 'Airbnb',
             };
             const verifiedSources = [
               ...(h.url ? [providerLabel[getUrlProvider(h.url) ?? 'google']].filter(Boolean) : []),
               ...(h.agodaUrl ? [providerLabel[getUrlProvider(h.agodaUrl) ?? 'google']].filter(Boolean) : []),
               ...(h.bookingUrl ? [providerLabel[getUrlProvider(h.bookingUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.airbnbUrl ? [providerLabel[getUrlProvider(h.airbnbUrl) ?? 'google']].filter(Boolean) : []),
             ].filter((v, i, a) => a.indexOf(v) === i); // dedupe
 
             const isIndia = countryName.toLowerCase() === 'india';
-            const rawUrls = [h.bookingUrl, h.agodaUrl, h.url]
+            const rawUrls = [h.airbnbUrl, h.bookingUrl, h.agodaUrl, h.url]
               .filter((u): u is string => !!u)
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
             
@@ -567,7 +1022,7 @@ export default function CityHotelsClient({
 
                   {/* Pinterest Save Button */}
                   <a
-                    href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(h.image))}&description=${encodeURIComponent(`${h.name} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
+                    href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(h.image))}&description=${encodeURIComponent(`${h.name} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="absolute top-3 right-3 bg-red-600/95 hover:bg-red-700 text-white text-[11px] font-bold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full shadow-md flex items-center gap-1 z-10 transition-all opacity-90 sm:opacity-0 group-hover:opacity-100"
@@ -674,18 +1129,20 @@ export default function CityHotelsClient({
 
                   {/* Price & CTA Buttons */}
                   <div className="pt-2.5 border-t border-gray-100 mt-auto">
-                    {h.price && (
-                      <div className="flex items-baseline justify-between mb-2">
-                        <div>
-                          <span className="text-[10px] text-gray-400 font-medium block leading-none mb-0.5">Starting from</span>
-                          <span className="text-base sm:text-[17px] font-black text-gray-900">{h.price}</span>
-                          <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>
+                    <div className="flex items-baseline justify-between mb-2">
+                      <div>
+                        <span className="text-[10px] text-gray-400 font-medium block leading-none mb-0.5">Usual Rate</span>
+                        <div className="flex items-baseline">
+                          <span className="text-base sm:text-[17px] font-black text-gray-900">
+                            {h.price ? (h.price.startsWith('~') ? h.price : `~${h.price}`) : 'Rates on Partner'}
+                          </span>
+                          {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
                         </div>
-                        <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-[11px] font-bold text-[#1a6fde] hover:underline">
-                          View Details &rarr;
-                        </Link>
                       </div>
-                    )}
+                      <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-[11px] font-bold text-[#1a6fde] hover:underline">
+                        View Details &rarr;
+                      </Link>
+                    </div>
 
                     <div className="flex flex-col gap-1.5">
                       {sortedUrls.map((u, idx) => (
@@ -698,20 +1155,28 @@ export default function CityHotelsClient({
             );
           })}
         </div>
+        {visibleCount < filteredHotels.length && (
+          <div ref={observerTarget} className="w-full h-20 flex items-center justify-center mt-8">
+            <div className="w-6 h-6 border-2 border-[#1a6fde] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
+        </>
       ) : (
-        <div className="bg-white border border-border rounded-2xl p-12 text-center max-w-lg mx-auto">
-          <p className="text-3xl mb-3">🛁</p>
-          <h3 className="font-heading text-lg font-bold text-accent-secondary mb-2">
-            No hotels match your filter
+        <div className="bg-white border border-gray-200 rounded-2xl p-10 sm:p-14 text-center max-w-lg mx-auto shadow-sm my-8">
+          <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-blue-50 text-[#1a6fde] flex items-center justify-center text-2xl shadow-xs">
+            🛁
+          </div>
+          <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mb-2">
+            No hotels match your filters
           </h3>
-          <p className="text-xs text-text-muted mb-4">
-            Try resetting your bathtub filter or clearing the search keyword.
+          <p className="text-xs sm:text-sm text-gray-500 mb-6 leading-relaxed">
+            We couldn&apos;t find any stays in {cityName} matching all selected filters. Try broadening your criteria or resetting to explore all {uniqueHotels.length} verified stays.
           </p>
           <button
             onClick={handleResetFilters}
-            className="px-4 py-2 bg-accent text-white font-bold rounded-xl text-xs shadow-sm hover:bg-accent-hover transition-colors"
+            className="px-5 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all cursor-pointer"
           >
-            Reset Filters
+            Reset All Filters {activeFilterCount > 0 ? `(${activeFilterCount})` : ''}
           </button>
         </div>
       )}

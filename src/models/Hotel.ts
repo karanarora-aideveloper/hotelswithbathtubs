@@ -8,6 +8,7 @@ export interface IHotel extends mongoose.Document {
   url: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  airbnbUrl?: string;
   image: string;
   verified: boolean;
   flagged?: boolean;
@@ -53,6 +54,9 @@ const HotelSchema = new mongoose.Schema<IHotel>({
     required: true,
   },
   agodaUrl: {
+    type: String,
+  },
+  airbnbUrl: {
     type: String,
   },
   bookingUrl: {

@@ -48,3 +48,4 @@ __pycache__/
 .wrangler/
 .cache/
 public/pins/
+*.apk

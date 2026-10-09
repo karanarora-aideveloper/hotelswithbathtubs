@@ -33,6 +33,10 @@ export default function ProgressiveImage({
   const [imgError, setImgError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  useEffect(() => {
+    setImgError(false);
+  }, [src]);
+
   const resolvedUrl = imgError ? DEFAULT_HOTEL_IMAGE : imageUrl(src);
   const [isLoaded, setIsLoaded] = useState<boolean>(() => loadedImageCache.has(resolvedUrl));
 

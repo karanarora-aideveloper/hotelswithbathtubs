@@ -10,6 +10,10 @@ type CityItem = {
   _id: { city: string; country: string };
   hotelCount: number;
   image: string;
+  minPrice?: string;
+  rating?: number;
+  totalReviews?: number;
+  hasJacuzzi?: boolean;
 };
 
 interface HomeDestinationsClientProps {
@@ -155,6 +159,10 @@ function FlashDestinationSection({
             image={item.image}
             isInternational={isInternational}
             priority={false}
+            minPrice={item.minPrice}
+            rating={item.rating}
+            totalReviews={item.totalReviews}
+            hasJacuzzi={item.hasJacuzzi}
           />
         ))}
 
@@ -545,6 +553,10 @@ export default function HomeDestinationsClient({
                     image={item.image}
                     isInternational={item._id.country.toLowerCase() !== 'india'}
                     priority={false}
+                    minPrice={item.minPrice}
+                    rating={item.rating}
+                    totalReviews={item.totalReviews}
+                    hasJacuzzi={item.hasJacuzzi}
                   />
                 ))}
               </div>
