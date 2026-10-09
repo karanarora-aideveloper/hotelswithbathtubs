@@ -981,9 +981,13 @@ export default function CityHotelsClient({
             const sortedUrls = [...rawUrls].sort((a, b) => {
               const provA = getUrlProvider(a);
               const provB = getUrlProvider(b);
+              if (h.airbnbUrl && !h.bookingUrl && !h.agodaUrl) {
+                if (provA === 'airbnb') return -1;
+                if (provB === 'airbnb') return 1;
+              }
               const priority: Record<string, number> = isIndia
-                ? { makemytrip: 1, agoda: 2, booking: 3, trivago: 4, tripadvisor: 5 }
-                : { booking: 1, agoda: 2, trivago: 3, tripadvisor: 4, makemytrip: 5 };
+                ? { makemytrip: 1, agoda: 2, booking: 3, airbnb: 4, trivago: 5, tripadvisor: 6 }
+                : { booking: 1, agoda: 2, airbnb: 3, trivago: 4, tripadvisor: 5, makemytrip: 6 };
               return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
             });
 

@@ -153,28 +153,33 @@ export default function HotelAnalyticsComparison({
   }
 
   // Airbnb Platform
-  const airbnbUrl = hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb') ? hotel.url : undefined);
-  if (airbnbUrl) {
-    const airbnbUsual = Math.round(numericBase * 0.92);
-    platforms.push({
-      id: 'airbnb',
-      name: 'Airbnb',
-      badge: 'Direct Host Booking & Entire Space',
-      badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
-      logoBg: 'bg-[#ff5a5f] text-white',
-      buttonBg: 'bg-[#ff5a5f] hover:bg-[#e04c51] text-white',
-      url: airbnbUrl,
-      source: 'Airbnb',
-      usualRate: fmt(airbnbUsual),
-      usualNote: 'Typical Entire Space Rate',
-      perks: [
-        'Full private apartment with dedicated kitchen',
-        'Direct messaging with verified Superhost',
-        'Maximum privacy with self check-in smart lock',
-      ],
-      isLowest: true,
-    });
-  }
+  const hasDirectAirbnb = !!(hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb')));
+  const airbnbUrl = hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb') ? hotel.url : undefined) ||
+    `https://www.airbnb.com/s/${encodeURIComponent(cityName)}--${encodeURIComponent(countryName)}/homes?amenities%5B%5D=61&query=${encodeURIComponent(hotel.name)}`;
+
+  const airbnbUsual = Math.round(numericBase * 0.92);
+  platforms.push({
+    id: 'airbnb',
+    name: 'Airbnb',
+    badge: hasDirectAirbnb ? 'Direct Host Booking & Entire Space' : 'Explore Bathtub Stays & Suites',
+    badgeColor: 'bg-rose-50 text-rose-700 border-rose-200',
+    logoBg: 'bg-[#ff5a5f] text-white',
+    buttonBg: 'bg-[#ff5a5f] hover:bg-[#e04c51] text-white',
+    url: airbnbUrl,
+    source: 'Airbnb',
+    usualRate: fmt(airbnbUsual),
+    usualNote: hasDirectAirbnb ? 'Typical Entire Space Rate' : 'Alternative Homestay Benchmark',
+    perks: hasDirectAirbnb ? [
+      'Full private apartment with dedicated kitchen',
+      'Direct messaging with verified Superhost',
+      'Maximum privacy with self check-in smart lock',
+    ] : [
+      `Search private in-room bathtubs in ${cityName}`,
+      'Direct host messaging & local hospitality',
+      'Instant cancellation on select romantic suites',
+    ],
+    isLowest: hasDirectAirbnb,
+  });
 
   // Tub Classification
   const tubName = hotel.tubType || 'Private En-Suite Soaking Bathtub';
