@@ -752,6 +752,125 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // India - Mulshi
+  'mulshi-india': {
+    intro: 'Mulshi in the Sahyadri mountains is renowned for tranquil lake reflections, misty valleys, and romantic island retreats. Discover private island cottages and lakeside resorts featuring deep soaking bathtubs and private jacuzzis.',
+    amenities: [
+      'Private island elevated wooden cottages with soaking tubs',
+      'Lake-facing luxury suites with private jacuzzi bathtubs',
+      'Unobstructed Sahyadri mountain and water reflections',
+      'Organic lakeside dining and infinity pools'
+    ],
+    whyChoose: [
+      'Top romantic weekend sanctuary from Mumbai and Pune',
+      'Rare private island seclusion at Jalsrushti Island Resort',
+      'Cool mountain climate ideal for hot baths and jacuzzi soaks',
+      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+    ]
+  },
+
+  // India - Tawang
+  'tawang-india': {
+    intro: 'Tawang, perched 10,000 feet in the Eastern Himalayas of Arunachal Pradesh, is crowned by ancient Buddhist monasteries and snow peaks. Stay in heated five-star suites with deep marble soaking bathtubs facing Tawang Monastery.',
+    amenities: [
+      'Heated luxury suites with deep marble mountain-view bathtubs',
+      'Dramatic views of the 17th-century Tawang Monastery',
+      'Indoor heated swimming pool and alpine wellness spa',
+      'Traditional Himalayan architecture and authentic local cuisine'
+    ],
+    whyChoose: [
+      'India\'s ultimate high-altitude Eastern Himalayan frontier',
+      'Five-star luxury at Vivanta Arunachal Pradesh Tawang',
+      'Warm en-suite soaking tubs after high-altitude mountain passes',
+      'Verified heating and hot water guarantees for freezing weather'
+    ]
+  },
+
+  // India - Dwarka
+  'dwarka-india': {
+    intro: 'Dwarka, the sacred kingdom of Lord Krishna on the Arabian Sea, blends ancient coastal spirituality with modern comfort. Enjoy private villa suites featuring deep soaking bathtubs and private patio gardens.',
+    amenities: [
+      'Executive villa suites with deep en-suite soaking bathtubs',
+      'Private garden patios and outdoor swimming pools',
+      'Pure vegetarian culinary offerings and temple shuttles',
+      'Proximity to holy Gomti Ghat and Dwarkadhish Temple'
+    ],
+    whyChoose: [
+      'Sacred Char Dham pilgrimage destination on the coast',
+      'Quiet villa resort environments providing peaceful couple stays',
+      'Verified in-room bathtubs for relaxing temple visits',
+      'Direct links with transparent partner pricing'
+    ]
+  },
+
+  // India - Somnath
+  'somnath-india': {
+    intro: 'Somnath, home of the first eternal Jyotirlinga on the shores of the Arabian Sea, offers seaside spirituality and luxury. Discover suites with marble bathtubs and sunset sea breezes.',
+    amenities: [
+      'Royal suites with deep en-suite marble bathtubs',
+      'Arabian Sea coastal breezes and temple access',
+      'Spa facilities and vegetarian dining',
+      'Free high-speed WiFi and airport/station transfers'
+    ],
+    whyChoose: [
+      'First among the twelve sacred Shiva Jyotirlingas',
+      'Coastline resort environments with guaranteed private tubs',
+      'Triple-verified across leading travel platforms',
+      'Transparent booking with verified room categories'
+    ]
+  },
+
+  // India - Jabalpur
+  'jabalpur-india': {
+    intro: 'Jabalpur in Madhya Pradesh is world-famous for the soaring Marble Rocks of Bhedaghat on the Narmada River. Experience five-star presidential suites equipped with private hydrotherapy jacuzzis and deep soaking bathtubs.',
+    amenities: [
+      'Private hydrotherapy jacuzzis in presidential suites',
+      'Deep marble soaking bathtubs and rain showers',
+      'Proximity to Dhuandhar Falls and Marble Rocks boat rides',
+      'Full-service luxury wellness spas and pools'
+    ],
+    whyChoose: [
+      'Natural world wonder of white marble river gorges',
+      'Five-star luxury amenities with in-room whirlpool baths',
+      'Gateway to Kanha and Bandhavgarh tiger reserves',
+      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+    ]
+  },
+
+  // India - Bodh Gaya
+  'bodh-gaya-india': {
+    intro: 'Bodh Gaya, where Gautama Buddha attained enlightenment under the Bodhi Tree, offers serene architecture and five-star hospitality. Unwind in presidential suites with deep marble soaking bathtubs.',
+    amenities: [
+      'Deep marble soaking bathtubs in stupa-inspired architecture',
+      'Serene water bodies and tranquil meditation gardens',
+      'Full-service wellness spas and vegetarian dining',
+      'Proximity to UNESCO World Heritage Mahabodhi Temple'
+    ],
+    whyChoose: [
+      'World-famous spiritual enlightenment destination',
+      'Peaceful architecture designed for mindful relaxation',
+      'Guaranteed private bathtubs for tranquil contemplation',
+      'Seamless multi-platform booking with verified rates'
+    ]
+  },
+
+  // India - Samode
+  'samode-india': {
+    intro: 'Samode, located 40 km north of Jaipur, is home to a 475-year-old royal palace famous for exquisite Sheesh Mahal frescoes. Experience regal palace suites with hand-carved marble bathtubs and royal courtyards.',
+    amenities: [
+      'Hand-carved marble bathtubs in 475-year-old palace suites',
+      'Priceless frescoed walls and Sheesh Mahal mirror work',
+      'Rooftop swimming pools and royal courtyard feasts',
+      'Aravalli mountain views and camel safaris'
+    ],
+    whyChoose: [
+      'One of Rajasthan\'s most magnificent restored royal palaces',
+      'Total privacy and romance in historical heritage bedchambers',
+      'World-famous luxury heritage landmark for honeymoons',
+      'Triple-verified room tiers with guaranteed private tubs'
+    ]
+  },
+
   // India - Delhi
   'delhi-india': {
     intro: 'Delhi, the historic capital, offers premier 5-star luxury and boutique retreats with private in-room bathtubs and jacuzzis for couples and staycationers.',
