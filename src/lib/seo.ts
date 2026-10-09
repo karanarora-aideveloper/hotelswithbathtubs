@@ -4794,6 +4794,431 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // India - Ayodhya
+  'ayodhya-india': {
+    intro: 'Ayodhya, the sacred city along the holy Saryu River, offers newly developed luxury accommodations and spiritual retreats. Unwind in royal suites featuring private indoor jacuzzis and deep soaking bathtubs after visiting Ram Janmabhoomi and attending evening aartis.',
+    amenities: [
+      'Private in-room jacuzzi and hydrotherapy suites',
+      'Freestanding designer soaking bathtubs',
+      'Peaceful riverfront and temple garden vistas',
+      'Complimentary temple transfer and darshan assistance'
+    ],
+    whyChoose: [
+      'Top spiritual and cultural pilgrimage destination in North India',
+      'New generation of five-star and boutique luxury stays',
+      'Serene evening Saryu River aarti and historic temples',
+      'Triple-verified in-room bathtub amenities across major OTAs'
+    ]
+  },
+
+  // India - Prayagraj
+  'prayagraj-india': {
+    intro: 'Prayagraj (Allahabad), home to the sacred Triveni Sangam, features heritage hotels and modern five-star properties with oversized marble bathtubs and deep soaking tubs in historic Civil Lines and Cantonment.',
+    amenities: [
+      'Oversized marble soaking bathtubs in presidential suites',
+      'Kaya Kalp and Ayurvedic wellness spa treatments',
+      'Historic British-era colonial architecture and lush lawns',
+      'Fine Awadhi and North Indian gourmet dining'
+    ],
+    whyChoose: [
+      'Iconic meeting point of Ganga, Yamuna, and mythical Saraswati',
+      'Historic Anand Bhavan and Allahabad Fort heritage circuits',
+      'Spacious five-star suites designed for peaceful rest',
+      'Individually confirmed bathtub suites across verified travel partners'
+    ]
+  },
+
+  // India - Vrindavan
+  'vrindavan-india': {
+    intro: 'Vrindavan is the sacred heart of Braj culture, where spiritual devotion meets serene hospitality. Indulge in royal suites featuring private whirlpool jacuzzis and deep soaking bathtubs close to Prem Mandir and Banke Bihari.',
+    amenities: [
+      'Private terrace whirlpool jacuzzis with temple skyline views',
+      'En-suite spa bathtubs and private steam saunas',
+      'Pure vegetarian gourmet dining and sattvic breakfast',
+      'Courtyard fountains and fragrant tulsi gardens'
+    ],
+    whyChoose: [
+      'Premier spiritual getaway destination in Uttar Pradesh',
+      'Boutique palace resorts offering tranquil couple retreats',
+      'Close proximity to Prem Mandir, ISKCON, and Banke Bihari',
+      'Verified in-room hot tub and bath amenities guaranteed'
+    ]
+  },
+
+  // India - Nandi Hills
+  'nandi-hills-india': {
+    intro: 'Nandi Hills, Bangalore’s favorite mountain sanctuary, offers misty sunrise vistas and ultra-luxury hillside golf villas featuring private heated outdoor jacuzzis and deep marble soaking bathtubs.',
+    amenities: [
+      'Private heated outdoor jacuzzis overlooking mist-clad hills',
+      'Deep marble bathtubs with panoramic valley windows',
+      'Championship 18-hole golf course and luxury spa',
+      'Private plunge pools and open-air rain showers'
+    ],
+    whyChoose: [
+      'Quick romantic mountain escape just 45 minutes from Bangalore Airport',
+      'World-class golf and wellness resorts with scenic cliff views',
+      'Crisp hillside air, paragliding, and historic Tipu’s Drop',
+      'Guaranteed private jacuzzis verified across international platforms'
+    ]
+  },
+
+  // India - Tirthan Valley
+  'tirthan-valley-india': {
+    intro: 'Tirthan Valley and Jibhi are Himachal Pradesh’s hidden mountain gems bordering Great Himalayan National Park. Experience elevated cedarwood treehouses with private panoramic jacuzzis and riverfront chalets with designer bathtubs.',
+    amenities: [
+      'Private glass-enclosed treehouse jacuzzis with snow-peak views',
+      'Freestanding tubs beside picture windows framing pine forests',
+      'Riverside apple orchard chalets with cedarwood hot tubs',
+      'Trout fishing streams and starry alpine night skies'
+    ],
+    whyChoose: [
+      'Pristine UNESCO-protected nature reserve away from commercial hill crowds',
+      'Unique boutique treehouse and chalet architecture with private tubs',
+      'Ideal base for Jalori Pass and Serolsar Lake treks',
+      'Triple-verified mountain stays with confirmed heating and private baths'
+    ]
+  },
+
+  // India - Kurseong
+  'kurseong-india': {
+    intro: 'Kurseong, the land of white orchids in the Darjeeling hills, boasts world-renowned tea estate sanctuaries where you can soak in deep freestanding bathtubs overlooking emerald Makaibari tea gardens.',
+    amenities: [
+      'Deep freestanding soaking bathtubs facing Makaibari tea gardens',
+      'Vintage colonial clawfoot tubs with restored antique brass fixtures',
+      'Jiva Ayurvedic wellness spas and indoor heated pools',
+      'Artisanal Darjeeling tea tastings and estate nature trails'
+    ],
+    whyChoose: [
+      'Quieter, romantic alternative to bustling Darjeeling and Siliguri',
+      'Stay in world-famous luxury tea resorts and colonial planter bungalows',
+      'Sublime views of Mount Kanchenjunga and misty pine valleys',
+      'Verified luxury bathtub listings with guaranteed tea estate views'
+    ]
+  },
+
+  // India - Raipur
+  'raipur-india': {
+    intro: 'Raipur, the vibrant capital of Chhattisgarh, is home to expansive palatial lakeside resorts and five-star business sanctuaries offering Regent Villas with private jacuzzis and balcony soaking bathtubs.',
+    amenities: [
+      'Private jacuzzis and lake-view balcony soaking tubs',
+      'Deep soaking marble baths in executive business suites',
+      'Olympic-sized swimming pools and luxury wellness spas',
+      'Scenic waterfront walkways along Jhangh Lake'
+    ],
+    whyChoose: [
+      'Central India’s premier luxury lakefront resort destination',
+      'Spacious five-star villas ideal for anniversaries and weekend escapes',
+      'Seamless airport connectivity and upscale dining',
+      'Individually confirmed in-room tubs across MakeMyTrip and Booking.com'
+    ]
+  },
+
+  // India - Maheshwar
+  'maheshwar-india': {
+    intro: 'Maheshwar, the royal seat of Queen Ahilyabai Holkar on the sacred Narmada River, offers historic fortress tents and riverside palaces featuring freestanding bathtubs, private plunge pools, and Ghat panoramas.',
+    amenities: [
+      'Freestanding soaking bathtubs in organic royal fortress gardens',
+      'Handcrafted rustic stone bathtubs in heritage gatehouse lodges',
+      'Private plunge pools with sunset Narmada river breezes',
+      'Direct private access to sacred Ahilya Ghat and evening aarti'
+    ],
+    whyChoose: [
+      'One of India’s most atmospheric and serene royal heritage settings',
+      'World-famous Ahilya Fort hospitality with gourmet organic dining',
+      'Authentic Maheshwari handloom weaving and riverboat excursions',
+      'Verified luxury heritage accommodations with guaranteed in-room tubs'
+    ]
+  },
+
+  // India - Rohet
+  'rohet-india': {
+    intro: 'Rohet, situated in the Marwar wilderness near Jodhpur, is home to globally acclaimed luxury fortresses and royal havelis featuring private terrace jacuzzis, plunge pools, and handcrafted stone bathtubs.',
+    amenities: [
+      'Private first-floor terrace jacuzzis overlooking Thar desert sands',
+      'Handcrafted deep soaking bathtubs and private courtyard plunge pools',
+      'Purebred Marwari horse safaris and royal desert picnics',
+      'Authentic Rajput cuisine and evening folk performances'
+    ],
+    whyChoose: [
+      'Home to Mihir Garh, repeatedly voted the world’s top boutique fortress',
+      'Unsurpassed intimacy, privacy, and desert wildlife encounters',
+      'Royal sanctuary away from urban crowds yet accessible from Jodhpur',
+      'Confirmed luxury suites with private jacuzzi and soaking bath amenities'
+    ]
+  },
+
+  // India - Ranakpur
+  'ranakpur-india': {
+    intro: 'Ranakpur, nestled in a secluded Aravalli valley, is celebrated for its 1444-pillar marble Jain Temple and contemporary eco-luxury resorts featuring spacious villa suites with deep soaking bathtubs.',
+    amenities: [
+      'Modern deep soaking bathtubs with floor-to-ceiling Aravalli views',
+      'Freestanding royal palace bathtubs in transplanted heritage castles',
+      'Sprawling outdoor swimming pools and jungle garden walkways',
+      'Guided village excursions and wildlife leopard safaris'
+    ],
+    whyChoose: [
+      'Architectural wonder of India combined with tranquil mountain nature',
+      'Boutique contemporary resorts and royal heritage palace stays',
+      'Scenic mountain drive between Udaipur and Jodhpur',
+      'Verified private bathtub amenities confirmed across leading OTAs'
+    ]
+  },
+
+  // India - Neil Island
+  'neil-island-india': {
+    intro: 'Neil Island (Shaheed Dweep) is the Andaman archipelago’s tranquil tropical haven, boasting pristine beaches and luxury beachfront villas with private plunge pools, sea-facing bathtubs, and coral reef access.',
+    amenities: [
+      'Freestanding soaking bathtubs in beachfront luxury villas',
+      'Private plunge pools and ocean-facing open terraces',
+      'Private jacuzzis nestled inside lush tropical coconut groves',
+      'Direct beach access to Sitapur sunrise and Laxmanpur sunset shores'
+    ],
+    whyChoose: [
+      'Laid-back, uncrowded island paradise ideal for honeymooners',
+      'Vibrant coral reefs, snorkeling, and the famous Natural Bridge',
+      'Exclusive private pool villas with guaranteed luxury tubs',
+      'Individually inspected and verified island accommodations'
+    ]
+  },
+
+  // India - Nubra Valley
+  'nubra-valley-india': {
+    intro: 'Nubra Valley, Ladakh’s enchanted high-altitude oasis, features luxury desert camps and 5-star mountain suites with heated indoor jacuzzis and handcrafted wooden bathtubs overlooking Hunder sand dunes.',
+    amenities: [
+      'Private heated indoor jacuzzis with Karakoram peak panoramas',
+      'Handcrafted wooden soaking bathtubs in solar-powered eco-cottages',
+      'Central heating and heated mattress amenities for alpine comfort',
+      'Stargazing decks and Bactrian camel safari access'
+    ],
+    whyChoose: [
+      'Surreal landscapes of white sand dunes surrounded by snowy Himalayas',
+      'Ultimate high-altitude luxury comfort after crossing Khardung La',
+      'Diskit Monastery, Panamik hot springs, and Turtuk culture',
+      'Verified heating and hot tub guarantees for extreme altitude comfort'
+    ]
+  },
+
+  // India - Bhandardara
+  'bhandardara-india': {
+    intro: 'Bhandardara, perched in Maharashtra’s Western Ghats beside Arthur Lake, offers eco-luxury mountain treehouses and lakeside chalets featuring deep soaking bathtubs framing Sahyadri mountain peaks.',
+    amenities: [
+      'High-perched treehouse suites with lake-view deep soaking bathtubs',
+      'Private balconies overlooking misty Arthur Lake and Wilson Dam',
+      'Lush monsoon waterfall viewpoints and Ayurveda wellness therapies',
+      'Campfire stargazing and fresh Maharashtrian lakefront dining'
+    ],
+    whyChoose: [
+      'Popular romantic getaway easily reached from Mumbai and Pune',
+      'Highest peaks of Maharashtra (Kalsubai) and ancient Ratangad Fort',
+      'Secluded lake and treehouse stays providing total peace and privacy',
+      'Confirmed in-room bathtubs verified across MakeMyTrip and Agoda'
+    ]
+  },
+
+  // India - Solan
+  'solan-india': {
+    intro: 'Solan, the mushroom and pine capital of Himachal Pradesh, features luxury mountain wellness estates and tea-view chalets equipped with private heated outdoor jacuzzis and deep soaking bathtubs.',
+    amenities: [
+      'Private heated outdoor jacuzzis set within 15 acres of pine forest',
+      'Deep soaking bathtubs overlooking terraced tea hills and valleys',
+      'Thalgo hydrotherapy spas and heated mountain infinity pools',
+      'Pine-scented verandas with views of snowy Churdhar peaks'
+    ],
+    whyChoose: [
+      'Convenient hill station retreat under 1.5 hours from Chandigarh',
+      'World-class luxury wellness resorts offering total rejuvenation',
+      'Quiet heritage cantonments of Dagshai and historic Barog tunnels',
+      'Verified private tub and jacuzzi listings across all top booking sites'
+    ]
+  },
+
+  // India - Dhanaulti
+  'dhanaulti-india': {
+    intro: 'Dhanaulti, set at 7,200 feet along the quiet Garhwal Himalayan ridge, offers glass pavilion suites and boutique spa retreats featuring freestanding panorama bathtubs and hydrotherapy jacuzzis.',
+    amenities: [
+      'Glass-walled suites with freestanding bathtubs facing snowy Himalayas',
+      'Hydrotherapy jacuzzi bathtubs with aromatherapy bath salts',
+      'Apple and deodar forest walking trails and private bonfires',
+      'Unobstructed vistas of the Bandarpoonch and Swargarohini peaks'
+    ],
+    whyChoose: [
+      'Crisp, crowd-free alternative to neighboring Mussoorie',
+      'Snow-capped Himalayan views right from your private bathtub',
+      'Close to Surkanda Devi Temple and scenic Eco Park forests',
+      'Triple-verified mountain rooms with guaranteed hot water and tubs'
+    ]
+  },
+
+  // India - Ajmer
+  'ajmer-india': {
+    intro: 'Ajmer, nestled amidst the ancient Aravalli ranges, combines spiritual Sufi reverence with Rajput palace grandeur. Enjoy royal suites featuring deep marble soaking bathtubs and private sit-out balconies with swings.',
+    amenities: [
+      'Deep marble soaking bathtubs in palace-style royal suites',
+      'Private sit-out balconies equipped with traditional jhula swings',
+      'Outdoor swimming pools with panoramic Aravalli mountain backdrops',
+      'Fine Rajasthani royal dining and Ana Sagar Lake boat tours'
+    ],
+    whyChoose: [
+      'Home to the historic Ajmer Sharif Dargah and scenic Ana Sagar Lake',
+      'Convenient stopover between Jaipur, Pushkar, and Udaipur',
+      'Luxury palace hospitality managed by top Indian hotel brands',
+      'Confirmed en-suite bathtub accommodations guaranteed on reservation'
+    ]
+  },
+
+  // India - Kota
+  'kota-india': {
+    intro: 'Kota, along the scenic Chambal River in southeastern Rajasthan, features historic heritage palaces built for the Maharao of Kota with original Victorian clawfoot bathtubs and modern executive suites.',
+    amenities: [
+      'Original Victorian clawfoot bathtubs in 1904 royal palace suites',
+      'Designer marble soaking tubs in contemporary executive suites',
+      'Peacock-filled royal courtyards and historic arms museum grounds',
+      'Chambal riverfront boating and Seven Wonders park tours'
+    ],
+    whyChoose: [
+      'Rare opportunity to stay in a living palace of Rajput royalty',
+      'Rich architectural heritage blending Indo-Saracenic and Italian styles',
+      'Chambal River canyon safaris and historic Garh Palace',
+      'Verified bathtub suites confirmed across MakeMyTrip and Booking.com'
+    ]
+  },
+
+  // India - Nathdwara
+  'nathdwara-india': {
+    intro: 'Nathdwara, renowned for the Shrinathji Temple and the world’s tallest Shiva statue (Statue of Belief), offers luxury palace hotels with mountain-view bathtubs and private whirlpool jacuzzis.',
+    amenities: [
+      'Deep soaking bathtubs framing views of the Statue of Belief',
+      'Private whirlpool jacuzzis in royal palace-style suites',
+      'Hilltop heritage havelis overlooking the sacred Banas River',
+      'Pure vegetarian gourmet dining and temple darshan coordination'
+    ],
+    whyChoose: [
+      'Premier spiritual and cultural destination in southern Rajasthan',
+      'Iconic Statue of Belief (Vishwas Swaroopam) and Pichwai art legacy',
+      'Plush 5-star international and heritage palace accommodations',
+      'Guaranteed private bathtub and jacuzzi amenities across OTAs'
+    ]
+  },
+
+  // India - Jhansi
+  'jhansi-india': {
+    intro: 'Jhansi, the historic warrior city of Rani Lakshmibai, provides modern luxury hotels and heritage properties offering Executive Suites with deep soaking bathtubs and fine dining in Bundelkhand.',
+    amenities: [
+      'Deep soaking bathtubs in spacious executive suites',
+      'Outdoor swimming pools and fitness centers',
+      'Central connectivity to Jhansi Fort and Rani Mahal',
+      'Fine Bundelkhandi and North Indian culinary specialties'
+    ],
+    whyChoose: [
+      'Gateway to Orchha, Khajuraho, and historic Bundelkhand citadels',
+      'Comfortable business and leisure hotels with top amenities',
+      'Strategic rail and highway hub in central North India',
+      'Individually verified bathtub rooms across major booking platforms'
+    ]
+  },
+
+  // India - Bareilly
+  'bareilly-india': {
+    intro: 'Bareilly, the bustling commercial and cultural metropolis of Rohilkhand, boasts international five-star hotels and boutique stays featuring Business Class Suites equipped with deep soaking bathtubs.',
+    amenities: [
+      'Deep soaking bathtubs in luxury international five-star suites',
+      'Outdoor swimming pools, steam rooms, and fitness centers',
+      'Gourmet restaurants and sophisticated executive lounges',
+      'Proximity to Bareilly Airport and central commercial hubs'
+    ],
+    whyChoose: [
+      'Premier five-star hospitality in western Uttar Pradesh',
+      'Ideal relaxing stopover on the way to Nainital and Jim Corbett',
+      'Spacious modern suites designed for business travelers and couples',
+      'Confirmed en-suite bathtub accommodations across verified partners'
+    ]
+  },
+
+  // India - Gorakhpur
+  'gorakhpur-india': {
+    intro: 'Gorakhpur, situated near scenic Ramgarh Tal Lake, features premier five-star international hotels offering Executive Suites with deep marble soaking tubs, rooftop infinity pools, and refined luxury.',
+    amenities: [
+      'Deep marble soaking bathtubs in executive luxury suites',
+      'Rooftop infinity swimming pools with city and lake views',
+      'Modern wellness spas and 24-hour fitness centers',
+      'Close to Gorakhnath Temple and Ramgarh Tal waterfront'
+    ],
+    whyChoose: [
+      'Eastern Uttar Pradesh’s leading luxury hotel and hospitality hub',
+      'Key gateway for pilgrimage tours to Kushinagar, Maghar, and Lumbini',
+      'High-end international hotel brands with dependable luxury services',
+      'Verified in-room bathtubs confirmed across all major booking channels'
+    ]
+  },
+
+  // India - Kumbakonam
+  'kumbakonam-india': {
+    intro: 'Kumbakonam, the temple capital of the Cauvery delta, offers soulful eco-heritage resorts built in traditional Chola agraharam village design, featuring open-air courtyard soaking tubs.',
+    amenities: [
+      'Open-air courtyard soaking bathtubs surrounded by brass oil lamps',
+      'Traditional Athangudi handmade tile floors and teak verandas',
+      'Ayurvedic wellness therapies and herbal bath treatments',
+      'Authentic vegetarian Thanjavur feasts and Navagraha temple tours'
+    ],
+    whyChoose: [
+      'Deep cultural immersion in Tamil Nadu’s sacred temple heartland',
+      'Stay in authentic restored Brahmin village cottages with open-sky tubs',
+      'Close to UNESCO World Heritage Chola temples and Mahamaham Tank',
+      'Triple-verified heritage listings ensuring confirmed private tubs'
+    ]
+  },
+
+  // India - Valparai
+  'valparai-india': {
+    intro: 'Valparai, an untouched hill station in the Anamalai Western Ghats, features colonial British tea planter bungalows offering original suites with restored Victorian clawfoot bathtubs.',
+    amenities: [
+      'Original Victorian clawfoot bathtubs in colonial tea bungalows',
+      'Sprawling tea garden verandas with Western Ghats cloud views',
+      'Woodburning fireplaces in bedrooms for crisp mountain nights',
+      'Wildlife walks for hornbills, Nilgiri tahr, and lion-tailed macaques'
+    ],
+    whyChoose: [
+      'Pristine, non-commercial tea hill station at 3,500 feet elevation',
+      'Authentic colonial British planter lifestyle with high-tea tradition',
+      'Surrounded by rich rainforests and scenic hairpin mountain roads',
+      'Verified vintage bathtub stays with confirmed hot water systems'
+    ]
+  },
+
+  // India - Yelagiri
+  'yelagiri-india': {
+    intro: 'Yelagiri, a peaceful hill retreat in Tamil Nadu’s Eastern Ghats, offers scenic hillside resorts and stone chalets featuring Valley Suites equipped with private soaking bathtubs and rose gardens.',
+    amenities: [
+      'Deep soaking bathtubs in hillside suites with private verandas',
+      'Landscaped gardens with campfire grounds and outdoor pools',
+      'Proximity to Punganur Lake, Jalagamparai Falls, and Nature Park',
+      'Fresh mountain fruit orchards and hiking trail access'
+    ],
+    whyChoose: [
+      'Accessible, relaxing weekend hill getaway from Chennai and Bangalore',
+      'Pleasant year-round climate with uncrowded scenic walking routes',
+      'Family and couple-friendly resort suites offering privacy and tubs',
+      'Guaranteed private bathtub amenities verified across booking sites'
+    ]
+  },
+
+  // India - Gandikota
+  'gandikota-india': {
+    intro: 'Gandikota, famously known as the Grand Canyon of India, offers cliffside resort suites and luxury canyon glamping tents featuring deep soaking bathtubs overlooking the majestic Pennar River Gorge.',
+    amenities: [
+      'Deep soaking bathtubs with dramatic canyon and cliffside vistas',
+      'Freestanding camping bathtubs in luxury canyon safari tents',
+      'Direct walking access to Gandikota Fort and gorge viewpoints',
+      'Breathtaking sunrise and stargazing experiences over the red cliffs'
+    ],
+    whyChoose: [
+      'One of India’s most awe-inspiring and unique natural canyon formations',
+      'Historic 13th-century fort ruins, grand granary, and ancient temples',
+      'Luxury glamping and resort accommodations with private tubs',
+      'Verified accommodations inspected across all top travel platforms'
+    ]
+  },
+
   // USA - Poconos
   'poconos-usa': {
     intro: 'The Pocono Mountains of Pennsylvania are the birthplace of romantic couple getaways. Experience legendary mountain resorts and private woodland cabins featuring iconic 7-foot Champagne glass whirlpool tubs, private heart-shaped jacuzzis, and in-suite heated swimming pools.',
