@@ -463,6 +463,295 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // India - Mashobra
+  'mashobra-india': {
+    intro: 'Mashobra, tucked 8,350 feet up in pristine cedar forests near Shimla, is one of the Himalayas\' most exclusive romantic sanctuaries. Experience world-renowned luxury resorts featuring heated outdoor whirlpools and deep marble soaking bathtubs framing snow-capped Himalayan peaks.',
+    amenities: [
+      'Heated outdoor infinity whirlpools with Himalayan panoramas',
+      'Sunken marble soaking bathtubs surrounded by cedar forest views',
+      'Indoor heated swimming pools and luxury spa therapies',
+      'Cozy log fireplaces and candlelit forest dining'
+    ],
+    whyChoose: [
+      'Home to Wildflower Hall, one of the world\'s finest luxury mountain resorts',
+      'Pure alpine serenity away from tourist traffic',
+      'Unsurpassed couple privacy in virgin pine and cedar woodlands',
+      'Triple-verified listings with guaranteed private tubs'
+    ]
+  },
+
+  // India - Kullu
+  'kullu-india': {
+    intro: 'Kullu, the Valley of the Gods, stretches along the rushing Beas River lined with pine forests and apple orchards. Discover iconic five-star riverside sanctuaries and timber chalets with deep marble soaking bathtubs and river sounds.',
+    amenities: [
+      'Beas Riverfront timber chalets with freestanding soaking tubs',
+      'Marble soaking bathtubs with apple and plum orchard views',
+      'Riverside dining and heated swimming pools',
+      'Bonfire barbecue evenings and fly-fishing adventures'
+    ],
+    whyChoose: [
+      'Historic riverside luxury at iconic properties like Span Resort & Spa',
+      'Tranquil base midway between Kullu airport and Manali',
+      'Crisp alpine mountain air ideal for warm evening soaks',
+      'Verified in-room bathtubs across MakeMyTrip, Agoda, Booking.com, and Trip.com'
+    ]
+  },
+
+  // India - Palampur
+  'palampur-india': {
+    intro: 'Palampur, the tea capital of Northern India, is nestled against the dramatic snow-capped Dhauladhar range. Indulge in boutique luxury retreats featuring mountain-facing soaking bathtubs and private pine balconies.',
+    amenities: [
+      'Panoramic soaking bathtubs facing the snow-clad Dhauladhar peaks',
+      'Private balconies overlooking emerald tea gardens',
+      'Tea tasting experiences and Kangra valley wellness spas',
+      'Spacious modern bathrooms with rain showers'
+    ],
+    whyChoose: [
+      'Unmatched snow mountain views combined with lush green tea estates',
+      'Peaceful Himalayan retreat far from commercial crowds',
+      'Proximity to Bir Billing, Kangra Fort, and Tibetan monasteries',
+      'Guaranteed room tiers with confirmed in-room bathtubs'
+    ]
+  },
+
+  // India - Kasol
+  'kasol-india': {
+    intro: 'Kasol, nestled along the gushing Parvati River in Himachal Pradesh, is a haven for nature lovers and couples. Stay in handcrafted Kathkuni timber cottages featuring private heated jacuzzis and deodar forest verandas.',
+    amenities: [
+      'Private jacuzzi whirlpool tubs in Kathkuni timber chalets',
+      'Riverside wooden cottages with deep soaking bathtubs',
+      'Parvati River valley views and traditional wood bukharis',
+      'Campfire evenings and alpine cafe culture'
+    ],
+    whyChoose: [
+      'Rustic Himalayan warmth paired with private jacuzzi indulgence',
+      'Base for romantic treks to Tosh, Malana, and Kheerganga',
+      'Soothe trekking muscles in private hot tubs and heated baths',
+      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+    ]
+  },
+
+  // India - Auli
+  'auli-india': {
+    intro: 'Auli is India’s premier ski paradise, perched 10,000 feet up in the Garhwal Himalayas. Unwind in heated alpine chalets featuring deep soaking bathtubs facing Nanda Devi and Trishul snow peaks.',
+    amenities: [
+      'Snow peak-facing deep soaking bathtubs overlooking Nanda Devi',
+      'Ski-in ski-out access and heated timber chalets',
+      'Panoramic glass dining and evening bonfire lounges',
+      'Heated bathroom flooring and insulated bedding'
+    ],
+    whyChoose: [
+      'Spectacular 360-degree views of India\'s highest Himalayan peaks',
+      'Premier skiing and winter wonderland romance in India',
+      'Warm up after ski slopes in steaming private bathtubs',
+      'Confirmed heating and bathtub amenities for winter comfort'
+    ]
+  },
+
+  // India - Neemrana
+  'neemrana-india': {
+    intro: 'Neemrana, located on the Delhi-Jaipur highway, is famous for its 15th-century medieval fort-palace stepped into the Aravalli hills. Experience royal palace suites with hand-carved sunken stone bathtubs, private turrets, and open-air jacuzzis.',
+    amenities: [
+      'Sunken hand-carved stone bathtubs in medieval palace turrets',
+      'Private open-air jacuzzis overlooking the Aravalli plains',
+      'Stepped palace courtyards and twin swimming pools',
+      'Royal Rajasthani dining and aerial zipline adventures'
+    ],
+    whyChoose: [
+      'India\'s most famous weekend heritage getaway from Delhi NCR',
+      'Stay in authentic 15th-century royal bedchambers and suites',
+      'Sensational sunset views from private palace bathtubs',
+      'Direct links with transparent rates on leading booking platforms'
+    ]
+  },
+
+  // India - Alwar
+  'alwar-india': {
+    intro: 'Alwar, bordering the Sariska Tiger Reserve and Aravalli hills, offers world-class palace sanctuaries. Experience ultra-luxury haveli suites featuring monolithic green marble bathtubs hand-carved from single blocks of stone.',
+    amenities: [
+      'Monolithic Udaipur green marble bathtubs hand-carved from single blocks',
+      'Private plunge pools and walled Mughal garden courtyards',
+      'Tiger safaris in Sariska and stargazing bush dinners',
+      'Ultra-exclusive butler service and holistic Ayurvedic spas'
+    ],
+    whyChoose: [
+      'Home to Amanbagh, one of the globe\'s most celebrated ultra-luxury retreats',
+      'Secluded regal privacy in pristine Aravalli valleys',
+      'Bespoke royal heritage hospitality and private wildlife safaris',
+      'Triple-verified room tiers with guaranteed private luxury tubs'
+    ]
+  },
+
+  // India - Jawai
+  'jawai-india': {
+    intro: 'Jawai in Rajasthan is a surreal landscape of billion-year-old granite kopjes where wild leopards and Rabari tribes co-exist in harmony. Discover Relais & Châteaux luxury tented camps featuring freestanding stone bathtubs and private plunge pools.',
+    amenities: [
+      'Freestanding handcrafted stone bathtubs under open wilderness skies',
+      'Private plunge pools and luxury tented suites with camp butlers',
+      'Custom 4x4 leopard tracking game drives with expert trackers',
+      'Starlit wilderness dining around campfire kopjes'
+    ],
+    whyChoose: [
+      'India\'s most iconic luxury leopard safari destination',
+      'World-famous Relais & Châteaux glamping elegance',
+      'Unsurpassed romance and seclusion in the Thar granite hills',
+      'Guaranteed private freestanding stone bathtubs in every luxury tent'
+    ]
+  },
+
+  // India - Mararikulam
+  'mararikulam-india': {
+    intro: 'Mararikulam (Marari Beach) in Kerala offers secluded white sand beaches shaded by swaying coconut palms. Retreat to eco-luxury pool villas featuring open-air courtyard garden bathtubs and private plunge pools.',
+    amenities: [
+      'Open-air tropical courtyard bathtubs under coconut fronds',
+      'Private plunge pools with adjoining hydrotherapy jacuzzis',
+      'Direct access to quiet, undeveloped white sand beaches',
+      'Award-winning Ayurveda and organic farm-to-table cuisine'
+    ],
+    whyChoose: [
+      'Serene beachside alternative to busy South Kerala resorts',
+      'Private open-to-sky garden bathrooms for romantic tropical soaks',
+      'Minutes from Alleppey backwaters yet peaceful and quiet',
+      'Triple-verified on MakeMyTrip, Agoda, Booking.com, and Trip.com'
+    ]
+  },
+
+  // India - Athirappilly
+  'athirappilly-india': {
+    intro: 'Athirappilly is home to Kerala\'s largest waterfall, thundering 80 feet down through dense Sholayar rainforest. Stay in clifftop luxury suites featuring freestanding soaking bathtubs providing direct, unobstructed views of the roaring falls.',
+    amenities: [
+      'Freestanding soaking bathtubs facing the 80-foot waterfalls',
+      'Cliff-edge infinity pools looking directly across the falls',
+      'Riverfront plunge pool villas with private whirlpool tubs',
+      'Canopy treehouses and rainforest biodiversity walks'
+    ],
+    whyChoose: [
+      'Unique worldwide experience: soak in a warm bath facing India\'s Niagara',
+      'Lush rainforest setting with hornbills and misty morning spray',
+      'Iconic cinematic retreat favored by movie directors and honeymooners',
+      'Verified room tiers with guaranteed waterfall-facing bathtubs'
+    ]
+  },
+
+  // India - Havelock Island
+  'havelock-island-india': {
+    intro: 'Havelock Island (Swaraj Dweep) in the Andamans is home to Radhanagar Beach, rated among the world\'s best beaches. Retreat to luxury stilted villas featuring deep freestanding soaking bathtubs and private plunge pools set among coastal rainforest.',
+    amenities: [
+      'Freestanding designer soaking bathtubs with rainforest views',
+      'Private plunge pools and direct pathways to Radhanagar Beach',
+      'Jiva luxury wellness spa and Andaman seafood dining',
+      'Turquoise water snorkeling, diving, and bioluminescence tours'
+    ],
+    whyChoose: [
+      'India\'s ultimate tropical island luxury destination',
+      'Stay at Taj Exotica and Barefoot directly on crescent beach sands',
+      'Unmatched romantic seclusion with private villa tubs and plunge pools',
+      'Triple-verified across all leading international and Indian OTAs'
+    ]
+  },
+
+  // India - Leh
+  'leh-india': {
+    intro: 'Leh, perched 11,500 feet in the high-altitude Ladakh desert, offers dramatic lunar valleys, ancient monasteries, and royal palaces. Experience solar-heated luxury hotels and authentic royal palaces featuring mountain-view soaking bathtubs.',
+    amenities: [
+      'Heated soaking bathtubs facing the snow-capped Stok Kangri range',
+      'Centrally heated and solar-powered five-star suites',
+      'Tibetan architectural craftsmanship and oxygen-enriched rooms',
+      'Rooftop stargazing and Indus valley monastery excursions'
+    ],
+    whyChoose: [
+      'High-altitude Himalayan wonder and Buddhist cultural heritage',
+      'Authentic stays in five-star comfort and royal palaces',
+      'Warm up after mountain passes in comforting heated bathtubs',
+      'Verified heating and hot water guarantees for high-altitude stays'
+    ]
+  },
+
+  // India - Tadoba
+  'tadoba-india': {
+    intro: 'Tadoba Andhari Tiger Reserve in Maharashtra is famous for high-frequency tiger sightings around forest waterholes. Stay in premier eco-luxury lodges featuring private heated jacuzzis and open-air stone bathtubs overlooking tranquil lakes.',
+    amenities: [
+      'Private heated jacuzzis and open-to-sky stone bathtubs',
+      'Lakefront chalet villas with tiger reserve buffer views',
+      'Custom 4x4 open safari jeeps with expert wildlife trackers',
+      'Starlit bush barbecues and sustainable adobe architecture'
+    ],
+    whyChoose: [
+      'Maharashtra\'s top wildlife sanctuary with incredible tiger density',
+      'Luxury chalets equipped with personal heated outdoor jacuzzis',
+      'Easy access from Nagpur International Airport',
+      'Confirmed private tub and jacuzzi amenities on every booking'
+    ]
+  },
+
+  // India - Coonoor
+  'coonoor-india': {
+    intro: 'Coonoor, the tranquil jewel of the Nilgiris, is surrounded by rolling tea plantations, eucalyptus groves, and birdlife. Experience British colonial heritage hotels featuring open log fireplaces and deep Victorian soaking bathtubs.',
+    amenities: [
+      'Deep Victorian soaking bathtubs in 19th-century colonial suites',
+      'Log fireplaces and private tea garden verandas',
+      'Nilgiri tea tasting and Ayurvedic wellness therapies',
+      'Sim\'s Park and mountain railway heritage charm'
+    ],
+    whyChoose: [
+      'Quieter, more romantic alternative to bustling Ooty',
+      'Authentic heritage tea planter bungalows with clawfoot baths',
+      'Pleasant cool year-round climate perfect for hot baths',
+      'Triple-verified across MakeMyTrip, Agoda, and Booking.com'
+    ]
+  },
+
+  // India - Thanjavur
+  'thanjavur-india': {
+    intro: 'Thanjavur, the glorious capital of the Great Chola Empire, is renowned for the 1,000-year-old Brihadeeswara Temple. Discover Relais & Châteaux heritage palaces featuring handcrafted bronze and marble soaking bathtubs celebrating classical Tamil art.',
+    amenities: [
+      'Handcrafted bronze and marble soaking bathtubs',
+      'Chola-inspired architectural courtyards and Carnatic music recitals',
+      'Arogya Ayurvedic spas and pure vegetarian gourmet dining',
+      'Private art collections and bronze sculpture casting tours'
+    ],
+    whyChoose: [
+      'World-class Relais & Châteaux sanctuary at Svatma Thanjavur',
+      'Rich UNESCO heritage art and classical temple culture',
+      'Unsurpassed refined luxury in South Tamil Nadu',
+      'Guaranteed private bathtubs with transparent partner pricing'
+    ]
+  },
+
+  // India - Kaziranga
+  'kaziranga-india': {
+    intro: 'Kaziranga National Park in Assam is a UNESCO World Heritage site home to two-thirds of the world\'s great one-horned rhinoceroses. Retreat to luxury river lodges and tea estate resorts featuring freestanding soaking bathtubs overlooking the Diphlu River.',
+    amenities: [
+      'Freestanding soaking bathtubs in riverfront thatched cottages',
+      'Diphlu riverfront views of wild animals drinking at dusk',
+      'Exclusive jeep and elephant safaris for rhinos and tigers',
+      'Assamese traditional culinary feasts and organic dining'
+    ],
+    whyChoose: [
+      'Royal heritage legacy: host to the Duke and Duchess of Cambridge',
+      'World-famous wildlife encounters with one-horned rhinos',
+      'Warm en-suite soaking tubs after morning mist safari drives',
+      'Triple-verified on leading travel booking platforms'
+    ]
+  },
+
+  // India - Cherrapunji
+  'cherrapunji-india': {
+    intro: 'Cherrapunji (Sohra) in Meghalaya is celebrated for mist-draped waterfalls, deep limestone gorges, and living root bridges. Indulge in cliff-rim log villas featuring private outdoor jacuzzis overlooking the Seven Sisters waterfalls canyon.',
+    amenities: [
+      'Private outdoor heated jacuzzis overlooking waterfall gorges',
+      'Cliff-edge rim infinity pools with cloud valley panoramas',
+      'Trekking guides to double-decker living root bridges',
+      'Rainforest dining and cozy pine cottage suites'
+    ],
+    whyChoose: [
+      'Spectacular clifftop views in the world\'s rainiest paradise',
+      'Warm hydrotherapy jacuzzi soaks in cool, misty mountain air',
+      'Proximity to Nohkalikai Falls and Mawsmai Caves',
+      'Verified private tub rooms with zero shared amenities'
+    ]
+  },
+
   // India - Delhi
   'delhi-india': {
     intro: 'Delhi, the historic capital, offers premier 5-star luxury and boutique retreats with private in-room bathtubs and jacuzzis for couples and staycationers.',
