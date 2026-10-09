@@ -25,6 +25,8 @@ export interface MatchmakerHotel {
   bookingTip?: string;
   bookingUrl?: string;
   agodaUrl?: string;
+  airbnbUrl?: string;
+  tripUrl?: string;
   url?: string;
 }
 
@@ -902,11 +904,13 @@ export default function DreamSoakMatchmaker({
           {!loading && matchedHotels.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {matchedHotels.slice(0, visibleResultsCount).map(({ hotel, matchScore, highlightReason }) => {
-                const partnerUrl = hotel.bookingUrl || hotel.agodaUrl || hotel.url || '';
+                const partnerUrl = hotel.bookingUrl || hotel.agodaUrl || hotel.tripUrl || hotel.airbnbUrl || hotel.url || '';
                 const isBookingCom = partnerUrl.includes('booking.com');
                 const isAgoda = partnerUrl.includes('agoda.com');
+                const isTrip = partnerUrl.includes('trip.com');
+                const isAirbnb = partnerUrl.includes('airbnb');
                 const isMMT = partnerUrl.includes('makemytrip.com');
-                const partnerName = isBookingCom ? 'Booking.com' : isAgoda ? 'Agoda' : isMMT ? 'MakeMyTrip' : 'Partner';
+                const partnerName = isBookingCom ? 'Booking.com' : isAgoda ? 'Agoda' : isTrip ? 'Trip.com' : isAirbnb ? 'Airbnb' : isMMT ? 'MakeMyTrip' : 'Partner';
 
                 return (
                   <div

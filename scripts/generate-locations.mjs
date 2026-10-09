@@ -183,6 +183,8 @@ async function generateLocations() {
         bookingTip: h.bookingTip || '',
         bookingUrl: h.bookingUrl || '',
         agodaUrl: h.agodaUrl || '',
+        airbnbUrl: h.airbnbUrl || '',
+        tripUrl: h.tripUrl || '',
         url: h.url || '',
       };
     });

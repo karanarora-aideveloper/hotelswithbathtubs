@@ -26,6 +26,7 @@ type HotelData = {
   agodaUrl?: string;
   bookingUrl?: string;
   airbnbUrl?: string;
+  tripUrl?: string;
   amenities: string[];
   description?: string;
   rating?: number;
@@ -101,7 +102,7 @@ export default function CityHotelsClient({
   const uniqueHotels = useMemo(() => {
     const seen = new Set<string>();
     return hotels.filter((h) => {
-      const key = [h.url, h.agodaUrl, h.bookingUrl, h.name].filter(Boolean).join('|');
+      const key = [h.url, h.agodaUrl, h.bookingUrl, h.tripUrl, h.name].filter(Boolean).join('|');
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -522,13 +523,14 @@ export default function CityHotelsClient({
   };
 
   // Detect what kind of URL is stored in any booking field
-  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | null;
+  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
   function getUrlProvider(url?: string): UrlProvider {
     if (!url) return null;
     const lower = url.toLowerCase();
     if (lower.includes('makemytrip.com')) return 'makemytrip';
     if (lower.includes('booking.com')) return 'booking';
     if (lower.includes('agoda.com')) return 'agoda';
+    if (lower.includes('trip.com')) return 'trip';
     if (lower.includes('airbnb')) return 'airbnb';
     if (lower.includes('trivago')) return 'trivago';
     if (lower.includes('tripadvisor')) return 'tripadvisor';
@@ -566,6 +568,13 @@ export default function CityHotelsClient({
         className: isPrimary 
           ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
           : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
+      trip: { 
+        label: 'Check on Trip.com', 
+        source: 'Trip.com', 
+        className: isPrimary 
+          ? 'bg-[#2681ff] hover:bg-[#1a6edb] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
       },
       airbnb: { 
         label: 'Check on Airbnb', 
@@ -963,7 +972,7 @@ export default function CityHotelsClient({
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
           {filteredHotels.slice(0, visibleCount).map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
-              makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda',
+              makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda', trip: 'Trip.com',
               trivago: 'Trivago', tripadvisor: 'TripAdvisor', google: '', airbnb: 'Airbnb',
             };
             const verifiedSources = [
@@ -971,10 +980,11 @@ export default function CityHotelsClient({
               ...(h.agodaUrl ? [providerLabel[getUrlProvider(h.agodaUrl) ?? 'google']].filter(Boolean) : []),
               ...(h.bookingUrl ? [providerLabel[getUrlProvider(h.bookingUrl) ?? 'google']].filter(Boolean) : []),
               ...(h.airbnbUrl ? [providerLabel[getUrlProvider(h.airbnbUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.tripUrl ? [providerLabel[getUrlProvider(h.tripUrl) ?? 'google']].filter(Boolean) : []),
             ].filter((v, i, a) => a.indexOf(v) === i); // dedupe
 
             const isIndia = countryName.toLowerCase() === 'india';
-            const rawUrls = [h.airbnbUrl, h.bookingUrl, h.agodaUrl, h.url]
+            const rawUrls = [h.airbnbUrl, h.bookingUrl, h.agodaUrl, h.tripUrl, h.url]
               .filter((u): u is string => !!u)
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
             
@@ -986,8 +996,8 @@ export default function CityHotelsClient({
                 if (provB === 'airbnb') return 1;
               }
               const priority: Record<string, number> = isIndia
-                ? { makemytrip: 1, agoda: 2, booking: 3, airbnb: 4, trivago: 5, tripadvisor: 6 }
-                : { booking: 1, agoda: 2, airbnb: 3, trivago: 4, tripadvisor: 5, makemytrip: 6 };
+                ? { makemytrip: 1, agoda: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
+                : { booking: 1, agoda: 2, trip: 3, airbnb: 4, trivago: 5, tripadvisor: 6, makemytrip: 7 };
               return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
             });
 

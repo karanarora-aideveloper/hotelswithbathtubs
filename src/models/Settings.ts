@@ -9,6 +9,8 @@ export interface ISettings extends Document {
     booking: string;
     makemytrip: string;
     earnkaro: string;
+    tripAllianceId?: string;
+    tripSid?: string;
   };
   deepseekApiKey?: string;
   googleAnalyticsId?: string;
@@ -26,6 +28,8 @@ const SettingsSchema: Schema = new Schema(
       booking: { type: String, default: '' },
       makemytrip: { type: String, default: '' },
       earnkaro: { type: String, default: '' },
+      tripAllianceId: { type: String, default: '' },
+      tripSid: { type: String, default: '' },
     }
   },
   { timestamps: true }

@@ -148,7 +148,7 @@ export default async function CityHotelsPage({
     city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
     country: countryInfo.regex,
     flagged: { $ne: true }
-  }).sort({ rating: -1 });
+  }).sort({ rating: -1 }).lean();
 
 
   if (rawHotels.length === 0) {
@@ -166,6 +166,7 @@ export default async function CityHotelsPage({
     agodaUrl: h.agodaUrl,
     bookingUrl: h.bookingUrl,
     airbnbUrl: h.airbnbUrl,
+    tripUrl: h.tripUrl,
     amenities: h.amenities || [],
     description: h.description || '',
     rating: h.rating,
@@ -290,7 +291,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             "@type": "Offer",
             "name": `${h.roomType || 'Room with Bathtub'} at ${h.name}`,
             "description": `Private in-room bathtub${h.tubType ? ` (${h.tubType})` : ''} in ${cityName}`,
-            "url": h.bookingUrl || h.agodaUrl || h.url,
+            "url": h.bookingUrl || h.agodaUrl || h.tripUrl || h.url,
             "availability": "https://schema.org/InStock",
             "priceSpecification": {
               "@type": "PriceSpecification",

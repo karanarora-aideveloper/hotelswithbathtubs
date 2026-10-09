@@ -19,6 +19,8 @@ export type FavoriteHotel = {
   tubType?: string;
   bookingUrl?: string;
   agodaUrl?: string;
+  airbnbUrl?: string;
+  tripUrl?: string;
   url?: string;
   countrySlug: string;
   citySlug: string;

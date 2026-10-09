@@ -17,6 +17,7 @@ interface HotelAnalyticsProps {
     agodaUrl?: string;
     bookingUrl?: string;
     airbnbUrl?: string;
+    tripUrl?: string;
     neighborhood?: string;
     landmarkDistance?: string;
   };
@@ -147,6 +148,31 @@ export default function HotelAnalyticsComparison({
         'Free cancellation on most bathtub suite tiers',
         'No upfront prepayment required on select dates',
         'Genius Level 1–3 complimentary room perks',
+      ],
+      isLowest: false,
+    });
+  }
+
+  // Trip.com Platform
+  const tripUrl = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : undefined) ||
+    (!isIndia ? `https://www.trip.com/hotels/list?keyword=${encodeURIComponent(hotel.name + ' ' + cityName)}` : undefined);
+  if (tripUrl) {
+    const tripUsual = Math.round(numericBase * 0.95);
+    platforms.push({
+      id: 'trip',
+      name: 'Trip.com',
+      badge: 'Best for Asia & Global Rewards',
+      badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
+      logoBg: 'bg-[#2681ff] text-white',
+      buttonBg: 'bg-[#2681ff] hover:bg-[#1a6edb] text-white',
+      url: tripUrl,
+      source: 'Trip.com',
+      usualRate: fmt(tripUsual),
+      usualNote: 'Typical Member & Mobile Benchmark',
+      perks: [
+        'Trip Coins rewards redeemable on future stays & flights',
+        'Competitive international member rates & mobile deals',
+        'Instant booking confirmation with multi-currency support',
       ],
       isLowest: false,
     });

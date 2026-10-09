@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     // Next hotel to review
     const hotel = await Hotel.findOne(baseFilter)
       .skip(skip)
-      .select('name city country image url agodaUrl bookingUrl amenities crossVerified crossVerifiedSources bathtubConfirmed')
+      .select('name city country image url agodaUrl bookingUrl airbnbUrl tripUrl amenities crossVerified crossVerifiedSources bathtubConfirmed')
       .lean();
 
     return NextResponse.json({

@@ -12,6 +12,8 @@ interface Hotel {
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  airbnbUrl?: string;
+  tripUrl?: string;
   amenities: string[];
   crossVerified?: boolean;
   crossVerifiedSources?: string[];
@@ -267,7 +269,27 @@ export default function ReviewQueuePage() {
                       Booking.com ↗
                     </a>
                   )}
-                  {!hotel.url && !hotel.agodaUrl && !hotel.bookingUrl && (
+                  {hotel.tripUrl && (
+                    <a
+                      href={hotel.tripUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm bg-sky-50 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-lg font-medium hover:bg-sky-100 transition-colors flex items-center gap-1.5"
+                    >
+                      Trip.com ↗
+                    </a>
+                  )}
+                  {hotel.airbnbUrl && (
+                    <a
+                      href={hotel.airbnbUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm bg-rose-50 text-rose-700 border border-rose-200 px-3 py-1.5 rounded-lg font-medium hover:bg-rose-100 transition-colors flex items-center gap-1.5"
+                    >
+                      Airbnb ↗
+                    </a>
+                  )}
+                  {!hotel.url && !hotel.agodaUrl && !hotel.bookingUrl && !hotel.tripUrl && !hotel.airbnbUrl && (
                     <span className="text-sm text-gray-400 italic">No booking links available</span>
                   )}
                 </div>

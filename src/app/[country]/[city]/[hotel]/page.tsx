@@ -281,7 +281,7 @@ export default async function HotelDetailPage({
       "@type": "Offer",
       "name": `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`,
       "description": `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`,
-      "url": hotel.airbnbUrl || hotel.bookingUrl || hotel.agodaUrl || hotel.url,
+      "url": hotel.airbnbUrl || hotel.bookingUrl || hotel.agodaUrl || hotel.tripUrl || hotel.url,
       "availability": "https://schema.org/InStock",
       "priceSpecification": {
         "@type": "PriceSpecification",
@@ -323,13 +323,14 @@ export default async function HotelDetailPage({
     ]
   };
 
-  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | null;
+  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
   function getUrlProvider(url?: string): UrlProvider {
     if (!url) return null;
     const lower = url.toLowerCase();
     if (lower.includes('makemytrip.com')) return 'makemytrip';
     if (lower.includes('booking.com')) return 'booking';
     if (lower.includes('agoda.com')) return 'agoda';
+    if (lower.includes('trip.com')) return 'trip';
     if (lower.includes('airbnb')) return 'airbnb';
     if (lower.includes('trivago')) return 'trivago';
     if (lower.includes('tripadvisor')) return 'tripadvisor';
@@ -370,6 +371,14 @@ export default async function HotelDetailPage({
           ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
           : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-emerald-200 flex items-center justify-center gap-2 w-full' 
       },
+      trip: { 
+        label: 'Check on Trip.com', 
+        source: 'Trip.com', 
+        logo: 'T',
+        className: isPrimary 
+          ? 'bg-[#2681ff] hover:bg-[#1a6edb] text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
+          : 'bg-sky-50 hover:bg-sky-100 text-[#0066e0] text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-sky-200 flex items-center justify-center gap-2 w-full' 
+      },
       airbnb: { 
         label: 'Check on Airbnb', 
         source: 'Airbnb', 
@@ -393,7 +402,7 @@ export default async function HotelDetailPage({
   }
 
   const isIndia = countrySlug === 'india';
-  const rawUrls = [hotel.airbnbUrl, hotel.bookingUrl, hotel.agodaUrl, hotel.url]
+  const rawUrls = [hotel.airbnbUrl, hotel.bookingUrl, hotel.agodaUrl, hotel.tripUrl, hotel.url]
     .filter((u): u is string => !!u)
     .filter((u, idx, arr) => arr.indexOf(u) === idx);
   
@@ -401,8 +410,8 @@ export default async function HotelDetailPage({
     const provA = getUrlProvider(a);
     const provB = getUrlProvider(b);
     const priority: Record<string, number> = isIndia
-      ? { agoda: 1, makemytrip: 2, booking: 3, airbnb: 4, trivago: 5, tripadvisor: 6 }
-      : { booking: 1, agoda: 2, airbnb: 3, trivago: 4, tripadvisor: 5, makemytrip: 6 };
+      ? { agoda: 1, makemytrip: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
+      : { booking: 1, agoda: 2, trip: 3, airbnb: 4, trivago: 5, tripadvisor: 6, makemytrip: 7 };
     return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
   });
 
@@ -414,6 +423,7 @@ export default async function HotelDetailPage({
   if (hotel.url && hotel.url.includes('makemytrip')) availableSources.push('MakeMyTrip');
   if (hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com'))) availableSources.push('Booking.com');
   if (hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb'))) availableSources.push('Airbnb');
+  if (hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com'))) availableSources.push('Trip.com');
   const verifiedPlatformsText = availableSources.length > 0
     ? `Verified on ${availableSources.join(', ')}`
     : 'Triple-Source Verified';

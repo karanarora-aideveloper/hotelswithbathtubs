@@ -2,6 +2,33 @@ export const DEFAULT_AGODA_CID = '1972736';
 export const DEFAULT_BOOKING_AID = '';
 export const DEFAULT_EARNKARO_ID = '1471944';
 export const EARNKARO_MMT_RETAILER_ID = '1729';
+export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID || '';
+export const DEFAULT_TRIP_SID = process.env.NEXT_PUBLIC_TRIP_SID || '';
+
+/**
+ * Transforms a Trip.com hotel URL to include the affiliate tracking Allianceid and SID
+ */
+export function getTripAffiliateLink(
+  url: string,
+  allianceId: string = DEFAULT_TRIP_ALLIANCEID,
+  sid: string = DEFAULT_TRIP_SID
+): string {
+  if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+    return url;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.hostname.includes('trip.com')) {
+      if (allianceId) parsedUrl.searchParams.set('Allianceid', allianceId);
+      if (sid) parsedUrl.searchParams.set('SID', sid);
+      return parsedUrl.toString();
+    }
+  } catch (e) {
+    console.error('Invalid URL in getTripAffiliateLink:', url);
+  }
+  return url;
+}
 
 /**
  * Transforms an Agoda hotel URL to include the affiliate tracking CID
@@ -96,6 +123,8 @@ export function wrapOutboundAffiliateLink(
     booking?: string;
     makemytrip?: string;
     earnkaro?: string;
+    tripAllianceId?: string;
+    tripSid?: string;
   }
 ): string {
   if (!url) return url;
@@ -103,6 +132,8 @@ export function wrapOutboundAffiliateLink(
   const agodaCid = customAffiliateIds?.agoda || DEFAULT_AGODA_CID;
   const bookingAid = customAffiliateIds?.booking || DEFAULT_BOOKING_AID;
   const earnkaroId = customAffiliateIds?.earnkaro || DEFAULT_EARNKARO_ID;
+  const tripAllianceId = customAffiliateIds?.tripAllianceId || DEFAULT_TRIP_ALLIANCEID;
+  const tripSid = customAffiliateIds?.tripSid || DEFAULT_TRIP_SID;
 
   try {
     const parsedUrl = new URL(url);
@@ -114,6 +145,10 @@ export function wrapOutboundAffiliateLink(
 
     if (host.includes('booking.com')) {
       return getBookingAffiliateLink(url, bookingAid);
+    }
+
+    if (host.includes('trip.com')) {
+      return getTripAffiliateLink(url, tripAllianceId, tripSid);
     }
 
     if (host.includes('makemytrip.com')) {
@@ -145,6 +180,7 @@ export function getSpecificHotelLink(hotel: {
   agodaUrl?: string;
   bookingUrl?: string;
   airbnbUrl?: string;
+  tripUrl?: string;
 }): string | null {
   const isMmtSpecific = (u?: string) => {
     if (!u) return false;
@@ -163,12 +199,18 @@ export function getSpecificHotelLink(hotel: {
     const lower = u.toLowerCase();
     return lower.includes('booking.com') && (lower.includes('searchresults') || lower.includes('/hotel/') || lower.includes('.html'));
   };
+
   const isAirbnbSpecific = (u?: string) => {
     if (!u) return false;
     const lower = u.toLowerCase();
     return lower.includes('airbnb') && (lower.includes('/rooms/') || lower.includes('/hotel/'));
   };
 
+  const isTripSpecific = (u?: string) => {
+    if (!u) return false;
+    const lower = u.toLowerCase();
+    return lower.includes('trip.com') && (lower.includes('/hotels/') || lower.includes('/detail/'));
+  };
 
   if (isAirbnbSpecific(hotel.airbnbUrl)) {
     return hotel.airbnbUrl!;
@@ -178,6 +220,9 @@ export function getSpecificHotelLink(hotel: {
   }
   if (isAgodaSpecific(hotel.agodaUrl)) {
     return hotel.agodaUrl!;
+  }
+  if (isTripSpecific(hotel.tripUrl)) {
+    return hotel.tripUrl!;
   }
   if (isMmtSpecific(hotel.url)) {
     return hotel.url!;

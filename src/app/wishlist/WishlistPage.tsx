@@ -160,9 +160,9 @@ export default function WishlistPage() {
                 >
                   View City
                 </Link>
-                {(h.bookingUrl || h.agodaUrl || h.url) && (
+                {(h.bookingUrl || h.agodaUrl || h.tripUrl || h.airbnbUrl || h.url) && (
                   <OutboundLink
-                    href={h.bookingUrl || h.agodaUrl || h.url!}
+                    href={h.bookingUrl || h.agodaUrl || h.tripUrl || h.airbnbUrl || h.url!}
                     hotelName={h.name}
                     cityName={h.city}
                     source="wishlist_cta"
