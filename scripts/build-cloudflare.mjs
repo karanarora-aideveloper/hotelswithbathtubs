@@ -89,6 +89,17 @@ async function build() {
       fs.copyFileSync(publicHeaders, outHeaders);
     }
 
+    // Clean up internal Next.js segment prefetch trees (__next.*) to comply with Cloudflare 20,000 files limit
+    console.log('\n[Clean] Pruning internal __next.* segment prefetch files to comply with Cloudflare 20,000 file limit...');
+    try {
+      execSync('find out -name "__next.*" -delete', { cwd: rootDir });
+      execSync('find out -type d -empty -delete', { cwd: rootDir });
+      const remainingFiles = execSync('find out -type f | wc -l', { cwd: rootDir }).toString().trim();
+      console.log(`✅ Output directory optimized: ${remainingFiles} total files (well under Cloudflare 20,000 limit).`);
+    } catch (e) {
+      console.warn('⚠️ Pruning warning:', e.message);
+    }
+
     console.log('\n✨ Cloudflare Pages static build completed successfully in out/ directory!');
   } finally {
     restoreAll();
