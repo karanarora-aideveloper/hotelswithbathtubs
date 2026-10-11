@@ -158,18 +158,21 @@ function enrichLocation(h) {
 
 function checkAgodaHtmlUrl(u) {
   return new Promise((resolve) => {
-    const req = https.get(u, { agent, timeout: 4500, headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
-      res.destroy();
-      if (res.statusCode === 200) return resolve(u);
-      if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location) {
-        const loc = res.headers.location;
-        if (loc.includes('/hotel/') && !loc.includes('pagenotfound') && !loc.includes('/city/')) {
-          const full = loc.startsWith('http') ? loc : `https://www.agoda.com${loc}`;
-          const clean = full.split('?')[0];
-          return resolve(`${clean}?cid=1972736`);
-        }
+    const req = https.get(u, { agent, timeout: 6000, headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' } }, (res) => {
+      if (res.statusCode !== 200) {
+        res.destroy();
+        return resolve(null);
       }
-      resolve(null);
+      let body = '';
+      res.on('data', (c) => { body += c; });
+      res.on('end', () => {
+        // Agoda returns HTTP 200 with defaultSearchURL:"" for soft-404s ("Sorry! We looked everywhere...")
+        const m = body.match(/defaultSearchURL:"([^"]*)"/);
+        if (m && m[1] && m[1].includes('/hotel/')) {
+          return resolve(u);
+        }
+        resolve(null);
+      });
     });
     req.on('error', () => resolve(null));
     req.on('timeout', () => { req.destroy(); resolve(null); });
