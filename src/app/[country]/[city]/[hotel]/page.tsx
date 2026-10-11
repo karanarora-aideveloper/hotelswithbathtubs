@@ -301,7 +301,7 @@ export default async function HotelDetailPage({
         "name": `Does ${hotel.name} have a private bathtub in the room?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, ${hotel.name} features private in-room bathtubs in select tiers. Specifically, you should reserve the ${hotel.roomType || 'Deluxe Room or Suite with Bathtub'}.`
+          "text": `Yes, ${hotel.name} features private in-room bathtubs in select room tiers. Specifically, you should reserve the ${hotel.roomType || 'Deluxe Room or Suite with Bathtub'}.`
         }
       },
       {
@@ -347,48 +347,48 @@ export default async function HotelDetailPage({
   }) {
     const provider = getUrlProvider(url);
     const config: Record<NonNullable<UrlProvider>, { label: string; className: string; source: string; logo: string } | null> = {
+      agoda: { 
+        label: 'Check on Agoda', 
+        source: 'Agoda', 
+        logo: 'A',
+        className: isPrimary 
+          ? 'bg-emerald-700 hover:bg-emerald-800 text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-emerald-50/70 hover:bg-emerald-100/80 text-emerald-800 text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-emerald-200/80 flex items-center justify-between w-full font-jakarta' 
+      },
       makemytrip: { 
         label: 'Check on MakeMyTrip', 
         source: 'MakeMyTrip', 
         logo: 'M',
         className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
-          : 'bg-[#1a6fde]/10 hover:bg-[#1a6fde]/20 text-[#1a6fde] text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-[#1a6fde]/30 flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#1f262d] hover:bg-[#2c3640] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-slate-50 hover:bg-slate-100 text-[#1f262d] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-[#5b8296]/20 flex items-center justify-between w-full font-jakarta' 
       },
       booking: { 
         label: 'Check on Booking.com', 
         source: 'Booking.com', 
         logo: 'B',
         className: isPrimary 
-          ? 'bg-[#003580] hover:bg-[#00224f] text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
-          : 'bg-blue-50 hover:bg-blue-100 text-[#003580] text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-blue-200 flex items-center justify-center gap-2 w-full' 
-      },
-      agoda: { 
-        label: 'Check on Agoda', 
-        source: 'Agoda', 
-        logo: 'A',
-        className: isPrimary 
-          ? 'bg-emerald-600 hover:bg-emerald-700 text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
-          : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-emerald-200 flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#003580] hover:bg-[#002860] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-sky-50/70 hover:bg-sky-100/80 text-[#003580] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-sky-200/80 flex items-center justify-between w-full font-jakarta' 
       },
       trip: { 
         label: 'Check on Trip.com', 
         source: 'Trip.com', 
         logo: 'T',
         className: isPrimary 
-          ? 'bg-[#2681ff] hover:bg-[#1a6edb] text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
-          : 'bg-sky-50 hover:bg-sky-100 text-[#0066e0] text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-sky-200 flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#2681ff] hover:bg-[#156fe0] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-blue-50/70 hover:bg-blue-100/80 text-[#0055b3] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-blue-200/80 flex items-center justify-between w-full font-jakarta' 
       },
       airbnb: { 
         label: 'Check on Airbnb', 
         source: 'Airbnb', 
         logo: 'A',
         className: isPrimary 
-          ? 'bg-[#ff5a5f] hover:bg-[#e04c51] text-white text-center py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2 w-full' 
-          : 'bg-rose-50 hover:bg-rose-100 text-[#ff5a5f] text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs border border-rose-200 flex items-center justify-center gap-2 w-full' 
+          ? 'bg-[#e0565b] hover:bg-[#c9454a] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-rose-50/70 hover:bg-rose-100/80 text-[#e0565b] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-rose-200/80 flex items-center justify-between w-full font-jakarta' 
       },
-      trivago: { label: 'Compare on Trivago', source: 'Trivago', logo: 'T', className: 'bg-gray-100 hover:bg-gray-200 text-gray-800 text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs flex items-center justify-center gap-2 w-full' },
-      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', logo: 'T', className: 'bg-gray-100 hover:bg-gray-200 text-gray-800 text-center py-2.5 px-4 rounded-xl font-bold transition-colors text-xs flex items-center justify-center gap-2 w-full' },
+      trivago: { label: 'Compare on Trivago', source: 'Trivago', logo: 'T', className: 'bg-slate-50 hover:bg-slate-100 text-slate-800 text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs flex items-center justify-between w-full font-jakarta' },
+      tripadvisor: { label: 'View on TripAdvisor', source: 'TripAdvisor', logo: 'T', className: 'bg-slate-50 hover:bg-slate-100 text-slate-800 text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs flex items-center justify-between w-full font-jakarta' },
       google: null,
     };
     if (!provider || !config[provider]) return null;
@@ -396,7 +396,7 @@ export default async function HotelDetailPage({
     return (
       <OutboundLink href={url} hotelName={hotelName} cityName={city} source={source} className={className}>
         <span>{preferredLabel || label}</span>
-        <span>&rarr;</span>
+        <span className="text-xs">&rarr;</span>
       </OutboundLink>
     );
   }
@@ -434,60 +434,62 @@ export default async function HotelDetailPage({
       <StructuredData data={hotelSchema} />
       <StructuredData data={faqSchema} />
 
-      {/* Modern Breadcrumbs & Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 text-xs sm:text-sm font-medium text-gray-500 flex items-center justify-between flex-wrap gap-2 border-b border-gray-100">
-        <div className="flex items-center flex-wrap gap-1.5">
-          <Link href="/" className="text-gray-500 hover:text-[#1a6fde] transition-colors">Home</Link>
-          <span>&rsaquo;</span>
-          <Link href={`/${countrySlug}`} className="text-gray-500 hover:text-[#1a6fde] transition-colors">{countryName}</Link>
-          <span>&rsaquo;</span>
-          <Link href={`/${countrySlug}/${citySlug}`} className="text-gray-500 hover:text-[#1a6fde] transition-colors">Hotels in {cityName}</Link>
-          <span>&rsaquo;</span>
-          <span className="text-gray-900 font-bold truncate max-w-[200px] sm:max-w-xs">{hotel.name}</span>
+      {/* Quiet Luxury Breadcrumbs Bar */}
+      <div className="border-b border-[#5b8296]/15 bg-white/70 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 text-xs font-medium text-slate-500 flex items-center justify-between flex-wrap gap-2 font-jakarta">
+          <div className="flex items-center flex-wrap gap-1.5">
+            <Link href="/" className="text-slate-500 hover:text-[#1f262d] transition-colors">Home</Link>
+            <span className="text-slate-300">/</span>
+            <Link href={`/${countrySlug}`} className="text-slate-500 hover:text-[#1f262d] transition-colors">{countryName}</Link>
+            <span className="text-slate-300">/</span>
+            <Link href={`/${countrySlug}/${citySlug}`} className="text-slate-500 hover:text-[#1f262d] transition-colors">{cityName}</Link>
+            <span className="text-slate-300">/</span>
+            <span className="text-[#1f262d] font-semibold truncate max-w-[200px] sm:max-w-xs">{hotel.name}</span>
+          </div>
+          <Link
+            href={`/${countrySlug}/${citySlug}`}
+            className="text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] transition-colors flex items-center gap-1"
+          >
+            <span>&larr;</span> Back to all {cityName} bathtub stays
+          </Link>
         </div>
-        <Link
-          href={`/${countrySlug}/${citySlug}`}
-          className="text-xs font-bold text-[#1a6fde] hover:underline flex items-center gap-1"
-        >
-          <span>&larr;</span> Back to all {cityName} stays
-        </Link>
       </div>
 
       {/* Contained Hero Image Showcase Gallery */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9] md:aspect-[2.3/1] max-h-[520px] w-full rounded-3xl overflow-hidden shadow-lg bg-gray-100 border border-gray-100 group">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-5 pb-2">
+        <div className="relative aspect-[16/10] sm:aspect-[2.1/1] md:aspect-[2.4/1] max-h-[520px] w-full rounded-3xl overflow-hidden shadow-sm border border-[#5b8296]/20 bg-[#1f262d] group">
           <Image
             src={imageUrl(hotel.image)}
             alt={`${hotel.name} with private bathtub in ${cityName}`}
             fill
             priority
             sizes="(max-width: 1280px) 100vw, 1280px"
-            className="object-cover group-hover:scale-102 transition-transform duration-500"
+            className="object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
           />
 
-          {/* Elegant Dark Gradient Overlays for Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/20 pointer-events-none" />
+          {/* Cinematic Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1f262d]/90 via-[#1f262d]/30 to-[#1f262d]/10 pointer-events-none" />
 
           {/* Floating Verification Badges (Top Left) */}
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-wrap items-center gap-2 z-10">
-            <span className="bg-emerald-600/95 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
-              <span>✓</span> Verified In-Room Bathtub
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-wrap items-center gap-2 z-10 font-jakarta">
+            <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
+              <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
             </span>
-            <span className="bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20 hidden sm:flex items-center gap-1.5">
-              <span>🏆</span> Triple-Source Audited
+            <span className="bg-[#1f262d]/75 backdrop-blur-md text-white text-xs font-medium px-3.5 py-1.5 rounded-full border border-white/20 hidden sm:flex items-center gap-1.5">
+              <span className="text-[#8eaab9]">✦</span> Triple-Source Audited
             </span>
-            <span className="bg-rose-600/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md hidden md:flex items-center gap-1.5">
-              <span>💑</span> Couple-Friendly
+            <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 hidden md:flex items-center gap-1.5">
+              <span>💑</span> Couple-Friendly Sanctuary
             </span>
           </div>
 
           {/* Pinterest Save & Share (Top Right) */}
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-10">
+          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-10 font-jakarta">
             <a
               href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(hotel.image))}&description=${encodeURIComponent(`${hotel.name} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-red-600/95 hover:bg-red-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md flex items-center gap-1.5 transition-all"
+              className="bg-red-600/90 hover:bg-red-700 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5 transition-all"
               title="Save to Pinterest"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -498,22 +500,22 @@ export default async function HotelDetailPage({
           </div>
 
           {/* In-Hero Bottom Ribbon */}
-          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white z-10">
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white z-10 font-jakarta">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold text-white mb-2 border border-white/30">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white mb-2 border border-white/30">
                 <span>🏷️</span> Guaranteed Tier: {hotel.roomType || 'Suite / Deluxe Room with Bathtub'}
               </div>
-              <p className="text-xs sm:text-sm text-white/90 font-medium">
+              <p className="text-xs sm:text-sm text-white/85 font-medium">
                 {verifiedPlatformsText}
               </p>
             </div>
-            <div className="text-left sm:text-right bg-black/50 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/20 w-fit shrink-0">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block">
+            <div className="text-left sm:text-right bg-[#1f262d]/70 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/20 w-fit shrink-0">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-[#8eaab9] block">
                 Usual Benchmark Rate
               </span>
               <div className="flex items-baseline gap-1 sm:justify-end">
-                <span className="text-xl sm:text-2xl font-black text-white">~{usualPrice}</span>
-                <span className="text-xs text-slate-300 font-medium">/ night</span>
+                <span className="text-xl sm:text-2xl font-bold text-white">~{usualPrice}</span>
+                <span className="text-xs text-white/70 font-medium">/ night</span>
               </div>
             </div>
           </div>
@@ -526,54 +528,54 @@ export default async function HotelDetailPage({
         <div className="w-full md:w-3/5 lg:w-2/3">
           {/* Header Title Block */}
           <div className="mb-8">
-            <div className="flex flex-wrap items-center gap-2 mb-2.5">
-              <span className="bg-blue-50 text-[#1a6fde] border border-blue-200/80 font-bold text-xs px-2.5 py-0.5 rounded-full">
-                Verified Stay
+            <div className="flex flex-wrap items-center gap-2 mb-2.5 font-jakarta">
+              <span className="bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full">
+                Sanctuary Audit #HTB-{hotel.slug?.slice(0, 8) || 'VERIFIED'}
               </span>
-              <span className="text-xs text-gray-500 font-medium">
-                Audit ID: #HTB-{hotel.slug?.slice(0, 8) || 'DELHI'}
+              <span className="text-xs text-slate-500 font-medium">
+                Verified In-Room Soaking Bath
               </span>
             </div>
 
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-3">
+            <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-normal text-[#1f262d] tracking-tight leading-tight mb-3">
               {hotel.name}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 mb-4">
-              <div className="flex items-center gap-1.5 font-bold text-gray-900">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-600 mb-4 font-jakarta">
+              <div className="flex items-center gap-1.5 font-bold text-[#1f262d]">
                 <span className="text-amber-500 text-base">★</span>
                 <span>{derivedStars}</span>
-                <span className="text-gray-400 font-normal">({derivedReviews.toLocaleString()} verified reviews)</span>
+                <span className="text-slate-400 font-normal">({derivedReviews.toLocaleString()} verified reviews)</span>
               </div>
-              <span className="text-gray-300 hidden sm:inline">•</span>
-              <div className="flex items-center gap-1.5 font-medium text-gray-700">
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <div className="flex items-center gap-1.5 font-medium text-slate-600">
+                <svg className="w-4 h-4 text-[#5b8296]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
                 <span>{hotel.neighborhood ? `${hotel.neighborhood}, ${cityName}` : cityName}, {countryName}</span>
                 {hotel.landmarkDistance && (
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full ml-1">
+                  <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full ml-1">
                     {hotel.landmarkDistance}
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Badges row */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+            {/* Badges row in Stitch porcelain & mist style */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 font-jakarta">
               {hotel.tubType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1a6fde]/10 text-[#1a6fde] border border-[#1a6fde]/20 font-bold text-xs sm:text-sm rounded-xl">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-xs sm:text-sm rounded-full">
                   <span className="text-base">🛁</span> {hotel.tubType}
                 </span>
               )}
               {hotel.roomType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-800 font-semibold text-xs sm:text-sm rounded-xl border border-gray-200">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-[#1f262d] font-semibold text-xs sm:text-sm rounded-full border border-slate-200/80">
                   <span>🏷️</span> Room Tier: {hotel.roomType}
                 </span>
               )}
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 font-bold text-xs sm:text-sm rounded-xl border border-emerald-200">
-                <span>✓</span> 100% In-Room Tub Guaranteed
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm rounded-full border border-emerald-200/80">
+                <span>✦</span> 100% In-Room Tub Guaranteed
               </span>
             </div>
           </div>
@@ -586,42 +588,44 @@ export default async function HotelDetailPage({
             countrySlug={countrySlug}
           />
 
-          {/* About this Hotel */}
+          {/* About this Sanctuary */}
           {hotel.description && (
-            <div className="mb-10 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs">
-              <h2 className="font-heading text-xl sm:text-2xl font-black text-gray-900 mb-3">
-                About this Stay
+            <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
+              <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-3">
+                About this Sanctuary
               </h2>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-jakarta">
                 {hotel.description}
               </p>
             </div>
           )}
 
-          {/* Booking Tip Callout Card */}
+          {/* Concierge Booking Tip Callout Card */}
           {hotel.bookingTip && (
-            <div className="bg-amber-50 border border-amber-200/80 rounded-2xl p-5 mb-10 flex items-start gap-3.5 shadow-xs">
-              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5 font-bold text-lg">
+            <div className="bg-[#f8fafb] border border-[#5b8296]/20 rounded-2xl p-5 mb-8 flex items-start gap-3.5 shadow-2xs font-jakarta">
+              <div className="w-9 h-9 rounded-xl bg-[#8eaab9]/20 text-[#1f262d] flex items-center justify-center shrink-0 mt-0.5 font-bold text-base">
                 💡
               </div>
-              <div className="text-sm text-amber-900 leading-relaxed">
-                <strong className="font-bold block mb-1 text-amber-950">Expert Booking Advice:</strong>
+              <div className="text-sm text-slate-700 leading-relaxed">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#5b8296] block mb-0.5">
+                  Concierge Booking Advice
+                </span>
                 {hotel.bookingTip}
               </div>
             </div>
           )}
 
-          {/* Amenities Grid */}
-          <div className="mb-10 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs">
-            <h2 className="font-heading text-xl sm:text-2xl font-black text-gray-900 mb-5">
+          {/* Curated Amenities Grid */}
+          <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
+            <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-5">
               Verified In-Room &amp; Property Amenities
             </h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-jakarta">
               {(hotel.amenities || []).map((amenity: string, idx: number) => {
                 const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub') || amenity.toLowerCase().includes('bathtub');
                 return (
-                  <li key={idx} className="flex items-center text-sm sm:text-base text-gray-700 gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors">
-                    <span className={isJacuzzi ? "text-[#1a6fde] font-bold text-lg shrink-0" : "text-emerald-600 font-bold text-base shrink-0"}>
+                  <li key={idx} className="flex items-center text-sm text-slate-700 gap-3 p-2.5 rounded-xl hover:bg-[#f8fafb] transition-colors">
+                    <span className={isJacuzzi ? "w-7 h-7 rounded-lg bg-[#8eaab9]/20 text-[#1f262d] flex items-center justify-center shrink-0 text-sm" : "w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 text-xs font-bold"}>
                       {isJacuzzi ? '🛁' : '✓'}
                     </span>
                     <span className="font-medium">{amenity}</span>
@@ -632,34 +636,34 @@ export default async function HotelDetailPage({
           </div>
 
           {/* Frequently Asked Questions */}
-          <div className="mb-10 bg-white rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-xs">
-            <h2 className="font-heading text-xl sm:text-2xl font-black text-gray-900 mb-5">
+          <div className="mb-10 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
+            <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-5">
               Frequently Asked Questions About {hotel.name}
             </h2>
-            <div className="space-y-4">
-              <div className="bg-slate-50 rounded-2xl p-5 border border-gray-200/80">
-                <h3 className="font-bold text-base text-gray-900 mb-2">
+            <div className="space-y-4 font-jakarta">
+              <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
+                <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
                   Does {hotel.name} guarantee a private in-room bathtub?
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  Yes, {hotel.name} offers rooms with a private in-room bathtub or jacuzzi. To guarantee this feature, you must reserve the <strong className="text-gray-900">{hotel.roomType || 'room tier featuring a bathtub'}</strong> rather than the entry-level shower-only room.
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  Yes, {hotel.name} offers rooms with a private in-room bathtub or jacuzzi. To guarantee this feature, you must reserve the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong> rather than the entry-level shower-only room.
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-5 border border-gray-200/80">
-                <h3 className="font-bold text-base text-gray-900 mb-2">
+              <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
+                <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
                   Is {hotel.name} in {cityName} couple-friendly?
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-slate-600 leading-relaxed text-sm">
                   Yes, {hotel.name} is verified as couple-friendly. Both unmarried and married couples are welcomed with standard government photo IDs and complete discretion.
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-5 border border-gray-200/80">
-                <h3 className="font-bold text-base text-gray-900 mb-2">
+              <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
+                <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
                   Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
+                <p className="text-slate-600 leading-relaxed text-sm">
                   Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile VIP discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and free cancellation.
                 </p>
               </div>
@@ -667,32 +671,32 @@ export default async function HotelDetailPage({
           </div>
         </div>
 
-        {/* Right Column: Sticky High-Converting Booking Console */}
+        {/* Right Column: Sticky Quiet-Luxury Booking Console */}
         <div className="w-full md:w-2/5 lg:w-1/3">
           <div className="sticky top-6">
-            <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-6 sm:p-7 mb-6 overflow-hidden">
-              <div className="pb-5 border-b border-gray-100 mb-5">
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 shadow-xl p-6 sm:p-7 mb-6 overflow-hidden">
+              <div className="pb-5 border-b border-[#5b8296]/15 mb-5 font-jakarta">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[11px] uppercase tracking-wider text-gray-400 font-extrabold">
+                  <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
                     Usual Nightly Benchmark
                   </span>
-                  <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
                     Verified Rates
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-3xl font-black text-gray-900">~{usualPrice}</span>
-                  <span className="text-sm text-gray-500 font-medium">/ night</span>
+                  <span className="text-3xl font-bold text-[#1f262d]">~{usualPrice}</span>
+                  <span className="text-sm text-slate-500 font-medium">/ night</span>
                 </div>
-                <p className="text-[11px] text-gray-400 mt-1 leading-normal">
+                <p className="text-[11px] text-slate-400 mt-1 leading-normal">
                   *Historical 30-day rate average. Live rates vary by dates, availability &amp; promotional tier.
                 </p>
               </div>
 
               {/* Partner Comparison Mini Table in Sticky Card */}
-              <div className="space-y-3 mb-5">
-                <span className="text-xs font-bold text-gray-700 block">
-                  Select Partner to Check Live Rates:
+              <div className="space-y-3 mb-5 font-jakarta">
+                <span className="text-xs font-semibold text-[#1f262d] block">
+                  Select Platform to Check Live Rates:
                 </span>
                 <div className="flex flex-col gap-2.5">
                   {sortedUrls.map((u, i) => (
@@ -708,23 +712,23 @@ export default async function HotelDetailPage({
               </div>
 
               {/* Bathtub Guarantee Checklist */}
-              <div className="pt-4 border-t border-gray-100 space-y-2 text-xs text-gray-600">
+              <div className="pt-4 border-t border-[#5b8296]/15 space-y-2 text-xs text-slate-600 font-jakarta">
                 <div className="flex items-center gap-2 font-medium">
-                  <span className="text-emerald-600 font-bold">✓</span>
+                  <span className="text-emerald-700 font-bold">✓</span>
                   <span>100% In-Room Tub (Never Shared Spa)</span>
                 </div>
                 <div className="flex items-center gap-2 font-medium">
-                  <span className="text-emerald-600 font-bold">✓</span>
+                  <span className="text-emerald-700 font-bold">✓</span>
                   <span>Direct Canonical Property URL</span>
                 </div>
                 <div className="flex items-center gap-2 font-medium">
-                  <span className="text-emerald-600 font-bold">✓</span>
+                  <span className="text-emerald-700 font-bold">✓</span>
                   <span>Zero Booking Fees or Hidden Markups</span>
                 </div>
               </div>
 
               {/* Room Tier Alert in Sidebar */}
-              <div className="mt-5 p-3.5 bg-amber-50 rounded-xl border border-amber-200/80 text-xs text-amber-900 leading-snug">
+              <div className="mt-5 p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 text-xs text-amber-900 leading-snug font-jakarta">
                 <strong className="font-bold block mb-1">Remember:</strong>
                 Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout to guarantee the tub.
               </div>
@@ -732,7 +736,7 @@ export default async function HotelDetailPage({
 
             <Link
               href={`/${countrySlug}/${citySlug}`}
-              className="block text-center text-sm font-bold text-[#1a6fde] hover:underline transition-colors"
+              className="block text-center text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] hover:underline transition-colors font-jakarta"
             >
               &larr; Explore all {cityName} bathtub hotels
             </Link>
@@ -742,19 +746,19 @@ export default async function HotelDetailPage({
 
       {/* Similar Verified Bathtub Hotels in the City */}
       {similarHotels.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12 border-t border-gray-100">
+        <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12 border-t border-[#5b8296]/15">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="font-heading text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+              <h2 className="font-playfair text-2xl sm:text-3xl font-normal text-[#1f262d] tracking-tight">
                 More Verified Bathtub Hotels in {cityName}
               </h2>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-slate-500 mt-1 font-jakarta">
                 Explore alternative romantic stays with guaranteed in-room bathtubs &amp; jacuzzi suites.
               </p>
             </div>
             <Link 
               href={`/${countrySlug}/${citySlug}`}
-              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-[#1a6fde] hover:underline"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] hover:underline font-jakarta"
             >
               <span>View all in {cityName}</span>
               <span>&rarr;</span>
@@ -768,54 +772,54 @@ export default async function HotelDetailPage({
               return (
                 <div
                   key={sim._id || idx}
-                  className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md hover:border-[#1a6fde] transition-all flex flex-col group overflow-hidden"
+                  className="bg-white/90 backdrop-blur-md rounded-2xl border border-[#5b8296]/20 shadow-2xs hover:shadow-md hover:border-[#5b8296] transition-all flex flex-col group overflow-hidden"
                 >
-                  <div className="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
+                  <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden">
                     <Image
                       src={imageUrl(sim.image)}
                       alt={sim.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute top-2.5 left-2.5">
-                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-xs flex items-center gap-1 shadow-xs">
-                        <span>✓</span> Verified Bathtub
+                      <span className="bg-white/90 backdrop-blur-md text-[#1f262d] border border-white/40 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs font-jakarta">
+                        <span className="text-emerald-700 font-bold">✓</span> Verified Tub
                       </span>
                     </div>
                   </div>
 
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-1 text-xs font-bold text-gray-800 mb-1.5">
+                      <div className="flex items-center gap-1 text-xs font-bold text-slate-800 mb-1.5 font-jakarta">
                         <span className="text-amber-500">★</span>
                         <span>{(sim.rating && Number(sim.rating) > 0) ? Number(sim.rating).toFixed(1) : '4.5'}</span>
-                        <span className="text-gray-400 font-normal">({sim.reviewsCount || 120})</span>
+                        <span className="text-slate-400 font-normal">({sim.reviewsCount || 120})</span>
                       </div>
-                      <Link href={simUrl} className="font-heading font-bold text-sm text-gray-900 group-hover:text-[#1a6fde] transition-colors line-clamp-2 mb-2 leading-snug">
+                      <Link href={simUrl} className="font-playfair font-semibold text-base text-[#1f262d] group-hover:text-[#5b8296] transition-colors line-clamp-2 mb-2 leading-snug">
                         {sim.name}
                       </Link>
                       {sim.tubType && (
-                        <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-[#1a6fde] font-bold text-[10px] rounded-md border border-blue-100 mb-3">
+                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#8eaab9]/15 text-[#1f262d] font-semibold text-[10px] rounded-full border border-[#5b8296]/25 mb-3 font-jakarta">
                           <span>🛁</span> {sim.tubType}
                         </div>
                       )}
                     </div>
 
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between font-jakarta">
                       {sim.price ? (
                         <div>
-                          <span className="text-[10px] text-gray-400 block leading-none">Usual Rate</span>
-                          <span className="text-sm font-black text-gray-900">~{sim.price}</span>
+                          <span className="text-[10px] text-slate-400 block leading-none">Usual Rate</span>
+                          <span className="text-sm font-bold text-[#1f262d]">~{sim.price}</span>
                         </div>
                       ) : (
-                        <span className="text-[11px] text-gray-400">Usual Rates on OTA</span>
+                        <span className="text-[11px] text-slate-400">Usual Rates on OTA</span>
                       )}
                       <Link
                         href={simUrl}
-                        className="px-3.5 py-1.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs rounded-lg transition-colors shadow-xs"
+                        className="px-3 py-1.5 bg-[#1f262d] hover:bg-[#2c3640] text-white font-semibold text-xs rounded-xl transition-colors shadow-2xs"
                       >
-                        View Stay
+                        Inspect Stay
                       </Link>
                     </div>
                   </div>
@@ -827,7 +831,7 @@ export default async function HotelDetailPage({
           <div className="mt-8 text-center sm:hidden">
             <Link 
               href={`/${countrySlug}/${citySlug}`}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-800 font-bold text-sm rounded-xl hover:bg-gray-200 transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-800 font-semibold text-sm rounded-xl hover:bg-slate-200 transition-colors w-full font-jakarta"
             >
               <span>View all verified stays in {cityName} &rarr;</span>
             </Link>
