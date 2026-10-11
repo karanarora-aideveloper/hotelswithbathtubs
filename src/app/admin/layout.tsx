@@ -23,7 +23,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded-full font-bold">AI</span>
           </Link>
           
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2 px-4">Growth & Data</div>
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2 px-4">Growth &amp; Data</div>
+          <Link href="/admin/audit" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors flex items-center justify-between">
+            <span>Master Data Audit</span>
+            <span className="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">ITER 1</span>
+          </Link>
           <Link href="/admin/review" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors flex items-center justify-between">
             <span>Bathtub Review Queue</span>
             <span className="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full font-bold">NEW</span>
