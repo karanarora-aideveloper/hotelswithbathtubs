@@ -186,45 +186,50 @@ export function wrapOutboundAffiliateLink(
 }
 
 /**
- * Returns true if the URL points directly to a specific hotel or property page
- * (or has a pinned property ID like hid= / selectedproperty= / hotelId= / /rooms/),
- * rather than a generic text search results page.
+ * Returns a numeric tier for how direct a booking URL is:
+ * 0 = True Standalone Property Detail Page (/hotel/*.html, hotel-details, /rooms/*)
+ * 1 = Pinned Property ID on City Search (hid=, selectedproperty=)
+ * 2 = City / Keyword Search Fallback
  */
-export function isDirectPropertyUrl(url?: string): boolean {
-  if (!url) return false;
+export function getUrlDirectnessTier(url?: string): number {
+  if (!url) return 3;
   const lower = url.toLowerCase();
 
   if (lower.includes('agoda.com')) {
-    return (
-      lower.includes('/hotel/') ||
-      lower.includes('hid=') ||
-      lower.includes('selectedproperty=')
-    );
+    if (lower.includes('/hotel/') && lower.includes('.html')) return 0;
+    if (lower.includes('hid=') || lower.includes('selectedproperty=')) return 1;
+    return 2;
   }
   if (lower.includes('makemytrip.com')) {
-    return (
-      (lower.includes('hotel-details') || lower.includes('hotelid=')) &&
-      !lower.includes('hotel-listing')
-    );
+    if ((lower.includes('hotel-details') || lower.includes('hotelid=')) && !lower.includes('hotel-listing')) return 0;
+    return 2;
   }
   if (lower.includes('booking.com')) {
-    return lower.includes('/hotel/') && !lower.includes('searchresults');
+    if (lower.includes('/hotel/') && !lower.includes('searchresults')) return 0;
+    return 2;
   }
   if (lower.includes('airbnb.')) {
-    return lower.includes('/rooms/');
+    if (lower.includes('/rooms/')) return 0;
+    return 2;
   }
   if (lower.includes('trip.com')) {
-    return (
-      lower.includes('/hotels/detail') ||
-      (lower.includes('/hotels/') && !lower.includes('/list?'))
-    );
+    if (lower.includes('/hotels/detail') || (lower.includes('/hotels/') && !lower.includes('/list?'))) return 0;
+    return 2;
   }
-  return false;
+  return 2;
+}
+
+/**
+ * Returns true ONLY if the URL points to a standalone hotel or room detail page
+ * (never a city search list).
+ */
+export function isDirectPropertyUrl(url?: string): boolean {
+  return getUrlDirectnessTier(url) === 0;
 }
 
 /**
  * Checks all available booking URLs for a hotel and returns the first specific
- * (non-generic aggregator search) page URL, if available.
+ * standalone property page URL, if available.
  */
 export function getSpecificHotelLink(hotel: {
   url?: string;
@@ -247,4 +252,5 @@ export function getSpecificHotelLink(hotel: {
   }
   return null;
 }
+
 
