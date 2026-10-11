@@ -3,10 +3,9 @@
 import { trackEvent } from '@/lib/analytics';
 import { recordBookingConversion } from '@/lib/gtag';
 import { wrapOutboundAffiliateLink } from '@/lib/affiliate';
+import { recordSessionRecurrenceUpdate } from '@/lib/userRecurrence';
 import posthog from 'posthog-js';
 import { isUserExcluded } from '@/lib/exclusion';
-
-
 
 export default function OutboundLink({
   href,
@@ -50,12 +49,26 @@ export default function OutboundLink({
           destinationUrl: affiliateLink,
         });
 
+        // Update persistent recurrence profile as a converted buyer
+        recordSessionRecurrenceUpdate({
+          timeSpentSeconds: 0,
+          hotelsViewedCount: 1,
+          converted: true,
+          lastClickedUrl: affiliateLink,
+        });
+
         // Track to PostHog — links to session recording (if not excluded)
         try {
           if (!isUserExcluded()) {
             posthog.capture('hotel_booking_click', {
               ...eventProps,
-              $set: { last_booking_source: source, last_booked_city: cityName },
+              $set: {
+                has_ever_converted: true,
+                last_booking_source: source,
+                last_booked_city: cityName,
+                last_booked_hotel: hotelName,
+                last_exit_link: affiliateLink,
+              },
             });
           }
         } catch (_) {}

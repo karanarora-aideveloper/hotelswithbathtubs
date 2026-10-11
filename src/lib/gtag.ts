@@ -18,9 +18,12 @@ export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_ID ||
   '';
 
-
-
 import { isUserExcluded } from '@/lib/exclusion';
+import posthog from 'posthog-js';
+import {
+  getUserRecurrenceData,
+  recordSessionRecurrenceUpdate,
+} from '@/lib/userRecurrence';
 
 /**
  * Check if current user has opted out or flagged internal traffic via /admin or ?exclude=true
@@ -47,10 +50,8 @@ export const applyGAExclusion = (gaId?: string) => {
   }
 };
 
-import posthog from 'posthog-js';
-
 /**
- * Send raw event to GA4 and PostHog in sync
+ * Send event to GA4 and PostHog in lockstep with beacon transport for exit reliability
  */
 export const sendGA4Event = (eventName: string, params?: Record<string, any>) => {
   if (typeof window === 'undefined') return;
@@ -62,14 +63,13 @@ export const sendGA4Event = (eventName: string, params?: Record<string, any>) =>
     return;
   }
 
-  // 1. GA4 gtag / dataLayer
+  // 1. Google Analytics 4 via dataLayer / gtag
   const eventParams = { ...params, transport_type: 'beacon' };
   
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', eventName, eventParams);
-  } else if (Array.isArray(window.dataLayer)) {
-    // Push as arguments-like array for gtag.js to process when it loads
-    window.dataLayer.push(['event', eventName, eventParams]);
+  if (typeof (window as any).gtag === 'function') {
+    (window as any).gtag('event', eventName, eventParams);
+  } else if (Array.isArray((window as any).dataLayer)) {
+    (window as any).dataLayer.push(['event', eventName, eventParams]);
   }
 
   // 2. PostHog Event Stream
@@ -80,8 +80,11 @@ export const sendGA4Event = (eventName: string, params?: Record<string, any>) =>
           ...params,
           $set: {
             last_churn_type: params?.churn_type,
+            last_exit_link: params?.last_clicked_url,
+            last_clicked_text: params?.last_clicked_text,
             last_max_scroll: params?.max_scroll_depth,
             last_time_spent_seconds: params?.time_spent_seconds,
+            last_active_time_seconds: params?.active_time_seconds,
           },
         });
       } else if (eventName === 'hotel_booking_click') {
@@ -89,8 +92,9 @@ export const sendGA4Event = (eventName: string, params?: Record<string, any>) =>
           ...params,
           $set: {
             has_converted: true,
-            last_booked_hotel: params?.hotelName || params?.hotel_name,
-            last_booking_source: params?.bookingSource || params?.booking_source,
+            last_booked_hotel: params?.hotel_name || params?.hotelName,
+            last_booking_source: params?.booking_source || params?.bookingSource,
+            last_destination_url: params?.destination_url || params?.destinationUrl,
           },
         });
       } else {
@@ -111,6 +115,8 @@ export interface PageSessionState {
   country?: string;
   city?: string;
   startTime: number;
+  lastActiveTime: number;
+  activeTimeSeconds: number;
   maxScrollPercent: number;
   lastVisibleSection: string;
   hotelsViewedCount: number;
@@ -119,27 +125,38 @@ export interface PageSessionState {
   conversionDetails?: {
     hotelName?: string;
     bookingSource?: string;
+    destinationUrl?: string;
   };
+  lastClickedUrl?: string;
+  lastClickedText?: string;
+  lastClickedType?: string;
+  timeToLastClickSeconds?: number;
+  exitTrigger: 'link_click' | 'tab_close_or_nav' | 'idle_timeout' | 'unknown';
   hadSearchZeroResults: boolean;
   lastFailedSearch?: string;
   hadFilterDeadEnd: boolean;
   lastFailedFilter?: string;
   hadRageClick: boolean;
   rageClickDetails?: string;
+  churnDispatched: boolean;
 }
 
 let currentSession: PageSessionState = {
   pagePath: '',
   pageType: 'unknown',
   startTime: Date.now(),
+  lastActiveTime: Date.now(),
+  activeTimeSeconds: 0,
   maxScrollPercent: 0,
   lastVisibleSection: 'top',
   hotelsViewedCount: 0,
   viewedHotelNames: new Set<string>(),
   hasConverted: false,
+  exitTrigger: 'unknown',
   hadSearchZeroResults: false,
   hadFilterDeadEnd: false,
   hadRageClick: false,
+  churnDispatched: false,
 };
 
 /**
@@ -151,27 +168,100 @@ export const initPageSession = (
   country?: string,
   city?: string
 ) => {
+  const now = Date.now();
   currentSession = {
     pagePath,
     pageType,
     country,
     city,
-    startTime: Date.now(),
+    startTime: now,
+    lastActiveTime: now,
+    activeTimeSeconds: 0,
     maxScrollPercent: 0,
     lastVisibleSection: 'top',
     hotelsViewedCount: 0,
     viewedHotelNames: new Set<string>(),
     hasConverted: false,
+    exitTrigger: 'unknown',
     hadSearchZeroResults: false,
     hadFilterDeadEnd: false,
     hadRageClick: false,
+    churnDispatched: false,
   };
+};
+
+/**
+ * Record active interaction heartbeat (mouse, scroll, keypress, touch)
+ */
+export const recordActiveHeartbeat = () => {
+  const now = Date.now();
+  const elapsedSinceLastActive = (now - currentSession.lastActiveTime) / 1000;
+  // If active within last 5 seconds, increment active time
+  if (elapsedSinceLastActive <= 5) {
+    currentSession.activeTimeSeconds += Math.round(elapsedSinceLastActive);
+  }
+  currentSession.lastActiveTime = now;
+};
+
+/**
+ * Categorize clicked link target
+ */
+export const categorizeLink = (href: string): string => {
+  if (!href) return 'unknown';
+  const lower = href.toLowerCase();
+  if (
+    lower.includes('agoda.com') ||
+    lower.includes('makemytrip.com') ||
+    lower.includes('booking.com') ||
+    lower.includes('trip.com') ||
+    lower.includes('airbnb') ||
+    lower.includes('trivago') ||
+    lower.includes('tripadvisor')
+  ) {
+    return 'outbound_affiliate';
+  }
+  if (lower.includes('pinterest.com') || lower.includes('facebook') || lower.includes('instagram') || lower.includes('twitter')) {
+    return 'external_social';
+  }
+  if (lower.startsWith('http') && !lower.includes('hotelswithbathtubs.com')) {
+    return 'external_outbound';
+  }
+  if (lower.includes('/blog')) {
+    return 'internal_blog';
+  }
+  if (lower.split('/').filter(Boolean).length >= 3) {
+    return 'internal_hotel';
+  }
+  if (lower.split('/').filter(Boolean).length === 2) {
+    return 'internal_city';
+  }
+  if (lower === '/' || lower.split('/').filter(Boolean).length === 1) {
+    return 'internal_nav';
+  }
+  return 'internal_other';
+};
+
+/**
+ * Record any link or button clicked by the user
+ */
+export const recordUserClick = (
+  url: string,
+  text: string,
+  type?: string
+) => {
+  currentSession.lastClickedUrl = url;
+  currentSession.lastClickedText = (text || '').trim().slice(0, 80);
+  currentSession.lastClickedType = type || categorizeLink(url);
+  currentSession.timeToLastClickSeconds = Math.max(1, Math.round((Date.now() - currentSession.startTime) / 1000));
+  currentSession.exitTrigger = 'link_click';
+  recordActiveHeartbeat();
 };
 
 /**
  * Update maximum scroll depth reached on page
  */
 export const updateMaxScroll = (percent: number) => {
+  recordActiveHeartbeat();
   if (percent > currentSession.maxScrollPercent) {
     currentSession.maxScrollPercent = Math.min(100, Math.round(percent));
   }
@@ -222,7 +312,13 @@ export const recordBookingConversion = (params: {
   currentSession.conversionDetails = {
     hotelName: params.hotelName,
     bookingSource: params.bookingSource,
+    destinationUrl: params.destinationUrl,
   };
+  currentSession.lastClickedUrl = params.destinationUrl;
+  currentSession.lastClickedText = `Book on ${params.bookingSource || 'Partner'}`;
+  currentSession.lastClickedType = 'outbound_affiliate';
+  currentSession.timeToLastClickSeconds = Math.max(1, Math.round((Date.now() - currentSession.startTime) / 1000));
+  currentSession.exitTrigger = 'link_click';
 
   sendGA4Event('hotel_booking_click', {
     hotel_name: params.hotelName,
@@ -230,7 +326,7 @@ export const recordBookingConversion = (params: {
     country_name: params.countryName || currentSession.country,
     booking_source: params.bookingSource,
     destination_url: params.destinationUrl,
-    time_to_click_seconds: Math.round((Date.now() - currentSession.startTime) / 1000),
+    time_to_click_seconds: currentSession.timeToLastClickSeconds,
     max_scroll_depth: currentSession.maxScrollPercent,
     hotels_viewed_count: currentSession.hotelsViewedCount,
   });
@@ -339,6 +435,7 @@ export const recordExitIntent = (timeSpentSeconds: number) => {
     time_spent_seconds: timeSpentSeconds,
     max_scroll_depth: currentSession.maxScrollPercent,
     last_visible_section: currentSession.lastVisibleSection,
+    last_clicked_url: currentSession.lastClickedUrl || 'none',
     page_path: currentSession.pagePath,
     page_type: currentSession.pageType,
     city: currentSession.city,
@@ -359,13 +456,26 @@ export const record404Error = (path: string, referrer: string) => {
 /**
  * Evaluate session outcome and dispatch user_churn event upon exit/unload
  */
-export const dispatchUserChurn = () => {
-  if (!currentSession.pagePath) return;
+export const dispatchUserChurn = (explicitExitTrigger?: 'link_click' | 'tab_close_or_nav') => {
+  if (!currentSession.pagePath || currentSession.churnDispatched) return;
+  currentSession.churnDispatched = true;
 
-  const timeSpentSeconds = Math.max(1, Math.round((Date.now() - currentSession.startTime) / 1000));
+  if (explicitExitTrigger) {
+    currentSession.exitTrigger = explicitExitTrigger;
+  } else if (currentSession.exitTrigger === 'unknown') {
+    currentSession.exitTrigger = 'tab_close_or_nav';
+  }
+
+  const now = Date.now();
+  const timeSpentSeconds = Math.max(1, Math.round((now - currentSession.startTime) / 1000));
+  const activeTimeSeconds = Math.max(1, Math.min(timeSpentSeconds, currentSession.activeTimeSeconds || Math.round(timeSpentSeconds * 0.75)));
+  const idleTimeSeconds = Math.max(0, timeSpentSeconds - activeTimeSeconds);
   const scrollDepth = currentSession.maxScrollPercent;
 
-  // Determine churn category
+  // Read anonymous user retention / recurrence data
+  const recurrence = getUserRecurrenceData();
+
+  // Determine granular churn category
   let churnType:
     | 'converted_exit'
     | 'quick_bounce'
@@ -374,6 +484,7 @@ export const dispatchUserChurn = () => {
     | 'filter_dead_end'
     | 'engaged_no_click'
     | 'rage_click_churn'
+    | 'outbound_exit_unconverted'
     | 'standard_exit';
 
   if (currentSession.hasConverted) {
@@ -384,28 +495,60 @@ export const dispatchUserChurn = () => {
     churnType = 'filter_dead_end';
   } else if (currentSession.hadSearchZeroResults) {
     churnType = 'search_abandoned';
-  } else if (timeSpentSeconds < 10 && scrollDepth < 25) {
+  } else if (currentSession.lastClickedType === 'external_social' || currentSession.lastClickedType === 'external_outbound') {
+    churnType = 'outbound_exit_unconverted';
+  } else if (timeSpentSeconds < 8 && scrollDepth < 20) {
     churnType = 'quick_bounce';
-  } else if (timeSpentSeconds < 30 && scrollDepth < 40) {
+  } else if (timeSpentSeconds < 25 && scrollDepth < 35) {
     churnType = 'shallow_browse';
-  } else if (timeSpentSeconds >= 30 && scrollDepth >= 40) {
+  } else if (timeSpentSeconds >= 25 && scrollDepth >= 35) {
     churnType = 'engaged_no_click';
   } else {
     churnType = 'standard_exit';
   }
 
-  sendGA4Event('user_churn', {
+  // Update persistent user retention stats
+  recordSessionRecurrenceUpdate({
+    timeSpentSeconds,
+    hotelsViewedCount: currentSession.hotelsViewedCount,
+    converted: currentSession.hasConverted,
+    churnType,
+    lastClickedUrl: currentSession.lastClickedUrl,
+  });
+
+  // Construct comprehensive churn telemetry payload
+  const churnPayload = {
     churn_type: churnType,
     page_path: currentSession.pagePath,
     page_type: currentSession.pageType,
     country: currentSession.country || 'unknown',
     city: currentSession.city || 'unknown',
+    // Time Analytics
     time_spent_seconds: timeSpentSeconds,
+    active_time_seconds: activeTimeSeconds,
+    idle_time_seconds: idleTimeSeconds,
+    time_to_last_click_seconds: currentSession.timeToLastClickSeconds || 0,
+    // Click & Exit Link Telemetry
+    last_clicked_url: currentSession.lastClickedUrl || 'none',
+    last_clicked_text: currentSession.lastClickedText || 'none',
+    last_clicked_type: currentSession.lastClickedType || 'none',
+    exit_trigger: currentSession.exitTrigger,
+    // Engagement Depth
     max_scroll_depth: scrollDepth,
     last_visible_section: currentSession.lastVisibleSection,
     hotels_viewed_count: currentSession.hotelsViewedCount,
     has_converted: currentSession.hasConverted,
+    // User Recurrence & Cohort Telemetry
+    user_type: recurrence.isReturningUser ? 'returning' : 'new',
+    session_number: recurrence.sessionNumber,
+    days_since_first_visit: recurrence.daysSinceFirstVisit,
+    days_since_last_visit: recurrence.daysSinceLastVisit,
+    has_ever_converted: recurrence.hasEverConverted || currentSession.hasConverted,
+    lifetime_time_spent_seconds: recurrence.lifetimeTimeSpentSeconds + timeSpentSeconds,
+    // Pain point diagnostics
     failed_search: currentSession.lastFailedSearch || '',
     failed_filter: currentSession.lastFailedFilter || '',
-  });
+  };
+
+  sendGA4Event('user_churn', churnPayload);
 };

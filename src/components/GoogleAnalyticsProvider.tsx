@@ -9,11 +9,14 @@ import {
   updateLastVisibleSection,
   recordExitIntent,
   recordRageClick,
+  recordUserClick,
+  recordActiveHeartbeat,
   dispatchUserChurn,
   applyGAExclusion,
   isGAExcluded,
   setRuntimeGAId,
 } from '@/lib/gtag';
+import { getUserRecurrenceData } from '@/lib/userRecurrence';
 
 // Parse country, city, and page_type from route pathname
 const getRouteContext = (path: string) => {
@@ -41,6 +44,10 @@ const getRouteContext = (path: string) => {
     return { page_type: 'city_listings', country: parts[0], city: parts[1] };
   }
 
+  if (parts.length >= 3) {
+    return { page_type: 'hotel_detail', country: parts[0], city: parts[1], hotel: parts[2] };
+  }
+
   return { page_type: 'other', country: undefined, city: undefined };
 };
 
@@ -51,6 +58,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
   const firedScrollMilestones = useRef<Set<number>>(new Set());
   const exitIntentFired = useRef<boolean>(false);
   const clickHistory = useRef<Array<{ time: number; x: number; y: number; target: HTMLElement }>>([]);
+  const repeatVisitTracked = useRef<boolean>(false);
 
   // Check exclusion on mount and when gaId changes
   useEffect(() => {
@@ -78,7 +86,33 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
     const url = window.location.href;
     const title = document.title;
 
-    // Send standard GA4 page_view
+    // Get persistent recurrence data
+    const recurrence = getUserRecurrenceData();
+
+    // Set GA4 User Properties for Cohort & Retention exploration
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('set', 'user_properties', {
+        user_type: recurrence.isReturningUser ? 'returning' : 'new',
+        session_number: recurrence.sessionNumber,
+        days_since_first_visit: recurrence.daysSinceFirstVisit,
+        days_since_last_visit: recurrence.daysSinceLastVisit,
+        has_ever_converted: recurrence.hasEverConverted,
+      });
+    }
+
+    // Fire explicit repeat visitor telemetry if returning
+    if (recurrence.isReturningUser && !repeatVisitTracked.current) {
+      repeatVisitTracked.current = true;
+      sendGA4Event('user_repeat_visit', {
+        session_number: recurrence.sessionNumber,
+        days_since_last_visit: recurrence.daysSinceLastVisit,
+        previous_churn_type: recurrence.previousChurnType || 'unknown',
+        has_ever_converted: recurrence.hasEverConverted,
+        page_path: pathname,
+      });
+    }
+
+    // Send standard GA4 page_view with rich dimensions
     sendGA4Event('page_view', {
       page_location: url,
       page_path: pathname,
@@ -86,6 +120,9 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
       page_type: context.page_type,
       country: context.country || 'all',
       city: context.city || 'all',
+      user_type: recurrence.isReturningUser ? 'returning' : 'new',
+      session_number: recurrence.sessionNumber,
+      days_since_last_visit: recurrence.daysSinceLastVisit,
     });
   }, [pathname, searchParams]);
 
@@ -96,17 +133,17 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
 
     return () => {
       // Dispatches churn telemetry when user navigates away to another page
-      dispatchUserChurn();
+      dispatchUserChurn('link_click');
     };
   }, [pathname]);
 
-  // Churn dispatch on tab close, browser switch, or app minimize (beforeunload / visibilitychange / pagehide)
+  // Churn dispatch on tab close, browser switch, or app minimize
   useEffect(() => {
     const context = getRouteContext(pathname);
     if (context.page_type === 'admin') return;
 
     const handleExit = () => {
-      dispatchUserChurn();
+      dispatchUserChurn('tab_close_or_nav');
     };
 
     const handleVisibilityChange = () => {
@@ -124,6 +161,67 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
       window.removeEventListener('pagehide', handleExit);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
+  }, [pathname]);
+
+  // Global Active Interaction Heartbeat (Differentiates active reading from idle background tabs)
+  useEffect(() => {
+    const context = getRouteContext(pathname);
+    if (context.page_type === 'admin') return;
+
+    const onUserActivity = () => {
+      recordActiveHeartbeat();
+    };
+
+    window.addEventListener('mousemove', onUserActivity, { passive: true });
+    window.addEventListener('keydown', onUserActivity, { passive: true });
+    window.addEventListener('touchstart', onUserActivity, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', onUserActivity);
+      window.removeEventListener('keydown', onUserActivity);
+      window.removeEventListener('touchstart', onUserActivity);
+    };
+  }, [pathname]);
+
+  // Global Click Tracking (Intercepts exact links and buttons clicked before exit or navigation)
+  useEffect(() => {
+    const context = getRouteContext(pathname);
+    if (context.page_type === 'admin') return;
+
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('a, button') as HTMLElement | null;
+      if (!target) return;
+
+      const href = target.getAttribute('href') || (target as any).href || '';
+      const text = (target.textContent || target.getAttribute('aria-label') || target.getAttribute('title') || '').trim();
+
+      if (href) {
+        recordUserClick(href, text);
+
+        // If clicking an external non-affiliate link (e.g. Pinterest, social, source)
+        if (href.startsWith('http') && !href.includes('hotelswithbathtubs.com')) {
+          const isAffiliate =
+            href.includes('agoda.com') ||
+            href.includes('makemytrip.com') ||
+            href.includes('booking.com') ||
+            href.includes('trip.com') ||
+            href.includes('airbnb');
+
+          if (!isAffiliate) {
+            sendGA4Event('outbound_exit_click', {
+              destination_url: href,
+              link_text: text.slice(0, 50),
+              page_path: pathname,
+            });
+          }
+        }
+      } else if (text) {
+        recordUserClick(`button:${text.slice(0, 30)}`, text);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick, { capture: true, passive: true });
+    return () => document.removeEventListener('click', handleDocumentClick, { capture: true });
   }, [pathname]);
 
   // Scroll depth tracking (25%, 50%, 75%, 90%, 100%)
@@ -233,7 +331,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [pathname]);
 
-  // Rage Click Detection (3+ clicks within 1000ms in a small radius -> indicates user frustration)
+  // Rage Click Detection (3+ clicks within 1200ms in a small radius -> indicates user frustration)
   useEffect(() => {
     const context = getRouteContext(pathname);
     if (context.page_type === 'admin') return;
