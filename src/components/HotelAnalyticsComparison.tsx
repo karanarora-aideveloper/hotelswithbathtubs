@@ -2,6 +2,7 @@
 
 import React from 'react';
 import OutboundLink from './OutboundLink';
+import { isDirectPropertyUrl } from '@/lib/affiliate';
 
 interface HotelAnalyticsProps {
   hotel: {
@@ -220,6 +221,18 @@ export default function HotelAnalyticsComparison({
       'Flexible cancellation on select stays',
     ],
     isLowest: hasDirectAirbnb,
+  });
+
+  // Sort platforms so direct property links always appear above generic search fallbacks
+  platforms.sort((a, b) => {
+    const directA = isDirectPropertyUrl(a.url) ? 0 : 1;
+    const directB = isDirectPropertyUrl(b.url) ? 0 : 1;
+    return directA - directB;
+  });
+
+  // Ensure the #1 top-ranked platform carries the featured highlight badge
+  platforms.forEach((p, idx) => {
+    p.isLowest = idx === 0;
   });
 
   // Tub Classification

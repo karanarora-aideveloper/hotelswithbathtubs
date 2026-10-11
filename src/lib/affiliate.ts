@@ -31,17 +31,31 @@ export function getTripAffiliateLink(
 }
 
 /**
- * Transforms an Agoda hotel URL to include the affiliate tracking CID
+ * Transforms an Agoda hotel URL to include the affiliate tracking CID.
+ * Automatically rewrites legacy /search?text= URLs (which 301-redirect to /)
+ * into Agoda's official partnersearch.aspx deep link format.
  */
 export function getAgodaAffiliateLink(url: string, cid: string = DEFAULT_AGODA_CID): string {
   if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
     return url;
   }
-  
+
   try {
     const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.includes('agoda.com') && cid) {
-      parsedUrl.searchParams.set('cid', cid);
+    if (parsedUrl.hostname.includes('agoda.com')) {
+      const textQuery = parsedUrl.searchParams.get('text');
+      const hasDirectProperty =
+        parsedUrl.searchParams.has('hid') ||
+        parsedUrl.searchParams.has('selectedproperty') ||
+        parsedUrl.searchParams.has('city');
+
+      if (parsedUrl.pathname.endsWith('/search') && textQuery && !hasDirectProperty) {
+        return `https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=${encodeURIComponent(cid || DEFAULT_AGODA_CID)}&txt=${encodeURIComponent(textQuery)}`;
+      }
+
+      if (cid) {
+        parsedUrl.searchParams.set('cid', cid);
+      }
       return parsedUrl.toString();
     }
   } catch (e) {
@@ -172,6 +186,43 @@ export function wrapOutboundAffiliateLink(
 }
 
 /**
+ * Returns true if the URL points directly to a specific hotel or property page
+ * (or has a pinned property ID like hid= / selectedproperty= / hotelId= / /rooms/),
+ * rather than a generic text search results page.
+ */
+export function isDirectPropertyUrl(url?: string): boolean {
+  if (!url) return false;
+  const lower = url.toLowerCase();
+
+  if (lower.includes('agoda.com')) {
+    return (
+      lower.includes('/hotel/') ||
+      lower.includes('hid=') ||
+      lower.includes('selectedproperty=')
+    );
+  }
+  if (lower.includes('makemytrip.com')) {
+    return (
+      (lower.includes('hotel-details') || lower.includes('hotelid=')) &&
+      !lower.includes('hotel-listing')
+    );
+  }
+  if (lower.includes('booking.com')) {
+    return lower.includes('/hotel/') && !lower.includes('searchresults');
+  }
+  if (lower.includes('airbnb.')) {
+    return lower.includes('/rooms/');
+  }
+  if (lower.includes('trip.com')) {
+    return (
+      lower.includes('/hotels/detail') ||
+      (lower.includes('/hotels/') && !lower.includes('/list?'))
+    );
+  }
+  return false;
+}
+
+/**
  * Checks all available booking URLs for a hotel and returns the first specific
  * (non-generic aggregator search) page URL, if available.
  */
@@ -182,51 +233,18 @@ export function getSpecificHotelLink(hotel: {
   airbnbUrl?: string;
   tripUrl?: string;
 }): string | null {
-  const isMmtSpecific = (u?: string) => {
-    if (!u) return false;
-    const lower = u.toLowerCase();
-    return lower.includes('makemytrip.com') && (lower.includes('hotel-details') || lower.includes('hotelid=') || lower.includes('hotel-listing'));
-  };
-
-  const isAgodaSpecific = (u?: string) => {
-    if (!u) return false;
-    const lower = u.toLowerCase();
-    return lower.includes('agoda.com') && (lower.includes('partnersearch') || lower.includes('/hotel/') || lower.includes('.html') || lower.includes('search'));
-  };
-
-  const isBookingSpecific = (u?: string) => {
-    if (!u) return false;
-    const lower = u.toLowerCase();
-    return lower.includes('booking.com') && (lower.includes('searchresults') || lower.includes('/hotel/') || lower.includes('.html'));
-  };
-
-  const isAirbnbSpecific = (u?: string) => {
-    if (!u) return false;
-    const lower = u.toLowerCase();
-    return lower.includes('airbnb') && (lower.includes('/rooms/') || lower.includes('/hotel/'));
-  };
-
-  const isTripSpecific = (u?: string) => {
-    if (!u) return false;
-    const lower = u.toLowerCase();
-    return lower.includes('trip.com') && (lower.includes('/hotels/') || lower.includes('/detail/'));
-  };
-
-  if (isAirbnbSpecific(hotel.airbnbUrl)) {
-    return hotel.airbnbUrl!;
+  const candidates = [
+    hotel.agodaUrl,
+    hotel.url,
+    hotel.bookingUrl,
+    hotel.airbnbUrl,
+    hotel.tripUrl,
+  ];
+  for (const candidate of candidates) {
+    if (isDirectPropertyUrl(candidate)) {
+      return candidate!;
+    }
   }
-  if (isBookingSpecific(hotel.bookingUrl)) {
-    return hotel.bookingUrl!;
-  }
-  if (isAgodaSpecific(hotel.agodaUrl)) {
-    return hotel.agodaUrl!;
-  }
-  if (isTripSpecific(hotel.tripUrl)) {
-    return hotel.tripUrl!;
-  }
-  if (isMmtSpecific(hotel.url)) {
-    return hotel.url!;
-  }
-
   return null;
 }
+

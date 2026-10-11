@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
+import { isDirectPropertyUrl } from '@/lib/affiliate';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import fs from 'node:fs';
@@ -407,6 +408,10 @@ export default async function HotelDetailPage({
     .filter((u, idx, arr) => arr.indexOf(u) === idx);
   
   const sortedUrls = [...rawUrls].sort((a, b) => {
+    const directA = isDirectPropertyUrl(a) ? 0 : 1;
+    const directB = isDirectPropertyUrl(b) ? 0 : 1;
+    if (directA !== directB) return directA - directB;
+
     const provA = getUrlProvider(a);
     const provB = getUrlProvider(b);
     const priority: Record<string, number> = isIndia

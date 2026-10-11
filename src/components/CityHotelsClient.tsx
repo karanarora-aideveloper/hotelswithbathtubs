@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
+import { isDirectPropertyUrl } from '@/lib/affiliate';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
@@ -411,7 +412,11 @@ export default function CityHotelsClient({
         if (pB === 0) return -1;
         return sortBy === 'price_asc' ? pA - pB : pB - pA;
       }
-      return 0; // recommended preserves order
+      // Recommended: prioritize stays that have at least one direct property URL, then rating
+      const hasDirectA = [a.agodaUrl, a.url, a.bookingUrl, a.airbnbUrl, a.tripUrl].some(isDirectPropertyUrl) ? 0 : 1;
+      const hasDirectB = [b.agodaUrl, b.url, b.bookingUrl, b.airbnbUrl, b.tripUrl].some(isDirectPropertyUrl) ? 0 : 1;
+      if (hasDirectA !== hasDirectB) return hasDirectA - hasDirectB;
+      return (b.rating || 0) - (a.rating || 0);
     });
 
     return result;
@@ -989,6 +994,10 @@ export default function CityHotelsClient({
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
             
             const sortedUrls = [...rawUrls].sort((a, b) => {
+              const directA = isDirectPropertyUrl(a) ? 0 : 1;
+              const directB = isDirectPropertyUrl(b) ? 0 : 1;
+              if (directA !== directB) return directA - directB;
+
               const provA = getUrlProvider(a);
               const provB = getUrlProvider(b);
               if (h.airbnbUrl && !h.bookingUrl && !h.agodaUrl) {
@@ -996,7 +1005,7 @@ export default function CityHotelsClient({
                 if (provB === 'airbnb') return 1;
               }
               const priority: Record<string, number> = isIndia
-                ? { makemytrip: 1, agoda: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
+                ? { agoda: 1, makemytrip: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
                 : { booking: 1, agoda: 2, trip: 3, airbnb: 4, trivago: 5, tripadvisor: 6, makemytrip: 7 };
               return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
             });
@@ -1158,10 +1167,24 @@ export default function CityHotelsClient({
                       </Link>
                     </div>
 
+                    {h.roomType && (
+                      <div className="text-[10px] text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1 mb-2 truncate font-medium">
+                        🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub
+                      </div>
+                    )}
+
                     <div className="flex flex-col gap-1.5">
-                      {sortedUrls.map((u, idx) => (
+                      {sortedUrls.slice(0, 2).map((u, idx) => (
                         <BookingButton key={idx} url={u} hotelName={h.name} cityName={cityName} isPrimary={idx === 0} />
                       ))}
+                      {sortedUrls.length > 2 && (
+                        <Link
+                          href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                          className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
+                        >
+                          Compare all {sortedUrls.length} sites &amp; tub guide &rarr;
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
