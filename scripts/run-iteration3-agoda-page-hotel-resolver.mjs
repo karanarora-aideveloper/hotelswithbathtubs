@@ -1,4 +1,5 @@
-import https from 'https';
+import http from 'http';
+import tls from 'tls';
 import fs from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -8,7 +9,11 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 const TODAY_DATE = '2026-10-12';
 const AUDIT_ITERATION = 'Iteration 3';
-const agent = new https.Agent({ keepAlive: true, maxSockets: 15 });
+
+const PROXY_HOST = process.env.JOYPROXY_HOST || 'gate.joyproxy.com';
+const PROXY_PORT = Number(process.env.JOYPROXY_PORT || 9001);
+const PROXY_USER = process.env.JOYPROXY_USER || '';
+const PROXY_PASS = process.env.JOYPROXY_PASS || '';
 
 const STOP_WORDS = new Set([
   'hotel', 'hotels', 'resort', 'resorts', 'spa', 'and', 'the', 'by', 'in', 'at', 'on', 'of', 'for', 'with', 'near',
@@ -20,6 +25,90 @@ const STOP_WORDS = new Set([
 const BRAND_CONFLICT_PREFIXES = new Set([
   'alaya', 'oyo', 'fabhotel', 'fabexpress', 'treebo', 'zostel', 'goibibo', 'stayvista', 'ekostay', 'saffronstays', 'elivaas',
 ]);
+
+function randomSessId() {
+  return Math.random().toString(36).slice(2, 10);
+}
+
+let RESOLVED_PROXY_IP = '57.129.2.43';
+
+function proxyGetOnce(targetUrl, sessId, includeBody = false) {
+  return new Promise((resolve) => {
+    const parsed = new URL(targetUrl);
+    const username = `customer-jp-${PROXY_USER}r-cc-rand-iptype-residential-sessid-${sessId}-sesstime-1-backup-1`;
+    const auth = Buffer.from(`${username}:${PROXY_PASS}`).toString('base64');
+
+    const connectReq = http.request({
+      host: RESOLVED_PROXY_IP,
+      port: PROXY_PORT,
+      method: 'CONNECT',
+      path: `${parsed.hostname}:443`,
+      headers: { 'Proxy-Authorization': `Basic ${auth}` },
+      timeout: 9000,
+    });
+
+    connectReq.on('connect', (res, socket) => {
+      if (res.statusCode !== 200) {
+        socket.destroy();
+        return resolve({ status: res.statusCode, error: true });
+      }
+      const tlsSocket = tls.connect(
+        { socket, servername: parsed.hostname, rejectUnauthorized: false },
+        () => {
+          const reqStr =
+            `GET ${parsed.pathname}${parsed.search} HTTP/1.1\r\n` +
+            `Host: ${parsed.hostname}\r\n` +
+            `User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36\r\n` +
+            `Accept: application/json, text/html, */*\r\n` +
+            `Connection: close\r\n\r\n`;
+          tlsSocket.write(reqStr);
+        }
+      );
+
+      tlsSocket.setTimeout(9000, () => {
+        tlsSocket.destroy();
+        resolve({ status: 0, error: true });
+      });
+
+      let raw = '';
+      tlsSocket.on('data', (d) => {
+        raw += d.toString('utf8');
+        if (!includeBody && raw.includes('\r\n\r\n')) {
+          tlsSocket.destroy();
+        }
+      });
+      tlsSocket.on('close', () => {
+        const [headerPart, ...bodyParts] = raw.split('\r\n\r\n');
+        const statusMatch = (headerPart || '').match(/^HTTP\/1\.[01]\s+(\d+)/);
+        const locMatch = (headerPart || '').match(/\r\nlocation:\s*([^\r\n]+)/i);
+        resolve({
+          status: statusMatch ? Number(statusMatch[1]) : 0,
+          location: locMatch ? locMatch[1].trim() : null,
+          body: bodyParts.join('\r\n\r\n'),
+          error: false,
+        });
+      });
+      tlsSocket.on('error', () => resolve({ status: 0, error: true }));
+    });
+
+    connectReq.on('error', () => resolve({ status: 0, error: true }));
+    connectReq.on('timeout', () => {
+      connectReq.destroy();
+      resolve({ status: 0, error: true });
+    });
+    connectReq.end();
+  });
+}
+
+async function proxyGet(targetUrl, includeBody = false, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const res = await proxyGetOnce(targetUrl, randomSessId(), includeBody);
+    if (!res.error && res.status > 0 && res.status !== 502 && res.status !== 429) {
+      return res;
+    }
+  }
+  return { status: 0, error: true };
+}
 
 function slugify(s) {
   return (s || '').toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
@@ -50,7 +139,6 @@ function isSameProperty(ourName, agodaSlugOrName, city = '') {
   const t2 = getTokens(agodaSlugOrName, city);
   if (t1.length === 0 || t2.length === 0) return false;
 
-  // Reject if Agoda slug has a conflicting third-party chain prefix not in our name
   for (const w of t2.slice(0, 2)) {
     if (BRAND_CONFLICT_PREFIXES.has(w) && !t1.some((x) => tokensEqual(x, w))) {
       return false;
@@ -65,70 +153,29 @@ function isSameProperty(ourName, agodaSlugOrName, city = '') {
   return matchedCount / t1.length >= 0.5;
 }
 
-function resolveHidToSlugUrl(hid) {
+async function resolveHidToSlugUrl(hid, country = '') {
   const u = `https://www.agoda.com/pages/agoda/default/page_hotel.aspx?hotel_id=${hid}`;
-  return new Promise((resolve) => {
-    const req = https.get(
-      u,
-      { agent, timeout: 6000, headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' } },
-      (res) => {
-        res.destroy();
-        if (res.statusCode === 502 || res.statusCode === 429 || res.statusCode === 403) {
-          return resolve({ rateLimited: true });
-        }
-        if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location) {
-          const loc = res.headers.location;
-          if (loc.includes('/hotel/') && loc.includes('.html') && !loc.includes('/city/')) {
-            const cleanPath = loc.split('?')[0];
-            const fullUrl = cleanPath.startsWith('http')
-              ? `${cleanPath}?cid=1972736`
-              : `https://www.agoda.com${cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath}?cid=1972736`;
-            return resolve({ url: fullUrl, slug: cleanPath.split('/hotel/')[0].replace(/^\//, '') });
-          }
-        }
-        resolve(null);
-      }
-    );
-    req.on('error', () => resolve({ rateLimited: true }));
-    req.on('timeout', () => { req.destroy(); resolve({ rateLimited: true }); });
-  });
+  const res = await proxyGet(u, false, 2);
+  if (res.error || res.status === 0) {
+    return { networkError: true };
+  }
+  if ((res.status === 301 || res.status === 302) && res.location) {
+    const loc = res.location;
+    if (loc.includes('/hotel/') && loc.includes('.html') && !loc.includes('/city/')) {
+      const cleanPath = loc.split('?')[0];
+      const prefix = (country || '').toLowerCase() === 'india' && !cleanPath.startsWith('/en-in/') ? '/en-in' : '';
+      const normalizedPath = cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath;
+      const fullUrl = cleanPath.startsWith('http')
+        ? `${cleanPath}?cid=1972736`
+        : `https://www.agoda.com${prefix}${normalizedPath}?cid=1972736`;
+      return {
+        url: fullUrl,
+        slug: normalizedPath.split('/hotel/')[0].replace(/^\/(?:en-in\/)?/, ''),
+      };
+    }
+  }
+  return { notFound: true };
 }
-
-function fetchSuggest(query) {
-  const url = `https://www.agoda.com/api/cronos/search/GetUnifiedSuggestResult/3/1/1/0/en-us/?searchText=${encodeURIComponent(query)}`;
-  return new Promise((resolve) => {
-    const req = https.get(
-      url,
-      { agent, timeout: 6000, headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' } },
-      (res) => {
-        let body = '';
-        res.on('data', (c) => { body += c; });
-        res.on('end', () => {
-          try { resolve(JSON.parse(body)); } catch { resolve(null); }
-        });
-      }
-    );
-    req.on('error', () => resolve(null));
-    req.on('timeout', () => { req.destroy(); resolve(null); });
-  });
-}
-
-const COUNTRY_ISO = {
-  'india': 'in', 'usa': 'us', 'united states': 'us', 'uk': 'gb', 'united kingdom': 'gb',
-  'france': 'fr', 'italy': 'it', 'spain': 'es', 'germany': 'de', 'switzerland': 'ch',
-  'austria': 'at', 'netherlands': 'nl', 'belgium': 'be', 'greece': 'gr', 'portugal': 'pt',
-  'ireland': 'ie', 'czechia': 'cz', 'hungary': 'hu', 'poland': 'pl', 'slovenia': 'si',
-  'croatia': 'hr', 'iceland': 'is', 'norway': 'no', 'sweden': 'se', 'finland': 'fi',
-  'denmark': 'dk', 'turkey': 'tr', 'uae': 'ae', 'qatar': 'qa', 'oman': 'om', 'bahrain': 'bh',
-  'jordan': 'jo', 'saudi arabia': 'sa', 'egypt': 'eg', 'morocco': 'ma', 'tunisia': 'tn',
-  'south africa': 'za', 'tanzania': 'tz', 'kenya': 'ke', 'rwanda': 'rw', 'mauritius': 'mu',
-  'seychelles': 'sc', 'maldives': 'mv', 'sri lanka': 'lk', 'nepal': 'np', 'bhutan': 'bt',
-  'thailand': 'th', 'singapore': 'sg', 'malaysia': 'my', 'indonesia': 'id', 'vietnam': 'vn',
-  'cambodia': 'kh', 'laos': 'la', 'philippines': 'ph', 'japan': 'jp', 'south korea': 'kr',
-  'taiwan': 'tw', 'hong kong': 'hk', 'macau': 'mo', 'australia': 'au', 'new zealand': 'nz',
-  'canada': 'ca', 'mexico': 'mx', 'costa rica': 'cr', 'brazil': 'br', 'argentina': 'ar',
-  'chile': 'cl', 'peru': 'pe', 'colombia': 'co',
-};
 
 function getStrictAgodaType(u) {
   if (!u) return 'MISSING';
@@ -153,114 +200,92 @@ async function main() {
   const cachePath = path.resolve(process.cwd(), '.cache/all-hotels.json');
   const hotels = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
 
+  // Normalize existing /hotel/*.html Indian URLs to include /en-in/
+  hotels.forEach((h) => {
+    if (
+      (h.country || '').toLowerCase() === 'india' &&
+      h.agodaUrl &&
+      h.agodaUrl.includes('agoda.com/') &&
+      h.agodaUrl.includes('/hotel/') &&
+      !h.agodaUrl.includes('/en-in/')
+    ) {
+      h.agodaUrl = h.agodaUrl.replace('https://www.agoda.com/', 'https://www.agoda.com/en-in/');
+    }
+  });
+
+  // Target all hotels that currently have hid= in agodaUrl
   const toProcess = hotels
     .map((h, idx) => ({ h, idx }))
-    .filter(({ h }) => !h.airbnbUrl && (!h.agodaUrl || !h.agodaUrl.includes('/hotel/')));
+    .filter(({ h }) => !h.airbnbUrl && h.agodaUrl && h.agodaUrl.includes('hid='));
 
-  console.log(`Iteration 3: Resolving exact standalone /hotel/*.html URLs via page_hotel.aspx for ${toProcess.length} hotels...`);
+  console.log(`Iteration 3 (JoyProxy Residential): Resolving ${toProcess.length} Agoda hid= hotels to exact /hotel/*.html URLs...`);
 
   let upgradedToStandaloneHtml = 0;
   let falseHidPurged = 0;
-  let recoveredViaSuggest = 0;
+  let networkSkipped = 0;
   const modifiedIds = new Set();
   const fixReasonsById = new Map();
 
-  const BATCH = 15;
+  const BATCH = 20;
   for (let b = 0; b < toProcess.length; b += BATCH) {
     const slice = toProcess.slice(b, b + BATCH);
     await Promise.all(
       slice.map(async ({ h, idx }) => {
         const hidMatch = (h.agodaUrl || '').match(/hid=(\d+)/);
         const existingHid = hidMatch ? hidMatch[1] : null;
+        if (!existingHid) return;
 
-        if (existingHid) {
-          const resolved = await resolveHidToSlugUrl(existingHid);
-          if (resolved && isSameProperty(h.name, resolved.slug, h.city)) {
-            hotels[idx].agodaUrl = resolved.url;
-            upgradedToStandaloneHtml++;
-            modifiedIds.add(String(h._id));
-            fixReasonsById.set(String(h._id), `UPGRADED_HID_${existingHid}_TO_DIRECT_HOTEL_HTML`);
-            return;
-          }
-          // If existingHid resolved to a DIFFERENT hotel name, try querying suggest by clean hotel name
+        const resolved = await resolveHidToSlugUrl(existingHid, h.country);
+        if (resolved.networkError) {
+          networkSkipped++;
+          return; // Never overwrite on proxy/network error
+        }
+
+        if (resolved.url && isSameProperty(h.name, resolved.slug, h.city)) {
+          hotels[idx].agodaUrl = resolved.url;
+          upgradedToStandaloneHtml++;
+          modifiedIds.add(String(h._id));
+          fixReasonsById.set(String(h._id), `EXTRACTED_EXACT_AGODA_HTML_FROM_HID_${existingHid}`);
+          return;
+        }
+
+        if (resolved.url && !isSameProperty(h.name, resolved.slug, h.city)) {
+          // Genuine mismatch between our hotel name and the Agoda HID's slug
           falseHidPurged++;
-        }
-
-        // Query GetUnifiedSuggestResult for clean hotel name
-        const cleanName = (h.name || '').replace(/\(.*?\)/g, '').split(',')[0].trim();
-        const data = await fetchSuggest(`${cleanName} ${h.city}`);
-        let list = data?.ViewModelList || [];
-        const expectedIso = COUNTRY_ISO[(h.country || '').toLowerCase()];
-
-        let matchedItem = list.find(
-          (x) =>
-            x.IsHotel &&
-            x.ObjectId > 0 &&
-            (!expectedIso || !x.CountryISO || x.CountryISO.toLowerCase() === expectedIso) &&
-            isSameProperty(h.name, x.Name, h.city)
-        );
-
-        if (!matchedItem) {
-          const data2 = await fetchSuggest(cleanName);
-          const list2 = data2?.ViewModelList || [];
-          matchedItem = list2.find(
-            (x) =>
-              x.IsHotel &&
-              x.ObjectId > 0 &&
-              (!expectedIso || !x.CountryISO || x.CountryISO.toLowerCase() === expectedIso) &&
-              isSameProperty(h.name, x.Name, h.city)
-          );
-        }
-
-        if (matchedItem) {
-          const resolved2 = await resolveHidToSlugUrl(matchedItem.ObjectId);
-          if (resolved2 && isSameProperty(h.name, resolved2.slug, h.city)) {
-            hotels[idx].agodaUrl = resolved2.url;
-            upgradedToStandaloneHtml++;
-            recoveredViaSuggest++;
-            modifiedIds.add(String(h._id));
-            fixReasonsById.set(String(h._id), `RESOLVED_EXACT_AGODA_HOTEL_HTML_ID_${matchedItem.ObjectId}`);
-            return;
-          }
-        }
-
-        // If existingHid was a false match to a different property, replace it with a clean city search link
-        if (existingHid) {
+          const cleanName = (h.name || '').replace(/\(.*?\)/g, '').split(',')[0].trim();
           hotels[idx].agodaUrl = `https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1972736&txt=${encodeURIComponent(`${cleanName} ${h.city}`)}`;
           modifiedIds.add(String(h._id));
-          fixReasonsById.set(String(h._id), `PURGED_MISMATCHED_HID_${existingHid}`);
+          fixReasonsById.set(String(h._id), `PURGED_MISMATCHED_HID_${existingHid}_WAS_${resolved.slug}`);
         }
       })
     );
 
-    if ((b + BATCH) % 150 === 0 || b + BATCH >= toProcess.length) {
+    if ((b + BATCH) % 100 === 0 || b + BATCH >= toProcess.length) {
       console.log(
-        `Progress ${Math.min(b + BATCH, toProcess.length)}/${toProcess.length} | Standalone /hotel/*.html: ${upgradedToStandaloneHtml} (Recovered: ${recoveredViaSuggest}, False HIDs Purged: ${falseHidPurged})`
+        `Progress ${Math.min(b + BATCH, toProcess.length)}/${toProcess.length} | Exact /hotel/*.html extracted: ${upgradedToStandaloneHtml} | Mismatched HIDs purged: ${falseHidPurged} | Proxy skips: ${networkSkipped}`
       );
+      fs.writeFileSync(cachePath, JSON.stringify(hotels, null, 2));
     }
   }
 
   console.log({
     upgradedToStandaloneHtml,
-    recoveredViaSuggest,
     falseHidPurged,
+    networkSkipped,
     totalModified: modifiedIds.size,
   });
 
   fs.writeFileSync(cachePath, JSON.stringify(hotels, null, 2));
-  console.log('Saved updated .cache/all-hotels.json');
 
   if (process.env.MONGODB_URI && modifiedIds.size > 0) {
     await mongoose.connect(process.env.MONGODB_URI);
     const Hotel = mongoose.connection.collection('hotels');
-    const ops = hotels
-      .filter((h) => modifiedIds.has(String(h._id)))
-      .map((h) => ({
-        updateOne: {
-          filter: { _id: new mongoose.Types.ObjectId(h._id) },
-          update: { $set: { agodaUrl: h.agodaUrl } },
-        },
-      }));
+    const ops = hotels.map((h) => ({
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(h._id) },
+        update: { $set: { agodaUrl: h.agodaUrl } },
+      },
+    }));
     const res = await Hotel.bulkWrite(ops, { ordered: false });
     console.log(`MongoDB bulkWrite modifiedCount: ${res.modifiedCount}`);
     await mongoose.disconnect();
