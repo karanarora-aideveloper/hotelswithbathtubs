@@ -1,4 +1,5 @@
 import http from 'http';
+import https from 'https';
 import tls from 'tls';
 import fs from 'fs';
 import path from 'path';
@@ -200,11 +201,143 @@ function cleanChunked(raw) {
 function extractHotelIdFromHtml(html) {
   if (!html) return null;
   const m1 = html.match(/hotel_id=(\d+)/);
-  if (m1 && m1[1].length >= 4) return m1[1];
+  if (m1 && m1[1] !== '0') return m1[1];
   const m2 = html.match(/hotelId:(\d+)/);
-  if (m2 && m2[1].length >= 4) return m2[1];
+  if (m2 && m2[1] !== '0') return m2[1];
   const m3 = html.match(/propertyId:(\d+)/);
-  if (m3 && m3[1].length >= 4) return m3[1];
+  if (m3 && m3[1] !== '0') return m3[1];
+  return null;
+}
+
+const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 15 });
+
+function fetchSuggest(query) {
+  const url = `https://www.agoda.com/api/cronos/search/GetUnifiedSuggestResult/3/1/1/0/en-us/?searchText=${encodeURIComponent(query)}`;
+  return new Promise((resolve) => {
+    https.get(
+      url,
+      {
+        agent: httpsAgent,
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36' },
+        timeout: 8000,
+      },
+      (res) => {
+        let body = '';
+        res.on('data', (c) => (body += c));
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(body));
+          } catch {
+            resolve(null);
+          }
+        });
+      }
+    ).on('error', () => resolve(null));
+  });
+}
+
+const CITY_ALIASES = {
+  'delhi': ['delhi', 'new delhi', 'ncr', 'gurgaon', 'gurugram', 'noida', 'aerocity', 'ghaziabad', 'faridabad'],
+  'new delhi': ['delhi', 'new delhi', 'ncr', 'gurgaon', 'gurugram', 'noida', 'aerocity'],
+  'gurgaon': ['gurgaon', 'gurugram', 'delhi', 'ncr'],
+  'faridabad': ['faridabad', 'delhi', 'ncr'],
+  'mumbai': ['mumbai', 'bombay', 'navi mumbai', 'thane'],
+  'bangalore': ['bangalore', 'bengaluru'],
+  'bengaluru': ['bangalore', 'bengaluru'],
+  'kolkata': ['kolkata', 'calcutta'],
+  'chennai': ['chennai', 'madras'],
+  'kochi': ['kochi', 'cochin', 'ernakulam'],
+  'varanasi': ['varanasi', 'benares', 'banaras', 'kashi'],
+  'agra': ['agra', 'tajganj'],
+  'jaipur': ['jaipur', 'amer', 'kukas'],
+  'udaipur': ['udaipur', 'pichola'],
+  'goa': ['goa', 'panaji', 'calangute', 'candolim', 'anjuna', 'vagator', 'bardez', 'salcete', 'morjim', 'baga', 'colva', 'benaulim'],
+  'munnar': ['munnar', 'idukki', 'devikulam', 'chinnakanal'],
+  'kodaikanal': ['kodaikanal', 'vattakanal'],
+  'panchgani': ['panchgani', 'mahabaleshwar'],
+  'mahabaleshwar': ['mahabaleshwar', 'panchgani'],
+  'lonavala': ['lonavala', 'khandala'],
+  'shimla': ['shimla', 'mashobra', 'kufri', 'chail'],
+  'manali': ['manali', 'kullu'],
+  'dharamshala': ['dharamshala', 'mcleodganj', 'kangra'],
+  'rishikesh': ['rishikesh', 'tapovan', 'haridwar'],
+  'haridwar': ['haridwar', 'rishikesh'],
+  'amritsar': ['amritsar'],
+  'chandigarh': ['chandigarh', 'panchkula', 'mohali', 'zirakpur'],
+  'karjat': ['karjat'],
+  'alibaug': ['alibaug'],
+  'nashik': ['nashik'],
+  'siliguri': ['siliguri'],
+  'darjeeling': ['darjeeling'],
+};
+
+function matchesCity(itemCity, targetCity, itemCountry, targetCountry) {
+  if (!itemCity || !targetCity) return false;
+  const a = itemCity.toLowerCase();
+  const b = targetCity.toLowerCase();
+  if (a.includes(b) || b.includes(a)) return true;
+  for (const [key, aliases] of Object.entries(CITY_ALIASES)) {
+    if (b.includes(key) && aliases.some((al) => a.includes(al))) return true;
+  }
+  if (targetCountry && itemCountry) {
+    const c1 = itemCountry.toLowerCase();
+    const c2 = targetCountry.toLowerCase();
+    if (c1.includes(c2) || c2.includes(c1)) {
+      if (a.slice(0, 4) === b.slice(0, 4) || a.includes(b) || b.includes(a)) return true;
+    }
+  }
+  return false;
+}
+
+function strictHotelMatch(targetName, candidateName) {
+  const norm = (s) =>
+    (s || '')
+      .toLowerCase()
+      .replace(/([a-zA-Z])(\d+)/g, '$1 $2')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  const stopWords = new Set([
+    'hotel', 'hotels', 'resorts', 'resort', 'spa', 'suites', 'suite', 'the', 'and', 'by', 'near',
+    'in', 'of', '&', 'an', 'a', 'luxury', 'boutique', 'retreat', 'villas', 'villa', 'homestay', 'palace'
+  ]);
+  const t1 = norm(targetName).split(' ').filter((w) => w.length >= 3 && !stopWords.has(w));
+  const t2 = norm(candidateName).split(' ').filter((w) => w.length >= 3 && !stopWords.has(w));
+  if (t1.length === 0 || t2.length === 0) return norm(targetName) === norm(candidateName);
+  const set2 = new Set(t2);
+  const common = t1.filter((w) => set2.has(w));
+  const simMax = common.length / Math.max(t1.length, t2.length);
+  const simMin = common.length / Math.min(t1.length, t2.length);
+  return simMax >= 0.45 && simMin >= 0.65;
+}
+
+async function resolveHotelAgodaStrict(hotel) {
+  const cleanName = (hotel.name || '')
+    .replace(/\(.*?\)/g, '')
+    .replace(/,\s*[A-Z][a-z]+(\s+[A-Z][a-z]+)*/g, '')
+    .replace(/\b(Near|Opposite|Behind|At|Road|Tapovan|Fatehabad Road|City Center|Sector \d+)\b.*/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const queries = [
+    hotel.name,
+    `${cleanName} ${hotel.city}`,
+    cleanName
+  ];
+
+  for (const q of queries) {
+    if (!q || q.length < 3) continue;
+    const data = await fetchSuggest(q);
+    const list = (data?.ViewModelList || []).filter((x) => x.IsHotel && x.ObjectId > 0);
+    for (const item of list) {
+      if (matchesCity(item.CityName, hotel.city, item.CountryName, hotel.country)) {
+        if (strictHotelMatch(hotel.name, item.Name)) {
+          return item.ObjectId;
+        }
+      }
+    }
+    await new Promise((r) => setTimeout(r, 60));
+  }
   return null;
 }
 
@@ -425,7 +558,7 @@ async function main() {
 
   // Prioritize hotels with direct Agoda or Airbnb
   const prioritized = candidates
-    .filter((h) => h.agodaUrl || h.airbnbUrl)
+    .filter((h) => h.agodaUrl || h.airbnbUrl || h.name)
     .sort((a, b) => {
       const aDirect =
         (a.agodaUrl && (a.agodaUrl.includes('/hotel/') || a.agodaUrl.includes('hid='))) ||
@@ -452,23 +585,69 @@ async function main() {
     let extractedPhotos = [];
 
     // 1. Agoda Extraction
-    if (hotel.agodaUrl) {
-      let hotelId = hotel.agodaHotelId;
+    let hotelId = hotel.agodaHotelId;
 
-      if (!hotelId) {
-        const hidMatch = hotel.agodaUrl.match(/hid=(\d+)/) || hotel.agodaUrl.match(/-h(\d+)/);
-        hotelId = hidMatch ? hidMatch[1] : null;
-      }
+    if (!hotelId && hotel.agodaUrl) {
+      const hidMatch = hotel.agodaUrl.match(/hid=(\d+)/) || hotel.agodaUrl.match(/-h(\d+)/);
+      hotelId = hidMatch ? hidMatch[1] : null;
+    }
 
-      if (!hotelId && hotel.agodaUrl.includes('/hotel/') && hotel.agodaUrl.includes('.html')) {
-        const html = await proxyFetchHtml(hotel.agodaUrl);
-        hotelId = extractHotelIdFromHtml(html);
-        if (hotelId) {
-          await Hotel.updateOne({ _id: hotel._id }, { $set: { agodaHotelId: hotelId } }).catch(() => {});
-        }
-      }
-
+    if (!hotelId && hotel.agodaUrl && hotel.agodaUrl.includes('/hotel/') && hotel.agodaUrl.includes('.html')) {
+      const html = await proxyFetchHtml(hotel.agodaUrl);
+      hotelId = extractHotelIdFromHtml(html);
       if (hotelId) {
+        await Hotel.updateOne({ _id: hotel._id }, { $set: { agodaHotelId: hotelId } }).catch(() => {});
+      }
+    }
+
+    // Strict Agoda resolver fallback for partnersearch URLs or unmapped properties
+    if (!hotelId) {
+      const resolvedId = await resolveHotelAgodaStrict(hotel);
+      if (resolvedId) {
+        hotelId = String(resolvedId);
+        const resolvedAgodaUrl = `https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1972736&hid=${hotelId}`;
+        await Hotel.updateOne(
+          { _id: hotel._id },
+          {
+            $set: {
+              agodaHotelId: hotelId,
+              agodaUrl: resolvedAgodaUrl,
+            },
+          }
+        ).catch(() => {});
+        hotel.agodaHotelId = hotelId;
+        hotel.agodaUrl = resolvedAgodaUrl;
+      }
+    }
+
+    if (hotelId) {
+      const secondaryRaw = await proxyFetchJson(
+        `https://www.agoda.com/api/cronos/property/BelowFoldParams/GetSecondaryData?hotel_id=${hotelId}&all=false&isHostPropertiesEnabled=true`
+      );
+      const secondaryData = cleanChunked(secondaryRaw);
+      if (secondaryData) {
+        extractedPhotos = selectTop5AgodaPhotos(secondaryData);
+      }
+    }
+
+    // Secondary fallback: if hotel had an old/stale ID in URL that returned insufficient photos, try resolving via strict search!
+    if (extractedPhotos.length < 3) {
+      const resolvedId = await resolveHotelAgodaStrict(hotel);
+      if (resolvedId && String(resolvedId) !== hotelId) {
+        hotelId = String(resolvedId);
+        const resolvedAgodaUrl = `https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1972736&hid=${hotelId}`;
+        await Hotel.updateOne(
+          { _id: hotel._id },
+          {
+            $set: {
+              agodaHotelId: hotelId,
+              agodaUrl: resolvedAgodaUrl,
+            },
+          }
+        ).catch(() => {});
+        hotel.agodaHotelId = hotelId;
+        hotel.agodaUrl = resolvedAgodaUrl;
+
         const secondaryRaw = await proxyFetchJson(
           `https://www.agoda.com/api/cronos/property/BelowFoldParams/GetSecondaryData?hotel_id=${hotelId}&all=false&isHostPropertiesEnabled=true`
         );
