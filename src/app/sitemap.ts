@@ -75,7 +75,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
 
       // Track individual hotel entity route
-      const hotelSlug = h.slug || slugify(h.name);
+      const hotelSlug = slugify(h.slug || h.name);
       if (hotelSlug) {
         const hotelUrl = `${baseUrl}/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
         if (!seenHotelUrls.has(hotelUrl)) {
@@ -84,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: hotelUrl,
             lastModified: hotelUpdated,
             changeFrequency: 'weekly' as const,
-            priority: 0.65, images: h.image ? [h.image] : undefined
+            priority: 0.65,
           });
         }
       }
@@ -126,7 +126,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const blogRoutes = blogs
       .filter(blog => blog.slug && blog.slug.trim() !== '')
       .map(blog => ({
-        url: `${baseUrl}/blog/${blog.slug}`,
+        url: `${baseUrl}/blog/${slugify(blog.slug)}`,
         lastModified: blog.updatedAt ? new Date(blog.updatedAt) : fallbackDate,
         changeFrequency: 'monthly' as const,
         priority: 0.7,

@@ -37,12 +37,18 @@ async function getCachedHotelMap() {
 
   const map = new Map<string, any>();
   for (const h of allHotels) {
-    if (h.slug) map.set(h.slug, h);
+    if (h.slug) {
+      map.set(h.slug, h);
+      map.set(slugify(h.slug), h);
+    }
     const nSlug = slugify(h.name);
     if (nSlug && !map.has(nSlug)) map.set(nSlug, h);
     if (h.city) {
       const cSlug = slugify(h.city);
-      map.set(`${cSlug}/${h.slug}`, h);
+      if (h.slug) {
+        map.set(`${cSlug}/${h.slug}`, h);
+        map.set(`${cSlug}/${slugify(h.slug)}`, h);
+      }
       map.set(`${cSlug}/${nSlug}`, h);
     }
   }
@@ -60,7 +66,7 @@ export async function generateStaticParams() {
     const countryInfo = resolveCountry(h.country);
     const countrySlug = countryInfo.slug;
     const citySlug = slugify(h.city);
-    const canonicalHotelSlug = h.slug || slugify(h.name);
+    const canonicalHotelSlug = slugify(h.slug || h.name);
 
     if (canonicalHotelSlug) {
       const key = `${countrySlug}/${citySlug}/${canonicalHotelSlug}`;
