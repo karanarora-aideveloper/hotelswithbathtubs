@@ -89,6 +89,18 @@ async function build() {
       fs.copyFileSync(publicHeaders, outHeaders);
     }
 
+    const publicSitemapIndex = path.join(rootDir, 'public/sitemap_index.xml');
+    const outSitemapIndex = path.join(rootDir, 'out/sitemap_index.xml');
+    if (fs.existsSync(publicSitemapIndex)) {
+      fs.copyFileSync(publicSitemapIndex, outSitemapIndex);
+    }
+
+    const publicSitemapAll = path.join(rootDir, 'public/sitemap-all.xml');
+    const outSitemapAll = path.join(rootDir, 'out/sitemap-all.xml');
+    if (fs.existsSync(publicSitemapAll)) {
+      fs.copyFileSync(publicSitemapAll, outSitemapAll);
+    }
+
     // Clean up internal Next.js segment prefetch trees (__next.*) to comply with Cloudflare 20,000 files limit
     console.log('\n[Clean] Pruning internal __next.* segment prefetch files to comply with Cloudflare 20,000 file limit...');
     try {

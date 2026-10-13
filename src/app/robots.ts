@@ -9,6 +9,9 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin', '/api', '/out'],
     },
-    sitemap: 'https://www.hotelswithbathtubs.com/sitemap.xml',
+    sitemap: [
+      'https://www.hotelswithbathtubs.com/sitemap.xml',
+      'https://www.hotelswithbathtubs.com/sitemap_index.xml',
+    ],
   };
 }
