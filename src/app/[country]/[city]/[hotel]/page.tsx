@@ -9,6 +9,7 @@ import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl } from '@/lib/affiliate';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
+import HotelGallery from '@/components/HotelGallery';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -18,7 +19,7 @@ export const revalidate = false;
 let memoryHotelMap: Map<string, any> | null = null;
 
 async function getCachedHotelMap() {
-  if (memoryHotelMap) return memoryHotelMap;
+  if (process.env.NODE_ENV !== 'development' && memoryHotelMap) return memoryHotelMap;
 
   let allHotels: any[] = [];
   const cachePath = path.join(process.cwd(), '.cache', 'all-hotels.json');
@@ -466,72 +467,16 @@ export default async function HotelDetailPage({
         </div>
       </div>
 
-      {/* Contained Hero Image Showcase Gallery */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-5 pb-2">
-        <div className="relative aspect-[16/10] sm:aspect-[2.1/1] md:aspect-[2.4/1] max-h-[520px] w-full rounded-3xl overflow-hidden shadow-sm border border-[#5b8296]/20 bg-[#1f262d] group">
-          <Image
-            src={imageUrl(hotel.image)}
-            alt={`${hotel.name} with private bathtub in ${cityName}`}
-            fill
-            priority
-            sizes="(max-width: 1280px) 100vw, 1280px"
-            className="object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-          />
-
-          {/* Cinematic Vignette Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1f262d]/90 via-[#1f262d]/30 to-[#1f262d]/10 pointer-events-none" />
-
-          {/* Floating Verification Badges (Top Left) */}
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-wrap items-center gap-2 z-10 font-jakarta">
-            <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
-              <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
-            </span>
-            <span className="bg-[#1f262d]/75 backdrop-blur-md text-white text-xs font-medium px-3.5 py-1.5 rounded-full border border-white/20 hidden sm:flex items-center gap-1.5">
-              <span className="text-[#8eaab9]">✦</span> Triple-Source Audited
-            </span>
-            <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 hidden md:flex items-center gap-1.5">
-              <span>💑</span> Couple-Friendly Sanctuary
-            </span>
-          </div>
-
-          {/* Pinterest Save & Share (Top Right) */}
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2 z-10 font-jakarta">
-            <a
-              href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(hotel.image))}&description=${encodeURIComponent(`${hotel.name} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-red-600/90 hover:bg-red-700 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5 transition-all"
-              title="Save to Pinterest"
-            >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
-              </svg>
-              <span>Save</span>
-            </a>
-          </div>
-
-          {/* In-Hero Bottom Ribbon */}
-          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white z-10 font-jakarta">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white mb-2 border border-white/30">
-                <span>🏷️</span> Guaranteed Tier: {hotel.roomType || 'Suite / Deluxe Room with Bathtub'}
-              </div>
-              <p className="text-xs sm:text-sm text-white/85 font-medium">
-                {verifiedPlatformsText}
-              </p>
-            </div>
-            <div className="text-left sm:text-right bg-[#1f262d]/70 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/20 w-fit shrink-0">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[#8eaab9] block">
-                Usual Benchmark Rate
-              </span>
-              <div className="flex items-baseline gap-1 sm:justify-end">
-                <span className="text-xl sm:text-2xl font-bold text-white">~{usualPrice}</span>
-                <span className="text-xs text-white/70 font-medium">/ night</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Contained Hero Image Showcase Gallery / 5-Photo Bento Grid */}
+      <HotelGallery
+        images={hotel.images}
+        primaryImage={hotel.image}
+        hotelName={hotel.name}
+        cityName={cityName}
+        countryName={countryName}
+        roomType={hotel.roomType}
+        verifiedPlatformsText={verifiedPlatformsText}
+      />
 
       {/* Main Content Layout with 2/3 Content and 1/3 Sticky Booking Sidebar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 md:py-10 flex flex-col md:flex-row gap-8 lg:gap-12 relative">

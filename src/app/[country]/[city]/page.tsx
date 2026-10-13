@@ -162,6 +162,7 @@ export default async function CityHotelsPage({
     country: h.country,
     slug: h.slug || slugify(h.name),
     image: h.image,
+    images: Array.isArray(h.images) && h.images.length > 0 ? h.images : (h.image ? [h.image] : []),
     url: h.url,
     agodaUrl: h.agodaUrl,
     bookingUrl: h.bookingUrl,

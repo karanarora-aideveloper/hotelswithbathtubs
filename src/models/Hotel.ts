@@ -11,6 +11,7 @@ export interface IHotel extends mongoose.Document {
   airbnbUrl?: string;
   tripUrl?: string;
   image: string;
+  images?: string[];
   verified: boolean;
   flagged?: boolean;
   amenities: string[];
@@ -69,6 +70,10 @@ const HotelSchema = new mongoose.Schema<IHotel>({
   image: {
     type: String,
     required: true,
+  },
+  images: {
+    type: [String],
+    default: [],
   },
   verified: {
     type: Boolean,
