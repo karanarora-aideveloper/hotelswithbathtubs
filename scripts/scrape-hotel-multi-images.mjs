@@ -33,8 +33,8 @@ function randomSessId() {
   return Math.random().toString(36).slice(2, 10);
 }
 
-// Low-level HTTP CONNECT proxy fetch for Agoda metadata JSON
-function proxyFetchJson(targetUrl, headers = {}) {
+// Low-level HTTP CONNECT proxy fetch for Agoda metadata JSON with retries
+function proxyFetchJsonOnce(targetUrl, headers = {}) {
   return new Promise((resolve) => {
     const parsed = new URL(targetUrl);
     const sessId = randomSessId();
@@ -47,7 +47,7 @@ function proxyFetchJson(targetUrl, headers = {}) {
       method: 'CONNECT',
       path: `${parsed.hostname}:443`,
       headers: { 'Proxy-Authorization': `Basic ${auth}` },
-      timeout: 12000,
+      timeout: 10000,
     });
 
     connectReq.on('connect', (res, socket) => {
@@ -84,6 +84,10 @@ function proxyFetchJson(targetUrl, headers = {}) {
       });
 
       tlsSocket.on('error', () => resolve(null));
+      tlsSocket.setTimeout(10000, () => {
+        tlsSocket.destroy();
+        resolve(null);
+      });
     });
 
     connectReq.on('error', () => resolve(null));
@@ -95,8 +99,16 @@ function proxyFetchJson(targetUrl, headers = {}) {
   });
 }
 
-// Low-level HTTP CONNECT proxy fetch for Agoda HTML
-function proxyFetchHtml(targetUrl) {
+async function proxyFetchJson(targetUrl, headers = {}, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    const res = await proxyFetchJsonOnce(targetUrl, headers);
+    if (res && res.length > 500) return res;
+  }
+  return null;
+}
+
+// Low-level HTTP CONNECT proxy fetch for Agoda HTML with retries
+function proxyFetchHtmlOnce(targetUrl) {
   return new Promise((resolve) => {
     const parsed = new URL(targetUrl);
     const sessId = randomSessId();
@@ -109,7 +121,7 @@ function proxyFetchHtml(targetUrl) {
       method: 'CONNECT',
       path: `${parsed.hostname}:443`,
       headers: { 'Proxy-Authorization': `Basic ${auth}` },
-      timeout: 12000,
+      timeout: 10000,
     });
 
     connectReq.on('connect', (res, socket) => {
@@ -142,6 +154,10 @@ function proxyFetchHtml(targetUrl) {
       });
 
       tlsSocket.on('error', () => resolve(null));
+      tlsSocket.setTimeout(10000, () => {
+        tlsSocket.destroy();
+        resolve(null);
+      });
     });
 
     connectReq.on('error', () => resolve(null));
@@ -151,6 +167,14 @@ function proxyFetchHtml(targetUrl) {
     });
     connectReq.end();
   });
+}
+
+async function proxyFetchHtml(targetUrl, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    const res = await proxyFetchHtmlOnce(targetUrl);
+    if (res && res.length > 500) return res;
+  }
+  return null;
 }
 
 function cleanChunked(raw) {
@@ -176,11 +200,11 @@ function cleanChunked(raw) {
 function extractHotelIdFromHtml(html) {
   if (!html) return null;
   const m1 = html.match(/hotel_id=(\d+)/);
-  if (m1) return m1[1];
+  if (m1 && m1[1].length >= 4) return m1[1];
   const m2 = html.match(/hotelId:(\d+)/);
-  if (m2) return m2[1];
+  if (m2 && m2[1].length >= 4) return m2[1];
   const m3 = html.match(/propertyId:(\d+)/);
-  if (m3) return m3[1];
+  if (m3 && m3[1].length >= 4) return m3[1];
   return null;
 }
 
@@ -293,7 +317,6 @@ async function processAndUploadToR2(rawBuffer, hotelSlug, photoIndex) {
 
     return `${R2_PUBLIC_DOMAIN}/${r2Key}`;
   } catch (err) {
-    console.error(`Sharp/R2 upload error for ${hotelSlug}-${photoIndex}:`, err.message);
     return null;
   }
 }
@@ -301,7 +324,6 @@ async function processAndUploadToR2(rawBuffer, hotelSlug, photoIndex) {
 // Fetch Airbnb Photos
 async function extractAirbnbPhotos(airbnbUrl) {
   try {
-    // For Indian listings or .com listings, airbnb.co.in serves direct full SSR HTML
     const localizedUrl = (airbnbUrl || '').replace(/airbnb\.(?:com|co\.uk|ca)/i, 'airbnb.co.in');
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 12000);
@@ -343,20 +365,24 @@ async function extractAirbnbPhotos(airbnbUrl) {
   }
 }
 
-// Main runner
+// Main runner with Worker Pool Concurrency
 async function main() {
   const args = process.argv.slice(2);
   const limitArg = args.find((a) => a.startsWith('--limit='));
   const cityArg = args.find((a) => a.startsWith('--city='));
+  const concurrencyArg = args.find((a) => a.startsWith('--concurrency='));
   const dryRun = args.includes('--dry-run');
-  const LIMIT = limitArg ? parseInt(limitArg.split('=')[1], 10) : 50;
+
+  const LIMIT = limitArg ? parseInt(limitArg.split('=')[1], 10) : 10000;
+  const CONCURRENCY = concurrencyArg ? parseInt(concurrencyArg.split('=')[1], 10) : 4;
   const targetCity = cityArg ? cityArg.split('=')[1].trim() : null;
 
   console.log(`\n======================================================`);
-  console.log(`🚀 Hotel Multi-Image Extraction & R2 Pipeline Started`);
-  console.log(`Target Limit: ${LIMIT} hotels`);
+  console.log(`🚀 Hotel Multi-Image Scaled Scraper & R2 Pipeline Started`);
+  console.log(`Target Limit: ${LIMIT >= 10000 ? 'ALL' : LIMIT} hotels`);
+  console.log(`Concurrency Workers: ${CONCURRENCY}`);
   if (targetCity) console.log(`Target City: ${targetCity}`);
-  console.log(`Dry Run: ${dryRun ? 'YES (No upload/DB write)' : 'NO (Live Upload to R2 & DB)'}`);
+  console.log(`Dry Run: ${dryRun ? 'YES' : 'NO'}`);
   console.log(`======================================================\n`);
 
   await mongoose.connect(process.env.MONGODB_URI);
@@ -372,7 +398,7 @@ async function main() {
     }
   }
 
-  // Query hotels where images array has fewer than 4 images
+  // Query hotels needing multi-images
   const query = {
     $or: [{ images: { $exists: false } }, { images: { $size: 0 } }, { 'images.3': { $exists: false } }],
   };
@@ -380,7 +406,6 @@ async function main() {
     query.city = new RegExp(`^${targetCity}$`, 'i');
   }
 
-  // Fetch candidate hotels with projection for maximum speed
   const candidates = await Hotel.find(query, {
     projection: {
       name: 1,
@@ -388,137 +413,124 @@ async function main() {
       city: 1,
       country: 1,
       agodaUrl: 1,
+      agodaHotelId: 1,
       airbnbUrl: 1,
       bookingUrl: 1,
       image: 1,
       images: 1,
     },
   }).toArray();
+
   console.log(`Found ${candidates.length} hotels needing multi-images.`);
 
+  // Prioritize hotels with direct Agoda or Airbnb
   const prioritized = candidates
     .filter((h) => h.agodaUrl || h.airbnbUrl)
     .sort((a, b) => {
-      // Prioritize Agoda direct HTML or hid
-      const aAgoda = a.agodaUrl && (a.agodaUrl.includes('/hotel/') || a.agodaUrl.includes('hid='));
-      const bAgoda = b.agodaUrl && (b.agodaUrl.includes('/hotel/') || b.agodaUrl.includes('hid='));
-      if (aAgoda && !bAgoda) return -1;
-      if (!aAgoda && bAgoda) return 1;
+      const aDirect =
+        (a.agodaUrl && (a.agodaUrl.includes('/hotel/') || a.agodaUrl.includes('hid='))) ||
+        (a.airbnbUrl && a.airbnbUrl.includes('/rooms/'));
+      const bDirect =
+        (b.agodaUrl && (b.agodaUrl.includes('/hotel/') || b.agodaUrl.includes('hid='))) ||
+        (b.airbnbUrl && b.airbnbUrl.includes('/rooms/'));
+      if (aDirect && !bDirect) return -1;
+      if (!aDirect && bDirect) return 1;
       return 0;
     })
     .slice(0, LIMIT);
 
-  console.log(`Selected ${prioritized.length} candidate hotels for this run.\n`);
+  console.log(`Queued ${prioritized.length} candidate hotels for processing.\n`);
 
   let processedCount = 0;
   let successCount = 0;
   let skippedCount = 0;
   let totalUploadedImages = 0;
+  let unpersistedUpdates = 0;
+  let queueIndex = 0;
 
-  for (let i = 0; i < prioritized.length; i++) {
-    const hotel = prioritized[i];
-    processedCount++;
-    console.log(
-      `\n[${processedCount}/${prioritized.length}] Processing: "${hotel.name}" (${hotel.city}, ${hotel.country})`
-    );
-
+  async function processHotel(hotel, itemIndex, totalItems, workerId) {
     let extractedPhotos = [];
 
-    // 1. Try Agoda
+    // 1. Agoda Extraction
     if (hotel.agodaUrl) {
-      let hidMatch = hotel.agodaUrl.match(/hid=(\d+)/) || hotel.agodaUrl.match(/-h(\d+)/);
-      let hotelId = hidMatch ? hidMatch[1] : null;
+      let hotelId = hotel.agodaHotelId;
 
-      // If no explicit hid, fetch HTML to extract hotelId
+      if (!hotelId) {
+        const hidMatch = hotel.agodaUrl.match(/hid=(\d+)/) || hotel.agodaUrl.match(/-h(\d+)/);
+        hotelId = hidMatch ? hidMatch[1] : null;
+      }
+
       if (!hotelId && hotel.agodaUrl.includes('/hotel/') && hotel.agodaUrl.includes('.html')) {
-        process.stdout.write(`   Fetching Agoda HTML for hid... `);
         const html = await proxyFetchHtml(hotel.agodaUrl);
         hotelId = extractHotelIdFromHtml(html);
         if (hotelId) {
-          process.stdout.write(`Found HID: ${hotelId}\n`);
-        } else {
-          process.stdout.write(`No HID found\n`);
+          await Hotel.updateOne({ _id: hotel._id }, { $set: { agodaHotelId: hotelId } }).catch(() => {});
         }
       }
 
       if (hotelId) {
-        process.stdout.write(`   Fetching Agoda Secondary Data for HID ${hotelId}... `);
         const secondaryRaw = await proxyFetchJson(
           `https://www.agoda.com/api/cronos/property/BelowFoldParams/GetSecondaryData?hotel_id=${hotelId}&all=false&isHostPropertiesEnabled=true`
         );
         const secondaryData = cleanChunked(secondaryRaw);
         if (secondaryData) {
           extractedPhotos = selectTop5AgodaPhotos(secondaryData);
-          process.stdout.write(`Selected ${extractedPhotos.length} photos!\n`);
-        } else {
-          process.stdout.write(`Failed to parse secondary data\n`);
         }
       }
     }
 
-    // 2. Try Airbnb fallback if Agoda returned < 4 photos
+    // 2. Airbnb Fallback
     if (extractedPhotos.length < 4 && hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) {
-      process.stdout.write(`   Fetching Airbnb photos from ${hotel.airbnbUrl}... `);
       const airbnbPhotos = await extractAirbnbPhotos(hotel.airbnbUrl);
       if (airbnbPhotos.length >= 4) {
         extractedPhotos = airbnbPhotos;
-        process.stdout.write(`Found ${airbnbPhotos.length} Airbnb photos!\n`);
-      } else {
-        process.stdout.write(`Found ${airbnbPhotos.length} photos\n`);
       }
     }
 
-    if (extractedPhotos.length < 3) {
-      console.log(`   ⚠️ Skipped: Only found ${extractedPhotos.length} photos (minimum 3 required).`);
-      skippedCount++;
-      continue;
-    }
+    processedCount++;
+    const pct = ((processedCount / totalItems) * 100).toFixed(1);
 
-    console.log(`   📸 Extracted ${extractedPhotos.length} verified photos:`);
-    extractedPhotos.forEach((p, idx) => {
-      console.log(`      ${idx + 1}. [${p.tag}] ${p.url.slice(0, 80)}...`);
-    });
+    if (extractedPhotos.length < 3) {
+      skippedCount++;
+      console.log(
+        `[W${workerId} | ${processedCount}/${totalItems} (${pct}%)] ⚠️ SKIPPED: "${hotel.name}" (${hotel.city}) - insufficient photos (${extractedPhotos.length})`
+      );
+      return;
+    }
 
     if (dryRun) {
-      console.log(`   [DRY RUN] Would upload ${extractedPhotos.length} photos to R2 and update MongoDB.`);
       successCount++;
-      continue;
+      console.log(
+        `[W${workerId} | ${processedCount}/${totalItems} (${pct}%)] 🔍 DRY RUN: "${hotel.name}" (${hotel.city}) - found ${extractedPhotos.length} photos`
+      );
+      return;
     }
 
-    // Download and upload to R2
+    // Download and upload to Cloudflare R2
     const uploadedR2Urls = [];
     for (let pIdx = 0; pIdx < extractedPhotos.length; pIdx++) {
       const p = extractedPhotos[pIdx];
-      process.stdout.write(`   Uploading photo ${pIdx + 1}/${extractedPhotos.length}... `);
       const buf = await downloadImageBuffer(p.url);
-      if (!buf) {
-        process.stdout.write(`Download failed!\n`);
-        continue;
-      }
+      if (!buf) continue;
 
       const r2Url = await processAndUploadToR2(buf, hotel.slug, pIdx + 1);
       if (r2Url) {
         uploadedR2Urls.push(r2Url);
         totalUploadedImages++;
-        process.stdout.write(`Uploaded: ${r2Url.split('/').pop()}\n`);
-      } else {
-        process.stdout.write(`Upload failed!\n`);
       }
     }
 
     if (uploadedR2Urls.length >= 3) {
-      // Update MongoDB
       await Hotel.updateOne(
         { _id: hotel._id },
         {
           $set: {
             images: uploadedR2Urls,
-            image: uploadedR2Urls[0], // Set primary image to the first uploaded photo
+            image: uploadedR2Urls[0],
           },
         }
       );
 
-      // Update in-memory local cache
       const cachedItem = localCacheHotels.find(
         (h) => String(h._id) === String(hotel._id) || h.slug === hotel.slug
       );
@@ -527,22 +539,55 @@ async function main() {
         cachedItem.image = uploadedR2Urls[0];
       }
 
-      console.log(`   ✅ Successfully updated MongoDB with ${uploadedR2Urls.length} images!`);
       successCount++;
+      unpersistedUpdates++;
+
+      console.log(
+        `[W${workerId} | ${processedCount}/${totalItems} (${pct}%)] ✅ UPDATED: "${hotel.name}" (${hotel.city}) -> +${uploadedR2Urls.length} R2 photos (Total uploaded: ${totalUploadedImages})`
+      );
+
+      // Periodically persist to .cache/all-hotels.json every 20 hotels
+      if (unpersistedUpdates >= 20 && localCacheHotels.length > 0) {
+        unpersistedUpdates = 0;
+        try {
+          fs.writeFileSync(cachePath, JSON.stringify(localCacheHotels, null, 2));
+          console.log(`   💾 Autosaved progress to .cache/all-hotels.json`);
+        } catch (e) {}
+      }
     } else {
-      console.log(`   ⚠️ Insufficient successful uploads (${uploadedR2Urls.length}). Did not update DB.`);
       skippedCount++;
+      console.log(
+        `[W${workerId} | ${processedCount}/${totalItems} (${pct}%)] ⚠️ UPLOAD FAILED: "${hotel.name}" (${hotel.city}) - only ${uploadedR2Urls.length} uploaded`
+      );
     }
   }
 
-  // Persist local cache update if any hotels were updated
-  if (successCount > 0 && localCacheHotels.length > 0) {
-    fs.writeFileSync(cachePath, JSON.stringify(localCacheHotels, null, 2));
-    console.log(`💾 Persisted updates to .cache/all-hotels.json`);
+  // Worker loop
+  async function worker(workerId) {
+    while (queueIndex < prioritized.length) {
+      const idx = queueIndex++;
+      const hotel = prioritized[idx];
+      try {
+        await processHotel(hotel, idx, prioritized.length, workerId);
+      } catch (err) {
+        console.error(`[W${workerId}] Error on "${hotel.name}":`, err.message);
+      }
+    }
+  }
+
+  const workers = Array.from({ length: CONCURRENCY }, (_, i) => worker(i + 1));
+  await Promise.all(workers);
+
+  // Final flush to cache
+  if (localCacheHotels.length > 0) {
+    try {
+      fs.writeFileSync(cachePath, JSON.stringify(localCacheHotels, null, 2));
+      console.log(`💾 Final sync to .cache/all-hotels.json completed.`);
+    } catch (e) {}
   }
 
   console.log(`\n======================================================`);
-  console.log(`🏁 Pipeline Complete Summary:`);
+  console.log(`🏁 Batch Pipeline Complete Summary:`);
   console.log(`- Processed: ${processedCount} hotels`);
   console.log(`- Successfully Updated: ${successCount} hotels`);
   console.log(`- Skipped: ${skippedCount} hotels`);
