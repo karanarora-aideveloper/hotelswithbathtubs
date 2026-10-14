@@ -110,36 +110,36 @@ function FlashDestinationSection({
   return (
     <div id={id} ref={sectionRef} className="scroll-mt-32">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-gray-200 pb-4 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-slate-200/80 pb-4 gap-3">
         <div>
           {hubUrl ? (
-            <Link href={hubUrl} className="group inline-flex items-center gap-2 hover:text-accent transition-colors">
-              <span className="text-xl">{emoji}</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary group-hover:text-accent transition-colors">
+            <Link href={hubUrl} className="group inline-flex items-center gap-2.5 hover:text-[#1a6fde] transition-colors">
+              <span className="text-2xl">{emoji}</span>
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors tracking-tight">
                 {title}
               </h2>
             </Link>
           ) : (
-            <div className="flex items-center gap-2">
-              <span className="text-xl">{emoji}</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary">
+            <div className="flex items-center gap-2.5">
+              <span className="text-2xl">{emoji}</span>
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
                 {title}
               </h2>
             </div>
           )}
-          <p className="text-text-muted text-xs sm:text-sm mt-1">{subtitle}</p>
+          <p className="text-slate-500 text-xs sm:text-sm mt-1 font-normal leading-relaxed">{subtitle}</p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
           {badgeLabel && (
-            <span className="px-3 py-1 bg-accent-secondary/10 text-accent-secondary font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap">
+            <span className="px-3.5 py-1 bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm rounded-full border border-slate-200/80 whitespace-nowrap shadow-2xs">
               {badgeLabel}
             </span>
           )}
           {hubUrl && hubLabel && (
             <Link
               href={hubUrl}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-accent/10 hover:bg-accent hover:text-white text-accent font-semibold text-xs sm:text-sm rounded-full whitespace-nowrap transition-all group shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1a6fde]/10 hover:bg-[#1a6fde] hover:text-white text-[#1a6fde] font-bold text-xs sm:text-sm rounded-full border border-[#1a6fde]/20 whitespace-nowrap transition-all group shadow-2xs"
             >
               <span>{hubLabel}</span>
               <span className="group-hover:translate-x-0.5 transition-transform">→</span>
@@ -149,7 +149,7 @@ function FlashDestinationSection({
       </div>
 
       {/* Grid of Destination Cards (Lazy loaded & content-visibility optimized) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
         {displayedCities.map((item) => (
           <CityCard
             key={`${item._id.city}-${item._id.country}`}
@@ -168,15 +168,15 @@ function FlashDestinationSection({
 
         {/* Coming soon placeholder for Global Escapes */}
         {comingSoonCard && isExpanded && (
-          <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center text-center">
-            <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mb-3">
+          <div className="bg-white rounded-2xl border-2 border-dashed border-slate-200 p-6 flex flex-col items-center justify-center text-center shadow-xs">
+            <div className="w-12 h-12 rounded-full bg-[#1a6fde]/10 text-[#1a6fde] flex items-center justify-center mb-3">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
             </div>
-            <p className="font-heading text-base font-bold text-accent-secondary mb-1">More Cities Coming Soon</p>
-            <p className="text-xs text-text-muted leading-relaxed mb-3">Continuously adding verified boutique stays across Europe &amp; Asia.</p>
-            <span className="text-2xs font-semibold text-accent uppercase tracking-wider">Audited Weekly</span>
+            <p className="font-heading text-base font-bold text-slate-900 mb-1">More Cities Coming Soon</p>
+            <p className="text-xs text-slate-500 leading-relaxed mb-3">Continuously adding verified boutique stays across Europe &amp; Asia.</p>
+            <span className="text-2xs font-bold text-[#1a6fde] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">Audited Weekly</span>
           </div>
         )}
       </div>
@@ -184,8 +184,8 @@ function FlashDestinationSection({
       {/* Sentinel for Flash List Infinite Scroll */}
       {hasMoreToStream && (
         <div ref={sentinelRef} className="h-10 w-full flex items-center justify-center my-6" aria-hidden="true">
-          <div className="flex items-center gap-2 text-xs text-text-muted font-medium bg-gray-50 px-4 py-2 rounded-full border border-gray-200 shadow-2xs animate-pulse">
-            <div className="w-2 h-2 rounded-full bg-accent animate-ping" />
+          <div className="flex items-center gap-2 text-xs text-slate-600 font-medium bg-white px-4 py-2 rounded-full border border-slate-200 shadow-2xs animate-pulse">
+            <div className="w-2 h-2 rounded-full bg-[#1a6fde] animate-ping" />
             <span>Streaming verified destinations ({visibleCount} of {totalCount})...</span>
           </div>
         </div>
@@ -198,7 +198,7 @@ function FlashDestinationSection({
             <button
               type="button"
               onClick={handleExpand}
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-accent-secondary hover:bg-accent text-white font-semibold text-xs sm:text-sm rounded-xl shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
             >
               <span>Show All {totalCount} {title.split(' ')[0]} Destination Cards</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,8 +208,8 @@ function FlashDestinationSection({
           </div>
 
           {remainingCitiesFormatter && (
-            <div className="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs">
-              <span className="text-text-muted font-medium mr-1">{pillPrefix}</span>
+            <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs">
+              <span className="text-slate-400 font-medium mr-1">{pillPrefix}</span>
               {pillsToRender.map((item) => {
                 const formatted = remainingCitiesFormatter(item);
                 return (
@@ -217,7 +217,7 @@ function FlashDestinationSection({
                     key={`${item._id.city}-${item._id.country}`}
                     href={formatted.href}
                     prefetch={false}
-                    className="px-2.5 py-1 bg-white hover:bg-accent hover:text-white border border-gray-200 rounded-lg text-text-main transition-colors text-xs font-medium shadow-2xs"
+                    className="px-2.5 py-1 bg-white hover:bg-[#1a6fde] hover:text-white hover:border-[#1a6fde] border border-slate-200 rounded-lg text-slate-700 transition-colors text-xs font-medium shadow-2xs"
                   >
                     {formatted.label}
                   </Link>
@@ -227,7 +227,7 @@ function FlashDestinationSection({
                 <button
                   type="button"
                   onClick={handleExpand}
-                  className="px-2.5 py-1 bg-accent/10 text-accent hover:bg-accent hover:text-white rounded-lg text-xs font-semibold transition-colors"
+                  className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
                 >
                   +{overflowPillsCount} more worldwide →
                 </button>
@@ -404,7 +404,7 @@ export default function HomeDestinationsClient({
   return (
     <div className="space-y-8">
       {/* Interactive Region Selection Bar + Instant Search */}
-      <div className="bg-gray-50/95 border border-border rounded-2xl p-3 sm:p-4 shadow-2xs w-full flex flex-col gap-3">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-[0_2px_8px_rgba(0,0,0,0.03)] w-full flex flex-col gap-3">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
           {/* Quick-Access Region Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 pb-1 lg:pb-0">
@@ -412,12 +412,12 @@ export default function HomeDestinationsClient({
               onClick={() => handleTabChange('auto')}
               className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
                 selectedTab === 'auto'
-                  ? 'bg-accent-secondary text-white shadow-sm'
-                  : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
+                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <span>📍 For You</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'auto' ? 'bg-white/20' : 'bg-gray-100'}`}>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'auto' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
                 {isIndiaVisitor ? '🇮🇳 India' : '🇺🇸 USA'}
               </span>
             </button>
@@ -426,12 +426,12 @@ export default function HomeDestinationsClient({
               onClick={() => handleTabChange('usa')}
               className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
                 selectedTab === 'usa'
-                  ? 'bg-accent-secondary text-white shadow-sm'
-                  : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
+                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <span>🇺🇸 United States</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'usa' ? 'bg-white/20' : 'bg-gray-100'}`}>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'usa' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
                 {usaCities.length}
               </span>
             </button>
@@ -440,12 +440,12 @@ export default function HomeDestinationsClient({
               onClick={() => handleTabChange('india')}
               className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
                 selectedTab === 'india'
-                  ? 'bg-accent-secondary text-white shadow-sm'
-                  : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
+                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <span>🇮🇳 India</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'india' ? 'bg-white/20' : 'bg-gray-100'}`}>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'india' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
                 {indiaCities.length}
               </span>
             </button>
@@ -454,12 +454,12 @@ export default function HomeDestinationsClient({
               onClick={() => handleTabChange('global')}
               className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
                 selectedTab === 'global'
-                  ? 'bg-accent-secondary text-white shadow-sm'
-                  : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
+                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <span>🌍 Global</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs ${selectedTab === 'global' ? 'bg-white/20' : 'bg-gray-100'}`}>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'global' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
                 {internationalCities.length}
               </span>
             </button>
@@ -468,8 +468,8 @@ export default function HomeDestinationsClient({
               onClick={() => handleTabChange('all')}
               className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
                 selectedTab === 'all'
-                  ? 'bg-accent text-white shadow-sm'
-                  : 'bg-white text-text-main border border-gray-200 hover:bg-gray-100'
+                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <span>✨ View All</span>
@@ -484,10 +484,10 @@ export default function HomeDestinationsClient({
               onChange={(e) => setFilterQuery(e.target.value)}
               placeholder="Filter 280+ destinations..."
               aria-label="Filter destinations by city or country"
-              className="w-full pl-9 pr-8 py-2 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent shadow-2xs transition-all placeholder:text-gray-400"
+              className="w-full pl-9 pr-8 py-2 text-xs bg-slate-50 border border-slate-200/80 rounded-xl focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#1a6fde]/20 focus:border-[#1a6fde] shadow-2xs transition-all placeholder:text-slate-400 text-slate-900 font-medium"
             />
             <svg
-              className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -498,7 +498,7 @@ export default function HomeDestinationsClient({
               <button
                 type="button"
                 onClick={() => setFilterQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-100 text-xs font-bold cursor-pointer"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 w-5 h-5 flex items-center justify-center rounded-full hover:bg-slate-100 text-xs font-bold cursor-pointer"
                 aria-label="Clear filter"
               >
                 ✕
@@ -508,33 +508,33 @@ export default function HomeDestinationsClient({
         </div>
 
         {/* Region detection prompt */}
-        <div className="text-2xs text-text-muted font-medium flex items-center justify-between border-t border-gray-200/60 pt-2 px-1">
+        <div className="text-2xs text-slate-500 font-medium flex items-center justify-between border-t border-slate-100 pt-2 px-1">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>
-              Detected location: <strong>{geo.country}</strong> {isIndiaVisitor ? '(🇮🇳 India layout active)' : '(🇺🇸 USA layout active)'}
+              Detected location: <strong className="text-slate-700">{geo.country}</strong> {isIndiaVisitor ? '(🇮🇳 India layout active)' : '(🇺🇸 USA layout active)'}
             </span>
           </div>
-          <span className="text-gray-400 hidden sm:inline">Flash List progressive streaming active</span>
+          <span className="text-slate-400 hidden sm:inline">Flash List progressive streaming active</span>
         </div>
       </div>
 
       {/* When filtering by text, render Instant Matches Grid */}
       {normalizedFilter ? (
         <div className="space-y-6">
-          <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+          <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
             <div>
-              <h3 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary">
+              <h3 className="font-heading text-xl sm:text-2xl font-black text-slate-900">
                 Search Results for &ldquo;{filterQuery}&rdquo;
               </h3>
-              <p className="text-xs text-text-muted mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Found {filteredMatches.length} matching verified bathtub destinations
               </p>
             </div>
             <button
               type="button"
               onClick={() => setFilterQuery('')}
-              className="text-xs font-bold text-accent hover:underline flex items-center gap-1 cursor-pointer"
+              className="text-xs font-bold text-[#1a6fde] hover:text-[#1559b8] hover:underline flex items-center gap-1 cursor-pointer"
             >
               <span>Clear Filter</span>
               <span>✕</span>
@@ -543,7 +543,7 @@ export default function HomeDestinationsClient({
 
           {filteredMatches.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
                 {filteredMatches.slice(0, filterVisibleCount).map((item) => (
                   <CityCard
                     key={`filter-${item._id.city}-${item._id.country}`}
@@ -563,24 +563,24 @@ export default function HomeDestinationsClient({
 
               {filterVisibleCount < filteredMatches.length && (
                 <div ref={filterSentinelRef} className="h-10 w-full flex items-center justify-center my-4" aria-hidden="true">
-                  <div className="flex items-center gap-2 text-xs text-text-muted font-medium bg-gray-50 px-4 py-2 rounded-full border border-gray-200 shadow-2xs animate-pulse">
-                    <div className="w-2 h-2 rounded-full bg-accent animate-ping" />
+                  <div className="flex items-center gap-2 text-xs text-slate-600 font-medium bg-white px-4 py-2 rounded-full border border-slate-200 shadow-2xs animate-pulse">
+                    <div className="w-2 h-2 rounded-full bg-[#1a6fde] animate-ping" />
                     <span>Streaming matching destinations ({filterVisibleCount} of {filteredMatches.length})...</span>
                   </div>
                 </div>
               )}
             </>
           ) : (
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 text-center max-w-md mx-auto my-12">
+            <div className="bg-white border border-slate-200/90 rounded-2xl p-8 text-center max-w-md mx-auto my-12 shadow-sm">
               <span className="text-3xl mb-2 block">🔍</span>
-              <h4 className="font-heading font-bold text-gray-800 text-base mb-1">No destinations found</h4>
-              <p className="text-xs text-text-muted mb-4">
+              <h4 className="font-heading font-bold text-slate-900 text-base mb-1">No destinations found</h4>
+              <p className="text-xs text-slate-500 mb-4 leading-relaxed">
                 No verified bathtub stays match &ldquo;{filterQuery}&rdquo;. Try searching for popular hubs like Paris, New York, Goa, London, or Tokyo.
               </p>
               <button
                 type="button"
                 onClick={() => setFilterQuery('')}
-                className="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+                className="px-5 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
               >
                 Reset Filter
               </button>

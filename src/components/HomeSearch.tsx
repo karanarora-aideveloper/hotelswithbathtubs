@@ -242,7 +242,7 @@ export default function HomeSearch() {
                 ? 'Search city or hotel (e.g. Puri, Goa, Udaipur, Taj)...'
                 : 'Search city or hotel (e.g. New York, Miami, Four Seasons)...'
             }
-            className="w-full px-4 md:px-6 py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-semibold bg-gray-100 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-accent/20 border-2 border-transparent focus:border-accent transition-all pr-10"
+            className="w-full px-4 md:px-6 py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-bold bg-slate-50 rounded-xl outline-none focus:bg-white focus:ring-4 focus:ring-[#1a6fde]/15 border-2 border-slate-200 focus:border-[#1a6fde] transition-all pr-10 text-slate-900 placeholder:text-slate-400"
           />
 
           {query && (
@@ -251,7 +251,7 @@ export default function HomeSearch() {
                 setQuery('');
                 setIsOpen(false);
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
               aria-label="Clear search"
             >
               ✕
@@ -259,14 +259,14 @@ export default function HomeSearch() {
           )}
 
           {isOpen && query.trim() && (
-            <div className="absolute top-full mt-2 left-0 right-0 bg-white border border-border shadow-2xl rounded-2xl overflow-hidden z-30 max-h-96 overflow-y-auto text-left divide-y divide-gray-100 animate-in fade-in slide-in-from-top-1 duration-150">
+            <div className="absolute top-full mt-2 left-0 right-0 bg-white border border-slate-200 shadow-2xl rounded-2xl overflow-hidden z-30 max-h-96 overflow-y-auto text-left divide-y divide-slate-100 animate-in fade-in slide-in-from-top-1 duration-150">
               {filtered.length === 0 ? (
                 <div className="p-6 text-center">
                   <p className="text-2xl mb-2">🔍</p>
-                  <p className="text-sm font-semibold text-gray-800">
+                  <p className="text-sm font-bold text-slate-900">
                     No results for &ldquo;{query}&rdquo;
                   </p>
-                  <p className="text-xs text-gray-500 mt-1 mb-4">
+                  <p className="text-xs text-slate-500 mt-1 mb-4">
                     Try searching for another city, hotel name, or popular destination:
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
@@ -290,7 +290,7 @@ export default function HomeSearch() {
                         key={sug.name}
                         href={sug.url}
                         onClick={() => setIsOpen(false)}
-                        className="text-xs font-semibold px-3 py-1.5 bg-gray-100 hover:bg-accent/10 hover:text-accent text-gray-700 rounded-lg transition-colors"
+                        className="text-xs font-bold px-3 py-1.5 bg-slate-100 hover:bg-[#1a6fde] hover:text-white text-slate-700 rounded-lg transition-colors"
                       >
                         {sug.name} &rarr;
                       </Link>
@@ -312,8 +312,8 @@ export default function HomeSearch() {
                     onMouseEnter={() => setActiveIndex(i)}
                     className={`w-full text-left px-4 py-3.5 text-sm transition-colors flex items-center justify-between group ${
                       i === activeIndex
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-text-main hover:bg-accent/10 hover:text-accent'
+                        ? 'bg-[#1a6fde]/10 text-[#1a6fde]'
+                        : 'text-slate-700 hover:bg-[#1a6fde]/10 hover:text-[#1a6fde]'
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
@@ -321,14 +321,14 @@ export default function HomeSearch() {
                         {item.type === 'hotel' ? '🏨' : item.type === 'city' ? '📍' : '🌍'}
                       </span>
                       <div className="truncate">
-                        <div className="font-bold text-gray-900 group-hover:text-accent truncate">
+                        <div className="font-bold text-slate-900 group-hover:text-[#1a6fde] truncate">
                           {item.title}
                         </div>
-                        <div className="text-xs text-gray-500 truncate">{item.subtitle}</div>
+                        <div className="text-xs text-slate-500 truncate">{item.subtitle}</div>
                       </div>
                     </div>
                     {item.badge && (
-                      <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 group-hover:bg-accent/20 group-hover:text-accent flex-shrink-0 ml-3">
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 group-hover:bg-[#1a6fde]/15 group-hover:text-[#1a6fde] flex-shrink-0 ml-3">
                         {item.badge}
                       </span>
                     )}

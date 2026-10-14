@@ -249,7 +249,7 @@ export default async function Home() {
       <StructuredData data={organizationSchema} />
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={faqSchema}>
-        <>
+        <div className="min-h-screen bg-[#fafafc] text-slate-800">
           <header className="relative pt-24 sm:pt-32 pb-36 sm:pb-48 px-4 sm:px-8 text-center overflow-hidden">
             {/* React 19 auto-hoisted LCP Image Preload */}
             <link
@@ -276,7 +276,7 @@ export default async function Home() {
           </header>
           
           {/* Main Search Panel + Direct Inspiration Navigation */}
-          <div className="relative z-20 max-w-3xl mx-4 md:mx-auto -mt-16 sm:-mt-20 bg-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-gray-100">
+          <div className="relative z-20 max-w-3xl mx-4 md:mx-auto -mt-16 sm:-mt-20 bg-white p-4 sm:p-6 rounded-2xl shadow-xl border border-slate-200/80">
             <HomeSearch />
             
             {/* Above-The-Fold Inspiration Shortcuts (Geo-Adaptive) */}
@@ -284,26 +284,26 @@ export default async function Home() {
           </div>
 
           {/* Trust Strip with Clean Trust Badges (2x2 on mobile, flex on desktop) */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 py-4 px-4 mb-8 sm:mb-10 bg-white border-b border-gray-100 max-w-5xl mx-auto text-sm">
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 py-3.5 px-6 my-8 bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.02)] max-w-4xl mx-4 sm:mx-auto text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-slate-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="truncate sm:whitespace-normal">Triple-Platform Verified</span>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-slate-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
               <span>Guaranteed Tubs</span>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 font-semibold text-gray-800">
+            <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-slate-800">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
               <span>Trusted Direct Links</span>
             </div>
-            <div className="flex items-center justify-start sm:justify-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-semibold text-xs">
+            <div className="flex items-center justify-start sm:justify-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200/80 rounded-full font-bold text-xs shadow-2xs">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
               <span className="truncate">Active &amp; Audited</span>
             </div>
@@ -311,47 +311,47 @@ export default async function Home() {
 
           {/* Streamlined & Consolidated Proof Module */}
           <section id="verification" className="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-2">How We Verify Every Hotel</h2>
-            <p className="text-gray-500 text-sm mb-8">Triple-checked across three platforms — so you book with full confidence.</p>
+            <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-2">How We Verify Every Hotel</h2>
+            <p className="text-slate-500 text-sm mb-8">Triple-checked across three platforms — so you book with full confidence.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                  <div className="flex items-center gap-2.5 font-bold text-slate-900 mb-2 text-base">
                     <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">1</span>
                     <span>MakeMyTrip Audit</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
                     Confirmed "Bathtub", "Jacuzzi", or "Jacuzzi/Bathtub" room tags in verified listings.
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Amenity Tags</span>
+                <span className="text-xs font-bold text-emerald-700 mt-4 flex items-center gap-1">✓ Verified Amenity Tags</span>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                  <div className="flex items-center gap-2.5 font-bold text-slate-900 mb-2 text-base">
                     <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">2</span>
                     <span>Agoda Facility Check</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
                     Cross-referenced against Agoda's explicit "Bathtub" and private jacuzzi room facility filter.
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Facilities</span>
+                <span className="text-xs font-bold text-emerald-700 mt-4 flex items-center gap-1">✓ Verified Facilities</span>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 font-bold text-gray-900 mb-2 text-base">
+                  <div className="flex items-center gap-2.5 font-bold text-slate-900 mb-2 text-base">
                     <span className="w-8 h-8 rounded-full bg-[#1a6fde] text-white text-xs flex items-center justify-center font-bold">3</span>
                     <span>Booking.com Validation</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
                     Validated in room specifications for genuine in-room hot tubs and deep soaking tubs.
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-emerald-700 mt-3 block">✓ Verified Room Specs</span>
+                <span className="text-xs font-bold text-emerald-700 mt-4 flex items-center gap-1">✓ Verified Room Specs</span>
               </div>
             </div>
           </section>
@@ -369,8 +369,8 @@ export default async function Home() {
               indiaCities={indiaCities}
             />
             {/* FAQ Section — targets "hotel with bathtub in room" long-tail + enables FAQPage schema */}
-            <section id="faq" aria-label="Frequently Asked Questions" className="max-w-3xl mx-auto">
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary mb-6">
+            <section id="faq" aria-label="Frequently Asked Questions" className="max-w-3xl mx-auto py-8">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-6 text-center">
                 Hotel with Bathtub in Room — Common Questions
               </h2>
               <div className="space-y-4">
@@ -392,14 +392,14 @@ export default async function Home() {
                     a: 'In India: Kolkata, Delhi, Goa, Jaipur, and Udaipur have the highest density of verified bathtub hotels. Internationally: Dubai, Singapore, Bangkok, Tokyo, and London all have strong selections of luxury rooms with private in-room bathtubs.',
                   },
                 ].map(({ q, a }) => (
-                  <details key={q} className="group border border-border rounded-xl overflow-hidden">
-                    <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer font-semibold text-sm sm:text-base text-accent-secondary list-none hover:bg-accent/5 transition-colors">
+                  <details key={q} className="group border border-slate-200/90 rounded-2xl bg-white shadow-xs overflow-hidden transition-all duration-200 hover:border-slate-300">
+                    <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer font-bold text-sm sm:text-base text-slate-900 list-none hover:bg-slate-50/80 transition-colors">
                       {q}
-                      <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                      <svg className="w-4 h-4 flex-shrink-0 transition-transform duration-200 group-open:rotate-180 text-[#1a6fde]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
-                    <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-text-muted leading-relaxed border-t border-border pt-3">
+                    <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
                       {a}
                     </p>
                   </details>
@@ -407,7 +407,7 @@ export default async function Home() {
               </div>
             </section>
           </section>
-        </>
+        </div>
       </StructuredData>
     </StructuredData>
   );

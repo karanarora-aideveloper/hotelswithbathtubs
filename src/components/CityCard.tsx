@@ -82,106 +82,113 @@ export default function CityCard({
       href={targetUrl}
       prefetch={false}
       onClick={handleClick}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 400px' }}
-      className={`relative overflow-hidden rounded-2xl border border-gray-200/80 shadow-md transition-all duration-300 flex flex-col group text-left cursor-pointer bg-gray-900 aspect-[3/4] sm:aspect-[4/5] min-h-[360px] ${
+      style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 380px' }}
+      className={`bg-white rounded-2xl border border-slate-200/90 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(15,23,42,0.08)] hover:border-[#1a6fde]/50 transition-all duration-300 flex flex-col group text-left cursor-pointer overflow-hidden ${
         clicked
-          ? 'ring-2 ring-[#1a6fde] border-[#1a6fde] shadow-lg opacity-90 scale-[0.99]'
-          : 'hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#1a6fde]'
+          ? 'ring-2 ring-[#1a6fde] border-[#1a6fde] shadow-lg opacity-95 scale-[0.99]'
+          : 'hover:-translate-y-1.5'
       }`}
     >
-      {/* Background Image with Zoom Effect */}
-      <ProgressiveImage
-        src={image}
-        alt={`Hotels with private bathtubs in ${city}, ${country}`}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
-        priority={priority}
-      />
+      {/* Top Media Window */}
+      <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
+        <ProgressiveImage
+          src={image}
+          alt={`Hotels with private bathtubs in ${city}, ${country}`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
+          priority={priority}
+        />
 
-      {/* Multi-Stop Gradient Vignettes for Perfect Legibility */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/75 via-black/35 to-transparent z-[1] pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-[1] pointer-events-none" />
+        {/* Soft bottom vignette to separate photo from card body */}
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/25 to-transparent pointer-events-none" />
 
-      {/* Top Floating Glassmorphic Badges */}
-      <div className="relative z-[2] p-3.5 sm:p-4 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold shadow-xs">
-          <span>{flag}</span>
-          <span className="line-clamp-1">{country}</span>
-        </div>
+        {/* Floating Glassmorphic Badges */}
+        <div className="absolute inset-x-0 top-0 p-3 sm:p-3.5 flex items-center justify-between gap-2 z-[2]">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/60 text-slate-800 text-[11px] font-bold shadow-xs">
+            <span>{flag}</span>
+            <span className="line-clamp-1">{country}</span>
+          </div>
 
-        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-[11px] font-extrabold shadow-xs whitespace-nowrap">
-          <span className="text-[10px] text-white/80 font-normal">from</span>
-          <span>{displayPrice.replace('From ', '')}</span>
-          <span className="text-[9px] text-white/70 font-normal">/nt</span>
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/60 text-slate-900 text-[11px] font-black shadow-xs whitespace-nowrap">
+            <span className="text-[10px] text-slate-500 font-normal">from</span>
+            <span>{displayPrice.replace('From ', '')}</span>
+            <span className="text-[9px] text-slate-400 font-normal">/nt</span>
+          </div>
         </div>
       </div>
 
-      {/* Spacer to push content to bottom */}
-      <div className="flex-1 z-[2]" />
-
-      {/* Bottom Overlaid Information */}
-      <div className="relative z-[2] p-4 sm:p-5 flex flex-col gap-2">
-        {/* Verification & Tub Type Badges */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-emerald-500/90 backdrop-blur-xs text-white border border-emerald-400/40 shadow-xs">
-            <span className="font-black">✓</span>
-            <span>{hotelCount} Verified Tubs</span>
-          </span>
-          {hasJacuzzi && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-blue-500/85 backdrop-blur-xs text-white border border-blue-400/30 shadow-xs">
-              <span>🌊</span>
-              <span>Jacuzzi Suites</span>
+      {/* Bottom Information Body */}
+      <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
+        <div>
+          {/* Verification & Tub Type Badges */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">
+              <span className="font-black">✓</span>
+              <span>{hotelCount} Verified Tubs</span>
             </span>
-          )}
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold bg-amber-500/90 backdrop-blur-xs text-white border border-amber-400/30 shadow-xs ml-auto">
-            <span className="text-amber-200 font-black">★</span>
-            <span>{rating}</span>
-          </span>
+            {hasJacuzzi && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 shadow-2xs">
+                <span>🌊</span>
+                <span>Jacuzzi</span>
+              </span>
+            )}
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-2xs ml-auto">
+              <span className="text-amber-500 font-black">★</span>
+              <span>{rating}</span>
+            </span>
+          </div>
+
+          {/* City Heading & Review Stats */}
+          <div className="mt-2.5">
+            <h3 className="font-heading text-xl sm:text-[22px] font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors leading-snug tracking-tight">
+              {city}
+            </h3>
+            <p className="text-xs text-slate-500 font-medium line-clamp-1 mt-1 flex items-center gap-1.5">
+              <span>{reviewsFormatted}</span>
+              <span className="opacity-40">•</span>
+              <span className="text-emerald-700 font-semibold">100% In-Room</span>
+            </p>
+          </div>
         </div>
 
-        {/* City Heading & Review Stats */}
-        <div className="mt-0.5">
-          <h3 className="font-heading text-2xl sm:text-[26px] font-black text-white leading-tight drop-shadow-md tracking-tight group-hover:text-sky-300 transition-colors">
-            {city}
-          </h3>
-          <p className="text-[11px] sm:text-xs text-white/80 font-medium line-clamp-1 mt-0.5 flex items-center gap-1.5 drop-shadow-xs">
-            <span>{reviewsFormatted}</span>
-            <span className="opacity-60">•</span>
-            <span className="text-emerald-300 font-semibold">100% In-Room</span>
-          </p>
-        </div>
+        {/* Divider & Action Footer */}
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <div>
+            <span className="text-xs text-slate-400 block font-normal">Best verified rate</span>
+            <span className="text-[15px] font-extrabold text-slate-900">{displayPrice}</span>
+          </div>
 
-        {/* Interactive Action CTA Bar */}
-        <div
-          className={`mt-1.5 flex items-center justify-between py-2.5 px-3.5 rounded-xl font-bold text-xs sm:text-[13px] transition-all duration-200 border backdrop-blur-md shadow-sm ${
-            clicked
-              ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-md'
-              : 'bg-white/15 hover:bg-white text-white hover:text-gray-900 border-white/25 group-hover:bg-[#1a6fde] group-hover:border-[#1a6fde] group-hover:text-white'
-          }`}
-        >
-          {clicked ? (
-            <>
-              <span>Opening {city}...</span>
-              <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-            </>
-          ) : (
-            <>
-              <span>Explore {hotelCount} Verified Stays</span>
-              <svg
-                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth="2.5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </>
-          )}
+          <div
+            className={`flex items-center gap-1.5 py-1.5 px-3.5 rounded-xl font-bold text-xs transition-all duration-200 border shadow-2xs ${
+              clicked
+                ? 'bg-[#1a6fde] text-white border-[#1a6fde]'
+                : 'bg-slate-50 group-hover:bg-[#1a6fde] text-slate-700 group-hover:text-white border-slate-200/70 group-hover:border-[#1a6fde]'
+            }`}
+          >
+            {clicked ? (
+              <>
+                <span>Opening...</span>
+                <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </>
+            ) : (
+              <>
+                <span>Explore Stays</span>
+                <svg
+                  className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2.5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </Link>

@@ -101,18 +101,18 @@
   --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  --color-bg-main: #f5f7fa;
+  --color-bg-main: #fafafc;
   --color-bg-card: #ffffff;
-  --color-text-main: #1a1a1a;
-  --color-text-muted: #6b7280;
+  --color-text-main: #0f172a;
+  --color-text-muted: #64748b;
   
-  --color-accent: #eb5510;
-  --color-accent-hover: #d14609;
-  --color-accent-secondary: #003b95;
-  --color-accent-secondary-hover: #002c70;
+  --color-accent: #1a6fde;
+  --color-accent-hover: #1559b8;
+  --color-accent-secondary: #0f172a;
+  --color-accent-secondary-hover: #1e293b;
   
   --color-success: #059669;
-  --color-border: #e5e7eb;
+  --color-border: #e2e8f0;
 }
 
 /* Custom CSS to mimic the old OTA styling but mapped to Tailwind */
