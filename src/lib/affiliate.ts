@@ -1,5 +1,5 @@
 export const DEFAULT_AGODA_CID = '1972736';
-export const DEFAULT_BOOKING_AID = '';
+export const DEFAULT_BOOKING_AID = '304144';
 export const DEFAULT_EARNKARO_ID = '1471944';
 export const EARNKARO_MMT_RETAILER_ID = '1729';
 export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID || '';
