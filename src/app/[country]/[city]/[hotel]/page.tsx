@@ -427,6 +427,10 @@ export default async function HotelDetailPage({
     return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
   });
 
+  // Filter out Tier 99 (broken search / generic redirect) URLs if any direct or scoped property URL exists
+  const safeUrls = sortedUrls.filter(u => getUrlDirectnessTier(u) < 99);
+  const displayUrls = safeUrls.length > 0 ? safeUrls : sortedUrls;
+
   // Calculate clean Usual Rate display
   const usualPrice = hotel.price || '₹ 4,500';
 
@@ -655,7 +659,7 @@ export default async function HotelDetailPage({
                   Select Platform to Check Live Rates:
                 </span>
                 <div className="flex flex-col gap-2.5">
-                  {sortedUrls.map((u, i) => (
+                  {displayUrls.map((u, i) => (
                     <BookingButton
                       key={i}
                       url={u}

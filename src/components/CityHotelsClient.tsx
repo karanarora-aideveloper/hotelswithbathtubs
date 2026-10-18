@@ -1011,6 +1011,10 @@ export default function CityHotelsClient({
               return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
             });
 
+            // Filter out Tier 99 (broken search / generic redirect) URLs if any direct or scoped property URL exists
+            const safeUrls = sortedUrls.filter(u => getUrlDirectnessTier(u) < 99);
+            const displayUrls = safeUrls.length > 0 ? safeUrls : sortedUrls;
+
             return (
               <div
                 key={h._id || i}
@@ -1148,15 +1152,15 @@ export default function CityHotelsClient({
                     )}
 
                     <div className="flex flex-col gap-1.5">
-                      {sortedUrls.slice(0, 2).map((u, idx) => (
+                      {displayUrls.slice(0, 2).map((u, idx) => (
                         <BookingButton key={idx} url={u} hotelName={h.name} cityName={cityName} isPrimary={idx === 0} />
                       ))}
-                      {sortedUrls.length > 2 && (
+                      {displayUrls.length > 2 && (
                         <Link
                           href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`}
                           className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
                         >
-                          Compare all {sortedUrls.length} sites &amp; tub guide &rarr;
+                          Compare all {displayUrls.length} sites &amp; tub guide &rarr;
                         </Link>
                       )}
                     </div>
