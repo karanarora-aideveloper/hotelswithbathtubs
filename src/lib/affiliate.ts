@@ -32,8 +32,7 @@ export function getTripAffiliateLink(
 
 /**
  * Transforms an Agoda hotel URL to include the affiliate tracking CID.
- * Automatically rewrites legacy /search?text= URLs (which 301-redirect to /)
- * into Agoda's official partnersearch.aspx deep link format.
+ * Ensures proper affiliate tracking CID is attached without breaking direct property or search parameters.
  */
 export function getAgodaAffiliateLink(url: string, cid: string = DEFAULT_AGODA_CID): string {
   if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
@@ -43,18 +42,10 @@ export function getAgodaAffiliateLink(url: string, cid: string = DEFAULT_AGODA_C
   try {
     const parsedUrl = new URL(url);
     if (parsedUrl.hostname.includes('agoda.com')) {
-      const textQuery = parsedUrl.searchParams.get('text');
-      const hasDirectProperty =
-        parsedUrl.searchParams.has('hid') ||
-        parsedUrl.searchParams.has('selectedproperty') ||
-        parsedUrl.searchParams.has('city');
-
-      if (parsedUrl.pathname.endsWith('/search') && textQuery && !hasDirectProperty) {
-        return `https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=${encodeURIComponent(cid || DEFAULT_AGODA_CID)}&txt=${encodeURIComponent(textQuery)}`;
-      }
-
-      if (cid) {
-        parsedUrl.searchParams.set('cid', cid);
+      const existingCid = parsedUrl.searchParams.get('cid');
+      const targetCid = cid || existingCid || DEFAULT_AGODA_CID;
+      if (targetCid) {
+        parsedUrl.searchParams.set('cid', targetCid);
       }
       return parsedUrl.toString();
     }
@@ -189,16 +180,19 @@ export function wrapOutboundAffiliateLink(
  * Returns a numeric tier for how direct a booking URL is:
  * 0 = True Standalone Property Detail Page (/hotel/*.html, hotel-details, /rooms/*)
  * 1 = Pinned Property ID on City Search (hid=, selectedproperty=)
- * 2 = City / Keyword Search Fallback
+ * 2 = Scoped City / Keyword Search Fallback (city=, booking searchresults, mmt search)
+ * 99 = Broken Search / Generic Homepage Redirect (partnersearch.aspx with only text/txt)
  */
 export function getUrlDirectnessTier(url?: string): number {
-  if (!url) return 3;
+  if (!url) return 99;
   const lower = url.toLowerCase();
 
   if (lower.includes('agoda.com')) {
     if (lower.includes('/hotel/') && lower.includes('.html')) return 0;
     if (lower.includes('hid=') || lower.includes('selectedproperty=')) return 1;
-    return 2;
+    if (lower.includes('city=')) return 2;
+    // Agoda partnersearch with only text= or txt= (without hid or city) 302-redirects to homepage!
+    return 99;
   }
   if (lower.includes('makemytrip.com')) {
     if ((lower.includes('hotel-details') || lower.includes('hotelid=')) && !lower.includes('hotel-listing')) return 0;
@@ -220,11 +214,11 @@ export function getUrlDirectnessTier(url?: string): number {
 }
 
 /**
- * Returns true ONLY if the URL points to a standalone hotel or room detail page
- * (never a city search list).
+ * Returns true if the URL points directly to the specific property
+ * (either standalone detail page or pinned property ID).
  */
 export function isDirectPropertyUrl(url?: string): boolean {
-  return getUrlDirectnessTier(url) === 0;
+  return getUrlDirectnessTier(url) <= 1;
 }
 
 /**

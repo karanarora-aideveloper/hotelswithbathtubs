@@ -2,7 +2,7 @@
 
 import React from 'react';
 import OutboundLink from './OutboundLink';
-import { isDirectPropertyUrl } from '@/lib/affiliate';
+import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 
 interface HotelAnalyticsProps {
   hotel: {
@@ -225,9 +225,9 @@ export default function HotelAnalyticsComparison({
 
   // Sort platforms so direct property links always appear above generic search fallbacks
   platforms.sort((a, b) => {
-    const directA = isDirectPropertyUrl(a.url) ? 0 : 1;
-    const directB = isDirectPropertyUrl(b.url) ? 0 : 1;
-    return directA - directB;
+    const tierA = getUrlDirectnessTier(a.url);
+    const tierB = getUrlDirectnessTier(b.url);
+    return tierA - tierB;
   });
 
   // Ensure the #1 top-ranked platform carries the featured highlight badge

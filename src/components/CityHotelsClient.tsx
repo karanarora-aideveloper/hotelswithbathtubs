@@ -3,8 +3,7 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
-import { isDirectPropertyUrl } from '@/lib/affiliate';
-import ProgressiveImage from '@/components/ProgressiveImage';
+import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
@@ -996,9 +995,9 @@ export default function CityHotelsClient({
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
             
             const sortedUrls = [...rawUrls].sort((a, b) => {
-              const directA = isDirectPropertyUrl(a) ? 0 : 1;
-              const directB = isDirectPropertyUrl(b) ? 0 : 1;
-              if (directA !== directB) return directA - directB;
+              const tierA = getUrlDirectnessTier(a);
+              const tierB = getUrlDirectnessTier(b);
+              if (tierA !== tierB) return tierA - tierB;
 
               const provA = getUrlProvider(a);
               const provB = getUrlProvider(b);
