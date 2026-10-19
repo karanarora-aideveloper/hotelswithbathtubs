@@ -6,6 +6,17 @@ export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID |
 export const DEFAULT_TRIP_SID = process.env.NEXT_PUBLIC_TRIP_SID || '';
 
 /**
+ * Robust domain checker that prevents subdomain/domain overlap bugs
+ * (e.g. 'makemytrip.com' or 'cleartrip.com' erroneously matching 'trip.com').
+ */
+export function matchesDomain(hostname: string, domain: string): boolean {
+  if (!hostname) return false;
+  const host = hostname.toLowerCase();
+  const target = domain.toLowerCase();
+  return host === target || host.endsWith('.' + target);
+}
+
+/**
  * Transforms a Trip.com hotel URL to include the affiliate tracking Allianceid and SID
  */
 export function getTripAffiliateLink(
@@ -19,7 +30,7 @@ export function getTripAffiliateLink(
 
   try {
     const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.includes('trip.com')) {
+    if (matchesDomain(parsedUrl.hostname, 'trip.com')) {
       if (allianceId) parsedUrl.searchParams.set('Allianceid', allianceId);
       if (sid) parsedUrl.searchParams.set('SID', sid);
       return parsedUrl.toString();
@@ -116,6 +127,69 @@ export function getEarnkaroAffiliateLink(url: string, earnkaroId: string = DEFAU
   return url;
 }
 
+export type TripDates = {
+  checkin?: string; // YYYY-MM-DD
+  checkout?: string; // YYYY-MM-DD
+  adults?: number;
+};
+
+/**
+ * Dynamically appends check-in, check-out, and guest counts to OTA booking URLs
+ * for zero-friction real-time price lookup on partner checkout pages.
+ */
+export function appendTripDates(url: string, dates?: TripDates): string {
+  if (!url || !dates || !dates.checkin || !dates.checkout) return url;
+
+  try {
+    const parsedUrl = new URL(url);
+    const host = parsedUrl.hostname.toLowerCase();
+
+    if (matchesDomain(host, 'booking.com')) {
+      parsedUrl.searchParams.set('checkin', dates.checkin);
+      parsedUrl.searchParams.set('checkout', dates.checkout);
+      parsedUrl.searchParams.set('group_adults', String(dates.adults || 2));
+      parsedUrl.searchParams.set('no_rooms', '1');
+      return parsedUrl.toString();
+    }
+
+    if (matchesDomain(host, 'agoda.com')) {
+      parsedUrl.searchParams.set('checkin', dates.checkin);
+      parsedUrl.searchParams.set('checkout', dates.checkout);
+      parsedUrl.searchParams.set('adults', String(dates.adults || 2));
+      parsedUrl.searchParams.set('rooms', '1');
+      return parsedUrl.toString();
+    }
+
+    if (matchesDomain(host, 'makemytrip.com')) {
+      const cinParts = dates.checkin.split('-');
+      const coutParts = dates.checkout.split('-');
+      if (cinParts.length === 3 && coutParts.length === 3) {
+        parsedUrl.searchParams.set('checkin', `${cinParts[1]}${cinParts[2]}${cinParts[0]}`);
+        parsedUrl.searchParams.set('checkout', `${coutParts[1]}${coutParts[2]}${coutParts[0]}`);
+        parsedUrl.searchParams.set('roomStayQualifier', `${dates.adults || 2}e0e`);
+      }
+      return parsedUrl.toString();
+    }
+
+    if (matchesDomain(host, 'trip.com')) {
+      parsedUrl.searchParams.set('checkin', dates.checkin);
+      parsedUrl.searchParams.set('checkout', dates.checkout);
+      parsedUrl.searchParams.set('adult', String(dates.adults || 2));
+      return parsedUrl.toString();
+    }
+
+    if (matchesDomain(host, 'airbnb.com')) {
+      parsedUrl.searchParams.set('check_in', dates.checkin);
+      parsedUrl.searchParams.set('check_out', dates.checkout);
+      parsedUrl.searchParams.set('adults', String(dates.adults || 2));
+      return parsedUrl.toString();
+    }
+  } catch {
+    // Return original url on failure
+  }
+  return url;
+}
+
 /**
  * Universal Outbound Link Wrapper
  * Automatically detects the provider (MakeMyTrip, Agoda, Booking.com, Retail)
@@ -130,9 +204,13 @@ export function wrapOutboundAffiliateLink(
     earnkaro?: string;
     tripAllianceId?: string;
     tripSid?: string;
-  }
+  },
+  dates?: TripDates
 ): string {
   if (!url) return url;
+
+  // Append travel dates if provided
+  const targetUrl = dates ? appendTripDates(url, dates) : url;
 
   const agodaCid = customAffiliateIds?.agoda || DEFAULT_AGODA_CID;
   const bookingAid = customAffiliateIds?.booking || DEFAULT_BOOKING_AID;
@@ -141,39 +219,39 @@ export function wrapOutboundAffiliateLink(
   const tripSid = customAffiliateIds?.tripSid || DEFAULT_TRIP_SID;
 
   try {
-    const parsedUrl = new URL(url);
+    const parsedUrl = new URL(targetUrl);
     const host = parsedUrl.hostname.toLowerCase();
 
-    if (host.includes('agoda.com')) {
-      return getAgodaAffiliateLink(url, agodaCid);
+    if (matchesDomain(host, 'agoda.com')) {
+      return getAgodaAffiliateLink(targetUrl, agodaCid);
     }
 
-    if (host.includes('booking.com')) {
-      return getBookingAffiliateLink(url, bookingAid);
+    if (matchesDomain(host, 'booking.com')) {
+      return getBookingAffiliateLink(targetUrl, bookingAid);
     }
 
-    if (host.includes('trip.com')) {
-      return getTripAffiliateLink(url, tripAllianceId, tripSid);
-    }
-
-    if (host.includes('makemytrip.com')) {
+    if (matchesDomain(host, 'makemytrip.com')) {
       // If direct MMT affiliate tracking exists
       if (customAffiliateIds?.makemytrip) {
         parsedUrl.searchParams.set('affiliateId', customAffiliateIds.makemytrip);
         return parsedUrl.toString();
       }
-      return url;
+      return targetUrl;
+    }
+
+    if (matchesDomain(host, 'trip.com')) {
+      return getTripAffiliateLink(targetUrl, tripAllianceId, tripSid);
     }
 
     // General EarnKaro retail routing (Amazon, Nykaa, etc.)
     if (earnkaroId && (host.includes('amazon.in') || host.includes('nykaa.com'))) {
-      return getEarnkaroAffiliateLink(url, earnkaroId);
+      return getEarnkaroAffiliateLink(targetUrl, earnkaroId);
     }
   } catch {
     // Return unmodified on parse failure
   }
 
-  return url;
+  return targetUrl;
 }
 
 /**

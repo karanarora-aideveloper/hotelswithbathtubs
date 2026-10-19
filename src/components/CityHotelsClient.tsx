@@ -99,6 +99,24 @@ export default function CityHotelsClient({
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
+  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(undefined);
+
+  useEffect(() => {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+    if (daysUntilFriday === 0) daysUntilFriday = 7;
+    const friday = new Date(today);
+    friday.setDate(today.getDate() + daysUntilFriday);
+    const sunday = new Date(friday);
+    sunday.setDate(friday.getDate() + 2);
+    const fmt = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    setWeekendDates({
+      checkin: fmt(friday),
+      checkout: fmt(sunday),
+      adults: 2,
+    });
+  }, []);
 
   // Deduplicate hotels by URL signature (same hotel added multiple times to DB)
   const uniqueHotels = useMemo(() => {
@@ -608,7 +626,7 @@ export default function CityHotelsClient({
     if (!provider || !config[provider]) return null;
     const { label, source, className } = config[provider]!;
     return (
-      <OutboundLink href={url} hotelName={hotelName} cityName={city} source={source} className={className}>
+      <OutboundLink href={url} hotelName={hotelName} cityName={city} source={source} dates={weekendDates} className={className}>
         <span>{preferredLabel || label}</span>
         <span>&rarr;</span>
       </OutboundLink>

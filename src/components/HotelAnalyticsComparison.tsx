@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import OutboundLink from './OutboundLink';
-import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
+import { isDirectPropertyUrl, getUrlDirectnessTier, type TripDates } from '@/lib/affiliate';
 
 interface HotelAnalyticsProps {
   hotel: {
@@ -91,6 +91,7 @@ export default function HotelAnalyticsComparison({
     source: string;
     usualRate: string;
     usualNote: string;
+    numericRate: number;
     perks: string[];
     isLowest: boolean;
   }
@@ -112,6 +113,7 @@ export default function HotelAnalyticsComparison({
       source: 'Agoda',
       usualRate: fmt(agodaUsual),
       usualNote: 'Mobile & VIP Benchmark',
+      numericRate: agodaUsual,
       perks: [
         'Instant mobile VIP discount pricing',
         'Direct room selector with guaranteed tub tier',
@@ -136,6 +138,7 @@ export default function HotelAnalyticsComparison({
       source: 'MakeMyTrip',
       usualRate: fmt(mmtUsual),
       usualNote: 'Domestic Benchmark Rate',
+      numericRate: mmtUsual,
       perks: [
         'Instant bank card discounts (HDFC, ICICI, Axis)',
         'Verified couple-friendly check-in with local IDs',
@@ -160,6 +163,7 @@ export default function HotelAnalyticsComparison({
       source: 'Booking.com',
       usualRate: fmt(bookingUsual),
       usualNote: 'Genius-Eligible Standard Rate',
+      numericRate: bookingUsual,
       perks: [
         'Free cancellation on most bathtub suites',
         'No upfront deposit on select dates',
@@ -185,6 +189,7 @@ export default function HotelAnalyticsComparison({
       source: 'Trip.com',
       usualRate: fmt(tripUsual),
       usualNote: 'Member & App Benchmark',
+      numericRate: tripUsual,
       perks: [
         'Trip Coins rewards redeemable on future stays',
         'Competitive international member pricing',
@@ -211,6 +216,7 @@ export default function HotelAnalyticsComparison({
     source: 'Airbnb',
     usualRate: fmt(airbnbUsual),
     usualNote: hasDirectAirbnb ? 'Private Apartment Benchmark' : 'Alternative Host Benchmark',
+    numericRate: airbnbUsual,
     perks: hasDirectAirbnb ? [
       'Full private sanctuary with gourmet kitchen',
       'Direct messaging with verified Superhost',
@@ -234,6 +240,112 @@ export default function HotelAnalyticsComparison({
   platforms.forEach((p, idx) => {
     p.isLowest = idx === 0;
   });
+
+  // Date and Guest State for Real-Time Meta-Search Deep Linking
+  const [checkin, setCheckin] = useState<string>('');
+  const [checkout, setCheckout] = useState<string>('');
+  const [adults, setAdults] = useState<number>(2);
+  const [activeShortcut, setActiveShortcut] = useState<'weekend' | 'next-weekend' | 'next-month' | 'custom'>('weekend');
+
+  const formatDateStr = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getUpcomingWeekend = (offsetWeeks = 0) => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 is Sunday, 5 is Friday, 6 is Saturday
+    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+    if (daysUntilFriday === 0) daysUntilFriday = 7; // Next Friday
+    daysUntilFriday += offsetWeeks * 7;
+    const friday = new Date(today);
+    friday.setDate(today.getDate() + daysUntilFriday);
+    const sunday = new Date(friday);
+    sunday.setDate(friday.getDate() + 2);
+    return { checkin: formatDateStr(friday), checkout: formatDateStr(sunday) };
+  };
+
+  const getNextMonthDates = () => {
+    const future = new Date();
+    future.setDate(future.getDate() + 28);
+    const dayOfWeek = future.getDay();
+    const daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+    future.setDate(future.getDate() + daysUntilFriday);
+    const sunday = new Date(future);
+    sunday.setDate(future.getDate() + 2);
+    return { checkin: formatDateStr(future), checkout: formatDateStr(sunday) };
+  };
+
+  useEffect(() => {
+    const weekend = getUpcomingWeekend(0);
+    setCheckin(weekend.checkin);
+    setCheckout(weekend.checkout);
+  }, []);
+
+  const handleShortcut = (shortcut: 'weekend' | 'next-weekend' | 'next-month') => {
+    setActiveShortcut(shortcut);
+    if (shortcut === 'weekend') {
+      const dates = getUpcomingWeekend(0);
+      setCheckin(dates.checkin);
+      setCheckout(dates.checkout);
+    } else if (shortcut === 'next-weekend') {
+      const dates = getUpcomingWeekend(1);
+      setCheckin(dates.checkin);
+      setCheckout(dates.checkout);
+    } else if (shortcut === 'next-month') {
+      const dates = getNextMonthDates();
+      setCheckin(dates.checkin);
+      setCheckout(dates.checkout);
+    }
+  };
+
+  const minCheckinDate = useMemo(() => {
+    return formatDateStr(new Date());
+  }, []);
+
+  const handleCheckinChange = (val: string) => {
+    setActiveShortcut('custom');
+    setCheckin(val);
+    if (val && checkout && checkout <= val) {
+      const d = new Date(val + 'T00:00:00');
+      d.setDate(d.getDate() + 1);
+      setCheckout(formatDateStr(d));
+    }
+  };
+
+  const handleCheckoutChange = (val: string) => {
+    setActiveShortcut('custom');
+    setCheckout(val);
+  };
+
+  const nights = useMemo(() => {
+    if (!checkin || !checkout) return 1;
+    const start = new Date(checkin + 'T00:00:00');
+    const end = new Date(checkout + 'T00:00:00');
+    const diffTime = end.getTime() - start.getTime();
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 1;
+  }, [checkin, checkout]);
+
+  const formattedDateRange = useMemo(() => {
+    if (!checkin || !checkout) return '';
+    try {
+      const dIn = new Date(checkin + 'T00:00:00');
+      const dOut = new Date(checkout + 'T00:00:00');
+      const mIn = dIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const mOut = dOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `${mIn} – ${mOut}`;
+    } catch {
+      return '';
+    }
+  }, [checkin, checkout]);
+
+  const tripDates: TripDates | undefined = useMemo(() => {
+    if (!checkin || !checkout) return undefined;
+    return { checkin, checkout, adults };
+  }, [checkin, checkout, adults]);
 
   // Tub Classification
   const tubName = hotel.tubType || 'Private En-Suite Soaking Bathtub';
@@ -293,6 +405,111 @@ export default function HotelAnalyticsComparison({
           </div>
         </div>
 
+        {/* Interactive Date & Guest Selector for Real-Time Price Discovery */}
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-slate-50 via-[#f8fafb] to-slate-50 border-b border-[#5b8296]/15">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            {/* Quick Weekend Shortcuts */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1 font-jakarta">
+                Trip Dates:
+              </span>
+              <button
+                type="button"
+                onClick={() => handleShortcut('weekend')}
+                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${
+                  activeShortcut === 'weekend'
+                    ? 'bg-[#1f262d] text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-400'
+                }`}
+              >
+                This Weekend
+              </button>
+              <button
+                type="button"
+                onClick={() => handleShortcut('next-weekend')}
+                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${
+                  activeShortcut === 'next-weekend'
+                    ? 'bg-[#1f262d] text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-400'
+                }`}
+              >
+                Next Weekend
+              </button>
+              <button
+                type="button"
+                onClick={() => handleShortcut('next-month')}
+                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${
+                  activeShortcut === 'next-month'
+                    ? 'bg-[#1f262d] text-white shadow-xs'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-400'
+                }`}
+              >
+                Next Month
+              </button>
+            </div>
+
+            {/* Inputs: Check-in, Check-out, Guests */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 items-center">
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                  Check-in
+                </label>
+                <input
+                  type="date"
+                  min={minCheckinDate}
+                  value={checkin}
+                  onChange={(e) => handleCheckinChange(e.target.value)}
+                  className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                  Check-out
+                </label>
+                <input
+                  type="date"
+                  min={checkin || minCheckinDate}
+                  value={checkout}
+                  onChange={(e) => handleCheckoutChange(e.target.value)}
+                  className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"
+                />
+              </div>
+
+              <div className="col-span-2 sm:col-span-1">
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                  Guests
+                </label>
+                <select
+                  value={adults}
+                  onChange={(e) => setAdults(Number(e.target.value))}
+                  className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"
+                >
+                  <option value={2}>2 Adults (Couple)</option>
+                  <option value={1}>1 Adult (Solo)</option>
+                  <option value={3}>3 Adults</option>
+                  <option value={4}>4 Adults</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Bathtub Room Tier Guarantee reminder strip */}
+          <div className="mt-3.5 pt-3 border-t border-slate-200/70 flex items-center justify-between gap-3 flex-wrap text-xs text-slate-600">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">🛁</span>
+              <span className="font-medium">
+                <strong className="text-slate-800">Bathtub Guarantee:</strong> When checking rates on partners, select the room marked <em>&quot;{hotel.roomType || tubName}&quot;</em> to guarantee your in-room tub.
+              </span>
+            </div>
+            {nights > 1 && (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#5b8296]/10 text-[#2a4d5e]">
+                {nights} Nights Selected ({formattedDateRange})
+              </span>
+            )}
+          </div>
+        </div>
+
         <div className="divide-y divide-slate-100">
           {platforms.map((platform) => (
             <div
@@ -335,13 +552,15 @@ export default function HotelAnalyticsComparison({
               <div className="flex items-center lg:flex-col lg:items-end justify-between lg:justify-center gap-4 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-slate-100">
                 <div className="text-left lg:text-right">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-jakarta">
-                    Usual Nightly Rate
+                    {nights > 1 ? `Est. Total (${nights} Nights)` : 'Usual Nightly Rate'}
                   </span>
                   <div className="flex items-baseline gap-1 lg:justify-end">
                     <span className="text-xl sm:text-2xl font-bold text-[#1f262d] font-jakarta">
-                      ~{platform.usualRate}
+                      ~{nights > 1 ? fmt(platform.numericRate * nights) : platform.usualRate}
                     </span>
-                    <span className="text-xs text-slate-400 font-medium">/ night</span>
+                    <span className="text-xs text-slate-400 font-medium">
+                      {nights > 1 ? `(${platform.usualRate}/nt)` : '/ night'}
+                    </span>
                   </div>
                   <span className="text-[10px] text-slate-400 block mt-0.5 font-jakarta">
                     {platform.usualNote}
@@ -352,9 +571,12 @@ export default function HotelAnalyticsComparison({
                   hotelName={hotel.name}
                   cityName={cityName}
                   source={platform.source}
+                  dates={tripDates}
                   className={`text-xs sm:text-sm font-semibold px-5 py-2.5 sm:py-3 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 w-full lg:w-auto font-jakarta ${platform.buttonBg}`}
                 >
-                  <span>Check Live Rates on {platform.name}</span>
+                  <span>
+                    Check Live Deal {formattedDateRange ? `(${formattedDateRange})` : ''} on {platform.name}
+                  </span>
                   <span>&rarr;</span>
                 </OutboundLink>
               </div>

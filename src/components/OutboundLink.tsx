@@ -2,7 +2,7 @@
 
 import { trackEvent } from '@/lib/analytics';
 import { recordBookingConversion } from '@/lib/gtag';
-import { wrapOutboundAffiliateLink } from '@/lib/affiliate';
+import { wrapOutboundAffiliateLink, type TripDates } from '@/lib/affiliate';
 import { recordSessionRecurrenceUpdate } from '@/lib/userRecurrence';
 import posthog from 'posthog-js';
 import { isUserExcluded } from '@/lib/exclusion';
@@ -13,7 +13,8 @@ export default function OutboundLink({
   className,
   hotelName,
   cityName,
-  source
+  source,
+  dates,
 }: {
   href: string;
   children: React.ReactNode;
@@ -21,8 +22,9 @@ export default function OutboundLink({
   hotelName?: string;
   cityName?: string;
   source?: string;
+  dates?: TripDates;
 }) {
-  const affiliateLink = wrapOutboundAffiliateLink(href);
+  const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
 
   return (
     <a
