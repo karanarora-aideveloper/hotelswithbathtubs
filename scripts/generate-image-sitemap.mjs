@@ -104,6 +104,11 @@ async function generateImageSitemap() {
 
     // Collect all valid images for this hotel
     const photoUrls = [h.image, ...(Array.isArray(h.images) ? h.images : [])]
+      .map((img) =>
+        typeof img === 'string' && (img.includes('agoda.net') || img.includes('agoda.com'))
+          ? 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/default-hotel.jpg'
+          : img
+      )
       .filter((img, idx, arr) => img && typeof img === 'string' && arr.indexOf(img) === idx)
       .slice(0, 3); // Max 3 images per hotel
 

@@ -156,17 +156,19 @@ export default async function HostelsHubPage() {
         "description": h.description || `Boutique hostel in ${h.city} with private ${h.tubType || 'bathtub'}.`,
         "url": `https://www.hotelswithbathtubs.com/${slugify(h.country || 'india')}/${slugify(h.city)}/${h.slug}`,
         "image": imageUrl(h.image || (h.images && h.images[0])),
-        "priceRange": h.price || '₹ 3,500',
+        ...(h.price ? { "priceRange": h.price } : {}),
         "address": {
           "@type": "PostalAddress",
           "addressLocality": h.city,
           "addressCountry": h.country || 'India'
         },
-        "aggregateRating": h.rating ? {
-          "@type": "AggregateRating",
-          "ratingValue": h.rating,
-          "reviewCount": h.reviewsCount || 100
-        } : undefined
+        ...(h.rating && Number(h.rating) > 0 && h.reviewsCount && Number(h.reviewsCount) > 0 ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": h.rating,
+            "reviewCount": Number(h.reviewsCount)
+          }
+        } : {})
       }
     }))
   };
@@ -339,13 +341,19 @@ export default async function HostelsHubPage() {
                     </p>
 
                     <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-1 text-xs font-bold text-gray-900">
-                        <span className="text-amber-500">★</span>
-                        <span>{hostel.rating || 4.6}</span>
-                        {hostel.reviewsCount && (
-                          <span className="text-gray-400 font-normal">({hostel.reviewsCount})</span>
-                        )}
-                      </div>
+                      {(hostel.rating && Number(hostel.rating) > 0) || (hostel.reviewsCount && Number(hostel.reviewsCount) > 0) ? (
+                        <div className="flex items-center gap-1 text-xs font-bold text-gray-900">
+                          {hostel.rating && Number(hostel.rating) > 0 && (
+                            <>
+                              <span className="text-amber-500">★</span>
+                              <span>{hostel.rating}</span>
+                            </>
+                          )}
+                          {hostel.reviewsCount && Number(hostel.reviewsCount) > 0 && (
+                            <span className="text-gray-400 font-normal">({hostel.reviewsCount})</span>
+                          )}
+                        </div>
+                      ) : <span />}
 
                       <div className="flex items-center gap-2">
                         <Link

@@ -20,16 +20,6 @@ export const metadata = {
   description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/',
-    languages: {
-      'en-US': 'https://www.hotelswithbathtubs.com/usa',
-      'en-GB': 'https://www.hotelswithbathtubs.com/uk',
-      'en-SG': 'https://www.hotelswithbathtubs.com/singapore',
-      'en-AE': 'https://www.hotelswithbathtubs.com/uae',
-      'en-IN': 'https://www.hotelswithbathtubs.com/india',
-      'en-AU': 'https://www.hotelswithbathtubs.com/australia',
-      'en-CA': 'https://www.hotelswithbathtubs.com/canada',
-      'x-default': 'https://www.hotelswithbathtubs.com/',
-    },
   },
   openGraph: {
     title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
@@ -117,7 +107,7 @@ async function getCities() {
       ? '₹'
       : '$';
     const minPrice = minP !== Infinity ? `${curr}${minP.toLocaleString()}` : isIndia ? '₹2,499' : '$149';
-    const rating = c.avgRating ? Number(c.avgRating.toFixed(1)) : 4.8;
+    const rating = c.avgRating ? Number(c.avgRating.toFixed(1)) : undefined;
 
     return {
       _id: c._id,

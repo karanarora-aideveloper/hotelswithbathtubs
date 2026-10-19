@@ -158,10 +158,6 @@ export default async function CoupleFriendlyPage() {
           "@type": "PostalAddress",
           "addressLocality": h.city,
           "addressCountry": h.country
-        },
-        "starRating": {
-          "@type": "Rating",
-          "ratingValue": h.rating ? Number(h.rating).toFixed(1) : "4.5"
         }
       }
     }))
@@ -304,9 +300,11 @@ export default async function CoupleFriendlyPage() {
                         className="object-cover"
                         loading="lazy"
                       />
-                      <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-gray-900 shadow-sm flex items-center gap-1">
-                        <span>★</span> {hotel.rating ? Number(hotel.rating).toFixed(1) : '4.6'}
-                      </div>
+                      {hotel.rating && Number(hotel.rating) > 0 && (
+                        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-gray-900 shadow-sm flex items-center gap-1">
+                          <span>★</span> {Number(hotel.rating).toFixed(1)}
+                        </div>
+                      )}
                       {hotel.tubType && (
                         <div className="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-white">
                           🛁 {hotel.tubType}

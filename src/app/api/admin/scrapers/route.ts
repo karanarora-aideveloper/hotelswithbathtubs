@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     // Only allow execution in development mode (local machine)
     if (process.env.NODE_ENV === 'production') {
       return new Response(
-        JSON.stringify({ error: 'Scrapers cannot be executed in the production Vercel environment.' }), 
+        JSON.stringify({ error: 'Scrapers cannot be executed in the production environment.' }),
         { status: 403, headers: { 'Content-Type': 'application/json' } }
       );
     }

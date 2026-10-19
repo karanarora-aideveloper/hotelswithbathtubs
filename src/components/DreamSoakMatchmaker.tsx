@@ -398,8 +398,8 @@ export default function DreamSoakMatchmaker({
         if (isMounted) {
           const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
             ...h,
-            rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 4.5,
-            reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 100,
+            rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
+            reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
             numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
             amenities: Array.isArray(h.amenities) ? h.amenities : [],
           }));
@@ -931,8 +931,14 @@ export default function DreamSoakMatchmaker({
                         {/* Top Ribbon: Match % and Tub Type */}
                         <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
                           <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 font-black text-xs shadow-md border border-black/5 flex items-center gap-1">
-                            <span className="text-amber-500">★</span> {typeof hotel.rating === 'number' ? hotel.rating.toFixed(1) : (Number(hotel.rating) > 0 ? Number(hotel.rating).toFixed(1) : '4.8')}
-                            <span className="text-[10px] text-gray-400 font-medium">({hotel.reviewsCount || 120})</span>
+                            {Number(hotel.rating) > 0 && (
+                              <>
+                                <span className="text-amber-500">★</span> {Number(hotel.rating).toFixed(1)}
+                              </>
+                            )}
+                            {Number(hotel.reviewsCount) > 0 && (
+                              <span className="text-[10px] text-gray-400 font-medium">({hotel.reviewsCount})</span>
+                            )}
                           </span>
                           <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs shadow-md flex items-center gap-1">
                             <span>🔥</span>

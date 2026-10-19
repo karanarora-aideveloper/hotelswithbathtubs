@@ -51,12 +51,12 @@
 - URL: https://www.hotelswithbathtubs.com/france
 - Total Verified Stays: 42
 
-### South Korea
-- URL: https://www.hotelswithbathtubs.com/south-korea
+### Oman
+- URL: https://www.hotelswithbathtubs.com/oman
 - Total Verified Stays: 36
 
-### Thailand
-- URL: https://www.hotelswithbathtubs.com/thailand
+### South Korea
+- URL: https://www.hotelswithbathtubs.com/south-korea
 - Total Verified Stays: 36
 
 ### Bosnia and Herzegovina
@@ -71,16 +71,16 @@
 - URL: https://www.hotelswithbathtubs.com/poland
 - Total Verified Stays: 36
 
-### Oman
-- URL: https://www.hotelswithbathtubs.com/oman
+### Thailand
+- URL: https://www.hotelswithbathtubs.com/thailand
 - Total Verified Stays: 36
-
-### Montenegro
-- URL: https://www.hotelswithbathtubs.com/montenegro
-- Total Verified Stays: 35
 
 ### Egypt
 - URL: https://www.hotelswithbathtubs.com/egypt
+- Total Verified Stays: 35
+
+### Montenegro
+- URL: https://www.hotelswithbathtubs.com/montenegro
 - Total Verified Stays: 35
 
 ### Austria
@@ -91,8 +91,8 @@
 - URL: https://www.hotelswithbathtubs.com/uzbekistan
 - Total Verified Stays: 34
 
-### Greece
-- URL: https://www.hotelswithbathtubs.com/greece
+### Guatemala
+- URL: https://www.hotelswithbathtubs.com/guatemala
 - Total Verified Stays: 33
 
 ---
@@ -113,15 +113,15 @@
 - Verified Bathtub Stays: 30
 - Direct Anchor: https://www.hotelswithbathtubs.com/india/rishikesh#hotels
 
-### Agra, India
-- Directory URL: https://www.hotelswithbathtubs.com/india/agra
-- Verified Bathtub Stays: 28
-- Direct Anchor: https://www.hotelswithbathtubs.com/india/agra#hotels
-
 ### Santorini, Greece
 - Directory URL: https://www.hotelswithbathtubs.com/greece/santorini
 - Verified Bathtub Stays: 28
 - Direct Anchor: https://www.hotelswithbathtubs.com/greece/santorini#hotels
+
+### Agra, India
+- Directory URL: https://www.hotelswithbathtubs.com/india/agra
+- Verified Bathtub Stays: 28
+- Direct Anchor: https://www.hotelswithbathtubs.com/india/agra#hotels
 
 ### Mumbai, India
 - Directory URL: https://www.hotelswithbathtubs.com/india/mumbai
@@ -168,15 +168,15 @@
 - Verified Bathtub Stays: 20
 - Direct Anchor: https://www.hotelswithbathtubs.com/india/hyderabad#hotels
 
-### Amritsar, India
-- Directory URL: https://www.hotelswithbathtubs.com/india/amritsar
-- Verified Bathtub Stays: 20
-- Direct Anchor: https://www.hotelswithbathtubs.com/india/amritsar#hotels
-
 ### Kochi, India
 - Directory URL: https://www.hotelswithbathtubs.com/india/kochi
 - Verified Bathtub Stays: 20
 - Direct Anchor: https://www.hotelswithbathtubs.com/india/kochi#hotels
+
+### Amritsar, India
+- Directory URL: https://www.hotelswithbathtubs.com/india/amritsar
+- Verified Bathtub Stays: 20
+- Direct Anchor: https://www.hotelswithbathtubs.com/india/amritsar#hotels
 
 ### Chennai, India
 - Directory URL: https://www.hotelswithbathtubs.com/india/chennai
@@ -193,60 +193,60 @@
 - Verified Bathtub Stays: 19
 - Direct Anchor: https://www.hotelswithbathtubs.com/spain/tenerife#hotels
 
-### Fiji, Fiji
-- Directory URL: https://www.hotelswithbathtubs.com/fiji/fiji
+### Bangkok, Thailand
+- Directory URL: https://www.hotelswithbathtubs.com/thailand/bangkok
 - Verified Bathtub Stays: 19
-- Direct Anchor: https://www.hotelswithbathtubs.com/fiji/fiji#hotels
-
-### Bora Bora, French Polynesia
-- Directory URL: https://www.hotelswithbathtubs.com/french-polynesia/bora-bora
-- Verified Bathtub Stays: 19
-- Direct Anchor: https://www.hotelswithbathtubs.com/french-polynesia/bora-bora#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/thailand/bangkok#hotels
 
 ### Kolkata, India
 - Directory URL: https://www.hotelswithbathtubs.com/india/kolkata
 - Verified Bathtub Stays: 19
 - Direct Anchor: https://www.hotelswithbathtubs.com/india/kolkata#hotels
 
-### Bangkok, Thailand
-- Directory URL: https://www.hotelswithbathtubs.com/thailand/bangkok
+### Bora Bora, French Polynesia
+- Directory URL: https://www.hotelswithbathtubs.com/french-polynesia/bora-bora
 - Verified Bathtub Stays: 19
-- Direct Anchor: https://www.hotelswithbathtubs.com/thailand/bangkok#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/french-polynesia/bora-bora#hotels
 
-### Ohrid, North Macedonia
-- Directory URL: https://www.hotelswithbathtubs.com/north-macedonia/ohrid
-- Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/north-macedonia/ohrid#hotels
+### Fiji, Fiji
+- Directory URL: https://www.hotelswithbathtubs.com/fiji/fiji
+- Verified Bathtub Stays: 19
+- Direct Anchor: https://www.hotelswithbathtubs.com/fiji/fiji#hotels
 
-### Maui, USA
-- Directory URL: https://www.hotelswithbathtubs.com/usa/maui
+### Sarajevo, Bosnia and Herzegovina
+- Directory URL: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina/sarajevo
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/usa/maui#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina/sarajevo#hotels
 
-### Mostar, Bosnia and Herzegovina
-- Directory URL: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina/mostar
+### Punta Cana, Dominican Republic
+- Directory URL: https://www.hotelswithbathtubs.com/dominican-republic/punta-cana
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina/mostar#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/dominican-republic/punta-cana#hotels
 
-### Manchester, UK
-- Directory URL: https://www.hotelswithbathtubs.com/uk/manchester
+### Seoul, South Korea
+- Directory URL: https://www.hotelswithbathtubs.com/south-korea/seoul
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/uk/manchester#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/south-korea/seoul#hotels
 
-### Napa, USA
-- Directory URL: https://www.hotelswithbathtubs.com/usa/napa
+### Diani Beach, Kenya
+- Directory URL: https://www.hotelswithbathtubs.com/kenya/diani-beach
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/usa/napa#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/kenya/diani-beach#hotels
 
-### Tallinn, Estonia
-- Directory URL: https://www.hotelswithbathtubs.com/estonia/tallinn
+### Placencia, Belize
+- Directory URL: https://www.hotelswithbathtubs.com/belize/placencia
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/estonia/tallinn#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/belize/placencia#hotels
 
-### Dubrovnik, Croatia
-- Directory URL: https://www.hotelswithbathtubs.com/croatia/dubrovnik
+### Jabal Akhdar, Oman
+- Directory URL: https://www.hotelswithbathtubs.com/oman/jabal-akhdar
 - Verified Bathtub Stays: 18
-- Direct Anchor: https://www.hotelswithbathtubs.com/croatia/dubrovnik#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/oman/jabal-akhdar#hotels
+
+### Vilanculos, Mozambique
+- Directory URL: https://www.hotelswithbathtubs.com/mozambique/vilanculos
+- Verified Bathtub Stays: 18
+- Direct Anchor: https://www.hotelswithbathtubs.com/mozambique/vilanculos#hotels
 
 ---
 

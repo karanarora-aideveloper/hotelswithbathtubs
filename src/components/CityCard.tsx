@@ -51,7 +51,7 @@ export default function CityCard({
   isInternational = false,
   priority = false,
   minPrice,
-  rating = 4.8,
+  rating,
   totalReviews = 0,
   hasJacuzzi = false,
 }: CityCardProps) {
@@ -133,10 +133,12 @@ export default function CityCard({
                 <span>Jacuzzi</span>
               </span>
             )}
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-2xs ml-auto">
-              <span className="text-amber-500 font-black">★</span>
-              <span>{rating}</span>
-            </span>
+            {typeof rating === 'number' && rating > 0 && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-2xs ml-auto">
+                <span className="text-amber-500 font-black">★</span>
+                <span>{rating}</span>
+              </span>
+            )}
           </div>
 
           {/* City Heading & Review Stats */}

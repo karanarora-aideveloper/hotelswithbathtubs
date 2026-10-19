@@ -14,9 +14,9 @@ export default function AdminScrapersPage() {
     e.preventDefault();
     if (!city.trim()) return;
 
-    // Check if running on Vercel
+    // Check if running locally (scrapers only work in local dev)
     if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-      alert("WARNING: The scraper engine requires a headless Chrome browser and cannot run on Vercel. Please run 'npm run dev' locally to execute this script.");
+      alert("WARNING: The scraper engine requires a headless Chrome browser and cannot run on the live deployment. Please run 'npm run dev' locally to execute this script.");
       return;
     }
 

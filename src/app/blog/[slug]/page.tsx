@@ -66,9 +66,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       alternates: {
         canonical: `/blog/${resolvedParams.slug}`,
-        languages: {
-          'x-default': 'https://www.hotelswithbathtubs.com',
-        },
       },
       openGraph: {
         title,

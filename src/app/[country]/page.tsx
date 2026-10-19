@@ -2,8 +2,8 @@ import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import CityCard from '@/components/CityCard';
 import StructuredData from '@/components/StructuredData';
+import CountryCitiesClient from '@/components/CountryCitiesClient';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 
 export const revalidate = false;
@@ -65,29 +65,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : `Best Hotels with Bathtub in ${countryName} (2026) | Verified Stays`;
   const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for couples & romantic stays.`;
 
-  // hreflang: geographic locale signals for all priority markets
-  const hreflangMap: Record<string, string> = {
-    'usa': 'en-US',
-    'uk': 'en-GB',
-    'singapore': 'en-SG',
-    'uae': 'en-AE',
-    'india': 'en-IN',
-    'australia': 'en-AU',
-    'canada': 'en-CA',
-    'ireland': 'en-IE',
-    'new-zealand': 'en-NZ',
-  };
-  const localeCode = hreflangMap[countrySlug];
-
   return {
     title: { absolute: pageTitle },
     description: pageDescription,
     alternates: {
       canonical: `/${countrySlug}`,
-      languages: {
-        ...(localeCode ? { [localeCode]: `https://www.hotelswithbathtubs.com/${countrySlug}` } : {}),
-        'x-default': 'https://www.hotelswithbathtubs.com',
-      },
     },
     openGraph: {
       title: pageTitle,
@@ -178,7 +160,7 @@ export default async function CountryHubPage({
       ? '₹'
       : '$';
     const minPrice = minP !== Infinity ? `${curr}${minP.toLocaleString()}` : isIndia ? '₹2,499' : '$149';
-    const rating = c.avgRating ? Number(c.avgRating.toFixed(1)) : 4.8;
+    const rating = c.avgRating ? Number(c.avgRating.toFixed(1)) : undefined;
 
     return {
       _id: c._id,
@@ -361,22 +343,25 @@ export default async function CountryHubPage({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
-                {cities.map((item: any, idx: number) => (
-                  <CityCard
-                    key={`${item._id.city}-${item._id.country}`}
-                    city={item._id.city}
-                    country={item._id.country}
-                    hotelCount={item.hotelCount}
-                    image={item.image}
-                    priority={idx < 4}
-                    minPrice={item.minPrice}
-                    rating={item.rating}
-                    totalReviews={item.totalReviews}
-                    hasJacuzzi={item.hasJacuzzi}
-                  />
-                ))}
-              </div>
+              <CountryCitiesClient
+                initialCities={cities.slice(0, 48).map((c) => ({
+                  _id: c._id,
+                  hotelCount: c.hotelCount,
+                  image: c.image,
+                  minPrice: c.minPrice,
+                  rating: c.rating,
+                  totalReviews: c.totalReviews,
+                  hasJacuzzi: c.hasJacuzzi,
+                }))}
+                remainingCities={cities.slice(48).map((c) => [
+                  c._id.city,
+                  c._id.country,
+                  c.hotelCount,
+                  c.image,
+                  c.minPrice,
+                  c.hasJacuzzi,
+                ])}
+              />
 
               {/* Frequently Asked Questions Section */}
               <section className="mt-20 pt-12 border-t border-gray-200 max-w-4xl mx-auto">

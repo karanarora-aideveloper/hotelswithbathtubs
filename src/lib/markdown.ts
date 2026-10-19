@@ -13,7 +13,7 @@ const md = new MarkdownIt({
  * Lightweight server-safe HTML sanitizer.
  * Strips dangerous tags (script, iframe, object, embed) and inline event handlers.
  * Blog content is admin-controlled so a full jsdom-based DOMPurify is not needed.
- * This avoids the ERR_REQUIRE_ESM crash caused by jsdom's ESM-only deps on Vercel.
+ * This avoids the ERR_REQUIRE_ESM crash caused by jsdom's ESM-only deps at build time.
  */
 function sanitizeHtml(html: string): string {
   return html

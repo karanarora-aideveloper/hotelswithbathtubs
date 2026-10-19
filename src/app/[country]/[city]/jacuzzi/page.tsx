@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
-  const [firstHotel, hotelCount] = await Promise.all([
+  const [firstHotel, hotelCount, totalCityHotelCount] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -56,6 +56,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
       ...JACUZZI_FILTER
+    }),
+    Hotel.countDocuments({
+      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      country: countryInfo.regex,
+      flagged: { $ne: true }
     }),
   ]);
 
@@ -82,11 +87,13 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     description: pageDescription,
     robots: {
-      index: true,
+      index: hotelCount >= 2,
       follow: true,
     },
     alternates: {
-      canonical: `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/jacuzzi`,
+      canonical: hotelCount === totalCityHotelCount
+        ? `/${countrySlug}/${citySlug}`
+        : `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/jacuzzi`,
     },
     openGraph: {
       title: pageTitle,
@@ -207,9 +214,8 @@ export default async function CityJacuzziHotelsPage({
     "description": `Curated list of verified hotel suites featuring private in-room whirlpool tubs, jacuzzis, and hot tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => {
-      const derivedRating = (h.rating && Number(h.rating) >= 4.7) ? "5" :
-                            (h.rating && Number(h.rating) >= 4.3) ? "4" :
-                            (h.rating && Number(h.rating) >= 3.5) ? "3" : "3";
+      const hasRealRating = h.rating && Number(h.rating) > 0;
+      const hasRealReviews = h.reviewsCount && Number(h.reviewsCount) > 0;
 
       return {
         "@type": "ListItem",
@@ -231,18 +237,16 @@ export default async function CityJacuzziHotelsPage({
             "addressLocality": cityName,
             "addressCountry": countryName
           },
-          "starRating": {
-            "@type": "Rating",
-            "ratingValue": derivedRating
-          },
-          "priceRange": h.price ? `${h.price}` : (countrySlug === 'india' ? "₹4,999 - ₹12,500" : "$199 - $499"),
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": (h.rating && Number(h.rating) > 0) ? Number(h.rating).toFixed(1) : (4.6 + ((idx % 4) * 0.1)).toFixed(1),
-            "reviewCount": (h.reviewsCount && Number(h.reviewsCount) > 0) ? Number(h.reviewsCount) : (140 + ((idx % 7) * 20)),
-            "bestRating": "5",
-            "worstRating": "1"
-          },
+          ...(h.price ? { "priceRange": `${h.price}` } : {}),
+          ...(hasRealReviews ? {
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              ...(hasRealRating ? { "ratingValue": Number(h.rating).toFixed(1) } : {}),
+              "reviewCount": Number(h.reviewsCount),
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          } : {}),
           "amenityFeature": [
             { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
             { "@type": "LocationFeatureSpecification", "name": "Whirlpool Hydrotherapy Tub", "value": true },

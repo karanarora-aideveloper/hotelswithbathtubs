@@ -37,7 +37,7 @@ export function useGeo() {
       }
     } catch (_) {}
 
-    // Verified geolocation from Vercel Edge headers
+    // Verified geolocation from edge headers (served by /api/geo)
     fetch('/api/geo')
       .then((res) => res.json())
       .then((data: GeoData) => {

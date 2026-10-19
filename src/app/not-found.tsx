@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: undefined,
   },
+  openGraph: {},
 };
 
 export default function NotFound() {

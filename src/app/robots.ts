@@ -11,7 +11,6 @@ export default function robots(): MetadataRoute.Robots {
     },
     sitemap: [
       'https://www.hotelswithbathtubs.com/sitemap.xml',
-      'https://www.hotelswithbathtubs.com/sitemap_index.xml',
       'https://www.hotelswithbathtubs.com/sitemap-images.xml',
     ],
   };

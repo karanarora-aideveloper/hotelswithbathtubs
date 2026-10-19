@@ -81,7 +81,7 @@ export default async function AdminDashboard() {
           Use the sidebar to manage your blogs, configure affiliate links, tune your SEO, or trigger local web scrapers for MakeMyTrip, Agoda, and Booking.com.
         </p>
         <p className="text-sm text-blue-700 bg-blue-100 p-3 rounded border border-blue-300">
-          <strong>Note:</strong> Web scrapers require a headless Chrome browser to run. They can only be executed when this admin panel is running locally on your machine via <code>npm run dev</code>. Do not run scrapers on the live Vercel deployment.
+          <strong>Note:</strong> Web scrapers require a headless Chrome browser to run. They can only be executed when this admin panel is running locally on your machine via <code>npm run dev</code>. Do not run scrapers on the live Cloudflare Pages deployment.
         </p>
       </div>
     </div>

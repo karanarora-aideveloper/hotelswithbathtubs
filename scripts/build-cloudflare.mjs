@@ -98,18 +98,6 @@ async function build() {
       fs.copyFileSync(publicHeaders, outHeaders);
     }
 
-    const publicSitemapIndex = path.join(rootDir, 'public/sitemap_index.xml');
-    const outSitemapIndex = path.join(rootDir, 'out/sitemap_index.xml');
-    if (fs.existsSync(publicSitemapIndex)) {
-      fs.copyFileSync(publicSitemapIndex, outSitemapIndex);
-    }
-
-    const publicSitemapAll = path.join(rootDir, 'public/sitemap-all.xml');
-    const outSitemapAll = path.join(rootDir, 'out/sitemap-all.xml');
-    if (fs.existsSync(publicSitemapAll)) {
-      fs.copyFileSync(publicSitemapAll, outSitemapAll);
-    }
-
     const publicSitemapImages = path.join(rootDir, 'public/sitemap-images.xml');
     const outSitemapImages = path.join(rootDir, 'out/sitemap-images.xml');
     if (fs.existsSync(publicSitemapImages)) {

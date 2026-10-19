@@ -9,9 +9,11 @@ export async function onRequest(context: EventContext): Promise<Response> {
 
   // Canonical domain enforcement: 301 permanent redirect apex domain to www
   if (host === 'hotelswithbathtubs.com') {
-    url.hostname = 'www.hotelswithbathtubs.com';
-    url.protocol = 'https:';
-    return Response.redirect(url.toString(), 301);
+    const target = new URL(context.request.url);
+    target.protocol = 'https:';
+    target.hostname = 'www.hotelswithbathtubs.com';
+    target.port = '';
+    return Response.redirect(target.toString(), 301);
   }
 
   const response = await context.next();

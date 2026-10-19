@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "eslint",
-    "deploy": "/Users/karanarora/mystartups/deploy.sh",
+    "deploy": "npm run deploy:cf",
     "build:cf": "node scripts/build-cloudflare.mjs",
     "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs --branch main"
   },
@@ -36,7 +35,6 @@
     "sharp": "^0.35.3"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
     "@tailwindcss/postcss": "^4",
     "@types/mixpanel-browser": "^2.60.0",
     "@types/node": "^20.19.43",

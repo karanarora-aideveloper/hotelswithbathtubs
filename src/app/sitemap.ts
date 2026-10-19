@@ -10,7 +10,6 @@ export const dynamic = 'force-static';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.hotelswithbathtubs.com';
-  const fallbackDate = new Date('2026-09-08T00:00:00.000Z');
 
   try {
     // 1. Fetch hotels with country, city, slug, name, and updatedAt
@@ -58,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!countryInfo.slug || !citySlug) continue;
 
       const locKey = `${countryInfo.slug}/${citySlug}`;
-      const hotelUpdated = h.updatedAt ? new Date(h.updatedAt) : fallbackDate;
+      const hotelUpdated = h.updatedAt ? new Date(h.updatedAt) : null;
 
       // Track hotel count for thin-destination filtering
       locationHotelCount.set(locKey, (locationHotelCount.get(locKey) || 0) + 1);
@@ -71,15 +70,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
 
       // Track latest update for country hub
-      const currCountryDate = countryLastMod.get(countryInfo.slug);
-      if (!currCountryDate || hotelUpdated > currCountryDate) {
-        countryLastMod.set(countryInfo.slug, hotelUpdated);
-      }
+      if (hotelUpdated) {
+        const currCountryDate = countryLastMod.get(countryInfo.slug);
+        if (!currCountryDate || hotelUpdated > currCountryDate) {
+          countryLastMod.set(countryInfo.slug, hotelUpdated);
+        }
 
-      // Track latest update for city destination
-      const currLocDate = locationLastMod.get(locKey);
-      if (!currLocDate || hotelUpdated > currLocDate) {
-        locationLastMod.set(locKey, hotelUpdated);
+        // Track latest update for city destination
+        const currLocDate = locationLastMod.get(locKey);
+        if (!currLocDate || hotelUpdated > currLocDate) {
+          locationLastMod.set(locKey, hotelUpdated);
+        }
       }
 
       // Track individual hotel entity route
@@ -90,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           seenHotelUrls.add(hotelUrl);
           hotelRoutes.push({
             url: hotelUrl,
-            lastModified: hotelUpdated,
+            ...(hotelUpdated ? { lastModified: hotelUpdated } : {}),
             changeFrequency: 'weekly' as const,
             priority: 0.65,
           });
@@ -101,7 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Country Hub Routes
     const countryRoutes = Array.from(countryLastMod.keys()).map(countrySlug => ({
       url: `${baseUrl}/${countrySlug}`,
-      lastModified: countryLastMod.get(countrySlug) || fallbackDate,
+      ...(countryLastMod.get(countrySlug) ? { lastModified: countryLastMod.get(countrySlug)! } : {}),
       changeFrequency: 'weekly' as const,
       priority: 0.85,
     }));
@@ -111,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter(location => (locationHotelCount.get(location) || 0) >= 1)
       .map(location => ({
         url: `${baseUrl}/${location}`,
-        lastModified: locationLastMod.get(location) || fallbackDate,
+        ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
       }));
@@ -121,7 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter(location => (locationJacuzziCount.get(location) || 0) >= 1)
       .map(location => ({
         url: `${baseUrl}/${location}/jacuzzi`,
-        lastModified: locationLastMod.get(location) || fallbackDate,
+        ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
       }));
@@ -145,7 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter(blog => blog.slug && blog.slug.trim() !== '')
       .map(blog => ({
         url: `${baseUrl}/blog/${slugify(blog.slug)}`,
-        lastModified: blog.updatedAt ? new Date(blog.updatedAt) : fallbackDate,
+        ...(blog.updatedAt ? { lastModified: new Date(blog.updatedAt) } : {}),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       }));
@@ -219,10 +220,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Failed to build dynamic sitemap:', error);
     // Fallback static sitemap if DB is unreachable
     return [
-      { url: `${baseUrl}`, lastModified: fallbackDate, changeFrequency: 'daily' as const, priority: 1.0 },
-      { url: `${baseUrl}/blog`, lastModified: fallbackDate, changeFrequency: 'weekly' as const, priority: 0.8 },
-      { url: `${baseUrl}/about`, lastModified: fallbackDate, changeFrequency: 'monthly' as const, priority: 0.5 },
-      { url: `${baseUrl}/affiliate-policy`, lastModified: fallbackDate, changeFrequency: 'yearly' as const, priority: 0.3 },
+      { url: `${baseUrl}`, changeFrequency: 'daily' as const, priority: 1.0 },
+      { url: `${baseUrl}/blog`, changeFrequency: 'weekly' as const, priority: 0.8 },
+      { url: `${baseUrl}/about`, changeFrequency: 'monthly' as const, priority: 0.5 },
+      { url: `${baseUrl}/affiliate-policy`, changeFrequency: 'yearly' as const, priority: 0.3 },
     ];
   }
 }

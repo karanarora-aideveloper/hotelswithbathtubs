@@ -19,7 +19,8 @@ export function imageUrl(src?: string): string {
     return DEFAULT_HOTEL_IMAGE;
   }
 
-  // Intercept & rewrite any blocked Vercel Blob URLs to high-speed Cloudflare R2
+  // Intercept & rewrite any blocked legacy Vercel Blob URLs to high-speed Cloudflare R2
+  // (old image URLs still indexed/embedded out in the wild)
   if (trimmed.includes('wsyhnifiqkc8fvyw.public.blob.vercel-storage.com') || trimmed.includes('blob.vercel-storage.com')) {
     const filename = trimmed.split('/images/')[1] || trimmed.split('/').pop() || '';
     return `${R2_PUBLIC_BASE_URL}/images/${filename}`;

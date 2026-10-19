@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
-  // Extract headers injected by Vercel or Cloudflare
+  // Extract headers injected by the edge platform (Cloudflare Pages / legacy Vercel headers)
   const countryCode = (
     request.headers.get('x-vercel-ip-country') ||
     request.headers.get('cf-ipcountry') ||

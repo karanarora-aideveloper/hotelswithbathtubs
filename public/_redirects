@@ -7,6 +7,8 @@
 /united-kingdom/* /uk/:splat 301
 /united-arab-emirates /uae 301
 /united-arab-emirates/* /uae/:splat 301
+/usa/new-york-city /usa/new-york 301
+/usa/new%20york /usa/new-york 301
 /hotels-with-bathtub-in-new-delhi /india/delhi 301
 /hotels-with-bathtub-in-new-delhi/ /india/delhi 301
 /hotels-with-bathtub-in-bangalore /india/bangalore 301
@@ -155,3 +157,8 @@
 /india/paharganj/ /india/delhi 301
 /paharganj /india/delhi 301
 /paharganj/ /india/delhi 301
+/blog/verify-hotel-amenities /blog/verify-hotel-amenities-accurate-booking 301
+/blog/budget-romantic-trips-india /blog/budget-romantic-getaway-india 301
+/blog/honeymoon-hotels-bathtubs /blog/honeymoon-hotels-freestanding-bathtubs-india 301
+/blog/how-verification-works /#verification 301
+/blog/luxury-couple-hotels-india-cities /blog/best-hotels-private-jacuzzi-couples-india 301

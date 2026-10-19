@@ -86,21 +86,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     description: pageDescription,
     robots: {
-      index: true,
+      index: hotelCount >= 2,
       follow: true,
     },
     alternates: {
       canonical: `/${countrySlug}/${citySlug}`,
-      languages: {
-        ...(countrySlug === 'usa' ? { 'en-US': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'uk' ? { 'en-GB': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'singapore' ? { 'en-SG': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'uae' ? { 'en-AE': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'india' ? { 'en-IN': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'australia' ? { 'en-AU': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        ...(countrySlug === 'canada' ? { 'en-CA': `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}` } : {}),
-        'x-default': 'https://www.hotelswithbathtubs.com',
-      },
     },
     openGraph: {
       title: pageTitle,
@@ -248,9 +238,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     "description": `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => {
-      const derivedRating = (h.rating && Number(h.rating) >= 4.7) ? "5" :
-                            (h.rating && Number(h.rating) >= 4.3) ? "4" :
-                            (h.rating && Number(h.rating) >= 3.5) ? "3" : "3";
+      const hasRealRating = h.rating && Number(h.rating) > 0;
+      const hasRealReviews = h.reviewsCount && Number(h.reviewsCount) > 0;
 
       return {
         "@type": "ListItem",
@@ -272,18 +261,16 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             "addressLocality": cityName,
             "addressCountry": countryName
           },
-          "starRating": {
-            "@type": "Rating",
-            "ratingValue": derivedRating
-          },
-          "priceRange": h.price ? `${h.price}` : (countrySlug === 'india' ? "₹3,999 - ₹8,500" : "$149 - $299"),
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": (h.rating && Number(h.rating) > 0) ? Number(h.rating).toFixed(1) : (4.5 + ((idx % 4) * 0.1)).toFixed(1),
-            "reviewCount": (h.reviewsCount && Number(h.reviewsCount) > 0) ? Number(h.reviewsCount) : (115 + ((idx % 7) * 23)),
-            "bestRating": "5",
-            "worstRating": "1"
-          },
+          ...(h.price ? { "priceRange": `${h.price}` } : {}),
+          ...(hasRealReviews ? {
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              ...(hasRealRating ? { "ratingValue": Number(h.rating).toFixed(1) } : {}),
+              "reviewCount": Number(h.reviewsCount),
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          } : {}),
           "amenityFeature": [
             { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
             ...(h.tubType ? [{ "@type": "LocationFeatureSpecification", "name": h.tubType, "value": true }] : []),
