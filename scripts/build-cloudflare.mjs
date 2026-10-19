@@ -40,6 +40,15 @@ async function build() {
   console.log('\n[2/4] Generating public/_redirects...');
   execSync('node scripts/generate-redirects.mjs', { cwd: rootDir, stdio: 'inherit' });
 
+  // 2b. Generate Image Sitemap & LLMs files
+  console.log('\n[2b/4] Generating public/sitemap-images.xml & public/llms.txt...');
+  try {
+    execSync('node scripts/generate-image-sitemap.mjs', { cwd: rootDir, stdio: 'inherit' });
+    execSync('node scripts/generate-llms-txt.mjs', { cwd: rootDir, stdio: 'inherit' });
+  } catch (e) {
+    console.warn('⚠️ Warning generating image sitemap / llms:', e.message);
+  }
+
   // 3. Stash dynamic admin/server routes
   console.log('\n[3/4] Stashing local admin & dynamic routes for static export...');
   for (const item of moves) {
@@ -99,6 +108,24 @@ async function build() {
     const outSitemapAll = path.join(rootDir, 'out/sitemap-all.xml');
     if (fs.existsSync(publicSitemapAll)) {
       fs.copyFileSync(publicSitemapAll, outSitemapAll);
+    }
+
+    const publicSitemapImages = path.join(rootDir, 'public/sitemap-images.xml');
+    const outSitemapImages = path.join(rootDir, 'out/sitemap-images.xml');
+    if (fs.existsSync(publicSitemapImages)) {
+      fs.copyFileSync(publicSitemapImages, outSitemapImages);
+    }
+
+    const publicLlms = path.join(rootDir, 'public/llms.txt');
+    const outLlms = path.join(rootDir, 'out/llms.txt');
+    if (fs.existsSync(publicLlms)) {
+      fs.copyFileSync(publicLlms, outLlms);
+    }
+
+    const publicLlmsFull = path.join(rootDir, 'public/llms-full.txt');
+    const outLlmsFull = path.join(rootDir, 'out/llms-full.txt');
+    if (fs.existsSync(publicLlmsFull)) {
+      fs.copyFileSync(publicLlmsFull, outLlmsFull);
     }
 
     // Clean up internal Next.js segment prefetch trees (__next.*) to comply with Cloudflare 20,000 files limit

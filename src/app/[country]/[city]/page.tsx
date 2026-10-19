@@ -180,6 +180,11 @@ export default async function CityHotelsPage({
     landmarkDistance: h.landmarkDistance,
   }));
 
+  const jacuzziCount = hotels.filter(h =>
+    (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
+    (h.amenities && h.amenities.some((a: string) => /jacuzzi|hot tub|whirlpool/i.test(a)))
+  ).length;
+
 const CITY_ALIASES_MAP: Record<string, string[]> = {
   'new york': ['new york', 'nyc', 'new-york-city', 'manhattan'],
   'las vegas': ['las vegas', 'vegas'],
@@ -453,6 +458,31 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <span className="font-heading text-xl font-extrabold text-accent">{hotels.length}</span>
           </div>
         </div>
+
+        {jacuzziCount > 0 && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
+                🌊
+              </div>
+              <div>
+                <p className="font-heading font-bold text-gray-900 text-sm sm:text-base">
+                  Looking specifically for In-Room Jacuzzis in {cityName}?
+                </p>
+                <p className="text-xs text-gray-600">
+                  We found {jacuzziCount} verified hotel suites with private whirlpool jacuzzis and hydrotherapy jets.
+                </p>
+              </div>
+            </div>
+            <Link
+              href={`/${countrySlug}/${citySlug}/jacuzzi`}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs sm:text-sm font-bold shadow-sm transition-all whitespace-nowrap"
+            >
+              <span>View {jacuzziCount} Jacuzzi Suites</span>
+              <span>&rarr;</span>
+            </Link>
+          </div>
+        )}
 
         <CityHotelsClient
           hotels={hotels}

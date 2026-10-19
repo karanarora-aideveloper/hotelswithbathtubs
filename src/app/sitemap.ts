@@ -35,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const countryLastMod = new Map<string, Date>();
     const locationLastMod = new Map<string, Date>();
     const locationHotelCount = new Map<string, number>();
+    const locationJacuzziCount = new Map<string, number>();
     const hotelRoutes: MetadataRoute.Sitemap = [];
     const seenHotelUrls = new Set<string>();
 
@@ -61,6 +62,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       // Track hotel count for thin-destination filtering
       locationHotelCount.set(locKey, (locationHotelCount.get(locKey) || 0) + 1);
+
+      // Track jacuzzi hotels
+      const isJacuzzi = (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
+        (Array.isArray(h.amenities) && h.amenities.some((a: string) => /jacuzzi|hot tub|whirlpool/i.test(a)));
+      if (isJacuzzi) {
+        locationJacuzziCount.set(locKey, (locationJacuzziCount.get(locKey) || 0) + 1);
+      }
 
       // Track latest update for country hub
       const currCountryDate = countryLastMod.get(countryInfo.slug);
@@ -108,6 +116,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       }));
 
+    // Programmatic Jacuzzi Sub-page Routes
+    const jacuzziRoutes = Array.from(locationJacuzziCount.keys())
+      .filter(location => (locationJacuzziCount.get(location) || 0) >= 1)
+      .map(location => ({
+        url: `${baseUrl}/${location}/jacuzzi`,
+        lastModified: locationLastMod.get(location) || fallbackDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      }));
+
     // 2. Fetch all published blogs
     let blogs: any[] = [];
     const blogCachePath = path.join(process.cwd(), '.cache', 'all-blogs.json');
@@ -147,6 +165,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.95,
       },
       {
+        url: `${baseUrl}/couple-friendly`,
+        lastModified: new Date('2026-10-19T00:00:00.000Z'),
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+      },
+      {
         url: `${baseUrl}/blog`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
         changeFrequency: 'weekly' as const,
@@ -184,7 +208,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     ];
 
-    return [...staticRoutes, ...countryRoutes, ...locationRoutes, ...blogRoutes, ...hotelRoutes];
+    return [...staticRoutes, ...countryRoutes, ...locationRoutes, ...jacuzziRoutes, ...blogRoutes, ...hotelRoutes];
   } catch (error) {
     console.error('Failed to build dynamic sitemap:', error);
     // Fallback static sitemap if DB is unreachable
