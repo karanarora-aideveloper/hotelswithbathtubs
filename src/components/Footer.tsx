@@ -703,6 +703,7 @@ export default async function Footer() {
             <div className="flex gap-4 flex-wrap justify-center sm:justify-end">
               <Link href="/matchmaker" className="text-[#1a6fde] hover:underline font-bold transition-colors">✨ Matchmaker</Link>
               <Link href="/couple-friendly" className="text-text-muted hover:text-accent font-medium transition-colors">Couple Stays</Link>
+              <Link href="/hostels" className="text-text-muted hover:text-accent font-medium transition-colors">🎒 Hostels</Link>
               <Link href="/blog" className="text-text-muted hover:text-accent font-medium transition-colors">Travel Blog</Link>
               <Link href="/about" className="text-text-muted hover:text-accent font-medium transition-colors">About Us</Link>
               <Link href="/affiliate-policy" className="text-text-muted hover:text-accent font-medium transition-colors">Affiliate Policy</Link>

@@ -95,7 +95,7 @@ export default function CityHotelsClient({
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'jacuzzi' | 'soaking' | 'tripled'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews'>('recommended');
-  const [stayStyle, setStayStyle] = useState<'all' | 'luxury' | 'apartment' | 'boutique'>('all');
+  const [stayStyle, setStayStyle] = useState<'all' | 'luxury' | 'apartment' | 'boutique' | 'hostel'>('all');
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
@@ -249,6 +249,22 @@ export default function CityHotelsClient({
     );
   };
 
+  const isHostelStay = (h: HotelData) => {
+    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
+    return (
+      text.includes('hostel') ||
+      text.includes('zostel') ||
+      text.includes('poshtel') ||
+      text.includes('backpacker') ||
+      text.includes('hosteller') ||
+      text.includes('gostops') ||
+      text.includes('madpackers') ||
+      text.includes('moustache') ||
+      text.includes('dorm') ||
+      text.includes('bunk')
+    );
+  };
+
   const matchesPerk = (h: HotelData, perk: string) => {
     const ams = (h.amenities || []).join(' ').toLowerCase();
     const desc = (h.description || '').toLowerCase();
@@ -313,6 +329,7 @@ export default function CityHotelsClient({
       luxury: uniqueHotels.filter(isLuxuryHotelStay).length,
       apartment: uniqueHotels.filter(isApartmentStay).length,
       boutique: uniqueHotels.filter(isBoutiqueStay).length,
+      hostel: uniqueHotels.filter(isHostelStay).length,
     };
   }, [uniqueHotels, ultraMin]);
 
@@ -386,6 +403,7 @@ export default function CityHotelsClient({
       if (stayStyle === 'luxury' && !isLuxuryHotelStay(h)) return false;
       if (stayStyle === 'apartment' && !isApartmentStay(h)) return false;
       if (stayStyle === 'boutique' && !isBoutiqueStay(h)) return false;
+      if (stayStyle === 'hostel' && !isHostelStay(h)) return false;
 
       // Category filter (legacy support)
       if (selectedFilter === 'jacuzzi' && !isJacuzziHotel(h)) return false;
@@ -755,6 +773,18 @@ export default function CityHotelsClient({
             >
               ✨ Boutique Stays ({stayStyleCounts.boutique})
             </button>
+            {stayStyleCounts.hostel > 0 && (
+              <button
+                onClick={() => setStayStyle('hostel')}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                  stayStyle === 'hostel'
+                    ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                }`}
+              >
+                🎒 Hostels &amp; Poshtels ({stayStyleCounts.hostel})
+              </button>
+            )}
           </div>
         </div>
 

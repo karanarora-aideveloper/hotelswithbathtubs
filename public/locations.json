@@ -225,6 +225,7 @@
     "Bijapur",
     "Bikaner",
     "Binsar",
+    "Bir",
     "Bir Billing",
     "Bishnupur",
     "Bodh Gaya",
@@ -876,6 +877,9 @@
     "Scottsdale",
     "Seattle",
     "Sedona"
+  ],
+  "United Kingdom": [
+    "London"
   ],
   "Uruguay": [
     "Punta del Este"

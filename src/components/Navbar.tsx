@@ -89,6 +89,10 @@ export default function Navbar() {
             <Link href="/couple-friendly" className="hover:text-accent transition-colors">
               Couple Stays
             </Link>
+            <Link href="/hostels" className="hover:text-accent transition-colors flex items-center gap-1">
+              <span>Hostels</span>
+              <span className="text-[9px] font-bold px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded-full">New</span>
+            </Link>
             <Link href="/#verification" className="hover:text-accent transition-colors">
               Verification
             </Link>
@@ -308,6 +312,21 @@ export default function Navbar() {
                   <div>
                     <span className="block">Couple-Friendly Stays</span>
                     <span className="block text-2xs text-text-muted font-normal">Private tubs &amp; romantic suites</span>
+                  </div>
+                </div>
+                <span className="text-text-muted text-xs">&rarr;</span>
+              </Link>
+
+              <Link
+                href="/hostels"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-base">🎒</span>
+                  <div>
+                    <span className="block">Hostels &amp; Poshtels</span>
+                    <span className="block text-2xs text-text-muted font-normal">Social vibes &amp; private tubs</span>
                   </div>
                 </div>
                 <span className="text-text-muted text-xs">&rarr;</span>
