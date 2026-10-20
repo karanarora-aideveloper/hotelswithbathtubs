@@ -9,6 +9,7 @@ const rootDir = path.resolve(__dirname, '..');
 
 const moves = [
   { from: path.join(rootDir, 'src/app/api/admin'), to: path.join(rootDir, '_cf_tmp_api_admin') },
+  { from: path.join(rootDir, 'src/app/api/track-click'), to: path.join(rootDir, '_cf_tmp_api_track_click') },
   { from: path.join(rootDir, 'src/app/admin'), to: path.join(rootDir, '_cf_tmp_admin') },
   { from: path.join(rootDir, 'src/app/api/geo'), to: path.join(rootDir, '_cf_tmp_api_geo') },
   { from: path.join(rootDir, 'src/app/out'), to: path.join(rootDir, '_cf_tmp_out') },

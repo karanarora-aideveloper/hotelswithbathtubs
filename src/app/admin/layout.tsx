@@ -49,6 +49,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>Pinterest Studio</span>
             <span className="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full font-bold">📌 API</span>
           </Link>
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2 px-4">Affiliates & Revenue</div>
+          <Link href="/admin/clicks" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors flex items-center justify-between bg-emerald-50/60 border border-emerald-200/70">
+            <span className="flex items-center gap-2">
+              <span>🎯</span>
+              <span className="font-semibold text-emerald-950">Hotel Link Clicks</span>
+            </span>
+            <span className="bg-emerald-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">PORTAL</span>
+          </Link>
           <Link href="/admin/tracker" className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-accent-secondary font-medium transition-colors">
             Affiliate Tracker & Strategy
           </Link>

@@ -26,6 +26,18 @@ export default function OutboundLink({
 }) {
   const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
 
+  // Normalize affiliate provider name
+  const getProvider = (url: string, src?: string): string => {
+    if (src) return src.toLowerCase();
+    const lower = url.toLowerCase();
+    if (lower.includes('booking.com') || lower.includes('visitretailer/2732')) return 'booking.com';
+    if (lower.includes('agoda.com') || lower.includes('visitretailer/2927')) return 'agoda';
+    if (lower.includes('makemytrip.com') || lower.includes('visitretailer/1729') || lower.includes('linkredirect.in') || lower.includes('ekaro.in')) return 'makemytrip';
+    if (lower.includes('trip.com')) return 'trip.com';
+    if (lower.includes('airbnb.')) return 'airbnb';
+    return 'other';
+  };
+
   return (
     <a
       href={affiliateLink}
@@ -33,25 +45,77 @@ export default function OutboundLink({
       rel="noopener noreferrer nofollow sponsored"
       className={className}
       onClick={() => {
+        const clickId = `clk_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+        const provider = getProvider(affiliateLink, source);
+        const pagePath = typeof window !== 'undefined' ? window.location.pathname : '';
+        const referrer = typeof document !== 'undefined' ? document.referrer : '';
+        const deviceCategory = typeof window !== 'undefined'
+          ? window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1024 ? 'tablet' : 'desktop'
+          : 'desktop';
+        const posthogDistinctId = (posthog as any)?.get_distinct_id?.() || '';
+        const posthogSessionId = (posthog as any)?.get_session_id?.() || '';
+
+        // Extract country from pathname e.g. /thailand/bangkok -> thailand
+        const pathSegments = pagePath.split('/').filter(Boolean);
+        const countryName = pathSegments.length >= 1 ? pathSegments[0] : '';
+
         const eventProps = {
-          hotel_name: hotelName,
-          city_name: cityName,
-          booking_source: source || 'unknown',
+          click_id: clickId,
+          hotel_name: hotelName || 'Unknown Hotel',
+          city_name: cityName || '',
+          country_name: countryName,
+          provider,
+          booking_source: source || provider,
           destination_url: affiliateLink,
+          page_path: pagePath,
+          device_category: deviceCategory,
+          posthog_distinct_id: posthogDistinctId,
+          posthog_session_id: posthogSessionId,
         };
 
-        // Track to Mixpanel
+        // 1. Track to Internal Hotel Clicks Portal (/api/track-click)
+        try {
+          const clickPayload = {
+            clickId,
+            hotelName: hotelName || 'Unknown Hotel',
+            cityName: cityName || '',
+            countryName,
+            provider,
+            destinationUrl: affiliateLink,
+            pagePath,
+            referrer,
+            deviceCategory,
+            userType: typeof window !== 'undefined' && localStorage.getItem('hwb_returning') ? 'returning' : 'new',
+            posthogDistinctId,
+            posthogSessionId,
+            clickedAt: new Date().toISOString(),
+          };
+
+          const body = JSON.stringify(clickPayload);
+          if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+            navigator.sendBeacon('/api/track-click', body);
+          } else if (typeof fetch !== 'undefined') {
+            fetch('/api/track-click', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body,
+              keepalive: true,
+            }).catch(() => {});
+          }
+        } catch (_) {}
+
+        // 2. Track to Mixpanel
         trackEvent('hotel_booking_click', eventProps);
 
-        // Track to Google Analytics 4 & mark session converted
+        // 3. Track to Google Analytics 4 & mark session converted
         recordBookingConversion({
           hotelName,
           cityName,
-          bookingSource: source || 'unknown',
+          bookingSource: source || provider,
           destinationUrl: affiliateLink,
         });
 
-        // Update persistent recurrence profile as a converted buyer
+        // 4. Update persistent recurrence profile as a converted buyer
         recordSessionRecurrenceUpdate({
           timeSpentSeconds: 0,
           hotelsViewedCount: 1,
@@ -59,19 +123,20 @@ export default function OutboundLink({
           lastClickedUrl: affiliateLink,
         });
 
-        // Track to PostHog — links to session recording (if not excluded)
+        // 5. Track to PostHog — dedicated hotel link click event
         try {
           if (!isUserExcluded()) {
             posthog.capture('hotel_booking_click', {
               ...eventProps,
               $set: {
                 has_ever_converted: true,
-                last_booking_source: source,
+                last_booking_source: source || provider,
                 last_booked_city: cityName,
                 last_booked_hotel: hotelName,
                 last_exit_link: affiliateLink,
               },
             });
+            posthog.capture('hotel_link_clicked', eventProps);
           }
         } catch (_) {}
       }}

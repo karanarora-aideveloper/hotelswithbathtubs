@@ -36,6 +36,7 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
       host.endsWith('earnkaro.com') ||
       host.endsWith('ekaro.in') ||
       host.endsWith('linkredirect.in') ||
+      host.endsWith('bitli.in') ||
       host.endsWith('google.com') ||
       host.endsWith('google.co.in');
 

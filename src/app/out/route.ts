@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
       host.endsWith('earnkaro.com') ||
       host.endsWith('ekaro.in') ||
       host.endsWith('linkredirect.in') ||
+      host.endsWith('bitli.in') ||
       host.endsWith('google.com') ||
       host.endsWith('google.co.in');
 

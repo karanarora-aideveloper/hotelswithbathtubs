@@ -5,16 +5,25 @@
  * Blocks GA4, PostHog session recordings, and Mixpanel for admin & developer devices.
  */
 
-export function isUserExcluded(): boolean {
+export function isUserExcluded(gaId?: string): boolean {
   if (typeof window === 'undefined') return false;
   try {
-    if ((window as any).__HWB_ANALYTICS_EXCLUDED__ === true) return true;
-    if (localStorage.getItem('ignore_ga') === 'true') return true;
-    if (localStorage.getItem('ignore_analytics') === 'true') return true;
-    if (document.cookie.includes('ignore_analytics=true')) return true;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('include_analytics') === 'true' || params.get('unexclude') === 'true') {
+      setUserExcluded(false, gaId);
+      return false;
+    }
+
+    if ((window as any).__HWB_ANALYTICS_EXCLUDED__ === true) {
+      if (gaId) (window as any)[`ga-disable-${gaId}`] = true;
+      return true;
+    }
+    if (localStorage.getItem('ignore_ga') === 'true' || localStorage.getItem('ignore_analytics') === 'true' || document.cookie.includes('ignore_analytics=true')) {
+      setUserExcluded(true, gaId);
+      return true;
+    }
 
     // Check URL query parameters (e.g. ?exclude=true or ?admin=true or ?ignore_analytics=true)
-    const params = new URLSearchParams(window.location.search);
     if (
       params.get('exclude') === 'true' ||
       params.get('admin_mode') === 'true' ||
@@ -22,7 +31,7 @@ export function isUserExcluded(): boolean {
       params.get('ignore_ga') === 'true' ||
       params.get('dev') === 'true'
     ) {
-      setUserExcluded(true);
+      setUserExcluded(true, gaId);
       return true;
     }
 
@@ -32,7 +41,7 @@ export function isUserExcluded(): boolean {
   }
 }
 
-export function setUserExcluded(excluded: boolean) {
+export function setUserExcluded(excluded: boolean, gaId?: string) {
   if (typeof window === 'undefined') return;
   try {
     if (excluded) {
@@ -42,6 +51,7 @@ export function setUserExcluded(excluded: boolean) {
       (window as any).__HWB_ANALYTICS_EXCLUDED__ = true;
       (window as any)['ga-disable-G-TETR30WPYM'] = true;
       (window as any)['ga-disable-G-2VDZWWBGD3'] = true;
+      if (gaId) (window as any)[`ga-disable-${gaId}`] = true;
 
       // Disable PostHog capturing immediately if initialized
       try {
@@ -61,6 +71,7 @@ export function setUserExcluded(excluded: boolean) {
       (window as any).__HWB_ANALYTICS_EXCLUDED__ = false;
       delete (window as any)['ga-disable-G-TETR30WPYM'];
       delete (window as any)['ga-disable-G-2VDZWWBGD3'];
+      if (gaId) delete (window as any)[`ga-disable-${gaId}`];
 
       try {
         if (typeof (window as any).posthog?.opt_in_capturing === 'function') {

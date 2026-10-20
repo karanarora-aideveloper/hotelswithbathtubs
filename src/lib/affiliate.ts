@@ -2,6 +2,7 @@ export const DEFAULT_AGODA_CID = '1972736';
 export const DEFAULT_BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID || '304142';
 export const DEFAULT_EARNKARO_ID = '1471944';
 export const EARNKARO_MMT_RETAILER_ID = '1729';
+export const EARNKARO_AGODA_RETAILER_ID = '2927';
 export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID || '';
 export const DEFAULT_TRIP_SID = process.env.NEXT_PUBLIC_TRIP_SID || '';
 
@@ -42,19 +43,37 @@ export function getTripAffiliateLink(
 }
 
 /**
- * Transforms an Agoda hotel URL to include the affiliate tracking CID.
- * Ensures proper affiliate tracking CID is attached without breaking direct property or search parameters.
+ * Transforms an Agoda hotel URL to route through EarnKaro profit links (Retailer 2927)
+ * or falls back to direct Agoda CID if EarnKaro is disabled.
  */
-export function getAgodaAffiliateLink(url: string, cid: string = DEFAULT_AGODA_CID): string {
+export function getAgodaAffiliateLink(
+  url: string,
+  cid: string = DEFAULT_AGODA_CID,
+  earnkaroId: string = DEFAULT_EARNKARO_ID
+): string {
   if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+    return url;
+  }
+
+  // If already an EarnKaro or tracking redirect link, don't double-wrap
+  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in') || url.includes('bitli.in')) {
     return url;
   }
 
   try {
     const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.includes('agoda.com')) {
-      const existingCid = parsedUrl.searchParams.get('cid');
-      const targetCid = cid || existingCid || DEFAULT_AGODA_CID;
+    if (matchesDomain(parsedUrl.hostname, 'agoda.com')) {
+      // Remove any existing direct CID to avoid affiliate collision with EarnKaro CJ tracking
+      parsedUrl.searchParams.delete('cid');
+      const cleanUrl = parsedUrl.toString();
+
+      // Route via approved EarnKaro Retailer 2927 (Agoda)
+      if (earnkaroId) {
+        return `https://trackingv3.linkredirect.in/visitretailer/${EARNKARO_AGODA_RETAILER_ID}?id=${encodeURIComponent(earnkaroId)}&dl=${encodeURIComponent(cleanUrl)}`;
+      }
+
+      // Fallback to direct Agoda CID
+      const targetCid = cid || DEFAULT_AGODA_CID;
       if (targetCid) {
         parsedUrl.searchParams.set('cid', targetCid);
       }
@@ -92,7 +111,44 @@ export function getBookingAffiliateLink(url: string, aid: string = DEFAULT_BOOKI
 }
 
 /**
- * Converts a MakeMyTrip (or supported Indian merchant) URL to an EarnKaro Profit Link
+ * Transforms a MakeMyTrip hotel URL to route through EarnKaro profit links (Retailer 1729)
+ * or falls back to direct MMT affiliate tracking.
+ */
+export function getMakeMyTripAffiliateLink(
+  url: string,
+  earnkaroId: string = DEFAULT_EARNKARO_ID,
+  directAffiliateId?: string
+): string {
+  if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
+    return url;
+  }
+
+  // If already an EarnKaro link, don't double-wrap
+  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in') || url.includes('bitli.in')) {
+    return url;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+    if (matchesDomain(parsedUrl.hostname, 'makemytrip.com')) {
+      if (directAffiliateId) {
+        parsedUrl.searchParams.set('affiliateId', directAffiliateId);
+        return parsedUrl.toString();
+      }
+
+      if (earnkaroId) {
+        return `https://trackingv3.linkredirect.in/visitretailer/${EARNKARO_MMT_RETAILER_ID}?id=${encodeURIComponent(earnkaroId)}&dl=${encodeURIComponent(url)}`;
+      }
+      return parsedUrl.toString();
+    }
+  } catch (e) {
+    console.error('Invalid URL in getMakeMyTripAffiliateLink:', url);
+  }
+  return url;
+}
+
+/**
+ * Converts a MakeMyTrip, Agoda, or supported merchant URL to an EarnKaro Profit Link
  */
 export function getEarnkaroAffiliateLink(url: string, earnkaroId: string = DEFAULT_EARNKARO_ID): string {
   if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
@@ -100,7 +156,7 @@ export function getEarnkaroAffiliateLink(url: string, earnkaroId: string = DEFAU
   }
 
   // If already an EarnKaro link, don't double-wrap
-  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in')) {
+  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in') || url.includes('bitli.in')) {
     return url;
   }
 
@@ -108,9 +164,15 @@ export function getEarnkaroAffiliateLink(url: string, earnkaroId: string = DEFAU
     const parsedUrl = new URL(url);
     const host = parsedUrl.hostname.toLowerCase();
 
-    // MakeMyTrip Hotels direct deep link engine
-    if (host.includes('makemytrip.com') && earnkaroId) {
-      return `https://linkredirect.in/visitretailer/${EARNKARO_MMT_RETAILER_ID}?id=${encodeURIComponent(earnkaroId)}&dl=${encodeURIComponent(url)}`;
+    // MakeMyTrip Hotels direct deep link engine (Retailer 1729)
+    if (matchesDomain(host, 'makemytrip.com') && earnkaroId) {
+      return `https://trackingv3.linkredirect.in/visitretailer/${EARNKARO_MMT_RETAILER_ID}?id=${encodeURIComponent(earnkaroId)}&dl=${encodeURIComponent(url)}`;
+    }
+
+    // Agoda Hotels direct deep link engine (Retailer 2927)
+    if (matchesDomain(host, 'agoda.com') && earnkaroId) {
+      parsedUrl.searchParams.delete('cid');
+      return `https://trackingv3.linkredirect.in/visitretailer/${EARNKARO_AGODA_RETAILER_ID}?id=${encodeURIComponent(earnkaroId)}&dl=${encodeURIComponent(parsedUrl.toString())}`;
     }
 
     // Other supported EarnKaro merchants
@@ -233,20 +295,16 @@ export function wrapOutboundAffiliateLink(
     const host = parsedUrl.hostname.toLowerCase();
 
     if (matchesDomain(host, 'agoda.com')) {
-      return getAgodaAffiliateLink(targetUrl, agodaCid);
+      return getAgodaAffiliateLink(targetUrl, agodaCid, earnkaroId);
     }
 
     if (matchesDomain(host, 'booking.com')) {
+      // Direct Booking.com affiliate link to ensure direct hotel room landing page
       return getBookingAffiliateLink(targetUrl, bookingAid);
     }
 
     if (matchesDomain(host, 'makemytrip.com')) {
-      // If direct MMT affiliate tracking exists
-      if (customAffiliateIds?.makemytrip) {
-        parsedUrl.searchParams.set('affiliateId', customAffiliateIds.makemytrip);
-        return parsedUrl.toString();
-      }
-      return targetUrl;
+      return getMakeMyTripAffiliateLink(targetUrl, earnkaroId, customAffiliateIds?.makemytrip);
     }
 
     if (matchesDomain(host, 'trip.com')) {

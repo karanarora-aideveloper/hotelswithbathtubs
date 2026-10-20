@@ -1,5 +1,7 @@
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
+import HotelClick from '@/models/HotelClick';
+import Link from 'next/link';
 
 export default async function AdminDashboard() {
   await connectToDatabase();
@@ -10,6 +12,10 @@ export default async function AdminDashboard() {
   const countries = await Hotel.distinct('country');
   const hotelsWithBookingUrl = await Hotel.countDocuments({ bookingUrl: { $exists: true, $ne: null } });
   const hotelsWithAgodaUrl = await Hotel.countDocuments({ agodaUrl: { $exists: true, $ne: null } });
+  const totalClicks = await HotelClick.countDocuments();
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const todayClicks = await HotelClick.countDocuments({ clickedAt: { $gte: todayStart } });
 
   const bookingUrlPercentage = Math.round((hotelsWithBookingUrl / totalHotels) * 100);
   const agodaUrlPercentage = Math.round((hotelsWithAgodaUrl / totalHotels) * 100);
@@ -18,26 +24,50 @@ export default async function AdminDashboard() {
     <div>
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Platform Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="text-gray-500 font-medium mb-1">Total Hotels</h3>
-          <p className="text-4xl font-bold text-accent-secondary">{totalHotels}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+          <h3 className="text-gray-500 font-medium text-xs mb-1">Total Hotels</h3>
+          <p className="text-3xl font-black text-gray-900">{totalHotels.toLocaleString()}</p>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="text-gray-500 font-medium mb-1">Cities Covered</h3>
-          <p className="text-4xl font-bold text-accent-secondary">{cities.length}</p>
+        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+          <h3 className="text-gray-500 font-medium text-xs mb-1">Cities Covered</h3>
+          <p className="text-3xl font-black text-gray-900">{cities.length}</p>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="text-gray-500 font-medium mb-1">Countries</h3>
-          <p className="text-4xl font-bold text-accent-secondary">{countries.length}</p>
+        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+          <h3 className="text-gray-500 font-medium text-xs mb-1">Countries</h3>
+          <p className="text-3xl font-black text-gray-900">{countries.length}</p>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="text-gray-500 font-medium mb-1">Active Affiliates</h3>
-          <p className="text-4xl font-bold text-accent-secondary">3</p>
+        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+          <h3 className="text-gray-500 font-medium text-xs mb-1">Total Hotel Clicks</h3>
+          <p className="text-3xl font-black text-[#1a6fde]">{totalClicks.toLocaleString()}</p>
         </div>
+
+        <div className="bg-white p-5 rounded-xl border border-emerald-200 bg-emerald-50/40 shadow-sm">
+          <h3 className="text-emerald-800 font-medium text-xs mb-1">Clicks Today</h3>
+          <p className="text-3xl font-black text-emerald-600">{todayClicks.toLocaleString()}</p>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-2xl p-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-sm">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🎯</span>
+            <h2 className="text-xl font-black text-white">Hotel Link Clicks Portal</h2>
+            <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">NEW</span>
+          </div>
+          <p className="text-xs text-white/80 mt-1 max-w-xl">
+            Live telemetry of every outbound partner click. Reconcile with Booking.com, Agoda, and MakeMyTrip affiliate dashboards and track attribution.
+          </p>
+        </div>
+        <Link
+          href="/admin/clicks"
+          className="bg-white text-emerald-900 hover:bg-emerald-50 px-5 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all shrink-0"
+        >
+          Open Clicks Portal &rarr;
+        </Link>
       </div>
 
       <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-8 mb-8">
