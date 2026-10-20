@@ -169,6 +169,22 @@ export const redirects = [
   { source: '/paharganj', destination: '/india/delhi', permanent: true },
   { source: '/paharganj/', destination: '/india/delhi', permanent: true },
 
+  // Hotel legacy alternate slugs & domain authority indexed URLs
+  { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn/', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-lonin-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-lonin-torshavn/', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
+  { source: '/faroe-islands/torshavn/hotel-brandan-torshavn', destination: '/faroe-islands/torshavn/torshavn-hotel-brandan', permanent: true },
+  { source: '/faroe-islands/torshavn/hilton-garden-inn-faroe-islands-torshavn', destination: '/faroe-islands/torshavn/torshavn-hilton-garden-inn-faroe-islands', permanent: true },
+  { source: '/faroe-islands/torshavn/hotel-djurhuus-torshavn', destination: '/faroe-islands/torshavn/torshavn-hotel-djurhuus', permanent: true },
+  { source: '/faroe-islands/torshavn/hotel-hafnia-torshavn', destination: '/faroe-islands/torshavn/torshavn-hotel-hafnia', permanent: true },
+  { source: '/faroe-islands/torshavn/hotel-foroyar-torshavn', destination: '/faroe-islands/torshavn/torshavn-hotel-f-royar', permanent: true },
+  { source: '/faroe-islands/torshavn/hotel-f-royar-torshavn', destination: '/faroe-islands/torshavn/torshavn-hotel-f-royar', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-apartment-1', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-apartment-1/', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-lonin', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
+  { source: '/faroe-islands/torshavn/broncks-lonin/', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
+
   // Blog slug aliases & historical redirects
   { source: '/blog/verify-hotel-amenities', destination: '/blog/verify-hotel-amenities-accurate-booking', permanent: true },
   { source: '/blog/budget-romantic-trips-india', destination: '/blog/budget-romantic-getaway-india', permanent: true },
