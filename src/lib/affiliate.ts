@@ -1,5 +1,5 @@
 export const DEFAULT_AGODA_CID = '1972736';
-export const DEFAULT_BOOKING_AID = '304144';
+export const DEFAULT_BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID || '304142';
 export const DEFAULT_EARNKARO_ID = '1471944';
 export const EARNKARO_MMT_RETAILER_ID = '1729';
 export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID || '';
@@ -76,8 +76,13 @@ export function getBookingAffiliateLink(url: string, aid: string = DEFAULT_BOOKI
 
   try {
     const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.includes('booking.com') && aid) {
-      parsedUrl.searchParams.set('aid', aid);
+    if (parsedUrl.hostname.includes('booking.com')) {
+      const targetAid = (aid && aid !== '304144') ? aid : DEFAULT_BOOKING_AID;
+      if (targetAid && targetAid !== '304144') {
+        parsedUrl.searchParams.set('aid', targetAid);
+      } else {
+        parsedUrl.searchParams.delete('aid');
+      }
       return parsedUrl.toString();
     }
   } catch (e) {
@@ -145,6 +150,11 @@ export function appendTripDates(url: string, dates?: TripDates): string {
     const host = parsedUrl.hostname.toLowerCase();
 
     if (matchesDomain(host, 'booking.com')) {
+      // Standalone Booking.com /hotel/ detail pages 301-redirect and strip affiliate aid
+      // when query params are appended. Preserve clean direct property link with aid intact.
+      if (parsedUrl.pathname.includes('/hotel/')) {
+        return url;
+      }
       parsedUrl.searchParams.set('checkin', dates.checkin);
       parsedUrl.searchParams.set('checkout', dates.checkout);
       parsedUrl.searchParams.set('group_adults', String(dates.adults || 2));
@@ -278,7 +288,8 @@ export function getUrlDirectnessTier(url?: string): number {
   }
   if (lower.includes('booking.com')) {
     if (lower.includes('/hotel/') && !lower.includes('searchresults')) return 0;
-    return 2;
+    // Any bare searchresults.html (or ss= search fallback) loses property context and redirects to blank search
+    return 99;
   }
   if (lower.includes('airbnb.')) {
     if (lower.includes('/rooms/')) return 0;

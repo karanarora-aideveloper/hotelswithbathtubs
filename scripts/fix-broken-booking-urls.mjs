@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-const BOOKING_AID = '304144';
+const BOOKING_AID = '304142';
 
 const COUNTRY_ISO = {
   'india': 'in', 'usa': 'us', 'united states': 'us', 'uk': 'gb', 'united kingdom': 'gb',

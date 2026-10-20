@@ -149,7 +149,7 @@ export default function HotelAnalyticsComparison({
   }
 
   // Booking.com Platform
-  const bookingUrl = hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : undefined);
+  const bookingUrl = hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') && !hotel.url.includes('searchresults') ? hotel.url : undefined);
   if (bookingUrl) {
     const bookingUsual = Math.round(numericBase * 1.02);
     platforms.push({

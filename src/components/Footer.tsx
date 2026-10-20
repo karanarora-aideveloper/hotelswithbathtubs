@@ -445,7 +445,21 @@ export default async function Footer() {
           
           <div className="space-y-6 sm:space-y-8">
             {Object.entries(regionGroups).filter(([_, cities]) => cities.length > 0).map(([region, cities]) => {
-              const sortedCities = cities.sort((a, b) => a.city.localeCompare(b.city));
+              // Deduplicate cities by countrySlug-citySlug (e.g. UK vs United Kingdom)
+              const cityMap = new Map<string, { city: string; country: string; hotelCount: number }>();
+              for (const loc of cities) {
+                const cSlug = resolveCountry(loc.country).slug;
+                const ctSlug = slugify(loc.city);
+                const k = `${cSlug}-${ctSlug}`;
+                const existing = cityMap.get(k);
+                if (existing) {
+                  existing.hotelCount += loc.hotelCount;
+                } else {
+                  cityMap.set(k, { ...loc });
+                }
+              }
+              const uniqueCities = Array.from(cityMap.values());
+              const sortedCities = uniqueCities.sort((a, b) => a.city.localeCompare(b.city));
               const topCities = sortedCities.slice(0, 8);
               const extraCities = sortedCities.slice(8);
 
