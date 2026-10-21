@@ -84,3 +84,13 @@ These properties are automatically attached to **every** event fired during the 
 - **Do not track PII as properties** — no emails, full names, phone numbers, or payment details.
 - **Do not fire analytics events inside loops** — each event call is a network request.
 - **Do not hardcode tokens or measurement IDs** — read them from environment config or database settings.
+
+---
+
+# Google Stitch MCP Guidelines
+
+When using Google Stitch MCP to generate or refine UI designs:
+1. **Plain Language & Simple Baselines First**: Use clean, focused prompts to establish the initial screen rather than monolithic prompts (avoid >3,000–5,000 chars, which cause Stitch to omit components).
+2. **Iterative Screen-by-Screen Refinement**: Generate a clean baseline with `generate_screen_from_text`, then iteratively complexify and fine-tune using `edit_screens` and `generate_variants`.
+3. **Core Anchor Focus**: Specify screen type, brand aesthetic & emotional palette, hero focal point, and 2–3 core structural modules. Leave micro-details to the editing flow.
+
