@@ -78,14 +78,23 @@ export async function onRequest(context: EventContext): Promise<Response> {
     }
   }
 
-  // Attach Edge CDN caching headers for HTML pages (sub-50ms TTFB worldwide)
+  // Attach Edge caching headers for HTML pages:
+  // Must revalidate so clients always get latest JS chunk hashes from new deployments
+  // Never cache 404/error statuses or use aggressive s-maxage on HTML (prevents ChunkLoadError)
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('text/html')) {
+    // Protect against 304/204 response body construction errors in Cloudflare Workers
+    if (response.status === 304 || response.status === 204) {
+      return response;
+    }
+
     const newHeaders = new Headers(response.headers);
-    newHeaders.set(
-      'Cache-Control',
-      'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800'
-    );
+    if (response.status === 200) {
+      newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else {
+      newHeaders.set('Cache-Control', 'no-store');
+    }
+
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,

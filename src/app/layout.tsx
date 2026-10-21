@@ -14,6 +14,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 import { PostHogProviderWrapper } from '@/components/PostHogProvider';
 import InternalTrafficBadge from '@/components/InternalTrafficBadge';
+import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -86,6 +87,7 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://us.i.posthog.com" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} ${lora.variable} ${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
+        <ChunkErrorRecovery />
         <AnalyticsExclusionInit gaId={gaId} />
         <PostHogProviderWrapper>
           <Suspense fallback={null}>

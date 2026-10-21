@@ -59,6 +59,11 @@ export default function OutboundLink({
         const pathSegments = pagePath.split('/').filter(Boolean);
         const countryName = pathSegments.length >= 1 ? pathSegments[0] : '';
 
+        let isReturning = false;
+        try {
+          isReturning = typeof window !== 'undefined' && localStorage.getItem('hwb_returning') === 'true';
+        } catch (_) {}
+
         const eventProps = {
           click_id: clickId,
           hotel_name: hotelName || 'Unknown Hotel',
@@ -85,7 +90,7 @@ export default function OutboundLink({
             pagePath,
             referrer,
             deviceCategory,
-            userType: typeof window !== 'undefined' && localStorage.getItem('hwb_returning') ? 'returning' : 'new',
+            userType: isReturning ? 'returning' : 'new',
             posthogDistinctId,
             posthogSessionId,
             clickedAt: new Date().toISOString(),

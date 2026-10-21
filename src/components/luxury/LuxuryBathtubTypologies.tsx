@@ -87,7 +87,7 @@ const GLOBAL_TYPOLOGIES = [
     title: 'Alpine Chalet Heated Baths',
     material: 'Thermal Wood & Mountain Granite',
     description: 'Deep heated tubs overlooking snow-covered peaks, fireplaces, and pine forests in the Swiss Alps.',
-    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-kumarakom-lake-resort.webp',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-chamonix.webp',
     sampleHotel: 'Chalet Zermatt Peak',
     href: '/france/paris',
     tag: 'Mountain Panorama',

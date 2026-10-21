@@ -36,7 +36,9 @@ function loadFavorites(): FavoriteHotel[] {
 }
 
 function saveFavorites(favs: FavoriteHotel[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+  } catch (_) {}
 }
 
 export function useFavorites() {

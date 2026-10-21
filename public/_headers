@@ -24,8 +24,8 @@
 /favicon.ico
   Cache-Control: public, max-age=604800
 
-# HTML responses - Edge CDN cached for 24h, stale-while-revalidate for 7d
+# HTML responses - fresh revalidation so clients always get current build chunk hashes
 /*.html
-  Cache-Control: public, max-age=0, s-maxage=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=0, must-revalidate
 /
-  Cache-Control: public, max-age=0, s-maxage=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=0, must-revalidate
