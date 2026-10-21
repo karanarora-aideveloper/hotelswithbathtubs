@@ -30,14 +30,15 @@ export async function onRequest(context: EventContext): Promise<Response> {
       if (!url.searchParams.has('__r')) {
         const candidates: string[] = [];
 
-        // Scenario 1: Suffix slug requested (e.g. broncks-apartment-1-torshavn)
-        // Canonical page may be city-prefixed (torshavn-broncks-apartment-1) or bare
+        // Scenario 1: Suffix slug requested (e.g. broncks-apartment-1-torshavn or capella-bangkok)
+        // Canonical page may be city-prefixed (torshavn-broncks-apartment-1), bare, or double-suffixed (capella-bangkok-bangkok)
         if (hotelSlug.endsWith(`-${citySlug}`)) {
           const stripped = hotelSlug.slice(0, -(citySlug.length + 1));
           if (stripped) {
             candidates.push(`/${country}/${city}/${citySlug}-${stripped}`);
             candidates.push(`/${country}/${city}/${stripped}`);
           }
+          candidates.push(`/${country}/${city}/${hotelSlug}-${citySlug}`);
         }
         // Scenario 2: City-prefixed slug requested (e.g. torshavn-hotel-name)
         // Canonical page may be city-suffixed (hotel-name-torshavn) or bare
@@ -50,8 +51,9 @@ export async function onRequest(context: EventContext): Promise<Response> {
         }
         // Scenario 3: Bare slug without city (e.g. broncks-apartment-1)
         else {
-          candidates.push(`/${country}/${city}/${citySlug}-${hotelSlug}`);
           candidates.push(`/${country}/${city}/${hotelSlug}-${citySlug}`);
+          candidates.push(`/${country}/${city}/${citySlug}-${hotelSlug}`);
+          candidates.push(`/${country}/${city}/${hotelSlug}-${citySlug}-${citySlug}`);
         }
 
         // In Cloudflare Pages, context.env.ASSETS can test if candidate file exists
