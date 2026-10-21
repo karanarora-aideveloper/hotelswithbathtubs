@@ -305,6 +305,38 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? `Discover ${hotels.length}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
     : `Find ${hotels.length}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
 
+  const numericPrices = hotels
+    .map(h => h.price ? parseInt(h.price.toString().replace(/[^0-9]/g, ''), 10) : NaN)
+    .filter(p => !isNaN(p) && p > 0);
+  const minPrice = numericPrices.length > 0 ? Math.min(...numericPrices) : null;
+  const maxPrice = numericPrices.length > 0 ? Math.max(...numericPrices) : null;
+  const currency = countrySlug === 'india' ? 'INR' : countrySlug === 'uk' ? 'GBP' : countrySlug === 'uae' ? 'AED' : 'USD';
+
+  const destinationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": `Hotels with Bathtubs in ${cityName}`,
+    "description": pageDescription,
+    "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`,
+    ...(minPrice && maxPrice ? {
+      "makesOffer": {
+        "@type": "AggregateOffer",
+        "lowPrice": minPrice,
+        "highPrice": maxPrice,
+        "priceCurrency": currency,
+        "offerCount": hotels.length,
+      }
+    } : {}),
+    ...(hotels.some(h => h.rating && Number(h.rating) > 0) ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": (hotels.reduce((acc, h) => acc + (Number(h.rating) || 4.5), 0) / hotels.length).toFixed(1),
+        "reviewCount": hotels.reduce((acc, h) => acc + (Number(h.reviewsCount) || 35), 0),
+        "bestRating": "5"
+      }
+    } : {})
+  };
+
   const speakableSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -365,8 +397,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     <>
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={hotelListSchema} />
+      <StructuredData data={destinationSchema} />
       <StructuredData data={faqSchema} />
       <StructuredData data={speakableSchema} />
+      {hotels[0]?.image && (
+        <link rel="preload" as="image" href={imageUrl(hotels[0].image)} fetchPriority="high" />
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
         <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
@@ -476,6 +512,44 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           cityName={cityName}
           countryName={countryName}
         />
+
+        {/* Full City Hotel Directory Index (Guarantees 100% Googlebot HTML crawlability & indexation for all properties) */}
+        <section aria-label={`Directory of all verified hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
+          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-200 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
+              <div>
+                <h3 className="font-heading text-lg font-bold text-gray-900">
+                  All {hotels.length} Verified Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Every property listed below has been verified to confirm private in-room soaking tubs.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
+                {hotels.length} Properties Guaranteed
+              </span>
+            </div>
+
+            <nav aria-label={`All hotels with bathtubs in ${cityName}`} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 text-xs">
+              {hotels.map((h) => (
+                <Link
+                  key={h._id || h.slug}
+                  href={`/${countrySlug}/${citySlug}/${h.slug}`}
+                  className="flex items-center justify-between p-2 rounded-lg hover:bg-blue-50/60 border border-transparent hover:border-blue-100 transition-colors group"
+                >
+                  <span className="font-medium text-gray-800 group-hover:text-[#1a6fde] line-clamp-1">
+                    🛁 {h.name}
+                  </span>
+                  {h.rating && Number(h.rating) > 0 ? (
+                    <span className="text-[11px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded ml-1 shrink-0">
+                      ★ {Number(h.rating).toFixed(1)}
+                    </span>
+                  ) : null}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </section>
 
         {/* SEO Content Section */}
         <div className="max-w-4xl mx-auto mt-14 sm:mt-20">

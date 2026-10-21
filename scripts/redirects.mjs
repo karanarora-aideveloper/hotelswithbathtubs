@@ -51,7 +51,27 @@ export const redirects = [
   { source: '/hotels-with-bathtub-in-ooty', destination: '/india/ooty', permanent: true },
   { source: '/hotels-with-bathtub-in-ooty/', destination: '/india/ooty', permanent: true },
 
+  // Sitemaps
+  { source: '/sitemap_index.xml', destination: '/sitemap_index.xml', permanent: false },
+  { source: '/sitemap_index.xml/', destination: '/sitemap_index.xml', permanent: false },
+
   // Naked city legacy paths → canonical /india/[city]
+  { source: '/delhi', destination: '/india/delhi', permanent: true },
+  { source: '/delhi/', destination: '/india/delhi', permanent: true },
+  { source: '/new-delhi', destination: '/india/delhi', permanent: true },
+  { source: '/new-delhi/', destination: '/india/delhi', permanent: true },
+  { source: '/bangalore', destination: '/india/bangalore', permanent: true },
+  { source: '/bangalore/', destination: '/india/bangalore', permanent: true },
+  { source: '/bengaluru', destination: '/india/bangalore', permanent: true },
+  { source: '/bengaluru/', destination: '/india/bangalore', permanent: true },
+  { source: '/chennai', destination: '/india/chennai', permanent: true },
+  { source: '/chennai/', destination: '/india/chennai', permanent: true },
+  { source: '/hyderabad', destination: '/india/hyderabad', permanent: true },
+  { source: '/hyderabad/', destination: '/india/hyderabad', permanent: true },
+  { source: '/goa', destination: '/india/goa', permanent: true },
+  { source: '/goa/', destination: '/india/goa', permanent: true },
+  { source: '/ahmedabad', destination: '/india/ahmedabad', permanent: true },
+  { source: '/ahmedabad/', destination: '/india/ahmedabad', permanent: true },
   { source: '/agra', destination: '/india/agra', permanent: true },
   { source: '/agra/', destination: '/india/agra', permanent: true },
   { source: '/amritsar', destination: '/india/amritsar', permanent: true },

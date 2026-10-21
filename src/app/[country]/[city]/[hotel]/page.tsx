@@ -718,6 +718,34 @@ export default async function HotelDetailPage({
         </div>
       </div>
 
+      {/* Mobile Sticky Reservation Drawer (< 768px) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-gray-200 px-4 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-black text-gray-900 leading-tight truncate">
+              {hotel.price || '~' + usualPrice}
+            </span>
+            <span className="text-[10px] text-gray-400 font-normal">/ night</span>
+          </div>
+          <p className="text-[10px] text-emerald-700 font-semibold truncate flex items-center gap-1 mt-0.5">
+            <span>🛁</span> {hotel.roomType || 'Verified Bathtub Room'}
+          </p>
+        </div>
+
+        {displayUrls[0] && (
+          <OutboundLink
+            href={displayUrls[0]}
+            hotelName={hotel.name}
+            cityName={cityName}
+            source="mobile_sticky_bar"
+            className="px-4 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] active:scale-95 text-white text-xs font-bold rounded-xl shadow-sm transition-all shrink-0 flex items-center gap-1.5"
+          >
+            <span>Book Now</span>
+            <span>&rarr;</span>
+          </OutboundLink>
+        )}
+      </div>
+
       {/* Similar Verified Bathtub Hotels in the City */}
       {similarHotels.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12 border-t border-[#5b8296]/15">

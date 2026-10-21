@@ -96,6 +96,28 @@ export default function HotelClicksClient({ initialData }: { initialData?: any }
     fetchData();
   }, [range, selectedProvider, page]);
 
+  // Auto-sync from Cloudflare Edge D1 if last sync was > 30 minutes ago
+  useEffect(() => {
+    try {
+      const lastSync = localStorage.getItem('hwb_last_d1_sync');
+      const now = Date.now();
+      if (!lastSync || now - parseInt(lastSync, 10) > 30 * 60 * 1000) {
+        fetch('/api/track-click/sync', { method: 'POST' })
+          .then((r) => r.json())
+          .then((d) => {
+            if (d.success) {
+              if (d.syncedCount > 0) {
+                setSyncStatus(`Auto-synced ${d.syncedCount} new clicks from Cloudflare Edge.`);
+                fetchData();
+              }
+              localStorage.setItem('hwb_last_d1_sync', Date.now().toString());
+            }
+          })
+          .catch(() => {});
+      }
+    } catch (_) {}
+  }, []);
+
   // Handle Search submit
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();

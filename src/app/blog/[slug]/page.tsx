@@ -10,6 +10,7 @@ import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import AuthorBio from '@/components/AuthorBio';
 import ProgressiveImage from '@/components/ProgressiveImage';
+import OutboundLink from '@/components/OutboundLink';
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
 function toISO(dateStr: string | undefined): string {
@@ -122,6 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   let matchedCity: string | null = null;
   let matchedCountrySlug: string = 'india';
   let matchedCityCount = 0;
+  let featuredHotels: any[] = [];
 
   // Check known aliases first (e.g. NYC -> New York)
   const slugLower = blog.slug.toLowerCase();
@@ -155,10 +157,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     } else {
       matchedCountrySlug = inferCountry(matchedCity);
     }
-    matchedCityCount = await Hotel.countDocuments({
-      city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
-      flagged: { $ne: true }
-    });
+    const [cityCount, topHotels] = await Promise.all([
+      Hotel.countDocuments({
+        city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
+        flagged: { $ne: true }
+      }),
+      Hotel.find({
+        city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
+        flagged: { $ne: true }
+      }).sort({ rating: -1 }).limit(3).lean()
+    ]);
+    matchedCityCount = cityCount;
+    featuredHotels = topHotels;
   }
 
   // Structured Data Schemas
@@ -433,6 +443,94 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       </p>
                     </details>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {/* Top 3 Verified Hotel Direct Booking Cards */}
+            {featuredHotels.length > 0 && matchedCity && (
+              <section aria-label={`Featured verified hotels in ${matchedCity}`} className="mt-12 pt-8 border-t border-border">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+                  <div>
+                    <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                      Top Verified Picks
+                    </span>
+                    <h3 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mt-2">
+                      Featured Bathtub Hotels in {matchedCity}
+                    </h3>
+                  </div>
+                  <Link
+                    href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
+                  >
+                    <span>View all {matchedCityCount}+ stays</span>
+                    <span>&rarr;</span>
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-8">
+                  {featuredHotels.map((h: any) => {
+                    const hotelUrl = `/${matchedCountrySlug}/${slugify(matchedCity)}/${h.slug || slugify(h.name)}`;
+                    const primaryBookingUrl = h.bookingUrl || h.agodaUrl || h.url;
+                    const bookingProvider = h.bookingUrl ? 'Booking.com' : h.agodaUrl ? 'Agoda' : 'Partner';
+
+                    return (
+                      <div key={h._id || h.slug} className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between">
+                        <div>
+                          <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
+                            <ProgressiveImage
+                              src={h.image || DEFAULT_HOTEL_IMAGE}
+                              alt={h.name}
+                              sizes="(max-width: 768px) 100vw, 300px"
+                              className="object-cover"
+                            />
+                            {h.rating && Number(h.rating) > 0 && (
+                              <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md text-amber-300 font-black text-xs px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                                <span>★</span> {Number(h.rating).toFixed(1)}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="p-3.5">
+                            <Link href={hotelUrl} className="block group">
+                              <h4 className="font-heading text-sm font-bold text-gray-900 group-hover:text-accent transition-colors line-clamp-1">
+                                {h.name}
+                              </h4>
+                            </Link>
+                            <p className="text-2xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-1 font-semibold border border-emerald-100">
+                              🛁 {h.roomType || 'Private In-Room Bathtub'}
+                            </p>
+                            {h.price && (
+                              <div className="mt-2 text-xs font-bold text-gray-900">
+                                {h.price} <span className="text-gray-400 font-normal text-2xs">/ night</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="p-3.5 pt-0 flex flex-col gap-1.5">
+                          {primaryBookingUrl && (
+                            <OutboundLink
+                              href={primaryBookingUrl}
+                              hotelName={h.name}
+                              cityName={matchedCity || ''}
+                              source="blog_guide"
+                              className="w-full text-center py-2 px-3 bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5"
+                            >
+                              <span>Book on {bookingProvider}</span>
+                              <span>&rarr;</span>
+                            </OutboundLink>
+                          )}
+                          <Link
+                            href={hotelUrl}
+                            className="w-full text-center py-1.5 px-3 bg-gray-50 hover:bg-gray-100 text-gray-600 text-2xs font-semibold rounded-lg transition-colors border border-gray-200"
+                          >
+                            View Verified Photos &amp; Specs
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </section>
             )}

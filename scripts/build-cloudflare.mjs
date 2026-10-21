@@ -41,10 +41,11 @@ async function build() {
   console.log('\n[2/4] Generating public/_redirects...');
   execSync('node scripts/generate-redirects.mjs', { cwd: rootDir, stdio: 'inherit' });
 
-  // 2b. Generate Image Sitemap & LLMs files
-  console.log('\n[2b/4] Generating public/sitemap-images.xml & public/llms.txt...');
+  // 2b. Generate Image Sitemap, Sitemap Index & LLMs files
+  console.log('\n[2b/4] Generating public/sitemap-images.xml, public/sitemap_index.xml & public/llms.txt...');
   try {
     execSync('node scripts/generate-image-sitemap.mjs', { cwd: rootDir, stdio: 'inherit' });
+    execSync('node scripts/generate-sitemap-index.mjs', { cwd: rootDir, stdio: 'inherit' });
     execSync('node scripts/generate-llms-txt.mjs', { cwd: rootDir, stdio: 'inherit' });
   } catch (e) {
     console.warn('⚠️ Warning generating image sitemap / llms:', e.message);
