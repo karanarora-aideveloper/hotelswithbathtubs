@@ -20,6 +20,9 @@ interface HomeDestinationsClientProps {
   usaCities: CityItem[];
   internationalCities: CityItem[];
   indiaCities: CityItem[];
+  totalUsaCount?: number;
+  totalInternationalCount?: number;
+  totalIndiaCount?: number;
 }
 
 interface FlashDestinationSectionProps {
@@ -31,6 +34,7 @@ interface FlashDestinationSectionProps {
   hubLabel?: string;
   badgeLabel?: string;
   cities: CityItem[];
+  totalCount?: number;
   isInternational?: boolean;
   comingSoonCard?: boolean;
   pillPrefix?: string;
@@ -47,6 +51,7 @@ function FlashDestinationSection({
   hubLabel,
   badgeLabel,
   cities,
+  totalCount: totalCountProp,
   isInternational = false,
   comingSoonCard = false,
   pillPrefix = 'More Destinations:',
@@ -58,12 +63,12 @@ function FlashDestinationSection({
   const sentinelRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const totalCount = cities.length;
-  if (totalCount === 0) return null;
+  const totalCount = totalCountProp ?? cities.length;
+  if (cities.length === 0) return null;
 
   const displayedCities = isExpanded ? cities.slice(0, visibleCount) : cities.slice(0, 12);
   const remainingCities = cities.slice(12);
-  const hasMoreToStream = isExpanded && visibleCount < totalCount;
+  const hasMoreToStream = isExpanded && visibleCount < cities.length;
 
   // Flash List Progressive Virtual Streaming via IntersectionObserver
   useEffect(() => {
@@ -75,7 +80,7 @@ function FlashDestinationSection({
       (entries) => {
         if (entries[0]?.isIntersecting) {
           // Stream next batch of 16 cards smoothly at 60fps
-          setVisibleCount((prev) => Math.min(prev + 16, totalCount));
+          setVisibleCount((prev) => Math.min(prev + 16, cities.length));
         }
       },
       { rootMargin: '600px 0px' }
@@ -85,11 +90,11 @@ function FlashDestinationSection({
     return () => {
       observer.disconnect();
     };
-  }, [hasMoreToStream, totalCount]);
+  }, [hasMoreToStream, cities.length]);
 
   const handleExpand = () => {
     setIsExpanded(true);
-    setVisibleCount(24);
+    setVisibleCount(Math.min(24, cities.length));
   };
 
   const handleCollapse = () => {
@@ -101,11 +106,11 @@ function FlashDestinationSection({
   };
 
   const handleLoadAll = () => {
-    setVisibleCount(totalCount);
+    setVisibleCount(cities.length);
   };
 
   const pillsToRender = maxPills ? remainingCities.slice(0, maxPills) : remainingCities;
-  const overflowPillsCount = maxPills && remainingCities.length > maxPills ? remainingCities.length - maxPills : 0;
+  const overflowPillsCount = totalCount > (12 + pillsToRender.length) ? totalCount - (12 + pillsToRender.length) : 0;
 
   return (
     <div id={id} ref={sectionRef} className="scroll-mt-32">
@@ -192,22 +197,33 @@ function FlashDestinationSection({
       )}
 
       {/* Unexpanded Action Bar & Quick Links */}
-      {!isExpanded && remainingCities.length > 0 && (
+      {!isExpanded && (
         <div className="mt-8 space-y-4">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={handleExpand}
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
-            >
-              <span>Show All {totalCount} {title.split(' ')[0]} Destination Cards</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+            {cities.length > 12 && (
+              <button
+                type="button"
+                onClick={handleExpand}
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+              >
+                <span>Show More Curated Cards ({cities.length})</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            )}
+            {hubUrl && (
+              <Link
+                href={hubUrl}
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm rounded-xl border border-slate-200 shadow-2xs hover:shadow-sm transition-all"
+              >
+                <span>{hubLabel || `Explore All ${totalCount} Destinations`}</span>
+                <span className="text-[#1a6fde]">→</span>
+              </Link>
+            )}
           </div>
 
-          {remainingCitiesFormatter && (
+          {remainingCitiesFormatter && pillsToRender.length > 0 && (
             <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs">
               <span className="text-slate-400 font-medium mr-1">{pillPrefix}</span>
               {pillsToRender.map((item) => {
@@ -224,13 +240,22 @@ function FlashDestinationSection({
                 );
               })}
               {overflowPillsCount > 0 && (
-                <button
-                  type="button"
-                  onClick={handleExpand}
-                  className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
-                >
-                  +{overflowPillsCount} more worldwide →
-                </button>
+                hubUrl ? (
+                  <Link
+                    href={hubUrl}
+                    className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors"
+                  >
+                    +{overflowPillsCount} more in directory →
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleExpand}
+                    className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    +{overflowPillsCount} more worldwide →
+                  </button>
+                )
               )}
             </div>
           )}
@@ -243,16 +268,15 @@ function FlashDestinationSection({
           <div className="flex items-center gap-2 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span>
-              Showing {Math.min(visibleCount, totalCount)} of {totalCount} destinations in {title}
+              Showing {Math.min(visibleCount, cities.length)} of {totalCount} destinations in {title}
             </span>
-            {hasMoreToStream && (
-              <button
-                type="button"
-                onClick={handleLoadAll}
-                className="ml-2 text-accent font-semibold hover:underline"
+            {hubUrl && (
+              <Link
+                href={hubUrl}
+                className="ml-2 text-[#1a6fde] font-semibold hover:underline inline-flex items-center gap-1"
               >
-                Load all {totalCount} now
-              </button>
+                Explore all {totalCount} in full directory →
+              </Link>
             )}
           </div>
           <button
@@ -275,6 +299,9 @@ export default function HomeDestinationsClient({
   usaCities,
   internationalCities,
   indiaCities,
+  totalUsaCount,
+  totalInternationalCount,
+  totalIndiaCount,
 }: HomeDestinationsClientProps) {
   const { geo } = useGeo();
   const [selectedTab, setSelectedTab] = useState<'auto' | 'usa' | 'india' | 'global' | 'all'>('auto');
@@ -348,11 +375,13 @@ export default function HomeDestinationsClient({
       title="United States Luxury Escapes"
       subtitle="Premier American city stays and romantic getaways featuring verified in-room jacuzzis & deep soaking tubs"
       hubUrl="/usa"
-      hubLabel={`Explore All ${usaCities.length} US Destinations`}
-      badgeLabel={`${usaCities.length} Destinations`}
+      hubLabel={`Explore All ${totalUsaCount ?? usaCities.length} US Destinations`}
+      badgeLabel={`${totalUsaCount ?? usaCities.length} Destinations`}
       cities={usaCities}
+      totalCount={totalUsaCount}
       isInternational={true}
       pillPrefix="More US Destinations:"
+      maxPills={12}
       remainingCitiesFormatter={(item) => ({
         href: `/usa/${slugify(item._id.city)}`,
         label: `${item._id.city} (${item.hotelCount})`,
@@ -366,12 +395,13 @@ export default function HomeDestinationsClient({
       emoji="🌍"
       title="Global Romantic Escapes"
       subtitle="World-class luxury destinations in Europe, Asia & the Middle East with verified private tubs"
-      badgeLabel={`${internationalCities.length} Global Cities`}
+      badgeLabel={`${totalInternationalCount ?? internationalCities.length} Global Cities`}
       cities={internationalCities}
+      totalCount={totalInternationalCount}
       isInternational={true}
       comingSoonCard={true}
       pillPrefix="More Global Escapes:"
-      maxPills={32}
+      maxPills={12}
       remainingCitiesFormatter={(item) => {
         const countrySlug = resolveCountry(item._id.country).slug;
         return {
@@ -389,11 +419,13 @@ export default function HomeDestinationsClient({
       title="India Getaways"
       subtitle="Top romantic destinations across India featuring verified private jacuzzi suites & in-room soaking tubs"
       hubUrl="/india"
-      hubLabel={`Explore All ${indiaCities.length} Indian Cities`}
-      badgeLabel={`${indiaCities.length} Indian Cities`}
+      hubLabel={`Explore All ${totalIndiaCount ?? indiaCities.length} Indian Cities`}
+      badgeLabel={`${totalIndiaCount ?? indiaCities.length} Indian Cities`}
       cities={indiaCities}
+      totalCount={totalIndiaCount}
       isInternational={false}
       pillPrefix="More India Getaways:"
+      maxPills={14}
       remainingCitiesFormatter={(item) => ({
         href: `/india/${slugify(item._id.city)}`,
         label: `${item._id.city} (${item.hotelCount})`,
@@ -432,7 +464,7 @@ export default function HomeDestinationsClient({
             >
               <span>🇺🇸 United States</span>
               <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'usa' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
-                {usaCities.length}
+                {totalUsaCount ?? usaCities.length}
               </span>
             </button>
 
@@ -446,7 +478,7 @@ export default function HomeDestinationsClient({
             >
               <span>🇮🇳 India</span>
               <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'india' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
-                {indiaCities.length}
+                {totalIndiaCount ?? indiaCities.length}
               </span>
             </button>
 
@@ -460,7 +492,7 @@ export default function HomeDestinationsClient({
             >
               <span>🌍 Global</span>
               <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'global' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
-                {internationalCities.length}
+                {totalInternationalCount ?? internationalCities.length}
               </span>
             </button>
 

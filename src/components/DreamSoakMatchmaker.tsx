@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
@@ -387,35 +387,61 @@ export default function DreamSoakMatchmaker({
     }
   }, []);
 
-  // Fetch matchmaker data
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasRequestedData = useRef(false);
+
+  // Lazy-load 4.04 MB matchmaker data on demand or viewport intersection (zero impact on initial page load)
+  const loadData = useCallback(async () => {
+    if (hasRequestedData.current) return;
+    hasRequestedData.current = true;
+    try {
+      const res = await fetch('/matchmaker-data.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: MatchmakerHotel[] = await res.json();
+      const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
+        ...h,
+        rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
+        reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
+        numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
+        amenities: Array.isArray(h.amenities) ? h.amenities : [],
+      }));
+      setAllHotels(cleanData);
+      setLoading(false);
+    } catch (err) {
+      console.warn('[DreamSoakMatchmaker] Failed to fetch matchmaker-data.json:', err);
+      setLoading(false);
+    }
+  }, []);
+
+  // Fetch matchmaker data: trigger on URL query params, viewport intersection, or user hover
   useEffect(() => {
-    let isMounted = true;
-    async function loadData() {
-      try {
-        const res = await fetch('/matchmaker-data.json');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: MatchmakerHotel[] = await res.json();
-        if (isMounted) {
-          const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
-            ...h,
-            rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
-            reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
-            numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
-            amenities: Array.isArray(h.amenities) ? h.amenities : [],
-          }));
-          setAllHotels(cleanData);
-          setLoading(false);
-        }
-      } catch (err) {
-        console.warn('[DreamSoakMatchmaker] Failed to fetch matchmaker-data.json, falling back to search-data:', err);
-        if (isMounted) setLoading(false);
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('vibe') || params.has('tub') || params.has('region') || params.has('budget')) {
+        loadData();
+        return;
       }
     }
-    loadData();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+
+    const node = containerRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      loadData();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          loadData();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px 0px' }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [loadData]);
 
   // Compute matched hotels
   const matchedHotels: ScoredHotel[] = useMemo(() => {
@@ -458,6 +484,7 @@ export default function DreamSoakMatchmaker({
 
   // Track step transitions
   const handleVibeSelect = (vibe: VibeId) => {
+    loadData();
     setSelectedVibe(vibe);
     trackEvent('matchmaker_step_completed', { step: 1, option: vibe });
     sendGA4Event('matchmaker_step', { step: 1, vibe });
@@ -465,6 +492,7 @@ export default function DreamSoakMatchmaker({
   };
 
   const handleTubSelect = (tub: TubId) => {
+    loadData();
     setSelectedTub(tub);
     trackEvent('matchmaker_step_completed', { step: 2, option: tub });
     sendGA4Event('matchmaker_step', { step: 2, tub });
@@ -472,6 +500,7 @@ export default function DreamSoakMatchmaker({
   };
 
   const handleRegionSelect = (region: RegionId) => {
+    loadData();
     setSelectedRegion(region);
     trackEvent('matchmaker_step_completed', { step: 3, option: region });
     sendGA4Event('matchmaker_step', { step: 3, region });
@@ -479,6 +508,7 @@ export default function DreamSoakMatchmaker({
   };
 
   const handleBudgetSelect = (budget: BudgetId) => {
+    loadData();
     setSelectedBudget(budget);
     trackEvent('matchmaker_completed', {
       vibe: selectedVibe,
@@ -568,6 +598,8 @@ export default function DreamSoakMatchmaker({
   return (
     <div
       id="dream-soak-matchmaker"
+      ref={containerRef}
+      onMouseEnter={loadData}
       className={`w-full ${
         embedded
           ? 'bg-gradient-to-b from-blue-50/60 via-white to-white rounded-3xl border border-blue-100/80 shadow-sm p-5 sm:p-8 lg:p-10 my-10'

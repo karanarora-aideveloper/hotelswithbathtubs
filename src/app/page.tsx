@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import StructuredData from '@/components/StructuredData';
@@ -6,8 +7,20 @@ import LuxuryTrustProof from '@/components/luxury/LuxuryTrustProof';
 import LuxuryBathtubTypologies from '@/components/luxury/LuxuryBathtubTypologies';
 import LuxuryFeaturedSuites from '@/components/luxury/LuxuryFeaturedSuites';
 import LuxuryFAQ from '@/components/luxury/LuxuryFAQ';
-import DreamSoakMatchmaker from '@/components/DreamSoakMatchmaker';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
+
+// Lazy-load the heavy interactive 5-step matchmaker quiz into a separate JS chunk
+const DreamSoakMatchmaker = dynamic(
+  () => import('@/components/DreamSoakMatchmaker'),
+  {
+    loading: () => (
+      <div className="min-h-[460px] flex flex-col items-center justify-center p-8 text-center bg-white rounded-3xl border border-[#E5E1D8]">
+        <div className="w-10 h-10 rounded-full border-2 border-[#1a6fde] border-t-transparent animate-spin mb-4" />
+        <p className="text-sm font-medium text-slate-600">Loading Dream Soak Matchmaker™...</p>
+      </div>
+    ),
+  }
+);
 
 // Static page generation with on-demand cache
 export const revalidate = false;
@@ -136,6 +149,17 @@ export default async function Home() {
   });
   const indiaCities = cities.filter((c) => c._id.country?.toLowerCase() === 'india');
 
+  // Authoritative region inventory counts for directory badges and CTA links
+  const totalUsaCount = usaCities.length;
+  const totalInternationalCount = internationalCities.length;
+  const totalIndiaCount = indiaCities.length;
+
+  // Curate top destinations for the homepage initial payload (<120 KB vs previous 1.25 MB)
+  // Full regional directories are linked via /india, /usa, and country hubs
+  const topUsaCities = usaCities.slice(0, 20);
+  const topInternationalCities = internationalCities.slice(0, 20);
+  const topIndiaCities = indiaCities.slice(0, 24);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -253,19 +277,29 @@ export default async function Home() {
           {/* Phase 2: Featured Iconic Bathtub Suites */}
           <LuxuryFeaturedSuites />
 
-          {/* Interactive Matchmaker Segment */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          {/* Interactive Matchmaker Segment — Deferred heavy quiz with CSS content-visibility */}
+          <section
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
+            style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 650px' }}
+          >
             <div className="border border-[#E5E1D8] rounded-3xl overflow-hidden bg-white shadow-xs">
               <DreamSoakMatchmaker embedded={true} />
             </div>
           </section>
 
-          {/* Destination Discovery Hub */}
-          <section id="destinations" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16 scroll-mt-24">
+          {/* Destination Discovery Hub — Streamlined curated cards + CSS content-visibility */}
+          <section
+            id="destinations"
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16 scroll-mt-24"
+            style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1200px' }}
+          >
             <HomeDestinationsClient
-              usaCities={usaCities}
-              internationalCities={internationalCities}
-              indiaCities={indiaCities}
+              usaCities={topUsaCities}
+              internationalCities={topInternationalCities}
+              indiaCities={topIndiaCities}
+              totalUsaCount={totalUsaCount}
+              totalInternationalCount={totalInternationalCount}
+              totalIndiaCount={totalIndiaCount}
             />
 
             {/* Quiet Luxury FAQ Accordion */}

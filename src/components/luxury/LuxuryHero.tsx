@@ -57,6 +57,7 @@ export default function LuxuryHero() {
   const [searchData, setSearchData] = useState<SearchData | null>(null);
   const [isNavigating, setIsNavigating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isFetchingSearch = useRef(false);
 
   // Sync default region with Geo-IP detection once loaded
   useEffect(() => {
@@ -65,8 +66,11 @@ export default function LuxuryHero() {
     }
   }, [geo.isIndia]);
 
-  // Load search index
-  useEffect(() => {
+  // Lazy-load search index on demand or when browser is idle (zero impact on initial LCP)
+  const loadSearchData = React.useCallback(() => {
+    if (searchData || isFetchingSearch.current) return;
+    isFetchingSearch.current = true;
+
     fetch('/search-data.json')
       .then((res) => {
         if (res.ok) return res.json();
@@ -90,11 +94,33 @@ export default function LuxuryHero() {
             return { countries, cities, hotels: [] };
           });
       })
-      .then((data: SearchData) => setSearchData(data))
-      .catch(console.error);
+      .then((data: SearchData) => {
+        setSearchData(data);
+      })
+      .catch((err) => {
+        console.warn('Search index load failed:', err);
+      });
+  }, [searchData]);
 
-    setIsNavigating(false);
-  }, []);
+  // Load search data in idle callback after page is fully painted
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if ('requestIdleCallback' in window) {
+      const id = (window as any).requestIdleCallback(
+        () => {
+          loadSearchData();
+        },
+        { timeout: 3500 }
+      );
+      return () => (window as any).cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(() => {
+        loadSearchData();
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [loadSearchData]);
 
   // Handle outside clicks
   useEffect(() => {
@@ -237,6 +263,7 @@ export default function LuxuryHero() {
           {/* Floating Monolithic Concierge Search Bar */}
           <div
             ref={containerRef}
+            onMouseEnter={loadSearchData}
             className="relative max-w-3xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/50 p-2 sm:p-2.5 text-left text-[#121518]"
           >
             <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center divide-y sm:divide-y-0 sm:divide-x divide-[#E5E1D8]">
@@ -249,11 +276,15 @@ export default function LuxuryHero() {
                   type="text"
                   value={query}
                   onChange={(e) => {
+                    loadSearchData();
                     setQuery(e.target.value);
                     setIsOpen(true);
                     setActiveIndex(-1);
                   }}
-                  onFocus={() => setIsOpen(true)}
+                  onFocus={() => {
+                    loadSearchData();
+                    setIsOpen(true);
+                  }}
                   placeholder={activeRegion === 'india' ? 'Udaipur, Agra, Goa, Shimla...' : 'Paris, Tokyo, New York, London...'}
                   className="w-full text-sm font-medium text-[#121518] placeholder-[#9E9B94] focus:outline-none bg-transparent"
                 />
@@ -301,6 +332,11 @@ export default function LuxuryHero() {
             </form>
 
             {/* Autocomplete Dropdown */}
+            {isOpen && cleanQuery && !searchData && (
+              <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl border border-[#E5E1D8] p-3 text-center text-xs text-[#6B6964] z-50">
+                Searching verified luxury stays...
+              </div>
+            )}
             {isOpen && filtered.length > 0 && (
               <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl border border-[#E5E1D8] overflow-hidden z-50">
                 <div className="p-2 border-b border-[#E5E1D8]/60 text-[10.5px] font-semibold tracking-wider uppercase text-[#6B6964]">

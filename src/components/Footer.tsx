@@ -459,9 +459,15 @@ export default async function Footer() {
                 }
               }
               const uniqueCities = Array.from(cityMap.values());
-              const sortedCities = uniqueCities.sort((a, b) => a.city.localeCompare(b.city));
-              const topCities = sortedCities.slice(0, 8);
-              const extraCities = sortedCities.slice(8);
+              // Prioritize highest-inventory destinations first for optimal user discovery
+              const sortedCities = uniqueCities.sort((a, b) => b.hotelCount - a.hotelCount);
+              const topCities = sortedCities.slice(0, 10);
+              const extraCount = sortedCities.length - topCities.length;
+              const hubHref = region.includes('India')
+                ? '/india'
+                : region.includes('United States')
+                ? '/usa'
+                : '/#destinations';
 
               return (
                 <div key={region} className="bg-white p-4 sm:p-6 rounded-2xl border border-border shadow-2xs">
@@ -490,32 +496,17 @@ export default async function Footer() {
                         </Link>
                       );
                     })}
+                    {extraCount > 0 && (
+                      <Link
+                        href={hubHref}
+                        prefetch={false}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 bg-accent/5 hover:bg-accent hover:text-white border border-accent/20 hover:border-accent rounded-xl text-xs sm:text-sm font-semibold text-accent transition-all group shadow-2xs hover:shadow-sm"
+                      >
+                        <span>+{extraCount} more in directory</span>
+                        <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                      </Link>
+                    )}
                   </div>
-                  {extraCities.length > 0 && (
-                    <details className="mt-3 group">
-                      <summary className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover cursor-pointer py-1 px-2.5 bg-accent/5 rounded-lg border border-accent/15">
-                        <span>+{extraCities.length} more {region} destinations</span>
-                        <span className="group-open:rotate-180 transition-transform">▼</span>
-                      </summary>
-                      <div className="flex flex-wrap gap-2 pt-2.5">
-                        {extraCities.map(loc => {
-                          const countrySlug = resolveCountry(loc.country).slug;
-                          const citySlug = slugify(loc.city);
-                          return (
-                            <Link
-                              key={`${countrySlug}-${citySlug}`}
-                              href={`/${countrySlug}/${citySlug}`}
-                              prefetch={false}
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white hover:bg-accent hover:text-white border border-gray-200 rounded-lg text-xs font-medium text-text-main transition-all shadow-2xs"
-                            >
-                              <span>{loc.city}</span>
-                              <span className="text-3xs text-text-muted font-normal">({loc.hotelCount})</span>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </details>
-                  )}
                 </div>
               );
             })}
