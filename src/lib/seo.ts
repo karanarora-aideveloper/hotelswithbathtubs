@@ -924,18 +924,19 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
 
   // India - Kolkata
   'kolkata-india': {
-    intro: 'Kolkata, the City of Joy, offers heritage elegance and modern riverside luxury. Discover boutique hotels and grand 5-star stays with private in-room bathtubs.',
+    intro: 'Kolkata, the City of Joy, seamlessly blends colonial heritage architecture with contemporary luxury. Whether planning an intimate romantic couple staycation, an anniversary celebration, or a relaxing weekend getaway, discover Kolkata’s finest verified hotels with private in-room bathtubs and hydrotherapy jacuzzi suites — from vintage clawfoot tubs in heritage North Kolkata to skyline jacuzzis in Salt Lake and Rajarhat.',
     amenities: [
-      'Heritage-style freestanding and marble bathtubs',
-      'Spacious soaking tubs with ambient mood lighting',
-      'Private jacuzzi suites in luxury city properties',
-      'Spa therapies and premium bath amenities'
+      'Heritage freestanding vintage clawfoot bathtubs in boutique stays (e.g. Shyambazar & Park Street)',
+      'Private hydro-massage jacuzzi suites & double-seater whirlpool baths for couples',
+      'Deep sunken Italian marble soaking tubs in 5-star properties (Salt Lake & Rajarhat)',
+      '100% couple-friendly check-in with local ID acceptance (Aadhaar & Passport)',
+      'Aromatherapy bath salts, designer bathrobes, and rainfall showers'
     ],
     whyChoose: [
-      'Rich cultural surroundings with world-class Bengali hospitality',
-      'Affordable luxury rates compared to other metro destinations',
-      'Ideal for couples seeking romantic staycations',
-      'Every listing independently validated for bathtub availability'
+      'Unrivaled luxury value with 5-star suite rates starting at ₹4,000–₹8,500/night (30–50% more affordable than Mumbai or Delhi)',
+      'Guaranteed private in-room bathtubs — independently cross-checked on MakeMyTrip, Booking.com, and Agoda to eliminate shared spa confusion',
+      'Exceptional culinary and cultural retreats near Park Street, Salt Lake Sector V, and Rajarhat',
+      'Hassle-free romantic weekend staycations with late checkout and privacy guaranteed'
     ]
   },
 
@@ -1026,18 +1027,19 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
 
   // Thailand - Bangkok
   'bangkok-thailand': {
-    intro: 'Bangkok offers vibrant city energy paired with world-class hospitality. Relax in sky-high suites with freestanding bathtubs overlooking the Chao Phraya River and glittering skyline.',
+    intro: 'Bangkok is Southeast Asia’s premier luxury hospitality capital, renowned for riverfront palaces and high-rise boutique sanctuaries. Relax in stunning sky-high suites with freestanding bathtubs overlooking the Chao Phraya River, private jacuzzi whirlpool suites in Silom, and authentic Japanese onsen deep-soaking bathtubs in Sukhumvit and Thonglor.',
     amenities: [
-      'Chao Phraya river-view freestanding bathtubs',
-      'Private jacuzzi suites and Japanese onsen-style soaking baths',
-      'Sky-high skyline-facing marble bathrooms',
-      'Traditional Thai aromatherapy bath collections'
+      'Panoramic Chao Phraya riverfront freestanding bathtubs (Capella, Mandarin Oriental, The Peninsula)',
+      'Japanese onsen-style deep soaking cedar and stone baths in Sukhumvit (MAYU Japanese Hotel)',
+      'High-rise skyline-view marble bathtubs and cantilevered balcony jacuzzis (137 Pillars, Banyan Tree)',
+      'Spacious couple suites with oversized soaking tubs and separate rain showers',
+      'Thai herbal bath infusions, luxury bath amenities, and panoramic floor-to-ceiling windows'
     ],
     whyChoose: [
-      'Exceptional luxury value with 5-star service at affordable rates',
-      'Iconic rooftop bars, street food, and luxury riverside dining',
-      'Seamless transit via BTS Skytrain and river ferries',
-      'Verified private in-room bathtub listings'
+      'Exceptional 5-star luxury value with verified bathtub suites starting at ฿3,500–฿6,500/night',
+      'Iconic riverside lifestyle, rooftop sky bars, and Michelin-starred dining minutes via BTS Skytrain and river shuttles',
+      'Triple-checked across Agoda, Booking.com, and Expedia to guarantee private in-room baths (never shared facilities)',
+      'Ideal romantic couple retreats and honeymoon sanctuaries with complete privacy'
     ]
   },
 

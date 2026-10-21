@@ -206,6 +206,8 @@ export const redirects = [
   { source: '/faroe-islands/torshavn/broncks-lonin/', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
 
   // Blog slug aliases & historical redirects
+  { source: '/blog/kolkata-hotels-with-bathtub-couples-guide', destination: '/blog/kolkata-jacuzzi-hotels-romantic-staycation', permanent: true },
+  { source: '/blog/kolkata-hotels-with-bathtub-couples-guide/', destination: '/blog/kolkata-jacuzzi-hotels-romantic-staycation', permanent: true },
   { source: '/blog/verify-hotel-amenities', destination: '/blog/verify-hotel-amenities-accurate-booking', permanent: true },
   { source: '/blog/budget-romantic-trips-india', destination: '/blog/budget-romantic-getaway-india', permanent: true },
   { source: '/blog/honeymoon-hotels-bathtubs', destination: '/blog/honeymoon-hotels-freestanding-bathtubs-india', permanent: true },

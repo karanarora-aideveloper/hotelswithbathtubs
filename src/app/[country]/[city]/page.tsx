@@ -133,17 +133,41 @@ export default async function CityHotelsPage({
   const citySlug = slugify(rawCity);
 
   // Fetch only active (non-flagged) hotels using country regex for alias tolerance
-  // Sort by rating desc so best-rated hotels appear first for E-E-A-T and UX
-  const rawHotels = await Hotel.find({
-    city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
-    country: countryInfo.regex,
-    flagged: { $ne: true }
-  }).sort({ rating: -1 }).lean();
-
+  // Sibling destination mesh linking: fetch top sister cities in same country for strong crawl graph
+  const [rawHotels, rawSiblings] = await Promise.all([
+    Hotel.find({
+      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      country: countryInfo.regex,
+      flagged: { $ne: true }
+    }).sort({ rating: -1 }).lean(),
+    Hotel.aggregate([
+      {
+        $match: {
+          country: countryInfo.regex,
+          flagged: { $ne: true },
+          city: { $not: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
+        }
+      },
+      {
+        $group: {
+          _id: "$city",
+          hotelCount: { $sum: 1 }
+        }
+      },
+      { $sort: { hotelCount: -1 } },
+      { $limit: 12 }
+    ])
+  ]);
 
   if (rawHotels.length === 0) {
     notFound();
   }
+
+  const siblingCities = rawSiblings.map((s: any) => ({
+    name: titleCase(s._id),
+    slug: slugify(s._id),
+    count: s.hotelCount
+  }));
 
   const hotels = rawHotels.map((h: any) => ({
     _id: h._id?.toString(),
@@ -651,6 +675,46 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                         </Link>
                       ))}
                     </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Regional Destination Mesh: Sister cities within the same country */}
+              {siblingCities.length > 0 && (
+                <section aria-label={`Other destinations in ${countryName} with verified bathtubs`} className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+                    <div>
+                      <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                        Regional Exploration
+                      </span>
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mt-2">
+                        More Verified Bathtub &amp; Jacuzzi Stays in {countryName}
+                      </h3>
+                    </div>
+                    <Link
+                      href={`/${countrySlug}`}
+                      className="text-xs font-bold text-[#1a6fde] hover:underline flex items-center gap-1 self-start sm:self-auto"
+                    >
+                      <span>Explore all {countryName} Destinations</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3">
+                    {siblingCities.map((c) => (
+                      <Link
+                        key={c.slug}
+                        href={`/${countrySlug}/${c.slug}`}
+                        className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-blue-50/70 border border-gray-200 hover:border-[#1a6fde]/40 transition-all group shadow-2xs hover:shadow-xs"
+                      >
+                        <span className="text-xs font-bold text-gray-800 group-hover:text-[#1a6fde] truncate">
+                          🛁 {c.name}
+                        </span>
+                        <span className="text-[10px] font-extrabold text-gray-500 bg-gray-50 group-hover:bg-blue-100 group-hover:text-[#1a6fde] px-2 py-0.5 rounded-full border border-gray-200 group-hover:border-blue-200 shrink-0 ml-1.5 transition-colors">
+                          {c.count} {c.count === 1 ? 'stay' : 'stays'}
+                        </span>
+                      </Link>
+                    ))}
                   </div>
                 </section>
               )}
