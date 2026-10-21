@@ -113,6 +113,15 @@
   
   --color-success: #059669;
   --color-border: #e2e8f0;
+
+  --color-luxury-bg: #FAF8F5;
+  --color-luxury-surface: #F5F2EC;
+  --color-luxury-card: #FFFFFF;
+  --color-luxury-text: #121518;
+  --color-luxury-muted: #6B6964;
+  --color-luxury-bronze: #C5A880;
+  --color-luxury-bronze-hover: #B0926A;
+  --color-luxury-border: #E5E1D8;
 }
 
 /* Custom CSS to mimic the old OTA styling but mapped to Tailwind */
