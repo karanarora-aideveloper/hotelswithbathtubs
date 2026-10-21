@@ -211,6 +211,6 @@ export const redirects = [
   { source: '/blog/verify-hotel-amenities', destination: '/blog/verify-hotel-amenities-accurate-booking', permanent: true },
   { source: '/blog/budget-romantic-trips-india', destination: '/blog/budget-romantic-getaway-india', permanent: true },
   { source: '/blog/honeymoon-hotels-bathtubs', destination: '/blog/honeymoon-hotels-freestanding-bathtubs-india', permanent: true },
-  { source: '/blog/how-verification-works', destination: '/#verification', permanent: true },
+  { source: '/blog/how-verification-works', destination: '/', permanent: true },
   { source: '/blog/luxury-couple-hotels-india-cities', destination: '/blog/best-hotels-private-jacuzzi-couples-india', permanent: true },
 ];

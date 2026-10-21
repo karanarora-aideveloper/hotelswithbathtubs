@@ -12,14 +12,16 @@ import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = 86400; // Daily revalidation
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
-  title: 'Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (2026 Guide)',
+  title: `Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (${currentYear} Guide)`,
   description: 'Hand-picked couple-friendly hotels and romantic suites featuring guaranteed private in-room bathtubs and jacuzzis. Unmarried couples welcome, 100% private.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/couple-friendly',
   },
   openGraph: {
-    title: 'Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (2026)',
+    title: `Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (${currentYear})`,
     description: 'Discover verified romantic hotels and suites with private in-room bathtubs & jacuzzis. Safe, welcoming, and judgment-free stays for couples.',
     url: 'https://www.hotelswithbathtubs.com/couple-friendly',
     siteName: 'Hotels with Bathtubs',

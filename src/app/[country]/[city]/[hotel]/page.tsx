@@ -203,8 +203,9 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   
   const pageDescription = `${hotel.name} features ${tubType} in ${roomType}.${price} Verified private in-room bathtub in ${cityName}.`;
 
+  const hotelSlug = slugify(hotel.slug || hotel.name);
   const ogImage = imageUrl(hotel.image);
-  const hotelUrl = `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotel.slug || slugify(hotel.name)}`;
+  const hotelUrl = `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotelSlug}`;
 
   return {
     title: {
@@ -213,7 +214,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     description: pageDescription,
     robots: { index: true, follow: true },
     alternates: {
-      canonical: `/${countryInfo.slug}/${slugify(rawCity)}/${hotel.slug || slugify(hotel.name)}`,
+      canonical: `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotelSlug}`,
     },
     openGraph: {
       title: `${pageTitle} | Hotels With Bathtubs`,
@@ -255,7 +256,7 @@ export default async function HotelDetailPage({
   const countryName = countryInfo.displayName;
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
-  const hotelSlug = hotel.slug || slugify(hotel.name);
+  const hotelSlug = slugify(hotel.slug || hotel.name);
   const similarHotels = await getSimilarHotels(resolvedParams.country, resolvedParams.city, hotelSlug);
   const hasRealRating = hotel.rating && Number(hotel.rating) > 0;
   const hasRealReviews = hotel.reviewsCount && Number(hotel.reviewsCount) > 0;

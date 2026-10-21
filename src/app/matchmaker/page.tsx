@@ -5,9 +5,11 @@ import Link from 'next/link';
 
 export const revalidate = false;
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   title: {
-    absolute: 'Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room (2026)',
+    absolute: `Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room (${currentYear})`,
   },
   description:
     'Find your perfect hotel with bathtub in room or private jacuzzi suite in 30 seconds. Interactive matchmaker for romantic anniversaries, honeymoons, and cozy escapes across 118 countries.',

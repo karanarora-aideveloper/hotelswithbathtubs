@@ -71,9 +71,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query ("Hotels with Bathtub in [City]")
   // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
+  const currentYear = new Date().getFullYear();
   const pageTitle = countrySlug === 'usa'
-    ? `Hotels with Bathtubs in ${cityName}: Top ${hotelCount} Stays (2026)`
-    : `Hotels with Bathtub in ${cityName} (${hotelCount} Verified Stays) (2026)`;
+    ? `Hotels with Bathtubs in ${cityName}: Top ${hotelCount} Stays (${currentYear})`
+    : `Hotels with Bathtub in ${cityName} (${hotelCount} Verified Stays) (${currentYear})`;
 
   const pageDescription = countrySlug === 'usa'
     ? `Discover ${hotelCount}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
@@ -321,44 +322,29 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     })
   };
 
+  const currentYear = new Date().getFullYear();
   const pageTitle = countrySlug === 'usa'
-    ? `Hotels with Bathtubs in ${cityName}: Top ${hotels.length} Stays (2026)`
-    : `Hotels with Bathtub in ${cityName} (${hotels.length} Verified Stays) (2026)`;
+    ? `Hotels with Bathtubs in ${cityName}: Top ${hotels.length} Stays (${currentYear})`
+    : `Hotels with Bathtub in ${cityName} (${hotels.length} Verified Stays) (${currentYear})`;
 
   const pageDescription = countrySlug === 'usa'
     ? `Discover ${hotels.length}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
     : `Find ${hotels.length}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
 
-  const numericPrices = hotels
-    .map(h => h.price ? parseInt(h.price.toString().replace(/[^0-9]/g, ''), 10) : NaN)
-    .filter(p => !isNaN(p) && p > 0);
-  const minPrice = numericPrices.length > 0 ? Math.min(...numericPrices) : null;
-  const maxPrice = numericPrices.length > 0 ? Math.max(...numericPrices) : null;
-  const currency = countrySlug === 'india' ? 'INR' : countrySlug === 'uk' ? 'GBP' : countrySlug === 'uae' ? 'AED' : 'USD';
-
   const destinationSchema = {
     "@context": "https://schema.org",
-    "@type": "Hotel",
+    "@type": "CollectionPage",
     "name": `Hotels with Bathtubs in ${cityName}`,
     "description": pageDescription,
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`,
-    ...(minPrice && maxPrice ? {
-      "makesOffer": {
-        "@type": "AggregateOffer",
-        "lowPrice": minPrice,
-        "highPrice": maxPrice,
-        "priceCurrency": currency,
-        "offerCount": hotels.length,
-      }
-    } : {}),
-    ...(hotels.some(h => h.rating && Number(h.rating) > 0) ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": (hotels.reduce((acc, h) => acc + (Number(h.rating) || 4.5), 0) / hotels.length).toFixed(1),
-        "reviewCount": hotels.reduce((acc, h) => acc + (Number(h.reviewsCount) || 35), 0),
-        "bestRating": "5"
-      }
-    } : {})
+    "about": {
+      "@type": "City",
+      "name": cityName,
+      "containedInPlace": {
+        "@type": "Country",
+        "name": countryName,
+      },
+    },
   };
 
   const speakableSchema = {

@@ -78,7 +78,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  const pageTitle = `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (2026)`;
+  const currentYear = new Date().getFullYear();
+  const pageTitle = `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
   const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount}+ verified suites with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
 
   return {
@@ -91,9 +92,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       follow: true,
     },
     alternates: {
-      canonical: hotelCount === totalCityHotelCount
-        ? `/${countrySlug}/${citySlug}`
-        : `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/jacuzzi`,
+      canonical: `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/jacuzzi`,
     },
     openGraph: {
       title: pageTitle,

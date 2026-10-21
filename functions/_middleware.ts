@@ -14,6 +14,16 @@ export async function onRequest(context: EventContext): Promise<Response> {
     target.protocol = 'https:';
     target.hostname = 'www.hotelswithbathtubs.com';
     target.port = '';
+    if (target.pathname.length > 1 && target.pathname.endsWith('/') && !target.pathname.startsWith('/api')) {
+      target.pathname = target.pathname.slice(0, -1);
+    }
+    return Response.redirect(target.toString(), 301);
+  }
+
+  // Trailing slash normalization: 301 redirect /path/ to /path (except root / and /api)
+  if (url.pathname.length > 1 && url.pathname.endsWith('/') && !url.pathname.startsWith('/api')) {
+    const target = new URL(context.request.url);
+    target.pathname = url.pathname.slice(0, -1);
     return Response.redirect(target.toString(), 301);
   }
 

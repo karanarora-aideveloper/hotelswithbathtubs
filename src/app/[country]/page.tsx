@@ -60,9 +60,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // SERP-optimised title: front-loaded, year for freshness, trust hook
   // India gets shorter title (was 80 chars, Google truncates at ~60) 
+  const currentYear = new Date().getFullYear();
   const pageTitle = countrySlug === 'india'
-    ? `Best Hotels with Bathtub & Jacuzzi in India (2026)`
-    : `Best Hotels with Bathtub in ${countryName} (2026) | Verified Stays`;
+    ? `Best Hotels with Bathtub & Jacuzzi in India (${currentYear})`
+    : `Best Hotels with Bathtub in ${countryName} (${currentYear}) | Verified Stays`;
   const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for couples & romantic stays.`;
 
   return {

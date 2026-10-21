@@ -107,9 +107,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     }));
 
-    // City Destination Routes (include all destinations with at least 1 verified hotel)
+    // City Destination Routes (strictly match [city]/page.tsx index threshold >= 2 hotels to prevent GSC noindex submission errors)
     const locationRoutes = Array.from(locationLastMod.keys())
-      .filter(location => (locationHotelCount.get(location) || 0) >= 1)
+      .filter(location => (locationHotelCount.get(location) || 0) >= 2)
       .map(location => ({
         url: `${baseUrl}/${location}`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
@@ -117,9 +117,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       }));
 
-    // Programmatic Jacuzzi Sub-page Routes
+    // Programmatic Jacuzzi Sub-page Routes (match jacuzzi/page.tsx index threshold >= 2 hotels)
     const jacuzziRoutes = Array.from(locationJacuzziCount.keys())
-      .filter(location => (locationJacuzziCount.get(location) || 0) >= 1)
+      .filter(location => (locationJacuzziCount.get(location) || 0) >= 2)
       .map(location => ({
         url: `${baseUrl}/${location}/jacuzzi`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),

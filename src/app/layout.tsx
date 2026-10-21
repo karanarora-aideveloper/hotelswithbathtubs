@@ -30,11 +30,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.hotelswithbathtubs.com'),
   title: {
     template: "%s | Hotels With Bathtubs",
-    default: "Hotels with Bathtub in Room & Jacuzzi Suites (2026)",
+    default: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
   description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
   alternates: {

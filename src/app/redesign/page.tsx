@@ -6,6 +6,10 @@ import RedesignClient from './RedesignClient';
 export const metadata = {
   title: 'Redesign Preview | HotelsWithBathtubs - Full-Width Verified Directory',
   description: 'Verified bathtub hotels with neighborhood area filters, global destination search, and full-width interactive map.',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 async function getData(city: string = 'Delhi') {

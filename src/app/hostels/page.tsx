@@ -12,14 +12,16 @@ import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = 86400; // Daily revalidation
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
-  title: 'Hostels with Bathtubs & Jacuzzis (2026 Guide) | Boutique Poshtels',
+  title: `Hostels with Bathtubs & Jacuzzis (${currentYear} Guide) | Boutique Poshtels`,
   description: 'Handpicked boutique hostels and poshtels with guaranteed private in-room bathtubs & jacuzzis. Experience vibrant social backpacker culture with private soaking luxury.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hostels',
   },
   openGraph: {
-    title: 'Boutique Hostels & Poshtels with Bathtubs (2026 Guide)',
+    title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
     description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
     url: 'https://www.hotelswithbathtubs.com/hostels',
     siteName: 'Hotels with Bathtubs',

@@ -25,18 +25,20 @@ const DreamSoakMatchmaker = dynamic(
 // Static page generation with on-demand cache
 export const revalidate = false;
 
+const currentYear = new Date().getFullYear();
+
 // Page-level metadata — overrides layout.tsx defaults
 // Front-loaded for high-impression GSC head terms: "hotels with bathtub", "bathtub in room", "jacuzzi suites"
 export const metadata = {
   title: {
-    absolute: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+    absolute: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
   description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
   alternates: {
-    canonical: 'https://www.hotelswithbathtubs.com/',
+    canonical: 'https://www.hotelswithbathtubs.com',
   },
   openGraph: {
-    title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+    title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
     description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
@@ -52,7 +54,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hotels with Bathtub in Room & Jacuzzi Suites (2026)',
+    title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
     description: 'Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
