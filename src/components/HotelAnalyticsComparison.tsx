@@ -100,7 +100,8 @@ export default function HotelAnalyticsComparison({
 
   // Agoda Platform
   const agodaUrl = hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda') ? hotel.url : undefined);
-  if (agodaUrl) {
+  const isAgodaValid = agodaUrl ? getUrlDirectnessTier(agodaUrl) < 99 : false;
+  if (agodaUrl && isAgodaValid) {
     const agodaUsual = Math.round(numericBase * 0.94); // Agoda mobile VIP deal ~6%
     platforms.push({
       id: 'agoda',

@@ -225,6 +225,12 @@ export function appendTripDates(url: string, dates?: TripDates): string {
     }
 
     if (matchesDomain(host, 'agoda.com')) {
+      // If it is a generic partnersearch without a specific property ID (hid=),
+      // DO NOT append checkin/checkout dates, because Agoda strips the hotel name
+      // and converts it into a blank city-wide date search!
+      if (parsedUrl.pathname.includes('partnersearch.aspx') && !parsedUrl.searchParams.has('hid') && !parsedUrl.searchParams.has('selectedproperty')) {
+        return url;
+      }
       parsedUrl.searchParams.set('checkin', dates.checkin);
       parsedUrl.searchParams.set('checkout', dates.checkout);
       parsedUrl.searchParams.set('adults', String(dates.adults || 2));
@@ -336,8 +342,12 @@ export function getUrlDirectnessTier(url?: string): number {
   if (lower.includes('agoda.com')) {
     if (lower.includes('/hotel/') && lower.includes('.html')) return 0;
     if (lower.includes('hid=') || lower.includes('selectedproperty=')) return 1;
+    // Any partnersearch.aspx that only has text/txt search (even with city) is a generic search fallback, not a direct hotel
+    if (lower.includes('partnersearch.aspx')) {
+      if (lower.includes('hid=') || lower.includes('selectedproperty=')) return 1;
+      return 99;
+    }
     if (lower.includes('city=')) return 2;
-    // Agoda partnersearch with only text= or txt= (without hid or city) 302-redirects to homepage!
     return 99;
   }
   if (lower.includes('makemytrip.com')) {
