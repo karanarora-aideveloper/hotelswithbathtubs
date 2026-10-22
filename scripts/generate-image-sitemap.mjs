@@ -64,23 +64,37 @@ function resolveCountrySlug(country) {
 
 async function generateImageSitemap() {
   console.log('🚀 Generating Google Image Sitemap for all verified hotels...');
-  await mongoose.connect(process.env.MONGODB_URI);
+  let hotels = [];
 
-  const hotels = await mongoose.connection.collection('hotels').find({
-    flagged: { $ne: true },
-    image: { $exists: true, $ne: '' }
-  }).project({
-    name: 1,
-    city: 1,
-    country: 1,
-    slug: 1,
-    image: 1,
-    images: 1,
-    tubType: 1,
-    roomType: 1
-  }).toArray();
+  const cachePath = path.join(process.cwd(), '.cache', 'all-hotels.json');
+  if (fs.existsSync(cachePath)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+      hotels = cached.filter((h) => !h.flagged && h.image);
+      console.log(`Using .cache/all-hotels.json (${hotels.length} hotels with images).`);
+    } catch {
+      hotels = [];
+    }
+  }
 
-  console.log(`Found ${hotels.length} hotels with images.`);
+  if (!hotels.length) {
+    await mongoose.connect(process.env.MONGODB_URI);
+    hotels = await mongoose.connection.collection('hotels').find({
+      flagged: { $ne: true },
+      image: { $exists: true, $ne: '' }
+    }).project({
+      name: 1,
+      city: 1,
+      country: 1,
+      slug: 1,
+      image: 1,
+      images: 1,
+      tubType: 1,
+      roomType: 1
+    }).toArray();
+    await mongoose.disconnect();
+    console.log(`Queried MongoDB (${hotels.length} hotels with images).`);
+  }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
@@ -137,7 +151,9 @@ async function generateImageSitemap() {
   fs.writeFileSync(outputPath, xml, 'utf8');
   console.log(`✅ Saved Google Image Sitemap to public/sitemap-images.xml (${imageCount} total images indexed across ${hotels.length} hotels).`);
 
-  await mongoose.disconnect();
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.disconnect();
+  }
 }
 
 generateImageSitemap().catch(console.error);

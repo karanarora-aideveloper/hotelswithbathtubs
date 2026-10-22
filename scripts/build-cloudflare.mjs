@@ -33,9 +33,10 @@ function restoreAll() {
 async function build() {
   console.log('🚀 Starting Cloudflare Pages Static Build Pipeline...');
 
-  // 1. Generate locations.json
-  console.log('\n[1/4] Generating locations.json from MongoDB...');
+  // 1. Generate locations.json & blogs cache
+  console.log('\n[1/4] Generating locations.json and .cache/all-blogs.json from MongoDB...');
   execSync('node scripts/generate-locations.mjs', { cwd: rootDir, stdio: 'inherit' });
+  execSync('node scripts/generate-blogs-cache.mjs', { cwd: rootDir, stdio: 'inherit' });
 
   // 2. Generate _redirects
   console.log('\n[2/4] Generating public/_redirects...');

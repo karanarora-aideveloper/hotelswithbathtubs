@@ -71,6 +71,10 @@ async function runDeepAudit() {
         if (h1.name.trim().toLowerCase() === h2.name.trim().toLowerCase()) {
           reason = 'EXACT_NAME_MATCH';
         }
+        // 1b. Exact or inverted slug match in same city
+        else if (h1.slug && h2.slug && (h1.slug.trim().toLowerCase() === h2.slug.trim().toLowerCase() || jaccardSimilarity(h1.slug, h2.slug) >= 0.8)) {
+          reason = 'DUPLICATE_OR_NEAR_IDENTICAL_SLUG';
+        }
         // 2. High token similarity (>= 0.75)
         else {
           const sim = jaccardSimilarity(h1.name, h2.name);

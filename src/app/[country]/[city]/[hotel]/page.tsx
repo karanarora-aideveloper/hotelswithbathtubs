@@ -10,6 +10,7 @@ import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
+import { getCityGeoCoordinates } from '@/lib/geoData';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -255,7 +256,13 @@ export default async function HotelDetailPage({
     ]
   };
 
-  // Hotel Schema
+  // Geographic coordinates & street address resolution with guaranteed fallbacks
+  const cityGeo = getCityGeoCoordinates(citySlug);
+  const hotelLat = typeof hotel.latitude === 'number' && !isNaN(hotel.latitude) ? hotel.latitude : cityGeo.latitude;
+  const hotelLng = typeof hotel.longitude === 'number' && !isNaN(hotel.longitude) ? hotel.longitude : cityGeo.longitude;
+  const hotelStreet = hotel.streetAddress || (hotel.neighborhood ? `${hotel.neighborhood}, ${cityName}` : `${cityGeo.streetFallback}, ${cityName}`);
+
+  // Hotel Schema (Google LodgingBusiness compliant with GeoCoordinates & minimum price spec)
   const hotelSchema = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -263,7 +270,18 @@ export default async function HotelDetailPage({
     "description": hotel.description || `Verified hotel with private in-room bathtub in ${cityName}`,
     "image": imageUrl(hotel.image),
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
-    "address": { "@type": "PostalAddress", "addressLocality": cityName, "addressCountry": countryName },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": hotelStreet,
+      "addressLocality": cityName,
+      "addressCountry": countryName,
+      ...(hotel.postalCode ? { "postalCode": hotel.postalCode } : {})
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": Number(hotelLat),
+      "longitude": Number(hotelLng)
+    },
     ...(hasRealReviews ? {
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -287,6 +305,8 @@ export default async function HotelDetailPage({
         "@type": "PriceSpecification",
         "price": hotel.price ? hotel.price.toString().replace(/[^0-9]/g, '') : undefined,
         "priceCurrency": getCurrencyForPrice(hotel.price, countrySlug),
+        "priceType": "https://schema.org/MinimumPrice",
+        "unitText": "NIGHT"
       }
     }
   };

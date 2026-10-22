@@ -366,7 +366,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     {
       question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
       answer: minPriceHotel
-        ? `Nightly rates for verified bathtub suites in ${cityName} start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
+        ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
         : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
     },
     {

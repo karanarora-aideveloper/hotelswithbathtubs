@@ -190,6 +190,8 @@ export const redirects = [
   { source: '/paharganj/', destination: '/india/delhi', permanent: true },
 
   // Hotel legacy alternate slugs & domain authority indexed URLs
+  { source: '/usa/miami/miami-1-hotel-south-beach', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
+  { source: '/usa/miami/miami-1-hotel-south-beach/', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
   { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
   { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn/', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },
   { source: '/faroe-islands/torshavn/broncks-lonin-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },

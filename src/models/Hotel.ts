@@ -28,6 +28,10 @@ export interface IHotel extends mongoose.Document {
   price?: string;
   neighborhood?: string;
   landmarkDistance?: string;
+  latitude?: number;
+  longitude?: number;
+  streetAddress?: string;
+  postalCode?: string;
 }
 
 const HotelSchema = new mongoose.Schema<IHotel>({
@@ -131,6 +135,18 @@ const HotelSchema = new mongoose.Schema<IHotel>({
     type: String,
   },
   landmarkDistance: {
+    type: String,
+  },
+  latitude: {
+    type: Number,
+  },
+  longitude: {
+    type: Number,
+  },
+  streetAddress: {
+    type: String,
+  },
+  postalCode: {
     type: String,
   },
 }, {
