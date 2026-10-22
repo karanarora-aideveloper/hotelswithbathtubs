@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
+import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 
 export const revalidate = false;
 
@@ -45,13 +46,20 @@ export async function generateStaticParams() {
     { $group: { _id: { city: "$city", country: "$country" } } }
   ]);
 
-  return destinations.map((d: any) => {
+  const cityParams = destinations.map((d: any) => {
     const countryInfo = resolveCountry(d._id.country);
     return {
       country: countryInfo.slug,
       city: slugify(d._id.city),
     };
   });
+
+  const stateParams = getAllStateSlugs().map((slug) => ({
+    country: 'usa',
+    city: slug,
+  }));
+
+  return [...cityParams, ...stateParams];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ country: string, city: string }> }) {
@@ -64,6 +72,62 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countryName = countryInfo.displayName;
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
+
+  // US State Hub Metadata
+  if (countrySlug === 'usa' && isStateSlug(citySlug)) {
+    const state = getStateBySlug(citySlug)!;
+    const [firstHotel, hotelCount] = await Promise.all([
+      Hotel.findOne({
+        city: { $in: state.cities },
+        country: countryInfo.regex,
+        flagged: { $ne: true }
+      }).select('image'),
+      Hotel.countDocuments({
+        city: { $in: state.cities },
+        country: countryInfo.regex,
+        flagged: { $ne: true }
+      }),
+    ]);
+
+    if (hotelCount === 0) {
+      return {
+        title: `Hotels in ${state.name} Not Found`,
+        robots: { index: false, follow: false },
+      };
+    }
+
+    const ogImage = firstHotel && firstHotel.image
+      ? imageUrl(firstHotel.image.split('/').pop() || '')
+      : state.heroImage;
+
+    const currentYear = new Date().getFullYear();
+    const pageTitle = `Hotels with Bathtub in ${state.name}: Top ${hotelCount} Stays (${currentYear})`;
+    const pageDescription = state.metaDescription;
+
+    return {
+      title: { absolute: pageTitle },
+      description: pageDescription,
+      robots: { index: hotelCount >= 2, follow: true },
+      alternates: {
+        canonical: `/usa/${state.slug}`,
+      },
+      openGraph: {
+        title: pageTitle,
+        description: pageDescription,
+        url: `https://www.hotelswithbathtubs.com/usa/${state.slug}`,
+        siteName: 'Hotels with Bathtubs',
+        locale: 'en_US',
+        images: [{ url: ogImage, width: 1200, height: 630, alt: `Hotels with Bathtubs in ${state.name}` }],
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDescription,
+        images: [ogImage],
+      },
+    };
+  }
 
   // Fetch the first hotel to get a city-specific image if available, and count for description
   const [firstHotel, hotelCount] = await Promise.all([
@@ -149,36 +213,63 @@ export default async function CityHotelsPage({
 
   const countryInfo = resolveCountry(resolvedParams.country);
   const rawCity = decodeURIComponent(resolvedParams.city).replace(/-/g, ' ');
-  const cityName = titleCase(rawCity);
   const countryName = countryInfo.displayName;
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
+  const stateConfig = countrySlug === 'usa' ? getStateBySlug(citySlug) : undefined;
+  const cityName = stateConfig ? stateConfig.name : titleCase(rawCity);
+  const parentState = (!stateConfig && countrySlug === 'usa') ? getStateForCity(cityName) : undefined;
+
   // Fetch only active (non-flagged) hotels using country regex for alias tolerance
-  // Sibling destination mesh linking: fetch top sister cities in same country for strong crawl graph
+  // For state hubs: query all hotels across the state's constituent cities
+  // Sibling destination mesh linking: fetch top sister cities in same country (or constituent cities for state)
   const [rawHotels, rawSiblings] = await Promise.all([
-    Hotel.find({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
-      country: countryInfo.regex,
-      flagged: { $ne: true }
-    }).sort({ rating: -1 }).lean(),
-    Hotel.aggregate([
-      {
-        $match: {
+    stateConfig
+      ? Hotel.find({
+          city: { $in: stateConfig.cities },
           country: countryInfo.regex,
-          flagged: { $ne: true },
-          city: { $not: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
-        }
-      },
-      {
-        $group: {
-          _id: "$city",
-          hotelCount: { $sum: 1 }
-        }
-      },
-      { $sort: { hotelCount: -1 } },
-      { $limit: 12 }
-    ])
+          flagged: { $ne: true }
+        }).sort({ rating: -1 }).lean()
+      : Hotel.find({
+          city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+          country: countryInfo.regex,
+          flagged: { $ne: true }
+        }).sort({ rating: -1 }).lean(),
+    stateConfig
+      ? Hotel.aggregate([
+          {
+            $match: {
+              city: { $in: stateConfig.cities },
+              country: countryInfo.regex,
+              flagged: { $ne: true }
+            }
+          },
+          {
+            $group: {
+              _id: "$city",
+              hotelCount: { $sum: 1 }
+            }
+          },
+          { $sort: { hotelCount: -1 } }
+        ])
+      : Hotel.aggregate([
+          {
+            $match: {
+              country: countryInfo.regex,
+              flagged: { $ne: true },
+              city: { $not: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
+            }
+          },
+          {
+            $group: {
+              _id: "$city",
+              hotelCount: { $sum: 1 }
+            }
+          },
+          { $sort: { hotelCount: -1 } },
+          { $limit: 12 }
+        ])
   ]);
 
   if (rawHotels.length === 0) {
@@ -262,49 +353,80 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   }).limit(3).sort({ createdAt: -1 });
 
   // Rich Schema: BreadcrumbList + ItemList of Hotels
+  const breadcrumbElements: any[] = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.hotelswithbathtubs.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": countryName,
+      "item": `https://www.hotelswithbathtubs.com/${countrySlug}`
+    }
+  ];
+
+  if (stateConfig) {
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": `Hotels with Bathtubs in ${stateConfig.name}`,
+      "item": `https://www.hotelswithbathtubs.com/usa/${stateConfig.slug}`
+    });
+  } else if (parentState) {
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": `Hotels with Bathtubs in ${parentState.name}`,
+      "item": `https://www.hotelswithbathtubs.com/usa/${parentState.slug}`
+    });
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 4,
+      "name": `Hotels with Bathtubs in ${cityName}`,
+      "item": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`
+    });
+  } else {
+    breadcrumbElements.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": `Hotels with Bathtubs in ${cityName}`,
+      "item": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`
+    });
+  }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.hotelswithbathtubs.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": countryName,
-        "item": `https://www.hotelswithbathtubs.com/${countrySlug}`
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": `Hotels with Bathtubs in ${cityName}`,
-        "item": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`
-      }
-    ]
+    "itemListElement": breadcrumbElements
   };
 
   const hotelListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `Hotels with Bathtubs & Jacuzzis in ${cityName}`,
-    "description": `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
+    "description": stateConfig
+      ? `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs across ${stateConfig.name}.`
+      : `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => ({
       "@type": "ListItem",
       "position": idx + 1,
       "name": h.name,
-      "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`
+      "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${slugify(h.city || citySlug)}/${h.slug || slugify(h.name)}`
     }))
   };
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotels.length} Stays (${currentYear})`;
+  const pageTitle = stateConfig
+    ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
+    : `Hotels with Bathtub in ${cityName}: Top ${hotels.length} Stays (${currentYear})`;
 
-  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
+  const pageDescription = stateConfig
+    ? stateConfig.metaDescription
+    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
 
   const destinationSchema = {
     "@context": "https://schema.org",
@@ -312,7 +434,14 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     "name": `Hotels with Bathtubs in ${cityName}`,
     "description": pageDescription,
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`,
-    "about": {
+    "about": stateConfig ? {
+      "@type": "State",
+      "name": stateConfig.name,
+      "containedInPlace": {
+        "@type": "Country",
+        "name": countryName,
+      },
+    } : {
       "@type": "City",
       "name": cityName,
       "containedInPlace": {
@@ -355,30 +484,38 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     }
   }
 
-  const faqItems = [
-    {
-      question: `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
-      answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub or jacuzzi${tubTypes.length > 0 ? ` (including ${tubTypes.slice(0, 2).join(' and ')})` : ''}.`
-    },
-    {
-      question: `Are bathtub hotels in ${cityName} couple-friendly?`,
-      answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
-    },
-    {
-      question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
-      answer: minPriceHotel
-        ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
-        : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
-    },
-    {
-      question: neighborhoods.length > 0
-        ? `What are the best neighborhoods in ${cityName} to stay in for a room with a bathtub?`
-        : `How do I make sure my room in ${cityName} definitely has a bathtub?`,
-      answer: neighborhoods.length > 0
-        ? `Popular neighborhoods in ${cityName} with verified bathtub and jacuzzi hotels include ${neighborhoods.slice(0, 3).join(', ')}. Look for room categories that specifically guarantee an in-room tub.`
-        : `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
-    }
-  ];
+  const faqItems = stateConfig
+    ? [
+        ...stateConfig.faqs,
+        ...(minPriceHotel ? [{
+          question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
+          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
+        }] : [])
+      ]
+    : [
+        {
+          question: `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
+          answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub or jacuzzi${tubTypes.length > 0 ? ` (including ${tubTypes.slice(0, 2).join(' and ')})` : ''}.`
+        },
+        {
+          question: `Are bathtub hotels in ${cityName} couple-friendly?`,
+          answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
+        },
+        {
+          question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
+          answer: minPriceHotel
+            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
+            : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
+        },
+        {
+          question: neighborhoods.length > 0
+            ? `What are the best neighborhoods in ${cityName} to stay in for a room with a bathtub?`
+            : `How do I make sure my room in ${cityName} definitely has a bathtub?`,
+          answer: neighborhoods.length > 0
+            ? `Popular neighborhoods in ${cityName} with verified bathtub and jacuzzi hotels include ${neighborhoods.slice(0, 3).join(', ')}. Look for room categories that specifically guarantee an in-room tub.`
+            : `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
+        }
+      ];
 
   // FAQPage schema derived from dynamic real property data
   const faqSchema = {
@@ -409,22 +546,42 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
         <span>&rsaquo;</span>
         <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link>
-        <span>&rsaquo;</span>
-        <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
+        {stateConfig ? (
+          <>
+            <span>&rsaquo;</span>
+            <span className="text-text-main font-semibold">Hotels with Bathtubs in {stateConfig.name}</span>
+          </>
+        ) : parentState ? (
+          <>
+            <span>&rsaquo;</span>
+            <Link href={`/usa/${parentState.slug}`} className="text-accent-secondary hover:underline">{parentState.name}</Link>
+            <span>&rsaquo;</span>
+            <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
+          </>
+        ) : (
+          <>
+            <span>&rsaquo;</span>
+            <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
+          </>
+        )}
       </div>
 
       <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated · Verified {cityVerifiedDate}
+            <span>🏨</span> {hotels.length} Verified Hotels{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''} · Triple-Source Validated · Verified {cityVerifiedDate}
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
-            {countrySlug === 'usa'
+            {stateConfig
+              ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${stateConfig.name}`
+              : countrySlug === 'usa'
               ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName}`
               : `Hotels with Bathtub & Jacuzzi in ${cityName} for Couples`}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
-            {countrySlug === 'usa'
+            {stateConfig
+              ? stateConfig.intro
+              : countrySlug === 'usa'
               ? `${rawHotels.length}+ verified hotels with private in-room deep soaking tubs & jacuzzi suites in ${cityName}, ${countryName} — every room verified, no shared facilities.`
               : `${rawHotels.length}+ verified hotels with private in-room bathtubs & jacuzzi suites in ${cityName}, ${countryName} — every listing triple-checked, no shared spa tubs.`}
           </p>
@@ -483,6 +640,39 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
         </div>
 
+        {/* Constituent Destinations (State Hubs) */}
+        {stateConfig && (
+          <div className="mb-6 p-4 sm:p-5 bg-white rounded-2xl border border-gray-200 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <h3 className="font-heading text-sm sm:text-base font-bold text-gray-900">
+                  Explore {stateConfig.name} Destinations with Verified Bathtubs
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Select a destination below to jump directly to detailed city guides and neighborhood listings:
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
+                {stateConfig.cities.length} Top Destinations
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {siblingCities.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/usa/${c.slug}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-blue-50/80 border border-gray-200 hover:border-blue-300 rounded-xl text-xs font-semibold text-gray-800 hover:text-[#1a6fde] transition-all group"
+                >
+                  <span>🛁 {c.name}</span>
+                  <span className="text-[10px] bg-white border border-gray-200 text-gray-600 group-hover:border-blue-200 group-hover:text-[#1a6fde] px-1.5 py-0.5 rounded-full font-bold">
+                    {c.count} {c.count === 1 ? 'stay' : 'stays'}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {jacuzziCount > 0 && (
           <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
             <div className="flex items-center gap-3">
@@ -499,7 +689,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               </div>
             </div>
             <Link
-              href={`/${countrySlug}/${citySlug}/jacuzzi`}
+              href={stateConfig ? `#directory` : `/${countrySlug}/${citySlug}/jacuzzi`}
               className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs sm:text-sm font-bold shadow-sm transition-all whitespace-nowrap"
             >
               <span>View {jacuzziCount} Jacuzzi Suites</span>
@@ -515,7 +705,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         />
 
         {/* Full City Hotel Directory Index (Guarantees 100% Googlebot HTML crawlability & indexation for all properties) */}
-        <section aria-label={`Directory of all verified hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
+        <section id="directory" aria-label={`Directory of all verified hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
           <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-200 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
               <div>
@@ -535,7 +725,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               {hotels.map((h) => (
                 <Link
                   key={h._id || h.slug}
-                  href={`/${countrySlug}/${citySlug}/${h.slug}`}
+                  href={`/${countrySlug}/${slugify(h.city || citySlug)}/${h.slug}`}
                   className="flex items-center justify-between p-2 rounded-lg hover:bg-blue-50/60 border border-transparent hover:border-blue-100 transition-colors group"
                 >
                   <span className="font-medium text-gray-800 group-hover:text-[#1a6fde] line-clamp-1">
@@ -578,14 +768,42 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
         </div>
 
-        {/* SEO Content Section */}
-        <div className="max-w-4xl mx-auto mt-14 sm:mt-20">
-          <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-2xs">
-            <div dangerouslySetInnerHTML={{
-              __html: generateCityPageContent(cityName, countryName, rawHotels.length)
-            }} />
+        {/* SEO Content / State Highlights Section */}
+        {stateConfig ? (
+          <div className="max-w-4xl mx-auto mt-14 sm:mt-20">
+            <div className="bg-gradient-to-br from-blue-50/70 to-indigo-50/70 border border-blue-200/80 rounded-2xl p-6 sm:p-8 shadow-2xs">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-100/60 px-2.5 py-1 rounded-full">
+                Regional Getaways Guide
+              </span>
+              <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900 mt-3 mb-4">
+                Where to Find the Best In-Room Bathtubs &amp; Jacuzzi Suites in {stateConfig.name}
+              </h2>
+              <p className="text-sm text-gray-700 leading-relaxed mb-6 font-serif">
+                {stateConfig.intro}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {stateConfig.highlights.map((hl, i) => (
+                  <div key={i} className="p-4 bg-white/90 rounded-xl border border-blue-100">
+                    <h3 className="font-bold text-sm text-gray-900 mb-1.5 flex items-center gap-1.5">
+                      <span>✨</span> {hl.region}
+                    </h3>
+                    <p className="text-xs text-gray-600 leading-relaxed font-serif">
+                      {hl.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="max-w-4xl mx-auto mt-14 sm:mt-20">
+            <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-2xs">
+              <div dangerouslySetInnerHTML={{
+                __html: generateCityPageContent(cityName, countryName, rawHotels.length)
+              }} />
+            </div>
+          </div>
+        )}
 
               {/* Frequently Asked Questions Section (SEO & Conversion) */}
               <section className="mt-20 pt-12 border-t border-gray-200">
@@ -656,8 +874,47 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                 </section>
               )}
 
-              {/* Regional Destination Mesh: Sister cities within the same country */}
-              {siblingCities.length > 0 && (
+              {/* Regional State Hub Mesh or Sister Cities */}
+              {stateConfig ? (
+                <section aria-label="Explore other US states with verified bathtubs" className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+                    <div>
+                      <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
+                        More US State Hubs
+                      </span>
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mt-2">
+                        Explore Other US States for In-Room Bathtubs &amp; Jacuzzis
+                      </h3>
+                    </div>
+                    <Link
+                      href="/usa"
+                      className="text-xs font-bold text-[#1a6fde] hover:underline flex items-center gap-1 self-start sm:self-auto"
+                    >
+                      <span>Explore all USA Destinations</span>
+                      <span>&rarr;</span>
+                    </Link>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3">
+                    {getAllStates()
+                      .filter((s) => s.slug !== stateConfig.slug)
+                      .map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/usa/${s.slug}`}
+                          className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-blue-50/70 border border-gray-200 hover:border-[#1a6fde]/40 transition-all group shadow-2xs hover:shadow-xs"
+                        >
+                          <span className="text-xs font-bold text-gray-800 group-hover:text-[#1a6fde] truncate">
+                            🛁 {s.name}
+                          </span>
+                          <span className="text-[10px] font-extrabold text-gray-500 bg-gray-50 group-hover:bg-blue-100 group-hover:text-[#1a6fde] px-2 py-0.5 rounded-full border border-gray-200 group-hover:border-blue-200 shrink-0 ml-1.5 transition-colors">
+                            Explore &rarr;
+                          </span>
+                        </Link>
+                      ))}
+                  </div>
+                </section>
+              ) : siblingCities.length > 0 ? (
                 <section aria-label={`Other destinations in ${countryName} with verified bathtubs`} className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                     <div>
@@ -693,8 +950,23 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                       </Link>
                     ))}
                   </div>
+
+                  {parentState && (
+                    <div className="mt-6 p-4 rounded-xl bg-blue-50/70 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                      <span className="text-gray-700">
+                        Planning a wider trip across <strong>{parentState.name}</strong>? Explore vineyard soaking tubs, mountain hot tubs, and oceanfront suites statewide.
+                      </span>
+                      <Link
+                        href={`/usa/${parentState.slug}`}
+                        className="inline-flex items-center gap-1 text-[#1a6fde] font-bold hover:underline shrink-0"
+                      >
+                        <span>View all {parentState.name} Stays</span>
+                        <span>&rarr;</span>
+                      </Link>
+                    </div>
+                  )}
                 </section>
-              )}
+              ) : null}
 
               {/* Also Explore: Cross-links to international & popular cities */}
               {(() => {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 import CountryCitiesClient from '@/components/CountryCitiesClient';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { getAllStates } from '@/lib/usStates';
 
 export const revalidate = false;
 
@@ -180,6 +181,19 @@ export default async function CountryHubPage({
   }
 
   const totalHotels = cities.reduce((acc, curr) => acc + curr.hotelCount, 0);
+
+  const stateSummaries = countrySlug === 'usa'
+    ? getAllStates().map((state) => {
+        const stateHotelCount = state.cities.reduce((sum, cName) => {
+          const match = rawCities.find((rc: any) => rc._id?.city?.toLowerCase() === cName.toLowerCase());
+          return sum + (match?.hotelCount || 0);
+        }, 0);
+        return {
+          ...state,
+          hotelCount: stateHotelCount,
+        };
+      })
+    : [];
 
   // Breadcrumb List Schema
   const breadcrumbSchema = {
@@ -363,6 +377,68 @@ export default async function CountryHubPage({
                   </Link>
                 </div>
               </div>
+
+              {/* Featured US State Directories */}
+              {countrySlug === 'usa' && (
+                <section className="mb-14">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 border-b border-gray-200 pb-3">
+                    <div>
+                      <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full">
+                        Browse by State
+                      </span>
+                      <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900 mt-2">
+                        Top US States for In-Room Bathtubs &amp; Jacuzzi Suites
+                      </h2>
+                      <p className="text-text-muted text-xs sm:text-sm mt-1">
+                        Explore verified romantic getaways, wine country soaking tubs, and mountain hot tub chalets statewide
+                      </p>
+                    </div>
+                    <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full w-fit">
+                      12 State Hubs
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {stateSummaries.map((state) => (
+                      <Link
+                        key={state.slug}
+                        href={`/usa/${state.slug}`}
+                        className="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col"
+                      >
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+                          <img
+                            src={state.heroImage}
+                            alt={`Hotels with bathtubs in ${state.name}`}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
+                            {state.hotelCount} {state.hotelCount === 1 ? 'Stay' : 'Stays'}
+                          </div>
+                        </div>
+                        <div className="p-4 flex flex-col flex-grow">
+                          <div className="flex items-center justify-between mb-1.5">
+                            <h3 className="font-heading text-base font-bold text-gray-900 group-hover:text-[#1a6fde] transition-colors">
+                              {state.name}
+                            </h3>
+                            <span className="text-[10px] font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full">
+                              {state.cities.length} {state.cities.length === 1 ? 'City' : 'Cities'}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-3">
+                            {state.tagline}
+                          </p>
+                          <div className="mt-auto pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#1a6fde]">
+                            <span>Explore {state.shortName}</span>
+                            <span>&rarr;</span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               <div className="flex items-center justify-between mb-6 sm:mb-8 border-b border-gray-200 pb-3">
                 <div>

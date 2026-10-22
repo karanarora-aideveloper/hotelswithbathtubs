@@ -3,6 +3,7 @@ import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
 import { slugify, resolveCountry } from '@/lib/utils';
+import { getAllStateSlugs } from '@/lib/usStates';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -102,6 +103,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const countryRoutes = Array.from(countryLastMod.keys()).map(countrySlug => ({
       url: `${baseUrl}/${countrySlug}`,
       ...(countryLastMod.get(countrySlug) ? { lastModified: countryLastMod.get(countrySlug)! } : {}),
+      priority: 0.85,
+    }));
+
+    // US State Hub Routes (High-intent regional hubs)
+    const usaLastMod = countryLastMod.get('usa') || new Date();
+    const stateRoutes = getAllStateSlugs().map(slug => ({
+      url: `${baseUrl}/usa/${slug}`,
+      lastModified: usaLastMod,
       priority: 0.85,
     }));
 
@@ -220,7 +229,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     ];
 
-    return [...staticRoutes, ...countryRoutes, ...locationRoutes, ...jacuzziRoutes, ...blogRoutes, ...hotelRoutes];
+    return [...staticRoutes, ...countryRoutes, ...stateRoutes, ...locationRoutes, ...jacuzziRoutes, ...blogRoutes, ...hotelRoutes];
   } catch (error) {
     console.error('Failed to build dynamic sitemap:', error);
     // Fallback static sitemap if DB is unreachable

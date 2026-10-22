@@ -96,6 +96,7 @@ export default function CityHotelsClient({
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews'>('recommended');
   const [stayStyle, setStayStyle] = useState<'all' | 'luxury' | 'apartment' | 'boutique' | 'hostel'>('all');
+  const [selectedCity, setSelectedCity] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
@@ -364,13 +365,14 @@ export default function CityHotelsClient({
   const activeFilterCount = useMemo(() => {
     let count = 0;
     if (searchTerm.trim()) count++;
+    if (selectedCity !== 'all') count++;
     if (stayStyle !== 'all') count++;
     if (selectedTubCategory !== 'all') count++;
     if (priceRange !== 'all') count++;
     if (selectedPerks.length > 0) count += selectedPerks.length;
     if (sortBy !== 'recommended') count++;
     return count;
-  }, [searchTerm, stayStyle, selectedTubCategory, priceRange, selectedPerks, sortBy]);
+  }, [searchTerm, selectedCity, stayStyle, selectedTubCategory, priceRange, selectedPerks, sortBy]);
 
   const togglePerk = (perk: string) => {
     setSelectedPerks((prev) =>
@@ -382,21 +384,35 @@ export default function CityHotelsClient({
   const [visibleCount, setVisibleCount] = useState(24);
   const observerTarget = useRef<HTMLDivElement>(null);
 
+  const availableCities = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const h of uniqueHotels) {
+      if (h.city) {
+        map.set(h.city, (map.get(h.city) || 0) + 1);
+      }
+    }
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  }, [uniqueHotels]);
+
   useEffect(() => {
     // Reset visible count when filters change
     setVisibleCount(24);
-  }, [searchTerm, selectedFilter, selectedTubCategory, sortBy, priceRange, stayStyle, selectedPerks]);
+  }, [searchTerm, selectedFilter, selectedTubCategory, sortBy, priceRange, stayStyle, selectedPerks, selectedCity]);
 
   const filteredHotels = useMemo(() => {
     let result = uniqueHotels.filter((h) => {
+      // Destination / City filter (State Hubs with Multiple Cities)
+      if (selectedCity !== 'all' && h.city !== selectedCity) return false;
+
       // Text search filter
       if (searchTerm.trim()) {
         const q = searchTerm.trim().toLowerCase();
         const matchesName = h.name.toLowerCase().includes(q);
+        const matchesCity = (h.city || '').toLowerCase().includes(q);
         const matchesNeighborhood = (h.neighborhood || '').toLowerCase().includes(q);
         const matchesAmenity = h.amenities?.some((a) => a.toLowerCase().includes(q));
         const matchesTub = (h.tubType || '').toLowerCase().includes(q);
-        if (!matchesName && !matchesNeighborhood && !matchesAmenity && !matchesTub) return false;
+        if (!matchesName && !matchesCity && !matchesNeighborhood && !matchesAmenity && !matchesTub) return false;
       }
 
       // Stay Style filter
@@ -460,6 +476,7 @@ export default function CityHotelsClient({
   }, [
     uniqueHotels,
     searchTerm,
+    selectedCity,
     stayStyle,
     selectedTubCategory,
     selectedFilter,
@@ -550,6 +567,7 @@ export default function CityHotelsClient({
 
   const handleResetFilters = () => {
     setSelectedFilter('all');
+    setSelectedCity('all');
     setStayStyle('all');
     setSelectedTubCategory('all');
     setPriceRange('all');
@@ -726,6 +744,40 @@ export default function CityHotelsClient({
             )}
           </div>
         </div>
+
+        {/* Destination Filter (State Hubs with Multiple Cities) */}
+        {availableCities.length > 1 && (
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+              City / Area:
+            </span>
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+              <button
+                onClick={() => setSelectedCity('all')}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                  selectedCity === 'all'
+                    ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                }`}
+              >
+                All {cityName} ({uniqueHotels.length})
+              </button>
+              {availableCities.map(([city, count]) => (
+                <button
+                  key={city}
+                  onClick={() => setSelectedCity(selectedCity === city ? 'all' : city)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
+                    selectedCity === city
+                      ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  {city} ({count})
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Row 2: Stay Type Filter */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
@@ -1088,7 +1140,7 @@ export default function CityHotelsClient({
                 {/* Card Content */}
                 <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
                   {/* Hotel Title */}
-                  <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link mb-1">
+                  <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link mb-1">
                     <h2 className="text-sm sm:text-[15px] font-bold text-gray-900 leading-snug line-clamp-1 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
                   </Link>
 
@@ -1110,7 +1162,7 @@ export default function CityHotelsClient({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <span className="font-semibold text-gray-700">{h.neighborhood ? `${h.neighborhood}, ${cityName}` : `${cityName}, ${countryName}`}</span>
+                    <span className="font-semibold text-gray-700">{h.neighborhood ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
                     {h.landmarkDistance && (
                       <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                         {h.landmarkDistance}
@@ -1188,7 +1240,7 @@ export default function CityHotelsClient({
                           {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
                         </div>
                       </div>
-                      <Link href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-[11px] font-bold text-[#1a6fde] hover:underline">
+                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-[11px] font-bold text-[#1a6fde] hover:underline">
                         View Details &rarr;
                       </Link>
                     </div>
@@ -1201,11 +1253,11 @@ export default function CityHotelsClient({
 
                     <div className="flex flex-col gap-1.5">
                       {displayUrls.slice(0, 2).map((u, idx) => (
-                        <BookingButton key={idx} url={u} hotelName={h.name} cityName={cityName} isPrimary={idx === 0} />
+                        <BookingButton key={idx} url={u} hotelName={h.name} cityName={h.city || cityName} isPrimary={idx === 0} />
                       ))}
                       {displayUrls.length > 2 && (
                         <Link
-                          href={`/${slugify(countryName)}/${slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                          href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
                           className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
                         >
                           Compare all {displayUrls.length} sites &amp; tub guide &rarr;

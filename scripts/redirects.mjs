@@ -14,6 +14,32 @@ export const redirects = [
   { source: '/usa/new-york-city', destination: '/usa/new-york', permanent: true },
   { source: '/usa/new%20york', destination: '/usa/new-york', permanent: true },
 
+  // Naked US State paths → canonical /usa/[state]
+  { source: '/california', destination: '/usa/california', permanent: true },
+  { source: '/california/', destination: '/usa/california', permanent: true },
+  { source: '/florida', destination: '/usa/florida', permanent: true },
+  { source: '/florida/', destination: '/usa/florida', permanent: true },
+  { source: '/hawaii', destination: '/usa/hawaii', permanent: true },
+  { source: '/hawaii/', destination: '/usa/hawaii', permanent: true },
+  { source: '/texas', destination: '/usa/texas', permanent: true },
+  { source: '/texas/', destination: '/usa/texas', permanent: true },
+  { source: '/massachusetts', destination: '/usa/massachusetts', permanent: true },
+  { source: '/massachusetts/', destination: '/usa/massachusetts', permanent: true },
+  { source: '/new-york-state', destination: '/usa/new-york-state', permanent: true },
+  { source: '/new-york-state/', destination: '/usa/new-york-state', permanent: true },
+  { source: '/illinois', destination: '/usa/illinois', permanent: true },
+  { source: '/illinois/', destination: '/usa/illinois', permanent: true },
+  { source: '/colorado', destination: '/usa/colorado', permanent: true },
+  { source: '/colorado/', destination: '/usa/colorado', permanent: true },
+  { source: '/nevada', destination: '/usa/nevada', permanent: true },
+  { source: '/nevada/', destination: '/usa/nevada', permanent: true },
+  { source: '/south-carolina', destination: '/usa/south-carolina', permanent: true },
+  { source: '/south-carolina/', destination: '/usa/south-carolina', permanent: true },
+  { source: '/arizona', destination: '/usa/arizona', permanent: true },
+  { source: '/arizona/', destination: '/usa/arizona', permanent: true },
+  { source: '/tennessee', destination: '/usa/tennessee', permanent: true },
+  { source: '/tennessee/', destination: '/usa/tennessee', permanent: true },
+
   // Legacy city URL formats → canonical /country/city paths
   // These were indexed by Google under old URL structures and split ranking authority
   { source: '/hotels-with-bathtub-in-new-delhi', destination: '/india/delhi', permanent: true },

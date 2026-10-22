@@ -135,9 +135,24 @@ async function generateLocations() {
       ]);
     }
 
+    const stateHubsList = [
+      ['California', 'USA', 'usa', 'california', 64],
+      ['Florida', 'USA', 'usa', 'florida', 47],
+      ['Hawaii', 'USA', 'usa', 'hawaii', 36],
+      ['Texas', 'USA', 'usa', 'texas', 24],
+      ['Massachusetts', 'USA', 'usa', 'massachusetts', 22],
+      ['New York State', 'USA', 'usa', 'new-york-state', 22],
+      ['Illinois', 'USA', 'usa', 'illinois', 22],
+      ['Colorado', 'USA', 'usa', 'colorado', 21],
+      ['Nevada', 'USA', 'usa', 'nevada', 20],
+      ['South Carolina', 'USA', 'usa', 'south-carolina', 18],
+      ['Arizona', 'USA', 'usa', 'arizona', 14],
+      ['Tennessee', 'USA', 'usa', 'tennessee', 13],
+    ];
+
     const searchData = {
       countries: Object.values(countryStats).map((c) => [c.name, c.slug, c.count]),
-      cities: Object.values(cityStats).map((c) => [c.name, c.country, c.countrySlug, c.citySlug, c.count]),
+      cities: [...stateHubsList, ...Object.values(cityStats).map((c) => [c.name, c.country, c.countrySlug, c.citySlug, c.count])],
       hotels: hotelList,
     };
 
