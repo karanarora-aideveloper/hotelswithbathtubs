@@ -707,6 +707,8 @@ export default async function Footer() {
             <p className="font-medium">&copy; 2026 HotelsWithBathtubs.com. All rights reserved.</p>
             <div className="flex gap-4 flex-wrap justify-center sm:justify-end">
               <Link href="/matchmaker" className="text-[#1a6fde] hover:underline font-bold transition-colors">✨ Matchmaker</Link>
+              <Link href="/soaking-tub-hotels" className="text-text-muted hover:text-accent font-medium transition-colors">🛁 Soaking Tubs</Link>
+              <Link href="/hotels-with-hot-tub-in-room" className="text-text-muted hover:text-accent font-medium transition-colors">♨️ Hot Tub Suites</Link>
               <Link href="/couple-friendly" className="text-text-muted hover:text-accent font-medium transition-colors">Couple Stays</Link>
               <Link href="/hostels" className="text-text-muted hover:text-accent font-medium transition-colors">🎒 Hostels</Link>
               <Link href="/blog" className="text-text-muted hover:text-accent font-medium transition-colors">Travel Blog</Link>

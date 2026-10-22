@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ProgressiveImage from '@/components/ProgressiveImage';
-import { imageUrl } from '@/lib/imageUrl';
+import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
 interface HotelCardImageProps {
   primaryImage: string;
@@ -47,12 +46,19 @@ export default function HotelCardImage({
 
   return (
     <div className="relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image">
-      <ProgressiveImage
-        src={currentSrc}
+      <img
+        src={imageUrl(currentSrc)}
         alt={`${hotelName} - Hotel with Bathtub in ${cityName}`}
-        priority={priority && currentIndex === 0}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        loading={priority && currentIndex === 0 ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={priority && currentIndex === 0 ? 'high' : 'auto'}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        onError={(e) => {
+          const target = e.currentTarget;
+          if (!target.src.includes('pexels') && !target.src.includes('the-oberoi')) {
+            target.src = DEFAULT_HOTEL_IMAGE;
+          }
+        }}
       />
 
       {/* Verified Badges */}

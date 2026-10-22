@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   output: isExport ? 'export' : undefined,
   staticPageGenerationTimeout: 180,
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   serverExternalPackages: ['mongoose', 'mongodb', 'isomorphic-dompurify', 'jsdom', 'cheerio', 'markdown-it'],
   images: {

@@ -543,7 +543,7 @@ export default async function HotelDetailPage({
                 <span>✦</span> 100% In-Room Tub Guaranteed
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-800 font-semibold text-xs sm:text-sm rounded-full border border-sky-200/80">
-                <span className="text-sky-600 font-bold">✓</span> Verified for {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                <span className="text-sky-600 font-bold">✓</span> Verified {hotel.crossVerifiedAt || (hotel.updatedAt ? new Date(hotel.updatedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'October 2026')}
               </span>
             </div>
           </div>

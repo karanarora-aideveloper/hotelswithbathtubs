@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
-import ProgressiveImage from '@/components/ProgressiveImage';
 
 export const revalidate = false;
 
@@ -191,23 +190,33 @@ export default async function CityHotelsPage({
     country: h.country,
     slug: h.slug || slugify(h.name),
     image: h.image,
-    images: Array.isArray(h.images) && h.images.length > 0 ? h.images : (h.image ? [h.image] : []),
+    images: Array.isArray(h.images) && h.images.length > 0 ? h.images.slice(0, 3) : (h.image ? [h.image] : []),
     url: h.url,
     agodaUrl: h.agodaUrl,
     bookingUrl: h.bookingUrl,
     airbnbUrl: h.airbnbUrl,
     tripUrl: h.tripUrl,
-    amenities: h.amenities || [],
-    description: h.description || '',
+    amenities: (h.amenities || []).slice(0, 6),
+    description: h.description ? h.description.slice(0, 140) : '',
     rating: h.rating,
     reviewsCount: h.reviewsCount,
     roomType: h.roomType,
     tubType: h.tubType,
-    bookingTip: h.bookingTip,
+    bookingTip: h.bookingTip ? h.bookingTip.slice(0, 120) : '',
     price: h.price,
     neighborhood: h.neighborhood,
     landmarkDistance: h.landmarkDistance,
+    updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
   }));
+
+  // Grounded freshness date derived from real MongoDB timestamps
+  const maxTimestamp = hotels.reduce((max, h) => {
+    const t = h.updatedAt ? new Date(h.updatedAt).getTime() : 0;
+    return t > max ? t : max;
+  }, 0);
+  const cityVerifiedDate = maxTimestamp > 0
+    ? new Date(maxTimestamp).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    : 'October 2026';
 
   const jacuzziCount = hotels.filter(h =>
     (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
@@ -276,64 +285,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     "name": `Hotels with Bathtubs & Jacuzzis in ${cityName}`,
     "description": `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
-    "itemListElement": hotels.map((h, idx) => {
-      const hasRealRating = h.rating && Number(h.rating) > 0;
-      const hasRealReviews = h.reviewsCount && Number(h.reviewsCount) > 0;
-
-      return {
-        "@type": "ListItem",
-        "position": idx + 1,
-        "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`,
-        "name": h.name,
-        "item": {
-          "@type": "LodgingBusiness",
-          "name": h.name,
-          "description": h.description || `Verified hotel with private in-room bathtub and jacuzzi in ${cityName}`,
-          "image": {
-            "@type": "ImageObject",
-            "url": imageUrl(h.image?.split('/').pop() || ''),
-            "caption": `${h.name} - Private bathtub hotel in ${cityName}`
-          },
-          "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": cityName,
-            "addressCountry": countryName
-          },
-          ...(h.price ? { "priceRange": `${h.price}` } : {}),
-          ...(hasRealReviews ? {
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              ...(hasRealRating ? { "ratingValue": Number(h.rating).toFixed(1) } : {}),
-              "reviewCount": Number(h.reviewsCount),
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          } : {}),
-          "amenityFeature": [
-            { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
-            ...(h.tubType ? [{ "@type": "LocationFeatureSpecification", "name": h.tubType, "value": true }] : []),
-            ...(h.amenities || []).map((a: string) => ({
-              "@type": "LocationFeatureSpecification",
-              "name": a,
-              "value": true
-            }))
-          ],
-          "makesOffer": {
-            "@type": "Offer",
-            "name": `${h.roomType || 'Room with Bathtub'} at ${h.name}`,
-            "description": `Private in-room bathtub${h.tubType ? ` (${h.tubType})` : ''} in ${cityName}`,
-            "url": h.bookingUrl || h.agodaUrl || h.tripUrl || h.url,
-            "availability": "https://schema.org/InStock",
-            "priceSpecification": {
-              "@type": "PriceSpecification",
-              "price": h.price ? h.price.toString().replace(/[^0-9]/g, '') : undefined,
-              "priceCurrency": getCountryCurrency(countrySlug),
-            }
-          }
-        }
-      };
-    })
+    "itemListElement": hotels.map((h, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": h.name,
+      "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${h.slug || slugify(h.name)}`
+    }))
   };
 
   const currentYear = new Date().getFullYear();
@@ -451,7 +408,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated · Updated for {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated · Verified {cityVerifiedDate}
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {countrySlug === 'usa'
@@ -634,13 +591,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                       {relatedBlogs.map((blog: any) => (
                         <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                           <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-gray-100">
-                            <ProgressiveImage
-                              key={blog.image || blog.slug}
-                              src={blog.image || DEFAULT_HOTEL_IMAGE}
+                            <img
+                              src={imageUrl(blog.image)}
                               alt={blog.title}
-                              priority
-                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              loading="lazy"
+                              decoding="async"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                           </div>
                           <div className="p-5 sm:p-6 flex flex-col flex-grow">

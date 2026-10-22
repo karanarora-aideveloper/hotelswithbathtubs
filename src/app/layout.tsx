@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com',
+    types: {
+      'application/rss+xml': 'https://www.hotelswithbathtubs.com/rss.xml',
+    },
   },
   openGraph: {
     locale: 'en_US',

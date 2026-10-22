@@ -102,6 +102,34 @@ export default function EditorialPolicyPage() {
                   </p>
                 </div>
               </div>
+
+              {/* Visual Methodology Walkthrough Card */}
+              <div className="mt-6 p-5 sm:p-6 bg-gradient-to-br from-gray-900 to-slate-800 rounded-2xl text-white">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 mb-2">
+                  <span>🎥</span>
+                  <span className="uppercase tracking-wider">Visual Inspection Standard</span>
+                </div>
+                <h3 className="font-heading text-lg sm:text-xl font-bold mb-2">
+                  Field &amp; Digital Audit Walkthrough
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
+                  Our verification scouts examine photographic clues that automated scrapers miss: mirror reflections confirming enclosed bathroom boundaries, plumbing fixtures distinguishing private tubs from communal hydro-spa pools, and exact contractual room tier labeling on booking checkouts.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  <div className="bg-white/10 p-3 rounded-xl border border-white/10">
+                    <strong className="block text-white mb-1">01. Inventory Code</strong>
+                    <span className="text-gray-300">Matching property rate codes to guaranteed tub categories.</span>
+                  </div>
+                  <div className="bg-white/10 p-3 rounded-xl border border-white/10">
+                    <strong className="block text-white mb-1">02. Enclosure Audit</strong>
+                    <span className="text-gray-300">Confirming 100% private walls — never shared facilities.</span>
+                  </div>
+                  <div className="bg-white/10 p-3 rounded-xl border border-white/10">
+                    <strong className="block text-white mb-1">03. Weekly Parity</strong>
+                    <span className="text-gray-300">Continuous link &amp; price health validation across OTAs.</span>
+                  </div>
+                </div>
+              </div>
             </section>
 
             <section>

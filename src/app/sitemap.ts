@@ -164,6 +164,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       },
       {
+        url: `${baseUrl}/soaking-tub-hotels`,
+        lastModified: new Date('2026-10-22T00:00:00.000Z'),
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/hotels-with-hot-tub-in-room`,
+        lastModified: new Date('2026-10-22T00:00:00.000Z'),
+        priority: 0.9,
+      },
+      {
         url: `${baseUrl}/hostels`,
         lastModified: new Date('2026-10-19T00:00:00.000Z'),
         priority: 0.9,
