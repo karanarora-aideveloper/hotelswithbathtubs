@@ -269,7 +269,8 @@ export default async function HotelDetailPage({
         "@type": "AggregateRating",
         ...(hasRealRating ? { "ratingValue": Number(hotel.rating).toFixed(1) } : {}),
         "reviewCount": Number(hotel.reviewsCount),
-        "bestRating": "5"
+        "bestRating": "5",
+        "description": "Aggregated guest review scores from verified booking partners"
       }
     } : {}),
     "amenityFeature": [
@@ -311,7 +312,14 @@ export default async function HotelDetailPage({
           "text": `Yes, ${hotel.name} in ${cityName} is thoroughly verified as couple-friendly, welcoming unmarried and married couples with complete privacy.`
         }
       },
-      {
+      hotel.bookingTip ? {
+        "@type": "Question",
+        "name": `What is the insider booking tip for ${hotel.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${hotel.bookingTip} Ensure you verify that the ${hotel.roomType || 'room category'} lists a private bathtub before finalizing your reservation.`
+        }
+      } : {
         "@type": "Question",
         "name": `How can I guarantee that my room gets a bathtub at ${hotel.name}?`,
         "acceptedAnswer": {
@@ -498,7 +506,7 @@ export default async function HotelDetailPage({
                   <span className="text-amber-500 text-base">★</span>
                   <span>{Number(hotel.rating).toFixed(1)}</span>
                   {hasRealReviews && (
-                    <span className="text-slate-400 font-normal">({Number(hotel.reviewsCount).toLocaleString()} verified reviews)</span>
+                    <span className="text-slate-400 font-normal">({Number(hotel.reviewsCount).toLocaleString()} verified guest reviews on Booking.com &amp; partner platforms)</span>
                   )}
                 </div>
               )}
@@ -533,6 +541,9 @@ export default async function HotelDetailPage({
               )}
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm rounded-full border border-emerald-200/80">
                 <span>✦</span> 100% In-Room Tub Guaranteed
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-800 font-semibold text-xs sm:text-sm rounded-full border border-sky-200/80">
+                <span className="text-sky-600 font-bold">✓</span> Verified for {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
               </span>
             </div>
           </div>
@@ -618,10 +629,13 @@ export default async function HotelDetailPage({
 
               <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
                 <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?
+                  {hotel.bookingTip ? `What is the insider booking tip for ${hotel.name}?` : 'Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?'}
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile VIP discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and free cancellation.
+                  {hotel.bookingTip
+                    ? `${hotel.bookingTip} Ensure you select the ${hotel.roomType || 'Bathtub Suite'} tier and confirm "Bathtub" is listed in room amenities before payment.`
+                    : 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile VIP discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and free cancellation.'
+                  }
                 </p>
               </div>
             </div>
@@ -688,6 +702,11 @@ export default async function HotelDetailPage({
               <div className="mt-5 p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 text-xs text-amber-900 leading-snug font-jakarta">
                 <strong className="font-bold block mb-1">Remember:</strong>
                 Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout to guarantee the tub.
+              </div>
+
+              {/* FTC / ASA Reader Disclosure */}
+              <div className="mt-4 pt-3.5 border-t border-[#5b8296]/15 text-[11px] text-slate-500 leading-relaxed font-jakarta">
+                <span className="font-semibold text-slate-700">Reader Disclosure:</span> When you book through our verified partner links, we may earn an affiliate commission at no extra cost to you. This supports our independent room verification audits.
               </div>
             </div>
 

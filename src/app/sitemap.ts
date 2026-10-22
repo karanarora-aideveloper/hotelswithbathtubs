@@ -92,7 +92,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           hotelRoutes.push({
             url: hotelUrl,
             ...(hotelUpdated ? { lastModified: hotelUpdated } : {}),
-            changeFrequency: 'weekly' as const,
             priority: 0.65,
           });
         }
@@ -103,7 +102,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const countryRoutes = Array.from(countryLastMod.keys()).map(countrySlug => ({
       url: `${baseUrl}/${countrySlug}`,
       ...(countryLastMod.get(countrySlug) ? { lastModified: countryLastMod.get(countrySlug)! } : {}),
-      changeFrequency: 'weekly' as const,
       priority: 0.85,
     }));
 
@@ -113,7 +111,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .map(location => ({
         url: `${baseUrl}/${location}`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
-        changeFrequency: 'weekly' as const,
         priority: 0.8,
       }));
 
@@ -123,7 +120,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .map(location => ({
         url: `${baseUrl}/${location}/jacuzzi`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
-        changeFrequency: 'weekly' as const,
         priority: 0.8,
       }));
 
@@ -147,7 +143,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .map(blog => ({
         url: `${baseUrl}/blog/${slugify(blog.slug)}`,
         ...(blog.updatedAt ? { lastModified: new Date(blog.updatedAt) } : {}),
-        changeFrequency: 'monthly' as const,
         priority: 0.7,
       }));
 
@@ -156,61 +151,61 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       {
         url: `${baseUrl}`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
-        changeFrequency: 'daily' as const,
         priority: 1.0,
       },
       {
         url: `${baseUrl}/matchmaker`,
         lastModified: new Date('2026-10-07T00:00:00.000Z'),
-        changeFrequency: 'weekly' as const,
         priority: 0.95,
       },
       {
         url: `${baseUrl}/couple-friendly`,
         lastModified: new Date('2026-10-19T00:00:00.000Z'),
-        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: `${baseUrl}/hostels`,
         lastModified: new Date('2026-10-19T00:00:00.000Z'),
-        changeFrequency: 'weekly' as const,
         priority: 0.9,
       },
       {
         url: `${baseUrl}/blog`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
-        changeFrequency: 'weekly' as const,
         priority: 0.8,
       },
       {
         url: `${baseUrl}/about`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
-        changeFrequency: 'monthly' as const,
-        priority: 0.5,
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/editorial-policy`,
+        lastModified: new Date('2026-10-22T00:00:00.000Z'),
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/contact`,
+        lastModified: new Date('2026-10-22T00:00:00.000Z'),
+        priority: 0.6,
       },
       {
         url: `${baseUrl}/affiliate-policy`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
-        changeFrequency: 'yearly' as const,
-        priority: 0.3,
+        priority: 0.4,
       },
       {
         url: `${baseUrl}/privacy`,
         lastModified: new Date('2026-08-01T00:00:00.000Z'),
-        changeFrequency: 'yearly' as const,
         priority: 0.3,
       },
       {
         url: `${baseUrl}/terms`,
         lastModified: new Date('2026-08-01T00:00:00.000Z'),
-        changeFrequency: 'yearly' as const,
         priority: 0.3,
       },
       {
         url: `${baseUrl}/cookies`,
         lastModified: new Date('2026-08-01T00:00:00.000Z'),
-        changeFrequency: 'yearly' as const,
         priority: 0.3,
       },
     ];
@@ -220,10 +215,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Failed to build dynamic sitemap:', error);
     // Fallback static sitemap if DB is unreachable
     return [
-      { url: `${baseUrl}`, changeFrequency: 'daily' as const, priority: 1.0 },
-      { url: `${baseUrl}/blog`, changeFrequency: 'weekly' as const, priority: 0.8 },
-      { url: `${baseUrl}/about`, changeFrequency: 'monthly' as const, priority: 0.5 },
-      { url: `${baseUrl}/affiliate-policy`, changeFrequency: 'yearly' as const, priority: 0.3 },
+      { url: `${baseUrl}`, priority: 1.0 },
+      { url: `${baseUrl}/blog`, priority: 0.8 },
+      { url: `${baseUrl}/about`, priority: 0.6 },
+      { url: `${baseUrl}/editorial-policy`, priority: 0.6 },
+      { url: `${baseUrl}/contact`, priority: 0.6 },
+      { url: `${baseUrl}/affiliate-policy`, priority: 0.4 },
     ];
   }
 }

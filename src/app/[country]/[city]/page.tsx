@@ -90,9 +90,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query ("Hotels with Bathtub in [City]")
   // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
   const currentYear = new Date().getFullYear();
-  const pageTitle = countrySlug === 'usa'
-    ? `Hotels with Bathtubs in ${cityName}: Top ${hotelCount} Stays (${currentYear})`
-    : `Hotels with Bathtub in ${cityName} (${hotelCount} Verified Stays) (${currentYear})`;
+  const pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotelCount} Stays (${currentYear})`;
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, citySlug);
 
@@ -339,9 +337,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   };
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = countrySlug === 'usa'
-    ? `Hotels with Bathtubs in ${cityName}: Top ${hotels.length} Stays (${currentYear})`
-    : `Hotels with Bathtub in ${cityName} (${hotels.length} Verified Stays) (${currentYear})`;
+  const pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotels.length} Stays (${currentYear})`;
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
 
@@ -377,44 +373,60 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? 'valid government photo IDs (Aadhaar, Passport, or Driving License)'
     : 'valid government-issued photo ID (Passport or national ID card)';
 
-  // FAQPage schema for the 4 structured FAQ questions displayed on this page
+  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(Boolean))) as string[];
+  const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
+  const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and Expedia';
+
+  // Find lowest price hotel for data-driven pricing FAQ
+  let minPriceHotel: any = null;
+  let minPriceVal = Infinity;
+  for (const h of hotels) {
+    if (h.price && typeof h.price === 'string') {
+      const num = parseInt(h.price.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(num) && num > 0 && num < minPriceVal) {
+        minPriceVal = num;
+        minPriceHotel = h;
+      }
+    }
+  }
+
+  const faqItems = [
+    {
+      question: `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
+      answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub or jacuzzi${tubTypes.length > 0 ? ` (including ${tubTypes.slice(0, 2).join(' and ')})` : ''}.`
+    },
+    {
+      question: `Are bathtub hotels in ${cityName} couple-friendly?`,
+      answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
+    },
+    {
+      question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
+      answer: minPriceHotel
+        ? `Nightly rates for verified bathtub suites in ${cityName} start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
+        : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
+    },
+    {
+      question: neighborhoods.length > 0
+        ? `What are the best neighborhoods in ${cityName} to stay in for a room with a bathtub?`
+        : `How do I make sure my room in ${cityName} definitely has a bathtub?`,
+      answer: neighborhoods.length > 0
+        ? `Popular neighborhoods in ${cityName} with verified bathtub and jacuzzi hotels include ${neighborhoods.slice(0, 3).join(', ')}. Look for room categories that specifically guarantee an in-room tub.`
+        : `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
+    }
+  ];
+
+  // FAQPage schema derived from dynamic real property data
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Expedia, Agoda, and Booking.com'} to confirm that the specific room tier includes a bathtub or jacuzzi.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Are these bathtub hotels in ${cityName} couple-friendly?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `How do I make sure my room in ${cityName} definitely has a bathtub?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Standard or base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly lists a private bathtub.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Are there budget-friendly hotels with bathtubs in ${cityName}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${cityName} offers a wide spectrum of accommodations ranging from affordable boutique hotels to ultra-luxury 5-star resorts featuring deep soaking bathtubs and private spa baths.`
-        }
+    "mainEntity": faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
       }
-    ]
+    }))
   };
 
   return (
@@ -439,7 +451,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated
+            <span>🏨</span> {hotels.length} Verified Hotels · Triple-Source Validated · Updated for {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {countrySlug === 'usa'
@@ -597,41 +609,16 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   </div>
 
                   <div className="space-y-6">
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        Which hotels in {cityName} have private in-room bathtubs or jacuzzis?
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Top verified hotels in {cityName} offering private in-room tubs include {hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Expedia, Agoda, and Booking.com'} to confirm that the specific room tier includes a bathtub or jacuzzi.
-                      </p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        Are these bathtub hotels in {cityName} couple-friendly?
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Yes. Verified properties in {cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying {idRequirement} for check-in.
-                      </p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        How do I make sure my room in {cityName} definitely has a bathtub?
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Standard or base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named &ldquo;Suite with Bathtub&rdquo;, &ldquo;Jacuzzi Suite&rdquo;, &ldquo;Executive Room&rdquo;, or &ldquo;Royal Suite&rdquo; where the amenity list explicitly lists a private bathtub.
-                      </p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        Are there budget-friendly hotels with bathtubs in {cityName}?
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        Yes, {cityName} offers a wide spectrum of accommodations ranging from affordable boutique hotels to ultra-luxury 5-star resorts featuring deep soaking bathtubs and private spa baths.
-                      </p>
-                    </div>
+                    {faqItems.map((item, idx) => (
+                      <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <h3 className="font-bold text-lg text-gray-900 mb-2">
+                          {item.question}
+                        </h3>
+                        <p className="text-gray-600 leading-relaxed">
+                          {item.answer}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </section>

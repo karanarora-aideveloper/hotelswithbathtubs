@@ -711,6 +711,8 @@ export default async function Footer() {
               <Link href="/hostels" className="text-text-muted hover:text-accent font-medium transition-colors">🎒 Hostels</Link>
               <Link href="/blog" className="text-text-muted hover:text-accent font-medium transition-colors">Travel Blog</Link>
               <Link href="/about" className="text-text-muted hover:text-accent font-medium transition-colors">About Us</Link>
+              <Link href="/editorial-policy" className="text-text-muted hover:text-accent font-medium transition-colors">Editorial Policy</Link>
+              <Link href="/contact" className="text-text-muted hover:text-accent font-medium transition-colors">Contact</Link>
               <Link href="/affiliate-policy" className="text-text-muted hover:text-accent font-medium transition-colors">Affiliate Policy</Link>
               <Link href="/privacy" className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
               <Link href="/terms" className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>

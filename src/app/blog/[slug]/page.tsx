@@ -194,7 +194,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "author": {
       "@type": "Person",
       "name": "Karan Arora",
-      "jobTitle": "Founder & Luxury Hotel Scout",
+      "jobTitle": "Founder & Travel Editor",
       "url": "https://www.hotelswithbathtubs.com/about"
     },
     "publisher": {

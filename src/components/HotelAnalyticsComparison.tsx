@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import OutboundLink from './OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier, type TripDates } from '@/lib/affiliate';
 
@@ -583,6 +584,22 @@ export default function HotelAnalyticsComparison({
               </div>
             </div>
           ))}
+        </div>
+
+        {/* In-view FTC / ASA Affiliate Transparency Banner */}
+        <div className="mt-5 p-3.5 bg-slate-50/80 rounded-2xl border border-slate-200/70 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 font-jakarta">
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400">ⓘ</span>
+            <span>
+              <strong className="text-slate-700 font-semibold">Affiliate Transparency:</strong> Rates shown are live estimates from our booking partners. If you book through these links, HotelsWithBathtubs may earn an affiliate commission at no extra cost to you.
+            </span>
+          </div>
+          <Link
+            href="/affiliate-policy"
+            className="text-[#1a6fde] hover:underline font-medium text-2xs sm:text-xs shrink-0 self-start sm:self-auto"
+          >
+            Editorial Policy &rarr;
+          </Link>
         </div>
       </section>
 

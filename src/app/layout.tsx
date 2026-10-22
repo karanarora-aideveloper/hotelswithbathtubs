@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.hotelswithbathtubs.com',
   },
   openGraph: {
+    locale: 'en_US',
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
     description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
     url: 'https://www.hotelswithbathtubs.com',

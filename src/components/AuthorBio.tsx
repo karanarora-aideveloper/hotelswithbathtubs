@@ -18,18 +18,22 @@ export default function AuthorBio() {
             </span>
           </div>
           <p className="text-2xs sm:text-xs font-semibold uppercase tracking-wider text-accent mb-2">
-            Founder &amp; Luxury Hospitality Scout · HotelsWithBathtubs.com
+            Founder &amp; Travel Editor · HotelsWithBathtubs.com
           </p>
           <p className="text-xs sm:text-sm text-text-muted leading-relaxed font-serif mb-3">
-            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan pioneered the platform&rsquo;s <strong>Triple-Verification Methodology</strong>. Every hotel and jacuzzi suite featured on this site is independently audited across room inventories on MakeMyTrip, Agoda, and Booking.com to guarantee authentic, in-room soaking experiences for couples and honeymooners.
+            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan pioneered the platform&rsquo;s <strong>Triple-Verification Methodology</strong>. Every hotel and jacuzzi suite featured on this site is independently audited across room inventories on Booking.com, Agoda, MakeMyTrip, and Expedia to guarantee authentic, in-room soaking experiences for couples and honeymooners.
           </p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-semibold text-accent-secondary">
             <Link href="/about" className="hover:text-accent underline transition-colors">
               Our Verification Process
             </Link>
             <span className="hidden sm:inline">&bull;</span>
-            <Link href="/affiliate-policy" className="hover:text-accent underline transition-colors">
+            <Link href="/editorial-policy" className="hover:text-accent underline transition-colors">
               Editorial Policy
+            </Link>
+            <span className="hidden sm:inline">&bull;</span>
+            <Link href="/contact" className="hover:text-accent underline transition-colors">
+              Contact Desk
             </Link>
             <span className="hidden sm:inline">&bull;</span>
             <a href="mailto:editorial@hotelswithbathtubs.com" className="hover:text-accent underline transition-colors break-all">
