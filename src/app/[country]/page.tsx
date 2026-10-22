@@ -77,6 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       description: pageDescription,
       url: `https://www.hotelswithbathtubs.com/${countrySlug}`,
       siteName: 'Hotels with Bathtubs',
+      locale: countrySlug === 'uk' ? 'en_GB' : 'en_US',
       images: [
         {
           url: ogImageUrl,
@@ -389,6 +390,65 @@ export default async function CountryHubPage({
                   c.hasJacuzzi,
                 ])}
               />
+
+              {/* Curated Seasonal & Regional Travel Guides for USA */}
+              {countrySlug === 'usa' && (
+                <section className="mt-16 pt-10 border-t border-gray-200">
+                  <div className="flex items-center justify-between mb-6 border-b border-gray-200 pb-3">
+                    <div>
+                      <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900">Curated USA Jacuzzi & Bathtub Travel Guides</h2>
+                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Seasonal getaways, romantic couple suites, and winter mountain retreats</p>
+                    </div>
+                    <Link href="/blog" className="text-xs font-semibold text-[#1a6fde] hover:underline hidden sm:block">
+                      View all guides &rarr;
+                    </Link>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <Link
+                      href="/blog/winter-jacuzzi-getaways-usa"
+                      className="group p-5 bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full inline-block mb-3">
+                          ❄️ Seasonal Getaways
+                        </span>
+                        <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 group-hover:text-[#1a6fde] transition-colors mb-2">
+                          Top Winter Jacuzzi Getaways in the USA
+                        </h3>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                          12 snowbound mountain resorts, alpine chalets, and fireside jetted tubs from Aspen to the Poconos.
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#1a6fde]">
+                        <span>Read Travel Guide</span>
+                        <span>&rarr;</span>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/blog/valentines-day-hotels-with-jacuzzi-in-room"
+                      className="group p-5 bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full inline-block mb-3">
+                          ❤️ Romantic Stays
+                        </span>
+                        <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 group-hover:text-[#1a6fde] transition-colors mb-2">
+                          Valentine's Day Hotels with In-Room Jacuzzis
+                        </h3>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                          Hand-verified romantic hotel suites with private couple whirlpool tubs, champagne service, and candlelit ambiance.
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#1a6fde]">
+                        <span>Read Travel Guide</span>
+                        <span>&rarr;</span>
+                      </div>
+                    </Link>
+                  </div>
+                </section>
+              )}
 
               {/* Frequently Asked Questions Section */}
               <section className="mt-20 pt-12 border-t border-gray-200 max-w-4xl mx-auto">

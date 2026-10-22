@@ -1,24 +1,31 @@
 import Link from 'next/link';
 
 const TRENDING_CITIES = [
+  { name: 'New York', country: 'USA', slug: '/usa/new-york' },
+  { name: 'Paris', country: 'France', slug: '/france/paris' },
+  { name: 'London', country: 'UK', slug: '/uk/london' },
+  { name: 'Los Angeles', country: 'USA', slug: '/usa/los-angeles' },
+  { name: 'Houston', country: 'USA', slug: '/usa/houston' },
+  { name: 'Dallas', country: 'USA', slug: '/usa/dallas' },
+  { name: 'Atlanta', country: 'USA', slug: '/usa/atlanta' },
+  { name: 'Miami', country: 'USA', slug: '/usa/miami' },
+  { name: 'Chicago', country: 'USA', slug: '/usa/chicago' },
+  { name: 'Las Vegas', country: 'USA', slug: '/usa/las-vegas' },
+  { name: 'Santorini', country: 'Greece', slug: '/greece/santorini' },
+  { name: 'Bangkok', country: 'Thailand', slug: '/thailand/bangkok' },
+  { name: 'Dubai', country: 'UAE', slug: '/uae/dubai' },
+  { name: 'Singapore', country: 'Singapore', slug: '/singapore/singapore' },
+  { name: 'Bali', country: 'Indonesia', slug: '/indonesia/bali' },
+  { name: 'Phuket', country: 'Thailand', slug: '/thailand/phuket' },
+  { name: 'Sydney', country: 'Australia', slug: '/australia/sydney' },
   { name: 'Bora Bora', country: 'French Polynesia', slug: '/french-polynesia/bora-bora' },
   { name: 'Seychelles', country: 'Seychelles', slug: '/seychelles/seychelles' },
   { name: 'Mauritius', country: 'Mauritius', slug: '/mauritius/mauritius' },
   { name: 'Fiji', country: 'Fiji', slug: '/fiji/fiji' },
-  { name: 'Santorini', country: 'Greece', slug: '/greece/santorini' },
-  { name: 'Bangkok', country: 'Thailand', slug: '/thailand/bangkok' },
-  { name: 'London', country: 'UK', slug: '/uk/london' },
-  { name: 'New York', country: 'USA', slug: '/usa/new-york' },
-  { name: 'Dubai', country: 'UAE', slug: '/uae/dubai' },
-  { name: 'Singapore', country: 'Singapore', slug: '/singapore/singapore' },
-  { name: 'Paris', country: 'France', slug: '/france/paris' },
-  { name: 'Bali', country: 'Indonesia', slug: '/indonesia/bali' },
-  { name: 'Phuket', country: 'Thailand', slug: '/thailand/phuket' },
-  { name: 'Sydney', country: 'Australia', slug: '/australia/sydney' }
 ];
 
 export default function TrendingDestinations({ currentCity }: { currentCity: string }) {
-  const filtered = TRENDING_CITIES.filter(c => c.name.toLowerCase() !== currentCity.toLowerCase()).slice(0, 5);
+  const filtered = TRENDING_CITIES.filter(c => c.name.toLowerCase() !== currentCity.toLowerCase()).slice(0, 10);
 
   return (
     <div className="mt-16 pt-10 border-t border-border">

@@ -118,6 +118,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       description: pageDescription,
       url: `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}`,
       siteName: 'Hotels with Bathtubs',
+      locale: countrySlug === 'uk' ? 'en_GB' : 'en_US',
       images: [
         {
           url: ogImage,

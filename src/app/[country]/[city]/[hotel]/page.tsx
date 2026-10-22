@@ -204,6 +204,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       description: pageDescription,
       url: hotelUrl,
       siteName: 'Hotels with Bathtubs',
+      locale: countryInfo.slug === 'uk' ? 'en_GB' : 'en_US',
       images: [
         {
           url: ogImage,
@@ -260,9 +261,8 @@ export default async function HotelDetailPage({
   const cityGeo = getCityGeoCoordinates(citySlug);
   const hotelLat = typeof hotel.latitude === 'number' && !isNaN(hotel.latitude) ? hotel.latitude : cityGeo.latitude;
   const hotelLng = typeof hotel.longitude === 'number' && !isNaN(hotel.longitude) ? hotel.longitude : cityGeo.longitude;
-  const hotelStreet = hotel.streetAddress || (hotel.neighborhood ? `${hotel.neighborhood}, ${cityName}` : `${cityGeo.streetFallback}, ${cityName}`);
 
-  // Hotel Schema (Google LodgingBusiness compliant with GeoCoordinates & minimum price spec)
+  // Hotel Schema (Google LodgingBusiness compliant with GeoCoordinates & UnitPriceSpecification)
   const hotelSchema = {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
@@ -272,7 +272,7 @@ export default async function HotelDetailPage({
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": hotelStreet,
+      ...(hotel.streetAddress ? { "streetAddress": hotel.streetAddress } : {}),
       "addressLocality": cityName,
       "addressCountry": countryName,
       ...(hotel.postalCode ? { "postalCode": hotel.postalCode } : {})
@@ -302,10 +302,9 @@ export default async function HotelDetailPage({
       "url": hotel.airbnbUrl || hotel.bookingUrl || hotel.agodaUrl || hotel.tripUrl || hotel.url,
       "availability": "https://schema.org/InStock",
       "priceSpecification": {
-        "@type": "PriceSpecification",
+        "@type": "UnitPriceSpecification",
         "price": hotel.price ? hotel.price.toString().replace(/[^0-9]/g, '') : undefined,
         "priceCurrency": getCurrencyForPrice(hotel.price, countrySlug),
-        "priceType": "https://schema.org/MinimumPrice",
         "unitText": "NIGHT"
       }
     }
