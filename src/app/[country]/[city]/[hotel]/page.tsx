@@ -7,7 +7,7 @@ import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
-import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import fs from 'node:fs';
@@ -126,6 +126,7 @@ function getCurrencyForPrice(price?: string, countrySlug?: string): string {
     if (price.includes('₹')) return 'INR';
     if (price.includes('£')) return 'GBP';
     if (price.includes('€')) return 'EUR';
+    if (price.includes('CHF') || price.includes('Fr')) return 'CHF';
     if (price.includes('AED')) return 'AED';
     if (price.includes('S$')) return 'SGD';
     if (price.includes('A$')) return 'AUD';
@@ -134,26 +135,7 @@ function getCurrencyForPrice(price?: string, countrySlug?: string): string {
     if (price.includes('฿')) return 'THB';
     if (price.includes('$')) return 'USD';
   }
-  const countryCurrencyMap: Record<string, string> = {
-    india: 'INR',
-    uk: 'GBP',
-    uae: 'AED',
-    singapore: 'SGD',
-    australia: 'AUD',
-    canada: 'CAD',
-    japan: 'JPY',
-    thailand: 'THB',
-    indonesia: 'IDR',
-    vietnam: 'VND',
-    france: 'EUR',
-    italy: 'EUR',
-    germany: 'EUR',
-    spain: 'EUR',
-    netherlands: 'EUR',
-    greece: 'EUR',
-    switzerland: 'CHF',
-  };
-  return countryCurrencyMap[countrySlug || ''] || 'USD';
+  return getCountryCurrency(countrySlug || '');
 }
 
 async function getSimilarHotels(countryParam: string, cityParam: string, currentHotelSlug: string) {

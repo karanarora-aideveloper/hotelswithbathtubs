@@ -216,3 +216,101 @@ export function resolveCountry(raw: string): { dbCountry: string; slug: string; 
     regex: new RegExp(`^${escapeRegex(raw.replace(/-/g, ' '))}$`, 'i')
   };
 }
+
+export const countryCurrencyMap: Record<string, string> = {
+  // Asia
+  india: 'INR',
+  thailand: 'THB',
+  singapore: 'SGD',
+  malaysia: 'MYR',
+  indonesia: 'IDR',
+  vietnam: 'VND',
+  japan: 'JPY',
+  'south-korea': 'KRW',
+  philippines: 'PHP',
+  maldives: 'USD',
+  'sri-lanka': 'LKR',
+  nepal: 'NPR',
+  cambodia: 'USD',
+  laos: 'LAK',
+  bhutan: 'INR',
+
+  // Middle East
+  uae: 'AED',
+  'saudi-arabia': 'SAR',
+  qatar: 'QAR',
+  oman: 'OMR',
+  bahrain: 'BHD',
+  jordan: 'JOD',
+  turkey: 'TRY',
+  egypt: 'EGP',
+  morocco: 'MAD',
+
+  // Americas
+  usa: 'USD',
+  canada: 'CAD',
+  mexico: 'MXN',
+  brazil: 'BRL',
+  colombia: 'COP',
+  chile: 'CLP',
+  peru: 'PEN',
+  argentina: 'ARS',
+  'costa-rica': 'USD',
+
+  // Europe - Non-EUR
+  uk: 'GBP',
+  switzerland: 'CHF',
+  norway: 'NOK',
+  sweden: 'SEK',
+  denmark: 'DKK',
+  iceland: 'ISK',
+  poland: 'PLN',
+  czechia: 'CZK',
+  hungary: 'HUF',
+
+  // Europe - Eurozone (EUR)
+  france: 'EUR',
+  italy: 'EUR',
+  germany: 'EUR',
+  spain: 'EUR',
+  netherlands: 'EUR',
+  greece: 'EUR',
+  portugal: 'EUR',
+  austria: 'EUR',
+  belgium: 'EUR',
+  ireland: 'EUR',
+  finland: 'EUR',
+  croatia: 'EUR',
+  cyprus: 'EUR',
+  malta: 'EUR',
+  estonia: 'EUR',
+  latvia: 'EUR',
+  lithuania: 'EUR',
+  slovenia: 'EUR',
+  slovakia: 'EUR',
+  luxembourg: 'EUR',
+  monaco: 'EUR',
+  andorra: 'EUR',
+  montenegro: 'EUR',
+
+  // Oceania
+  australia: 'AUD',
+  'new-zealand': 'NZD',
+  fiji: 'FJD',
+  'french-polynesia': 'XPF',
+
+  // Africa
+  'south-africa': 'ZAR',
+  mauritius: 'MUR',
+  seychelles: 'SCR',
+  kenya: 'KES',
+  tanzania: 'TZS',
+  rwanda: 'RWF',
+  namibia: 'NAD',
+  botswana: 'BWP',
+};
+
+export function getCountryCurrency(countrySlug: string): string {
+  const clean = (countrySlug || '').toLowerCase().trim();
+  return countryCurrencyMap[clean] || 'USD';
+}

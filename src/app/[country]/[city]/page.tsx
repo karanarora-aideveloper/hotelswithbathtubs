@@ -7,12 +7,30 @@ import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import Image from 'next/image';
-import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
-import { generateCityPageContent } from '@/lib/seo';
+import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
+import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import ProgressiveImage from '@/components/ProgressiveImage';
 
 export const revalidate = false;
+
+function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, citySlug: string): string {
+  const customIntro = cityIntroContent[`${citySlug}-${countrySlug}`]?.intro || (countrySlug === 'india' ? cityIntroContent[`${citySlug}-india`]?.intro : undefined);
+  if (customIntro) {
+    if (customIntro.length <= 160) return customIntro;
+    const firstSentence = customIntro.split(/[.!?]\s+/)[0];
+    if (firstSentence && firstSentence.length >= 75 && firstSentence.length <= 150) {
+      const candidate = `${firstSentence}. Verified private in-room bathtubs.`;
+      if (candidate.length <= 160) return candidate;
+      return `${firstSentence}.`;
+    }
+    const truncated = customIntro.slice(0, 155).replace(/\s+\S*$/, '');
+    return `${truncated}...`;
+  }
+  return countrySlug === 'usa'
+    ? `Discover ${count}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
+    : `Find ${count}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
+}
 
 export async function generateStaticParams() {
   await connectToDatabase();
@@ -76,9 +94,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? `Hotels with Bathtubs in ${cityName}: Top ${hotelCount} Stays (${currentYear})`
     : `Hotels with Bathtub in ${cityName} (${hotelCount} Verified Stays) (${currentYear})`;
 
-  const pageDescription = countrySlug === 'usa'
-    ? `Discover ${hotelCount}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
-    : `Find ${hotelCount}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
+  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, citySlug);
 
 
   return {
@@ -314,7 +330,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             "priceSpecification": {
               "@type": "PriceSpecification",
               "price": h.price ? h.price.toString().replace(/[^0-9]/g, '') : undefined,
-              "priceCurrency": countrySlug === 'india' ? "INR" : "USD",
+              "priceCurrency": getCountryCurrency(countrySlug),
             }
           }
         }
@@ -327,9 +343,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? `Hotels with Bathtubs in ${cityName}: Top ${hotels.length} Stays (${currentYear})`
     : `Hotels with Bathtub in ${cityName} (${hotels.length} Verified Stays) (${currentYear})`;
 
-  const pageDescription = countrySlug === 'usa'
-    ? `Discover ${hotels.length}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
-    : `Find ${hotels.length}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
+  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
 
   const destinationSchema = {
     "@context": "https://schema.org",

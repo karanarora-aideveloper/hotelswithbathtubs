@@ -132,28 +132,65 @@ export function PostHogProviderWrapper({ children }: { children: React.ReactNode
     // Guard against multiple initializations
     if ((posthog as any).__loaded) return;
 
-    posthog.init(key, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
-      // Always maintain person profiles for anonymous travelers to calculate accurate D1/D7 retention
-      person_profiles: 'always',
-      // Full session recordings — inspect exact drop-offs, hesitation, and rage clicks
-      session_recording: {
-        maskAllInputs: false,
-        maskInputOptions: { password: true },
-      },
-      // Autocapture: captures clicks, inputs, buttons, and navigation across all subdomains
-      autocapture: {
-        element_allowlist: ['a', 'button', 'form', 'input', 'select'],
-      },
-      // Manual pageview tracking in PostHogPageView above
-      capture_pageview: false,
-      respect_dnt: false,
-      loaded: (ph) => {
-        if (isUserExcluded()) {
-          ph.opt_out_capturing();
-        }
-      },
+    const startPostHog = () => {
+      if ((posthog as any).__loaded) return;
+      cleanup();
+
+      posthog.init(key, {
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+        // Always maintain person profiles for anonymous travelers to calculate accurate D1/D7 retention
+        person_profiles: 'always',
+        // Session recordings — inspect exact drop-offs, hesitation, and rage clicks without blocking main-thread hydration
+        session_recording: {
+          maskAllInputs: false,
+          maskInputOptions: { password: true },
+        },
+        // Autocapture: captures clicks, inputs, buttons, and navigation across all subdomains
+        autocapture: {
+          element_allowlist: ['a', 'button', 'form', 'input', 'select'],
+        },
+        // Manual pageview tracking in PostHogPageView above
+        capture_pageview: false,
+        respect_dnt: false,
+        loaded: (ph) => {
+          if (isUserExcluded()) {
+            ph.opt_out_capturing();
+          }
+        },
+      });
+    };
+
+    // Lazy load: initialize on first interaction or when browser is idle (max 3.5s delay)
+    // This removes heavy DOM MutationObservers from the critical path, dramatically improving mobile INP & TBT.
+    const interactionEvents = ['scroll', 'pointerdown', 'keydown', 'touchstart'] as const;
+    const onInteract = () => {
+      startPostHog();
+    };
+
+    interactionEvents.forEach((evt) => {
+      window.addEventListener(evt, onInteract, { once: true, passive: true });
     });
+
+    let idleId: any = null;
+    let timerId: any = null;
+
+    const cleanup = () => {
+      interactionEvents.forEach((evt) => {
+        window.removeEventListener(evt, onInteract);
+      });
+      if (idleId && typeof window !== 'undefined' && 'cancelIdleCallback' in window) {
+        (window as any).cancelIdleCallback(idleId);
+      }
+      if (timerId) clearTimeout(timerId);
+    };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      idleId = (window as any).requestIdleCallback(startPostHog, { timeout: 3500 });
+    } else {
+      timerId = setTimeout(startPostHog, 3500);
+    }
+
+    return cleanup;
   }, []);
 
   return (

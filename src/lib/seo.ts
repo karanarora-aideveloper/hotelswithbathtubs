@@ -974,6 +974,23 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ]
   },
 
+  // USA - Washington DC
+  'washington-dc-usa': {
+    intro: 'Washington DC blends historic grandeur with intimate boutique retreats, featuring palatial Italian marble soaking tubs, heated bathroom floors, and serene Georgetown canal view suites.',
+    amenities: [
+      'Deep European marble soaking tubs near the White House and National Mall',
+      'Artisan freestanding soaking bathtubs in historic Penn Quarter bank lofts',
+      'Heated Italian marble bathroom floors and bespoke luxury bath amenities',
+      'Georgetown canalside soaking suites with private rooftop cocktail terraces'
+    ],
+    whyChoose: [
+      'Top choice for romantic political staycations and anniversary escapes',
+      'Steps from the Smithsonian museums, Dupont Circle, and Lafayette Square',
+      'Historic 5-star palace hotels and trendsetting Logan Circle boutiques',
+      'Every bathtub amenity hand-verified across Booking.com and Expedia'
+    ]
+  },
+
   // USA - New York
   'new-york-usa': {
     intro: 'New York City delivers iconic romantic luxury, from Tribeca boutique Japanese soaking tubs to sky-high suites with deep baths framing Central Park.',
@@ -1278,6 +1295,23 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Boutique Nine Streets shopping and candlelit dining',
       'Unique historic canal house architecture',
       'Accurate room tier verification on all stays'
+    ]
+  },
+
+  // Greece - Athens
+  'athens-greece': {
+    intro: 'Athens bridges ancient classical history and vibrant Mediterranean luxury. Discover neoclassical palace suites and design lofts featuring deep marble soaking bathtubs and private balcony jacuzzis framing the illuminated Acropolis.',
+    amenities: [
+      'Private terrace hydromassage jacuzzi tubs with direct Acropolis views',
+      'Palatial Greek Pentelic marble bathrooms with deep European soaking baths',
+      'Industrial loft suites with centerpiece freestanding clawfoot and oval bathtubs',
+      'Sculptural solid brass designer soaking baths steps from Plaka and Syntagma'
+    ],
+    whyChoose: [
+      'Unobstructed sunset panoramas over the Parthenon and Temple of Olympian Zeus',
+      'Boutique accommodations nestled in historic Plaka, Psyrri, and chic Kolonaki',
+      'Effortless walking distance to classical ruins and Michelin-starred Greek dining',
+      'Verified in-room private tub tiers across Booking.com and Expedia'
     ]
   },
 
