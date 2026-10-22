@@ -710,12 +710,23 @@ export default async function HotelDetailPage({
               </div>
             </div>
 
-            <Link
-              href={`/${countrySlug}/${citySlug}`}
-              className="block text-center text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] hover:underline transition-colors font-jakarta"
-            >
-              &larr; Explore all {cityName} bathtub hotels
-            </Link>
+            <div className="space-y-2.5 font-jakarta text-center">
+              <Link
+                href={`/${countrySlug}/${citySlug}`}
+                className="block text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] hover:underline transition-colors"
+              >
+                &larr; Explore all {cityName} bathtub hotels
+              </Link>
+              <div className="pt-2 border-t border-[#5b8296]/15 flex items-center justify-center gap-2.5 text-[11px] text-slate-500">
+                <Link href="/soaking-tub-hotels" className="hover:text-[#1a6fde] hover:underline">
+                  🛁 Top 50 Soaking Tubs
+                </Link>
+                <span>&bull;</span>
+                <Link href="/hotels-with-hot-tub-in-room" className="hover:text-[#1a6fde] hover:underline">
+                  ♨️ In-Room Hot Tubs
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

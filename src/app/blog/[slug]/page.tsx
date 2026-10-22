@@ -9,7 +9,6 @@ import StructuredData from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import AuthorBio from '@/components/AuthorBio';
-import ProgressiveImage from '@/components/ProgressiveImage';
 import OutboundLink from '@/components/OutboundLink';
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
@@ -372,12 +371,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {blog.image && (
               <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs group">
-                <ProgressiveImage
-                  src={blog.image}
+                <img
+                  src={imageUrl(blog.image)}
                   alt={blog.title}
-                  priority
-                  sizes="(max-width: 768px) 100vw, 800px"
-                  className="object-cover"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="object-cover w-full h-full"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+                  }}
                 />
                 <a
                   href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(`https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`)}&media=${encodeURIComponent(imageUrl(blog.image))}&description=${encodeURIComponent(`${blog.title} - Read our curated guide on HotelsWithBathtubs.com`)}`}
@@ -478,11 +481,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <div key={h._id || h.slug} className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between">
                         <div>
                           <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
-                            <ProgressiveImage
-                              src={h.image || DEFAULT_HOTEL_IMAGE}
+                            <img
+                              src={imageUrl(h.image || DEFAULT_HOTEL_IMAGE)}
                               alt={h.name}
-                              sizes="(max-width: 768px) 100vw, 300px"
-                              className="object-cover"
+                              loading="lazy"
+                              decoding="async"
+                              className="object-cover w-full h-full"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+                              }}
                             />
                             {h.rating && Number(h.rating) > 0 && (
                               <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md text-amber-300 font-black text-xs px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
@@ -580,11 +587,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                     {relatedBlog.image && (
                       <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                        <ProgressiveImage
-                          src={relatedBlog.image}
+                        <img
+                          src={imageUrl(relatedBlog.image)}
                           alt={relatedBlog.title}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+                          }}
                         />
                       </div>
                     )}

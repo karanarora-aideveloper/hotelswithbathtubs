@@ -987,7 +987,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top choice for romantic political staycations and anniversary escapes',
       'Steps from the Smithsonian museums, Dupont Circle, and Lafayette Square',
       'Historic 5-star palace hotels and trendsetting Logan Circle boutiques',
-      'Every bathtub amenity hand-verified across Booking.com and Expedia'
+      'Every bathtub amenity hand-verified across Booking.com and direct partner channels'
     ]
   },
 
@@ -1055,7 +1055,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Exceptional 5-star luxury value with verified bathtub suites starting at ฿3,500–฿6,500/night',
       'Iconic riverside lifestyle, rooftop sky bars, and Michelin-starred dining minutes via BTS Skytrain and river shuttles',
-      'Triple-checked across Agoda, Booking.com, and Expedia to guarantee private in-room baths (never shared facilities)',
+      'Triple-checked across Agoda, Booking.com, and partner networks to guarantee private in-room baths (never shared facilities)',
       'Ideal romantic couple retreats and honeymoon sanctuaries with complete privacy'
     ]
   },
@@ -1311,7 +1311,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unobstructed sunset panoramas over the Parthenon and Temple of Olympian Zeus',
       'Boutique accommodations nestled in historic Plaka, Psyrri, and chic Kolonaki',
       'Effortless walking distance to classical ruins and Michelin-starred Greek dining',
-      'Verified in-room private tub tiers across Booking.com and Expedia'
+      'Verified in-room private tub tiers across Booking.com and direct partner channels'
     ]
   },
 
@@ -6004,7 +6004,7 @@ export function generateCityPageContent(
 
   const verificationSources = isIndia
     ? 'Booking.com, Agoda, and MakeMyTrip'
-    : 'Booking.com, Agoda, and Expedia';
+    : 'Booking.com, Agoda, and partner networks';
 
   const bookingPartners = isIndia
     ? `
@@ -6015,7 +6015,7 @@ export function generateCityPageContent(
     : `
       <li><strong>Booking.com:</strong> Instant confirmation with free cancellation and member discounts.</li>
       <li><strong>Agoda:</strong> Competitive rates and exclusive mobile savings worldwide.</li>
-      <li><strong>Expedia:</strong> Trusted international booking partner with flexible stay options.</li>
+      <li><strong>Direct Partner Channels:</strong> Hand-verified boutique stay channels and flexible reservation options.</li>
     `;
 
   // US-specific section: targets "soaking tub", "jacuzzi suite", "hot tub in room" queries

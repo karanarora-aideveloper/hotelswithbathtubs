@@ -2,7 +2,7 @@ import Link from 'next/link';
 import connectToDatabase from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
-import ProgressiveImage from '@/components/ProgressiveImage';
+import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
 export const metadata = {
   title: 'Bathtub Hotel Travel Guides & Tips',
@@ -123,12 +123,16 @@ export default async function BlogIndex() {
                 </div>
                 {featured.image && (
                   <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
-                    <ProgressiveImage
-                      src={featured.image}
+                    <img
+                      src={imageUrl(featured.image)}
                       alt={featured.title}
-                      priority
-                      sizes="(max-width: 768px) 100vw, 320px"
-                      className="object-cover"
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
+                      className="object-cover w-full h-full"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+                      }}
                     />
                   </div>
                 )}
@@ -141,12 +145,16 @@ export default async function BlogIndex() {
               <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                 {blog.image && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                    <ProgressiveImage
-                      src={blog.image}
+                    <img
+                      src={imageUrl(blog.image)}
                       alt={blog.title}
-                      priority={idx < 3}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading={idx < 3 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      fetchPriority={idx < 3 ? 'high' : 'auto'}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+                      }}
                     />
                   </div>
                 )}

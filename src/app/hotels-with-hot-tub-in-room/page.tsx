@@ -8,7 +8,7 @@ import { slugify, resolveCountry } from '@/lib/utils';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
-export const revalidate = 86400; // Daily revalidation
+export const dynamic = 'force-static';
 
 const currentYear = new Date().getFullYear();
 
@@ -265,7 +265,7 @@ export default async function HotelsWithHotTubInRoomPage() {
 
           {/* Reader Disclosure & E-E-A-T Assurance */}
           <div className="p-4 bg-slate-50 border border-gray-200 rounded-2xl text-xs text-gray-500 mb-12">
-            <strong>Affiliate Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, MakeMyTrip, or Expedia, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
+            <strong>Affiliate Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
             <Link href="/editorial-policy" className="text-[#1a6fde] underline">Editorial Policy</Link>.
           </div>
 

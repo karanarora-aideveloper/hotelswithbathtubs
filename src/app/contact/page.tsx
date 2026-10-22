@@ -120,7 +120,7 @@ export default function ContactPage() {
             <div className="p-5 bg-amber-50/70 border border-amber-200/80 rounded-2xl text-xs sm:text-sm text-amber-900">
               <h3 className="font-bold mb-1">Please Note (Guest Bookings &amp; Cancellations):</h3>
               <p>
-                HotelsWithBathtubs.com is an independent editorial directory and does not process payments or reservations directly. If you have questions regarding dates, cancellations, or modifications to an existing reservation, please contact your booking provider directly (Booking.com, Agoda, MakeMyTrip, or Expedia) using the confirmation email they provided.
+                HotelsWithBathtubs.com is an independent editorial directory and does not process payments or reservations directly. If you have questions regarding dates, cancellations, or modifications to an existing reservation, please contact your booking provider directly (Booking.com, Agoda, MakeMyTrip, or partner channels) using the confirmation email they provided.
               </p>
             </div>
 

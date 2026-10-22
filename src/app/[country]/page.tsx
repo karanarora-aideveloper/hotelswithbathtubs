@@ -333,8 +333,34 @@ export default async function CountryHubPage({
                   Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
                 </p>
                 <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                  Every property featured across our {countryName} destinations is triple-verified across MakeMyTrip, Agoda, and Booking.com to confirm that your chosen room tier guarantees a private in-room soaking tub or whirlpool jacuzzi.
+                  Every property featured across our {countryName} destinations is triple-verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your chosen room tier guarantees a private in-room soaking tub or whirlpool jacuzzi.
                 </p>
+              </div>
+
+              {/* Specialty Bathtub Collections Navigation */}
+              <div className="mb-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 mb-1">
+                    Explore Hand-Curated In-Room Tub Categories
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-600 max-w-2xl">
+                    Looking for a specific bathing style? Browse our verified global guides for deep Japanese soaking tubs and private in-room whirlpool jacuzzi suites.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 shrink-0">
+                  <Link
+                    href="/soaking-tub-hotels"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-blue-50 border border-blue-200 text-[#1a6fde] font-semibold text-xs rounded-xl shadow-2xs transition-all"
+                  >
+                    🛁 Top 50 Soaking Tub Hotels
+                  </Link>
+                  <Link
+                    href="/hotels-with-hot-tub-in-room"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-semibold text-xs rounded-xl shadow-2xs transition-all"
+                  >
+                    ♨️ In-Room Hot Tub Suites
+                  </Link>
+                </div>
               </div>
 
               <div className="flex items-center justify-between mb-6 sm:mb-8 border-b border-gray-200 pb-3">

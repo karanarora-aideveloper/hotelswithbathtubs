@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import ProgressiveImage from '@/components/ProgressiveImage';
+import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { resolveCountry, slugify } from '@/lib/utils';
 
 interface CityCardProps {
@@ -91,13 +91,16 @@ export default function CityCard({
     >
       {/* Top Media Window */}
       <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
-        <ProgressiveImage
-          src={image}
+        <img
+          src={imageUrl(image)}
           alt={`Hotels with private bathtubs in ${city}, ${country}`}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
-          priority={priority}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
+          }}
         />
 
         {/* Soft bottom vignette to separate photo from card body */}

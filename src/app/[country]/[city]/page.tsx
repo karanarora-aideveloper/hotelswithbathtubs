@@ -31,6 +31,13 @@ function getCityMetaDescription(cityName: string, countryName: string, countrySl
     : `Find ${count}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
 }
 
+function truncateToWord(str: string, maxLen: number): string {
+  if (!str || str.length <= maxLen) return str || '';
+  const truncated = str.slice(0, maxLen);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return (lastSpace > maxLen * 0.6 ? truncated.slice(0, lastSpace) : truncated).trim() + '...';
+}
+
 export async function generateStaticParams() {
   await connectToDatabase();
   const destinations = await Hotel.aggregate([
@@ -197,12 +204,12 @@ export default async function CityHotelsPage({
     airbnbUrl: h.airbnbUrl,
     tripUrl: h.tripUrl,
     amenities: (h.amenities || []).slice(0, 6),
-    description: h.description ? h.description.slice(0, 140) : '',
+    description: h.description ? truncateToWord(h.description, 140) : '',
     rating: h.rating,
     reviewsCount: h.reviewsCount,
     roomType: h.roomType,
     tubType: h.tubType,
-    bookingTip: h.bookingTip ? h.bookingTip.slice(0, 120) : '',
+    bookingTip: h.bookingTip ? truncateToWord(h.bookingTip, 120) : '',
     price: h.price,
     neighborhood: h.neighborhood,
     landmarkDistance: h.landmarkDistance,
@@ -332,7 +339,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(Boolean))) as string[];
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
-  const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and Expedia';
+  const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 
   // Find lowest price hotel for data-driven pricing FAQ
   let minPriceHotel: any = null;
@@ -429,7 +436,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-center sm:text-left">Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Expedia, Agoda'} &amp; Booking.com</span>
+          <span className="text-center sm:text-left">Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Booking.com, Agoda'} &amp; partner networks</span>
         </div>
         <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -448,7 +455,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       {/* Editorial & Affiliate Disclosure */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
         <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or Expedia'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
+          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
         </p>
       </div>
 
@@ -466,7 +473,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
               Top verified hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
               <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-              All {hotels.length} stays in our directory have been independently verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and Expedia'} to confirm that your private room tier guarantees an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
+              All {hotels.length} stays in our directory have been independently verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your private room tier guarantees an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
             </p>
           </div>
           <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
@@ -543,6 +550,32 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             </nav>
           </div>
         </section>
+
+        {/* Specialty Bathtub Collections Navigation */}
+        <div className="max-w-7xl mx-auto my-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 mb-1">
+              Looking for a Specific Bathtub Experience?
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl">
+              Compare our verified thematic collections featuring private jacuzzi whirlpool suites, outdoor mountain hot tubs, and deep Japanese soaking baths globally.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href="/soaking-tub-hotels"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-blue-50 border border-blue-200 text-[#1a6fde] font-semibold text-xs rounded-xl shadow-2xs transition-all"
+            >
+              🛁 Top 50 Soaking Tub Hotels
+            </Link>
+            <Link
+              href="/hotels-with-hot-tub-in-room"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-semibold text-xs rounded-xl shadow-2xs transition-all"
+            >
+              ♨️ Private In-Room Hot Tubs
+            </Link>
+          </div>
+        </div>
 
         {/* SEO Content Section */}
         <div className="max-w-4xl mx-auto mt-14 sm:mt-20">

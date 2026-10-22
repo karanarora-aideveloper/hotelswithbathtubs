@@ -78,7 +78,7 @@ export default function EditorialPolicyPage() {
                     Room-Tier Inventory Cross-Referencing
                   </h3>
                   <p className="text-gray-600">
-                    We independently audit room specifications across Booking.com, Agoda, MakeMyTrip, and Expedia. We identify the exact room tier code (e.g. &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is contractual, and explicitly guide users to select that tier.
+                    We independently audit room specifications across Booking.com, Agoda, MakeMyTrip, and partner inventory networks. We identify the exact room tier code (e.g. &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is contractual, and explicitly guide users to select that tier.
                   </p>
                 </div>
 
@@ -154,7 +154,7 @@ export default function EditorialPolicyPage() {
                 4. Affiliate Transparency &amp; Compensation
               </h2>
               <p>
-                HotelsWithBathtubs is free for readers. To support our extensive research and database infrastructure, we participate in affiliate marketing programs with verified online travel agencies, including Booking.com, Agoda, MakeMyTrip, and Expedia.
+                HotelsWithBathtubs is free for readers. To support our extensive research and database infrastructure, we participate in affiliate marketing programs with verified online travel agencies, including Booking.com, Agoda, MakeMyTrip, and trusted global partner networks.
               </p>
               <p className="mt-2">
                 When you click through our partner links and complete a booking, we may earn an affiliate commission at <strong>zero additional cost to you</strong>. Our editorial curation remains entirely impartial: we recommend the best stay regardless of partner commission rates.
