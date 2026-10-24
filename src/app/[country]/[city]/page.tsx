@@ -1,4 +1,5 @@
 import connectToDatabase from '@/lib/mongodb';
+import { shouldIndexDestination } from '@/lib/indexing';
 import Hotel from '@/models/Hotel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -107,7 +108,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     return {
       title: { absolute: pageTitle },
       description: pageDescription,
-      robots: { index: hotelCount >= 2, follow: true },
+      robots: { index: shouldIndexDestination(hotelCount), follow: true },
       alternates: {
         canonical: `/usa/${state.slug}`,
       },
@@ -157,10 +158,17 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query ("Hotels with Bathtub in [City]")
+  // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query
+  // For USA: "Hotels with Jacuzzi in Room in [City]" is 3.5x higher volume than "bathtub"
   // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
   const currentYear = new Date().getFullYear();
-  const pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotelCount} Stays (${currentYear})`;
+  let pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotelCount} Stays (${currentYear})`;
+  if (countrySlug === 'usa') {
+    const usCandidate = `Hotels with Jacuzzi in Room in ${cityName}: Top ${hotelCount} (${currentYear})`;
+    pageTitle = usCandidate.length <= 58
+      ? usCandidate
+      : `Hotels with Jacuzzi in ${cityName}: Top ${hotelCount} (${currentYear})`;
+  }
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, citySlug);
 
@@ -171,7 +179,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     description: pageDescription,
     robots: {
-      index: hotelCount >= 2,
+      index: shouldIndexDestination(hotelCount),
       follow: true,
     },
     alternates: {
@@ -792,6 +800,27 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                     </p>
                   </div>
                 ))}
+              </div>
+
+              {/* Neighboring State Mesh Navigation */}
+              <div className="mt-8 pt-6 border-t border-blue-200/60">
+                <span className="text-2xs font-bold uppercase tracking-wider text-gray-500 mb-3 block">
+                  Explore More US State Getaways
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {getAllStates()
+                    .filter((s) => s.slug !== stateConfig.slug)
+                    .map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={`/usa/${s.slug}`}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-blue-50 border border-blue-200 text-gray-800 hover:text-[#1a6fde] text-xs font-semibold rounded-lg transition-all shadow-2xs"
+                      >
+                        <span>{s.name}</span>
+                        <span className="text-[10px] text-gray-400">&rarr;</span>
+                      </Link>
+                    ))}
+                </div>
               </div>
             </div>
           </div>

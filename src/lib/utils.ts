@@ -4,6 +4,9 @@
 export function slugify(text: string): string {
   if (!text) return '';
   return text
+    // Transliterate accents ("Curaçao" -> "curacao", "Hôtel" -> "hotel") instead of dropping the letter
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .trim()
     .replace(/&+/g, 'and')

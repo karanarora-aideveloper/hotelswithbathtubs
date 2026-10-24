@@ -79,11 +79,9 @@ export async function onRequest(context: EventContext): Promise<Response> {
               // Ignore and check next candidate
             }
           }
-        } else if (candidates.length > 0) {
-          // Fallback if ASSETS fetcher is not available: redirect to first candidate
-          const redirectUrl = new URL(candidates[0], url.origin);
-          return Response.redirect(redirectUrl.toString(), 301);
         }
+        // Without the ASSETS fetcher we cannot confirm a candidate exists, so fall through to the
+        // 404 instead of permanently redirecting to a guessed page.
       }
     }
   }

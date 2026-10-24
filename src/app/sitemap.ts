@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { shouldIndexDestination } from '@/lib/indexing';
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
@@ -107,16 +108,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     // US State Hub Routes (High-intent regional hubs)
-    const usaLastMod = countryLastMod.get('usa') || new Date();
+    // No `new Date()` fallback: a date that changes on every build teaches Google to ignore lastmod.
+    const usaLastMod = countryLastMod.get('usa');
     const stateRoutes = getAllStateSlugs().map(slug => ({
       url: `${baseUrl}/usa/${slug}`,
-      lastModified: usaLastMod,
+      ...(usaLastMod ? { lastModified: usaLastMod } : {}),
       priority: 0.85,
     }));
 
     // City Destination Routes (strictly match [city]/page.tsx index threshold >= 2 hotels to prevent GSC noindex submission errors)
     const locationRoutes = Array.from(locationLastMod.keys())
-      .filter(location => (locationHotelCount.get(location) || 0) >= 2)
+      .filter(location => shouldIndexDestination(locationHotelCount.get(location) || 0))
       .map(location => ({
         url: `${baseUrl}/${location}`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),
@@ -125,7 +127,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Programmatic Jacuzzi Sub-page Routes (match jacuzzi/page.tsx index threshold >= 2 hotels)
     const jacuzziRoutes = Array.from(locationJacuzziCount.keys())
-      .filter(location => (locationJacuzziCount.get(location) || 0) >= 2)
+      .filter(location => shouldIndexDestination(locationJacuzziCount.get(location) || 0))
       .map(location => ({
         url: `${baseUrl}/${location}/jacuzzi`,
         ...(locationLastMod.get(location) ? { lastModified: locationLastMod.get(location)! } : {}),

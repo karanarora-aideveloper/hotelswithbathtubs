@@ -1,4 +1,5 @@
 import connectToDatabase from '@/lib/mongodb';
+import { shouldIndexDestination } from '@/lib/indexing';
 import Hotel from '@/models/Hotel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -88,7 +89,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     },
     description: pageDescription,
     robots: {
-      index: hotelCount >= 2,
+      index: shouldIndexDestination(hotelCount),
       follow: true,
     },
     alternates: {

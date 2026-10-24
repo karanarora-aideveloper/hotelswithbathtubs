@@ -182,9 +182,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const tubType = hotel.tubType || 'Private Bathtub';
   const pageTitle = `${hotel.name} — ${tubType} in ${cityName}`;
   const roomType = hotel.roomType || 'Room with Bathtub';
-  const price = hotel.price ? ` Starting at ${hotel.price}.` : '';
-  
-  const pageDescription = `${hotel.name} features ${tubType} in ${roomType}.${price} Verified private in-room bathtub in ${cityName}.`;
+  const pageDescription = `${hotel.name} features ${tubType} in ${roomType}. Verified private in-room bathtub in ${cityName}.`;
 
   const hotelSlug = slugify(hotel.slug || hotel.name);
   const ogImage = imageUrl(hotel.image);
@@ -262,6 +260,15 @@ export default async function HotelDetailPage({
   const hotelLat = typeof hotel.latitude === 'number' && !isNaN(hotel.latitude) ? hotel.latitude : cityGeo.latitude;
   const hotelLng = typeof hotel.longitude === 'number' && !isNaN(hotel.longitude) ? hotel.longitude : cityGeo.longitude;
 
+  // Parse a single numeric nightly price ("$1,234.50" -> "1234.50"); ranges or junk yield no offer
+  const schemaPrice = (() => {
+    const raw = hotel.price?.toString() ?? '';
+    const nums = raw.match(/\d[\d,]*(?:\.\d+)?/g);
+    if (!nums || nums.length !== 1) return undefined;
+    const n = Number(nums[0].replace(/,/g, ''));
+    return n > 0 ? String(n) : undefined;
+  })();
+
   // Hotel Schema (Google LodgingBusiness compliant with GeoCoordinates & UnitPriceSpecification)
   const hotelSchema = {
     "@context": "https://schema.org",
@@ -282,79 +289,39 @@ export default async function HotelDetailPage({
       "latitude": Number(hotelLat),
       "longitude": Number(hotelLng)
     },
-    ...(hasRealReviews ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        ...(hasRealRating ? { "ratingValue": Number(hotel.rating).toFixed(1) } : {}),
-        "reviewCount": Number(hotel.reviewsCount),
-        "bestRating": "5",
-        "description": "Aggregated guest review scores from verified booking partners"
-      }
-    } : {}),
+    // No aggregateRating: scores come from third-party booking partners, which Google's
+    // review-snippet policy disallows marking up as the site's own ratings.
     "amenityFeature": [
       { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
       ...(hotel.amenities || []).map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
     ],
-    "makesOffer": {
-      "@type": "Offer",
-      "name": `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`,
-      "description": `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`,
-      "url": hotel.airbnbUrl || hotel.bookingUrl || hotel.agodaUrl || hotel.tripUrl || hotel.url,
-      "availability": "https://schema.org/InStock",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "price": hotel.price ? hotel.price.toString().replace(/[^0-9]/g, '') : undefined,
-        "priceCurrency": getCurrencyForPrice(hotel.price, countrySlug),
-        "unitText": "NIGHT"
-      }
-    }
-  };
-
-  // FAQ Schema
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `Does ${hotel.name} have a private bathtub in the room?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${hotel.name} features private in-room bathtubs in select room tiers. Specifically, you should reserve the ${hotel.roomType || 'Deluxe Room or Suite with Bathtub'}.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `Is ${hotel.name} couple-friendly?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes, ${hotel.name} in ${cityName} is thoroughly verified as couple-friendly, welcoming unmarried and married couples with complete privacy.`
-        }
-      },
-      hotel.bookingTip ? {
-        "@type": "Question",
-        "name": `What is the insider booking tip for ${hotel.name}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `${hotel.bookingTip} Ensure you verify that the ${hotel.roomType || 'room category'} lists a private bathtub before finalizing your reservation.`
-        }
-      } : {
-        "@type": "Question",
-        "name": `How can I guarantee that my room gets a bathtub at ${hotel.name}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `When using our verified partner links on Agoda, MakeMyTrip, or Booking.com, choose the ${hotel.roomType || 'Bathtub Suite'} and verify that "Bathtub" is listed under Room Amenities before payment.`
+    ...(schemaPrice ? {
+      "makesOffer": {
+        "@type": "Offer",
+        "name": `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`,
+        "description": `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`,
+        "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": schemaPrice,
+          "priceCurrency": getCurrencyForPrice(hotel.price, countrySlug),
+          "unitText": "NIGHT"
         }
       }
-    ]
+    } : {})
   };
 
-  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
+  // FAQPage schema intentionally omitted: rich results are limited to gov/health sites,
+  // and the templated answers did not match the visible FAQ.
+
+  type UrlProvider = 'makemytrip' | 'booking' | 'expedia' | 'hotelscom' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
   function getUrlProvider(url?: string): UrlProvider {
     if (!url) return null;
     const lower = url.toLowerCase();
     if (lower.includes('makemytrip.com')) return 'makemytrip';
     if (lower.includes('booking.com')) return 'booking';
+    if (lower.includes('expedia.com')) return 'expedia';
+    if (lower.includes('hotels.com')) return 'hotelscom';
     if (lower.includes('agoda.com')) return 'agoda';
     if (lower.includes('trip.com')) return 'trip';
     if (lower.includes('airbnb')) return 'airbnb';
@@ -373,6 +340,30 @@ export default async function HotelDetailPage({
   }) {
     const provider = getUrlProvider(url);
     const config: Record<NonNullable<UrlProvider>, { label: string; className: string; source: string; logo: string } | null> = {
+      booking: { 
+        label: 'Check on Booking.com', 
+        source: 'Booking.com', 
+        logo: 'B',
+        className: isPrimary 
+          ? 'bg-[#003580] hover:bg-[#002860] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-sky-50/70 hover:bg-sky-100/80 text-[#003580] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-sky-200/80 flex items-center justify-between w-full font-jakarta' 
+      },
+      expedia: { 
+        label: 'Check on Expedia', 
+        source: 'Expedia', 
+        logo: 'E',
+        className: isPrimary 
+          ? 'bg-[#00256c] hover:bg-[#001c54] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-amber-50 hover:bg-amber-100 text-[#00256c] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-amber-300 flex items-center justify-between w-full font-jakarta' 
+      },
+      hotelscom: { 
+        label: 'Check on Hotels.com', 
+        source: 'Hotels.com', 
+        logo: 'H',
+        className: isPrimary 
+          ? 'bg-[#d32f2f] hover:bg-[#b71c1c] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
+          : 'bg-red-50 hover:bg-red-100 text-[#d32f2f] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-red-200 flex items-center justify-between w-full font-jakarta' 
+      },
       agoda: { 
         label: 'Check on Agoda', 
         source: 'Agoda', 
@@ -388,14 +379,6 @@ export default async function HotelDetailPage({
         className: isPrimary 
           ? 'bg-[#1f262d] hover:bg-[#2c3640] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
           : 'bg-slate-50 hover:bg-slate-100 text-[#1f262d] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-[#5b8296]/20 flex items-center justify-between w-full font-jakarta' 
-      },
-      booking: { 
-        label: 'Check on Booking.com', 
-        source: 'Booking.com', 
-        logo: 'B',
-        className: isPrimary 
-          ? 'bg-[#003580] hover:bg-[#002860] text-white text-center py-3.5 px-4 rounded-xl font-semibold transition-all text-xs sm:text-sm shadow-xs hover:shadow-md flex items-center justify-between w-full font-jakarta' 
-          : 'bg-sky-50/70 hover:bg-sky-100/80 text-[#003580] text-center py-2.5 px-4 rounded-xl font-semibold transition-colors text-xs border border-sky-200/80 flex items-center justify-between w-full font-jakarta' 
       },
       trip: { 
         label: 'Check on Trip.com', 
@@ -428,9 +411,14 @@ export default async function HotelDetailPage({
   }
 
   const isIndia = countrySlug === 'india';
-  const rawUrls = [hotel.airbnbUrl, hotel.bookingUrl, hotel.agodaUrl, hotel.tripUrl, hotel.url]
+  let rawUrls = [hotel.bookingUrl, hotel.expediaUrl, hotel.hotelsComUrl, hotel.vrboUrl, hotel.agodaUrl, hotel.tripUrl, hotel.mmtUrl, hotel.airbnbUrl, hotel.url]
     .filter((u): u is string => !!u)
     .filter((u, idx, arr) => arr.indexOf(u) === idx);
+
+  // For USA / non-India hotels, strictly suppress MakeMyTrip links
+  if (!isIndia) {
+    rawUrls = rawUrls.filter(u => !u.toLowerCase().includes('makemytrip.com') && !u.toLowerCase().includes('ekaro') && !u.toLowerCase().includes('linkredirect'));
+  }
   
   const sortedUrls = [...rawUrls].sort((a, b) => {
     const tierA = getUrlDirectnessTier(a);
@@ -440,24 +428,30 @@ export default async function HotelDetailPage({
     const provA = getUrlProvider(a);
     const provB = getUrlProvider(b);
     const priority: Record<string, number> = isIndia
-      ? { agoda: 1, makemytrip: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
-      : { booking: 1, agoda: 2, trip: 3, airbnb: 4, trivago: 5, tripadvisor: 6, makemytrip: 7 };
+      ? { agoda: 1, booking: 2, makemytrip: 3, expedia: 4, airbnb: 5, trip: 6, trivago: 7, tripadvisor: 8 }
+      : { booking: 1, expedia: 2, hotelscom: 3, vrbo: 4, agoda: 5, trip: 6, airbnb: 7, trivago: 8, tripadvisor: 9, makemytrip: 99 };
     return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
   });
 
-  // Filter out Tier 99 (broken search / generic redirect) URLs if any direct or scoped property URL exists
+  // Filter out Tier 99 (broken search / generic redirect / fake search) URLs
   const safeUrls = sortedUrls.filter(u => getUrlDirectnessTier(u) < 99);
-  const displayUrls = safeUrls.length > 0 ? safeUrls : sortedUrls;
+  const displayUrls = safeUrls;
 
   // Calculate clean Usual Rate display
-  const usualPrice = hotel.price || '₹ 4,500';
+  const usualPrice = hotel.price || (isIndia ? '₹ 4,500' : '$195');
 
   const availableSources: string[] = [];
-  if (hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda'))) availableSources.push('Agoda');
-  if (hotel.url && hotel.url.includes('makemytrip')) availableSources.push('MakeMyTrip');
-  if (hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com'))) availableSources.push('Booking.com');
-  if (hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb'))) availableSources.push('Airbnb');
-  if (hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com'))) availableSources.push('Trip.com');
+  const cleanBooking = (hotel.bookingUrl && !hotel.bookingUrl.includes('searchresults')) || (hotel.url && hotel.url.includes('booking.com') && !hotel.url.includes('searchresults'));
+  if (cleanBooking) availableSources.push('Booking.com');
+  if (hotel.expediaUrl || hotel.hotelsComUrl || hotel.vrboUrl) availableSources.push('Expedia');
+  const cleanAgoda = (hotel.agodaUrl && getUrlDirectnessTier(hotel.agodaUrl) < 99) || (hotel.url && hotel.url.includes('agoda') && getUrlDirectnessTier(hotel.url) < 99);
+  if (cleanAgoda) availableSources.push('Agoda');
+  const cleanMmt = (hotel.mmtUrl && !hotel.mmtUrl.includes('hotel-listing') && !hotel.mmtUrl.includes('searchText=')) || (hotel.url && hotel.url.includes('makemytrip') && !hotel.url.includes('hotel-listing') && !hotel.url.includes('searchText='));
+  if (isIndia && cleanMmt) availableSources.push('MakeMyTrip');
+  const cleanAirbnb = (hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) || (hotel.url && hotel.url.includes('airbnb') && hotel.url.includes('/rooms/'));
+  if (cleanAirbnb) availableSources.push('Airbnb');
+  const cleanTrip = (hotel.tripUrl && !hotel.tripUrl.includes('/hotels/list') && !hotel.tripUrl.includes('keyword=')) || (hotel.url && hotel.url.includes('trip.com') && !hotel.url.includes('/hotels/list') && !hotel.url.includes('keyword='));
+  if (cleanTrip) availableSources.push('Trip.com');
   const verifiedPlatformsText = availableSources.length > 0
     ? `Verified on ${availableSources.join(', ')}`
     : 'Triple-Source Verified';
@@ -466,7 +460,6 @@ export default async function HotelDetailPage({
     <>
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={hotelSchema} />
-      <StructuredData data={faqSchema} />
 
       {/* Quiet Luxury Breadcrumbs Bar */}
       <div className="border-b border-[#5b8296]/15 bg-white/70 backdrop-blur-md">
@@ -648,12 +641,14 @@ export default async function HotelDetailPage({
 
               <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
                 <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  {hotel.bookingTip ? `What is the insider booking tip for ${hotel.name}?` : 'Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?'}
+                  {hotel.bookingTip ? `What is the insider booking tip for ${hotel.name}?` : (isIndia ? 'Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?' : 'Why do bathtub rates vary between Expedia, Agoda, and Booking.com?')}
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
                   {hotel.bookingTip
                     ? `${hotel.bookingTip} Ensure you select the ${hotel.roomType || 'Bathtub Suite'} tier and confirm "Bathtub" is listed in room amenities before payment.`
-                    : 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile VIP discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and free cancellation.'
+                    : (isIndia
+                      ? 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and flexible cancellation on select rates.'
+                      : 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile discounts, Expedia provides OneKey rewards, and Booking.com offers Genius loyalty tiers and flexible cancellation on select rates.')
                   }
                 </p>
               </div>
@@ -679,7 +674,7 @@ export default async function HotelDetailPage({
                   <span className="text-sm text-slate-500 font-medium">/ night</span>
                 </div>
                 <p className="text-[11px] text-slate-400 mt-1 leading-normal">
-                  *Historical 30-day rate average. Live rates vary by dates, availability &amp; promotional tier.
+                  *Historical benchmark rate. Rates exclude taxes &amp; resort fees — shown at partner checkout.
                 </p>
               </div>
 
@@ -689,15 +684,24 @@ export default async function HotelDetailPage({
                   Select Platform to Check Live Rates:
                 </span>
                 <div className="flex flex-col gap-2.5">
-                  {displayUrls.map((u, i) => (
-                    <BookingButton
-                      key={i}
-                      url={u}
-                      hotelName={hotel.name}
-                      cityName={cityName}
-                      isPrimary={i === 0}
-                    />
-                  ))}
+                  {displayUrls.length > 0 ? (
+                    displayUrls.map((u, i) => (
+                      <BookingButton
+                        key={i}
+                        url={u}
+                        hotelName={hotel.name}
+                        cityName={cityName}
+                        isPrimary={i === 0}
+                      />
+                    ))
+                  ) : (
+                    <Link
+                      href={`/${countrySlug}/${citySlug}`}
+                      className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full font-jakarta"
+                    >
+                      <span>Browse All {cityName} Verified Stays &rarr;</span>
+                    </Link>
+                  )}
                 </div>
               </div>
 
