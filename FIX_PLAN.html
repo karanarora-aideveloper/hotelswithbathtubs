@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotels With Bathtubs – Fix Plan for Product</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { font: 9.5pt/1.35 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #111; background: #fff; max-width: 800px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 18pt; margin: 0 0 2px; }
+  .sub { color: #555; margin: 0 0 10px; font-size: 9pt; }
+  h2 { font-size: 11.5pt; margin: 16px 0 5px; padding: 4px 8px; background: #111; color: #fff; break-after: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h2 small { font-weight: 400; opacity: .85; font-size: 8.5pt; }
+  table { border-collapse: collapse; width: 100%; margin: 0 0 4px; }
+  th, td { border: 1px solid #888; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #eee; font-size: 8.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { break-inside: avoid; }
+  td.id { width: 34px; font-weight: 700; white-space: nowrap; }
+  td.chk { width: 22px; text-align: center; }
+  td.chk::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 1.5px solid #111; border-radius: 2px; }
+  td.pri { width: 30px; text-align: center; font-weight: 700; }
+  .t { font-weight: 700; display: block; margin-bottom: 1px; }
+  .lbl { font-weight: 700; color: #333; }
+  .box { border: 1.5px solid #111; padding: 6px 10px; margin: 8px 0; break-inside: avoid; }
+  .box ul { margin: 3px 0 0 16px; padding: 0; }
+  .num td { text-align: center; } .num td:first-child { text-align: left; }
+  .sign { margin-top: 18px; display: flex; gap: 24px; font-size: 9pt; }
+  .sign div { flex: 1; border-top: 1px solid #111; padding-top: 3px; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+
+<h1>Hotels With Bathtubs — Fix Plan</h1>
+<p class="sub">For: Product Manager · hotelswithbathtubs.com · Prepared 23 Oct 2026 · Priority: <b>H</b> high, <b>M</b> medium, <b>L</b> low · Tick the box when the test passes</p>
+
+<div class="box">
+  <b>How to read this plan.</b> Each task has what is wrong and what we change (two lines), then a simple test anyone can do without code. Work is in phase order. Phase 1 comes first because broken booking links cost revenue and trust.
+  <ul>
+    <li>Nothing is written to the live database until the product owner approves a preview of the changes.</li>
+    <li>If a hotel link cannot be verified, we remove it. We never replace it with a search page.</li>
+  </ul>
+</div>
+
+<h2>Phase 1 — Booking links <small>do first · revenue and trust</small></h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">1.1</td><td class="pri">H</td><td><span class="t">Check links on the real sites (sample run)</span>
+    We test a sample of Booking.com and Trip.com links in a real browser to measure how many are dead or wrong. Results are saved to a report only; nothing on the site changes.<br>
+    <span class="lbl">Test:</span> open the report and spot check 10 rows by hand; the result in the report should match what you see.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.2</td><td class="pri">H</td><td><span class="t">Booking.com buttons that open a search page</span>
+    Some hotel links (e.g. Nouvata, Noumea) open a city list instead of the hotel. We find the correct hotel page by name and city, or remove the button.<br>
+    <span class="lbl">Test:</span> pick 10 random cities, click each Booking.com button; every one must show the same hotel name.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.3</td><td class="pri">H</td><td><span class="t">Trip.com links show "0 properties found"</span>
+    2,930 of 3,120 Trip.com links are keyword searches that Trip ignores, so visitors land on an empty page. We swap them for the hotel's real Trip.com page, or remove them.<br>
+    <span class="lbl">Test:</span> click 10 Trip.com buttons across countries; each must open the named hotel, never an empty list.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.4</td><td class="pri">M</td><td><span class="t">Agoda links go through a search step</span>
+    988 Agoda links use a search address instead of the hotel page, and 28 are missing our affiliate ID. We use direct hotel pages and add the ID everywhere.<br>
+    <span class="lbl">Test:</span> click 10 Agoda buttons; the hotel page opens directly and the address contains our ID (cid=1972736).</td></tr>
+  <tr><td class="chk"></td><td class="id">1.5</td><td class="pri">M</td><td><span class="t">MakeMyTrip: almost no hotel pages for India</span>
+    Only 24 of 1,548 India hotels have a MakeMyTrip hotel page, so most India clicks earn nothing there. We look up the real hotel pages and leave the rest empty.<br>
+    <span class="lbl">Test:</span> open 10 India hotels; each MakeMyTrip button opens that hotel. Count of hotels with a MakeMyTrip page goes up from 24.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.6</td><td class="pri">M</td><td><span class="t">Two hotels share one Booking.com link</span>
+    13 Booking.com links are used by two different hotels, so one of them points to the wrong place. We fix or remove the wrong one.<br>
+    <span class="lbl">Test:</span> the report lists the 13 pairs; open each pair and confirm every hotel now opens its own page.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.7</td><td class="pri">M</td><td><span class="t">Old link field mixes everything</span>
+    3,177 hotels keep links in an old catch-all field. We move each link into its own platform field so the right button and badge show.<br>
+    <span class="lbl">Test:</span> a hotel with a MakeMyTrip page shows "Verified on MakeMyTrip"; a hotel without one does not.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.8</td><td class="pri">H</td><td><span class="t">Search pages must never be a booking button</span>
+    The site currently allows some Trip.com search links to appear as buttons. We block any search-type link from being shown as a booking button.<br>
+    <span class="lbl">Test:</span> browse 20 hotels; every visible booking button opens a hotel page, none opens a list.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.9</td><td class="pri">M</td><td><span class="t">Redirect button blocks some partners</span>
+    The "/out" redirect only allows some partner sites, so Trip.com, Expedia, Hotels.com, Airbnb and Vrbo clicks would fail if routed through it. We allow the partners we actually use.<br>
+    <span class="lbl">Test:</span> click one button for each partner; each opens the partner page, not an error.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.10</td><td class="pri">M</td><td><span class="t">Automatic link check on every release</span>
+    There is no automatic safeguard, so broken links can ship again. We add a quick sample check on every build and a full check weekly.<br>
+    <span class="lbl">Test:</span> deliberately add one bad link in a test copy; the build must fail and name the hotel.</td></tr>
+  <tr><td class="chk"></td><td class="id">1.11</td><td class="pri">L</td><td><span class="t">Old addresses after link repair</span>
+    If a hotel's page address changes during repair, old addresses must forward to the new one. We add forwarding rules.<br>
+    <span class="lbl">Test:</span> open an old hotel address from the report; it forwards to the new page.</td></tr>
+</table>
+
+<table class="num">
+  <tr><th>Measure (fill in after Phase 1)</th><th>Before</th><th>After</th></tr>
+  <tr><td>Trip.com links that are searches</td><td>2,930 of 3,120</td><td></td></tr>
+  <tr><td>Booking.com links not opening the hotel</td><td>measured in 1.1</td><td></td></tr>
+  <tr><td>Agoda links via search step</td><td>988</td><td></td></tr>
+  <tr><td>India hotels with a MakeMyTrip hotel page</td><td>24 of 1,548</td><td></td></tr>
+  <tr><td>Agoda links missing our ID</td><td>28</td><td></td></tr>
+</table>
+
+<h2>Phase 2 — Trust and rich-result data <small>how Google reads each hotel page</small></h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">2.1</td><td class="pri">H</td><td><span class="t">Wrong prices in search-result data (done, needs check)</span>
+    Prices like "$1,234.50" were read as 123450. Price is now parsed correctly, and left out when it is a range or missing.<br>
+    <span class="lbl">Test:</span> test 5 hotel pages in Google's Rich Results Test; price matches the page and no errors show.</td></tr>
+  <tr><td class="chk"></td><td class="id">2.2</td><td class="pri">H</td><td><span class="t">Star ratings and FAQ markup removed (done, needs check)</span>
+    Star ratings came from booking partners, which Google does not allow us to mark up. Template FAQ markup is removed; visible text stays.<br>
+    <span class="lbl">Test:</span> Rich Results Test shows no rating or FAQ data; the page still shows its ratings and FAQ to visitors.</td></tr>
+  <tr><td class="chk"></td><td class="id">2.3</td><td class="pri">H</td><td><span class="t">Hotel pages read like copies of each other</span>
+    About 4,400 hotel pages use the same sentences with names swapped, which Google treats as thin. We add facts that differ per hotel: tub type, room, area, who it suits.<br>
+    <span class="lbl">Test:</span> read 5 pages in one city; each has at least 3 facts not found on the others.</td></tr>
+  <tr><td class="chk"></td><td class="id">2.4</td><td class="pri">M</td><td><span class="t">"Verified" claims need proof</span>
+    Pages say "triple-checked" without showing how. We add a short "how we verify" note and a last-checked date, or soften the wording.<br>
+    <span class="lbl">Test:</span> every hotel page shows a verification date and links to the method.</td></tr>
+  <tr><td class="chk"></td><td class="id">2.5</td><td class="pri">L</td><td><span class="t">Prices inside search descriptions go stale</span>
+    The text shown in Google includes "Starting at $X", which changes. We remove the price from that text.<br>
+    <span class="lbl">Test:</span> view page source of 5 hotels; the description has no price.</td></tr>
+  <tr><td class="chk"></td><td class="id">2.6</td><td class="pri">H</td><td><span class="t">Internal audit files are public</span>
+    13 MB of internal hotel audit files could be downloaded from the live site. They are now removed from the deployed site and blocked in robots (done).<br>
+    <span class="lbl">Test:</span> after deploy, www.hotelswithbathtubs.com/audits/hotels_master_audit_latest.csv shows "not found".</td></tr>
+</table>
+
+<h2>Phase 3 — Search indexing <small>so Google finds the right pages</small></h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">3.1</td><td class="pri">M</td><td><span class="t">Default "canonical" points to the homepage</span>
+    A new page that forgets its own setting would tell Google "I am the homepage". We remove the default so each page must state its own.<br>
+    <span class="lbl">Test:</span> view source on 5 different page types; each canonical is its own address.</td></tr>
+  <tr><td class="chk"></td><td class="id">3.2</td><td class="pri">M</td><td><span class="t">Sitemap "last updated" dates are unreliable</span>
+    Many dates are typed by hand or change on every build, so Google learns to ignore them. We use real content dates only.<br>
+    <span class="lbl">Test:</span> open sitemap.xml twice after two builds with no content change; dates do not change.</td></tr>
+  <tr><td class="chk"></td><td class="id">3.3</td><td class="pri">M</td><td><span class="t">"Index only if 2+ hotels" rule is in three places</span>
+    If the copies disagree, the sitemap lists pages marked "do not index". We keep the rule in one place.<br>
+    <span class="lbl">Test:</span> pick a city with 1 hotel; it is absent from the sitemap and marked noindex.</td></tr>
+  <tr><td class="chk"></td><td class="id">3.4</td><td class="pri">L</td><td><span class="t">Mistyped hotel addresses redirect blindly</span>
+    The fallback can permanently redirect a typo to a guessed page that does not exist. It will show "not found" unless the target is confirmed.<br>
+    <span class="lbl">Test:</span> open /india/goa/not-a-real-hotel; you see the 404 page, not a redirect loop.</td></tr>
+  <tr><td class="chk"></td><td class="id">3.5</td><td class="pri">H</td><td><span class="t">Review real search data</span>
+    We have not looked at Google Search Console numbers. We pull indexed vs submitted pages, errors and top searches to find real problems.<br>
+    <span class="lbl">Test:</span> a one-page summary of indexed count, top 10 errors and top 20 queries is delivered.</td></tr>
+</table>
+
+<h2>Phase 4 — Site speed <small>a Google ranking factor</small></h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">4.1</td><td class="pri">M</td><td><span class="t">Five font families on every page</span>
+    Every visit downloads five fonts, slowing the first view. We reduce to one or two.<br>
+    <span class="lbl">Test:</span> Lighthouse mobile score on home, a city and a hotel page is higher than before.</td></tr>
+  <tr><td class="chk"></td><td class="id">4.2</td><td class="pri">M</td><td><span class="t">Three tracking tools load at once</span>
+    Google Analytics, Mixpanel and PostHog all load immediately. We load them after the page is usable and review whether we need all three.<br>
+    <span class="lbl">Test:</span> events still appear in each tool; mobile loading time improves.</td></tr>
+  <tr><td class="chk"></td><td class="id">4.3</td><td class="pri">L</td><td><span class="t">Every build needs the database</span>
+    The site layout reads the database during build just to get the analytics ID, so a database outage can break releases. We read it from settings instead.<br>
+    <span class="lbl">Test:</span> a build succeeds with the database turned off.</td></tr>
+  <tr><td class="chk"></td><td class="id">4.4</td><td class="pri">L</td><td><span class="t">Scraping tools shipped as site dependencies</span>
+    Browser-automation and scraper packages sit in the production list, bloating installs and widening security risk. We move them to developer-only.<br>
+    <span class="lbl">Test:</span> the site builds and deploys as before; the production install is smaller.</td></tr>
+</table>
+
+<h2>Phase 5 — Code quality and security</h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">5.1</td><td class="pri">M</td><td><span class="t">194 code-quality errors</span>
+    The code checker reports 194 errors (mostly loose typing) that the build ignores. We fix them and make the build fail on new ones.<br>
+    <span class="lbl">Test:</span> the lint command ends with 0 errors.</td></tr>
+  <tr><td class="chk"></td><td class="id">5.2</td><td class="pri">H</td><td><span class="t">Admin area protection unconfirmed</span>
+    The admin pages and tools exist in the code, and we have not confirmed they require a login. We verify login and make sure they never go live in the public site.<br>
+    <span class="lbl">Test:</span> /admin on the live site shows "not found"; locally it asks for a login.</td></tr>
+  <tr><td class="chk"></td><td class="id">5.3</td><td class="pri">L</td><td><span class="t">Missing browser security headers</span>
+    The site does not send standard protection headers. We add them.<br>
+    <span class="lbl">Test:</span> securityheaders.com gives the site a grade of A or better.</td></tr>
+  <tr><td class="chk"></td><td class="id">5.4</td><td class="pri">L</td><td><span class="t">Check against the Next.js 16 guide</span>
+    The project uses a newer Next.js than most documentation covers. We read the local guide and re-check our Next-specific code against it.<br>
+    <span class="lbl">Test:</span> a short list of any deprecated or changed features found, each fixed or noted.</td></tr>
+</table>
+
+<h2>Phase 6 — Repository cleanup</h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">6.1</td><td class="pri">L</td><td><span class="t">Old files clutter the project</span>
+    Old static pages, scraper scripts, test logs and a PDF sit in the repository. We archive or delete them.<br>
+    <span class="lbl">Test:</span> the repository is smaller; the site still builds and looks the same.</td></tr>
+  <tr><td class="chk"></td><td class="id">6.2</td><td class="pri">L</td><td><span class="t">Generated files saved as code changes</span>
+    Sitemaps and data files are regenerated and committed, creating noise. We generate them during the build only.<br>
+    <span class="lbl">Test:</span> a fresh build leaves no uncommitted changes.</td></tr>
+  <tr><td class="chk"></td><td class="id">6.3</td><td class="pri">L</td><td><span class="t">Setup notes and sample settings missing</span>
+    New developers have no example settings file or current instructions. We add both.<br>
+    <span class="lbl">Test:</span> someone new follows the README and runs the site in under 30 minutes.</td></tr>
+</table>
+
+<h2>Phase 7 — Verify and release</h2>
+<table>
+  <tr><th></th><th>ID</th><th>P</th><th>Task: what we fix, and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">7.1</td><td class="pri">H</td><td><span class="t">Full build and live spot check</span>
+    We confirm type and lint checks pass, the Cloudflare build succeeds, and a sample of live pages is correct.<br>
+    <span class="lbl">Test:</span> check 10 live pages for title, hotel name, working booking buttons and no console errors.</td></tr>
+  <tr><td class="chk"></td><td class="id">7.2</td><td class="pri">M</td><td><span class="t">Tell Google and re-measure</span>
+    We resubmit the sitemap in Search Console, re-inspect key pages, and re-run the link audit to fill in the before/after table.<br>
+    <span class="lbl">Test:</span> the sitemap shows "Success" in Search Console; the measures table is complete.</td></tr>
+</table>
+
+<div class="sign">
+  <div>Product Manager</div>
+  <div>Product Owner (approves database changes)</div>
+  <div>Date</div>
+</div>
+
+</body>
+</html>

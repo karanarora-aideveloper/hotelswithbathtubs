@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotels With Bathtubs – Master Plan (24 Oct 2026)</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { font: 9.5pt/1.35 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #111; background: #fff; max-width: 800px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 18pt; margin: 0 0 2px; }
+  .sub { color: #555; margin: 0 0 10px; font-size: 9pt; }
+  h2 { font-size: 11.5pt; margin: 16px 0 5px; padding: 4px 8px; background: #111; color: #fff; break-after: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table { border-collapse: collapse; width: 100%; margin: 0 0 4px; }
+  th, td { border: 1px solid #888; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #eee; font-size: 8.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { break-inside: avoid; }
+  td.id { width: 34px; font-weight: 700; white-space: nowrap; }
+  td.st { width: 62px; font-weight: 700; font-size: 8.5pt; }
+  td.chk { width: 22px; text-align: center; }
+  td.chk::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 1.5px solid #111; border-radius: 2px; }
+  td.chk.done::before { background: #111; }
+  .t { font-weight: 700; display: block; margin-bottom: 1px; }
+  .lbl { font-weight: 700; color: #333; }
+  .box { border: 1.5px solid #111; padding: 6px 10px; margin: 8px 0; break-inside: avoid; }
+  .box ul { margin: 3px 0 0 16px; padding: 0; }
+  .sign { margin-top: 18px; display: flex; gap: 24px; font-size: 9pt; }
+  .sign div { flex: 1; border-top: 1px solid #111; padding-top: 3px; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+
+<h1>Hotels With Bathtubs — Master Plan</h1>
+<p class="sub">Written 24 Oct 2026 · Status key: <b>DONE</b> (in code, not deployed) · <b>RUNNING</b> · <b>NEXT</b> · <b>DECIDE</b> (needs the owner) · Nothing in this plan has been deployed to Cloudflare yet.</p>
+
+<div class="box">
+  <b>Rules we agreed</b>
+  <ul>
+    <li>No deploy until everything is closed. Order before deploy: type-check, lint, test build, then you approve.</li>
+    <li>Iteration = I fix all cities, then you test one random city. Whenever you say "random", I pick exactly one.</li>
+    <li>A link is kept only if the page it opens names the same hotel in the same city. Otherwise it is emptied, never replaced with a search page.</li>
+    <li>No tools that bypass bot protection. No paid services unless you say so.</li>
+  </ul>
+</div>
+
+<h2>A. Link repair (Booking.com first)</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">A1</td><td class="st">RUNNING</td><td><span class="t">First pass: Booking.com for all hotels</span>
+    About 1,430 of 4,180 hotels left; Agoda checks are off in this pass. Writes to MongoDB with backups.<br><span class="lbl">Test:</span> log shows "Done"; then test one random city (all booking buttons open the right hotel).</td></tr>
+  <tr><td class="chk"></td><td class="id">A2</td><td class="st">NEXT</td><td><span class="t">Retry pass for emptied Booking.com links</span>
+    Restore the original links for emptied hotels, re-check with the accent fix (script ready: restore-nulled-booking.mjs).<br><span class="lbl">Test:</span> Hôtel Ritz Paris gets a working Booking.com button; report lists hotels that still have no link.</td></tr>
+  <tr><td class="chk"></td><td class="id">A3</td><td class="st">NEXT</td><td><span class="t">Agoda pass</span>
+    Agoda throttles automated checks; more than half of the old <code>selectedproperty</code> links are dead. Resolve real property pages by a different route, empty the rest.<br><span class="lbl">Test:</span> 10 random Agoda buttons open the named hotel.</td></tr>
+  <tr><td class="chk"></td><td class="id">A4</td><td class="st">NEXT</td><td><span class="t">Trip.com: resolve real hotel pages</span>
+    All keyword-search links were emptied (they showed "0 properties"). Resolve real pages through Trip's search box and require a city and country match.<br><span class="lbl">Test:</span> 10 random Trip.com buttons open the named hotel in the right city.</td></tr>
+  <tr><td class="chk"></td><td class="id">A5</td><td class="st">NEXT</td><td><span class="t">MakeMyTrip detail links for India</span>
+    Only 24 of 1,548 India hotels have one. Resolve numeric hotel IDs; empty the rest.<br><span class="lbl">Test:</span> the MakeMyTrip button opens the right hotel; the "Verified on MakeMyTrip" badge appears only with a real link.</td></tr>
+  <tr><td class="chk"></td><td class="id">A6</td><td class="st">NEXT</td><td><span class="t">Hotels left with no link at all (about 356 now)</span>
+    Decide per hotel: another platform, tone down "verified on Booking.com" text, or noindex until it has a link.<br><span class="lbl">Test:</span> no hotel page shows a Booking.com claim without a Booking.com button.</td></tr>
+  <tr><td class="chk"></td><td class="id">A7</td><td class="st">NEXT</td><td><span class="t">Cache and database agree</span>
+    After all passes, re-export link fields from MongoDB to the local cache and compare counts.<br><span class="lbl">Test:</span> before/after numbers per platform match the database.</td></tr>
+  <tr><td class="chk"></td><td class="id">A8</td><td class="st">NEXT</td><td><span class="t">Build-time link gate</span>
+    Fail the build if any hotel ships a search-page link or a missing affiliate ID.<br><span class="lbl">Test:</span> a deliberately bad link makes the build fail and names the hotel.</td></tr>
+</table>
+
+<h2>B. Done in code this week (verify, then deploy together)</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>What changed and how to test</th></tr>
+  <tr><td class="chk done"></td><td class="id">B1</td><td class="st">DONE</td><td><span class="t">Hotel schema</span> Price parsed correctly; star-rating and FAQ markup removed; price removed from meta descriptions.<br><span class="lbl">Test:</span> Google Rich Results Test on 5 hotel pages shows no errors.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B2</td><td class="st">DONE</td><td><span class="t">Audit files not published</span> public/audits removed from the deploy and blocked in robots.<br><span class="lbl">Test:</span> after deploy, /audits/hotels_master_audit_latest.csv shows "not found".</td></tr>
+  <tr><td class="chk done"></td><td class="id">B3</td><td class="st">DONE</td><td><span class="t">Click log made private</span> The live /api/track-click returned every click publicly. Now needs a secret token (CLICKS_READ_TOKEN).<br><span class="lbl">Test:</span> after deploy and adding the secret, a plain request returns 401/403.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B4</td><td class="st">DONE</td><td><span class="t">Report-wrong-data button</span> Never worked in production (405). New function and database table written; form now reports failure honestly.<br><span class="lbl">Test:</span> submit a report on a live hotel; a row appears in the hotel_reports table. Needs the table created (migrations/002_hotel_reports.sql).</td></tr>
+  <tr><td class="chk done"></td><td class="id">B5</td><td class="st">DONE</td><td><span class="t">Blog pages</span> Server pages passed image error handlers (React forbids this; blog crashed in dev). Replaced with a small client component.<br><span class="lbl">Test:</span> /blog and one blog post load; a broken image falls back to the default photo.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B6</td><td class="st">DONE</td><td><span class="t">Structured data escaping</span> A scraped description containing a closing script tag could inject HTML.<br><span class="lbl">Test:</span> view source on a hotel page; JSON-LD has no raw "&lt;".</td></tr>
+  <tr><td class="chk done"></td><td class="id">B7</td><td class="st">DONE</td><td><span class="t">Curaçao / St. Barthélemy links</span> Slugs dropped the accented letter; about a dozen links led to 404s.<br><span class="lbl">Test:</span> every hotel link on /curacao/willemstad opens a page.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B8</td><td class="st">DONE</td><td><span class="t">Next.js 16 proxy</span> middleware.ts renamed to proxy.ts (old name deprecated); build script sets it aside for the static export.<br><span class="lbl">Test:</span> test build succeeds; no deprecation warning in dev.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B9</td><td class="st">DONE</td><td><span class="t">Layout and headers</span> No database call in the root layout; no homepage canonical default; HSTS and Permissions-Policy added; .env.example added.<br><span class="lbl">Test:</span> each page shows its own canonical; securityheaders.com grade after deploy.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B10</td><td class="st">DONE</td><td><span class="t">Other small fixes</span> Shared "index only with 2+ hotels" rule; no per-build sitemap dates; no blind redirect on mistyped hotel URLs; wider /out allowlist; database reconnects after a failure; legacy url field optional; search filters escaped.<br><span class="lbl">Test:</span> type-check and test build pass.</td></tr>
+  <tr><td class="chk done"></td><td class="id">B11</td><td class="st">DONE</td><td><span class="t">Affiliate routing</span> MakeMyTrip now goes through EarnKaro (Cuelinks was not tracking); Booking.com direct; Agoda via EarnKaro.<br><span class="lbl">Test:</span> one click per platform shows up in the EarnKaro dashboard / Booking.com partner report.</td></tr>
+</table>
+
+<h2>C. Quality, speed and security (after the link passes)</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">C1</td><td class="st">NEXT</td><td><span class="t">Type-check, lint, test build</span> Run tsc, lint (194 known errors) and a Cloudflare test build with all changes; fix what breaks.<br><span class="lbl">Test:</span> all three finish with no errors.</td></tr>
+  <tr><td class="chk"></td><td class="id">C2</td><td class="st">NEXT</td><td><span class="t">Dependencies</span> 28 known vulnerabilities (2 critical, 21 high), nearly all from scraping packages in the production list. Move them to developer-only, remove unused ones.<br><span class="lbl">Test:</span> npm audit on production dependencies shows none critical.</td></tr>
+  <tr><td class="chk"></td><td class="id">C3</td><td class="st">NEXT</td><td><span class="t">Trackers and speed</span> GA4, Mixpanel and PostHog load on every page. Defer them, then measure.<br><span class="lbl">Test:</span> Lighthouse mobile score before and after; events still arrive.</td></tr>
+  <tr><td class="chk"></td><td class="id">C4</td><td class="st">NEXT</td><td><span class="t">Blog HTML cleaner</span> Replace the text-replacement cleaner with a proper sanitizer.<br><span class="lbl">Test:</span> a test post containing script, style and svg tricks renders safely.</td></tr>
+  <tr><td class="chk"></td><td class="id">C5</td><td class="st">NEXT</td><td><span class="t">Tests and CI</span> There are none. Add a basic build-and-check workflow and a few link/schema tests.<br><span class="lbl">Test:</span> a pull request runs and passes the workflow.</td></tr>
+  <tr><td class="chk"></td><td class="id">C6</td><td class="st">NEXT</td><td><span class="t">Wrong numbers and text</span> Site says "2,500+ hotels, 111 countries"; data has 4,469 and 119. Also the visitor-location function labels unknown countries "USA".<br><span class="lbl">Test:</span> numbers match the data; a German test visitor is not shown as American.</td></tr>
+  <tr><td class="chk"></td><td class="id">C7</td><td class="st">NEXT</td><td><span class="t">Repository cleanup</span> Old static pages, scraper files, test logs, the stray kolkata_test.html and generated files committed to git.<br><span class="lbl">Test:</span> smaller repository; site builds the same.</td></tr>
+</table>
+
+<h2>D. Content and SEO</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">D1</td><td class="st">NEXT</td><td><span class="t">Hotel pages read like copies</span> About 4,400 pages use the same sentences. Add facts that differ per hotel (tub type, room, area, who it suits).<br><span class="lbl">Test:</span> five pages in one city each have 3 facts not on the others.</td></tr>
+  <tr><td class="chk"></td><td class="id">D2</td><td class="st">NEXT</td><td><span class="t">"Verified" claims</span> Add a visible method and last-checked date, or soften the wording.<br><span class="lbl">Test:</span> each hotel page shows a date and links to the method.</td></tr>
+  <tr><td class="chk"></td><td class="id">D3</td><td class="st">NEXT</td><td><span class="t">Sitemap dates</span> Replace hand-typed static dates with real ones.<br><span class="lbl">Test:</span> two builds with no content change give identical dates.</td></tr>
+  <tr><td class="chk"></td><td class="id">D4</td><td class="st">DECIDE</td><td><span class="t">152 hotel addresses contain broken words</span> (for example h-tel-ritz-paris-paris). Fixing means changing live addresses with redirects.<br><span class="lbl">Test:</span> if approved, old and new addresses both work.</td></tr>
+  <tr><td class="chk"></td><td class="id">D5</td><td class="st">DECIDE</td><td><span class="t">Five font families</span> All are in real use; cutting any changes the design.<br><span class="lbl">Test:</span> before/after screenshots and Lighthouse.</td></tr>
+</table>
+
+<h2>E. Region-aware booking buttons</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">E1</td><td class="st">DECIDE</td><td><span class="t">Approve the region table</span> Asia-Pacific and Middle East groups added; Germany last. See REGION_PLAN.html.<br><span class="lbl">Test:</span> owner signs off.</td></tr>
+  <tr><td class="chk"></td><td class="id">E2</td><td class="st">DECIDE</td><td><span class="t">Affiliate accounts</span> Only EarnKaro is approved today. Expedia, Hotels.com and Trip.com IDs are empty in the build, so those clicks earn nothing until you add them (NEXT_PUBLIC_EXPEDIA_CAMREF, _TRIP_SID, _TRIP_ALLIANCEID).<br><span class="lbl">Test:</span> a built Expedia link contains the camref.</td></tr>
+  <tr><td class="chk"></td><td class="id">E3</td><td class="st">NEXT</td><td><span class="t">Region logic in the code</span> Visitor country picks 2 to 3 buttons; Booking.com is the fallback; no search-page fallbacks.<br><span class="lbl">Test:</span> switching a test country changes the buttons.</td></tr>
+  <tr><td class="chk"></td><td class="id">E4</td><td class="st">NEXT</td><td><span class="t">Data per new platform</span> Expedia first, then Hotels.com, then others, with the same dry-run, backup and spot-check process.<br><span class="lbl">Test:</span> each platform passes a random-city test.</td></tr>
+</table>
+
+<h2>F. Release (only when everything above is closed)</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">F1</td><td class="st">NEXT</td><td><span class="t">One-time setup</span> Create the hotel_reports table (D1), add the CLICKS_READ_TOKEN secret, add affiliate IDs to .env.local.<br><span class="lbl">Test:</span> report form saves; click log refuses a plain request.</td></tr>
+  <tr><td class="chk"></td><td class="id">F2</td><td class="st">NEXT</td><td><span class="t">Commit in groups, build, deploy</span> One commit per area; npm run deploy:cf.<br><span class="lbl">Test:</span> 10 live pages checked for title, canonical, booking buttons, no console errors.</td></tr>
+  <tr><td class="chk"></td><td class="id">F3</td><td class="st">NEXT</td><td><span class="t">Tell Google</span> Resubmit the sitemap in Search Console and re-inspect key pages; re-run the link audit and fill in before/after.<br><span class="lbl">Test:</span> sitemap shows "Success"; before/after table complete.</td></tr>
+</table>
+
+<div class="sign">
+  <div>Owner</div>
+  <div>Date</div>
+</div>
+
+</body>
+</html>

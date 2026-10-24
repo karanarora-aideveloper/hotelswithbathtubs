@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotels With Bathtubs – Region-Aware Booking Plan (DRAFT)</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { font: 9.5pt/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #111; background: #fff; max-width: 800px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 18pt; margin: 0 0 2px; }
+  .sub { color: #555; margin: 0 0 10px; font-size: 9pt; }
+  h2 { font-size: 11.5pt; margin: 16px 0 5px; padding: 4px 8px; background: #111; color: #fff; break-after: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  table { border-collapse: collapse; width: 100%; margin: 4px 0; }
+  th, td { border: 1px solid #888; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #eee; font-size: 8.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { break-inside: avoid; }
+  .box { border: 1.5px solid #111; padding: 6px 10px; margin: 8px 0; break-inside: avoid; }
+  .ask td:first-child { width: 22px; text-align: center; }
+  .ask td:first-child::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 1.5px solid #111; border-radius: 2px; }
+  ul { margin: 3px 0 3px 18px; padding: 0; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+
+<h1>Region-Aware Booking Plan</h1>
+<p class="sub">DRAFT for confirmation · 23 Oct 2026 · Nothing here is built yet. Items marked ASSUMPTION need the owner's yes or no.</p>
+
+<div class="box">
+  <b>The goal in one sentence.</b> Each visitor sees the booking buttons that suit where they are, not one fixed list. A visitor in India sees MakeMyTrip, Booking.com and Agoda. A visitor in the US sees Expedia, Hotels.com, Trip.com and Booking.com. Visitors in the UK and Europe see platforms they use there.
+</div>
+
+<h2>1. What changes for a visitor</h2>
+<table>
+  <tr><th>Today</th><th>After this plan</th></tr>
+  <tr><td>Everyone gets the same button order (Booking.com first, then Expedia, Hotels.com, Agoda, MakeMyTrip, others).</td><td>The order and the set of buttons depend on the visitor's region.</td></tr>
+  <tr><td>The site only tells "India" from "US" (plus a few country names).</td><td>Six visitor groups (table 2), decided from the country code the site already receives.</td></tr>
+  <tr><td>Only 190 hotels have an Expedia link. Hotels.com and Vrbo have none.</td><td>Each new platform gets verified hotel links, or no button for that hotel.</td></tr>
+</table>
+
+<h2>2. Visitor groups and platform order <small>(ASSUMPTION: confirm the lists)</small></h2>
+<table>
+  <tr><th>Visitor region</th><th>Buttons shown, best first</th><th>Status</th></tr>
+  <tr><td>India</td><td>MakeMyTrip, Booking.com, Agoda</td><td>Booking.com and Agoda being repaired now. MakeMyTrip has only 24 of 1,548 India hotels.</td></tr>
+  <tr><td>USA / Canada</td><td>Expedia, Hotels.com, Booking.com, Trip.com</td><td>Expedia has 190 hotels. Hotels.com none.</td></tr>
+  <tr><td>UK / Ireland</td><td>Booking.com, Expedia UK, Trip.com</td><td>New data needed.</td></tr>
+  <tr><td>Asia-Pacific (Singapore, Malaysia, Australia, Indonesia, Japan)</td><td>Agoda, Booking.com, Trip.com</td><td>ADDED after the traffic check: Singapore, Malaysia and Australia send more clicks than Germany. Agoda is being repaired now.</td></tr>
+  <tr><td>Middle East (UAE, Qatar, Saudi Arabia)</td><td>Booking.com, Agoda</td><td>ADDED after the traffic check. No new data needed.</td></tr>
+  <tr><td>Germany / Austria / Switzerland</td><td>Booking.com plus one German-focused platform (candidates: HRS, Hotel.de)</td><td>LOW PRIORITY: only 3 clicks from Germany and 3 from Switzerland in 90 days. Do last, or skip.</td></tr>
+  <tr><td>Rest of Europe</td><td>Booking.com, Expedia, plus a Europe-centric platform (candidates: Opodo, Lastminute)</td><td>Platform not chosen.</td></tr>
+  <tr><td>Rest of the world</td><td>Booking.com, Agoda, Trip.com</td><td>Booking.com and Agoda being repaired now.</td></tr>
+</table>
+
+<h2>3. Decisions I am assuming (please confirm each)</h2>
+<table class="ask">
+  <tr><td></td><td><b>A. Visitor location decides the buttons, not the hotel's location.</b> A US visitor viewing a hotel in India still sees Expedia first, if that hotel has an Expedia link. If it does not, the next platform in their list is used.</td></tr>
+  <tr><td></td><td><b>B. Show 2 or 3 buttons per hotel</b> (the best matches for the visitor's region), not all of them.</td></tr>
+  <tr><td></td><td><b>C. A hotel with no verified link for a platform simply skips that button.</b> We never fall back to a search page.</td></tr>
+  <tr><td></td><td><b>D. Booking.com is the global fallback</b> and appears for every region where the hotel has a verified link.</td></tr>
+  <tr><td></td><td><b>E. We use the visitor's country as the site already gets it</b> (the geo function), with no extra tracking and no personal data.</td></tr>
+  <tr><td></td><td><b>F. Data comes first, then display.</b> Showing a platform before its links are verified would repeat the dead-link problem.</td></tr>
+</table>
+
+<h2>4. What you need to provide <small>(accounts and money)</small></h2>
+<table>
+  <tr><th>Item</th><th>Why</th></tr>
+  <tr><td>Affiliate account and ID for Expedia, Hotels.com (and Vrbo if wanted)</td><td>Clicks only earn if the link carries our ID.</td></tr>
+  <tr><td>Affiliate account for Trip.com</td><td>Same.</td></tr>
+  <tr><td>Decision on the Germany and Europe platforms</td><td>Each has its own program and sign-up.</td></tr>
+  <tr><td>MakeMyTrip affiliate route (CORRECTED 24 Oct)</td><td>Stored MakeMyTrip links carry no parameter, but the site wraps every MakeMyTrip click through Cuelinks (campaign 325472) at click time. Confirm that campaign is active and paying; no new enrolment may be needed.</td></tr>
+  <tr><td>Agoda affiliate route (CORRECTED 24 Oct)</td><td>The site strips the Agoda cid and sends every Agoda click through EarnKaro (retailer 2927). Confirm that is the route you want, especially for non-India visitors.</td></tr>
+  <tr><td>Expedia / Trip.com IDs missing from the build</td><td>NEXT_PUBLIC_EXPEDIA_CAMREF, NEXT_PUBLIC_TRIP_SID and NEXT_PUBLIC_TRIP_ALLIANCEID are empty in .env.local, so deployed Expedia and Trip.com links carry no tracking ID.</td></tr>
+  <tr><td>Whether to use a link-network service</td><td>Some give deep links for several platforms under one account. I would read their terms and fees first.</td></tr>
+  <tr><td>Search Console access check</td><td>To see which countries your visitors really come from, so we pick platforms by traffic, not guesses.</td></tr>
+</table>
+
+<h2>5. Order of work</h2>
+<table>
+  <tr><th>Step</th><th>What</th><th>Done when</th></tr>
+  <tr><td>1</td><td>Finish the current Booking.com / Agoda repair and review the results with you.</td><td>You approve the random-city tests.</td></tr>
+  <tr><td>2</td><td><b>DONE 23 Oct.</b> Search Console country data pulled (section 7). Region table adjusted.</td><td>Owner signs off the adjusted table 2.</td></tr>
+  <tr><td>3</td><td>Set up affiliate accounts you chose.</td><td>IDs stored in settings, not in code.</td></tr>
+  <tr><td>4</td><td>Build the region logic: geo groups, per-region platform order, 2 to 3 buttons.</td><td>Switching a test country changes the buttons.</td></tr>
+  <tr><td>5</td><td>Collect verified hotel links for Expedia first, then the other platforms, one platform at a time, with the same dry-run, backup and spot-check process used for Booking.com.</td><td>Each platform passes your random-city test.</td></tr>
+  <tr><td>6</td><td>Add a build check: no hotel ships with a search-page link or a missing affiliate ID.</td><td>The check fails on a deliberately bad link.</td></tr>
+  <tr><td>7</td><td>Update the printable plan, run the full test, deploy.</td><td>Live pages show the right buttons per region.</td></tr>
+</table>
+
+<h2>6. Risks</h2>
+<ul>
+  <li>Expedia, Hotels.com and Trip.com are harder to read automatically than Booking.com. If a platform blocks automated checks, we use its official affiliate tool or feed, and we do not try to get around its protection.</li>
+  <li>Every new platform repeats the dead-link problem unless checked the same way.</li>
+  <li>More buttons means more affiliate-disclosure text is needed on pages.</li>
+</ul>
+
+<h2>7. Where visitors really come from <small>(Google Search Console, 23 Jul to 21 Oct 2026, clicks from search)</small></h2>
+<table>
+  <tr><th>Country</th><th>Clicks</th><th>Impressions</th><th>Share of the top 25 countries' clicks</th></tr>
+  <tr><td>India</td><td>244</td><td>25,116</td><td>about 55%</td></tr>
+  <tr><td>USA</td><td>87</td><td>8,817</td><td>about 20%</td></tr>
+  <tr><td>UK</td><td>29</td><td>2,037</td><td>about 7%</td></tr>
+  <tr><td>Singapore</td><td>12</td><td>1,020</td><td>about 3%</td></tr>
+  <tr><td>Australia</td><td>7</td><td>323</td><td>about 2%</td></tr>
+  <tr><td>Canada, Malaysia, Netherlands</td><td>5 each</td><td>579 / 331 / 120</td><td>about 1% each</td></tr>
+  <tr><td>Germany</td><td>3</td><td>181</td><td>under 1%</td></tr>
+</table>
+<ul>
+  <li><b>What this says:</b> India and the US are three quarters of the traffic, and the UK is next. Asia-Pacific together is larger than Germany and the German-speaking countries.</li>
+  <li><b>So the order of data work is:</b> finish Booking.com and Agoda, then MakeMyTrip (India), then Expedia and Hotels.com (US, UK, Canada), then Trip.com. German and other European platforms come last.</li>
+  <li><b>Caveat:</b> these are search clicks only (about 440 in 90 days). It is a small sample, so use it as a guide, not as exact shares. Site analytics (GA4, Mixpanel) would give visitor numbers by country, which I have not looked at.</li>
+</ul>
+</body>
+</html>
