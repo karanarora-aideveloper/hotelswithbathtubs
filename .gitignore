@@ -51,3 +51,4 @@ public/pins/
 *_files/
 web_pages/
 *.apk
+!.env.example
