@@ -100,9 +100,20 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
 }
 
 export async function onRequestGet(context: EventContext): Promise<Response> {
+  // The click log holds analytics identifiers, user agents and referrers: never public.
+  // Set CLICKS_READ_TOKEN as a Pages secret and send `Authorization: Bearer <token>`.
+  const expected = context.env?.CLICKS_READ_TOKEN;
+  const given = context.request.headers.get('authorization') || '';
+  if (!expected || given !== `Bearer ${expected}`) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+      status: expected ? 401 : 403,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   const url = new URL(context.request.url);
-  const limit = Math.min(parseInt(url.searchParams.get('limit') || '100', 10), 1000);
-  const offset = parseInt(url.searchParams.get('offset') || '0', 10);
+  const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') || '100', 10) || 100, 1), 1000);
+  const offset = Math.max(parseInt(url.searchParams.get('offset') || '0', 10) || 0, 0);
   const provider = url.searchParams.get('provider') || '';
 
   if (!context.env?.DB) {

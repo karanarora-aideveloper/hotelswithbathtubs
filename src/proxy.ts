@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const host = req.headers.get('host') || '';
   const url = req.nextUrl;
 
@@ -28,7 +28,9 @@ export function middleware(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set('x-pathname', url.pathname);
 
-  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin')) {
+  // The click log (GET /api/track-click) is admin data; POST stays public so clicks can be recorded.
+  const isClickLogRead = url.pathname.startsWith('/api/track-click') && req.method !== 'POST';
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api/admin') || isClickLogRead) {
     // In local development, allow access without requiring basic auth
     if (process.env.NODE_ENV === 'development') {
       return NextResponse.next({
@@ -69,7 +71,7 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // Run middleware on all paths except static assets
+    // Run proxy on all paths except static assets
     '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };

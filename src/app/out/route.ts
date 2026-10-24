@@ -15,6 +15,13 @@ export async function GET(request: NextRequest) {
     // Security validation to prevent open redirect vulnerabilities
     const isAllowedDomain =
       host.endsWith('makemytrip.com') ||
+      host.endsWith('trip.com') ||
+      host.endsWith('expedia.com') ||
+      host.endsWith('expedia.co.uk') ||
+      host.endsWith('hotels.com') ||
+      host.endsWith('vrbo.com') ||
+      host.endsWith('airbnb.com') ||
+      host.endsWith('airbnb.co.in') ||
       host.endsWith('agoda.com') ||
       host.endsWith('agoda.net') ||
       host.endsWith('booking.com') ||

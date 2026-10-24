@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import HotelClick from '@/models/HotelClick';
+import { escapeRegex } from '@/lib/utils';
 
 export async function POST(req: NextRequest) {
   try {
@@ -101,10 +102,10 @@ export async function GET(req: NextRequest) {
       query.provider = provider.toLowerCase();
     }
     if (city && city !== 'all') {
-      query.cityName = new RegExp(`^${city}$`, 'i');
+      query.cityName = new RegExp(`^${escapeRegex(city)}$`, 'i');
     }
     if (search) {
-      const sRegex = new RegExp(search, 'i');
+      const sRegex = new RegExp(escapeRegex(search), 'i');
       query.$or = [
         { hotelName: sRegex },
         { cityName: sRegex },

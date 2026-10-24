@@ -22,6 +22,7 @@ export default function ReportWrongData({ hotelName, hotelId, cityName }: Report
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   const handleToggle = (issue: string) => {
@@ -34,7 +35,7 @@ export default function ReportWrongData({ hotelName, hotelId, cityName }: Report
     if (selected.length === 0) return;
     setSubmitting(true);
     try {
-      await fetch('/api/report-hotel', {
+      const res = await fetch('/api/report-hotel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -45,8 +46,9 @@ export default function ReportWrongData({ hotelName, hotelId, cityName }: Report
           reportedAt: new Date().toISOString(),
         }),
       });
+      if (!res.ok) setFailed(true);
     } catch (_) {
-      // Silently continue — non-critical
+      setFailed(true);
     }
     setSubmitting(false);
     setSubmitted(true);
@@ -58,7 +60,7 @@ export default function ReportWrongData({ hotelName, hotelId, cityName }: Report
         disabled
         className="text-2xs text-emerald-600 font-semibold flex items-center gap-1"
       >
-        ✅ Thanks for the report!
+        {failed ? 'Sorry, the report could not be sent. Please try again later.' : '✅ Thanks for the report!'}
       </button>
     );
   }
