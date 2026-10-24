@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
 interface HotelCardImageProps {
@@ -9,6 +9,7 @@ interface HotelCardImageProps {
   hotelName: string;
   cityName: string;
   countryName: string;
+  tubType?: string;
   priority?: boolean;
   verifiedSources?: string[];
   crossVerifiedAt?: string;
@@ -20,15 +21,41 @@ export default function HotelCardImage({
   hotelName,
   cityName,
   countryName,
+  tubType,
   priority = false,
   verifiedSources = [],
   crossVerifiedAt,
 }: HotelCardImageProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isInteractive, setIsInteractive] = useState(false);
 
-  const allImages = Array.isArray(images) && images.length > 0 
-    ? images 
-    : [primaryImage];
+  // Tub-First Image Ordering: prioritize photos featuring private tubs/jacuzzis
+  const allImages = useMemo(() => {
+    const list = Array.isArray(images) && images.length > 0 ? [...images] : [primaryImage];
+    const tubPattern = /bathtub|tub|jacuzzi|bath|soak|whirlpool/i;
+    
+    // Stable sort: bring tub-specific photos to the front
+    list.sort((a, b) => {
+      const aIsTub = tubPattern.test(a);
+      const bIsTub = tubPattern.test(b);
+      if (aIsTub && !bIsTub) return -1;
+      if (!aIsTub && bIsTub) return 1;
+      return 0;
+    });
+
+    // If primaryImage was specifically verified as a bathtub image, guarantee it at index 0
+    if (primaryImage && tubPattern.test(primaryImage)) {
+      const idx = list.indexOf(primaryImage);
+      if (idx > 0) {
+        list.splice(idx, 1);
+        list.unshift(primaryImage);
+      } else if (idx === -1) {
+        list.unshift(primaryImage);
+      }
+    }
+
+    return list;
+  }, [images, primaryImage]);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -43,12 +70,17 @@ export default function HotelCardImage({
   };
 
   const currentSrc = allImages[currentIndex] || primaryImage;
+  const isUSOrIntl = countryName?.toLowerCase() !== 'india';
 
   return (
-    <div className="relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image">
+    <div 
+      className="relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image"
+      onMouseEnter={() => !isInteractive && setIsInteractive(true)}
+      onTouchStart={() => !isInteractive && setIsInteractive(true)}
+    >
       <img
         src={imageUrl(currentSrc)}
-        alt={`${hotelName} - Hotel with Bathtub in ${cityName}`}
+        alt={`${hotelName} - ${tubType || 'Hotel with Private Bathtub'} in ${cityName}`}
         loading={priority && currentIndex === 0 ? 'eager' : 'lazy'}
         decoding="async"
         fetchPriority={priority && currentIndex === 0 ? 'high' : 'auto'}
@@ -70,14 +102,16 @@ export default function HotelCardImage({
             <span className="hidden sm:inline">Verified on {verifiedSources.join(', ')}</span>
             <button type="button" className="ml-0.5 opacity-80 hover:opacity-100 bg-white/20 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center text-[9px] outline-none">i</button>
           </span>
-          <div className="absolute top-full left-0 mt-1.5 w-60 p-2.5 bg-gray-900 text-white text-[11px] rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:visible transition-all z-30 pointer-events-none">
-            We manually check every hotel across Booking.com, Agoda, and MakeMyTrip to confirm the specific room tier includes a private bathtub. Last verified: {crossVerifiedAt || 'Sep 2026'}.
+          <div className="absolute top-full left-0 mt-1.5 w-64 p-2.5 bg-gray-900 text-white text-[11px] rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:visible transition-all z-30 pointer-events-none">
+            {isUSOrIntl 
+              ? `We manually verify every hotel across Booking.com, Expedia, and Agoda to confirm the specific room tier includes a private in-room bathtub. Last verified: ${crossVerifiedAt || 'Oct 2026'}.`
+              : `We manually check every hotel across Booking.com, Agoda, and partner channels to confirm the specific room tier includes a private in-room bathtub. Last verified: ${crossVerifiedAt || 'Oct 2026'}.`}
           </div>
         </div>
       )}
 
-      {/* Multi-Image Hover Navigation Arrows */}
-      {allImages.length > 1 && (
+      {/* Multi-Image Hover Navigation (Lazy initialized on first hover/touch to save INP) */}
+      {isInteractive && allImages.length > 1 && (
         <>
           <button
             onClick={handlePrev}

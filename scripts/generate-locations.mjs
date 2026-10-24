@@ -51,30 +51,33 @@ const HotelSchema = new mongoose.Schema({}, { strict: false, collection: 'hotels
 const Hotel = mongoose.models.Hotel || mongoose.model('Hotel', HotelSchema);
 
 async function generateLocations() {
-  console.log('📍 Connecting to MongoDB to generate locations.json and search-data.json...');
+  const cachePath = path.join(rootDir, '.cache', 'all-hotels.json');
+  let allHotels = [];
+
   try {
-    await mongoose.connect(MONGODB_URI);
+    if (fs.existsSync(cachePath)) {
+      console.log('📍 Reading hotel dataset from authoritative .cache/all-hotels.json...');
+      allHotels = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+    } else if (MONGODB_URI) {
+      console.log('📍 Connecting to MongoDB to generate locations.json and search-data.json...');
+      await mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 8000 });
+      allHotels = await mongoose.connection.collection('hotels')
+        .find({ flagged: { $ne: true } })
+        .toArray();
+    } else {
+      console.error('❌ Neither .cache/all-hotels.json nor MONGODB_URI found.');
+      process.exit(1);
+    }
+
+    allHotels.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0));
 
     // 1. Generate standard locations.json (for backward compatibility)
-    const locations = await Hotel.aggregate([
-      { $match: { flagged: { $ne: true } } },
-      {
-        $group: {
-          _id: { country: '$country', city: '$city' },
-        },
-      },
-      {
-        $sort: { '_id.country': 1, '_id.city': 1 },
-      },
-    ]);
-
     const locationMap = {};
-    for (const loc of locations) {
-      if (!loc._id || !loc._id.country || !loc._id.city) continue;
-      const country = loc._id.country.trim();
-      const city = loc._id.city.trim();
+    for (const h of allHotels) {
+      if (!h.country || !h.city) continue;
+      const country = h.country.trim();
+      const city = h.city.trim();
       if (!country || !city) continue;
-
       if (!locationMap[country]) {
         locationMap[country] = [];
       }
@@ -83,23 +86,24 @@ async function generateLocations() {
       }
     }
 
+    const sortedLocationMap = {};
+    for (const c of Object.keys(locationMap).sort()) {
+      sortedLocationMap[c] = locationMap[c].sort();
+    }
+
     const publicDir = path.join(rootDir, 'public');
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
     }
 
     const outputPath = path.join(publicDir, 'locations.json');
-    fs.writeFileSync(outputPath, JSON.stringify(locationMap, null, 2), 'utf-8');
+    fs.writeFileSync(outputPath, JSON.stringify(sortedLocationMap, null, 2), 'utf-8');
 
-    const totalCountries = Object.keys(locationMap).length;
-    const totalCities = Object.values(locationMap).reduce((sum, cities) => sum + cities.length, 0);
+    const totalCountries = Object.keys(sortedLocationMap).length;
+    const totalCities = Object.values(sortedLocationMap).reduce((sum, cities) => sum + cities.length, 0);
     console.log(`✅ locations.json generated successfully: ${totalCountries} countries, ${totalCities} cities.`);
 
     // 2. Generate comprehensive search-data.json (Hotels, Cities, Countries)
-    const allHotels = await Hotel.find({ flagged: { $ne: true } })
-      .select('name city country slug')
-      .sort({ rating: -1 })
-      .lean();
 
     const countryStats = {};
     const cityStats = {};
@@ -135,20 +139,36 @@ async function generateLocations() {
       ]);
     }
 
-    const stateHubsList = [
-      ['California', 'USA', 'usa', 'california', 64],
-      ['Florida', 'USA', 'usa', 'florida', 47],
-      ['Hawaii', 'USA', 'usa', 'hawaii', 36],
-      ['Texas', 'USA', 'usa', 'texas', 24],
-      ['Massachusetts', 'USA', 'usa', 'massachusetts', 22],
-      ['New York State', 'USA', 'usa', 'new-york-state', 22],
-      ['Illinois', 'USA', 'usa', 'illinois', 22],
-      ['Colorado', 'USA', 'usa', 'colorado', 21],
-      ['Nevada', 'USA', 'usa', 'nevada', 20],
-      ['South Carolina', 'USA', 'usa', 'south-carolina', 18],
-      ['Arizona', 'USA', 'usa', 'arizona', 14],
-      ['Tennessee', 'USA', 'usa', 'tennessee', 13],
+    const stateHubsConfig = [
+      { name: 'California', slug: 'california', cities: ['los angeles', 'san francisco', 'san diego', 'lake tahoe', 'napa', 'palm springs'] },
+      { name: 'Florida', slug: 'florida', cities: ['miami', 'key west', 'orlando'] },
+      { name: 'Hawaii', slug: 'hawaii', cities: ['honolulu', 'maui'] },
+      { name: 'Texas', slug: 'texas', cities: ['austin', 'houston', 'dallas', 'san antonio'] },
+      { name: 'Massachusetts', slug: 'massachusetts', cities: ['boston'] },
+      { name: 'New York State', slug: 'new-york-state', cities: ['new york'] },
+      { name: 'Illinois', slug: 'illinois', cities: ['chicago'] },
+      { name: 'Colorado', slug: 'colorado', cities: ['aspen', 'denver'] },
+      { name: 'Nevada', slug: 'nevada', cities: ['las vegas'] },
+      { name: 'South Carolina', slug: 'south-carolina', cities: ['charleston'] },
+      { name: 'Arizona', slug: 'arizona', cities: ['scottsdale', 'sedona', 'phoenix'] },
+      { name: 'Tennessee', slug: 'tennessee', cities: ['nashville', 'gatlinburg'] },
+      { name: 'Georgia', slug: 'georgia', cities: ['atlanta', 'savannah'] },
+      { name: 'Pennsylvania', slug: 'pennsylvania', cities: ['philadelphia', 'poconos'] },
+      { name: 'Washington State', slug: 'washington', cities: ['seattle'] },
+      { name: 'Oregon', slug: 'oregon', cities: ['portland'] },
+      { name: 'North Carolina', slug: 'north-carolina', cities: ['asheville'] },
     ];
+
+    const stateHubsList = stateHubsConfig.map((state) => {
+      let count = 0;
+      for (const cityName of state.cities) {
+        const cityKey = `usa:${slugify(cityName)}`;
+        if (cityStats[cityKey]) {
+          count += cityStats[cityKey].count;
+        }
+      }
+      return [state.name, 'USA', 'usa', state.slug, count];
+    });
 
     const searchData = {
       countries: Object.values(countryStats).map((c) => [c.name, c.slug, c.count]),
@@ -168,12 +188,11 @@ async function generateLocations() {
     // 3. Save full hotel cache for static export page rendering
     const cacheDir = path.join(rootDir, '.cache');
     if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
-    const fullHotels = await Hotel.find({ flagged: { $ne: true } }).lean();
-    fs.writeFileSync(path.join(cacheDir, 'all-hotels.json'), JSON.stringify(fullHotels), 'utf-8');
-    console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${fullHotels.length} hotels).`);
+    fs.writeFileSync(path.join(cacheDir, 'all-hotels.json'), JSON.stringify(allHotels, null, 2), 'utf-8');
+    console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${allHotels.length} hotels).`);
 
     // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker
-    const matchmakerHotels = fullHotels.map((h) => {
+    const matchmakerHotels = allHotels.map((h) => {
       const country = (h.country || '').trim();
       const city = (h.city || '').trim();
       const countrySlug = countrySlugMap[country.toLowerCase()] || slugify(country);
@@ -197,7 +216,11 @@ async function generateLocations() {
         amenities: (h.amenities || []).slice(0, 5),
         bookingTip: h.bookingTip || '',
         bookingUrl: h.bookingUrl || '',
+        expediaUrl: h.expediaUrl || '',
+        hotelsComUrl: h.hotelsComUrl || '',
+        vrboUrl: h.vrboUrl || '',
         agodaUrl: h.agodaUrl || '',
+        mmtUrl: h.mmtUrl || '',
         airbnbUrl: h.airbnbUrl || '',
         tripUrl: h.tripUrl || '',
         url: h.url || '',
@@ -211,7 +234,10 @@ async function generateLocations() {
     console.error('❌ Error generating search data:', err);
     process.exit(1);
   } finally {
-    await mongoose.disconnect();
+    if (mongoose.connection && mongoose.connection.readyState !== 0) {
+      await mongoose.disconnect();
+    }
+    process.exit(0);
   }
 }
 

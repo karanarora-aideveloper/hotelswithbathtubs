@@ -39,6 +39,16 @@ export const redirects = [
   { source: '/arizona/', destination: '/usa/arizona', permanent: true },
   { source: '/tennessee', destination: '/usa/tennessee', permanent: true },
   { source: '/tennessee/', destination: '/usa/tennessee', permanent: true },
+  { source: '/georgia', destination: '/usa/georgia', permanent: true },
+  { source: '/georgia/', destination: '/usa/georgia', permanent: true },
+  { source: '/pennsylvania', destination: '/usa/pennsylvania', permanent: true },
+  { source: '/pennsylvania/', destination: '/usa/pennsylvania', permanent: true },
+  { source: '/washington', destination: '/usa/washington', permanent: true },
+  { source: '/washington/', destination: '/usa/washington', permanent: true },
+  { source: '/oregon', destination: '/usa/oregon', permanent: true },
+  { source: '/oregon/', destination: '/usa/oregon', permanent: true },
+  { source: '/north-carolina', destination: '/usa/north-carolina', permanent: true },
+  { source: '/north-carolina/', destination: '/usa/north-carolina', permanent: true },
 
   // Legacy city URL formats → canonical /country/city paths
   // These were indexed by Google under old URL structures and split ranking authority

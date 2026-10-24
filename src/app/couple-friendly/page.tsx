@@ -9,6 +9,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
+import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
 
 export const revalidate = 86400; // Daily revalidation
 
@@ -30,20 +31,20 @@ export const metadata: Metadata = {
 };
 
 const ROMANTIC_DESTINATIONS = [
+  { name: 'Napa Valley', country: 'USA', slug: 'napa', countrySlug: 'usa', vibe: 'Vineyard soaking tubs & private garden courtyard baths', icon: '🍷' },
+  { name: 'Key West', country: 'USA', slug: 'key-west', countrySlug: 'usa', vibe: 'Secluded outdoor porch bathtubs & tropical jacuzzi suites', icon: '🌴' },
+  { name: 'Aspen', country: 'USA', slug: 'aspen', countrySlug: 'usa', vibe: 'Fireside cedar tubs & snowy alpine jacuzzi chalets', icon: '🏔️' },
+  { name: 'Charleston', country: 'USA', slug: 'charleston', countrySlug: 'usa', vibe: 'Historic clawfoot soaking tubs & Southern romance', icon: '🌸' },
+  { name: 'Miami Beach', country: 'USA', slug: 'miami', countrySlug: 'usa', vibe: 'Ocean-view whirlpool suites & art deco soaking tubs', icon: '🌊' },
+  { name: 'Las Vegas', country: 'USA', slug: 'las-vegas', countrySlug: 'usa', vibe: 'Oversized marble Roman tubs & skyline jacuzzi suites', icon: '✨' },
+  { name: 'Santorini', country: 'Greece', slug: 'santorini', countrySlug: 'greece', vibe: 'Caldera cliffside cave suites with outdoor hot tubs', icon: '🇬🇷' },
+  { name: 'Paris', country: 'France', slug: 'paris', countrySlug: 'france', vibe: 'Haussmannian boutique suites with Eiffel Tower views', icon: '🗼' },
+  { name: 'Bora Bora', country: 'French Polynesia', slug: 'bora-bora', countrySlug: 'french-polynesia', vibe: 'Overwater bungalows with glass-floor bathtubs', icon: '🏝️' },
   { name: 'Goa', country: 'India', slug: 'goa', countrySlug: 'india', vibe: 'Beachfront jacuzzis & private villa plunge tubs', icon: '🏖️' },
   { name: 'Udaipur', country: 'India', slug: 'udaipur', countrySlug: 'india', vibe: 'Palatial marble tubs overlooking Lake Pichola', icon: '🏰' },
   { name: 'Munnar', country: 'India', slug: 'munnar', countrySlug: 'india', vibe: 'Mist-clad tea valley views from private jacuzzi tubs', icon: '⛰️' },
   { name: 'Manali', country: 'India', slug: 'manali', countrySlug: 'india', vibe: 'Snow-capped Himalayan views & heated whirlpool suites', icon: '❄️' },
-  { name: 'Lonavala', country: 'India', slug: 'lonavala', countrySlug: 'india', vibe: 'Monsoon valley getaways with private balcony jacuzzis', icon: '🌿' },
   { name: 'Jaipur', country: 'India', slug: 'jaipur', countrySlug: 'india', vibe: 'Heritage haveli courtyards & royal soaking baths', icon: '👑' },
-  { name: 'Ooty', country: 'India', slug: 'ooty', countrySlug: 'india', vibe: 'Colonial fireplace chalets & deep soaking tubs', icon: '🌲' },
-  { name: 'Delhi', country: 'India', slug: 'delhi', countrySlug: 'india', vibe: '5-star luxury boutique suites with private jacuzzi', icon: '✨' },
-  { name: 'Bangalore', country: 'India', slug: 'bangalore', countrySlug: 'india', vibe: 'Romantic garden city staycations with deep marble tubs', icon: '🌆' },
-  { name: 'Mumbai', country: 'India', slug: 'mumbai', countrySlug: 'india', vibe: 'Sea-facing suites & skyline bathtub view escapes', icon: '🌊' },
-  { name: 'Santorini', country: 'Greece', slug: 'santorini', countrySlug: 'greece', vibe: 'Caldera cliffside cave suites with outdoor hot tubs', icon: '🇬🇷' },
-  { name: 'Bora Bora', country: 'French Polynesia', slug: 'bora-bora', countrySlug: 'french-polynesia', vibe: 'Overwater bungalows with glass-floor bathtubs', icon: '🏝️' },
-  { name: 'Aspen', country: 'USA', slug: 'aspen', countrySlug: 'usa', vibe: 'Ski-in/ski-out chalets with private outdoor hot tubs', icon: '🏔️' },
-  { name: 'Paris', country: 'France', slug: 'paris', countrySlug: 'france', vibe: 'Haussmannian boutique suites with Eiffel Tower views', icon: '🗼' },
 ];
 
 export default async function CoupleFriendlyPage() {
@@ -470,6 +471,11 @@ export default async function CoupleFriendlyPage() {
             </div>
           </div>
         </section>
+
+        {/* Romantic Getaway Secret Drop Email Capture */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-4 pb-10">
+          <RomanticGetawayEmailCapture destinationName="Top Romantic Getaways" />
+        </div>
 
         {/* Global Catalog Footer / Trending Destinations */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8">

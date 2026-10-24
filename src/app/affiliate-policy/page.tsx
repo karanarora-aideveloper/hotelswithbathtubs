@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Affiliate Policy & Disclosure',
-  description: 'Read our Affiliate Policy & Disclosure. Learn how Hotels With Bathtubs works with verified OTAs like MakeMyTrip, Agoda, and Booking.com.',
+  description: 'Read our Affiliate Policy & Disclosure. Learn how Hotels With Bathtubs works with verified booking platforms like Booking.com, Expedia, Agoda, and Trip.com.',
   alternates: {
     canonical: '/affiliate-policy',
   },
@@ -35,9 +35,10 @@ export default function AffiliatePolicy() {
             We are proud to partner with some of the world's leading online travel agencies (OTAs) and booking platforms, including but not limited to:
           </p>
           <ul>
-            <li><strong>MakeMyTrip (MMT)</strong></li>
-            <li><strong>Agoda</strong></li>
             <li><strong>Booking.com</strong></li>
+            <li><strong>Expedia &amp; Hotels.com</strong></li>
+            <li><strong>Agoda</strong></li>
+            <li><strong>Trip.com</strong></li>
           </ul>
 
           <h2>Editorial Integrity</h2>

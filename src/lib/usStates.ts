@@ -151,7 +151,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     slug: 'texas',
     name: 'Texas',
     shortName: 'Texas',
-    cities: ['Austin', 'Houston', 'Dallas'],
+    cities: ['Austin', 'Houston', 'Dallas', 'San Antonio'],
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/austin-commodore-perry-estate-auberge-resorts-collection-austin-1.webp',
     tagline: 'Hill Country estate soaking tubs, Houston Galleria luxury suites, and chic Dallas boutique jacuzzi baths.',
     metaTitle: 'Hotels with Bathtub in Texas: Top Jacuzzi & Spa Suites (2026)',
@@ -299,7 +299,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     slug: 'colorado',
     name: 'Colorado',
     shortName: 'Colorado',
-    cities: ['Aspen'],
+    cities: ['Aspen', 'Denver'],
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/aspen-hotel-jerome-auberge-resorts-collection-aspen-1.webp',
     tagline: 'Rocky Mountain alpine hot tubs, ski chalet fireside jacuzzis, and luxury Aspen spa retreats.',
     metaTitle: 'Hotels with Bathtub in Colorado: Rocky Mountain Jacuzzi Suites (2026)',
@@ -395,7 +395,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     slug: 'arizona',
     name: 'Arizona',
     shortName: 'Arizona',
-    cities: ['Scottsdale', 'Sedona'],
+    cities: ['Scottsdale', 'Sedona', 'Phoenix'],
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-phoenician-a-luxury-collection-resort-scottsdale-scottsdale-1.webp',
     tagline: 'Sedona Red Rock vortex soaking tubs, Sonoran Desert casita baths, and Scottsdale luxury resort spas.',
     metaTitle: 'Hotels with Bathtub in Arizona: Sedona & Scottsdale Jacuzzis (2026)',
@@ -459,6 +459,154 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       {
         question: 'What are typical nightly rates for Tennessee jacuzzi accommodations?',
         answer: 'Rates in Gatlinburg and Nashville typically start from $140 to $220 per night, with luxury suites and prime mountain chalets ranging between $280 and $550 per night.'
+      }
+    ]
+  },
+
+  'georgia': {
+    slug: 'georgia',
+    name: 'Georgia',
+    shortName: 'Georgia',
+    cities: ['Atlanta', 'Savannah'],
+    heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-st-regis-atlanta.webp',
+    tagline: 'From historic Savannah squares with clawfoot soaking tubs to Buckhead Atlanta skyline jacuzzi suites.',
+    metaTitle: 'Hotels with Bathtub in Georgia: Top 25+ Jacuzzi & Soaking Suites (2026)',
+    metaDescription: 'Find verified hotels with private in-room bathtubs and jacuzzi suites in Georgia. Hand-checked romantic suites in Atlanta & Savannah.',
+    intro: 'Georgia effortlessly blends deep Southern heritage with vibrant urban sophistication. From the Spanish-moss-canopied squares and 19th-century Victorian verandas of historic Savannah to the glittering skyline towers and lush residential avenues of Buckhead Atlanta, our Georgia guide features hand-verified private in-room bathtubs, deep soaking tubs, and couple jacuzzi suites.',
+    highlights: [
+      {
+        region: 'Historic Savannah & Riverfront',
+        description: 'Romantic Queen Anne mansions and waterfront boutique hotels on Columbia and Chippewa Squares featuring antique clawfoot tubs, private verandas, and silver-service breakfasts.'
+      },
+      {
+        region: 'Atlanta (Buckhead & Midtown)',
+        description: 'High-design Buckhead towers, Midtown arts-district retreats, and historic Peachtree landmarks featuring Japanese soaking tubs, freestanding stone baths, and heated floor jacuzzi suites.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Which hotels in Georgia have the best private in-room bathtubs or jacuzzis?',
+        answer: 'Standout stays include The St. Regis Atlanta and Nobu Hotel in Buckhead, The Kehoe House and The Gastonian on Savannah historic squares, and The Perry Lane Hotel along the riverfront.'
+      },
+      {
+        question: 'What are typical nightly rates for a bathtub suite in Georgia?',
+        answer: 'Rates typically range from $185 to $295 for boutique hotels in Midtown Atlanta and historic Savannah, scaling to $380 to $600+ for Five-Star luxury stays like The St. Regis or Waldorf Astoria.'
+      }
+    ]
+  },
+
+  'pennsylvania': {
+    slug: 'pennsylvania',
+    name: 'Pennsylvania',
+    shortName: 'Pennsylvania',
+    cities: ['Philadelphia', 'Poconos'],
+    heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-rittenhouse-hotel-philadelphia.webp',
+    tagline: 'From Rittenhouse Square marble soaking tubs to iconic Pocono Mountains couples jacuzzi retreats.',
+    metaTitle: 'Hotels with Bathtub in Pennsylvania: Top Jacuzzi & Spa Suites (2026)',
+    metaDescription: 'Discover verified hotels with in-room bathtubs and jacuzzi suites across Pennsylvania. Philadelphia luxury hotels & Pocono couples resorts.',
+    intro: 'Pennsylvania offers an unmatched spectrum of bathtub getaways, spanning the high-culture urban sophistication of Philadelphia to the timeless romantic mountain hideaways of the Pocono Mountains. Whether you dream of soaking 57 floors above Center City at the Four Seasons or relaxing in an iconic heart-shaped whirlpool spa nestled among Pocono pine forests, every room in our guide has been verified.',
+    highlights: [
+      {
+        region: 'Philadelphia (Rittenhouse Square & Old City)',
+        description: 'Forbes Five-Star skyline towers, historic 19th-century boutique row houses, and Avenue of the Arts landmarks with deep marble soaking tubs.'
+      },
+      {
+        region: 'Pocono Mountains',
+        description: 'Classic all-inclusive romance resorts and cozy alpine chalets equipped with in-suite whirlpool jacuzzis, fireside champagne baths, and private indoor pools.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Which Philadelphia hotels offer the best in-room bathtubs?',
+        answer: 'Top recommendations include Four Seasons Hotel Philadelphia at Comcast Center (freestanding tubs 57 floors high), The Rittenhouse Hotel overlooking Rittenhouse Square, and Guild House Hotel in Washington Square West.'
+      },
+      {
+        question: 'Are there hotels with whirlpool jacuzzis in the Poconos?',
+        answer: 'Yes, the Poconos is historically famous for couples romance suites featuring in-room heart-shaped whirlpool jacuzzis and multi-level Champagne Tower spa tubs.'
+      }
+    ]
+  },
+
+  'washington': {
+    slug: 'washington',
+    name: 'Washington State',
+    shortName: 'Washington',
+    cities: ['Seattle'],
+    heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-four-seasons-hotel-seattle.webp',
+    tagline: 'Puget Sound waterfront soaking tubs, Elliott Bay views, and cozy Pacific Northwest fireside suites.',
+    metaTitle: 'Hotels with Bathtub in Washington State: Top Seattle Jacuzzi Suites (2026)',
+    metaDescription: 'Verified hotels with private in-room bathtubs and jacuzzi suites in Washington State. Elliott Bay views, Seattle luxury hotels & soaking tubs.',
+    intro: 'Framed by Puget Sound, Mount Rainier, and evergreen forests, Washington State offers quintessential Pacific Northwest serenity. In downtown Seattle, luxurious waterfront suites place deep soaking tubs next to floor-to-ceiling glass framing ferries gliding across Elliott Bay, while historic boutique hotels in Pioneer Square and Belltown deliver fireside whirlpool baths.',
+    highlights: [
+      {
+        region: 'Downtown Seattle & Waterfront',
+        description: 'Five-star waterfront sanctuaries and boutique retreats overlooking Pike Place Market, Elliott Bay, and the Olympic Mountains with deep soaking tubs.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Which hotels in Seattle have bathtubs with water views?',
+        answer: 'Four Seasons Hotel Seattle, The Edgewater Hotel (over Elliott Bay), and Inn at the Market feature rooms with deep soaking tubs and Puget Sound vistas.'
+      },
+      {
+        question: 'What is the average price for a hotel with a bathtub in Seattle?',
+        answer: 'Boutique and upscale hotels typically start around $220 to $310 per night, while premier waterfront five-star properties range from $450 to $700 per night.'
+      }
+    ]
+  },
+
+  'oregon': {
+    slug: 'oregon',
+    name: 'Oregon',
+    shortName: 'Oregon',
+    cities: ['Portland'],
+    heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-allison-inn-and-spa-oregon.webp',
+    tagline: 'Willamette Valley vineyard soaking tubs, Willamette Riverfront suites, and historic downtown Portland boutique retreats.',
+    metaTitle: 'Hotels with Bathtub in Oregon: Top Portland & Wine Country Suites (2026)',
+    metaDescription: 'Find verified hotels with private in-room bathtubs in Oregon. Portland boutique hotels, Willamette Valley vineyard soaking tubs & spa suites.',
+    intro: 'Oregon combines rich culinary culture, lush Willamette Valley vineyards, and rugged Pacific Northwest landscapes. Whether you are retreating to a vineyard spa with deep soaking tubs overlooking pinot noir vines or booking a historic boutique hideaway in downtown Portland with clawfoot bathtubs, our Oregon collection ensures guaranteed in-room tubs.',
+    highlights: [
+      {
+        region: 'Portland & Willamette Valley',
+        description: 'Boutique urban gems in Pearl District and Downtown, paired with world-class vineyard spa resorts in Newberg featuring deep mineral soaking tubs.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Where can I find the best hotels with bathtubs in Oregon?',
+        answer: 'The Allison Inn & Spa in Willamette Wine Country, Sentinel Hotel in Downtown Portland (private terrace whirlpool hot tubs), and The Nines on Pioneer Square are the highest rated.'
+      },
+      {
+        question: 'What are typical nightly rates in Portland for bathtub rooms?',
+        answer: 'Downtown Portland boutique hotels range from $185 to $265 per night, with premier vineyard resort suites at $480 to $650 per night.'
+      }
+    ]
+  },
+
+  'north-carolina': {
+    slug: 'north-carolina',
+    name: 'North Carolina',
+    shortName: 'North Carolina',
+    cities: ['Asheville'],
+    heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-omni-grove-park-inn-asheville.webp',
+    tagline: 'Blue Ridge Mountain stone soaking tubs, Biltmore Estate luxury, and romantic historic Asheville inns.',
+    metaTitle: 'Hotels with Bathtub in North Carolina: Top Asheville Jacuzzi Suites (2026)',
+    metaDescription: 'Discover verified hotels with private in-room bathtubs in North Carolina. Blue Ridge Mountain views, Biltmore Village luxury & Asheville jacuzzi suites.',
+    intro: 'Nestled in the majestic Blue Ridge Mountains, North Carolina is a premier romantic mountain destination. From George Vanderbilt’s historic 8,000-acre Biltmore Estate to the legendary granite halls of The Omni Grove Park Inn, our North Carolina guide features mountain-view soaking tubs, subterranean rock spas, and romantic Arts and Crafts suites with two-person jetted jacuzzis.',
+    highlights: [
+      {
+        region: 'Asheville & The Blue Ridge Mountains',
+        description: 'Granite boulder lodges, Victorian historic district B&Bs, and Biltmore Village retreats featuring two-person whirlpool tubs and mountain panoramas.'
+      }
+    ],
+    faqs: [
+      {
+        question: 'Which hotels in Asheville, NC have private in-room jacuzzi or soaking tubs?',
+        answer: 'The Omni Grove Park Inn, The Inn on Biltmore Estate, Grand Bohemian Hotel Asheville, and 1900 Inn on Montford feature confirmed private soaking tubs or jetted jacuzzis.'
+      },
+      {
+        question: 'What is the best time of year to visit Asheville for a romantic mountain getaway?',
+        answer: 'Autumn (October–November) offers world-renowned Blue Ridge fall foliage, while winter brings cozy fireplace and hot tub retreats with snow-capped mountain views.'
       }
     ]
   }

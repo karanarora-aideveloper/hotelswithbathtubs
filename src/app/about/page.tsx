@@ -39,14 +39,14 @@ export default function AboutUs() {
             Every property listed in our directory undergoes our proprietary <strong>Triple-Verification Process</strong>:
           </p>
           <ul>
-            <li><strong>Room Specification Audit:</strong> We cross-reference verified guest room inventories across Booking.com, Agoda, and MakeMyTrip to ensure the bathtub is strictly inside the guest room or private suite, not in a shared public spa.</li>
+            <li><strong>Room Specification Audit:</strong> We cross-reference verified guest room inventories across major reservation channels including Booking.com, Expedia, Agoda, and direct hotel property systems to ensure the bathtub is strictly inside the guest room or private suite, not in a shared public spa.</li>
             <li><strong>Specific Room Tier Identification:</strong> We identify the exact room category name (such as &ldquo;Executive Suite with Bathtub&rdquo; or &ldquo;Deluxe Jacuzzi Room&rdquo;) and provide direct booking guidance so guests don&rsquo;t accidentally select base-tier rooms with standing showers.</li>
             <li><strong>Continuous Link &amp; Inventory Auditing:</strong> Hotel room configurations change over time. Our automated and manual auditing monitors booking link integrity and amenity confirmation on a weekly basis.</li>
           </ul>
 
           <h2>Editorial Independence &amp; Integrity</h2>
           <p>
-            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Every property is curated strictly based on verified amenities, guest review scores, and room quality. While we participate in verified affiliate programs with major OTAs (Booking.com, Agoda, MakeMyTrip) to maintain our research platform free for readers, our editorial rankings remain 100% independent.
+            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Every property is curated strictly based on verified amenities, guest review scores, and room quality. While we participate in verified affiliate programs with major OTAs (Booking.com, Expedia, Agoda, Trip.com) to maintain our research platform free for readers, our editorial rankings remain 100% independent.
           </p>
 
           <h2>Contact &amp; Editorial Feedback</h2>

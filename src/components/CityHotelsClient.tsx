@@ -27,6 +27,10 @@ type HotelData = {
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  expediaUrl?: string;
+  hotelsComUrl?: string;
+  vrboUrl?: string;
+  mmtUrl?: string;
   airbnbUrl?: string;
   tripUrl?: string;
   amenities: string[];
@@ -100,23 +104,84 @@ export default function CityHotelsClient({
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
+  const [dateOption, setDateOption] = useState<'this-weekend' | 'next-weekend' | 'midweek' | 'custom'>('next-weekend');
+  const [customCheckin, setCustomCheckin] = useState<string>('');
+  const [customCheckout, setCustomCheckout] = useState<string>('');
+  const [showCustomPicker, setShowCustomPicker] = useState<boolean>(false);
   const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(undefined);
 
-  useEffect(() => {
+  // Pre-calculate human readable ranges for all quick date pills
+  const calculatedDatePills = useMemo(() => {
     const today = new Date();
-    const dayOfWeek = today.getDay();
-    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
-    if (daysUntilFriday === 0) daysUntilFriday = 7;
-    const friday = new Date(today);
-    friday.setDate(today.getDate() + daysUntilFriday);
-    const sunday = new Date(friday);
-    sunday.setDate(friday.getDate() + 2);
+    const dayOfWeek = today.getDay(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
     const fmt = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-    setWeekendDates({
-      checkin: fmt(friday),
-      checkout: fmt(sunday),
-      adults: 2,
-    });
+    const fmtShort = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+    // 1. This Weekend
+    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+    if (daysUntilFriday === 0 && today.getHours() >= 18) daysUntilFriday = 7;
+    const thisFri = new Date(today);
+    thisFri.setDate(today.getDate() + daysUntilFriday);
+    const thisSun = new Date(thisFri);
+    thisSun.setDate(thisFri.getDate() + 2);
+
+    // 2. Next Weekend (Popular)
+    let daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
+    const nextFri = new Date(today);
+    nextFri.setDate(today.getDate() + daysUntilNextFriday);
+    const nextSun = new Date(nextFri);
+    nextSun.setDate(nextFri.getDate() + 2);
+
+    // 3. Midweek (Tue–Thu)
+    let daysUntilTuesday = (2 - dayOfWeek + 7) % 7;
+    if (daysUntilTuesday === 0) daysUntilTuesday = 7;
+    const tue = new Date(today);
+    tue.setDate(today.getDate() + daysUntilTuesday);
+    const thu = new Date(tue);
+    thu.setDate(tue.getDate() + 2);
+
+    return {
+      'this-weekend': {
+        checkin: fmt(thisFri),
+        checkout: fmt(thisSun),
+        label: 'This Weekend',
+        range: `${fmtShort(thisFri)}–${fmtShort(thisSun)}`,
+      },
+      'next-weekend': {
+        checkin: fmt(nextFri),
+        checkout: fmt(nextSun),
+        label: 'Next Weekend (Popular)',
+        range: `${fmtShort(nextFri)}–${fmtShort(nextSun)}`,
+      },
+      midweek: {
+        checkin: fmt(tue),
+        checkout: fmt(thu),
+        label: 'Midweek (Tue–Thu)',
+        range: `${fmtShort(tue)}–${fmtShort(thu)}`,
+      },
+    };
+  }, []);
+
+  useEffect(() => {
+    const nextWk = calculatedDatePills['next-weekend'];
+    setWeekendDates({ checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 });
+    setCustomCheckin(nextWk.checkin);
+    setCustomCheckout(nextWk.checkout);
+  }, [calculatedDatePills]);
+
+  const handleSelectDateOption = useCallback((option: 'this-weekend' | 'next-weekend' | 'midweek') => {
+    setDateOption(option);
+    setShowCustomPicker(false);
+    const opt = calculatedDatePills[option];
+    setWeekendDates({ checkin: opt.checkin, checkout: opt.checkout, adults: 2 });
+  }, [calculatedDatePills]);
+
+  const handleApplyCustomDates = useCallback((checkin: string, checkout: string) => {
+    if (!checkin || !checkout) return;
+    setDateOption('custom');
+    setCustomCheckin(checkin);
+    setCustomCheckout(checkout);
+    setWeekendDates({ checkin, checkout, adults: 2 });
   }, []);
 
   // Deduplicate hotels by URL signature (same hotel added multiple times to DB)
@@ -182,7 +247,7 @@ export default function CityHotelsClient({
       allText.includes('soaking') ||
       allText.includes('freestanding') ||
       allText.includes('clawfoot') ||
-      allText.includes('stone') ||
+      /stone tub|stone bath|freestanding stone|carved stone/i.test(allText) ||
       allText.includes('marble') ||
       allText.includes('onsen')
     );
@@ -246,7 +311,9 @@ export default function CityHotelsClient({
       text.includes('haveli') ||
       text.includes('house') ||
       text.includes('lodge') ||
-      (h.rating !== undefined && h.rating >= 4.4)
+      text.includes('chateau') ||
+      text.includes('historic') ||
+      text.includes('villa')
     );
   };
 
@@ -583,12 +650,15 @@ export default function CityHotelsClient({
   };
 
   // Detect what kind of URL is stored in any booking field
-  type UrlProvider = 'makemytrip' | 'booking' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
+  type UrlProvider = 'makemytrip' | 'booking' | 'expedia' | 'hotelscom' | 'vrbo' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
   function getUrlProvider(url?: string): UrlProvider {
     if (!url) return null;
     const lower = url.toLowerCase();
     if (lower.includes('makemytrip.com')) return 'makemytrip';
     if (lower.includes('booking.com')) return 'booking';
+    if (lower.includes('expedia.com')) return 'expedia';
+    if (lower.includes('hotels.com')) return 'hotelscom';
+    if (lower.includes('vrbo.com')) return 'vrbo';
     if (lower.includes('agoda.com')) return 'agoda';
     if (lower.includes('trip.com')) return 'trip';
     if (lower.includes('airbnb')) return 'airbnb';
@@ -608,19 +678,40 @@ export default function CityHotelsClient({
   }) {
     const provider = getUrlProvider(url);
     const config: Record<NonNullable<UrlProvider>, { label: string; className: string; source: string } | null> = {
-      makemytrip: { 
-        label: 'Check on MakeMyTrip', 
-        source: 'MakeMyTrip', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
       booking: { 
         label: 'Check on Booking.com', 
         source: 'Booking.com', 
         className: isPrimary 
           ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
           : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
+      expedia: { 
+        label: 'Check on Expedia', 
+        source: 'Expedia', 
+        className: isPrimary 
+          ? 'bg-[#00256c] hover:bg-[#001c54] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-amber-50 hover:bg-amber-100 text-[#00256c] border border-amber-300 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
+      hotelscom: { 
+        label: 'Check on Hotels.com', 
+        source: 'Hotels.com', 
+        className: isPrimary 
+          ? 'bg-[#d32f2f] hover:bg-[#b71c1c] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-red-50 hover:bg-red-100 text-[#d32f2f] border border-red-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
+      vrbo: { 
+        label: 'Check on Vrbo', 
+        source: 'Vrbo', 
+        className: isPrimary 
+          ? 'bg-[#1b3b6f] hover:bg-[#12284c] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
+      },
+      makemytrip: { 
+        label: 'Check on MakeMyTrip', 
+        source: 'MakeMyTrip', 
+        className: isPrimary 
+          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
+          : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
       },
       agoda: { 
         label: 'Check on Agoda', 
@@ -974,6 +1065,62 @@ export default function CityHotelsClient({
               })}
           </div>
         </div>
+
+        {/* Row 6: Travel Dates & Booking Window */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
+            Travel Dates:
+          </span>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('this-weekend')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'this-weekend'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>🗓️ This Weekend</span>
+              <span className={`text-[10px] ml-0.5 ${dateOption === 'this-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
+                ({calculatedDatePills['this-weekend'].range})
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('next-weekend')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'next-weekend'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>🗓️ Next Weekend (Popular)</span>
+              <span className={`text-[10px] ml-0.5 ${dateOption === 'next-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
+                ({calculatedDatePills['next-weekend'].range})
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('midweek')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'midweek'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>💼 Midweek (Tue–Thu)</span>
+              <span className={`text-[10px] ml-0.5 ${dateOption === 'midweek' ? 'text-white/80' : 'text-gray-400'}`}>
+                ({calculatedDatePills.midweek.range})
+              </span>
+            </button>
+            {weekendDates && (
+              <span className="text-[11px] text-gray-500 font-medium ml-1 hidden md:inline whitespace-nowrap">
+                Selected: {weekendDates.checkin} → {weekendDates.checkout}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Matchmaker Discovery Callout */}
@@ -1006,7 +1153,7 @@ export default function CityHotelsClient({
         </div>
         <div className="text-xs sm:text-sm text-amber-900 leading-relaxed">
           <strong className="font-bold block mb-0.5">Booking Tip for {cityName} Bathtub Suites:</strong>
-          When selecting your room on MakeMyTrip, Agoda, or Booking.com, ensure your chosen room tier (such as <em>Executive Suite</em> or <em>Deluxe Room with Jacuzzi</em>) explicitly lists the bathtub amenity before confirming.
+          When selecting your room on {countryName.toLowerCase() === 'india' ? 'MakeMyTrip, Agoda, or Booking.com' : 'Booking.com, Expedia, or Agoda'}, ensure your chosen room tier (such as <em>Executive Suite</em> or <em>Deluxe Room with Jacuzzi</em>) explicitly lists the bathtub amenity before confirming.
         </div>
       </div>
 
@@ -1072,27 +1219,167 @@ export default function CityHotelsClient({
         )}
       </div>
 
+      {/* Prominent Travel Dates Selector Bar — Dynamic OTA Link Date Injection */}
+      <div className="bg-gradient-to-r from-blue-50/70 via-white to-sky-50/70 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-6 shadow-2xs">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-base shrink-0 shadow-xs">
+              🗓️
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-900 text-sm sm:text-base">Target Travel Dates</span>
+                <span className="text-[10px] font-bold text-[#1a6fde] bg-blue-100/70 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Live Rates
+                </span>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Pre-fills real-time check-in &amp; check-out directly into Booking.com, Agoda &amp; Expedia.
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Date Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('this-weekend')}
+              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'this-weekend'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>🗓️ This Weekend</span>
+              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'this-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                {calculatedDatePills['this-weekend'].range}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('next-weekend')}
+              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'next-weekend'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>🗓️ Next Weekend (Popular)</span>
+              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'next-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                {calculatedDatePills['next-weekend'].range}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleSelectDateOption('midweek')}
+              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'midweek'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>💼 Midweek (Tue–Thu)</span>
+              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'midweek' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                {calculatedDatePills.midweek.range}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowCustomPicker(!showCustomPicker)}
+              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
+                dateOption === 'custom'
+                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
+                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
+              }`}
+            >
+              <span>📅 Custom Dates {showCustomPicker ? '▲' : '▾'}</span>
+              {dateOption === 'custom' && customCheckin && (
+                <span className="text-[10px] ml-0.5 px-1.5 py-0.5 rounded bg-white/20 text-white">
+                  {customCheckin.slice(5)} → {customCheckout.slice(5)}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Custom Date Picker Tray */}
+        {showCustomPicker && (
+          <div className="mt-4 pt-3.5 border-t border-blue-100/80 flex flex-wrap items-center gap-3">
+            <span className="text-xs font-bold text-gray-700">Choose Specific Check-in &amp; Check-out:</span>
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500">In:</label>
+              <input
+                type="date"
+                value={customCheckin}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setCustomCheckin(val);
+                  if (customCheckout && val < customCheckout) {
+                    handleApplyCustomDates(val, customCheckout);
+                  }
+                }}
+                className="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-semibold text-gray-900 bg-white focus:outline-none focus:border-[#1a6fde]"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] text-gray-500">Out:</label>
+              <input
+                type="date"
+                value={customCheckout}
+                min={customCheckin || new Date().toISOString().split('T')[0]}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setCustomCheckout(val);
+                  if (customCheckin && val > customCheckin) {
+                    handleApplyCustomDates(customCheckin, val);
+                  }
+                }}
+                className="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-semibold text-gray-900 bg-white focus:outline-none focus:border-[#1a6fde]"
+              />
+            </div>
+            {customCheckin && customCheckout && customCheckout > customCheckin && (
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md">
+                ✓ Ready ({customCheckin} → {customCheckout})
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Hotel Cards Grid */}
       {filteredHotels.length > 0 ? (
         <>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
           {filteredHotels.slice(0, visibleCount).map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
-              makemytrip: 'MakeMyTrip', booking: 'Booking.com', agoda: 'Agoda', trip: 'Trip.com',
+              makemytrip: 'MakeMyTrip', booking: 'Booking.com', expedia: 'Expedia', hotelscom: 'Hotels.com', vrbo: 'Vrbo', agoda: 'Agoda', trip: 'Trip.com',
               trivago: 'Trivago', tripadvisor: 'TripAdvisor', google: '', airbnb: 'Airbnb',
             };
             const verifiedSources = [
-              ...(h.url ? [providerLabel[getUrlProvider(h.url) ?? 'google']].filter(Boolean) : []),
-              ...(h.agodaUrl ? [providerLabel[getUrlProvider(h.agodaUrl) ?? 'google']].filter(Boolean) : []),
               ...(h.bookingUrl ? [providerLabel[getUrlProvider(h.bookingUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.airbnbUrl ? [providerLabel[getUrlProvider(h.airbnbUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.expediaUrl ? [providerLabel[getUrlProvider(h.expediaUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.hotelsComUrl ? [providerLabel[getUrlProvider(h.hotelsComUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.vrboUrl ? [providerLabel[getUrlProvider(h.vrboUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.agodaUrl ? [providerLabel[getUrlProvider(h.agodaUrl) ?? 'google']].filter(Boolean) : []),
               ...(h.tripUrl ? [providerLabel[getUrlProvider(h.tripUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.mmtUrl ? [providerLabel[getUrlProvider(h.mmtUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.airbnbUrl ? [providerLabel[getUrlProvider(h.airbnbUrl) ?? 'google']].filter(Boolean) : []),
+              ...(h.url ? [providerLabel[getUrlProvider(h.url) ?? 'google']].filter(Boolean) : []),
             ].filter((v, i, a) => a.indexOf(v) === i); // dedupe
 
             const isIndia = countryName.toLowerCase() === 'india';
-            const rawUrls = [h.airbnbUrl, h.bookingUrl, h.agodaUrl, h.tripUrl, h.url]
+            let rawUrls = [h.bookingUrl, h.expediaUrl, h.hotelsComUrl, h.vrboUrl, h.agodaUrl, h.tripUrl, h.mmtUrl, h.airbnbUrl, h.url]
               .filter((u): u is string => !!u)
               .filter((u, idx, arr) => arr.indexOf(u) === idx);
+
+            // For USA & non-India hotels: strictly suppress any MakeMyTrip or Indian reseller links
+            if (!isIndia) {
+              rawUrls = rawUrls.filter(u => !u.toLowerCase().includes('makemytrip.com') && !u.toLowerCase().includes('ekaro') && !u.toLowerCase().includes('linkredirect'));
+            }
             
             const sortedUrls = [...rawUrls].sort((a, b) => {
               const tierA = getUrlDirectnessTier(a);
@@ -1106,14 +1393,14 @@ export default function CityHotelsClient({
                 if (provB === 'airbnb') return 1;
               }
               const priority: Record<string, number> = isIndia
-                ? { agoda: 1, makemytrip: 2, booking: 3, airbnb: 4, trip: 5, trivago: 6, tripadvisor: 7 }
-                : { booking: 1, agoda: 2, trip: 3, airbnb: 4, trivago: 5, tripadvisor: 6, makemytrip: 7 };
+                ? { agoda: 1, booking: 2, makemytrip: 3, expedia: 4, airbnb: 5, trip: 6, trivago: 7, tripadvisor: 8 }
+                : { booking: 1, expedia: 2, hotelscom: 3, vrbo: 4, agoda: 5, trip: 6, airbnb: 7, trivago: 8, tripadvisor: 9, makemytrip: 99 };
               return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
             });
 
-            // Filter out Tier 99 (broken search / generic redirect) URLs if any direct or scoped property URL exists
+            // Filter out Tier 99 (broken search / generic redirect / fake search) URLs
             const safeUrls = sortedUrls.filter(u => getUrlDirectnessTier(u) < 99);
-            const displayUrls = safeUrls.length > 0 ? safeUrls : sortedUrls;
+            const displayUrls = safeUrls;
 
             return (
               <div
@@ -1132,6 +1419,7 @@ export default function CityHotelsClient({
                   hotelName={h.name}
                   cityName={cityName}
                   countryName={countryName}
+                  tubType={h.tubType}
                   priority={i < 2}
                   verifiedSources={verifiedSources}
                   crossVerifiedAt={h.crossVerifiedAt}
@@ -1230,12 +1518,12 @@ export default function CityHotelsClient({
 
                   {/* Price & CTA Buttons */}
                   <div className="pt-2.5 border-t border-gray-100 mt-auto">
-                    <div className="flex items-baseline justify-between mb-2">
+                    <div className="flex items-baseline justify-between mb-1">
                       <div>
                         <span className="text-[10px] text-gray-400 font-medium block leading-none mb-0.5">Usual Rate</span>
                         <div className="flex items-baseline">
                           <span className="text-base sm:text-[17px] font-black text-gray-900">
-                            {h.price ? (h.price.startsWith('~') ? h.price : `~${h.price}`) : 'Rates on Partner'}
+                            {h.price ? (h.price.startsWith('~') ? h.price : `~${h.price}`) : 'See live partner rates'}
                           </span>
                           {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
                         </div>
@@ -1245,6 +1533,10 @@ export default function CityHotelsClient({
                       </Link>
                     </div>
 
+                    <span className="text-[9.5px] text-gray-400 block mb-2 leading-tight">
+                      Rates exclude taxes &amp; resort fees — shown at partner checkout
+                    </span>
+
                     {h.roomType && (
                       <div className="text-[10px] text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1 mb-2 truncate font-medium">
                         🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub
@@ -1252,15 +1544,26 @@ export default function CityHotelsClient({
                     )}
 
                     <div className="flex flex-col gap-1.5">
-                      {displayUrls.slice(0, 2).map((u, idx) => (
-                        <BookingButton key={idx} url={u} hotelName={h.name} cityName={h.city || cityName} isPrimary={idx === 0} />
-                      ))}
-                      {displayUrls.length > 2 && (
+                      {displayUrls.length > 0 ? (
+                        <>
+                          {displayUrls.slice(0, 2).map((u, idx) => (
+                            <BookingButton key={idx} url={u} hotelName={h.name} cityName={h.city || cityName} isPrimary={idx === 0} />
+                          ))}
+                          {displayUrls.length > 2 && (
+                            <Link
+                              href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                              className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
+                            >
+                              Compare all {displayUrls.length} sites &amp; tub guide &rarr;
+                            </Link>
+                          )}
+                        </>
+                      ) : (
                         <Link
                           href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
-                          className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
+                          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full"
                         >
-                          Compare all {displayUrls.length} sites &amp; tub guide &rarr;
+                          <span>View Live Rates &amp; Availability &rarr;</span>
                         </Link>
                       )}
                     </div>
