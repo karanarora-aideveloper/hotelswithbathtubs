@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FallbackImg from '@/components/FallbackImg';
 import connectToDatabase from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
@@ -123,17 +124,14 @@ export default async function BlogIndex() {
                 </div>
                 {featured.image && (
                   <div className="relative aspect-[16/10] w-full md:w-80 h-48 md:h-auto overflow-hidden rounded-xl border border-border flex-shrink-0">
-                    <img
+                    <FallbackImg
                       src={imageUrl(featured.image)}
                       alt={featured.title}
                       loading="eager"
                       decoding="async"
                       fetchPriority="high"
                       className="object-cover w-full h-full"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
-                      }}
-                    />
+                      />
                   </div>
                 )}
               </div>
@@ -145,17 +143,14 @@ export default async function BlogIndex() {
               <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                 {blog.image && (
                   <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                    <img
+                    <FallbackImg
                       src={imageUrl(blog.image)}
                       alt={blog.title}
                       loading={idx < 3 ? 'eager' : 'lazy'}
                       decoding="async"
                       fetchPriority={idx < 3 ? 'high' : 'auto'}
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
-                      }}
-                    />
+                      />
                   </div>
                 )}
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">

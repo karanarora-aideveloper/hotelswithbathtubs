@@ -13,6 +13,10 @@ const moves = [
   { from: path.join(rootDir, 'src/app/admin'), to: path.join(rootDir, '_cf_tmp_admin') },
   { from: path.join(rootDir, 'src/app/api/geo'), to: path.join(rootDir, '_cf_tmp_api_geo') },
   { from: path.join(rootDir, 'src/app/out'), to: path.join(rootDir, '_cf_tmp_out') },
+  // admin UI components import from the stashed admin routes, so they must be stashed with them
+  { from: path.join(rootDir, 'src/components/admin'), to: path.join(rootDir, '_cf_tmp_components_admin') },
+  // proxy.ts (formerly middleware.ts) cannot run in a static export; edge logic lives in functions/_middleware.ts
+  { from: path.join(rootDir, 'src/proxy.ts'), to: path.join(rootDir, '_cf_tmp_proxy.ts') },
 ];
 
 function move(from, to) {
@@ -37,6 +41,7 @@ async function build() {
   console.log('\n[1/4] Generating locations.json and .cache/all-blogs.json from MongoDB...');
   execSync('node scripts/generate-locations.mjs', { cwd: rootDir, stdio: 'inherit' });
   execSync('node scripts/generate-blogs-cache.mjs', { cwd: rootDir, stdio: 'inherit' });
+  execSync('node scripts/audit-hotel-links.mjs', { cwd: rootDir, stdio: 'inherit' });
 
   // 2. Generate _redirects
   console.log('\n[2/4] Generating public/_redirects...');
@@ -59,7 +64,8 @@ async function build() {
     move(item.from, item.to);
   }
 
-  // 4. Run Next.js Export
+  // 4. Run Next.js Export (stale dev-server types in .next would reference the stashed routes)
+  fs.rmSync(path.join(rootDir, '.next'), { recursive: true, force: true });
   console.log('\n[4/4] Running Next.js Static Export build...');
   try {
     execSync('NEXT_EXPORT=true npx next build', {
@@ -119,6 +125,9 @@ async function build() {
     if (fs.existsSync(publicLlmsFull)) {
       fs.copyFileSync(publicLlmsFull, outLlmsFull);
     }
+
+    // Internal audit CSV/JSON lives in public/audits for scripts only; never publish it
+    fs.rmSync(path.join(rootDir, 'out/audits'), { recursive: true, force: true });
 
     // Clean up internal Next.js segment prefetch trees (__next.*) to comply with Cloudflare 20,000 files limit
     console.log('\n[Clean] Pruning internal __next.* segment prefetch files to comply with Cloudflare 20,000 file limit...');

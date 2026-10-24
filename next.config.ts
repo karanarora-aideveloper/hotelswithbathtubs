@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Static export (used by scripts/build-cloudflare.mjs, which sets NEXT_EXPORT=true)
-// cannot coexist with middleware, so local dev runs without it.
+// cannot coexist with the proxy (src/proxy.ts), so the build script stashes it.
 const isExport = process.env.NEXT_EXPORT === 'true';
 
 const nextConfig: NextConfig = {
@@ -68,4 +68,3 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
-// Trigger Cloudflare Pages remote build with full Airbnb catalog across 278 global cities - 1789630000

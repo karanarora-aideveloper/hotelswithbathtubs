@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import FallbackImg from '@/components/FallbackImg';
 import Link from 'next/link';
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
@@ -203,13 +204,12 @@ export default async function HotelsWithHotTubInRoomPage() {
                     className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col"
                   >
                     <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
-                      <img
+                      <FallbackImg
                         src={imageUrl(h.image)}
                         alt={`${h.name} - In-room hot tub in ${h.city}`}
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        onError={(e) => { e.currentTarget.src = DEFAULT_HOTEL_IMAGE; }}
                       />
                       {h.tubType && (
                         <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-gray-900 border border-gray-200/80 shadow-xs">

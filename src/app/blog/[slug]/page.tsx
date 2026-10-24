@@ -1,15 +1,17 @@
 import Link from 'next/link';
+import FallbackImg from '@/components/FallbackImg';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import connectToDatabase from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import Hotel from '@/models/Hotel';
 import { markdownToHtml } from '@/lib/markdown';
-import StructuredData from '@/components/StructuredData';
+import StructuredData, { safeJsonLd } from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
+import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
 function toISO(dateStr: string | undefined): string {
@@ -332,7 +334,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {faqSchema && (
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
           />
         )}
         <div className="bg-bg-main py-6 sm:py-10 md:py-16">
@@ -371,17 +373,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {blog.image && (
               <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs group">
-                <img
+                <FallbackImg
                   src={imageUrl(blog.image)}
                   alt={blog.title}
                   loading="eager"
                   decoding="async"
                   fetchPriority="high"
                   className="object-cover w-full h-full"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
-                  }}
-                />
+                  />
                 <a
                   href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(`https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`)}&media=${encodeURIComponent(imageUrl(blog.image))}&description=${encodeURIComponent(`${blog.title} - Read our curated guide on HotelsWithBathtubs.com`)}`}
                   target="_blank"
@@ -481,16 +480,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <div key={h._id || h.slug} className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between">
                         <div>
                           <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
-                            <img
+                            <FallbackImg
                               src={imageUrl(h.image || DEFAULT_HOTEL_IMAGE)}
                               alt={h.name}
                               loading="lazy"
                               decoding="async"
                               className="object-cover w-full h-full"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
-                              }}
-                            />
+                              />
                             {h.rating && Number(h.rating) > 0 && (
                               <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md text-amber-300 font-black text-xs px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
                                 <span>★</span> {Number(h.rating).toFixed(1)}
@@ -569,6 +565,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
 
+            {/* Romantic Getaway & Secret Drop Email Capture */}
+            <div className="mt-10 mb-6">
+              <RomanticGetawayEmailCapture destinationName={matchedCity || undefined} />
+            </div>
+
             <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border text-center">
               <Link href="/blog" className="inline-block bg-gray-100 hover:bg-gray-200 text-text-main px-6 py-3 rounded-xl font-semibold transition-colors text-sm sm:text-base">
                 &larr; Back to all articles
@@ -587,16 +588,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                     {relatedBlog.image && (
                       <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
-                        <img
+                        <FallbackImg
                           src={imageUrl(relatedBlog.image)}
                           alt={relatedBlog.title}
                           loading="lazy"
                           decoding="async"
                           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = DEFAULT_HOTEL_IMAGE;
-                          }}
-                        />
+                          />
                       </div>
                     )}
                     <div className="p-5 sm:p-6 flex flex-col flex-grow">
