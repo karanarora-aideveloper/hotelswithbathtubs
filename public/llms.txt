@@ -6,9 +6,9 @@
 Every property in the directory is triple-checked across Booking.com and Agoda room categories. We strictly index rooms where the bathtub or whirlpool jacuzzi is private and inside the guest quarters — explicitly eliminating shared hotel spa tubs or misleading descriptions.
 
 ## Catalog Overview
-- **Verified Hotel Listings**: 4,279 hand-verified properties
-- **Global Coverage**: 667 cities across 119 countries
-- **In-Room Jacuzzi & Whirlpool Suites**: 2,129 verified listings
+- **Verified Hotel Listings**: 4,469 hand-verified properties
+- **Global Coverage**: 674 cities across 119 countries
+- **In-Room Jacuzzi & Whirlpool Suites**: 2,161 verified listings
 - **Curated Travel Guides**: 140 in-depth destination guides
 - **Zero Surprises Guarantee**: Direct canonical booking links targeting verified room tiers
 
@@ -22,7 +22,7 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 
 ## Top Regional Hubs
 - India: https://www.hotelswithbathtubs.com/india (1548 verified stays)
-- USA: https://www.hotelswithbathtubs.com/usa (372 verified stays)
+- USA: https://www.hotelswithbathtubs.com/usa (562 verified stays)
 - UK: https://www.hotelswithbathtubs.com/uk (79 verified stays)
 - Spain: https://www.hotelswithbathtubs.com/spain (75 verified stays)
 - Italy: https://www.hotelswithbathtubs.com/italy (74 verified stays)
@@ -31,14 +31,14 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - Portugal: https://www.hotelswithbathtubs.com/portugal (48 verified stays)
 - Japan: https://www.hotelswithbathtubs.com/japan (48 verified stays)
 - Greece: https://www.hotelswithbathtubs.com/greece (41 verified stays)
+- Thailand: https://www.hotelswithbathtubs.com/thailand (36 verified stays)
+- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
+- Oman: https://www.hotelswithbathtubs.com/oman (36 verified stays)
 - Poland: https://www.hotelswithbathtubs.com/poland (36 verified stays)
 - Bosnia and Herzegovina: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina (36 verified stays)
-- Oman: https://www.hotelswithbathtubs.com/oman (36 verified stays)
 - South Korea: https://www.hotelswithbathtubs.com/south-korea (36 verified stays)
-- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
-- Thailand: https://www.hotelswithbathtubs.com/thailand (36 verified stays)
-- Montenegro: https://www.hotelswithbathtubs.com/montenegro (35 verified stays)
 - Egypt: https://www.hotelswithbathtubs.com/egypt (35 verified stays)
+- Montenegro: https://www.hotelswithbathtubs.com/montenegro (35 verified stays)
 - Uzbekistan: https://www.hotelswithbathtubs.com/uzbekistan (34 verified stays)
 - Austria: https://www.hotelswithbathtubs.com/austria (34 verified stays)
 
@@ -51,13 +51,13 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - Mumbai, India: https://www.hotelswithbathtubs.com/india/mumbai (27 verified stays)
 - Bangalore, India: https://www.hotelswithbathtubs.com/india/bangalore (25 verified stays)
 - Udaipur, India: https://www.hotelswithbathtubs.com/india/udaipur (25 verified stays)
-- London, UK: https://www.hotelswithbathtubs.com/uk/london (24 verified stays)
 - Jaipur, India: https://www.hotelswithbathtubs.com/india/jaipur (24 verified stays)
-- Mauritius, Mauritius: https://www.hotelswithbathtubs.com/mauritius/mauritius (23 verified stays)
+- London, UK: https://www.hotelswithbathtubs.com/uk/london (24 verified stays)
 - Edinburgh, UK: https://www.hotelswithbathtubs.com/uk/edinburgh (23 verified stays)
+- Mauritius, Mauritius: https://www.hotelswithbathtubs.com/mauritius/mauritius (23 verified stays)
 - Chicago, USA: https://www.hotelswithbathtubs.com/usa/chicago (22 verified stays)
-- Boston, USA: https://www.hotelswithbathtubs.com/usa/boston (22 verified stays)
 - New York, USA: https://www.hotelswithbathtubs.com/usa/new-york (22 verified stays)
+- Boston, USA: https://www.hotelswithbathtubs.com/usa/boston (22 verified stays)
 
 ## Editorial Guides & FAQs
 - Top Aspen Luxury Hotels & Chalets with Private Hot Tubs & Soaking Baths (2026): https://www.hotelswithbathtubs.com/blog/aspen-luxury-hotels-with-hot-tubs
