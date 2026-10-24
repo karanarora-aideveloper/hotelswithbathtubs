@@ -37,7 +37,13 @@ async function connectToDatabase() {
       return mongoose;
     });
   }
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    // A rejected promise must not be cached, or every later call would fail until the process restarts.
+    cached.promise = null;
+    throw err;
+  }
   return cached.conn;
 }
 

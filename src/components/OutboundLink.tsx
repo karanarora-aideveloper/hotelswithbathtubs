@@ -31,6 +31,9 @@ export default function OutboundLink({
     if (src) return src.toLowerCase();
     const lower = url.toLowerCase();
     if (lower.includes('booking.com') || lower.includes('visitretailer/2732')) return 'booking.com';
+    if (lower.includes('expedia.com')) return 'expedia';
+    if (lower.includes('hotels.com')) return 'hotels.com';
+    if (lower.includes('vrbo.com')) return 'vrbo';
     if (lower.includes('agoda.com') || lower.includes('visitretailer/2927')) return 'agoda';
     if (lower.includes('makemytrip.com') || lower.includes('visitretailer/1729') || lower.includes('linkredirect.in') || lower.includes('ekaro.in')) return 'makemytrip';
     if (lower.includes('trip.com')) return 'trip.com';

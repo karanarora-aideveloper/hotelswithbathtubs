@@ -20,6 +20,10 @@ interface HotelAnalyticsProps {
     bookingUrl?: string;
     airbnbUrl?: string;
     tripUrl?: string;
+    mmtUrl?: string;
+    expediaUrl?: string;
+    hotelsComUrl?: string;
+    vrboUrl?: string;
     neighborhood?: string;
     landmarkDistance?: string;
   };
@@ -157,7 +161,7 @@ export default function HotelAnalyticsComparison({
     platforms.push({
       id: 'booking',
       name: 'Booking.com',
-      badge: 'Genius Perks & Free Cancellation',
+      badge: 'Genius Perks & Flexible Rates',
       badgeColor: 'bg-sky-50/80 text-sky-900 border-sky-200/80',
       logoBg: 'bg-[#003580] text-white',
       buttonBg: 'bg-[#003580] hover:bg-[#002860] text-white',
@@ -167,7 +171,7 @@ export default function HotelAnalyticsComparison({
       usualNote: 'Genius-Eligible Standard Rate',
       numericRate: bookingUsual,
       perks: [
-        'Free cancellation on most bathtub suites',
+        'Flexible cancellation on select partner rates',
         'No upfront deposit on select dates',
         'Genius Level 1–3 complimentary upgrades',
       ],
@@ -176,8 +180,11 @@ export default function HotelAnalyticsComparison({
   }
 
   // Trip.com Platform
-  const tripUrl = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : undefined) ||
-    (!isIndia ? `https://www.trip.com/hotels/list?keyword=${encodeURIComponent(hotel.name + ' ' + cityName)}` : undefined);
+  // Only a real Trip.com hotel page counts. A keyword-search link used to be invented here for every
+  // non-India hotel; Trip.com ignores the keyword and shows "0 properties found".
+  const isTripSearch = (u?: string) => !!u && (u.includes('/hotels/list') || u.includes('keyword='));
+  const tripCandidate = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : undefined);
+  const tripUrl = isTripSearch(tripCandidate) ? undefined : tripCandidate;
   if (tripUrl) {
     const tripUsual = Math.round(numericBase * 0.95);
     platforms.push({
@@ -398,7 +405,7 @@ export default function HotelAnalyticsComparison({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 mt-1 font-jakarta">
-              Historical 30-day nightly benchmark rates. Select any partner to inspect live availability and reserve for your dates.
+              Historical benchmark rates (excluding taxes &amp; resort fees — shown at partner checkout). Select any partner to inspect live availability and reserve for your dates.
             </p>
           </div>
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200/80 rounded-full text-xs font-semibold w-fit shrink-0 font-jakarta">
@@ -863,7 +870,7 @@ export default function HotelAnalyticsComparison({
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-white/10 text-xs text-sky-200">
-              🔒 <em>Lock in free-cancellation rates early to guarantee tub access.</em>
+              🔒 <em>Lock in flexible rates early to guarantee bathtub room tier access.</em>
             </div>
           </div>
 

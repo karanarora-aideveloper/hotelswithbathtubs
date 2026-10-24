@@ -1,5 +1,9 @@
 export const DEFAULT_AGODA_CID = '1972736';
 export const DEFAULT_BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID || '304142';
+export const DEFAULT_EXPEDIA_CAMREF = process.env.NEXT_PUBLIC_EXPEDIA_CAMREF || '';
+export const DEFAULT_CUELINKS_CID = '325472';
+// Cuelinks is OFF by default: its campaign was not tracking or paying. Set NEXT_PUBLIC_USE_CUELINKS=true to re-enable.
+export const USE_CUELINKS = process.env.NEXT_PUBLIC_USE_CUELINKS === 'true';
 export const DEFAULT_EARNKARO_ID = '1471944';
 export const EARNKARO_MMT_RETAILER_ID = '1729';
 export const EARNKARO_AGODA_RETAILER_ID = '2927';
@@ -15,6 +19,40 @@ export function matchesDomain(hostname: string, domain: string): boolean {
   const host = hostname.toLowerCase();
   const target = domain.toLowerCase();
   return host === target || host.endsWith('.' + target);
+}
+
+/**
+ * Transforms an Expedia hotel URL to include partner tracking parameters
+ */
+export function getExpediaAffiliateLink(url: string, camref: string = DEFAULT_EXPEDIA_CAMREF): string {
+  if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) return url;
+  try {
+    const parsedUrl = new URL(url);
+    if (matchesDomain(parsedUrl.hostname, 'expedia.com')) {
+      if (camref) parsedUrl.searchParams.set('camref', camref);
+      return parsedUrl.toString();
+    }
+  } catch (e) {
+    console.error('Invalid URL in getExpediaAffiliateLink:', url);
+  }
+  return url;
+}
+
+/**
+ * Transforms a Hotels.com hotel URL to include partner tracking parameters
+ */
+export function getHotelsComAffiliateLink(url: string, camref: string = DEFAULT_EXPEDIA_CAMREF): string {
+  if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) return url;
+  try {
+    const parsedUrl = new URL(url);
+    if (matchesDomain(parsedUrl.hostname, 'hotels.com')) {
+      if (camref) parsedUrl.searchParams.set('camref', camref);
+      return parsedUrl.toString();
+    }
+  } catch (e) {
+    console.error('Invalid URL in getHotelsComAffiliateLink:', url);
+  }
+  return url;
 }
 
 /**
@@ -123,8 +161,8 @@ export function getMakeMyTripAffiliateLink(
     return url;
   }
 
-  // If already an EarnKaro link, don't double-wrap
-  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in') || url.includes('bitli.in')) {
+  // If already an EarnKaro or Cuelinks link, don't double-wrap
+  if (url.includes('earnkaro.com') || url.includes('ekaro.in') || url.includes('linkredirect.in') || url.includes('linksredirect.com') || url.includes('bitli.in')) {
     return url;
   }
 
@@ -134,6 +172,11 @@ export function getMakeMyTripAffiliateLink(
       if (directAffiliateId) {
         parsedUrl.searchParams.set('affiliateId', directAffiliateId);
         return parsedUrl.toString();
+      }
+
+      // Route via EarnKaro (verified account). Cuelinks only when explicitly re-enabled.
+      if (USE_CUELINKS && DEFAULT_CUELINKS_CID) {
+        return `https://linksredirect.com/?cid=${DEFAULT_CUELINKS_CID}&source=api&url=${encodeURIComponent(url)}`;
       }
 
       if (earnkaroId) {
@@ -212,11 +255,6 @@ export function appendTripDates(url: string, dates?: TripDates): string {
     const host = parsedUrl.hostname.toLowerCase();
 
     if (matchesDomain(host, 'booking.com')) {
-      // Standalone Booking.com /hotel/ detail pages 301-redirect and strip affiliate aid
-      // when query params are appended. Preserve clean direct property link with aid intact.
-      if (parsedUrl.pathname.includes('/hotel/')) {
-        return url;
-      }
       parsedUrl.searchParams.set('checkin', dates.checkin);
       parsedUrl.searchParams.set('checkout', dates.checkout);
       parsedUrl.searchParams.set('group_adults', String(dates.adults || 2));
@@ -253,6 +291,13 @@ export function appendTripDates(url: string, dates?: TripDates): string {
       parsedUrl.searchParams.set('checkin', dates.checkin);
       parsedUrl.searchParams.set('checkout', dates.checkout);
       parsedUrl.searchParams.set('adult', String(dates.adults || 2));
+      return parsedUrl.toString();
+    }
+
+    if (matchesDomain(host, 'expedia.com') || matchesDomain(host, 'hotels.com')) {
+      parsedUrl.searchParams.set('startDate', dates.checkin);
+      parsedUrl.searchParams.set('endDate', dates.checkout);
+      parsedUrl.searchParams.set('adults', String(dates.adults || 2));
       return parsedUrl.toString();
     }
 
@@ -317,6 +362,14 @@ export function wrapOutboundAffiliateLink(
       return getTripAffiliateLink(targetUrl, tripAllianceId, tripSid);
     }
 
+    if (matchesDomain(host, 'expedia.com')) {
+      return getExpediaAffiliateLink(targetUrl);
+    }
+
+    if (matchesDomain(host, 'hotels.com')) {
+      return getHotelsComAffiliateLink(targetUrl);
+    }
+
     // General EarnKaro retail routing (Amazon, Nykaa, etc.)
     if (earnkaroId && (host.includes('amazon.in') || host.includes('nykaa.com'))) {
       return getEarnkaroAffiliateLink(targetUrl, earnkaroId);
@@ -352,16 +405,24 @@ export function getUrlDirectnessTier(url?: string): number {
   }
   if (lower.includes('makemytrip.com')) {
     if ((lower.includes('hotel-details') || lower.includes('hotelid=')) && !lower.includes('hotel-listing')) return 0;
-    return 2;
+    return 99; // Generic hotel search / listings are not direct hotel pages
   }
   if (lower.includes('booking.com')) {
     if (lower.includes('/hotel/') && !lower.includes('searchresults')) return 0;
     // Any bare searchresults.html (or ss= search fallback) loses property context and redirects to blank search
     return 99;
   }
+  if (lower.includes('expedia.com') || lower.includes('hotels.com')) {
+    if (lower.includes('/hotel/') || lower.includes('.h') || lower.includes('/ho') || lower.includes('/hotel-information/')) return 0;
+    return 2;
+  }
+  if (lower.includes('vrbo.com')) {
+    if (lower.includes('/p') || lower.includes('/unit/')) return 0;
+    return 2;
+  }
   if (lower.includes('airbnb.')) {
     if (lower.includes('/rooms/')) return 0;
-    return 2;
+    return 99; // Filter out search pages (/s/{city}/homes?query=...) so they never surface as booking buttons
   }
   if (lower.includes('trip.com')) {
     if (lower.includes('/hotels/detail') || (lower.includes('/hotels/') && !lower.includes('/list?'))) return 0;
@@ -386,14 +447,22 @@ export function getSpecificHotelLink(hotel: {
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  expediaUrl?: string;
+  hotelsComUrl?: string;
+  vrboUrl?: string;
   airbnbUrl?: string;
   tripUrl?: string;
+  mmtUrl?: string;
 }): string | null {
   const candidates = [
-    hotel.agodaUrl,
-    hotel.url,
     hotel.bookingUrl,
+    hotel.expediaUrl,
+    hotel.hotelsComUrl,
+    hotel.agodaUrl,
+    hotel.mmtUrl,
+    hotel.url,
     hotel.airbnbUrl,
+    hotel.vrboUrl,
     hotel.tripUrl,
   ];
   for (const candidate of candidates) {

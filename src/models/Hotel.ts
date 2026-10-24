@@ -8,8 +8,12 @@ export interface IHotel extends mongoose.Document {
   url: string;
   agodaUrl?: string;
   bookingUrl?: string;
+  expediaUrl?: string;
+  hotelsComUrl?: string;
   airbnbUrl?: string;
+  vrboUrl?: string;
   tripUrl?: string;
+  mmtUrl?: string;
   image: string;
   images?: string[];
   verified: boolean;
@@ -55,9 +59,10 @@ const HotelSchema = new mongoose.Schema<IHotel>({
     default: 'India',
     index: true,
   },
+  // Legacy catch-all link field. Optional: the link repair empties it when no verified link exists,
+  // and a required legacy field would make every later save() of such a hotel fail validation.
   url: {
     type: String,
-    required: true,
   },
   agodaUrl: {
     type: String,
@@ -68,7 +73,19 @@ const HotelSchema = new mongoose.Schema<IHotel>({
   bookingUrl: {
     type: String,
   },
+  expediaUrl: {
+    type: String,
+  },
+  hotelsComUrl: {
+    type: String,
+  },
+  vrboUrl: {
+    type: String,
+  },
   tripUrl: {
+    type: String,
+  },
+  mmtUrl: {
     type: String,
   },
   image: {
