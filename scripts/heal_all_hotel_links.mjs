@@ -59,12 +59,8 @@ async function healAllLinks() {
         if (h.url.includes('hotelId=') || h.url.includes('hotelid=')) {
           mmtVerifiedPreserved++;
         } else {
-          // Legacy broken .html slug like /hotels/hotel-details-city.html -> heal to working search
-          const targetMmtUrl = `https://www.makemytrip.com/hotels/hotel-listing/?searchText=${encodedQuery}`;
-          if (h.url !== targetMmtUrl) {
-            update.url = targetMmtUrl;
-            mmtUrlHealed++;
-          }
+          // Do NOT manufacture generic search URLs. Leave unresolvable MMT links empty/null
+          // so verified property OTAs (Booking.com / Agoda) take precedence.
         }
       } else if (h.url.includes('booking.com')) {
         if (h.url !== targetBookingUrl) {

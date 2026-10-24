@@ -194,17 +194,8 @@ async function main() {
       }
     }
 
-    // 3. Fix duplicated city names in MakeMyTrip URLs (url field)
-    if (h.url && h.url.includes('makemytrip.com') && h.url.includes('hotel-listing')) {
-      const cleanQ = cleanSearchQuery(h.name, h.city);
-      const targetMmtUrl = `https://www.makemytrip.com/hotels/hotel-listing/?searchText=${encodeURIComponent(cleanQ)}`;
-      if (h.url.toLowerCase().includes(`${city.toLowerCase()}%20${city.toLowerCase()}`) || 
-          h.url.includes(encodeURIComponent(`${city} ${city}`))) {
-        h.url = targetMmtUrl;
-        update.url = targetMmtUrl;
-        mmtCleaned++;
-      }
-    }
+    // 3. MakeMyTrip handling: Do NOT write generic search URLs into detail fields.
+    // Preserves verified property links with numeric hotelId, leaves unresolvable alone.
 
     if (Object.keys(update).length > 0) {
       update.updatedAt = new Date();

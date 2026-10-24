@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint",
+    "audit:links": "node scripts/audit-hotel-links.mjs",
     "deploy": "npm run deploy:cf",
     "build:cf": "node scripts/build-cloudflare.mjs",
     "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs --branch main"
