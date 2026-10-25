@@ -154,7 +154,7 @@ function FlashDestinationSection({
       </div>
 
       {/* Grid of Destination Cards (Lazy loaded & content-visibility optimized) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
         {displayedCities.map((item) => (
           <CityCard
             key={`${item._id.city}-${item._id.country}`}
@@ -575,7 +575,7 @@ export default function HomeDestinationsClient({
 
           {filteredMatches.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
                 {filteredMatches.slice(0, filterVisibleCount).map((item) => (
                   <CityCard
                     key={`filter-${item._id.city}-${item._id.country}`}

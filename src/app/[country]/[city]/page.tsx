@@ -729,7 +729,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               </span>
             </div>
 
-            <nav aria-label={`All hotels with bathtubs in ${cityName}`} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 text-xs">
+            <nav aria-label={`All hotels with bathtubs in ${cityName}`} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 text-xs">
               {hotels.map((h) => (
                 <Link
                   key={h._id || h.slug}
@@ -789,7 +789,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               <p className="text-sm text-gray-700 leading-relaxed mb-6 font-serif">
                 {stateConfig.intro}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5">
                 {stateConfig.highlights.map((hl, i) => (
                   <div key={i} className="p-4 bg-white/90 rounded-xl border border-blue-100">
                     <h3 className="font-bold text-sm text-gray-900 mb-1.5 flex items-center gap-1.5">

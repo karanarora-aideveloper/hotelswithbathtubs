@@ -90,7 +90,7 @@ export default function CityCard({
       }`}
     >
       {/* Top Media Window */}
-      <div className="relative w-full h-48 sm:h-52 overflow-hidden bg-slate-100">
+      <div className="relative w-full h-36 sm:h-52 overflow-hidden bg-slate-100">
         <img
           src={imageUrl(image)}
           alt={`Hotels with private bathtubs in ${city}, ${country}`}
@@ -113,7 +113,7 @@ export default function CityCard({
             <span className="line-clamp-1">{country}</span>
           </div>
 
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/60 text-slate-900 text-[11px] font-black shadow-xs whitespace-nowrap">
+          <div className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-white/60 text-slate-900 text-[11px] font-black shadow-xs whitespace-nowrap">
             <span className="text-[10px] text-slate-500 font-normal">from</span>
             <span>{displayPrice.replace('From ', '')}</span>
             <span className="text-[9px] text-slate-400 font-normal">/nt</span>
@@ -122,7 +122,7 @@ export default function CityCard({
       </div>
 
       {/* Bottom Information Body */}
-      <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
+      <div className="p-3 sm:p-5 flex flex-col justify-between flex-1 bg-white">
         <div>
           {/* Verification & Tub Type Badges */}
           <div className="flex flex-wrap items-center gap-1.5">
@@ -131,7 +131,7 @@ export default function CityCard({
               <span>{hotelCount} Verified Tubs</span>
             </span>
             {hasJacuzzi && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 shadow-2xs">
+              <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 shadow-2xs">
                 <span>🌊</span>
                 <span>Jacuzzi</span>
               </span>
@@ -146,26 +146,26 @@ export default function CityCard({
 
           {/* City Heading & Review Stats */}
           <div className="mt-2.5">
-            <h3 className="font-heading text-xl sm:text-[22px] font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors leading-snug tracking-tight">
+            <h3 className="font-heading text-lg sm:text-[22px] font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors leading-snug tracking-tight">
               {city}
             </h3>
             <p className="text-xs text-slate-500 font-medium line-clamp-1 mt-1 flex items-center gap-1.5">
               <span>{reviewsFormatted}</span>
-              <span className="opacity-40">•</span>
-              <span className="text-emerald-700 font-semibold">100% In-Room</span>
+              <span className="hidden sm:inline opacity-40">•</span>
+              <span className="hidden sm:inline text-emerald-700 font-semibold">100% In-Room</span>
             </p>
           </div>
         </div>
 
         {/* Divider & Action Footer */}
-        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div className="mt-3 sm:mt-4 pt-3 border-t border-slate-100 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <span className="text-xs text-slate-400 block font-normal">Best verified rate</span>
+            <span className="hidden sm:block text-xs text-slate-400 font-normal">Best verified rate</span>
             <span className="text-[15px] font-extrabold text-slate-900">{displayPrice}</span>
           </div>
 
           <div
-            className={`flex items-center gap-1.5 py-1.5 px-3.5 rounded-xl font-bold text-xs transition-all duration-200 border shadow-2xs ${
+            className={`flex items-center justify-center gap-1.5 py-1.5 px-3.5 rounded-xl font-bold text-xs transition-all duration-200 border shadow-2xs ${
               clicked
                 ? 'bg-[#1a6fde] text-white border-[#1a6fde]'
                 : 'bg-slate-50 group-hover:bg-[#1a6fde] text-slate-700 group-hover:text-white border-slate-200/70 group-hover:border-[#1a6fde]'

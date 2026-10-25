@@ -32,7 +32,7 @@ export default function TrendingDestinations({ currentCity }: { currentCity: str
       <h3 className="text-xl font-heading font-bold mb-6 text-text-main">
         Trending Global Destinations
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3 sm:gap-5">
         {filtered.map(dest => (
           <Link
             key={dest.slug}

@@ -71,7 +71,7 @@ export default function CountryCitiesClient({ initialCities, remainingCities }: 
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
         {initialCities.map((item, idx) => (
           <CityCard
             key={`${item._id.city}-${item._id.country}`}

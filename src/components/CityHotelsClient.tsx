@@ -754,7 +754,8 @@ export default function CityHotelsClient({
     const { label, source, className } = config[provider]!;
     return (
       <OutboundLink href={url} hotelName={hotelName} cityName={city} source={source} dates={weekendDates} className={className}>
-        <span>{preferredLabel || label}</span>
+        <span className="sm:hidden">{(preferredLabel || label).replace(/^Check on /, '')}</span>
+        <span className="hidden sm:inline">{preferredLabel || label}</span>
         <span>&rarr;</span>
       </OutboundLink>
     );
@@ -1353,7 +1354,7 @@ export default function CityHotelsClient({
       {/* Hotel Cards Grid */}
       {filteredHotels.length > 0 ? (
         <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
           {filteredHotels.slice(0, visibleCount).map((h, i) => {
             const providerLabel: Record<NonNullable<UrlProvider>, string> = {
               makemytrip: 'MakeMyTrip', booking: 'Booking.com', expedia: 'Expedia', hotelscom: 'Hotels.com', vrbo: 'Vrbo', agoda: 'Agoda', trip: 'Trip.com',
@@ -1445,14 +1446,14 @@ export default function CityHotelsClient({
                   ) : null}
 
                   {/* Neighborhood Location & Distance */}
-                  <p className="text-xs text-gray-500 font-medium mb-2 flex items-center gap-1 flex-wrap">
+                  <p className="text-xs text-gray-500 font-medium mb-2 flex items-center gap-1 sm:flex-wrap">
                     <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <span className="font-semibold text-gray-700">{h.neighborhood ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
+                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">{h.neighborhood ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
                     {h.landmarkDistance && (
-                      <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
+                      <span className="hidden sm:inline text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                         {h.landmarkDistance}
                       </span>
                     )}
@@ -1470,7 +1471,7 @@ export default function CityHotelsClient({
                       );
                     })()}
                     {h.roomType && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 text-gray-700 font-medium text-[11px] rounded-md">
+                      <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 text-gray-700 font-medium text-[11px] rounded-md">
                         <span>🏷️</span> <span className="line-clamp-1">{h.roomType}</span>
                       </span>
                     )}
@@ -1478,21 +1479,21 @@ export default function CityHotelsClient({
 
                   {/* Description snippet if any */}
                   {h.description && (
-                    <p className="text-[11px] sm:text-xs text-gray-500 mb-2 line-clamp-2 leading-relaxed">
+                    <p className="hidden sm:block text-[11px] sm:text-xs text-gray-500 mb-2 line-clamp-2 leading-relaxed">
                       {h.description}
                     </p>
                   )}
 
                   {/* Booking Tip (Compact) */}
                   {h.bookingTip && (
-                    <div className="bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug flex items-start gap-1.5">
+                    <div className="hidden sm:flex bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug items-start gap-1.5">
                       <span className="shrink-0 text-xs">💡</span>
                       <span className="line-clamp-2"><strong>Tip:</strong> {h.bookingTip}</span>
                     </div>
                   )}
 
                   {/* Amenities Chips (Modern compact tags) */}
-                  <div className="flex flex-wrap items-center gap-1.5 mb-3 pt-2 border-t border-gray-100">
+                  <div className="hidden sm:flex flex-wrap items-center gap-1.5 mb-3 pt-2 border-t border-gray-100">
                     {h.amenities.slice(0, 3).map((amenity: string, idx: number) => {
                       const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub');
                       return (
@@ -1528,17 +1529,17 @@ export default function CityHotelsClient({
                           {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
                         </div>
                       </div>
-                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="text-[11px] font-bold text-[#1a6fde] hover:underline">
+                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
                         View Details &rarr;
                       </Link>
                     </div>
 
-                    <span className="text-[9.5px] text-gray-400 block mb-2 leading-tight">
+                    <span className="hidden sm:block text-[9.5px] text-gray-400 mb-2 leading-tight">
                       Rates exclude taxes &amp; resort fees — shown at partner checkout
                     </span>
 
                     {h.roomType && (
-                      <div className="text-[10px] text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1 mb-2 truncate font-medium">
+                      <div className="hidden sm:block text-[10px] text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1 mb-2 truncate font-medium">
                         🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub
                       </div>
                     )}
