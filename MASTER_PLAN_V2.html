@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotels With Bathtubs – Master Plan v2 (for approval)</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body { font: 9.5pt/1.38 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #111; background: #fff; max-width: 800px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 18pt; margin: 0 0 2px; }
+  .sub { color: #555; margin: 0 0 10px; font-size: 9pt; }
+  h2 { font-size: 11.5pt; margin: 16px 0 5px; padding: 4px 8px; background: #111; color: #fff; break-after: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h3 { font-size: 10pt; margin: 10px 0 3px; break-after: avoid; }
+  table { border-collapse: collapse; width: 100%; margin: 0 0 6px; }
+  th, td { border: 1px solid #888; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #eee; font-size: 8.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { break-inside: avoid; }
+  td.pick { width: 24px; text-align: center; }
+  td.pick::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 1.5px solid #111; border-radius: 2px; }
+  td.rec { width: 78px; font-weight: 700; font-size: 8.5pt; }
+  .box { border: 1.5px solid #111; padding: 6px 10px; margin: 8px 0; break-inside: avoid; }
+  .box ul, ul { margin: 3px 0 3px 16px; padding: 0; }
+  .lbl { font-weight: 700; }
+  .sign { margin-top: 18px; display: flex; gap: 24px; font-size: 9pt; }
+  .sign div { flex: 1; border-top: 1px solid #111; padding-top: 3px; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+
+<h1>Master Plan v2 — Cloud Build and Luxury Redesign</h1>
+<p class="sub">For approval · 25 Oct 2026 · Nothing in this plan is started. Tick one option per decision, sign at the end, and I begin. Where I recommend an option, it is marked <b>RECOMMENDED</b>.</p>
+
+<div class="box">
+  <b>Where we are today</b>
+  <ul>
+    <li>The live site has the repaired links (Booking.com, Agoda), no dead Trip.com/Agoda search links, a locked click log, a working report form and honest rate text.</li>
+    <li>On the branch but <b>not yet live</b>: two-column phone lists, the invented-price clean-up, corrected counts and wording, safer dependencies.</li>
+    <li>The Booking.com recheck is finished. About 160 Booking.com links stayed unreadable (old links kept), and 349 hotels have no link at all.</li>
+    <li>A deploy from your Mac takes over an hour because the site is 3.3 GB and your upload speed is about 10 Mbit/s. This is why we move the build to Cloudflare.</li>
+  </ul>
+</div>
+
+<h2>Part 1 — Build and deploy on Cloudflare's cloud</h2>
+<p><b>Goal:</b> your Mac stops building and uploading. You push code, Cloudflare builds the site on its own machines and publishes it. Every branch also gets a private preview address, so you can approve before anything reaches the public site.</p>
+
+<h3>Decision 1.1 — How does the cloud build get the hotel data?</h3>
+<table>
+  <tr><th></th><th>Option</th><th>How it works</th><th>Good</th><th>Watch out</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Data snapshot in R2</b></td><td>I save today's hotel and blog data as one file in your existing R2 storage. The cloud build downloads it. No database password goes to Cloudflare.</td><td>Safe, fast, repeatable, nothing to open on MongoDB.</td><td>Data changes need one command to refresh the snapshot before a build.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Snapshot committed to Git</b></td><td>The same file lives in the code repository.</td><td>Simplest, nothing outside Git.</td><td>A 9 MB data file in the repository; each data update becomes a commit.</td><td></td></tr>
+  <tr><td class="pick"></td><td><b>C. Cloud build reads MongoDB directly</b></td><td>The database password is added to Cloudflare, and MongoDB Atlas must accept connections from anywhere.</td><td>No snapshot to maintain.</td><td>Opens your database to the whole internet and puts its password in the build settings. A flaky connection already broke one of our builds.</td><td></td></tr>
+</table>
+
+<h3>Decision 1.2 — Approval flow</h3>
+<table>
+  <tr><th></th><th>Option</th><th>How it works</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Preview first, then production</b></td><td>I push a branch. Cloudflare builds a preview address. You review it on your phone. After you approve, it is merged to <code>main</code> and Cloudflare builds production.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Straight to production</b></td><td>Push to <code>main</code> and it goes live after the build.</td><td></td></tr>
+</table>
+
+<h3>Work for Part 1 (about a day, once approved)</h3>
+<table>
+  <tr><th>#</th><th>Task</th><th>How we know it worked</th></tr>
+  <tr><td>1.a</td><td>Read the Pages project's current build settings and fix them: build command <code>npm run build:cf</code>, output <code>out</code>, a fixed Node version, skip the browser download that puppeteer does on install.</td><td>Settings page matches the plan.</td></tr>
+  <tr><td>1.b</td><td>Make the build take its data from the snapshot (Decision 1.1) and stop needing a local cache or a database.</td><td>A clean checkout builds on my Mac with no database access.</td></tr>
+  <tr><td>1.c</td><td>Fix the build ID so a deploy only changes pages whose content changed.</td><td>A rebuild with no data change produces identical pages.</td></tr>
+  <tr><td>1.d</td><td>Push the branch (needs your yes) and run the first cloud preview build. Cloudflare limits a build to <b>20 minutes</b>; our full build takes about 10 to 15 on a busy Mac, so I will watch the time.</td><td>Preview address opens; build log shows the time.</td></tr>
+  <tr><td>1.e</td><td>Check the preview the same way as before: pages open, no search-style links, click log locked, report form works.</td><td>Same scan as the last deploy passes.</td></tr>
+</table>
+<p><b>Risks and fallbacks:</b> if a cloud build ever exceeds 20 minutes, I split the heavy page generation or trim the pages; fallback is the current Mac upload from your phone hotspot. Cloudflare's free plan allows 500 builds a month and one build at a time, which is enough.</p>
+
+<h2>Part 2 — Luxury redesign (home page and whole site)</h2>
+<p><b>Goal:</b> one consistent luxury look. Today the site mixes three colour systems and five fonts, plus an unfinished ivory-and-bronze attempt. Booking buttons, click tracking, page addresses, headings and structured data stay exactly as they are, so Google rankings and revenue are not put at risk.</p>
+
+<h3>Decision 2.1 — Style direction</h3>
+<table>
+  <tr><th></th><th>Option</th><th>Feel</th><th>Colours and type</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Ivory and gold, editorial</b></td><td>Warm, calm, boutique-hotel magazine. Large photos, plenty of space.</td><td>Ivory background, charcoal text, one soft gold accent. Serif headlines (Playfair Display), quiet sans for text.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Midnight spa, dark</b></td><td>Dramatic, immersive, evening mood. Photos glow against dark.</td><td>Deep charcoal and near-black, gold accents, light text. Serif headlines.</td><td></td></tr>
+  <tr><td class="pick"></td><td><b>C. Modern minimal</b></td><td>Crisp, gallery-like. Thin lines, very large photography.</td><td>White and black, one bronze accent, a refined sans for headlines and text.</td><td></td></tr>
+</table>
+<p>Option A fits "bathtub" best (warm, relaxing) and is closest to the ivory-and-bronze pieces already in the code, so it is the least work and the least risk. Option B reads as "premium" but is harder to keep readable on hotel photos and costs more work. You can also hand me mock-ups from Google Stitch and I will build to them.</p>
+
+<h3>Decision 2.2 — How we roll it out</h3>
+<table>
+  <tr><th></th><th>Option</th><th>How it works</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Home page first, then the rest in stages</b></td><td>New look on the home page as a cloud preview. You approve. Then city and hotel pages, then navigation, footer, blog and list pages, each as its own preview.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Everything in one release</b></td><td>One big preview of the whole site.</td><td></td></tr>
+  <tr><td class="pick"></td><td><b>C. Home page only for now</b></td><td>Redesign the home page and leave the rest.</td><td></td></tr>
+</table>
+
+<h3>Work for Part 2</h3>
+<table>
+  <tr><th>#</th><th>Task</th><th>How we know it worked</th></tr>
+  <tr><td>2.a</td><td>Audit the current site on phone and desktop with screenshots.</td><td>A one-page list of what looks inconsistent.</td></tr>
+  <tr><td>2.b</td><td>Build one design system: two fonts (down from five), one colour set, spacing and card styles in a single place.</td><td>Every page type uses the same tokens.</td></tr>
+  <tr><td>2.c</td><td>Redesign the home page: hero, search, destinations (two columns on phones), featured suites, trust section.</td><td>You approve the preview; title, headings and structured data are unchanged.</td></tr>
+  <tr><td>2.d</td><td>City and hotel pages: cards, gallery, booking buttons, filters. The two-column phone grid is already done.</td><td>Every booking button still opens the right hotel and records the click.</td></tr>
+  <tr><td>2.e</td><td>Navigation, footer, blog and list pages.</td><td>No page still shows the old style.</td></tr>
+  <tr><td>2.f</td><td>Checks: page size goes down not up, contrast passes, mobile Lighthouse score is not worse.</td><td>Before and after numbers.</td></tr>
+</table>
+
+<h2>Part 3 — Everything else still open</h2>
+<h3>Decision 3.1 — Hotels with no booking link (349 now)</h3>
+<table>
+  <tr><th></th><th>Option</th><th>What visitors and Google see</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Keep the page, hide it from Google until it has a link</b></td><td>Visitors can still read the page; Google is told not to index it.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Keep the page and index it as it is</b></td><td>A page with no way to book.</td><td></td></tr>
+  <tr><td class="pick"></td><td><b>C. Remove those hotels from the site</b></td><td>Fewer pages; permanent.</td><td></td></tr>
+</table>
+<h3>Decision 3.2 — Hotel addresses with broken words (152, such as h-tel-ritz-paris)</h3>
+<table>
+  <tr><th></th><th>Option</th><th></th></tr>
+  <tr><td class="pick"></td><td><b>A. Leave them.</b> Changing live addresses risks losing search rankings for little gain.</td><td class="rec">RECOMMENDED</td></tr>
+  <tr><td class="pick"></td><td><b>B. Fix them with permanent redirects</b> in one planned release.</td><td></td></tr>
+</table>
+<table>
+  <tr><th>#</th><th>Task</th><th>Notes</th></tr>
+  <tr><td>3.a</td><td>MakeMyTrip real hotel links for India (24 of 1,548 today).</td><td>The biggest revenue gap. Needs browser time: 2 workers on the Mac plus the spare laptop when it is reachable.</td></tr>
+  <tr><td>3.b</td><td>Region-based button order: India shows MakeMyTrip, Booking.com, Agoda; everyone else Booking.com, Agoda. No new platforms until their affiliates are approved.</td><td>Small change; shipped with the redesign.</td></tr>
+  <tr><td>3.c</td><td>Patch upgrades: Next.js 16.4.3 (two critical advisories) and markdown-it, with a test build.</td><td>Done in the cloud preview.</td></tr>
+  <tr><td>3.d</td><td>Lint clean-up (about 190 old style errors) and a basic automatic check on every push.</td><td>Stops the problems that broke the last rebuild.</td></tr>
+  <tr><td>3.e</td><td>Rate widget: only real data remains. No invented prices.</td><td>Done on the branch.</td></tr>
+  <tr><td>3.f</td><td>Affiliate IDs for Expedia and Trip.com.</td><td>On hold until you are approved; nothing to do now.</td></tr>
+</table>
+
+<h2>Order of work and rough effort</h2>
+<table>
+  <tr><th>Step</th><th>What</th><th>Needs from you</th><th>Rough effort</th></tr>
+  <tr><td>1</td><td>Part 1: cloud build working, with a preview of the current branch</td><td>Yes to push the branch; your choices in 1.1 and 1.2</td><td>About a day</td></tr>
+  <tr><td>2</td><td>Approve the preview, then production build in the cloud</td><td>Your review of the preview</td><td>Hours</td></tr>
+  <tr><td>3</td><td>Part 2: audit and a home page preview</td><td>Style choice 2.1; approve the home page</td><td>2 to 3 days</td></tr>
+  <tr><td>4</td><td>Rest of the redesign, in stages (2.d, 2.e, 2.f)</td><td>Review each preview</td><td>3 to 5 days</td></tr>
+  <tr><td>5</td><td>Part 3 items in the background (3.a to 3.d)</td><td>Choices in 3.1 and 3.2</td><td>In parallel</td></tr>
+</table>
+<p>These efforts are estimates of working time, not calendar promises. They depend on how fast you review previews.</p>
+
+<div class="box">
+  <b>Safety rules I will keep</b>
+  <ul>
+    <li>Nothing is pushed or published without your yes. I will ask before the first push.</li>
+    <li>No database password or affiliate secret goes into the code or into Cloudflare's build settings except where you approve it.</li>
+    <li>Every redesign preview is checked for broken links, structured data and booking-button tracking before you see it.</li>
+    <li>The Mac stays limited to 2 browser workers, and no heavy builds run on it.</li>
+  </ul>
+</div>
+
+<div class="sign">
+  <div>Approved by (owner)</div>
+  <div>Date</div>
+  <div>Changes requested</div>
+</div>
+
+</body>
+</html>
