@@ -80,6 +80,7 @@ const TAIL = parseInt(opt('--tail', '0'), 10);
 if (TAIL) queue = queue.slice(-TAIL);
 if (IDS_FILE) { const ids = new Set(JSON.parse(fs.readFileSync(IDS_FILE, 'utf8')).map(String)); queue = all.filter((h) => ids.has(String(h._id)) && !state[h._id]); }
 if (SHARD) { const [ks, n] = SHARD.split('/'); const keep = new Set(ks.split(',').map(Number)); queue = queue.filter((_, i) => keep.has(i % Number(n))); }   // e.g. 2,3,4,5,6/7
+if (args.includes('--reverse')) queue.reverse();   // work from the other end of the list so two machines meet in the middle
 if (LIMIT) queue = queue.slice(0, LIMIT);
 console.log(`${queue.length} hotels to process (${Object.keys(state).length} already done) · workers=${WORKERS} · ${APPLY ? 'APPLY' : 'dry run'}`);
 
