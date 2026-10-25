@@ -228,7 +228,7 @@ export default async function HostelsHubPage() {
               <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-2xs">
                 <span className="text-lg mb-1 block">🔒</span>
                 <p className="text-xs font-bold text-gray-900">Room Guarantee</p>
-                <p className="text-[11px] text-gray-500">Triple-checked room tier</p>
+                <p className="text-[11px] text-gray-500">Room tier checked</p>
               </div>
             </div>
           </div>

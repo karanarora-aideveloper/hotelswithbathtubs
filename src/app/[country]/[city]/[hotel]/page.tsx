@@ -454,7 +454,7 @@ export default async function HotelDetailPage({
   if (cleanTrip) availableSources.push('Trip.com');
   const verifiedPlatformsText = availableSources.length > 0
     ? `Verified on ${availableSources.join(', ')}`
-    : 'Triple-Source Verified';
+    : 'Listed on partner platforms';
 
   return (
     <>
@@ -518,7 +518,7 @@ export default async function HotelDetailPage({
                   <span className="text-amber-500 text-base">★</span>
                   <span>{Number(hotel.rating).toFixed(1)}</span>
                   {hasRealReviews && (
-                    <span className="text-slate-400 font-normal">({Number(hotel.reviewsCount).toLocaleString()} verified guest reviews on Booking.com &amp; partner platforms)</span>
+                    <span className="text-slate-400 font-normal">({Number(hotel.reviewsCount).toLocaleString()} guest reviews on partner platforms)</span>
                   )}
                 </div>
               )}

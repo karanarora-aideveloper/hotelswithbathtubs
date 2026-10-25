@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Hotels With Bathtubs",
     default: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
-  description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
+  description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
   // No site-wide canonical here: every page sets its own, so a page that forgets cannot
   // accidentally canonicalize to the homepage.
   alternates: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     locale: 'en_US',
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
+    description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Find 2,500+ verified hotels with private bathtubs in room & jacuzzi suites across 111 countries. Triple-checked luxury stays.",
+    description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/los-angeles-the-beverly-hills-hotel-1.webp'],
   },
   other: {
