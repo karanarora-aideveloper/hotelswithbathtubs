@@ -14,6 +14,9 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
+  // Cloud builds read the data snapshot (see src/lib/snapshotModel.ts) and never open a connection.
+  if (process.env.DATA_SNAPSHOT === '1') return null;
+
   if (cached.conn) {
     return cached.conn;
   }

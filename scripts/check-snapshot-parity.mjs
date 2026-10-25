@@ -1,0 +1,28 @@
+// Compares the snapshot query layer with real MongoDB for the query shapes the pages use.
+import dotenv from 'dotenv'; import mongoose from 'mongoose';
+import { createSnapshotModel } from '../src/lib/snapshotModel.ts';
+dotenv.config({ path: '.env.local', quiet: true });
+await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 20000 });
+const db = mongoose.connection.db;
+const SH = createSnapshotModel('all-hotels.json'), SB = createSnapshotModel('all-blogs.json');
+const H = db.collection('hotels'), B = db.collection('blogs');
+const ok = (n, a, b) => console.log((JSON.stringify(a) === JSON.stringify(b) ? 'OK  ' : 'DIFF') + ' ' + n + (JSON.stringify(a) === JSON.stringify(b) ? '' : `\n   snapshot: ${JSON.stringify(a).slice(0, 200)}\n   mongo:    ${JSON.stringify(b).slice(0, 200)}`));
+const city = { city: /^new york$/i, country: /^(usa|united states)$/i, flagged: { $ne: true } };
+ok('count NYC', await SH.countDocuments(city), await H.countDocuments(city));
+const a = (await SH.find(city).sort({ rating: -1, name: 1 }).lean()).map((h) => h.name);
+const b = (await H.find(city).sort({ rating: -1, name: 1 }).toArray()).map((h) => h.name);
+ok('find NYC sorted names', a, b);
+const g = [{ $match: { flagged: { $ne: true } } }, { $group: { _id: { city: '$city', country: '$country' }, hotelCount: { $sum: 1 } } }, { $sort: { hotelCount: -1 } }, { $limit: 5 }];
+ok('top 5 cities', (await SH.aggregate(g)).map((x) => [x._id.city, x.hotelCount]), (await H.aggregate(g).toArray()).map((x) => [x._id.city, x.hotelCount]));
+const home = [{ $match: { flagged: { $ne: true } } }, { $addFields: { hasImage: { $cond: [{ $and: [{ $ne: ['$image', null] }, { $ne: ['$image', ''] }] }, 1, 0] } } }, { $group: { _id: { city: '$city', country: '$country' }, hotelCount: { $sum: 1 }, avgRating: { $avg: '$rating' }, totalReviews: { $sum: '$reviewsCount' } } }, { $sort: { hotelCount: -1 } }, { $limit: 3 }];
+ok('home pipeline', (await SH.aggregate(home)).map((x) => [x._id.city, x.hotelCount, Math.round(x.avgRating * 100), x.totalReviews]), (await H.aggregate(home).toArray()).map((x) => [x._id.city, x.hotelCount, Math.round(x.avgRating * 100), x.totalReviews]));
+ok('distinct cities count', (await SH.distinct('city', { flagged: { $ne: true } })).length, (await H.distinct('city', { flagged: { $ne: true } })).length);
+ok('published blogs', await SB.countDocuments({ published: true }), await B.countDocuments({ published: true }));
+const one = await SB.findOne({ published: true }).sort({ createdAt: -1 });
+ok('latest blog slug', one?.slug, (await B.find({ published: true }).sort({ createdAt: -1 }).limit(1).toArray())[0]?.slug);
+ok('blog createdAt is a Date', one?.createdAt instanceof Date, true);
+const or = { $or: [{ tubType: /jacuzzi/i }, { amenities: /jacuzzi/i }], flagged: { $ne: true } };
+ok('jacuzzi $or count', await SH.countDocuments(or), await H.countDocuments(or));
+const inq = { city: { $in: ['Miami', 'Orlando'] }, flagged: { $ne: true } };
+ok('$in count', await SH.countDocuments(inq), await H.countDocuments(inq));
+await mongoose.disconnect();

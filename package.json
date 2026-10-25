@@ -9,7 +9,8 @@
     "audit:links": "node scripts/audit-hotel-links.mjs",
     "deploy": "npm run deploy:cf",
     "build:cf": "node scripts/build-cloudflare.mjs",
-    "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs --branch main"
+    "deploy:cf": "npm run build:cf && npx wrangler pages deploy out --project-name hotelswithbathtubs --branch main",
+    "data:refresh": "node scripts/generate-locations.mjs && node scripts/generate-blogs-cache.mjs && node scripts/generate-image-sitemap.mjs && node scripts/generate-sitemap-index.mjs && node scripts/generate-llms-txt.mjs && node scripts/generate-rss.mjs && node scripts/snapshot-to-r2.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1131.0",
