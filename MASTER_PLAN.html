@@ -112,6 +112,19 @@
   <tr><td class="chk"></td><td class="id">E4</td><td class="st">NEXT</td><td><span class="t">Data per new platform</span> Expedia first, then Hotels.com, then others, with the same dry-run, backup and spot-check process.<br><span class="lbl">Test:</span> each platform passes a random-city test.</td></tr>
 </table>
 
+<h2>G. Luxury redesign (home page and the whole site)</h2>
+<table>
+  <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
+  <tr><td class="chk"></td><td class="id">G1</td><td class="st">NEXT</td><td><span class="t">Design audit of today's site</span> Screenshots of the home, city, hotel, blog and list pages on phone and desktop. The site already mixes three colour systems and five font families, plus an earlier luxury attempt (ivory and bronze) and an unused /redesign page.<br><span class="lbl">Test:</span> a one-page list of what feels cheap or inconsistent, with screenshots.</td></tr>
+  <tr><td class="chk"></td><td class="id">G2</td><td class="st">NEXT</td><td><span class="t">One luxury design direction</span> Warm ivory and charcoal, one gold accent, a refined serif for headlines, a quiet sans for text, large photography, generous space. One system replaces the three.<br><span class="lbl">Test:</span> owner approves a mock of the home page before the whole site is changed.</td></tr>
+  <tr><td class="chk"></td><td class="id">G3</td><td class="st">NEXT</td><td><span class="t">Design tokens and fonts</span> Cut the five font families to two, put colours and spacing in one place.<br><span class="lbl">Test:</span> the site looks the same on every page type; Lighthouse score is not worse.</td></tr>
+  <tr><td class="chk"></td><td class="id">G4</td><td class="st">NEXT</td><td><span class="t">Home page</span> New hero, destination showcase, featured suites, trust section and search.<br><span class="lbl">Test:</span> phone and desktop screenshots; search works; the page's title, headings and schema are unchanged.</td></tr>
+  <tr><td class="chk"></td><td class="id">G5</td><td class="st">NEXT</td><td><span class="t">City and hotel pages</span> Hotel cards, gallery, booking buttons, filters. These carry the revenue, so button placement and tracking stay the same.<br><span class="lbl">Test:</span> every booking button still opens the right hotel and still records the click.</td></tr>
+  <tr><td class="chk"></td><td class="id">G6</td><td class="st">NEXT</td><td><span class="t">Navigation, footer, blog and list pages</span> Same system on every page.<br><span class="lbl">Test:</span> no page still shows the old style.</td></tr>
+  <tr><td class="chk"></td><td class="id">G7</td><td class="st">NEXT</td><td><span class="t">Guard rails</span> No change to addresses, headings, canonicals or structured data. Page weight goes down, not up. Text stays readable (contrast checked).<br><span class="lbl">Test:</span> before/after page size, Lighthouse mobile score and an accessibility check.</td></tr>
+  <tr><td class="chk"></td><td class="id">G8</td><td class="st">NEXT</td><td><span class="t">Release in stages</span> Home page first, then the rest, each as its own deploy.<br><span class="lbl">Test:</span> owner checks the live home page before the rest goes out.</td></tr>
+</table>
+
 <h2>F. Release (only when everything above is closed)</h2>
 <table>
   <tr><th></th><th>ID</th><th>Status</th><th>Task and how to test</th></tr>
