@@ -107,7 +107,7 @@ export default function HotelAnalyticsComparison({
   const agodaUrl = hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda') ? hotel.url : undefined);
   const isAgodaValid = agodaUrl ? getUrlDirectnessTier(agodaUrl) < 99 : false;
   if (agodaUrl && isAgodaValid) {
-    const agodaUsual = Math.round(numericBase * 0.94); // Agoda mobile VIP deal ~6%
+    const agodaUsual = numericBase; // same listed rate: we do not know each platform's live price
     platforms.push({
       id: 'agoda',
       name: 'Agoda',
@@ -118,14 +118,14 @@ export default function HotelAnalyticsComparison({
       url: agodaUrl,
       source: 'Agoda',
       usualRate: fmt(agodaUsual),
-      usualNote: 'Mobile & VIP Benchmark',
+      usualNote: 'Listed rate - check live price',
       numericRate: agodaUsual,
       perks: [
         'Instant mobile VIP discount pricing',
         'Direct room selector with guaranteed tub tier',
         'Earn AgodaCash towards future spa escapes',
       ],
-      isLowest: true,
+      isLowest: false,
     });
   }
 
@@ -143,21 +143,21 @@ export default function HotelAnalyticsComparison({
       url: mmtUrl,
       source: 'MakeMyTrip',
       usualRate: fmt(mmtUsual),
-      usualNote: 'Domestic Benchmark Rate',
+      usualNote: 'Listed rate - check live price',
       numericRate: mmtUsual,
       perks: [
         'Instant bank card discounts (HDFC, ICICI, Axis)',
         'Verified couple-friendly check-in with local IDs',
         '24/7 dedicated guest concierge support',
       ],
-      isLowest: !agodaUrl,
+      isLowest: false,
     });
   }
 
   // Booking.com Platform
   const bookingUrl = hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') && !hotel.url.includes('searchresults') ? hotel.url : undefined);
   if (bookingUrl) {
-    const bookingUsual = Math.round(numericBase * 1.02);
+    const bookingUsual = numericBase; // same listed rate: we do not know each platform's live price
     platforms.push({
       id: 'booking',
       name: 'Booking.com',
@@ -168,7 +168,7 @@ export default function HotelAnalyticsComparison({
       url: bookingUrl,
       source: 'Booking.com',
       usualRate: fmt(bookingUsual),
-      usualNote: 'Genius-Eligible Standard Rate',
+      usualNote: 'Listed rate - check live price',
       numericRate: bookingUsual,
       perks: [
         'Flexible cancellation on select partner rates',
@@ -186,7 +186,7 @@ export default function HotelAnalyticsComparison({
   const tripCandidate = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : undefined);
   const tripUrl = isTripSearch(tripCandidate) ? undefined : tripCandidate;
   if (tripUrl) {
-    const tripUsual = Math.round(numericBase * 0.95);
+    const tripUsual = numericBase; // same listed rate: we do not know each platform's live price
     platforms.push({
       id: 'trip',
       name: 'Trip.com',
@@ -197,7 +197,7 @@ export default function HotelAnalyticsComparison({
       url: tripUrl,
       source: 'Trip.com',
       usualRate: fmt(tripUsual),
-      usualNote: 'Member & App Benchmark',
+      usualNote: 'Listed rate - check live price',
       numericRate: tripUsual,
       perks: [
         'Trip Coins rewards redeemable on future stays',
@@ -213,7 +213,7 @@ export default function HotelAnalyticsComparison({
   const airbnbUrl = hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb') ? hotel.url : undefined) ||
     `https://www.airbnb.com/s/${encodeURIComponent(cityName)}--${encodeURIComponent(countryName)}/homes?amenities%5B%5D=61&query=${encodeURIComponent(hotel.name)}`;
 
-  const airbnbUsual = Math.round(numericBase * 0.92);
+  const airbnbUsual = numericBase; // same listed rate: we do not know each platform's live price
   platforms.push({
     id: 'airbnb',
     name: 'Airbnb',
@@ -224,7 +224,7 @@ export default function HotelAnalyticsComparison({
     url: airbnbUrl,
     source: 'Airbnb',
     usualRate: fmt(airbnbUsual),
-    usualNote: hasDirectAirbnb ? 'Private Apartment Benchmark' : 'Alternative Host Benchmark',
+    usualNote: 'Listed rate - check live price',
     numericRate: airbnbUsual,
     perks: hasDirectAirbnb ? [
       'Full private sanctuary with gourmet kitchen',
@@ -235,7 +235,7 @@ export default function HotelAnalyticsComparison({
       'Direct host contact & residential privacy',
       'Flexible cancellation on select stays',
     ],
-    isLowest: hasDirectAirbnb,
+    isLowest: false,
   });
 
   // Sort platforms so direct property links always appear above generic search fallbacks
@@ -247,7 +247,7 @@ export default function HotelAnalyticsComparison({
 
   // Ensure the #1 top-ranked platform carries the featured highlight badge
   platforms.forEach((p, idx) => {
-    p.isLowest = idx === 0;
+    p.isLowest = false; // never claim a platform is cheapest: live prices are not known here
   });
 
   // Date and Guest State for Real-Time Meta-Search Deep Linking
@@ -377,9 +377,7 @@ export default function HotelAnalyticsComparison({
   }
 
   // 30-Day Rate Range
-  const lowRate = Math.round(numericBase * 0.82);
   const usualRate = numericBase;
-  const peakRate = Math.round(numericBase * 1.32);
 
   // Vibe Scorecard
   const scorecard = [
@@ -745,157 +743,6 @@ export default function HotelAnalyticsComparison({
         </div>
       </section>
 
-      {/* 4. 30-Day Historical Rate Benchmark Range */}
-      <section className="bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 shadow-xs p-6 sm:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#5b8296]/15">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="w-8 h-8 rounded-full bg-[#5b8296]/15 text-[#5b8296] flex items-center justify-center font-bold text-sm shrink-0">
-                📊
-              </span>
-              <h3 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d]">
-                30-Day Historical Rate Benchmark Range
-              </h3>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1 font-jakarta">
-              Estimated pricing fluctuation for {hotel.roomType || 'Bathtub Suite'} across off-peak, typical, and weekend dates.
-            </p>
-          </div>
-          <span className="px-3 py-1 bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 text-xs font-semibold rounded-full w-fit font-jakarta">
-            Telemetry Active
-          </span>
-        </div>
-
-        <div className="bg-[#f8fafb] p-6 rounded-2xl border border-[#5b8296]/15 mb-6">
-          <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 font-jakarta">
-            <span>Low Midweek Rate</span>
-            <span className="text-[#5b8296] font-bold">Usual Market Benchmark</span>
-            <span>Peak Weekend Rate</span>
-          </div>
-
-          {/* Visual Range Track */}
-          <div className="relative py-4">
-            <div className="w-full h-2.5 bg-gradient-to-r from-emerald-400 via-[#5b8296] to-rose-400 rounded-full shadow-inner" />
-            <div className="flex justify-between items-center text-sm font-bold text-[#1f262d] mt-3 font-jakarta">
-              <div className="text-left">
-                <span className="text-xs font-medium text-emerald-800 block">Off-Peak</span>
-                <span>~{fmt(lowRate)}</span>
-              </div>
-              <div className="text-center bg-white px-4 py-1.5 rounded-xl border border-[#5b8296]/30 shadow-xs">
-                <span className="text-[10px] font-bold text-[#5b8296] block uppercase tracking-wider">USUAL BENCHMARK</span>
-                <span className="text-base font-bold text-[#1f262d]">~{fmt(usualRate)}</span>
-              </div>
-              <div className="text-right">
-                <span className="text-xs font-medium text-rose-700 block">Weekend Peak</span>
-                <span>~{fmt(peakRate)}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 3-Step Booking Protocol */}
-        <div className="pt-2">
-          <h4 className="font-bold text-sm text-[#1f262d] mb-3 flex items-center gap-2 font-jakarta">
-            <span>💡</span> How to Guarantee Your Bathtub Room (Avoid Downgrades):
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-jakarta">
-            <div className="p-3.5 bg-white rounded-xl border border-[#5b8296]/20 shadow-2xs">
-              <span className="font-bold text-[#1f262d] block mb-1">Step 1: Click Partner Link</span>
-              <p className="text-slate-500">Use our direct canonical partner links to land on the official hotel property inventory.</p>
-            </div>
-            <div className="p-3.5 bg-white rounded-xl border border-[#5b8296]/20 shadow-2xs">
-              <span className="font-bold text-[#1f262d] block mb-1">Step 2: Choose Exact Tier</span>
-              <p className="text-slate-500">Select <strong className="text-[#1f262d]">{hotel.roomType || 'Bathtub Suite'}</strong> — not the base room.</p>
-            </div>
-            <div className="p-3.5 bg-white rounded-xl border border-[#5b8296]/20 shadow-2xs">
-              <span className="font-bold text-[#1f262d] block mb-1">Step 3: Confirm Amenity</span>
-              <p className="text-slate-500">Verify &ldquo;Bathtub&rdquo; is checked in the room amenities list before checkout.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Pricing Telemetry & Seasonal Trends Hub */}
-      <section className="bg-gradient-to-br from-[#1f262d] via-[#252f37] to-[#14181c] rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-white/10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-white/10">
-          <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#8eaab9] flex items-center gap-1.5 mb-1 font-jakarta">
-              <span>📈</span> Proprietary Pricing Telemetry
-            </span>
-            <h3 className="font-playfair text-xl sm:text-2xl font-normal">
-              Rate Trends &amp; Seasonal Booking Analytics
-            </h3>
-          </div>
-          <div className="text-xs text-slate-300 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 w-fit font-jakarta">
-            Destination: {cityName}, {countryName}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 font-jakarta">
-          {/* Card A: Weekend Surge Index */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Weekend Surge Index</span>
-                <span className="px-2 py-0.5 bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-md text-[10px] font-bold">
-                  +18% on Fri/Sat
-                </span>
-              </div>
-              <div className="text-xl font-bold text-white mb-2">
-                Midweek vs Weekend
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Romantic stays in {cityName} experience substantial Friday–Sunday demand. Book Tuesday–Thursday stays for maximum bathtub value.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-xs text-[#8eaab9]">
-              💡 <em>Average savings of {fmt(numericBase * 0.15)}/night on midweek reservations.</em>
-            </div>
-          </div>
-
-          {/* Card B: Optimal Booking Window */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Lead Time Window</span>
-                <span className="px-2 py-0.5 bg-sky-500/20 text-sky-300 border border-sky-500/30 rounded-md text-[10px] font-bold">
-                  High Demand
-                </span>
-              </div>
-              <div className="text-xl font-bold text-white mb-2">
-                14 – 22 Days Ahead
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Jacuzzi and bathtub suites are limited (typically representing under 15% of a property&apos;s total inventory) and sell out fast.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-xs text-sky-200">
-              🔒 <em>Lock in flexible rates early to guarantee bathtub room tier access.</em>
-            </div>
-          </div>
-
-          {/* Card C: Seasonal Price Fluctuations */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">Seasonal Demand</span>
-                <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-md text-[10px] font-bold">
-                  Winter Peak
-                </span>
-              </div>
-              <div className="text-xl font-bold text-white mb-2">
-                {fmt(Math.round(numericBase * 0.85))} – {fmt(Math.round(numericBase * 1.35))}
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                October through March marks the prime season in {cityName}, with bathtub suites enjoying peak popularity for winter escapes.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-xs text-emerald-200">
-              ❄️ <em>Winter stays offer the most memorable hot soak experiences.</em>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
