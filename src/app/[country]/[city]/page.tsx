@@ -481,6 +481,68 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const minPriceHotel = lowestPriceResult?.hotel;
   const minPrice = lowestPriceResult?.price;
 
+  // M4 unique data-driven intro components
+  const rentalList = hotels.filter((h) => isVacationRental(h));
+  const hotelList = hotels.filter((h) => !isVacationRental(h));
+  const hCount = hotelList.length;
+  const rCount = rentalList.length;
+
+  let countPhrase = '';
+  if (hCount > 0 && rCount > 0) {
+    countPhrase = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'} and ${rCount} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'} with a bathtub in the room`;
+  } else if (hCount > 0) {
+    countPhrase = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'} with a bathtub in the room`;
+  } else if (rCount > 0) {
+    countPhrase = `We list ${rCount} ${cityName} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'} with a bathtub in the room`;
+  }
+
+  let jacuzziMix = 0;
+  let clawfootMix = 0;
+  let soakingMix = 0;
+  let enSuiteMix = 0;
+  for (const h of hotels) {
+    if (isJacuzziRoom(h)) jacuzziMix++;
+    else if (/clawfoot/i.test(h.tubType || '')) clawfootMix++;
+    else if (/soak|deep|freestanding|marble/i.test(h.tubType || '')) soakingMix++;
+    else enSuiteMix++;
+  }
+
+  const tubParts: string[] = [];
+  if (jacuzziMix > 0) tubParts.push(`${jacuzziMix} with an in-room jacuzzi${jacuzziMix > 1 ? ' or whirlpool' : ''}`);
+  if (soakingMix > 0) tubParts.push(`${soakingMix} with a deep soaking ${soakingMix > 1 ? 'or freestanding tub' : 'tub'}`);
+  if (clawfootMix > 0) tubParts.push(`${clawfootMix} with a clawfoot tub`);
+  if (enSuiteMix > 0) tubParts.push(`${enSuiteMix} with a private en-suite bathtub`);
+
+  let tubPhrase = '';
+  if (tubParts.length === 1) tubPhrase = tubParts[0];
+  else if (tubParts.length === 2) tubPhrase = `${tubParts[0]} and ${tubParts[1]}`;
+  else if (tubParts.length >= 3) tubPhrase = `${tubParts.slice(0, -1).join(', ')}, and ${tubParts[tubParts.length - 1]}`;
+
+  const introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
+
+  const neighCounts = new Map<string, number>();
+  for (const h of hotels) {
+    if (isValidNeighborhood(h.neighborhood)) {
+      const n = h.neighborhood!.trim();
+      neighCounts.set(n, (neighCounts.get(n) || 0) + 1);
+    }
+  }
+  const topNeighs = Array.from(neighCounts.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([n]) => n);
+
+  let introSentence2 = '';
+  if (topNeighs.length >= 2) {
+    const list = topNeighs.length === 2 ? `${topNeighs[0]} and ${topNeighs[1]}` : `${topNeighs[0]}, ${topNeighs[1]} and ${topNeighs[2]}`;
+    introSentence2 = `Most are in ${list}.`;
+  } else if (topNeighs.length === 1) {
+    introSentence2 = `Most are in ${topNeighs[0]}.`;
+  }
+
+  const topRatedHotel = [...hotelList].sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0) || (Number(b.reviewsCount) || 0) - (Number(a.reviewsCount) || 0))[0] || hotels[0];
+  const hasTopRating = topRatedHotel && topRatedHotel.rating && Number(topRatedHotel.rating) > 0;
+
   const pageDescription = stateConfig
     ? stateConfig.metaDescription
     : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, minPrice);
@@ -622,12 +684,40 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName}`
               : `Hotels with Bathtub & Jacuzzi in ${cityName} for Couples`}
           </h1>
-          <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
-            {stateConfig
-              ? stateConfig.intro
-              : countrySlug === 'usa'
-              ? `${rawHotels.length}+ verified hotels with private in-room deep soaking tubs & jacuzzi suites in ${cityName}, ${countryName} — every room verified, no shared facilities.`
-              : `${rawHotels.length}+ verified hotels with private in-room bathtubs & jacuzzi suites in ${cityName}, ${countryName} — every listing triple-checked, no shared spa tubs.`}
+          <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
+            {stateConfig ? (
+              stateConfig.intro
+            ) : (
+              <>
+                {introSentence1}
+                {introSentence2 ? ` ${introSentence2}` : ''}
+                {minPrice && hasTopRating ? (
+                  <>
+                    {` Prices start at ${minPrice} a night, and the highest-rated is `}
+                    <Link
+                      href={`/${countrySlug}/${slugify(topRatedHotel.city || citySlug)}/${topRatedHotel.slug || slugify(topRatedHotel.name)}`}
+                      className="underline decoration-white/60 hover:decoration-white font-semibold"
+                    >
+                      {topRatedHotel.name}
+                    </Link>
+                    {` (${Number(topRatedHotel.rating).toFixed(1)}★).`}
+                  </>
+                ) : minPrice ? (
+                  ` Prices start at ${minPrice} a night.`
+                ) : hasTopRating ? (
+                  <>
+                    {` The highest-rated is `}
+                    <Link
+                      href={`/${countrySlug}/${slugify(topRatedHotel.city || citySlug)}/${topRatedHotel.slug || slugify(topRatedHotel.name)}`}
+                      className="underline decoration-white/60 hover:decoration-white font-semibold"
+                    >
+                      {topRatedHotel.name}
+                    </Link>
+                    {` (${Number(topRatedHotel.rating).toFixed(1)}★).`}
+                  </>
+                ) : null}
+              </>
+            )}
           </p>
         </div>
       </header>

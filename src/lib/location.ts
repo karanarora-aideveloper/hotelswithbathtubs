@@ -10,8 +10,24 @@ export function isPlaceholderNeighborhood(n?: string | null): boolean {
   if (!n || typeof n !== 'string') return true;
   const trimmed = n.trim();
   if (!trimmed) return true;
-  if (/^Prime\s+.*\s+Enclave$/i.test(trimmed)) return true;
-  if (/\bEnclave\b/i.test(trimmed) && /^Prime/i.test(trimmed)) return true;
+  if (/\bEnclave\b/i.test(trimmed)) return true;
+  if (/^Central\s+.+\s+Location$/i.test(trimmed)) return true;
+  if (/^(unknown|n\/a|null|undefined)$/i.test(trimmed)) return true;
+  if (/\b(hotel|resort|collection|rooftop|ihg|design hotels)\b/i.test(trimmed)) return true;
+  if (/\d+\s*(?:bed|bath|br|bhk|ac)/i.test(trimmed)) return true;
+  if (trimmed.length > 5 && trimmed.toUpperCase() === trimmed) return true;
+  return false;
+}
+
+/**
+ * Checks whether a landmark distance string is empty or synthetic placeholder
+ * (e.g. "Central New York Location", "Central London Location").
+ */
+export function isPlaceholderLandmark(l?: string | null): boolean {
+  if (!l || typeof l !== 'string') return true;
+  const trimmed = l.trim();
+  if (!trimmed) return true;
+  if (/^Central\s+.+\s+Location$/i.test(trimmed)) return true;
   if (/^(unknown|n\/a|null|undefined)$/i.test(trimmed)) return true;
   return false;
 }
