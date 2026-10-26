@@ -270,6 +270,54 @@ export default async function Home() {
           {/* Phase 1 & 2: Aman-Inspired Cinematic Hero & Concierge Search */}
           <LuxuryHero />
 
+          {/* Top US Bathtub Destinations - Server rendered plain <a> links high on page */}
+          <section className="bg-white border-b border-[#E5E1D8] py-6 sm:py-8 px-4 sm:px-6">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                <div>
+                  <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-[#C5A880]">
+                    Top US Bathtub Destinations
+                  </h2>
+                  <p className="font-playfair text-lg sm:text-xl text-[#121518] mt-0.5">
+                    Popular American cities with verified in-room tubs &amp; jacuzzi suites
+                  </p>
+                </div>
+                <a
+                  href="/usa"
+                  className="text-xs font-bold text-[#1a6fde] hover:underline self-start sm:self-auto inline-flex items-center gap-1 font-jakarta"
+                >
+                  <span>Explore all 50 US States</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-jakarta">
+                {[
+                  { name: 'New York', href: '/usa/new-york', flag: '🗽' },
+                  { name: 'Las Vegas', href: '/usa/las-vegas', flag: '🎰' },
+                  { name: 'Chicago', href: '/usa/chicago', flag: '🏙️' },
+                  { name: 'Miami', href: '/usa/miami', flag: '🌴' },
+                  { name: 'Los Angeles', href: '/usa/los-angeles', flag: '🎬' },
+                  { name: 'San Francisco', href: '/usa/san-francisco', flag: '🌁' },
+                  { name: 'Seattle', href: '/usa/seattle', flag: '☕' },
+                  { name: 'Austin', href: '/usa/austin', flag: '🎸' },
+                  { name: 'Boston', href: '/usa/boston', flag: '🏛️' },
+                  { name: 'San Diego', href: '/usa/san-diego', flag: '🌊' },
+                  { name: 'Denver', href: '/usa/denver', flag: '🏔️' },
+                  { name: 'Atlanta', href: '/usa/atlanta', flag: '🍑' },
+                ].map((dest) => (
+                  <a
+                    key={dest.href}
+                    href={dest.href}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-[#1a6fde] text-slate-800 hover:text-white border border-slate-200/80 transition-colors font-medium shadow-2xs"
+                  >
+                    <span className="text-sm">{dest.flag}</span>
+                    <span>{dest.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Phase 2: Understated Verification & Trust Seal */}
           <LuxuryTrustProof />
 

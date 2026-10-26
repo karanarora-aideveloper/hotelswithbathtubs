@@ -378,6 +378,50 @@ export default async function CountryHubPage({
                 </div>
               </div>
 
+              {/* Top US Bathtub Destinations - Direct plain <a> links for crawler discovery */}
+              {countrySlug === 'usa' && (
+                <section className="mb-10 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-2xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
+                    <div>
+                      <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full">
+                        Key US Money Pages
+                      </span>
+                      <h2 className="font-heading text-lg sm:text-2xl font-bold text-gray-900 mt-2">
+                        Top US Bathtub Destinations
+                      </h2>
+                      <p className="text-text-muted text-xs sm:text-sm mt-0.5">
+                        Direct access to the most popular American destinations featuring private in-room bathtubs &amp; jacuzzis
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+                    {[
+                      { name: 'New York', href: '/usa/new-york', flag: '🗽' },
+                      { name: 'Las Vegas', href: '/usa/las-vegas', flag: '🎰' },
+                      { name: 'Chicago', href: '/usa/chicago', flag: '🏙️' },
+                      { name: 'Miami', href: '/usa/miami', flag: '🌴' },
+                      { name: 'Los Angeles', href: '/usa/los-angeles', flag: '🎬' },
+                      { name: 'San Francisco', href: '/usa/san-francisco', flag: '🌁' },
+                      { name: 'Seattle', href: '/usa/seattle', flag: '☕' },
+                      { name: 'Austin', href: '/usa/austin', flag: '🎸' },
+                      { name: 'Boston', href: '/usa/boston', flag: '🏛️' },
+                      { name: 'San Diego', href: '/usa/san-diego', flag: '🌊' },
+                      { name: 'Denver', href: '/usa/denver', flag: '🏔️' },
+                      { name: 'Atlanta', href: '/usa/atlanta', flag: '🍑' },
+                    ].map((dest) => (
+                      <a
+                        key={dest.href}
+                        href={dest.href}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-[#1a6fde] text-slate-800 hover:text-white border border-slate-200/80 transition-colors font-medium shadow-2xs"
+                      >
+                        <span className="text-sm">{dest.flag}</span>
+                        <span>{dest.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {/* Featured US State Directories */}
               {countrySlug === 'usa' && (
                 <section className="mb-14">

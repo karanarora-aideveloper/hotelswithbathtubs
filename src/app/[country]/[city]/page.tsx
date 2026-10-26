@@ -752,6 +752,61 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
         </section>
 
+        {/* Nearby US destinations block (6 plain <a> links for crawler discovery across US cities) */}
+        {countrySlug === 'usa' && !stateConfig && (
+          <section aria-label="Nearby US destinations with verified bathtubs" className="my-10 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-2xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
+              <div>
+                <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full">
+                  Cross-Country Stays
+                </span>
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mt-2">
+                  Nearby US destinations
+                </h3>
+                <p className="text-text-muted text-xs sm:text-sm mt-0.5">
+                  Explore alternative American cities featuring verified private in-room bathtubs &amp; jacuzzis
+                </p>
+              </div>
+              <a
+                href="/usa"
+                className="text-xs font-bold text-[#1a6fde] hover:underline flex items-center gap-1 self-start sm:self-auto"
+              >
+                <span>All US Destinations &rarr;</span>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
+              {[
+                { name: 'New York', slug: 'new-york' },
+                { name: 'Las Vegas', slug: 'las-vegas' },
+                { name: 'Chicago', slug: 'chicago' },
+                { name: 'Miami', slug: 'miami' },
+                { name: 'Los Angeles', slug: 'los-angeles' },
+                { name: 'San Francisco', slug: 'san-francisco' },
+                { name: 'Seattle', slug: 'seattle' },
+                { name: 'Austin', slug: 'austin' },
+                { name: 'Boston', slug: 'boston' },
+                { name: 'San Diego', slug: 'san-diego' },
+                { name: 'Denver', slug: 'denver' },
+                { name: 'Atlanta', slug: 'atlanta' },
+              ]
+                .filter((c) => c.slug !== citySlug)
+                .slice(0, 6)
+                .map((c) => (
+                  <a
+                    key={c.slug}
+                    href={`/usa/${c.slug}`}
+                    className="flex flex-col items-center justify-center text-center p-3 rounded-xl bg-slate-50 hover:bg-[#1a6fde] text-slate-800 hover:text-white border border-slate-200/80 transition-colors group shadow-2xs"
+                  >
+                    <span className="text-base mb-1">🛁</span>
+                    <span className="text-xs font-bold truncate w-full">{c.name}</span>
+                    <span className="text-[10px] text-slate-500 group-hover:text-white/90 mt-0.5">Explore &rarr;</span>
+                  </a>
+                ))}
+            </div>
+          </section>
+        )}
+
         {/* Specialty Bathtub Collections Navigation */}
         <div className="max-w-7xl mx-auto my-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
