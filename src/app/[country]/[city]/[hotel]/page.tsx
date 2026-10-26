@@ -186,15 +186,26 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       displayName = splitMatch[1].trim();
     }
   }
-
-  // Target title under 65 chars
-  let pageTitle = `${displayName} – Room with ${tubType}, ${cityName}`;
-  if (pageTitle.length > 65) {
-    pageTitle = `${displayName} – ${tubType}, ${cityName}`;
-    if (pageTitle.length > 65) {
-      pageTitle = pageTitle.slice(0, 62).trim() + '...';
+  if (displayName.length > 42) {
+    const lastSpace = displayName.slice(0, 42).lastIndexOf(' ');
+    if (lastSpace > 20) {
+      displayName = displayName.slice(0, lastSpace).trim();
     }
   }
+
+  // Target title under 65 chars: shorten tub type to first part or simplify, never cut mid-word or append "..."
+  const shortTub = tubType.split(/\s*(?:&|and|,|\/|\+)\s*/i)[0].trim() || 'Bathtub';
+  const titleCandidates = [
+    `${displayName} – Room with ${tubType}, ${cityName}`,
+    `${displayName} – ${tubType}, ${cityName}`,
+    `${displayName} – Room with ${shortTub}, ${cityName}`,
+    `${displayName} – ${shortTub}, ${cityName}`,
+    `${displayName} – Bathtub, ${cityName}`,
+    `${displayName}, ${cityName}`,
+    displayName,
+  ];
+
+  let pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
 
   const roomType = hotel.roomType || 'Room with Bathtub';
   let pageDescription = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for a verified in-room ${tubType.toLowerCase()}.`;
