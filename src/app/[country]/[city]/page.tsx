@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
-import { isValidNeighborhood, sanitizePlaceholderText } from '@/lib/location';
+import { isValidNeighborhood, cleanNeighborhood, sanitizePlaceholderText } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 
 export const revalidate = false;
@@ -543,6 +543,23 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const topRatedHotel = [...hotelList].sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0) || (Number(b.reviewsCount) || 0) - (Number(a.reviewsCount) || 0))[0] || hotels[0];
   const hasTopRating = topRatedHotel && topRatedHotel.rating && Number(topRatedHotel.rating) > 0;
 
+  // M5: "Where to stay" by neighbourhood
+  const neighborhoodHotelMap = new Map<string, typeof hotels>();
+  for (const h of hotels) {
+    const n = cleanNeighborhood(h.neighborhood);
+    if (n) {
+      if (!neighborhoodHotelMap.has(n)) neighborhoodHotelMap.set(n, []);
+      neighborhoodHotelMap.get(n)!.push(h);
+    }
+  }
+
+  // Filter to valid neighbourhoods with >= 2 hotels each
+  const qualifiedNeighborhoods = Array.from(neighborhoodHotelMap.entries())
+    .filter(([, list]) => list.length >= 2)
+    .sort((a, b) => b[1].length - a[1].length);
+
+  const hasWhereToStaySection = !stateConfig && qualifiedNeighborhoods.length >= 2;
+
   const pageDescription = stateConfig
     ? stateConfig.metaDescription
     : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, minPrice);
@@ -1013,6 +1030,65 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               }} />
             </div>
           </div>
+        )}
+
+        {/* M5: Where to stay by neighbourhood */}
+        {hasWhereToStaySection && (
+          <section className="mt-16 pt-12 border-t border-gray-200 max-w-4xl mx-auto" aria-label={`Where to stay in ${cityName} for a room with a bathtub`}>
+            <div className="text-center mb-8">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                Neighborhood Guide
+              </span>
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mt-3">
+                Where to stay in {cityName} for a room with a bathtub
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-600 mt-2 max-w-2xl mx-auto">
+                Compare verified hotels with private in-room bathtubs across top {cityName} neighborhoods:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {qualifiedNeighborhoods.map(([neighborhoodName, neighHotels]) => {
+                const lowestInNeigh = findLowestPriceHotel(neighHotels);
+                const minNeighPrice = lowestInNeigh?.price;
+                return (
+                  <div
+                    key={neighborhoodName}
+                    className="bg-white border border-gray-200 rounded-2xl p-5 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-baseline justify-between gap-2 mb-2 pb-2 border-b border-gray-100">
+                        <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900">
+                          {neighborhoodName}
+                        </h3>
+                        <span className="text-2xs font-semibold text-[#1a6fde] bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full shrink-0">
+                          {neighHotels.length} {neighHotels.length === 1 ? 'hotel' : 'hotels'}
+                        </span>
+                      </div>
+                      {minNeighPrice && (
+                        <p className="text-xs font-semibold text-emerald-700 mb-3">
+                          From {minNeighPrice}/night
+                        </p>
+                      )}
+                      <ul className="space-y-2 text-xs sm:text-sm">
+                        {neighHotels.map((h) => (
+                          <li key={h.slug} className="flex items-center gap-1.5">
+                            <span className="text-gray-400 shrink-0">🛁</span>
+                            <a
+                              href={`/${countrySlug}/${slugify(h.city || citySlug)}/${h.slug}`}
+                              className="text-gray-800 hover:text-[#1a6fde] hover:underline font-medium line-clamp-1"
+                            >
+                              {h.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
         )}
 
               {/* Frequently Asked Questions Section (SEO & Conversion) */}

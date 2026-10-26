@@ -41,10 +41,15 @@ export function isValidNeighborhood(n?: string | null): boolean {
 
 /**
  * Returns trimmed neighborhood if valid, otherwise undefined.
+ * Normalizes multi-neighborhood slash notations ("A / B") to the primary neighborhood.
  */
 export function cleanNeighborhood(n?: string | null): string | undefined {
   if (isPlaceholderNeighborhood(n)) return undefined;
-  return n!.trim();
+  let cleaned = n!.trim();
+  if (cleaned.includes(' / ')) {
+    cleaned = cleaned.split(' / ')[0].trim();
+  }
+  return isPlaceholderNeighborhood(cleaned) ? undefined : cleaned;
 }
 
 /**
