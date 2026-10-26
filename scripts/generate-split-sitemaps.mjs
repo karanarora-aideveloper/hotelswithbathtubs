@@ -56,14 +56,23 @@ function resolveCountry(country) {
 }
 
 const US_STATES = [
-  'california', 'new-york', 'texas', 'florida', 'illinois', 'nevada', 'washington',
-  'oregon', 'colorado', 'arizona', 'massachusetts', 'georgia', 'pennsylvania',
-  'tennessee', 'louisiana', 'north-carolina', 'virginia', 'utah', 'ohio',
-  'michigan', 'minnesota', 'missouri', 'indiana', 'wisconsin', 'maryland',
-  'south-carolina', 'alabama', 'kentucky', 'oklahoma', 'iowa', 'arkansas',
-  'mississippi', 'kansas', 'connecticut', 'nebraska', 'new-mexico', 'idaho',
-  'west-virginia', 'hawaii', 'new-hampshire', 'maine', 'rhode-island', 'montana',
-  'delaware', 'south-dakota', 'north-dakota', 'alaska', 'vermont', 'wyoming'
+  'california',
+  'florida',
+  'hawaii',
+  'texas',
+  'massachusetts',
+  'new-york-state',
+  'illinois',
+  'colorado',
+  'nevada',
+  'south-carolina',
+  'arizona',
+  'tennessee',
+  'georgia',
+  'pennsylvania',
+  'washington',
+  'oregon',
+  'north-carolina',
 ];
 
 const neighborhoodCanonicalMap = {
@@ -214,7 +223,7 @@ export function generateSplitSitemaps() {
 
   // 2. Blog Routes
   const blogRoutes = blogs
-    .filter((b) => b.published !== false && b.slug && b.slug.trim() !== '')
+    .filter((b) => b.published !== false && b.slug && b.slug.trim() !== '' && b.slug !== 'kolkata-hotels-with-bathtub-couples-guide')
     .filter((b) => !redirectSet.has(`/blog/${slugify(b.slug)}`))
     .map((b) => ({
       url: `${baseUrl}/blog/${slugify(b.slug)}`,
