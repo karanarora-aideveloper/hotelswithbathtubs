@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, isValidNeighborhood } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -324,7 +324,7 @@ export default async function CityHotelsPage({
     tubType: h.tubType,
     bookingTip: h.bookingTip ? truncateToWord(h.bookingTip, 120) : '',
     price: h.price,
-    neighborhood: h.neighborhood,
+    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
     landmarkDistance: h.landmarkDistance,
     updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
   }));
@@ -492,7 +492,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? 'valid government photo IDs (Aadhaar, Passport, or Driving License)'
     : 'valid government-issued photo ID (Passport or national ID card)';
 
-  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(Boolean))) as string[];
+  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(isValidNeighborhood))) as string[];
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 

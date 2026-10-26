@@ -5,7 +5,7 @@ import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
-import { slugify } from '@/lib/utils';
+import { slugify, isValidNeighborhood } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
@@ -1456,7 +1456,7 @@ export default function CityHotelsClient({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
                     <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">
-                      {h.neighborhood && !/^Prime .* Enclave/i.test(h.neighborhood)
+                      {h.neighborhood && isValidNeighborhood(h.neighborhood)
                         ? `${h.neighborhood}, ${h.city || cityName}`
                         : `${h.city || cityName}, ${countryName}`}
                     </span>

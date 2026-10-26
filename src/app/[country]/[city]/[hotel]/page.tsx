@@ -7,7 +7,7 @@ import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
 import { getUrlDirectnessTier } from '@/lib/affiliate';
-import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency, isValidNeighborhood } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import fs from 'node:fs';
@@ -548,7 +548,7 @@ export default async function HotelDetailPage({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
                 <span>
-                  {hotel.neighborhood && !/^Prime .* Enclave/i.test(hotel.neighborhood)
+                  {hotel.neighborhood && isValidNeighborhood(hotel.neighborhood)
                     ? `${hotel.neighborhood}, ${cityName}`
                     : cityName}, {countryName}
                 </span>

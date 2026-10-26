@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = false;
@@ -164,7 +164,7 @@ export default async function CityJacuzziHotelsPage({
     tubType: h.tubType,
     bookingTip: h.bookingTip,
     price: h.price,
-    neighborhood: h.neighborhood,
+    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
     landmarkDistance: h.landmarkDistance,
   }));
 
