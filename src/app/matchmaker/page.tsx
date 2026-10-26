@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: {
-    absolute: `Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room (${currentYear})`,
+    absolute: `Bathtub Hotel Matchmaker: Find Your Perfect Soak (${currentYear})`,
   },
   description:
     'Find your ideal hotel room with a private bathtub or jacuzzi suite in 30 seconds. Matchmaker for romantic getaways, honeymoons, and cozy escapes.',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.hotelswithbathtubs.com/matchmaker',
   },
   openGraph: {
-    title: 'Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room',
+    title: `Bathtub Hotel Matchmaker: Find Your Perfect Soak (${currentYear})`,
     description:
       'Take our 30-second Dream Soak Matchmaker quiz to discover verified hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
     url: 'https://www.hotelswithbathtubs.com/matchmaker',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room',
+    title: `Bathtub Hotel Matchmaker: Find Your Perfect Soak (${currentYear})`,
     description:
       'Take our 30-second Dream Soak Matchmaker quiz to discover verified hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
     images: [
