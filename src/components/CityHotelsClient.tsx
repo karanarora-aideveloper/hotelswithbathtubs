@@ -24,6 +24,7 @@ type HotelData = {
   country: string;
   image: string;
   images?: string[];
+  partnerImages?: string[];
   url?: string;
   agodaUrl?: string;
   bookingUrl?: string;
@@ -1417,6 +1418,7 @@ export default function CityHotelsClient({
                 <HotelCardImage
                   primaryImage={h.image}
                   images={h.images}
+                  partnerImages={h.partnerImages}
                   hotelName={h.name}
                   cityName={cityName}
                   countryName={countryName}

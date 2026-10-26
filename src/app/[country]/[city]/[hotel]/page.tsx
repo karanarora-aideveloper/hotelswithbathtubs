@@ -485,6 +485,7 @@ export default async function HotelDetailPage({
       {/* Contained Hero Image Showcase Gallery / 5-Photo Bento Grid */}
       <HotelGallery
         images={hotel.images}
+        partnerImages={hotel.partnerImages}
         primaryImage={hotel.image}
         hotelName={hotel.name}
         cityName={cityName}

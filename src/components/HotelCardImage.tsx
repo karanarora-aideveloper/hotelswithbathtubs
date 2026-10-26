@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 
 interface HotelCardImageProps {
   primaryImage: string;
   images?: string[];
+  partnerImages?: string[];
   hotelName: string;
   cityName: string;
   countryName: string;
@@ -18,6 +19,7 @@ interface HotelCardImageProps {
 export default function HotelCardImage({
   primaryImage,
   images = [],
+  partnerImages = [],
   hotelName,
   cityName,
   countryName,
@@ -30,32 +32,31 @@ export default function HotelCardImage({
   const [isInteractive, setIsInteractive] = useState(false);
 
   // Tub-First Image Ordering: prioritize photos featuring private tubs/jacuzzis
-  const allImages = useMemo(() => {
+  const ownImages = useMemo(() => {
     const list = Array.isArray(images) && images.length > 0 ? [...images] : [primaryImage];
     const tubPattern = /bathtub|tub|jacuzzi|bath|soak|whirlpool/i;
-    
-    // Stable sort: bring tub-specific photos to the front
-    list.sort((a, b) => {
-      const aIsTub = tubPattern.test(a);
-      const bIsTub = tubPattern.test(b);
-      if (aIsTub && !bIsTub) return -1;
-      if (!aIsTub && bIsTub) return 1;
-      return 0;
-    });
-
-    // If primaryImage was specifically verified as a bathtub image, guarantee it at index 0
+    list.sort((a, b) => Number(tubPattern.test(b)) - Number(tubPattern.test(a)));
     if (primaryImage && tubPattern.test(primaryImage)) {
       const idx = list.indexOf(primaryImage);
-      if (idx > 0) {
-        list.splice(idx, 1);
-        list.unshift(primaryImage);
-      } else if (idx === -1) {
-        list.unshift(primaryImage);
-      }
+      if (idx > 0) list.splice(idx, 1);
+      if (idx !== 0) list.unshift(primaryImage);
     }
-
     return list;
   }, [images, primaryImage]);
+
+  // Decision D8: our tub photo always leads; Booking.com's CDN photos (faster) fill the carousel,
+  // resized to 500px for cards. Each partner photo falls back to one of our copies if it fails.
+  const slides = useMemo(() => {
+    const first = { src: imageUrl(ownImages[0] || primaryImage), fallback: DEFAULT_HOTEL_IMAGE };
+    const partner = partnerImages.slice(0, 5).map((u, i) => ({
+      src: u.replace(/\/max\d+(x\d+)?\//, '/max500/'),
+      fallback: imageUrl(ownImages[i + 1] || ownImages[0] || primaryImage),
+    }));
+    const rest = partner.length ? [] : ownImages.slice(1).map((u) => ({ src: imageUrl(u), fallback: DEFAULT_HOTEL_IMAGE }));
+    return [first, ...partner, ...rest];
+  }, [ownImages, partnerImages, primaryImage]);
+  const allImages = slides;
+  const touchX = useRef<number | null>(null);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -69,17 +70,26 @@ export default function HotelCardImage({
     setCurrentIndex((prev) => (prev + 1) % allImages.length);
   };
 
-  const currentSrc = allImages[currentIndex] || primaryImage;
+  const current = slides[currentIndex] || slides[0];
+  const currentSrc = current.src;
   const isUSOrIntl = countryName?.toLowerCase() !== 'india';
 
   return (
     <div 
       className="relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image"
       onMouseEnter={() => !isInteractive && setIsInteractive(true)}
-      onTouchStart={() => !isInteractive && setIsInteractive(true)}
+      onTouchStart={(e) => { if (!isInteractive) setIsInteractive(true); touchX.current = e.touches[0].clientX; }}
+      onTouchEnd={(e) => {
+        if (touchX.current == null || slides.length < 2) return;
+        const dx = e.changedTouches[0].clientX - touchX.current;
+        touchX.current = null;
+        if (Math.abs(dx) < 40) return;
+        setCurrentIndex((p) => (dx < 0 ? (p + 1) % slides.length : (p - 1 + slides.length) % slides.length));
+      }}
     >
       <img
-        src={imageUrl(currentSrc)}
+        key={currentSrc}
+        src={currentSrc}
         alt={`${hotelName} - ${tubType || 'Hotel with Private Bathtub'} in ${cityName}`}
         loading={priority && currentIndex === 0 ? 'eager' : 'lazy'}
         decoding="async"
@@ -87,9 +97,8 @@ export default function HotelCardImage({
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         onError={(e) => {
           const target = e.currentTarget;
-          if (!target.src.includes('pexels') && !target.src.includes('the-oberoi')) {
-            target.src = DEFAULT_HOTEL_IMAGE;
-          }
+          if (target.src !== current.fallback) target.src = current.fallback;
+          else if (target.src !== DEFAULT_HOTEL_IMAGE) target.src = DEFAULT_HOTEL_IMAGE;
         }}
       />
 
@@ -111,7 +120,7 @@ export default function HotelCardImage({
       )}
 
       {/* Multi-Image Hover Navigation (Lazy initialized on first hover/touch to save INP) */}
-      {isInteractive && allImages.length > 1 && (
+      {allImages.length > 1 && (
         <>
           <button
             onClick={handlePrev}
@@ -146,7 +155,7 @@ export default function HotelCardImage({
 
       {/* Pinterest Save Button */}
       <a
-        href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent(imageUrl(currentSrc))}&description=${encodeURIComponent(`${hotelName} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
+        href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent((currentSrc))}&description=${encodeURIComponent(`${hotelName} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="absolute top-3 right-3 bg-red-600/95 hover:bg-red-700 text-white text-[11px] font-bold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full shadow-md flex items-center gap-1 z-10 transition-all opacity-90 sm:opacity-0 group-hover/image:opacity-100"

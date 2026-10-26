@@ -6,6 +6,7 @@ import { imageUrl } from '@/lib/imageUrl';
 
 interface HotelGalleryProps {
   images?: string[];
+  partnerImages?: string[];
   primaryImage: string;
   hotelName: string;
   cityName: string;
@@ -16,6 +17,7 @@ interface HotelGalleryProps {
 
 export default function HotelGallery({
   images = [],
+  partnerImages = [],
   primaryImage,
   hotelName,
   cityName,
@@ -25,10 +27,19 @@ export default function HotelGallery({
 }: HotelGalleryProps) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
-  // Normalize image list (at least primary image)
-  const allImages = Array.isArray(images) && images.length > 0 
-    ? images.map(img => imageUrl(img)) 
-    : [imageUrl(primaryImage)];
+  // Decision D8: our tub photo leads; Booking.com CDN photos follow; our copies are the fallback.
+  const ownImages = Array.isArray(images) && images.length > 0 ? images.map((img) => imageUrl(img)) : [imageUrl(primaryImage)];
+  const partner = partnerImages.slice(0, 7);
+  const allImages = partner.length ? [ownImages[0], ...partner] : ownImages;
+  const fallbackFor = (src: string) => {
+    const i = allImages.indexOf(src);
+    return i > 0 && partner.length ? ownImages[i] || ownImages[0] : ownImages[0];
+  };
+  const onImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    const fb = fallbackFor(img.getAttribute('data-src') || '');
+    if (fb && img.src !== fb) img.src = fb;
+  };
 
   // Keyboard navigation for full-screen lightbox
   useEffect(() => {
@@ -64,6 +75,8 @@ export default function HotelGallery({
               >
                 <Image
                   src={allImages[0]}
+                  data-src={allImages[0]}
+                  onError={onImgError}
                   alt={`${hotelName} - Guaranteed in-room bathtub in ${cityName}`}
                   fill
                   priority
@@ -84,6 +97,8 @@ export default function HotelGallery({
                 >
                   <Image
                     src={allImages[1] || allImages[0]}
+                  data-src={allImages[1] || allImages[0]}
+                  onError={onImgError}
                     alt={`${hotelName} suite interior`}
                     fill
                     sizes="25vw"
@@ -97,6 +112,8 @@ export default function HotelGallery({
                 >
                   <Image
                     src={allImages[2] || allImages[0]}
+                  data-src={allImages[2] || allImages[0]}
+                  onError={onImgError}
                     alt={`${hotelName} bathroom and tub space`}
                     fill
                     sizes="25vw"
@@ -114,6 +131,8 @@ export default function HotelGallery({
                 >
                   <Image
                     src={allImages[3] || allImages[0]}
+                  data-src={allImages[3] || allImages[0]}
+                  onError={onImgError}
                     alt={`${hotelName} room view`}
                     fill
                     sizes="25vw"
@@ -127,6 +146,8 @@ export default function HotelGallery({
                 >
                   <Image
                     src={allImages[4] || allImages[0]}
+                  data-src={allImages[4] || allImages[0]}
+                  onError={onImgError}
                     alt={`${hotelName} property and ambiance`}
                     fill
                     sizes="25vw"
@@ -165,6 +186,8 @@ export default function HotelGallery({
                onClick={() => setActiveModalIndex(0)}>
             <Image
               src={allImages[0]}
+                  data-src={allImages[0]}
+                  onError={onImgError}
               alt={`${hotelName} with private bathtub in ${cityName}`}
               fill
               priority
@@ -220,6 +243,8 @@ export default function HotelGallery({
           <div className="relative w-full max-w-5xl h-[65vh] sm:h-[75vh] flex items-center justify-center">
             <Image
               src={allImages[activeModalIndex]}
+                  data-src={allImages[activeModalIndex]}
+                  onError={onImgError}
               alt={`${hotelName} photo ${activeModalIndex + 1}`}
               fill
               className="object-contain"
@@ -271,7 +296,9 @@ export default function HotelGallery({
                     activeModalIndex === idx ? 'border-white scale-105' : 'border-transparent opacity-60 hover:opacity-100'
                   }`}
                 >
-                  <Image src={thumb} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" sizes="56px" />
+                  <Image src={thumb}
+                  data-src={thumb}
+                  onError={onImgError} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" sizes="56px" />
                 </button>
               ))}
             </div>
