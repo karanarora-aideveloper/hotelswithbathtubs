@@ -35,6 +35,24 @@ export function escapeRegex(text: string): string {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
+/**
+ * Builds a regex to match city names from unslugified url string, handling punctuation
+ * variations such as "St." vs "St" vs "Saint", dots, hyphens, and spaces.
+ */
+export function buildCityRegex(rawCity: string): RegExp {
+  const words = rawCity.trim().split(/\s+/);
+  const pattern = words
+    .map(w => {
+      const esc = escapeRegex(w);
+      if (/^st$/i.test(w)) {
+        return '(?:st\\.?|saint)';
+      }
+      return esc;
+    })
+    .join('[\\s.-]+');
+  return new RegExp(`^${pattern}$`, 'i');
+}
+
 const countryMap: Record<string, { dbCountry: string; slug: string; displayName: string }> = {
   'usa': { dbCountry: 'USA', slug: 'usa', displayName: 'USA' },
   'united-states': { dbCountry: 'USA', slug: 'usa', displayName: 'USA' },

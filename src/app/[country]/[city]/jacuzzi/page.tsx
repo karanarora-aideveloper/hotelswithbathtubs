@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = false;
@@ -47,14 +47,15 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
+  const cityRegex = buildCityRegex(rawCity);
   const [firstHotel, hotelCount] = await Promise.all([
     Hotel.findOne({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      city: cityRegex,
       country: countryInfo.regex,
       ...JACUZZI_FILTER
     }).select('image'),
     Hotel.countDocuments({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      city: cityRegex,
       country: countryInfo.regex,
       ...JACUZZI_FILTER
     }),
@@ -132,8 +133,9 @@ export default async function CityJacuzziHotelsPage({
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
+  const cityRegex = buildCityRegex(rawCity);
   const rawHotels = await Hotel.find({
-    city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+    city: cityRegex,
     country: countryInfo.regex,
     ...JACUZZI_FILTER
   }).sort({ rating: -1 }).lean();
@@ -170,7 +172,7 @@ export default async function CityJacuzziHotelsPage({
 
   // Fetch related blog guides
   const relatedBlogs = await Blog.find({
-    city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+    city: cityRegex,
     published: true
   }).limit(3).sort({ createdAt: -1 });
 

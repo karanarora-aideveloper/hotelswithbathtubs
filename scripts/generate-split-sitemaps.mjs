@@ -85,6 +85,10 @@ const neighborhoodCanonicalMap = {
 
 const MIN_HOTELS_TO_INDEX = 2;
 
+function shouldIndexDestination(hotelCount) {
+  return (hotelCount || 0) >= MIN_HOTELS_TO_INDEX;
+}
+
 function formatDate(date) {
   if (!date) return null;
   const d = date instanceof Date ? date : new Date(date);
@@ -198,7 +202,7 @@ export function generateSplitSitemaps() {
   }));
 
   const locationRoutes = Array.from(locationLastMod.keys())
-    .filter((loc) => (locationHotelCount.get(loc) || 0) >= MIN_HOTELS_TO_INDEX)
+    .filter((loc) => shouldIndexDestination(locationHotelCount.get(loc)))
     .map((loc) => ({
       url: `${baseUrl}/${loc}`,
       lastModified: locationLastMod.get(loc),
@@ -206,7 +210,7 @@ export function generateSplitSitemaps() {
     }));
 
   const jacuzziRoutes = Array.from(locationJacuzziCount.keys())
-    .filter((loc) => (locationJacuzziCount.get(loc) || 0) >= MIN_HOTELS_TO_INDEX)
+    .filter((loc) => shouldIndexDestination(locationJacuzziCount.get(loc)))
     .map((loc) => ({
       url: `${baseUrl}/${loc}/jacuzzi`,
       lastModified: locationLastMod.get(loc),

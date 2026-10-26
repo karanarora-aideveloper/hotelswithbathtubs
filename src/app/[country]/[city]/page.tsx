@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -155,19 +155,20 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   }
 
   // Fetch the first hotel to get a city-specific image if available, count and prices for lowest price description
+  const cityRegex = buildCityRegex(rawCity);
   const [firstHotel, hotelCount, cityHotelPrices] = await Promise.all([
     Hotel.findOne({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      city: cityRegex,
       country: countryInfo.regex,
       flagged: { $ne: true }
     }).select('image'),
     Hotel.countDocuments({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      city: cityRegex,
       country: countryInfo.regex,
       flagged: { $ne: true }
     }),
     Hotel.find({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      city: cityRegex,
       country: countryInfo.regex,
       flagged: { $ne: true },
       price: { $exists: true, $ne: '' }
@@ -256,6 +257,7 @@ export default async function CityHotelsPage({
   // Fetch only active (non-flagged) hotels using country regex for alias tolerance
   // For state hubs: query all hotels across the state's constituent cities
   // Sibling destination mesh linking: fetch top sister cities in same country (or constituent cities for state)
+  const pageCityRegex = buildCityRegex(rawCity);
   const [rawHotels, rawSiblings] = await Promise.all([
     stateConfig
       ? Hotel.find({
@@ -264,7 +266,7 @@ export default async function CityHotelsPage({
           flagged: { $ne: true }
         }).sort({ rating: -1 }).lean()
       : Hotel.find({
-          city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+          city: pageCityRegex,
           country: countryInfo.regex,
           flagged: { $ne: true }
         }).sort({ rating: -1 }).lean(),
@@ -290,7 +292,7 @@ export default async function CityHotelsPage({
             $match: {
               country: countryInfo.regex,
               flagged: { $ne: true },
-              city: { $not: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
+              city: { $not: pageCityRegex }
             }
           },
           {
@@ -370,7 +372,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const cityKey = rawCity.toLowerCase();
   const searchTerms = Array.from(new Set([cityKey, ...(CITY_ALIASES_MAP[cityKey] || [])]));
   const blogOrConditions: any[] = [
-    { city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i') }
+    { city: pageCityRegex }
   ];
   for (const term of searchTerms) {
     const termEscaped = escapeRegex(term);

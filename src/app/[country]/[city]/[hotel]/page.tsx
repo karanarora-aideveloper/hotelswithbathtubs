@@ -7,7 +7,7 @@ import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
 import { getUrlDirectnessTier } from '@/lib/affiliate';
-import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
@@ -114,7 +114,7 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
       const rawHotelName = hotelSlug.replace(/-/g, ' ');
       hotel = await Hotel.findOne({
         name: new RegExp(`^${escapeRegex(rawHotelName)}$`, 'i'),
-        city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+        city: buildCityRegex(rawCity),
         flagged: { $ne: true }
       }).lean();
     }
