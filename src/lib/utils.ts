@@ -408,6 +408,6 @@ export function findLowestPriceHotel<T extends { price?: string }>(hotels: T[]):
   return norm ? { hotel: minHotel, price: norm } : null;
 }
 
-export { isPlaceholderNeighborhood, isValidNeighborhood, cleanNeighborhood } from './location';
+export { isPlaceholderNeighborhood, isValidNeighborhood, cleanNeighborhood, primaryNeighborhood } from './location';
 
 

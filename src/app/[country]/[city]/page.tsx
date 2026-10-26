@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
-import { isValidNeighborhood, cleanNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
+import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 
 export const revalidate = false;
@@ -521,17 +521,23 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
 
-  const neighCounts = new Map<string, number>();
+  // N1: Unify neighbourhood extraction across Intro (M4), "Where to stay" (M5), and FAQ (M6)
+  const neighborhoodHotelMap = new Map<string, typeof hotels>();
   for (const h of hotels) {
-    if (isValidNeighborhood(h.neighborhood)) {
-      const n = h.neighborhood!.trim();
-      neighCounts.set(n, (neighCounts.get(n) || 0) + 1);
+    const n = primaryNeighborhood(h.neighborhood, cityName);
+    if (n) {
+      if (!neighborhoodHotelMap.has(n)) neighborhoodHotelMap.set(n, []);
+      neighborhoodHotelMap.get(n)!.push(h);
     }
   }
-  const topNeighs = Array.from(neighCounts.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3)
-    .map(([n]) => n);
+
+  // Filter to valid neighbourhoods with >= 2 hotels each
+  const qualifiedNeighborhoods = Array.from(neighborhoodHotelMap.entries())
+    .filter(([, list]) => list.length >= 2)
+    .sort((a, b) => b[1].length - a[1].length);
+
+  // In the intro, name only neighbourhoods with 2 or more hotels, at most 3. If none qualify, leave that sentence out.
+  const topNeighs = qualifiedNeighborhoods.slice(0, 3).map(([n]) => n);
 
   let introSentence2 = '';
   if (topNeighs.length >= 2) {
@@ -543,21 +549,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const topRatedHotel = [...hotelList].sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0) || (Number(b.reviewsCount) || 0) - (Number(a.reviewsCount) || 0))[0] || hotels[0];
   const hasTopRating = topRatedHotel && topRatedHotel.rating && Number(topRatedHotel.rating) > 0;
-
-  // M5: "Where to stay" by neighbourhood
-  const neighborhoodHotelMap = new Map<string, typeof hotels>();
-  for (const h of hotels) {
-    const n = cleanNeighborhood(h.neighborhood);
-    if (n) {
-      if (!neighborhoodHotelMap.has(n)) neighborhoodHotelMap.set(n, []);
-      neighborhoodHotelMap.get(n)!.push(h);
-    }
-  }
-
-  // Filter to valid neighbourhoods with >= 2 hotels each
-  const qualifiedNeighborhoods = Array.from(neighborhoodHotelMap.entries())
-    .filter(([, list]) => list.length >= 2)
-    .sort((a, b) => b[1].length - a[1].length);
 
   const hasWhereToStaySection = !stateConfig && qualifiedNeighborhoods.length >= 2;
 

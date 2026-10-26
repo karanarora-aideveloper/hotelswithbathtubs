@@ -15,6 +15,7 @@ export function isPlaceholderNeighborhood(n?: string | null): boolean {
   if (/^(unknown|n\/a|null|undefined)$/i.test(trimmed)) return true;
   if (/\b(hotel|resort|collection|rooftop|ihg|design hotels)\b/i.test(trimmed)) return true;
   if (/\d+\s*(?:bed|bath|br|bhk|ac)/i.test(trimmed)) return true;
+  if (/^(gym|spa|pool|fitness|lake|beach)$/i.test(trimmed)) return true;
   if (trimmed.length > 5 && trimmed.toUpperCase() === trimmed) return true;
   return false;
 }
@@ -49,17 +50,51 @@ export function isValidNeighborhood(n?: string | null): boolean {
   return !isPlaceholderNeighborhood(n);
 }
 
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&');
+}
+
+/**
+ * Normalizes and extracts the primary neighborhood name for a hotel:
+ * - Keeps only the part before " / ", " & ", or ", "
+ * - Drops a trailing/embedded city or region name (e.g. ", New Orleans", ", North Goa")
+ * - Applies existing placeholder checks
+ */
+export function primaryNeighborhood(n?: string | null, cityName?: string | null): string | undefined {
+  if (!n || typeof n !== 'string') return undefined;
+  let cleaned = n.trim();
+  if (!cleaned) return undefined;
+
+  // 1. Keep only part before " / ", " & ", or ", "
+  const delimiterMatch = cleaned.split(/\s+[\/&]\s+|,\s*/);
+  cleaned = delimiterMatch[0].trim();
+
+  // 2. Drop trailing/embedded city name
+  if (cityName && typeof cityName === 'string' && cityName.trim()) {
+    const cityRe = new RegExp(`\\b${escapeRegex(cityName.trim())}\\b`, 'gi');
+    cleaned = cleaned.replace(cityRe, '').trim();
+    cleaned = cleaned.replace(/^[-,\/&\s]+|[-,\/&\s]+$/g, '').replace(/\s{2,}/g, ' ').trim();
+  }
+
+  // Drop common region suffixes/prefixes (e.g. "North Goa", "South Delhi")
+  cleaned = cleaned.replace(/\b(North|South|East|West)\s+(Goa|Delhi|London|Paris)\b/gi, '').trim();
+  cleaned = cleaned.replace(/\s*\(\s*(?:East|West|North|South)?\s*\)/gi, '').trim();
+  cleaned = cleaned.replace(/^[-,\/&\s]+|[-,\/&\s]+$/g, '').replace(/\s{2,}/g, ' ').trim();
+
+  // 3. Existing placeholder checks
+  if (isPlaceholderNeighborhood(cleaned)) return undefined;
+  if (!cleaned || cleaned.length < 2) return undefined;
+  if (/^(north|south|east|west|central)$/i.test(cleaned)) return undefined;
+
+  return cleaned;
+}
+
 /**
  * Returns trimmed neighborhood if valid, otherwise undefined.
- * Normalizes multi-neighborhood slash notations ("A / B") to the primary neighborhood.
+ * Delegates to primaryNeighborhood.
  */
-export function cleanNeighborhood(n?: string | null): string | undefined {
-  if (isPlaceholderNeighborhood(n)) return undefined;
-  let cleaned = n!.trim();
-  if (cleaned.includes(' / ')) {
-    cleaned = cleaned.split(' / ')[0].trim();
-  }
-  return isPlaceholderNeighborhood(cleaned) ? undefined : cleaned;
+export function cleanNeighborhood(n?: string | null, cityName?: string | null): string | undefined {
+  return primaryNeighborhood(n, cityName);
 }
 
 /**
