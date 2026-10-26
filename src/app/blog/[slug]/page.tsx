@@ -9,6 +9,7 @@ import { markdownToHtml } from '@/lib/markdown';
 import StructuredData, { safeJsonLd } from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
+import { sanitizePlaceholderText } from '@/lib/location';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
 import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
@@ -136,7 +137,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ? title
       : `${title}${brand}`;
 
-    const description = buildBlogDescription(blog.excerpt || blog.title);
+    const description = buildBlogDescription(sanitizePlaceholderText(blog.excerpt) || blog.title);
     let ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
 
     // Fix Item 9: Ensure non-Delhi blog posts do not use Leela Palace New Delhi photo
@@ -222,7 +223,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }).limit(3).sort({ createdAt: -1 });
 
   // Convert markdown to HTML (also strips duplicate markdown H1 & fixes legacy broken internal links)
-  const htmlContent = markdownToHtml((blog.content || '').replace(/\/india\/mahipalpur\b/g, '/india/delhi'));
+  const sanitizedContent = sanitizePlaceholderText(blog.content || '');
+  const htmlContent = markdownToHtml(sanitizedContent.replace(/\/india\/mahipalpur\b/g, '/india/delhi'));
 
   // Determine if this blog is strongly associated with a specific city
   // by checking if the title or slug contains a known city that we have hotels for.
@@ -280,8 +282,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   // Structured Data Schemas
   // Strip markdown syntax to get plain text for wordCount/articleBody
-  const plainText = blog.content
-    ? blog.content
+  const plainText = sanitizedContent
+    ? sanitizedContent
         .replace(/#{1,6}\s+/g, '')         // strip markdown headings
         .replace(/<[^>]+>/g, '')            // strip any HTML tags
         .replace(/[*_`[\]()!#>]/g, '')      // strip markdown syntax chars
@@ -294,7 +296,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": blog.title,
-    "description": blog.excerpt,
+    "description": sanitizePlaceholderText(blog.excerpt) || blog.excerpt,
     "image": blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE,
     "datePublished": toISO(blog.date),
     "dateModified": toISO(blog.updatedAt?.toString() || blog.date),
@@ -322,7 +324,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   // Parse FAQ from markdown content with flexible header matching
   const markdownFaqPairs = (() => {
-    const faqSection = blog.content?.split(/##\s+(?:Frequently Asked Questions|FAQ)/i)[1] || blog.content?.split(/###\s+(?:Frequently Asked Questions|FAQ)/i)[1];
+    const faqSection = sanitizedContent?.split(/##\s+(?:Frequently Asked Questions|FAQ)/i)[1] || sanitizedContent?.split(/###\s+(?:Frequently Asked Questions|FAQ)/i)[1];
     if (!faqSection) return [];
     const pairs = [
       ...faqSection.matchAll(/\*\*([^*]+\?)\*\*\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g),

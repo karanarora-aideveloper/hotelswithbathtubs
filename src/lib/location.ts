@@ -45,3 +45,14 @@ export function isValidStreetAddress(s?: string | null): boolean {
   if (/^(unknown|n\/a|null|undefined)$/i.test(trimmed)) return false;
   return true;
 }
+
+/**
+ * Sanitizes placeholder enclave text from markdown or HTML content.
+ * Replaces "in Prime <X> Enclave" with "in <X>", and any other "Prime <X> Enclave" with "<X>".
+ */
+export function sanitizePlaceholderText(text?: string | null): string {
+  if (!text || typeof text !== 'string') return '';
+  return text
+    .replace(/\bin\s+Prime\s+([A-Za-z\s]+?)\s+Enclave\b/gi, 'in $1')
+    .replace(/\bPrime\s+([A-Za-z\s]+?)\s+Enclave\b/gi, '$1');
+}
