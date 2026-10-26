@@ -158,20 +158,28 @@ export default function CityHotelsClient({
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
   const [dateOption, setDateOption] = useState<'this-weekend' | 'next-weekend' | 'midweek' | 'custom'>('next-weekend');
-  const [customCheckin, setCustomCheckin] = useState<string>(() => getCalculatedDatePills()['next-weekend'].checkin);
-  const [customCheckout, setCustomCheckout] = useState<string>(() => getCalculatedDatePills()['next-weekend'].checkout);
+  const [customCheckin, setCustomCheckin] = useState<string>('');
+  const [customCheckout, setCustomCheckout] = useState<string>('');
+  const [minDate, setMinDate] = useState<string>('');
   const [showCustomPicker, setShowCustomPicker] = useState<boolean>(false);
-  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(() => {
-    const nextWk = getCalculatedDatePills()['next-weekend'];
-    return { checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 };
-  });
+  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(undefined);
+  const [calculatedDatePills, setCalculatedDatePills] = useState<ReturnType<typeof getCalculatedDatePills> | null>(null);
 
-  const calculatedDatePills = useMemo(() => getCalculatedDatePills(), []);
+  useEffect(() => {
+    const pills = getCalculatedDatePills();
+    setCalculatedDatePills(pills);
+    const nextWk = pills['next-weekend'];
+    setWeekendDates({ checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 });
+    setCustomCheckin(nextWk.checkin);
+    setCustomCheckout(nextWk.checkout);
+    setMinDate(new Date().toISOString().split('T')[0]);
+  }, []);
 
   const handleSelectDateOption = useCallback((option: 'this-weekend' | 'next-weekend' | 'midweek') => {
     setDateOption(option);
     setShowCustomPicker(false);
-    const opt = calculatedDatePills[option];
+    const pills = calculatedDatePills || getCalculatedDatePills();
+    const opt = pills[option];
     setWeekendDates({ checkin: opt.checkin, checkout: opt.checkout, adults: 2 });
   }, [calculatedDatePills]);
 
@@ -1084,9 +1092,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>🗓️ This Weekend</span>
-              <span className={`text-[10px] ml-0.5 ${dateOption === 'this-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
-                ({calculatedDatePills['this-weekend'].range})
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 ${dateOption === 'this-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
+                  ({calculatedDatePills['this-weekend'].range})
+                </span>
+              )}
             </button>
             <button
               type="button"
@@ -1098,9 +1108,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>🗓️ Next Weekend (Popular)</span>
-              <span className={`text-[10px] ml-0.5 ${dateOption === 'next-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
-                ({calculatedDatePills['next-weekend'].range})
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 ${dateOption === 'next-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
+                  ({calculatedDatePills['next-weekend'].range})
+                </span>
+              )}
             </button>
             <button
               type="button"
@@ -1112,9 +1124,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>💼 Midweek (Tue–Thu)</span>
-              <span className={`text-[10px] ml-0.5 ${dateOption === 'midweek' ? 'text-white/80' : 'text-gray-400'}`}>
-                ({calculatedDatePills.midweek.range})
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 ${dateOption === 'midweek' ? 'text-white/80' : 'text-gray-400'}`}>
+                  ({calculatedDatePills.midweek.range})
+                </span>
+              )}
             </button>
             {weekendDates && (
               <span className="text-[11px] text-gray-500 font-medium ml-1 hidden md:inline whitespace-nowrap">
@@ -1254,9 +1268,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>🗓️ This Weekend</span>
-              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'this-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                {calculatedDatePills['this-weekend'].range}
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'this-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                  {calculatedDatePills['this-weekend'].range}
+                </span>
+              )}
             </button>
 
             <button
@@ -1269,9 +1285,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>🗓️ Next Weekend (Popular)</span>
-              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'next-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                {calculatedDatePills['next-weekend'].range}
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'next-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                  {calculatedDatePills['next-weekend'].range}
+                </span>
+              )}
             </button>
 
             <button
@@ -1284,9 +1302,11 @@ export default function CityHotelsClient({
               }`}
             >
               <span>💼 Midweek (Tue–Thu)</span>
-              <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'midweek' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                {calculatedDatePills.midweek.range}
-              </span>
+              {calculatedDatePills && (
+                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'midweek' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                  {calculatedDatePills.midweek.range}
+                </span>
+              )}
             </button>
 
             <button
@@ -1317,7 +1337,7 @@ export default function CityHotelsClient({
               <input
                 type="date"
                 value={customCheckin}
-                min={new Date().toISOString().split('T')[0]}
+                min={minDate || undefined}
                 onChange={(e) => {
                   const val = e.target.value;
                   setCustomCheckin(val);
@@ -1333,7 +1353,7 @@ export default function CityHotelsClient({
               <input
                 type="date"
                 value={customCheckout}
-                min={customCheckin || new Date().toISOString().split('T')[0]}
+                min={customCheckin || minDate || undefined}
                 onChange={(e) => {
                   const val = e.target.value;
                   setCustomCheckout(val);

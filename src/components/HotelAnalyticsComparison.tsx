@@ -282,10 +282,18 @@ export default function HotelAnalyticsComparison({
   };
 
   // Date and Guest State for Real-Time Meta-Search Deep Linking
-  const [checkin, setCheckin] = useState<string>(() => getUpcomingWeekend(0).checkin);
-  const [checkout, setCheckout] = useState<string>(() => getUpcomingWeekend(0).checkout);
+  const [checkin, setCheckin] = useState<string>('');
+  const [checkout, setCheckout] = useState<string>('');
   const [adults, setAdults] = useState<number>(2);
   const [activeShortcut, setActiveShortcut] = useState<'weekend' | 'next-weekend' | 'next-month' | 'custom'>('weekend');
+  const [minCheckinDate, setMinCheckinDate] = useState<string>('');
+
+  useEffect(() => {
+    const dates = getUpcomingWeekend(0);
+    setCheckin(dates.checkin);
+    setCheckout(dates.checkout);
+    setMinCheckinDate(formatDateStr(new Date()));
+  }, []);
 
   const handleShortcut = (shortcut: 'weekend' | 'next-weekend' | 'next-month') => {
     setActiveShortcut(shortcut);
@@ -303,10 +311,6 @@ export default function HotelAnalyticsComparison({
       setCheckout(dates.checkout);
     }
   };
-
-  const minCheckinDate = useMemo(() => {
-    return formatDateStr(new Date());
-  }, []);
 
   const handleCheckinChange = (val: string) => {
     setActiveShortcut('custom');
@@ -459,7 +463,7 @@ export default function HotelAnalyticsComparison({
                   id="hotel-checkin-date"
                   aria-label="Check-in Date"
                   type="date"
-                  min={minCheckinDate}
+                  min={minCheckinDate || undefined}
                   value={checkin}
                   onChange={(e) => handleCheckinChange(e.target.value)}
                   className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"
@@ -474,7 +478,7 @@ export default function HotelAnalyticsComparison({
                   id="hotel-checkout-date"
                   aria-label="Check-out Date"
                   type="date"
-                  min={checkin || minCheckinDate}
+                  min={checkin || minCheckinDate || undefined}
                   value={checkout}
                   onChange={(e) => handleCheckoutChange(e.target.value)}
                   className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"
@@ -509,7 +513,7 @@ export default function HotelAnalyticsComparison({
                 <strong className="text-slate-800">Bathtub Guarantee:</strong> When checking rates on partners, select the room marked <em>&quot;{hotel.roomType || tubName}&quot;</em> to guarantee your in-room tub.
               </span>
             </div>
-            {nights > 1 && (
+            {nights > 1 && formattedDateRange && (
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#5b8296]/10 text-[#2a4d5e]">
                 {nights} Nights Selected ({formattedDateRange})
               </span>
@@ -582,7 +586,7 @@ export default function HotelAnalyticsComparison({
                   className={`text-xs sm:text-sm font-semibold px-5 py-2.5 sm:py-3 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 w-full lg:w-auto font-jakarta ${platform.buttonBg}`}
                 >
                   <span>
-                    Check Live Deal {formattedDateRange ? `(${formattedDateRange})` : ''} on {platform.name}
+                    Check Live Deal{formattedDateRange ? ` (${formattedDateRange})` : ''} on {platform.name}
                   </span>
                   <span>&rarr;</span>
                 </OutboundLink>
