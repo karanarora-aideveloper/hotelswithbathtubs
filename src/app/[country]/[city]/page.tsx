@@ -603,9 +603,22 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? 'valid government photo IDs (Aadhaar, Passport, or Driving License)'
     : 'valid government-issued photo ID (Passport or national ID card)';
 
-  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(isValidNeighborhood))) as string[];
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
+
+  // M6 Data-driven FAQs
+  const jacuzziHotels = hotels.filter((h) => isJacuzziRoom(h));
+  const jacuzziFaqAnswer = jacuzziHotels.length > 0
+    ? `Verified hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Every room tier is individually checked to guarantee a private hot tub inside your suite rather than a shared hotel facility.`
+    : `Currently, no verified hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
+
+  const cheapestFaqAnswer = minPriceHotel && minPrice
+    ? `The most affordable verified stay with an in-room bathtub in ${cityName} is ${minPriceHotel.name}, with rates starting from approximately ${minPrice}/night. Nightly rates vary by season, day of the week, and room category.`
+    : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to luxury suites depending on seasonal demand and room tier.`;
+
+  const whereToStayFaqAnswer = hasWhereToStaySection
+    ? `Top neighborhoods in ${cityName} with multiple verified bathtub hotels include ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}. Each area offers multiple verified properties within walking distance of local attractions and dining.`
+    : '';
 
   const faqItems = stateConfig
     ? [
@@ -617,12 +630,20 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       ]
     : [
         {
-          question: `Which hotels in ${cityName} have private in-room bathtubs or jacuzzis?`,
-          answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub or jacuzzi${tubTypes.length > 0 ? ` (including ${tubTypes.slice(0, 2).join(' and ')})` : ''}.`
+          question: `Which hotels in ${cityName} have a jacuzzi in the room?`,
+          answer: jacuzziFaqAnswer
         },
         {
-          question: `Are bathtub hotels in ${cityName} couple-friendly?`,
-          answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
+          question: `What is the cheapest hotel with a bathtub in ${cityName}?`,
+          answer: cheapestFaqAnswer
+        },
+        ...(hasWhereToStaySection ? [{
+          question: `Where should I stay in ${cityName} for a hotel with a bathtub?`,
+          answer: whereToStayFaqAnswer
+        }] : []),
+        {
+          question: `Which hotels in ${cityName} have private in-room bathtubs?`,
+          answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub rather than a standing shower.`
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
@@ -631,12 +652,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
         },
         {
-          question: neighborhoods.length > 0
-            ? `What are the best neighborhoods in ${cityName} to stay in for a room with a bathtub?`
-            : `How do I make sure my room in ${cityName} definitely has a bathtub?`,
-          answer: neighborhoods.length > 0
-            ? `Popular neighborhoods in ${cityName} with verified bathtub and jacuzzi hotels include ${neighborhoods.slice(0, 3).join(', ')}. Look for room categories that specifically guarantee an in-room tub.`
-            : `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
+          question: `Are bathtub hotels in ${cityName} couple-friendly?`,
+          answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
+        },
+        {
+          question: `How do I make sure my room in ${cityName} definitely has a bathtub?`,
+          answer: `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
         }
       ];
 
