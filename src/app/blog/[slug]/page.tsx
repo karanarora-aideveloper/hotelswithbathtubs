@@ -22,7 +22,7 @@ function toISO(dateStr: string | undefined): string {
 
 export async function generateStaticParams() {
   await connectToDatabase();
-  const blogs = await Blog.find({ published: true }).select('slug');
+  const blogs = await Blog.find({ published: true, slug: { $ne: 'kolkata-hotels-with-bathtub-couples-guide' } }).select('slug');
   return blogs.map((blog: any) => ({
     slug: blog.slug,
   }));

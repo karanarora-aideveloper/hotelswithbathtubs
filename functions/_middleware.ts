@@ -22,6 +22,11 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(target.toString(), 301);
   }
 
+  // Canonical blog redirects
+  if (url.pathname === '/blog/kolkata-hotels-with-bathtub-couples-guide' || url.pathname === '/blog/kolkata-hotels-with-bathtub-couples-guide/') {
+    return Response.redirect(new URL('/blog/kolkata-jacuzzi-hotels-romantic-staycation', url.origin).toString(), 301);
+  }
+
   // Case normalization: 301 redirect any URL with uppercase letters to lowercase in a single hop
   if (/[A-Z]/.test(url.pathname) && !url.pathname.startsWith('/api')) {
     const target = new URL(context.request.url);
