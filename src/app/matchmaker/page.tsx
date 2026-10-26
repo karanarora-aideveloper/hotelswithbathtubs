@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     absolute: `Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room (${currentYear})`,
   },
   description:
-    'Find your perfect hotel with bathtub in room or private jacuzzi suite in 30 seconds. Interactive matchmaker for romantic anniversaries, honeymoons, and cozy escapes across 118 countries.',
+    'Find your ideal hotel room with a private bathtub or jacuzzi suite in 30 seconds. Matchmaker for romantic getaways, honeymoons, and cozy escapes.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/matchmaker',
   },
@@ -52,7 +52,7 @@ export default function MatchmakerPage() {
     applicationCategory: 'TravelApplication',
     operatingSystem: 'All',
     description:
-      'Interactive hotel finder matching travelers to verified hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, tub style, destination, and budget.',
+      'Interactive hotel finder matching travelers to verified hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, style, and budget.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -86,7 +86,7 @@ export default function MatchmakerPage() {
           {/* Breadcrumb Navigation */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-gray-500">
-              <Link href="/" className="hover:text-[#1a6fde] transition-colors">
+              <Link href="/" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
                 Home
               </Link>
               <span>/</span>

@@ -21,16 +21,38 @@ function locationFromPathname(pathname: string) {
   return null;
 }
 
+function getCachedGeo() {
+  if (typeof window !== 'undefined') {
+    try {
+      const cached = sessionStorage.getItem('hwb_geo');
+      if (cached) return JSON.parse(cached);
+    } catch {}
+  }
+  return null;
+}
+
 export default function LocationSelector() {
   const router = useRouter();
   const pathname = usePathname();
+  const urlLocation = locationFromPathname(pathname);
   const [locations, setLocations] = useState<Record<string, string[]>>({});
-  const [selectedCountry, setSelectedCountry] = useState<string>('India');
-  const [selectedCity, setSelectedCity] = useState<string>('');
+  const [selectedCountry, setSelectedCountry] = useState<string>(urlLocation?.country || 'India');
+  const [selectedCity, setSelectedCity] = useState<string>(urlLocation?.city || '');
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(pathname !== '/' && !urlLocation);
 
   useEffect(() => {
+    const cachedGeo = getCachedGeo();
+    if (cachedGeo) {
+      if (!urlLocation && cachedGeo.country) setSelectedCountry(cachedGeo.country);
+      if (!urlLocation && cachedGeo.city) setSelectedCity(cachedGeo.city);
+      setLoading(false);
+      return;
+    }
+    if (pathname === '/' || urlLocation) {
+      return;
+    }
+
     // Fetch available locations
     fetch('/locations.json')
       .then((res) => (res.ok ? res.json() : fetch('/api/locations').then((r) => r.json())))
@@ -41,25 +63,21 @@ export default function LocationSelector() {
       })
       .catch(console.error);
 
-    const urlLocation = locationFromPathname(pathname);
-    if (urlLocation) {
-      // Already on a city page — show that, not an IP guess.
-      setSelectedCountry(urlLocation.country);
-      setSelectedCity(urlLocation.city);
-      setLoading(false);
-      return;
-    }
-
-    // Not on a city page (e.g. homepage) — fall back to IP-based geo guess.
+    // Not on a city page — fall back to IP-based geo guess.
     fetch('/api/geo')
       .then(res => res.json())
       .then(data => {
+        try {
+          if (typeof window !== 'undefined') {
+            sessionStorage.setItem('hwb_geo', JSON.stringify(data));
+          }
+        } catch {}
         if (data.country) setSelectedCountry(data.country);
         if (data.city) setSelectedCity(data.city);
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [pathname]);
+  }, [pathname, urlLocation]);
 
   const handleCitySelect = (country: string, city: string) => {
     setIsOpen(false);

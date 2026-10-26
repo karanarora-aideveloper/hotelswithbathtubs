@@ -6,12 +6,14 @@ import { usePathname, useSearchParams } from 'next/navigation';
 export default function NavigationProgressBar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const currentKey = `${pathname}?${searchParams.toString()}`;
+  const [prevKey, setPrevKey] = useState(currentKey);
   const [isNavigating, setIsNavigating] = useState(false);
 
-  useEffect(() => {
-    // When pathname or search params change, navigation has completed
+  if (prevKey !== currentKey) {
+    setPrevKey(currentKey);
     setIsNavigating(false);
-  }, [pathname, searchParams]);
+  }
 
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {

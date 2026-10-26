@@ -680,5 +680,48 @@ export const cityToCountry: Record<string, string> = {
   "calcutta": "india",
   "madras": "india",
   "trivandrum": "india",
-  "cochin": "india"
+  "cochin": "india",
+  "mahipalpur": "india",
+  "new-delhi": "india"
+};
+
+export const CITY_COUNTRY_MAP: Record<string, string> = cityToCountry;
+
+export const CITY_ALIASES: Record<string, { city: string; country: string }> = {
+  "bengaluru": {
+    "city": "bangalore",
+    "country": "india"
+  },
+  "gurugram": {
+    "city": "gurgaon",
+    "country": "india"
+  },
+  "bombay": {
+    "city": "mumbai",
+    "country": "india"
+  },
+  "calcutta": {
+    "city": "kolkata",
+    "country": "india"
+  },
+  "madras": {
+    "city": "chennai",
+    "country": "india"
+  },
+  "trivandrum": {
+    "city": "thiruvananthapuram",
+    "country": "india"
+  },
+  "cochin": {
+    "city": "kochi",
+    "country": "india"
+  },
+  "mahipalpur": {
+    "city": "delhi",
+    "country": "india"
+  },
+  "new-delhi": {
+    "city": "delhi",
+    "country": "india"
+  }
 };

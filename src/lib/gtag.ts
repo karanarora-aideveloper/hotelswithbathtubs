@@ -39,13 +39,13 @@ export const applyGAExclusion = (gaId?: string) => {
   const id = gaId || GA_MEASUREMENT_ID;
 
   if (isGAExcluded()) {
-    if (id) window[`ga-disable-${id}`] = true;
-    window['ga-disable-G-TETR30WPYM'] = true;
-    window['ga-disable-G-2VDZWWBGD3'] = true;
+    if (id) (window as any)[`ga-disable-${id}`] = true;
+    (window as any)['ga-disable-G-TETR30WPYM'] = true;
+    (window as any)['ga-disable-G-2VDZWWBGD3'] = true;
   } else {
-    if (id) delete window[`ga-disable-${id}`];
-    delete window['ga-disable-G-TETR30WPYM'];
-    delete window['ga-disable-G-2VDZWWBGD3'];
+    if (id) delete (window as any)[`ga-disable-${id}`];
+    delete (window as any)['ga-disable-G-TETR30WPYM'];
+    delete (window as any)['ga-disable-G-2VDZWWBGD3'];
   }
 };
 

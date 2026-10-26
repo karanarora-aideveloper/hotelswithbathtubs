@@ -15,8 +15,8 @@ export const revalidate = 86400; // Daily revalidation
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Hostels with Bathtubs & Jacuzzis (${currentYear} Guide) | Boutique Poshtels`,
-  description: 'Handpicked boutique hostels and poshtels with guaranteed private in-room bathtubs & jacuzzis. Experience vibrant social backpacker culture with private soaking luxury.',
+  title: 'Hostels & Poshtels with Bathtubs',
+  description: 'Boutique hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Experience social backpacker vibes with private soaking luxury.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hostels',
   },
@@ -25,7 +25,21 @@ export const metadata: Metadata = {
     description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
     url: 'https://www.hotelswithbathtubs.com/hostels',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Boutique Hostels & Poshtels with Bathtubs',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
+    description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 
@@ -187,7 +201,7 @@ export default async function HostelsHubPage() {
           <div className="max-w-5xl mx-auto text-center">
             {/* Breadcrumb */}
             <nav className="flex items-center justify-center gap-2 text-xs text-gray-500 mb-6 font-medium">
-              <Link href="/" className="hover:text-[#1a6fde] transition-colors">Home</Link>
+              <Link href="/" prefetch={false} className="hover:text-[#1a6fde] transition-colors">Home</Link>
               <span>/</span>
               <span className="text-gray-900 font-semibold">Hostels with Bathtubs</span>
             </nav>

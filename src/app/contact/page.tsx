@@ -3,7 +3,7 @@ import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Contact Us & Editorial Desk | Hotels With Bathtubs',
+  title: 'Contact Us & Editorial Desk',
   description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
   alternates: {
     canonical: '/contact',
@@ -13,7 +13,21 @@ export const metadata: Metadata = {
     description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
     url: 'https://www.hotelswithbathtubs.com/contact',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Contact Hotels With Bathtubs',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Us & Editorial Desk | Hotels With Bathtubs',
+    description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 

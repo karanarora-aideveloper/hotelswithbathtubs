@@ -103,6 +103,29 @@ async function generateLocations() {
     const totalCities = Object.values(sortedLocationMap).reduce((sum, cities) => sum + cities.length, 0);
     console.log(`✅ locations.json generated successfully: ${totalCountries} countries, ${totalCities} cities.`);
 
+    // Generate functions/cityMap.ts for Cloudflare edge routing / 404 recovery
+    const cityCountryMap = {};
+    for (const [country, cities] of Object.entries(sortedLocationMap)) {
+      const cSlug = countrySlugMap[country.toLowerCase()] || slugify(country);
+      for (const city of cities) {
+        cityCountryMap[slugify(city)] = cSlug;
+      }
+    }
+    const functionsDir = path.join(rootDir, 'functions');
+    if (!fs.existsSync(functionsDir)) fs.mkdirSync(functionsDir, { recursive: true });
+    const cityMapCode = `export const CITY_COUNTRY_MAP: Record<string, string> = ${JSON.stringify(cityCountryMap, null, 2)};\n\n` +
+      `export const CITY_ALIASES: Record<string, { city: string; country: string }> = {\n` +
+      `  "bengaluru": { city: "bangalore", country: "india" },\n` +
+      `  "gurugram": { city: "gurgaon", country: "india" },\n` +
+      `  "bombay": { city: "mumbai", country: "india" },\n` +
+      `  "calcutta": { city: "kolkata", country: "india" },\n` +
+      `  "madras": { city: "chennai", country: "india" },\n` +
+      `  "mahipalpur": { city: "delhi", country: "india" },\n` +
+      `  "new-delhi": { city: "delhi", country: "india" }\n` +
+      `};\n`;
+    fs.writeFileSync(path.join(functionsDir, 'cityMap.ts'), cityMapCode, 'utf-8');
+    console.log('✅ functions/cityMap.ts generated successfully.');
+
     // 2. Generate comprehensive search-data.json (Hotels, Cities, Countries)
 
     const countryStats = {};

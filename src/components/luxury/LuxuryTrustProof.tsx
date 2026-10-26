@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function LuxuryTrustProof() {
   return (
@@ -27,6 +28,50 @@ export default function LuxuryTrustProof() {
             <span className="text-[11px] font-medium tracking-wider uppercase text-[#6B6964]">Shared Facilities</span>
           </div>
         </div>
+      </div>
+
+      {/* High-priority server-rendered HTML links to top US and global destination hubs */}
+      <div className="max-w-6xl mx-auto mt-6 pt-5 border-t border-[#E5E1D8]/70 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-xs text-[#6B6964]">
+        <span className="font-semibold uppercase tracking-wider text-[10px] text-[#121518]">Popular Stays:</span>
+        <Link href="/usa/new-york" prefetch={false} className="text-[#121518] hover:text-[#1a6fde] font-medium underline underline-offset-2">
+          New York
+        </Link>
+        <span>&bull;</span>
+        <Link href="/usa/las-vegas" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Las Vegas
+        </Link>
+        <span>&bull;</span>
+        <Link href="/usa/chicago" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Chicago
+        </Link>
+        <span>&bull;</span>
+        <Link href="/usa/miami" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Miami
+        </Link>
+        <span>&bull;</span>
+        <Link href="/uk/london" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          London
+        </Link>
+        <span>&bull;</span>
+        <Link href="/france/paris" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Paris
+        </Link>
+        <span>&bull;</span>
+        <Link href="/india/delhi" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Delhi
+        </Link>
+        <span>&bull;</span>
+        <Link href="/india/goa" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Goa
+        </Link>
+        <span>&bull;</span>
+        <Link href="/india/mumbai" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          Mumbai
+        </Link>
+        <span>&bull;</span>
+        <Link href="/destinations" prefetch={false} className="text-[#1a6fde] font-semibold hover:underline">
+          All Destinations &rarr;
+        </Link>
       </div>
     </section>
   );

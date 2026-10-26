@@ -1,19 +1,16 @@
 'use client';
 
-import { useFavorites } from '@/components/Favorites';
-import { FavoriteButton } from '@/components/Favorites';
+import { useFavorites, FavoriteButton, useMounted } from '@/components/Favorites';
 import Link from 'next/link';
 import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 import OutboundLink from '@/components/OutboundLink';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function WishlistPage() {
   const { favorites, clearAll } = useFavorites();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [copiedLink, setCopiedLink] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   const handleShareWishlist = async () => {
     if (favorites.length === 0) return;

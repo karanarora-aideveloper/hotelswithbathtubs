@@ -1,4 +1,4 @@
-import { createSnapshotModel, useSnapshot } from '@/lib/snapshotModel';
+import { createSnapshotModel, isSnapshotMode } from '@/lib/snapshotModel';
 import mongoose from 'mongoose';
 
 export interface IHotel extends mongoose.Document {
@@ -179,4 +179,4 @@ const HotelSchema = new mongoose.Schema<IHotel>({
 const HotelModel = mongoose.models.Hotel || mongoose.model<IHotel>('Hotel', HotelSchema);
 
 // The cloud build has no database access: with DATA_SNAPSHOT=1 the model reads the JSON snapshot instead.
-export default (useSnapshot() ? createSnapshotModel('all-hotels.json') : HotelModel) as unknown as typeof HotelModel;
+export default (isSnapshotMode() ? createSnapshotModel('all-hotels.json') : HotelModel) as unknown as typeof HotelModel;

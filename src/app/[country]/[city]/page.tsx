@@ -7,31 +7,54 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import Image from 'next/image';
-import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
-import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
+import { escapeRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
+import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood } from '@/lib/location';
 
 export const revalidate = false;
 
-function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, citySlug: string): string {
-  const customIntro = cityIntroContent[`${citySlug}-${countrySlug}`]?.intro || (countrySlug === 'india' ? cityIntroContent[`${citySlug}-india`]?.intro : undefined);
-  if (customIntro) {
-    if (customIntro.length <= 160) return customIntro;
-    const firstSentence = customIntro.split(/[.!?]\s+/)[0];
-    if (firstSentence && firstSentence.length >= 75 && firstSentence.length <= 150) {
-      const candidate = `${firstSentence}. Verified private in-room bathtubs.`;
-      if (candidate.length <= 160) return candidate;
-      return `${firstSentence}.`;
-    }
-    const truncated = customIntro.slice(0, 155).replace(/\s+\S*$/, '');
-    return `${truncated}...`;
+function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, minPrice?: string): string {
+  const hotelWord = count === 1 ? 'hotel' : 'hotels';
+  const sentences: string[] = [
+    `${count} ${cityName} ${hotelWord} with a bathtub or jacuzzi in the room, checked one by one.`,
+  ];
+  if (minPrice && minPrice.trim()) {
+    sentences.push(`From ${minPrice.trim()}/night.`);
   }
-  return countrySlug === 'usa'
-    ? `Discover ${count}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
-    : `Find ${count}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
+  sentences.push('See the exact room to book.');
+
+  let result = '';
+  for (const s of sentences) {
+    const candidate = result ? `${result} ${s}` : s;
+    if (candidate.length <= 155) {
+      result = candidate;
+    } else {
+      break;
+    }
+  }
+  if (!result) {
+    result = `${count} ${cityName} ${hotelWord} with verified in-room tubs.`;
+  }
+  return result;
+}
+
+function getCityPageTitle(cityName: string, countrySlug: string, citySlug: string, hotelCount: number): string {
+  const currentYear = new Date().getFullYear();
+  if (citySlug === 'new-york') {
+    return `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
+  }
+  if (countrySlug === 'usa') {
+    const roomsWord = hotelCount === 1 ? '1 Room' : `${hotelCount} Rooms`;
+    const standardUsTitle = `Hotels with Jacuzzi & Bathtub in ${cityName}: ${roomsWord} (${currentYear})`;
+    if (standardUsTitle.length <= 60) {
+      return standardUsTitle;
+    }
+    return `Jacuzzi & Bathtub Hotels in ${cityName} (${currentYear})`;
+  }
+  const verifiedWord = hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`;
+  return `Hotels with Bathtub in ${cityName}: ${verifiedWord} (${currentYear})`;
 }
 
 function truncateToWord(str: string, maxLen: number): string {
@@ -131,8 +154,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     };
   }
 
-  // Fetch the first hotel to get a city-specific image if available, and count for description
-  const [firstHotel, hotelCount] = await Promise.all([
+  // Fetch the first hotel to get a city-specific image if available, count and prices for lowest price description
+  const [firstHotel, hotelCount, cityHotelPrices] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -143,7 +166,16 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       country: countryInfo.regex,
       flagged: { $ne: true }
     }),
+    Hotel.find({
+      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      country: countryInfo.regex,
+      flagged: { $ne: true },
+      price: { $exists: true, $ne: '' }
+    }).select('price').lean(),
   ]);
+
+  const lowestPriceInfo = findLowestPriceHotel(cityHotelPrices);
+  const minPrice = lowestPriceInfo?.price;
 
   if (hotelCount === 0) {
     return {
@@ -159,19 +191,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query
-  // For USA: "Hotels with Jacuzzi in Room in [City]" is 3.5x higher volume than "bathtub"
-  // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
-  const currentYear = new Date().getFullYear();
-  let pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotelCount} Stays (${currentYear})`;
-  if (countrySlug === 'usa') {
-    const usCandidate = `Hotels with Jacuzzi in Room in ${cityName}: Top ${hotelCount} (${currentYear})`;
-    pageTitle = usCandidate.length <= 58
-      ? usCandidate
-      : `Hotels with Jacuzzi in ${cityName}: Top ${hotelCount} (${currentYear})`;
-  }
+  // SERP-Optimized Title (45-60 chars): Front-load exact high-volume search query
+  const pageTitle = getCityPageTitle(cityName, countrySlug, citySlug, hotelCount);
 
-  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, citySlug);
+  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
 
   return {
@@ -313,7 +336,7 @@ export default async function CityHotelsPage({
     tubType: h.tubType,
     bookingTip: h.bookingTip ? truncateToWord(h.bookingTip, 120) : '',
     price: h.price,
-    neighborhood: h.neighborhood,
+    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
     landmarkDistance: h.landmarkDistance,
     updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
   }));
@@ -432,11 +455,15 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
-    : `Hotels with Bathtub in ${cityName}: Top ${hotels.length} Stays (${currentYear})`;
+    : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length);
+
+  const lowestPriceResult = findLowestPriceHotel(hotels);
+  const minPriceHotel = lowestPriceResult?.hotel;
+  const minPrice = lowestPriceResult?.price;
 
   const pageDescription = stateConfig
     ? stateConfig.metaDescription
-    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
+    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, minPrice);
 
   const destinationSchema = {
     "@context": "https://schema.org",
@@ -481,25 +508,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 
-  // Find lowest price hotel for data-driven pricing FAQ
-  let minPriceHotel: any = null;
-  let minPriceVal = Infinity;
-  for (const h of hotels) {
-    if (h.price && typeof h.price === 'string') {
-      const num = parseInt(h.price.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(num) && num > 0 && num < minPriceVal) {
-        minPriceVal = num;
-        minPriceHotel = h;
-      }
-    }
-  }
-
   const faqItems = stateConfig
     ? [
         ...stateConfig.faqs,
-        ...(minPriceHotel ? [{
+        ...(minPriceHotel && minPrice ? [{
           question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
-          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
         }] : [])
       ]
     : [
@@ -513,8 +527,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
-          answer: minPriceHotel
-            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: minPriceHotel && minPrice
+            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
             : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
         },
         {

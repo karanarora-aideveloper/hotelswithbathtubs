@@ -1,23 +1,29 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit, Lora, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Link from "next/link";
 import AnalyticsExclusionInit from "@/components/AnalyticsExclusionInit";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import NavigationProgressBar from "@/components/NavigationProgressBar";
-import { GoogleAnalytics } from '@next/third-parties/google';
 import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 import InternalTrafficBadge from '@/components/InternalTrafficBadge';
 import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
 
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
-const lora = Lora({ subsets: ["latin"], variable: "--font-serif", display: "swap" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair-display", display: "swap" });
-const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-plus-jakarta-sans", display: "swap" });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-playfair-display",
+  display: "swap",
+});
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
+});
 
 
 export const viewport: Viewport = {
@@ -83,7 +89,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
         <link rel="dns-prefetch" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
       </head>
-      <body className={`${inter.variable} ${outfit.variable} ${lora.variable} ${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
+      <body className={`${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <ChunkErrorRecovery />
         <AnalyticsExclusionInit gaId={gaId} />
           <Suspense fallback={null}>
@@ -97,7 +103,28 @@ export default function RootLayout({
           </main>
 
           <Footer />
-          {gaId && <GoogleAnalytics gaId={gaId} />}
+          {gaId && (
+            <>
+              <Script
+                strategy="lazyOnload"
+                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              />
+              <Script
+                id="google-analytics-init"
+                strategy="lazyOnload"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${gaId}', {
+                      page_path: window.location.pathname,
+                    });
+                  `,
+                }}
+              />
+            </>
+          )}
           <GoogleAnalyticsProvider gaId={gaId} />
           <InternalTrafficBadge />
       </body>

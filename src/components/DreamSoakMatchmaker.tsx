@@ -355,68 +355,59 @@ export default function DreamSoakMatchmaker({
   initialBudget?: BudgetId;
   embedded?: boolean;
 }) {
-  const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedVibe, setSelectedVibe] = useState<VibeId | null>(initialVibe || null);
   const [selectedTub, setSelectedTub] = useState<TubId | null>(initialTub || null);
   const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(initialRegion || null);
   const [selectedBudget, setSelectedBudget] = useState<BudgetId | null>(initialBudget || null);
+  const [currentStep, setCurrentStep] = useState<number>(1);
 
   const [allHotels, setAllHotels] = useState<MatchmakerHotel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
   const [visibleResultsCount, setVisibleResultsCount] = useState<number>(12);
 
-  // Initialize from URL search params if present
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const qVibe = params.get('vibe') as VibeId;
-      const qTub = params.get('tub') as TubId;
-      const qRegion = params.get('region') as RegionId;
-      const qBudget = params.get('budget') as BudgetId;
-
-      if (qVibe && VIBE_OPTIONS.some((o) => o.id === qVibe)) setSelectedVibe(qVibe);
-      if (qTub && TUB_OPTIONS.some((o) => o.id === qTub)) setSelectedTub(qTub);
-      if (qRegion && REGION_OPTIONS.some((o) => o.id === qRegion)) setSelectedRegion(qRegion);
-      if (qBudget && BUDGET_OPTIONS.some((o) => o.id === qBudget)) setSelectedBudget(qBudget);
-
-      // If all 4 are present in URL, jump directly to results!
-      if (qVibe && qTub && qRegion && qBudget) {
-        setCurrentStep(5);
-      }
-    }
-  }, []);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const hasRequestedData = useRef(false);
 
   // Lazy-load 4.04 MB matchmaker data on demand or viewport intersection (zero impact on initial page load)
-  const loadData = useCallback(async () => {
+  const loadData = useCallback(() => {
     if (hasRequestedData.current) return;
     hasRequestedData.current = true;
-    try {
-      const res = await fetch('/matchmaker-data.json');
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data: MatchmakerHotel[] = await res.json();
-      const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
-        ...h,
-        rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
-        reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
-        numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
-        amenities: Array.isArray(h.amenities) ? h.amenities : [],
-      }));
-      setAllHotels(cleanData);
-      setLoading(false);
-    } catch (err) {
-      console.warn('[DreamSoakMatchmaker] Failed to fetch matchmaker-data.json:', err);
-      setLoading(false);
-    }
+    fetch('/matchmaker-data.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data: MatchmakerHotel[]) => {
+        const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
+          ...h,
+          rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
+          reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
+          numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
+          amenities: Array.isArray(h.amenities) ? h.amenities : [],
+        }));
+        setAllHotels(cleanData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.warn('[DreamSoakMatchmaker] Failed to fetch matchmaker-data.json:', err);
+        setLoading(false);
+      });
   }, []);
 
   // Fetch matchmaker data: trigger on URL query params, viewport intersection, or user hover
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
+      const v = params.get('vibe') as VibeId;
+      const t = params.get('tub') as TubId;
+      const r = params.get('region') as RegionId;
+      const b = params.get('budget') as BudgetId;
+      if (v && VIBE_OPTIONS.some((o) => o.id === v)) setSelectedVibe(v);
+      if (t && TUB_OPTIONS.some((o) => o.id === t)) setSelectedTub(t);
+      if (r && REGION_OPTIONS.some((o) => o.id === r)) setSelectedRegion(r);
+      if (b && BUDGET_OPTIONS.some((o) => o.id === b)) setSelectedBudget(b);
+      if (v && t && r && b) setCurrentStep(5);
       if (params.has('vibe') || params.has('tub') || params.has('region') || params.has('budget')) {
         loadData();
         return;
@@ -612,11 +603,17 @@ export default function DreamSoakMatchmaker({
           <span className="animate-spin text-sm">✨</span>
           <span>Interactive Dream Soak Matchmaker™</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight">
-          Find Your Perfect Bathtub Stay in 30 Seconds
-        </h2>
+        {embedded ? (
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight">
+            Find Your Perfect Bathtub Stay in 30 Seconds
+          </h2>
+        ) : (
+          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight">
+            Find Your Perfect Bathtub Stay in 30 Seconds
+          </h1>
+        )}
         <p className="mt-2 text-sm sm:text-base text-gray-600">
-          Can't decide on a destination? Tell us your dream soaking fantasy and we'll match you with triple-verified luxury suites worldwide.
+          Can&apos;t decide on a destination? Tell us your dream soaking fantasy and we&apos;ll match you with triple-verified luxury suites worldwide.
         </p>
       </div>
 

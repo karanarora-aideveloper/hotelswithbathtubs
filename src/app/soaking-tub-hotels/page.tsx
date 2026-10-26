@@ -14,17 +14,31 @@ export const dynamic = 'force-static';
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Hotels with Soaking Tub in Room | Deep Soaking Bath Suites (${currentYear})`,
-  description: 'Find verified luxury hotels with private deep soaking tubs in room, freestanding stone bathtubs, and scenic bath suites across top US & international destinations.',
+  title: 'Hotels with Soaking Tub in Room',
+  description: 'Verified luxury hotels with private deep soaking tubs, freestanding stone bathtubs, and scenic bath suites across top US & international getaways.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
   },
   openGraph: {
-    title: `Hotels with Soaking Tub in Room | Deep Soaking Bath Suites (${currentYear})`,
+    title: `Hotels with Soaking Tub in Room (${currentYear})`,
     description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
     url: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Hotels with Soaking Tub in Room',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Hotels with Soaking Tub in Room (${currentYear})`,
+    description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp'],
   },
 };
 
@@ -112,7 +126,7 @@ export default async function SoakingTubHotelsPage() {
       <div className="bg-[#f8fafc] min-h-screen font-jakarta">
         {/* Breadcrumb Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 flex items-center flex-wrap gap-1">
-          <Link href="/" className="text-[#1a6fde] hover:underline">Home</Link>
+          <Link href="/" prefetch={false} className="text-[#1a6fde] hover:underline">Home</Link>
           <span>&rsaquo;</span>
           <span className="text-gray-900 font-semibold">Soaking Tub Hotels</span>
         </div>

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about Hotels With Bathtubs, our triple-verification process, and our commitment to helping travelers find guaranteed in-room bathtubs & jacuzzi suites.',
+  description: 'Learn about Hotels With Bathtubs, our verification process, and our commitment to helping travelers find guaranteed in-room bathtubs & jacuzzi suites.',
   alternates: {
     canonical: '/about',
   },

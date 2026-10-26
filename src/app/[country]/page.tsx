@@ -555,7 +555,7 @@ export default async function CountryHubPage({
                           ❤️ Romantic Stays
                         </span>
                         <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 group-hover:text-[#1a6fde] transition-colors mb-2">
-                          Valentine's Day Hotels with In-Room Jacuzzis
+                          Valentine&apos;s Day Hotels with In-Room Jacuzzis
                         </h3>
                         <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                           Hand-verified romantic hotel suites with private couple whirlpool tubs, champagne service, and candlelit ambiance.

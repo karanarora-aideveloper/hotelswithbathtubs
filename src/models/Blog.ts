@@ -1,4 +1,4 @@
-import { createSnapshotModel, useSnapshot } from '@/lib/snapshotModel';
+import { createSnapshotModel, isSnapshotMode } from '@/lib/snapshotModel';
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IBlog extends Document {
@@ -31,4 +31,4 @@ const BlogSchema: Schema = new Schema(
 const BlogModel = mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema);
 
 // The cloud build has no database access: with DATA_SNAPSHOT=1 the model reads the JSON snapshot instead.
-export default (useSnapshot() ? createSnapshotModel('all-blogs.json') : BlogModel) as unknown as typeof BlogModel;
+export default (isSnapshotMode() ? createSnapshotModel('all-blogs.json') : BlogModel) as unknown as typeof BlogModel;

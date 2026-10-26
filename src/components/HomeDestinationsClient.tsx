@@ -64,8 +64,6 @@ function FlashDestinationSection({
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const totalCount = totalCountProp ?? cities.length;
-  if (cities.length === 0) return null;
-
   const displayedCities = isExpanded ? cities.slice(0, visibleCount) : cities.slice(0, 12);
   const remainingCities = cities.slice(12);
   const hasMoreToStream = isExpanded && visibleCount < cities.length;
@@ -91,6 +89,8 @@ function FlashDestinationSection({
       observer.disconnect();
     };
   }, [hasMoreToStream, cities.length]);
+
+  if (cities.length === 0) return null;
 
   const handleExpand = () => {
     setIsExpanded(true);
@@ -309,6 +309,16 @@ export default function HomeDestinationsClient({
 }: HomeDestinationsClientProps) {
   const { geo } = useGeo();
   const [selectedTab, setSelectedTab] = useState<'auto' | 'usa' | 'india' | 'global' | 'all'>('auto');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('hwb_region_tab');
+      if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
+        setSelectedTab(saved as any);
+      }
+    } catch {}
+  }, []);
+
   const [filterQuery, setFilterQuery] = useState('');
   const [filterVisibleCount, setFilterVisibleCount] = useState(16);
   const filterSentinelRef = useRef<HTMLDivElement>(null);
@@ -318,25 +328,21 @@ export default function HomeDestinationsClient({
     return [...usaCities, ...internationalCities, ...indiaCities];
   }, [usaCities, internationalCities, indiaCities]);
 
-  // Load manual user preference from localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('hwb_region_tab');
-      if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
-        setSelectedTab(saved as any);
-      }
-    } catch (_) {}
-  }, []);
-
   const handleTabChange = (tab: 'auto' | 'usa' | 'india' | 'global' | 'all') => {
     setSelectedTab(tab);
     try {
       localStorage.setItem('hwb_region_tab', tab);
-    } catch (_) {}
+    } catch {}
   };
 
   // Instant In-Section Destination Filter Results
   const normalizedFilter = filterQuery.trim().toLowerCase();
+  const [prevNormalizedFilter, setPrevNormalizedFilter] = useState(normalizedFilter);
+  if (prevNormalizedFilter !== normalizedFilter) {
+    setPrevNormalizedFilter(normalizedFilter);
+    setFilterVisibleCount(16);
+  }
+
   const filteredMatches = useMemo(() => {
     if (!normalizedFilter) return [];
     return allDestinations.filter(
@@ -345,11 +351,6 @@ export default function HomeDestinationsClient({
         c._id.country.toLowerCase().includes(normalizedFilter)
     );
   }, [allDestinations, normalizedFilter]);
-
-  // Reset filter visible count when query changes
-  useEffect(() => {
-    setFilterVisibleCount(16);
-  }, [normalizedFilter]);
 
   // Progressive streaming for filter results if many match
   useEffect(() => {

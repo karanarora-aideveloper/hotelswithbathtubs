@@ -17,6 +17,8 @@ const moves = [
   { from: path.join(rootDir, 'src/components/admin'), to: path.join(rootDir, '_cf_tmp_components_admin') },
   // proxy.ts (formerly middleware.ts) cannot run in a static export; edge logic lives in functions/_middleware.ts
   { from: path.join(rootDir, 'src/proxy.ts'), to: path.join(rootDir, '_cf_tmp_proxy.ts') },
+  // Stash /redesign from static export (saves 292 KB from production bundle)
+  { from: path.join(rootDir, 'src/app/redesign'), to: path.join(rootDir, '_cf_tmp_redesign') },
 ];
 
 function move(from, to) {

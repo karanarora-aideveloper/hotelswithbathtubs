@@ -1,10 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback, useSyncExternalStore } from 'react';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
-
-
 
 const STORAGE_KEY = 'hwb_favorites';
 
@@ -26,27 +24,65 @@ export type FavoriteHotel = {
   citySlug: string;
 };
 
-function loadFavorites(): FavoriteHotel[] {
-  if (typeof window === 'undefined') return [];
+const emptySubscribe = () => () => {};
+
+export function useMounted(): boolean {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+let listeners: Array<() => void> = [];
+function subscribe(listener: () => void) {
+  listeners.push(listener);
+  return () => {
+    listeners = listeners.filter((l) => l !== listener);
+  };
+}
+
+function notify() {
+  for (const l of listeners) l();
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) notify();
+  });
+}
+
+const emptyFavorites: FavoriteHotel[] = [];
+let cachedFavorites: FavoriteHotel[] = [];
+let lastRaw: string | null = null;
+
+function getFavoritesSnapshot(): FavoriteHotel[] {
+  if (typeof window === 'undefined') return emptyFavorites;
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const raw = localStorage.getItem(STORAGE_KEY) || '[]';
+    if (raw !== lastRaw) {
+      lastRaw = raw;
+      cachedFavorites = JSON.parse(raw);
+    }
+    return cachedFavorites;
   } catch {
-    return [];
+    return emptyFavorites;
   }
+}
+
+function getServerSnapshot(): FavoriteHotel[] {
+  return emptyFavorites;
 }
 
 function saveFavorites(favs: FavoriteHotel[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+    notify();
   } catch (_) {}
 }
 
 export function useFavorites() {
-  const [favorites, setFavorites] = useState<FavoriteHotel[]>([]);
-
-  useEffect(() => {
-    setFavorites(loadFavorites());
-  }, []);
+  const favorites = useSyncExternalStore(subscribe, getFavoritesSnapshot, getServerSnapshot);
 
   const isFavorite = useCallback(
     (id: string) => favorites.some((f) => f._id === id),
@@ -54,31 +90,28 @@ export function useFavorites() {
   );
 
   const toggleFavorite = useCallback((hotel: FavoriteHotel) => {
-    setFavorites((prev) => {
-      const exists = prev.some((f) => f._id === hotel._id);
-      const next = exists ? prev.filter((f) => f._id !== hotel._id) : [...prev, hotel];
-      saveFavorites(next);
-      // Track to PostHog (if not excluded)
-      try {
-        if (!isUserExcluded()) {
-          trackEvent('wishlist_action', {
-            action: exists ? 'remove' : 'add',
-            hotel_name: hotel.name,
-            city: hotel.city,
-            country: hotel.country,
-            tub_type: hotel.tubType,
-            price: hotel.price,
-            rating: hotel.rating,
-            total_wishlist_count: next.length,
-          });
-        }
-      } catch (_) {}
-      return next;
-    });
-  }, []);
+    const exists = favorites.some((f) => f._id === hotel._id);
+    const next = exists ? favorites.filter((f) => f._id !== hotel._id) : [...favorites, hotel];
+    saveFavorites(next);
+
+    // Track analytics (if not excluded)
+    try {
+      if (!isUserExcluded()) {
+        trackEvent('wishlist_action', {
+          action: exists ? 'remove' : 'add',
+          hotel_name: hotel.name,
+          city: hotel.city,
+          country: hotel.country,
+          tub_type: hotel.tubType,
+          price: hotel.price,
+          rating: hotel.rating,
+          total_wishlist_count: next.length,
+        });
+      }
+    } catch (_) {}
+  }, [favorites]);
 
   const clearAll = useCallback(() => {
-    setFavorites([]);
     saveFavorites([]);
   }, []);
 
@@ -95,10 +128,8 @@ export function FavoriteButton({
   className?: string;
 }) {
   const { isFavorite, toggleFavorite } = useFavorites();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [pulse, setPulse] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   const saved = mounted && isFavorite(hotel._id);
 
@@ -134,8 +165,7 @@ export function FavoriteButton({
 
 export function WishlistCount() {
   const { favorites } = useFavorites();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useMounted();
   if (!mounted || favorites.length === 0) return null;
   return (
     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-2xs font-black rounded-full w-4 h-4 flex items-center justify-center">

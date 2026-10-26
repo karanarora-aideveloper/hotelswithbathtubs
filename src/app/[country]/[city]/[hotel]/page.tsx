@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
-import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
+import { getUrlDirectnessTier } from '@/lib/affiliate';
 import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
@@ -180,10 +180,49 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   }
 
   const cityName = titleCase(rawCity);
-  const tubType = hotel.tubType || 'Private Bathtub';
-  const pageTitle = `${hotel.name} — ${tubType} in ${cityName}`;
+  const tubType = hotel.tubType || 'Bathtub';
+  let displayName = hotel.name;
+  if (displayName.length > 40) {
+    const splitMatch = displayName.match(/^([^|•–-]+)[|•–-]/);
+    if (splitMatch && splitMatch[1].trim().length >= 5) {
+      displayName = splitMatch[1].trim();
+    }
+  }
+  if (displayName.length > 42) {
+    const lastSpace = displayName.slice(0, 42).lastIndexOf(' ');
+    if (lastSpace > 20) {
+      displayName = displayName.slice(0, lastSpace).trim();
+    }
+  }
+
+  // Target title under 65 chars: shorten tub type to first part or simplify, never cut mid-word or append "..."
+  const shortTub = tubType.split(/\s*(?:&|and|,|\/|\+)\s*/i)[0].trim() || 'Bathtub';
+  const titleCandidates = [
+    `${displayName} – Room with ${tubType}, ${cityName}`,
+    `${displayName} – ${tubType}, ${cityName}`,
+    `${displayName} – Room with ${shortTub}, ${cityName}`,
+    `${displayName} – ${shortTub}, ${cityName}`,
+    `${displayName} – Bathtub, ${cityName}`,
+    `${displayName}, ${cityName}`,
+    displayName,
+  ];
+
+  let pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
+
   const roomType = hotel.roomType || 'Room with Bathtub';
-  const pageDescription = `${hotel.name} features ${tubType} in ${roomType}. Verified private in-room bathtub in ${cityName}.`;
+  let pageDescription = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for a verified in-room ${tubType.toLowerCase()}.`;
+  if (pageDescription.length > 155) {
+    pageDescription = `Book the ${roomType} at ${displayName}, ${cityName} for a verified in-room ${tubType.toLowerCase()}.`;
+    if (pageDescription.length > 155) {
+      pageDescription = `Verified private ${tubType.toLowerCase()} at ${displayName} in ${cityName}. Book guaranteed in-room tub.`;
+      if (pageDescription.length > 155) {
+        pageDescription = `Verified in-room bathtub at ${displayName}, ${cityName}.`;
+        if (pageDescription.length > 155) {
+          pageDescription = `Verified hotel rooms with in-room bathtubs in ${cityName}.`;
+        }
+      }
+    }
+  }
 
   const hotelSlug = slugify(hotel.slug || hotel.name);
   const ogImage = imageUrl(hotel.image);
@@ -199,7 +238,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       canonical: `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotelSlug}`,
     },
     openGraph: {
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
       url: hotelUrl,
       siteName: 'Hotels with Bathtubs',
@@ -209,14 +248,14 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${hotel.name} with bathtub in ${cityName}`,
+          alt: `${displayName} with bathtub in ${cityName}`,
         },
       ],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${pageTitle} | Hotels With Bathtubs`,
+      title: pageTitle,
       description: pageDescription,
       images: [ogImage],
     },
@@ -256,11 +295,6 @@ export default async function HotelDetailPage({
     ]
   };
 
-  // Geographic coordinates & street address resolution with guaranteed fallbacks
-  const cityGeo = getCityGeoCoordinates(citySlug);
-  const hotelLat = typeof hotel.latitude === 'number' && !isNaN(hotel.latitude) ? hotel.latitude : cityGeo.latitude;
-  const hotelLng = typeof hotel.longitude === 'number' && !isNaN(hotel.longitude) ? hotel.longitude : cityGeo.longitude;
-
   // Parse a single numeric nightly price ("$1,234.50" -> "1234.50"); ranges or junk yield no offer
   const schemaPrice = (() => {
     const raw = hotel.price?.toString() ?? '';
@@ -284,11 +318,6 @@ export default async function HotelDetailPage({
       "addressLocality": cityName,
       "addressCountry": countryName,
       ...(hotel.postalCode ? { "postalCode": hotel.postalCode } : {})
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": Number(hotelLat),
-      "longitude": Number(hotelLng)
     },
     // No aggregateRating: scores come from third-party booking partners, which Google's
     // review-snippet policy disallows marking up as the site's own ratings.
@@ -533,7 +562,11 @@ export default async function HotelDetailPage({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <span>{isValidNeighborhood(hotel.neighborhood) ? `${hotel.neighborhood}, ${cityName}` : cityName}, {countryName}</span>
+                <span>
+                  {hotel.neighborhood && isValidNeighborhood(hotel.neighborhood)
+                    ? `${hotel.neighborhood}, ${cityName}`
+                    : cityName}, {countryName}
+                </span>
                 {hotel.landmarkDistance && (
                   <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full ml-1">
                     {hotel.landmarkDistance}

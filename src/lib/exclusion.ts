@@ -2,7 +2,7 @@
 
 /**
  * Universal exclusion helper for Hotels With Bathtubs
- * Blocks GA4, PostHog session recordings, and Mixpanel for admin & developer devices.
+ * Blocks GA4 tracking and telemetry for admin & developer devices.
  */
 
 export function isUserExcluded(gaId?: string): boolean {
@@ -53,15 +53,8 @@ export function setUserExcluded(excluded: boolean, gaId?: string) {
       (window as any)['ga-disable-G-2VDZWWBGD3'] = true;
       if (gaId) (window as any)[`ga-disable-${gaId}`] = true;
 
-      // Disable PostHog capturing immediately if initialized
-      try {
-        if (typeof (window as any).posthog?.opt_out_capturing === 'function') {
-          (window as any).posthog.opt_out_capturing();
-        }
-      } catch (_) {}
-
       console.log(
-        '%c[Analytics Exclusion] This device is EXCLUDED from GA4, PostHog, and Mixpanel.',
+        '%c[Analytics Exclusion] This device is EXCLUDED from GA4 tracking.',
         'background: #0f172a; color: #10b981; font-weight: bold; padding: 4px 8px; border-radius: 4px;'
       );
     } else {
@@ -72,12 +65,6 @@ export function setUserExcluded(excluded: boolean, gaId?: string) {
       delete (window as any)['ga-disable-G-TETR30WPYM'];
       delete (window as any)['ga-disable-G-2VDZWWBGD3'];
       if (gaId) delete (window as any)[`ga-disable-${gaId}`];
-
-      try {
-        if (typeof (window as any).posthog?.opt_in_capturing === 'function') {
-          (window as any).posthog.opt_in_capturing();
-        }
-      } catch (_) {}
 
       console.log(
         '%c[Analytics Exclusion] Tracking re-enabled on this device.',

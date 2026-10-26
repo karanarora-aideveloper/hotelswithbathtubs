@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 interface HotelClickItem {
   _id?: string;
@@ -61,40 +61,41 @@ export default function HotelClicksClient({ initialData }: { initialData?: any }
   const [reportedEarnings, setReportedEarnings] = useState<string>('');
 
   // Fetch clicks data
-  const fetchData = async (overrideRange?: string, overrideProvider?: string, overridePage?: number) => {
-    setLoading(true);
-    try {
-      const activeRange = overrideRange || range;
-      const activeProvider = overrideProvider || selectedProvider;
-      const activePage = overridePage || page;
+  const fetchData = useCallback((overrideRange?: string, overrideProvider?: string, overridePage?: number) => {
+    const activeRange = overrideRange || range;
+    const activeProvider = overrideProvider || selectedProvider;
+    const activePage = overridePage || page;
 
-      const params = new URLSearchParams({
-        range: activeRange,
-        provider: activeProvider,
-        page: String(activePage),
-        limit: '50',
-      });
-      if (searchQuery.trim()) {
-        params.set('search', searchQuery.trim());
-      }
+    const params = new URLSearchParams({
+      range: activeRange,
+      provider: activeProvider,
+      page: String(activePage),
+      limit: '50',
+    });
+    if (searchQuery.trim()) {
+      params.set('search', searchQuery.trim());
+    }
 
-      const res = await fetch(`/api/track-click?${params.toString()}`);
-      if (res.ok) {
-        const data = await res.json();
+    fetch(`/api/track-click?${params.toString()}`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
         setClicks(data.clicks || []);
         if (data.summary) setSummary(data.summary);
         if (data.pagination) setTotalPages(data.pagination.pages || 1);
-      }
-    } catch (err) {
-      console.error('Failed to fetch clicks:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch clicks:', err);
+        setLoading(false);
+      });
+  }, [range, selectedProvider, page, searchQuery]);
 
   useEffect(() => {
     fetchData();
-  }, [range, selectedProvider, page]);
+  }, [fetchData]);
 
   // Auto-sync from Cloudflare Edge D1 if last sync was > 30 minutes ago
   useEffect(() => {

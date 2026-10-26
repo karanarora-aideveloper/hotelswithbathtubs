@@ -14,17 +14,31 @@ export const dynamic = 'force-static';
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Hotels with Hot Tub in Room | In-Room Jacuzzi Suites (${currentYear})`,
+  title: 'Hotels with Hot Tub in Room',
   description: 'Find verified hotels with private in-room hot tubs, jetted whirlpool suites, and romantic balcony jacuzzi rooms across popular US & global getaways.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room',
   },
   openGraph: {
-    title: `Hotels with Hot Tub in Room | In-Room Jacuzzi Suites (${currentYear})`,
+    title: `Hotels with Hot Tub in Room (${currentYear})`,
     description: 'Explore verified romantic hotels featuring guaranteed private in-room hot tubs, private balcony jacuzzis, and hydrotherapy suites.',
     url: 'https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Hotels with Hot Tub in Room',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Hotels with Hot Tub in Room (${currentYear})`,
+    description: 'Explore verified romantic hotels featuring guaranteed private in-room hot tubs.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 
@@ -118,7 +132,7 @@ export default async function HotelsWithHotTubInRoomPage() {
       <div className="bg-[#f8fafc] min-h-screen font-jakarta">
         {/* Breadcrumb Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 flex items-center flex-wrap gap-1">
-          <Link href="/" className="text-[#1a6fde] hover:underline">Home</Link>
+          <Link href="/" prefetch={false} className="text-[#1a6fde] hover:underline">Home</Link>
           <span>&rsaquo;</span>
           <span className="text-gray-900 font-semibold">Hotels with Hot Tub in Room</span>
         </div>

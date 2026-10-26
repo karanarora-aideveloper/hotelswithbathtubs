@@ -38,8 +38,6 @@ export default function ReviewQueuePage() {
   const [done, setDone] = useState(false);
 
   const fetchNext = useCallback(async (city = selectedCity) => {
-    setLoading(true);
-    setLastAction(null);
     try {
       const params = new URLSearchParams();
       if (city) params.set('city', city);
@@ -56,12 +54,13 @@ export default function ReviewQueuePage() {
 
   useEffect(() => {
     fetchNext();
-  }, []);
+  }, [fetchNext]);
 
   const act = useCallback(async (action: 'confirm' | 'flag') => {
     if (!hotel || acting) return;
     setActing(true);
     setLastAction(action);
+    setLoading(true);
     try {
       await fetch(`/api/admin/hotels/${hotel._id}/review`, {
         method: 'POST',
@@ -90,6 +89,7 @@ export default function ReviewQueuePage() {
   const handleCityChange = (city: string) => {
     setSelectedCity(city);
     setDone(false);
+    setLoading(true);
     fetchNext(city);
   };
 

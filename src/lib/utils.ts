@@ -317,3 +317,47 @@ export function getCountryCurrency(countrySlug: string): string {
   const clean = (countrySlug || '').toLowerCase().trim();
   return countryCurrencyMap[clean] || 'USD';
 }
+
+/**
+ * Normalizes price string so there is no space after the currency symbol/code (e.g. "₹ 3,800" -> "₹3,800").
+ */
+export function normalizePrice(priceStr?: string | null): string | undefined {
+  if (!priceStr || typeof priceStr !== 'string') return undefined;
+  const trimmed = priceStr.trim();
+  if (!trimmed) return undefined;
+  return trimmed.replace(/^([$£€₹¥]|AUD|CAD|USD|GBP|EUR|INR)\s+/i, '$1');
+}
+
+/**
+ * Extracts a numeric value from a price string, ignoring currency symbols, commas and spaces.
+ */
+export function parsePriceNumber(priceStr?: string | null): number | null {
+  if (!priceStr || typeof priceStr !== 'string') return null;
+  const cleaned = priceStr.replace(/,/g, '');
+  const match = cleaned.match(/\d+(?:\.\d+)?/);
+  if (!match) return null;
+  const num = parseFloat(match[0]);
+  return isNaN(num) || num <= 0 ? null : num;
+}
+
+/**
+ * Finds the hotel with the true lowest numerical price from an array of hotels or price objects.
+ */
+export function findLowestPriceHotel<T extends { price?: string }>(hotels: T[]): { hotel: T; price: string } | null {
+  let minNum = Infinity;
+  let minHotel: T | null = null;
+  for (const h of hotels) {
+    const num = parsePriceNumber(h.price);
+    if (num !== null && num < minNum) {
+      minNum = num;
+      minHotel = h;
+    }
+  }
+  if (!minHotel || !minHotel.price) return null;
+  const norm = normalizePrice(minHotel.price);
+  return norm ? { hotel: minHotel, price: norm } : null;
+}
+
+export { isPlaceholderNeighborhood, isValidNeighborhood, cleanNeighborhood } from './location';
+
+

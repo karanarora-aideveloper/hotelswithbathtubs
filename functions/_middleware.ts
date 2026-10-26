@@ -1,20 +1,10 @@
-import { cityToCountry } from './cityMap';
+import { cityToCountry, CITY_ALIASES } from './cityMap';
 
 interface EventContext {
   request: Request;
   env?: Record<string, any>;
   next: () => Promise<Response>;
 }
-
-const CITY_ALIASES: Record<string, string> = {
-  'bengaluru': 'bangalore',
-  'gurugram': 'gurgaon',
-  'bombay': 'mumbai',
-  'calcutta': 'kolkata',
-  'madras': 'chennai',
-  'trivandrum': 'thiruvananthapuram',
-  'cochin': 'kochi',
-};
 
 export async function onRequest(context: EventContext): Promise<Response> {
   const url = new URL(context.request.url);
@@ -33,17 +23,25 @@ export async function onRequest(context: EventContext): Promise<Response> {
   }
 
   // Case normalization: 301 redirect any URL with uppercase letters to lowercase in a single hop
-  if (/[A-Z]/.test(url.pathname)) {
+  if (/[A-Z]/.test(url.pathname) && !url.pathname.startsWith('/api')) {
     const target = new URL(context.request.url);
     let newPath = url.pathname.toLowerCase();
-    if (newPath.length > 1 && newPath.endsWith('/') && !newPath.startsWith('/api')) {
+    if (newPath.length > 1 && newPath.endsWith('/')) {
       newPath = newPath.slice(0, -1);
     }
     const segs = newPath.split('/').filter(Boolean);
-    if (segs.length === 1 && cityToCountry[segs[0]]) {
-      newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
-    } else if (segs.length === 2 && CITY_ALIASES[segs[1]]) {
-      newPath = `/${segs[0]}/${CITY_ALIASES[segs[1]]}`;
+    if (segs.length === 1) {
+      const alias = CITY_ALIASES[segs[0]];
+      if (alias) {
+        newPath = `/${alias.country}/${alias.city}`;
+      } else if (cityToCountry[segs[0]]) {
+        newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
+      }
+    } else if (segs.length === 2) {
+      const alias = CITY_ALIASES[segs[1]];
+      if (alias) {
+        newPath = `/${alias.country}/${alias.city}`;
+      }
     }
     target.pathname = newPath;
     return Response.redirect(target.toString(), 301);
@@ -54,50 +52,62 @@ export async function onRequest(context: EventContext): Promise<Response> {
     const target = new URL(context.request.url);
     let newPath = url.pathname.slice(0, -1);
     const segs = newPath.split('/').filter(Boolean);
-    if (segs.length === 1 && cityToCountry[segs[0]]) {
-      newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
-    } else if (segs.length === 2 && CITY_ALIASES[segs[1]]) {
-      newPath = `/${segs[0]}/${CITY_ALIASES[segs[1]]}`;
+    if (segs.length === 1) {
+      const alias = CITY_ALIASES[segs[0]];
+      if (alias) {
+        newPath = `/${alias.country}/${alias.city}`;
+      } else if (cityToCountry[segs[0]]) {
+        newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
+      }
+    } else if (segs.length === 2) {
+      const alias = CITY_ALIASES[segs[1]];
+      if (alias) {
+        newPath = `/${alias.country}/${alias.city}`;
+      }
     }
     target.pathname = newPath;
     return Response.redirect(target.toString(), 301);
   }
 
-  // Answer pruned Next.js client-router prefetch files with empty 404 to avoid 66 KB error pages
+  // Answer Next.js segment prefetch trees (__next.*) with an empty-body 404
+  // Prevents serving the 66 KB HTML 404 page repeatedly on every card prefetch
   if (url.pathname.includes('/__next.')) {
     return new Response(null, {
       status: 404,
+      statusText: 'Not Found',
       headers: {
-        'Cache-Control': 'public, max-age=86400',
+        'content-type': 'text/plain',
+        'cache-control': 'public, max-age=86400',
       },
     });
   }
 
   const response = await context.next();
 
-  // If 404, rescue known 1-segment city URLs, 2-segment city aliases, or 3-segment hotel variations
+  // On 404: check legacy naked city URLs, aliases, and 3-part hotel slugs
   if (response.status === 404) {
     const segments = url.pathname.split('/').filter(Boolean);
 
-    // 1-segment rescue: e.g. /kochi -> /india/kochi
+    // 1-segment route (e.g. /kochi, /bengaluru, /paris)
     if (segments.length === 1 && segments[0] !== 'api' && segments[0] !== '_next') {
-      const citySlug = segments[0].toLowerCase();
-      const countrySlug = cityToCountry[citySlug];
-      if (countrySlug) {
-        const target = new URL(context.request.url);
-        target.pathname = `/${countrySlug}/${citySlug}`;
-        return Response.redirect(target.toString(), 301);
+      const slug = segments[0].toLowerCase();
+      if (CITY_ALIASES[slug]) {
+        const alias = CITY_ALIASES[slug];
+        return Response.redirect(new URL(`/${alias.country}/${alias.city}`, url.origin).toString(), 301);
+      }
+      if (cityToCountry[slug]) {
+        const country = cityToCountry[slug];
+        return Response.redirect(new URL(`/${country}/${slug}`, url.origin).toString(), 301);
       }
     }
 
-    // 2-segment alias rescue: e.g. /india/bengaluru -> /india/bangalore
+    // 2-segment route with city alias (e.g. /india/bengaluru -> /india/bangalore)
     if (segments.length === 2 && segments[0] !== 'api' && segments[0] !== '_next') {
       const [country, city] = segments;
-      const citySlug = city.toLowerCase();
-      if (CITY_ALIASES[citySlug]) {
-        const target = new URL(context.request.url);
-        target.pathname = `/${country}/${CITY_ALIASES[citySlug]}`;
-        return Response.redirect(target.toString(), 301);
+      const cityLower = city.toLowerCase();
+      if (CITY_ALIASES[cityLower]) {
+        const alias = CITY_ALIASES[cityLower];
+        return Response.redirect(new URL(`/${alias.country}/${alias.city}`, url.origin).toString(), 301);
       }
     }
 
@@ -111,7 +121,6 @@ export async function onRequest(context: EventContext): Promise<Response> {
         const candidates: string[] = [];
 
         // Scenario 1: Suffix slug requested (e.g. broncks-apartment-1-torshavn or capella-bangkok)
-        // Canonical page may be city-prefixed (torshavn-broncks-apartment-1), bare, or double-suffixed (capella-bangkok-bangkok)
         if (hotelSlug.endsWith(`-${citySlug}`)) {
           const stripped = hotelSlug.slice(0, -(citySlug.length + 1));
           if (stripped) {
@@ -121,7 +130,6 @@ export async function onRequest(context: EventContext): Promise<Response> {
           candidates.push(`/${country}/${city}/${hotelSlug}-${citySlug}`);
         }
         // Scenario 2: City-prefixed slug requested (e.g. torshavn-hotel-name)
-        // Canonical page may be city-suffixed (hotel-name-torshavn) or bare
         else if (hotelSlug.startsWith(`${citySlug}-`)) {
           const stripped = hotelSlug.slice(citySlug.length + 1);
           if (stripped) {
@@ -150,15 +158,11 @@ export async function onRequest(context: EventContext): Promise<Response> {
             }
           }
         }
-        // Without the ASSETS fetcher we cannot confirm a candidate exists, so fall through to the
-        // 404 instead of permanently redirecting to a guessed page.
       }
     }
   }
 
   // Attach Edge caching headers for HTML pages:
-  // Must revalidate so clients always get latest JS chunk hashes from new deployments
-  // Never cache 404/error statuses or use aggressive s-maxage on HTML (prevents ChunkLoadError)
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('text/html')) {
     // Protect against 304/204 response body construction errors in Cloudflare Workers

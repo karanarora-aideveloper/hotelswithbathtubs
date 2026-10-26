@@ -49,7 +49,8 @@ const GLOBAL_SHORTCUTS = [
 export default function LuxuryHero() {
   const router = useRouter();
   const { geo } = useGeo();
-  const [activeRegion, setActiveRegion] = useState<'india' | 'global'>('india');
+  const [userRegion, setUserRegion] = useState<'india' | 'global' | null>(null);
+  const activeRegion = userRegion ?? (geo?.isIndia ? 'india' : 'global');
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -58,13 +59,6 @@ export default function LuxuryHero() {
   const [isNavigating, setIsNavigating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isFetchingSearch = useRef(false);
-
-  // Sync default region with Geo-IP detection once loaded
-  useEffect(() => {
-    if (geo && typeof geo.isIndia === 'boolean') {
-      setActiveRegion(geo.isIndia ? 'india' : 'global');
-    }
-  }, [geo.isIndia]);
 
   // Lazy-load search index on demand or when browser is idle (zero impact on initial LCP)
   const loadSearchData = React.useCallback(() => {
@@ -244,7 +238,7 @@ export default function LuxuryHero() {
             </span>
             <button
               type="button"
-              onClick={() => setActiveRegion((r) => (r === 'india' ? 'global' : 'india'))}
+              onClick={() => setUserRegion(activeRegion === 'india' ? 'global' : 'india')}
               className="text-[#C5A880] hover:text-white underline underline-offset-2 ml-1 cursor-pointer transition-colors"
             >
               (Switch to {activeRegion === 'india' ? 'Global' : 'India'})
@@ -269,10 +263,12 @@ export default function LuxuryHero() {
             <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center divide-y sm:divide-y-0 sm:divide-x divide-[#E5E1D8]">
               {/* Destination Search Input */}
               <div className="relative flex-grow px-4 py-2 sm:py-1">
-                <label className="block text-[10px] font-semibold tracking-widest uppercase text-[#6B6964] mb-0.5">
+                <label htmlFor="destination-hotel-search" className="block text-[10px] font-semibold tracking-widest uppercase text-[#6B6964] mb-0.5">
                   Destination or Hotel
                 </label>
                 <input
+                  id="destination-hotel-search"
+                  aria-label="Destination or Hotel"
                   type="text"
                   value={query}
                   onChange={(e) => {
@@ -292,10 +288,12 @@ export default function LuxuryHero() {
 
               {/* Bathtub Architecture Dropdown */}
               <div className="px-4 py-2 sm:py-1 sm:w-56 flex-shrink-0">
-                <label className="block text-[10px] font-semibold tracking-widest uppercase text-[#6B6964] mb-0.5">
+                <label htmlFor="bathtub-architecture-select" className="block text-[10px] font-semibold tracking-widest uppercase text-[#6B6964] mb-0.5">
                   Bathtub Architecture
                 </label>
                 <select
+                  id="bathtub-architecture-select"
+                  aria-label="Bathtub Architecture"
                   value={selectedTub}
                   onChange={(e) => setSelectedTub(e.target.value)}
                   className="w-full text-xs font-semibold text-[#121518] bg-transparent focus:outline-none cursor-pointer"

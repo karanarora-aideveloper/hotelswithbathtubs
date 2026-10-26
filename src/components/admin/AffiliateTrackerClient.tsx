@@ -16,10 +16,13 @@ function DebouncedInput({
   onSave: (val: string) => void,
   placeholder?: string 
 }) {
+  const [prevInitialValue, setPrevInitialValue] = useState(initialValue);
   const [val, setVal] = useState(initialValue || '');
+  if (prevInitialValue !== initialValue) {
+    setPrevInitialValue(initialValue);
+    setVal(initialValue || '');
+  }
   const timer = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => { setVal(initialValue || ''); }, [initialValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value);

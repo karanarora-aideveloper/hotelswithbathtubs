@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = false;
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
-  const [firstHotel, hotelCount, totalCityHotelCount] = await Promise.all([
+  const [firstHotel, hotelCount] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -57,11 +57,6 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
       ...JACUZZI_FILTER
-    }),
-    Hotel.countDocuments({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
-      country: countryInfo.regex,
-      flagged: { $ne: true }
     }),
   ]);
 
@@ -80,8 +75,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
-  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount}+ verified suites with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
+  const pageTitle = hotelCount === 1
+    ? `Hotels with Jacuzzi in Room in ${cityName}: 1 Verified Suite (${currentYear})`
+    : `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
+  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 verified suite' : `${hotelCount}+ verified suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
 
   return {
     title: {
@@ -167,7 +164,7 @@ export default async function CityJacuzziHotelsPage({
     tubType: h.tubType,
     bookingTip: h.bookingTip,
     price: h.price,
-    neighborhood: h.neighborhood,
+    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
     landmarkDistance: h.landmarkDistance,
   }));
 
@@ -309,11 +306,11 @@ export default async function CityJacuzziHotelsPage({
       <StructuredData data={faqSchema} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
-        <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+        <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
         <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link>
+        <Link href={`/${countrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{countryName}</Link>
         <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}/${citySlug}`} className="text-accent-secondary hover:underline">{cityName}</Link>
+        <Link href={`/${countrySlug}/${citySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{cityName}</Link>
         <span>&rsaquo;</span>
         <span className="text-text-main font-semibold">Hotels with Jacuzzi in Room</span>
       </div>
@@ -323,6 +320,7 @@ export default async function CityJacuzziHotelsPage({
         <div className="inline-flex items-center p-1 bg-gray-100 rounded-xl text-xs sm:text-sm font-semibold">
           <Link
             href={`/${countrySlug}/${citySlug}`}
+            prefetch={false}
             className="px-4 py-2 rounded-lg text-gray-600 hover:text-gray-900 transition-colors"
           >
             🛁 All Bathtub Hotels ({cityName})
@@ -433,7 +431,7 @@ export default async function CityJacuzziHotelsPage({
                 How do I select the exact jacuzzi room?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                When clicking our partner links, be sure to reserve the specific suite tier (such as "Whirlpool Suite", "Jacuzzi Room", or "Spa Villa") rather than the baseline standard room.
+                When clicking our partner links, be sure to reserve the specific suite tier (such as &quot;Whirlpool Suite&quot;, &quot;Jacuzzi Room&quot;, or &quot;Spa Villa&quot;) rather than the baseline standard room.
               </p>
             </div>
             <div>

@@ -19,19 +19,19 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Image Rule**: `images: { unoptimized: true }` in `next.config.ts` — all images are served directly from R2 with no `/_next/image` optimizer, which a static Cloudflare Pages export couldn't run anyway.
 ---
 
-# Analytics Tracking — Mixpanel & Google Analytics 4 (GA4)
+# Analytics Tracking — Google Analytics 4 (GA4) & Outbound Click Logging
 
-This project uses **Mixpanel** and **Google Analytics 4 (GA4)** for product analytics, outbound affiliate conversion measurement, and specialized user churn / pain point tracking.
+This project uses **Google Analytics 4 (GA4)** and an edge-intercepted **Outbound Click Log** (`/out` -> `functions/out.ts`) for product analytics, outbound affiliate conversion measurement, and specialized user churn / pain point tracking.
 
 ---
 
 ## Google Analytics 4 (GA4) Integration & Churn Telemetry
 
-Google Analytics 4 is integrated via `@next/third-parties/google` and our custom telemetry layer (`src/lib/gtag.ts` and `src/components/GoogleAnalyticsProvider.tsx`).
+Google Analytics 4 is integrated via `next/script` (lazyOnload) and our custom telemetry layer (`src/lib/gtag.ts` and `src/components/GoogleAnalyticsProvider.tsx`).
 
 ### Configuration
 - **Measurement ID Location**: `.env.local` -> `NEXT_PUBLIC_GA_MEASUREMENT_ID` (or MongoDB `Settings.googleAnalyticsId` managed in `/admin/seo`).
-- **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
+- **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin` or `/opt-out`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
 
 ### GA4 Events & Churn / Pain Point Tracking Plan
 
@@ -54,28 +54,10 @@ Google Analytics 4 is integrated via `@next/third-parties/google` and our custom
 
 ---
 
-## Mixpanel Tracking Plan
+## Outbound Click Log Architecture
 
-These are the Mixpanel events currently tracked in this project. All new Mixpanel events must follow the same conventions.
-
-### Current Mixpanel events
-
-| Mixpanel Event | Trigger | Key Properties | File |
-|---|---|---|---|
-| `page_view` | User loads or transitions to a route | `path`, `url`, `title` | `src/components/MixpanelProvider.tsx` |
-| `hotel_booking_click` | User clicks an outbound booking link | `hotel_name`, `city_name`, `booking_source`, `destination_url` | `src/components/OutboundLink.tsx` |
-| `outbound_exit_click` | User clicks non-affiliate outbound link | `destination_url`, `link_text` | `src/components/MixpanelProvider.tsx` |
-| `site_exit` | User closes page or tab (unload event) | `time_spent_seconds`, `last_viewed_page` | `src/components/MixpanelProvider.tsx` |
-
-### Super Properties
-
-These properties are automatically attached to **every** event fired during the page session:
-
-| Property | Type | Description |
-|---|---|---|
-| `page_type` | string | Renders category: `"homepage"`, `"country_hub"`, `"city_listings"`, `"blog_index"`, `"blog_post"` |
-| `country` | string | Current country context parsed from pathname (e.g. `"india"`, `"usa"`) |
-| `city` | string | Current city context parsed from pathname (e.g. `"munnar"`, `"new-york"`) |
+Affiliate redirects pass through `/out?id={hotelId}&url={encodedUrl}&source={source}&city={city}&country={country}`.
+The edge worker `functions/out.ts` logs conversion clicks directly to database/analytics storage before 302 redirecting to the partner OTA.
 
 ---
 
