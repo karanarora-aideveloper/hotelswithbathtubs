@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { escapeRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -118,8 +118,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     };
   }
 
-  // Fetch the first hotel to get a city-specific image if available, count and min price for description
-  const [firstHotel, hotelCount, minPriceHotel] = await Promise.all([
+  // Fetch the first hotel to get a city-specific image if available, count and prices for lowest price description
+  const [firstHotel, hotelCount, cityHotelPrices] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -130,13 +130,16 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       country: countryInfo.regex,
       flagged: { $ne: true }
     }),
-    Hotel.findOne({
+    Hotel.find({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
       flagged: { $ne: true },
       price: { $exists: true, $ne: '' }
-    }).sort({ price: 1 }).select('price'),
+    }).select('price').lean(),
   ]);
+
+  const lowestPriceInfo = findLowestPriceHotel(cityHotelPrices);
+  const minPrice = lowestPriceInfo?.price;
 
   if (hotelCount === 0) {
     return {
@@ -161,7 +164,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     pageTitle = `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
   }
 
-  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPriceHotel?.price);
+  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
 
   return {
@@ -424,9 +427,13 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
     : `Hotels with Bathtub in ${cityName}: ${hotels.length === 1 ? '1 Verified Room' : `${hotels.length} Verified Rooms`} (${currentYear})`;
 
+  const lowestPriceResult = findLowestPriceHotel(hotels);
+  const minPriceHotel = lowestPriceResult?.hotel;
+  const minPrice = lowestPriceResult?.price;
+
   const pageDescription = stateConfig
     ? stateConfig.metaDescription
-    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, hotels.find((h: any) => h.price)?.price);
+    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, minPrice);
 
   const destinationSchema = {
     "@context": "https://schema.org",
@@ -471,25 +478,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 
-  // Find lowest price hotel for data-driven pricing FAQ
-  let minPriceHotel: any = null;
-  let minPriceVal = Infinity;
-  for (const h of hotels) {
-    if (h.price && typeof h.price === 'string') {
-      const num = parseInt(h.price.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(num) && num > 0 && num < minPriceVal) {
-        minPriceVal = num;
-        minPriceHotel = h;
-      }
-    }
-  }
-
   const faqItems = stateConfig
     ? [
         ...stateConfig.faqs,
-        ...(minPriceHotel ? [{
+        ...(minPriceHotel && minPrice ? [{
           question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
-          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
         }] : [])
       ]
     : [
@@ -503,8 +497,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
-          answer: minPriceHotel
-            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPriceHotel.price}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: minPriceHotel && minPrice
+            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
             : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
         },
         {
