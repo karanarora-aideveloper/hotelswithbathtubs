@@ -61,6 +61,7 @@ async function flush(force = false) {
   if (!APPLY || (!force && pending.length < 40)) return;
   const batch = pending; pending = [];
   const rows = batch.filter((r) => r.photos);
+  try {
   if (rows.length) {
     if (!col) {
       mongoose = (await import('mongoose')).default;
@@ -74,6 +75,12 @@ async function flush(force = false) {
   }
   for (const r of batch) state[r._id] = r.status;
   fs.writeFileSync(statePath, JSON.stringify(state));
+  } catch (e) {
+    // a dropped database connection must not kill the run: keep the batch and retry with the next one
+    console.warn('flush failed, will retry:', e.message.slice(0, 100));
+    pending = batch.concat(pending);
+    if (col) { await mongoose.disconnect().catch(() => {}); col = null; }
+  }
 }
 
 const browser = await chromium.launch({ headless: true, ...(CHANNEL ? { channel: CHANNEL } : {}) });
