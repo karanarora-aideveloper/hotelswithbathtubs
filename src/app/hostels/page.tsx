@@ -201,7 +201,7 @@ export default async function HostelsHubPage() {
           <div className="max-w-5xl mx-auto text-center">
             {/* Breadcrumb */}
             <nav className="flex items-center justify-center gap-2 text-xs text-gray-500 mb-6 font-medium">
-              <Link href="/" className="hover:text-[#1a6fde] transition-colors">Home</Link>
+              <Link href="/" prefetch={false} className="hover:text-[#1a6fde] transition-colors">Home</Link>
               <span>/</span>
               <span className="text-gray-900 font-semibold">Hostels with Bathtubs</span>
             </nav>

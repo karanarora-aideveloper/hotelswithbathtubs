@@ -93,7 +93,7 @@ export default async function BlogIndex() {
       <StructuredData data={blogListSchema}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <div className="mb-4 text-xs sm:text-sm font-medium text-text-muted">
-            <Link href="/" className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <span className="text-text-main">Blog</span>
+            <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link> &rsaquo; <span className="text-text-main">Blog</span>
           </div>
 
           <header className="mb-10 sm:mb-12 text-center">

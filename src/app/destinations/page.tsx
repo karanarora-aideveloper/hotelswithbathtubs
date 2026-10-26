@@ -48,7 +48,7 @@ export default async function DestinationsPage() {
       <StructuredData data={breadcrumbSchema}>
         <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
           <nav aria-label="Breadcrumb" className="text-xs text-text-muted mb-4">
-            <Link href="/" className="hover:underline">Home</Link> <span aria-hidden="true">/</span> All destinations
+            <Link href="/" prefetch={false} className="hover:underline">Home</Link> <span aria-hidden="true">/</span> All destinations
           </nav>
       <h1 className="font-heading text-3xl sm:text-4xl font-bold text-accent-secondary mb-3">
         All destinations with in-room bathtubs and jacuzzi suites

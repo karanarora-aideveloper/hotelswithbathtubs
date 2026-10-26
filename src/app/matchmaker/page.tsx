@@ -86,7 +86,7 @@ export default function MatchmakerPage() {
           {/* Breadcrumb Navigation */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
             <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-gray-500">
-              <Link href="/" className="hover:text-[#1a6fde] transition-colors">
+              <Link href="/" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
                 Home
               </Link>
               <span>/</span>

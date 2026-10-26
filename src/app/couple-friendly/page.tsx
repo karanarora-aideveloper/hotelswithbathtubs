@@ -189,7 +189,7 @@ export default async function CoupleFriendlyPage() {
       <main className="min-h-screen bg-white">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 text-xs sm:text-sm font-medium text-gray-500 flex items-center gap-1">
-          <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+          <Link href="/" prefetch={false} className="hover:text-blue-600 transition-colors">Home</Link>
           <span>&rsaquo;</span>
           <span className="text-gray-900 font-semibold">Couple-Friendly Stays</span>
         </div>

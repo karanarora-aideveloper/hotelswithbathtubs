@@ -375,17 +375,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
         <div className="bg-bg-main py-6 sm:py-10 md:py-16">
           <nav aria-label="Breadcrumbs" className="max-w-4xl mx-auto px-4 sm:px-8 mb-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1.5">
-            <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+            <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
             <span>&rsaquo;</span>
-            <Link href="/blog" className="text-accent-secondary hover:underline">Guides</Link>
+            <Link href="/blog" prefetch={false} className="text-accent-secondary hover:underline">Guides</Link>
             {matchedCity && (
               <>
                 <span>&rsaquo;</span>
-                <Link href={`/${matchedCountrySlug}`} className="text-accent-secondary hover:underline">
+                <Link href={`/${matchedCountrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">
                   {matchedCountryName}
                 </Link>
                 <span>&rsaquo;</span>
-                <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} className="text-accent-secondary hover:underline">
+                <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} prefetch={false} className="text-accent-secondary hover:underline">
                   {matchedCity}
                 </Link>
               </>

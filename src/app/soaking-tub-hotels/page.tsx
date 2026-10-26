@@ -126,7 +126,7 @@ export default async function SoakingTubHotelsPage() {
       <div className="bg-[#f8fafc] min-h-screen font-jakarta">
         {/* Breadcrumb Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 flex items-center flex-wrap gap-1">
-          <Link href="/" className="text-[#1a6fde] hover:underline">Home</Link>
+          <Link href="/" prefetch={false} className="text-[#1a6fde] hover:underline">Home</Link>
           <span>&rsaquo;</span>
           <span className="text-gray-900 font-semibold">Soaking Tub Hotels</span>
         </div>

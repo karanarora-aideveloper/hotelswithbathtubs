@@ -306,11 +306,11 @@ export default async function CityJacuzziHotelsPage({
       <StructuredData data={faqSchema} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
-        <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+        <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
         <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link>
+        <Link href={`/${countrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{countryName}</Link>
         <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}/${citySlug}`} className="text-accent-secondary hover:underline">{cityName}</Link>
+        <Link href={`/${countrySlug}/${citySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{cityName}</Link>
         <span>&rsaquo;</span>
         <span className="text-text-main font-semibold">Hotels with Jacuzzi in Room</span>
       </div>
@@ -320,6 +320,7 @@ export default async function CityJacuzziHotelsPage({
         <div className="inline-flex items-center p-1 bg-gray-100 rounded-xl text-xs sm:text-sm font-semibold">
           <Link
             href={`/${countrySlug}/${citySlug}`}
+            prefetch={false}
             className="px-4 py-2 rounded-lg text-gray-600 hover:text-gray-900 transition-colors"
           >
             🛁 All Bathtub Hotels ({cityName})

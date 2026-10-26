@@ -566,9 +566,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
-        <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+        <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
         <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}`} className="text-accent-secondary hover:underline">{countryName}</Link>
+        <Link href={`/${countrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{countryName}</Link>
         {stateConfig ? (
           <>
             <span>&rsaquo;</span>
@@ -577,7 +577,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         ) : parentState ? (
           <>
             <span>&rsaquo;</span>
-            <Link href={`/usa/${parentState.slug}`} className="text-accent-secondary hover:underline">{parentState.name}</Link>
+            <Link href={`/usa/${parentState.slug}`} prefetch={false} className="text-accent-secondary hover:underline">{parentState.name}</Link>
             <span>&rsaquo;</span>
             <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
           </>
