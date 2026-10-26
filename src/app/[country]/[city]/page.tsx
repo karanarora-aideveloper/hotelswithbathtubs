@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, isVacationRental } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -355,6 +355,14 @@ export default async function CityHotelsPage({
     landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
     updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
   }));
+
+  // M2: Hotels before vacation rentals, preserving rating order inside each group
+  hotels.sort((a, b) => {
+    const rentalA = isVacationRental(a) ? 1 : 0;
+    const rentalB = isVacationRental(b) ? 1 : 0;
+    if (rentalA !== rentalB) return rentalA - rentalB;
+    return (Number(b.rating) || 0) - (Number(a.rating) || 0);
+  });
 
   // Grounded freshness date derived from real MongoDB timestamps
   const maxTimestamp = hotels.reduce((max, h) => {

@@ -36,6 +36,26 @@ export function escapeRegex(text: string): string {
 }
 
 /**
+ * A listing is a vacation rental when its only booking link is Airbnb.
+ */
+export function isVacationRental(hotel?: any): boolean {
+  if (!hotel) return false;
+  const hasAirbnb = Boolean(hotel.airbnbUrl || (typeof hotel.url === 'string' && hotel.url.includes('airbnb.')));
+  if (!hasAirbnb) return false;
+  const hasOther = Boolean(
+    hotel.bookingUrl ||
+    hotel.agodaUrl ||
+    hotel.expediaUrl ||
+    hotel.hotelsComUrl ||
+    hotel.tripUrl ||
+    hotel.mmtUrl ||
+    hotel.vrboUrl ||
+    (typeof hotel.url === 'string' && !hotel.url.includes('airbnb.'))
+  );
+  return !hasOther;
+}
+
+/**
  * Builds a regex to match city names from unslugified url string, handling punctuation
  * variations such as "St." vs "St" vs "Saint", dots, hyphens, and spaces.
  */

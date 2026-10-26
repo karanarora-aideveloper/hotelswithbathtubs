@@ -6,7 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
-import { slugify } from '@/lib/utils';
+import { slugify, isVacationRental } from '@/lib/utils';
 import { isValidNeighborhood } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
@@ -541,7 +541,11 @@ export default function CityHotelsClient({
         if (pB === 0) return -1;
         return sortBy === 'price_asc' ? pA - pB : pB - pA;
       }
-      // Recommended: prioritize stays that have at least one direct property URL, then rating
+      // Recommended: hotels first, then vacation rentals; within each group, prioritize direct property URL, then rating
+      const rentalA = isVacationRental(a) ? 1 : 0;
+      const rentalB = isVacationRental(b) ? 1 : 0;
+      if (rentalA !== rentalB) return rentalA - rentalB;
+
       const hasDirectA = [a.agodaUrl, a.url, a.bookingUrl, a.airbnbUrl, a.tripUrl].some(isDirectPropertyUrl) ? 0 : 1;
       const hasDirectB = [b.agodaUrl, b.url, b.bookingUrl, b.airbnbUrl, b.tripUrl].some(isDirectPropertyUrl) ? 0 : 1;
       if (hasDirectA !== hasDirectB) return hasDirectA - hasDirectB;
@@ -1451,6 +1455,14 @@ export default function CityHotelsClient({
 
                 {/* Card Content */}
                 <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
+                  {isVacationRental(h) && (
+                    <div className="mb-1">
+                      <span className="inline-flex items-center text-[10px] font-semibold text-purple-700 bg-purple-50 border border-purple-200/80 px-2 py-0.5 rounded-full">
+                        Vacation rental
+                      </span>
+                    </div>
+                  )}
+
                   {/* Hotel Title */}
                   <Link
                     href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
