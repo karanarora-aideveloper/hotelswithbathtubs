@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Affiliate Policy & Disclosure',
-  description: 'Read our Affiliate Policy & Disclosure. Learn how Hotels With Bathtubs works with verified booking platforms like Booking.com, Expedia, Agoda, and Trip.com.',
+  description: 'Read our Affiliate Policy & Disclosure. Learn how Hotels With Bathtubs works with partner platforms like Booking.com, Expedia, Agoda, and Trip.com.',
   alternates: {
     canonical: '/affiliate-policy',
   },

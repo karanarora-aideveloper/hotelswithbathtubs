@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     absolute: `Dream Soak Matchmaker — Find Hotels with Bathtub & Jacuzzi in Room (${currentYear})`,
   },
   description:
-    'Find your perfect hotel with bathtub in room or private jacuzzi suite in 30 seconds. Interactive matchmaker for romantic anniversaries, honeymoons, and cozy escapes across 118 countries.',
+    'Find your ideal hotel room with a private bathtub or jacuzzi suite in 30 seconds. Matchmaker for romantic getaways, honeymoons, and cozy escapes.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/matchmaker',
   },
@@ -52,7 +52,7 @@ export default function MatchmakerPage() {
     applicationCategory: 'TravelApplication',
     operatingSystem: 'All',
     description:
-      'Interactive hotel finder matching travelers to verified hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, tub style, destination, and budget.',
+      'Interactive hotel finder matching travelers to verified hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, style, and budget.',
     offers: {
       '@type': 'Offer',
       price: '0',

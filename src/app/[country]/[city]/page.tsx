@@ -15,10 +15,28 @@ import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateFo
 export const revalidate = false;
 
 function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, minPrice?: string): string {
-  const roomWord = count === 1 ? 'hotel' : 'hotels';
-  const priceSnippet = minPrice ? ` Prices from ${minPrice.trim()}/night.` : '';
-  const desc = `${count} ${cityName} ${roomWord} where the room itself has a bathtub or jacuzzi, checked one by one.${priceSnippet} Couple-friendly picks, exact room type to book.`;
-  return desc.length <= 155 ? desc : desc.slice(0, 152).trim() + '...';
+  const hotelWord = count === 1 ? 'hotel' : 'hotels';
+  const sentences: string[] = [
+    `${count} ${cityName} ${hotelWord} with a bathtub or jacuzzi in the room, checked one by one.`,
+  ];
+  if (minPrice && minPrice.trim()) {
+    sentences.push(`From ${minPrice.trim()}/night.`);
+  }
+  sentences.push('See the exact room to book.');
+
+  let result = '';
+  for (const s of sentences) {
+    const candidate = result ? `${result} ${s}` : s;
+    if (candidate.length <= 155) {
+      result = candidate;
+    } else {
+      break;
+    }
+  }
+  if (!result) {
+    result = `${count} ${cityName} ${hotelWord} with verified in-room tubs.`;
+  }
+  return result;
 }
 
 function truncateToWord(str: string, maxLen: number): string {

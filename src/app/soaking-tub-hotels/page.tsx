@@ -15,7 +15,7 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Hotels with Soaking Tub in Room',
-  description: 'Find verified luxury hotels with private deep soaking tubs in room, freestanding stone bathtubs, and scenic bath suites across top US & international destinations.',
+  description: 'Verified luxury hotels with private deep soaking tubs, freestanding stone bathtubs, and scenic bath suites across top US & international getaways.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
   },

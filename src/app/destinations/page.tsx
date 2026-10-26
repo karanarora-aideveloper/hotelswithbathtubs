@@ -6,7 +6,7 @@ import { getDestinationsDirectory, REGION_ORDER } from '@/lib/destinationsDirect
 export const metadata: Metadata = {
   title: 'All Destinations by City',
   description:
-    'Browse every destination with verified hotel rooms that have a private bathtub or in-room jacuzzi, grouped by region and country, from New York and Las Vegas to Jaipur and Goa.',
+    'Browse destinations with verified hotel rooms featuring private in-room bathtubs & jacuzzi suites, from New York and Las Vegas to Jaipur and Goa.',
   alternates: { canonical: 'https://www.hotelswithbathtubs.com/destinations' },
 };
 

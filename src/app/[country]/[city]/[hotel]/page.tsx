@@ -203,7 +203,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     if (pageDescription.length > 155) {
       pageDescription = `Verified private ${tubType.toLowerCase()} at ${displayName} in ${cityName}. Book guaranteed in-room tub.`;
       if (pageDescription.length > 155) {
-        pageDescription = pageDescription.slice(0, 152).trim() + '...';
+        pageDescription = `Verified in-room bathtub at ${displayName}, ${cityName}.`;
+        if (pageDescription.length > 155) {
+          pageDescription = `Verified hotel rooms with in-room bathtubs in ${cityName}.`;
+        }
       }
     }
   }

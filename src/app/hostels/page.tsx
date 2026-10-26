@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Hostels & Poshtels with Bathtubs',
-  description: 'Handpicked boutique hostels and poshtels with guaranteed private in-room bathtubs & jacuzzis. Experience vibrant social backpacker culture with private soaking luxury.',
+  description: 'Boutique hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Experience social backpacker vibes with private soaking luxury.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hostels',
   },
