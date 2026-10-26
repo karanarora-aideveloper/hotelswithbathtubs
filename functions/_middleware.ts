@@ -1,4 +1,4 @@
-import { cityToCountry, CITY_ALIASES } from './cityMap';
+import { cityToCountry, CITY_ALIASES, STATIC_REDIRECTS } from './cityMap';
 
 interface EventContext {
   request: Request;
@@ -25,6 +25,14 @@ export async function onRequest(context: EventContext): Promise<Response> {
   // Canonical blog redirects
   if (url.pathname === '/blog/kolkata-hotels-with-bathtub-couples-guide' || url.pathname === '/blog/kolkata-hotels-with-bathtub-couples-guide/') {
     return Response.redirect(new URL('/blog/kolkata-jacuzzi-hotels-romantic-staycation', url.origin).toString(), 301);
+  }
+
+  // Static exact path redirects (including M1 duplicate hotels, legacy routes, naked states)
+  const normalizedPath = (url.pathname.length > 1 && url.pathname.endsWith('/'))
+    ? url.pathname.slice(0, -1)
+    : url.pathname;
+  if (STATIC_REDIRECTS && STATIC_REDIRECTS[normalizedPath]) {
+    return Response.redirect(new URL(STATIC_REDIRECTS[normalizedPath], url.origin).toString(), 301);
   }
 
   // Case normalization: 301 redirect any URL with uppercase letters to lowercase in a single hop

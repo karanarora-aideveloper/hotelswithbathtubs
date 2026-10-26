@@ -12,6 +12,7 @@ import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText } from '@/lib/location';
+import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -40,6 +41,7 @@ async function getCachedHotelMap() {
 
   const map = new Map<string, any>();
   for (const h of allHotels) {
+    if (isDuplicateDropSlug(h.slug)) continue;
     const cleanH = {
       ...h,
       description: sanitizePlaceholderText(h.description),
@@ -93,6 +95,10 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
   const rawCity = decodeURIComponent(cityParam).replace(/-/g, ' ');
   const hotelSlug = decodeURIComponent(hotelParam);
   const citySlug = slugify(rawCity);
+
+  if (isDuplicateDropSlug(hotelSlug)) {
+    return { hotel: null, countryInfo, rawCity };
+  }
 
   // Fast-path: Check in-memory map first
   const map = await getCachedHotelMap();

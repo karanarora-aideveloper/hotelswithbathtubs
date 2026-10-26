@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { redirects } from './redirects.mjs';
+import { DUPLICATE_DROP_SLUGS } from '../src/data/duplicateHotels.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -118,7 +119,7 @@ export function generateSplitSitemaps() {
   const seenHotelUrls = new Set();
 
   for (const h of hotels) {
-    if (!h.city || !h.country || h.flagged === true) continue;
+    if (!h.city || !h.country || h.flagged === true || DUPLICATE_DROP_SLUGS.has(h.slug)) continue;
     const countryInfo = resolveCountry(h.country);
     let citySlug = slugify(h.city);
     if (neighborhoodCanonicalMap[citySlug]) {

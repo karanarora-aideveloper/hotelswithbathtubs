@@ -5,6 +5,7 @@
 // basic aggregate ($match, $group with $sum/$first/$push/$avg, $sort, $limit, $count).
 import fs from 'node:fs';
 import path from 'node:path';
+import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 
 type Doc = Record<string, any>;
 type Filter = Record<string, any>;
@@ -14,7 +15,10 @@ const DATE_FIELDS = new Set(['createdAt', 'updatedAt', 'crossVerifiedAt', 'publi
 const cache = new Map<string, Doc[]>();
 function load(file: string): Doc[] {
   if (!cache.has(file)) {
-    const raw = JSON.parse(fs.readFileSync(path.join(process.cwd(), '.cache', file), 'utf8')) as Doc[];
+    let raw = JSON.parse(fs.readFileSync(path.join(process.cwd(), '.cache', file), 'utf8')) as Doc[];
+    if (file === 'all-hotels.json') {
+      raw = raw.filter((d) => !isDuplicateDropSlug(d.slug));
+    }
     for (const d of raw) for (const k of DATE_FIELDS) if (typeof d[k] === 'string') d[k] = new Date(d[k]);
     cache.set(file, raw);
   }

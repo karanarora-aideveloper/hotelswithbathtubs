@@ -5,6 +5,7 @@ import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
 import { slugify, resolveCountry } from '@/lib/utils';
 import { getAllStateSlugs } from '@/lib/usStates';
+import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -50,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
 
     for (const h of hotels) {
-      if (!h.city || !h.country) continue;
+      if (!h.city || !h.country || isDuplicateDropSlug(h.slug)) continue;
       const countryInfo = resolveCountry(h.country);
       let citySlug = slugify(h.city);
       if (neighborhoodCanonicalMap[citySlug]) {

@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { DUPLICATE_DROP_SLUGS } from '../src/data/duplicateHotels.ts';
+import { redirects } from './redirects.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -69,6 +71,7 @@ async function generateLocations() {
       process.exit(1);
     }
 
+    allHotels = allHotels.filter((h) => !DUPLICATE_DROP_SLUGS.has(h.slug));
     allHotels.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0));
 
     // 1. Generate standard locations.json (for backward compatibility)
@@ -113,7 +116,14 @@ async function generateLocations() {
     }
     const functionsDir = path.join(rootDir, 'functions');
     if (!fs.existsSync(functionsDir)) fs.mkdirSync(functionsDir, { recursive: true });
+    const staticRedirects = {};
+    for (const r of redirects) {
+      if (r.source && !r.source.includes('*')) {
+        staticRedirects[r.source] = r.destination;
+      }
+    }
     const cityMapCode = `export const CITY_COUNTRY_MAP: Record<string, string> = ${JSON.stringify(cityCountryMap, null, 2)};\n\n` +
+      `export const cityToCountry: Record<string, string> = CITY_COUNTRY_MAP;\n\n` +
       `export const CITY_ALIASES: Record<string, { city: string; country: string }> = {\n` +
       `  "bengaluru": { city: "bangalore", country: "india" },\n` +
       `  "gurugram": { city: "gurgaon", country: "india" },\n` +
@@ -122,7 +132,8 @@ async function generateLocations() {
       `  "madras": { city: "chennai", country: "india" },\n` +
       `  "mahipalpur": { city: "delhi", country: "india" },\n` +
       `  "new-delhi": { city: "delhi", country: "india" }\n` +
-      `};\n`;
+      `};\n\n` +
+      `export const STATIC_REDIRECTS: Record<string, string> = ${JSON.stringify(staticRedirects, null, 2)};\n`;
     fs.writeFileSync(path.join(functionsDir, 'cityMap.ts'), cityMapCode, 'utf-8');
     console.log('✅ functions/cityMap.ts generated successfully.');
 
@@ -208,11 +219,16 @@ async function generateLocations() {
     console.log(`   - ${searchData.cities.length} cities`);
     console.log(`   - ${searchData.countries.length} countries`);
 
-    // 3. Save full hotel cache for static export page rendering
+    // 3. Save full hotel cache for static export page rendering (never overwrite existing)
     const cacheDir = path.join(rootDir, '.cache');
-    if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
-    fs.writeFileSync(path.join(cacheDir, 'all-hotels.json'), JSON.stringify(allHotels, null, 2), 'utf-8');
-    console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${allHotels.length} hotels).`);
+    const allHotelsCachePath = path.join(cacheDir, 'all-hotels.json');
+    if (!fs.existsSync(allHotelsCachePath)) {
+      if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
+      fs.writeFileSync(allHotelsCachePath, JSON.stringify(allHotels, null, 2), 'utf-8');
+      console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${allHotels.length} hotels).`);
+    } else {
+      console.log(`ℹ️ Preserved existing .cache/all-hotels.json.`);
+    }
 
     // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker
     const matchmakerHotels = allHotels.map((h) => {

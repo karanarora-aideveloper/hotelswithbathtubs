@@ -9,6 +9,7 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
+import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = false;
@@ -141,11 +142,13 @@ export default async function CityJacuzziHotelsPage({
     ...JACUZZI_FILTER
   }).sort({ rating: -1 }).lean();
 
-  if (rawHotels.length === 0) {
+  const activeHotels = rawHotels.filter((h: any) => !isDuplicateDropSlug(h.slug));
+
+  if (activeHotels.length === 0) {
     notFound();
   }
 
-  const hotels = rawHotels.map((h: any) => ({
+  const hotels = activeHotels.map((h: any) => ({
     _id: h._id?.toString(),
     name: h.name,
     city: h.city,

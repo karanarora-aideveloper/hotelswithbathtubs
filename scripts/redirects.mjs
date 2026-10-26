@@ -271,6 +271,22 @@ export const redirects = [
   { source: '/paharganj/', destination: '/india/delhi', permanent: true },
 
   // Hotel legacy alternate slugs & domain authority indexed URLs
+  // M1: 14 duplicate US hotel redirects (audit round 7)
+  { source: '/usa/austin/austin-hotel-saint-cecilia-austin', destination: '/usa/austin/hotel-saint-cecilia-austin', permanent: true },
+  { source: '/usa/austin/the-driskill-austin', destination: '/usa/austin/austin-the-driskill-in-the-unbound-collection-by-hyatt-austin', permanent: true },
+  { source: '/usa/san-diego/fairmont-grand-del-mar-san-diego', destination: '/usa/san-diego/san-diego-fairmont-grand-del-mar', permanent: true },
+  { source: '/usa/san-diego/san-diego-rancho-valencia-resort-spa', destination: '/usa/san-diego/rancho-valencia-resort-san-diego', permanent: true },
+  { source: '/usa/lake-tahoe/desolation-hotel-lake-tahoe', destination: '/usa/lake-tahoe/desolation-hotel-south-lake-tahoe-lake-tahoe', permanent: true },
+  { source: '/usa/lake-tahoe/the-landing-resort-spa-lake-tahoe', destination: '/usa/lake-tahoe/the-landing-resort-spa-south-lake-tahoe-lake-tahoe', permanent: true },
+  { source: '/usa/seattle/inn-at-the-market-seattle', destination: '/usa/seattle/seattle-inn-at-the-market-seattle', permanent: true },
+  { source: '/usa/seattle/thompson-seattle', destination: '/usa/seattle/seattle-thompson-seattle', permanent: true },
+  { source: '/usa/nashville/the-joseph-luxury-collection-nashville', destination: '/usa/nashville/nashville-the-joseph-a-luxury-collection-hotel-nashville', permanent: true },
+  { source: '/usa/orlando/disneys-grand-floridian-resort-orlando', destination: '/usa/orlando/disney-s-grand-floridian-resort-spa-orlando', permanent: true },
+  { source: '/usa/scottsdale/fairmont-scottsdale-princess', destination: '/usa/scottsdale/fairmont-scottsdale-princess-scottsdale', permanent: true },
+  { source: '/usa/scottsdale/omni-scottsdale-resort-montelucia', destination: '/usa/scottsdale/omni-scottsdale-resort-spa-at-montelucia-scottsdale', permanent: true },
+  { source: '/usa/san-francisco/1-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-1-hotel-san-francisco', permanent: true },
+  { source: '/usa/san-francisco/palace-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-palace-hotel-a-luxury-collection-hotel-san-francisco', permanent: true },
+
   { source: '/usa/miami/miami-1-hotel-south-beach', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
   { source: '/usa/miami/miami-1-hotel-south-beach/', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
   { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },

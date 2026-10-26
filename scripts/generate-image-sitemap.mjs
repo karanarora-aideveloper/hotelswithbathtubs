@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { DUPLICATE_DROP_SLUGS } from '../src/data/duplicateHotels.ts';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
@@ -70,7 +71,7 @@ async function generateImageSitemap() {
   if (fs.existsSync(cachePath)) {
     try {
       const cached = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
-      hotels = cached.filter((h) => !h.flagged && h.image);
+      hotels = cached.filter((h) => !h.flagged && h.image && !DUPLICATE_DROP_SLUGS.has(h.slug));
       console.log(`Using .cache/all-hotels.json (${hotels.length} hotels with images).`);
     } catch {
       hotels = [];

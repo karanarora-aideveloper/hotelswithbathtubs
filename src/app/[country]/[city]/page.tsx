@@ -12,6 +12,7 @@ import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, sanitizePlaceholderText } from '@/lib/location';
+import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 
 export const revalidate = false;
 
@@ -316,7 +317,9 @@ export default async function CityHotelsPage({
         ])
   ]);
 
-  if (rawHotels.length === 0) {
+  const activeHotels = rawHotels.filter((h: any) => !isDuplicateDropSlug(h.slug));
+
+  if (activeHotels.length === 0) {
     notFound();
   }
 
@@ -326,7 +329,7 @@ export default async function CityHotelsPage({
     count: s.hotelCount
   }));
 
-  const hotels = rawHotels.map((h: any) => ({
+  const hotels = activeHotels.map((h: any) => ({
     _id: h._id?.toString(),
     name: h.name,
     city: h.city,
