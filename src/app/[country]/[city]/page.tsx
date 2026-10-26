@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, isVacationRental, isJacuzziRoom } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, parsePriceNumber, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -479,12 +479,42 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length);
 
   const lowestPriceResult = findLowestPriceHotel(hotels);
-  const minPriceHotel = lowestPriceResult?.hotel;
   const minPrice = lowestPriceResult?.price;
 
-  // M4 unique data-driven intro components
+  // N2: "Cheapest hotel" FAQ must name a hotel, not a vacation rental
   const rentalList = hotels.filter((h) => isVacationRental(h));
   const hotelList = hotels.filter((h) => !isVacationRental(h));
+  const lowestHotelResult = findLowestPriceHotel(hotelList);
+  const cheapestHotel = lowestHotelResult?.hotel;
+  const cheapestHotelPrice = lowestHotelResult?.price;
+
+  const lowestRentalResult = findLowestPriceHotel(rentalList);
+  const cheapestRentalPrice = lowestRentalResult?.price;
+
+  const hotelMinNum = lowestHotelResult ? parsePriceNumber(lowestHotelResult.hotel.price) : null;
+  const rentalMinNum = lowestRentalResult ? parsePriceNumber(lowestRentalResult.hotel.price) : null;
+  const rentalCheaper = (rentalMinNum !== null && hotelMinNum !== null && rentalMinNum < hotelMinNum);
+
+  // N2: Hotel price range for typical nightly rate FAQ
+  let minHotelNum = Infinity;
+  let maxHotelNum = -Infinity;
+  let minHotelPriceStr = '';
+  let maxHotelPriceStr = '';
+  for (const h of hotelList) {
+    const num = parsePriceNumber(h.price);
+    if (num !== null) {
+      if (num < minHotelNum) {
+        minHotelNum = num;
+        minHotelPriceStr = normalizePrice(h.price) || h.price || '';
+      }
+      if (num > maxHotelNum) {
+        maxHotelNum = num;
+        maxHotelPriceStr = normalizePrice(h.price) || h.price || '';
+      }
+    }
+  }
+
+  // M4 unique data-driven intro components
   const hCount = hotelList.length;
   const rCount = rentalList.length;
 
@@ -604,9 +634,18 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? `Verified hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Every room tier is individually checked to guarantee a private hot tub inside your suite rather than a shared hotel facility.`
     : `Currently, no verified hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
 
-  const cheapestFaqAnswer = minPriceHotel && minPrice
-    ? `The most affordable verified stay with an in-room bathtub in ${cityName} is ${minPriceHotel.name}, with rates starting from approximately ${minPrice}/night. Nightly rates vary by season, day of the week, and room category.`
+  let cheapestFaqAnswer = cheapestHotel && cheapestHotelPrice
+    ? `The cheapest hotel with a bathtub in ${cityName} is ${cheapestHotel.name}, with rates starting from approximately ${cheapestHotelPrice}/night.`
     : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to luxury suites depending on seasonal demand and room tier.`;
+  if (rentalCheaper && cheapestRentalPrice) {
+    cheapestFaqAnswer += ` Vacation rentals start from ${cheapestRentalPrice}.`;
+  }
+
+  const typicalRateFaqAnswer = (minHotelNum !== Infinity && maxHotelNum !== -Infinity)
+    ? (minHotelNum < maxHotelNum
+        ? `Nightly rates for hotels with a bathtub in ${cityName} typically range from ${minHotelPriceStr} to ${maxHotelPriceStr} a night, depending on the season, room category, and day of the week.`
+        : `Nightly rates for hotels with a bathtub in ${cityName} typically start from ${minHotelPriceStr} a night, depending on the season, room category, and day of the week.`)
+    : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`;
 
   const whereToStayFaqAnswer = hasWhereToStaySection
     ? `Top neighborhoods in ${cityName} with multiple verified bathtub hotels include ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}. Each area offers multiple verified properties within walking distance of local attractions and dining.`
@@ -615,9 +654,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const faqItems = stateConfig
     ? [
         ...stateConfig.faqs,
-        ...(minPriceHotel && minPrice ? [{
+        ...(cheapestHotel && cheapestHotelPrice ? [{
           question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
-          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name} in ${minPriceHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${cheapestHotelPrice}/night (e.g. at ${cheapestHotel.name} in ${cheapestHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
         }] : [])
       ]
     : [
@@ -639,9 +678,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
-          answer: minPriceHotel && minPrice
-            ? `Nightly rates for verified bathtub suites in ${cityName} typically start from approximately ${minPrice}/night (e.g. at ${minPriceHotel.name}), scaling to luxury 5-star spa suites depending on season and view.`
-            : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`
+          answer: typicalRateFaqAnswer
         },
         {
           question: `Are bathtub hotels in ${cityName} couple-friendly?`,
