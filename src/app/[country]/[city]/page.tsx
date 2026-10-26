@@ -39,6 +39,23 @@ function getCityMetaDescription(cityName: string, countryName: string, countrySl
   return result;
 }
 
+function getCityPageTitle(cityName: string, countrySlug: string, citySlug: string, hotelCount: number): string {
+  const currentYear = new Date().getFullYear();
+  if (citySlug === 'new-york') {
+    return `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
+  }
+  if (countrySlug === 'usa') {
+    const roomsWord = hotelCount === 1 ? '1 Room' : `${hotelCount} Rooms`;
+    const standardUsTitle = `Hotels with Jacuzzi & Bathtub in ${cityName}: ${roomsWord} (${currentYear})`;
+    if (standardUsTitle.length <= 60) {
+      return standardUsTitle;
+    }
+    return `Jacuzzi & Bathtub Hotels in ${cityName} (${currentYear})`;
+  }
+  const verifiedWord = hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`;
+  return `Hotels with Bathtub in ${cityName}: ${verifiedWord} (${currentYear})`;
+}
+
 function truncateToWord(str: string, maxLen: number): string {
   if (!str || str.length <= maxLen) return str || '';
   const truncated = str.slice(0, maxLen);
@@ -173,14 +190,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // SERP-Optimized Title (45-58 chars): Front-load exact high-volume search query
-  const currentYear = new Date().getFullYear();
-  let pageTitle = `Hotels with Bathtub in ${cityName}: ${hotelCount} Verified Rooms (${currentYear})`;
-  if (hotelCount === 1) {
-    pageTitle = `Hotels with Bathtub in ${cityName}: 1 Verified Room (${currentYear})`;
-  } else if (citySlug === 'new-york') {
-    pageTitle = `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
-  }
+  // SERP-Optimized Title (45-60 chars): Front-load exact high-volume search query
+  const pageTitle = getCityPageTitle(cityName, countrySlug, citySlug, hotelCount);
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
@@ -443,7 +454,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
-    : `Hotels with Bathtub in ${cityName}: ${hotels.length === 1 ? '1 Verified Room' : `${hotels.length} Verified Rooms`} (${currentYear})`;
+    : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length);
 
   const lowestPriceResult = findLowestPriceHotel(hotels);
   const minPriceHotel = lowestPriceResult?.hotel;
