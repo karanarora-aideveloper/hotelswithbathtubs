@@ -188,6 +188,7 @@ export function generateSplitSitemaps() {
     { url: `${baseUrl}/destinations`, lastModified: new Date('2026-10-26T00:00:00.000Z'), priority: 0.8 },
     { url: `${baseUrl}/blog`, lastModified: new Date('2026-09-08T00:00:00.000Z'), priority: 0.8 },
     { url: `${baseUrl}/about`, lastModified: new Date('2026-09-08T00:00:00.000Z'), priority: 0.6 },
+    { url: `${baseUrl}/how-we-check-bathtubs`, lastModified: new Date('2026-10-27T00:00:00.000Z'), priority: 0.6 },
     { url: `${baseUrl}/editorial-policy`, lastModified: new Date('2026-10-22T00:00:00.000Z'), priority: 0.6 },
     { url: `${baseUrl}/contact`, lastModified: new Date('2026-10-22T00:00:00.000Z'), priority: 0.6 },
     { url: `${baseUrl}/affiliate-policy`, lastModified: new Date('2026-09-08T00:00:00.000Z'), priority: 0.4 },

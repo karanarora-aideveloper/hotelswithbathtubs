@@ -204,6 +204,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       },
       {
+        url: `${baseUrl}/how-we-check-bathtubs`,
+        lastModified: new Date('2026-10-27T00:00:00.000Z'),
+        priority: 0.6,
+      },
+      {
         url: `${baseUrl}/editorial-policy`,
         lastModified: new Date('2026-10-22T00:00:00.000Z'),
         priority: 0.6,
@@ -243,6 +248,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}`, priority: 1.0 },
       { url: `${baseUrl}/blog`, priority: 0.8 },
       { url: `${baseUrl}/about`, priority: 0.6 },
+      { url: `${baseUrl}/how-we-check-bathtubs`, priority: 0.6 },
       { url: `${baseUrl}/editorial-policy`, priority: 0.6 },
       { url: `${baseUrl}/contact`, priority: 0.6 },
       { url: `${baseUrl}/affiliate-policy`, priority: 0.4 },

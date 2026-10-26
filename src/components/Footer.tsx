@@ -14,7 +14,8 @@ const GUIDES = [
 ];
 const COMPANY = [
   { href: '/about', label: 'About us' },
-  { href: '/editorial-policy', label: 'How we verify' },
+  { href: '/how-we-check-bathtubs', label: 'How we check' },
+  { href: '/editorial-policy', label: 'Editorial policy' },
   { href: '/affiliate-policy', label: 'Affiliate policy' },
   { href: '/contact', label: 'Contact' },
 ];
