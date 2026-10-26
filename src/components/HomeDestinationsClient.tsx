@@ -304,17 +304,17 @@ export default function HomeDestinationsClient({
   totalIndiaCount,
 }: HomeDestinationsClientProps) {
   const { geo } = useGeo();
-  const [selectedTab, setSelectedTab] = useState<'auto' | 'usa' | 'india' | 'global' | 'all'>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const saved = localStorage.getItem('hwb_region_tab');
-        if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
-          return saved as any;
-        }
-      } catch {}
-    }
-    return 'auto';
-  });
+  const [selectedTab, setSelectedTab] = useState<'auto' | 'usa' | 'india' | 'global' | 'all'>('auto');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('hwb_region_tab');
+      if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
+        setSelectedTab(saved as any);
+      }
+    } catch {}
+  }, []);
+
   const [filterQuery, setFilterQuery] = useState('');
   const [filterVisibleCount, setFilterVisibleCount] = useState(16);
   const filterSentinelRef = useRef<HTMLDivElement>(null);

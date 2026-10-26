@@ -5,13 +5,12 @@ import Link from 'next/link';
 import { isUserExcluded, setUserExcluded } from '@/lib/exclusion';
 
 export default function OptOutClient() {
-  const [excluded, setExcluded] = useState<boolean | null>(() => {
-    if (typeof window !== 'undefined') {
-      return isUserExcluded();
-    }
-    return false;
-  });
+  const [excluded, setExcluded] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setExcluded(isUserExcluded());
+  }, []);
 
   const handleToggle = (enableExclusion: boolean) => {
     setUserExcluded(enableExclusion);

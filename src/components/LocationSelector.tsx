@@ -35,15 +35,21 @@ export default function LocationSelector() {
   const router = useRouter();
   const pathname = usePathname();
   const urlLocation = locationFromPathname(pathname);
-  const cachedGeo = getCachedGeo();
   const [locations, setLocations] = useState<Record<string, string[]>>({});
-  const [selectedCountry, setSelectedCountry] = useState<string>(() => urlLocation?.country || cachedGeo?.country || 'India');
-  const [selectedCity, setSelectedCity] = useState<string>(() => urlLocation?.city || cachedGeo?.city || '');
+  const [selectedCountry, setSelectedCountry] = useState<string>(urlLocation?.country || 'India');
+  const [selectedCity, setSelectedCity] = useState<string>(urlLocation?.city || '');
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState<boolean>(() => pathname !== '/' && !urlLocation && !cachedGeo);
+  const [loading, setLoading] = useState<boolean>(pathname !== '/' && !urlLocation);
 
   useEffect(() => {
-    if (pathname === '/' || urlLocation || cachedGeo) {
+    const cachedGeo = getCachedGeo();
+    if (cachedGeo) {
+      if (!urlLocation && cachedGeo.country) setSelectedCountry(cachedGeo.country);
+      if (!urlLocation && cachedGeo.city) setSelectedCity(cachedGeo.city);
+      setLoading(false);
+      return;
+    }
+    if (pathname === '/' || urlLocation) {
       return;
     }
 
@@ -71,7 +77,7 @@ export default function LocationSelector() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [pathname, urlLocation, cachedGeo]);
+  }, [pathname, urlLocation]);
 
   const handleCitySelect = (country: string, city: string) => {
     setIsOpen(false);

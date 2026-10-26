@@ -18,64 +18,41 @@ const DEFAULT_GEO: GeoData = {
   isUS: true,
 };
 
-function getInitialGeo(): GeoData {
-  if (typeof window !== 'undefined') {
-    try {
-      const cached = sessionStorage.getItem('hwb_geo');
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (parsed && parsed.countryCode) {
-          return parsed;
-        }
-      }
-    } catch {
-      // Ignore
-    }
-
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      if (tz.includes('Calcutta') || tz.includes('Kolkata')) {
-        return {
-          countryCode: 'IN',
-          country: 'India',
-          city: '',
-          isIndia: true,
-          isUS: false,
-        };
-      }
-    } catch {
-      // Ignore
-    }
-  }
-  return DEFAULT_GEO;
-}
-
 export function useGeo() {
-  const [geo, setGeo] = useState<GeoData>(getInitialGeo);
-  const [loaded, setLoaded] = useState(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const cached = sessionStorage.getItem('hwb_geo');
-        if (cached) return true;
-      } catch {
-        // Ignore
-      }
-    }
-    return false;
-  });
+  const [geo, setGeo] = useState<GeoData>(DEFAULT_GEO);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // If already cached in sessionStorage, initial state already used it
+    let cachedGeo: GeoData | null = null;
     try {
       const cached = sessionStorage.getItem('hwb_geo');
       if (cached) {
         const parsed = JSON.parse(cached);
         if (parsed && parsed.countryCode) {
-          return;
+          cachedGeo = parsed;
+          setGeo(parsed);
+          setLoaded(true);
         }
       }
     } catch {
       // Ignore storage errors
+    }
+
+    if (!cachedGeo) {
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if (tz.includes('Calcutta') || tz.includes('Kolkata')) {
+          setGeo({
+            countryCode: 'IN',
+            country: 'India',
+            city: '',
+            isIndia: true,
+            isUS: false,
+          });
+        }
+      } catch {
+        // Ignore timezone errors
+      }
     }
 
     // Verified geolocation from edge headers (served by /api/geo)

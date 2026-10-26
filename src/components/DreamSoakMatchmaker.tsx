@@ -355,47 +355,11 @@ export default function DreamSoakMatchmaker({
   initialBudget?: BudgetId;
   embedded?: boolean;
 }) {
-  const [selectedVibe, setSelectedVibe] = useState<VibeId | null>(() => {
-    if (initialVibe) return initialVibe;
-    if (typeof window !== 'undefined') {
-      const q = new URLSearchParams(window.location.search).get('vibe') as VibeId;
-      if (q && VIBE_OPTIONS.some((o) => o.id === q)) return q;
-    }
-    return null;
-  });
-  const [selectedTub, setSelectedTub] = useState<TubId | null>(() => {
-    if (initialTub) return initialTub;
-    if (typeof window !== 'undefined') {
-      const q = new URLSearchParams(window.location.search).get('tub') as TubId;
-      if (q && TUB_OPTIONS.some((o) => o.id === q)) return q;
-    }
-    return null;
-  });
-  const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(() => {
-    if (initialRegion) return initialRegion;
-    if (typeof window !== 'undefined') {
-      const q = new URLSearchParams(window.location.search).get('region') as RegionId;
-      if (q && REGION_OPTIONS.some((o) => o.id === q)) return q;
-    }
-    return null;
-  });
-  const [selectedBudget, setSelectedBudget] = useState<BudgetId | null>(() => {
-    if (initialBudget) return initialBudget;
-    if (typeof window !== 'undefined') {
-      const q = new URLSearchParams(window.location.search).get('budget') as BudgetId;
-      if (q && BUDGET_OPTIONS.some((o) => o.id === q)) return q;
-    }
-    return null;
-  });
-  const [currentStep, setCurrentStep] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('vibe') && params.get('tub') && params.get('region') && params.get('budget')) {
-        return 5;
-      }
-    }
-    return 1;
-  });
+  const [selectedVibe, setSelectedVibe] = useState<VibeId | null>(initialVibe || null);
+  const [selectedTub, setSelectedTub] = useState<TubId | null>(initialTub || null);
+  const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(initialRegion || null);
+  const [selectedBudget, setSelectedBudget] = useState<BudgetId | null>(initialBudget || null);
+  const [currentStep, setCurrentStep] = useState<number>(1);
 
   const [allHotels, setAllHotels] = useState<MatchmakerHotel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -435,6 +399,15 @@ export default function DreamSoakMatchmaker({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
+      const v = params.get('vibe') as VibeId;
+      const t = params.get('tub') as TubId;
+      const r = params.get('region') as RegionId;
+      const b = params.get('budget') as BudgetId;
+      if (v && VIBE_OPTIONS.some((o) => o.id === v)) setSelectedVibe(v);
+      if (t && TUB_OPTIONS.some((o) => o.id === t)) setSelectedTub(t);
+      if (r && REGION_OPTIONS.some((o) => o.id === r)) setSelectedRegion(r);
+      if (b && BUDGET_OPTIONS.some((o) => o.id === b)) setSelectedBudget(b);
+      if (v && t && r && b) setCurrentStep(5);
       if (params.has('vibe') || params.has('tub') || params.has('region') || params.has('budget')) {
         loadData();
         return;
