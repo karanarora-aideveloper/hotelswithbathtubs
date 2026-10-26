@@ -598,7 +598,27 @@ export default async function HotelDetailPage({
 
           {/* Cross-Platform Price Comparison & Bathtub Intelligence Analytics Hub */}
           <HotelAnalyticsComparison
-            hotel={hotel}
+            hotel={{
+              name: hotel.name,
+              price: hotel.price || null,
+              rating: hotel.rating,
+              reviewsCount: hotel.reviewsCount,
+              tubType: hotel.tubType,
+              roomType: hotel.roomType,
+              description: hotel.description,
+              bookingTip: hotel.bookingTip,
+              url: hotel.url,
+              agodaUrl: hotel.agodaUrl,
+              bookingUrl: hotel.bookingUrl,
+              airbnbUrl: hotel.airbnbUrl,
+              tripUrl: hotel.tripUrl,
+              mmtUrl: hotel.mmtUrl,
+              expediaUrl: hotel.expediaUrl,
+              hotelsComUrl: hotel.hotelsComUrl,
+              vrboUrl: hotel.vrboUrl,
+              neighborhood: isValidNeighborhood(hotel.neighborhood) ? hotel.neighborhood : undefined,
+              landmarkDistance: hotel.landmarkDistance,
+            }}
             cityName={cityName}
             countryName={countryName}
             countrySlug={countrySlug}
