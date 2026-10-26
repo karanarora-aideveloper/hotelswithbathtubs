@@ -190,6 +190,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       },
       {
+        url: `${baseUrl}/destinations`,
+        lastModified: new Date('2026-10-26T00:00:00.000Z'),
+        priority: 0.8,
+      },
+      {
         url: `${baseUrl}/blog`,
         lastModified: new Date('2026-09-08T00:00:00.000Z'),
         priority: 0.8,
