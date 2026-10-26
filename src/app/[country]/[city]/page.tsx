@@ -374,6 +374,7 @@ export default async function CityHotelsPage({
     : 'October 2026';
 
   const jacuzziCount = hotels.filter((h) => isJacuzziRoom(h)).length;
+  const isJacuzziIndexable = !stateConfig && shouldIndexDestination(jacuzziCount);
 
 const CITY_ALIASES_MAP: Record<string, string[]> = {
   'new york': ['new york', 'nyc', 'new-york-city', 'manhattan'],
@@ -757,6 +758,18 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               </>
             )}
           </p>
+
+          {isJacuzziIndexable && (
+            <div className="mt-3 sm:mt-4">
+              <a
+                href={`/${countrySlug}/${citySlug}/jacuzzi`}
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold bg-white/15 hover:bg-white/25 border border-white/30 text-white px-3.5 py-1.5 rounded-full transition-colors shadow-xs backdrop-blur-xs"
+              >
+                <span>🌊</span>
+                <span>See the {jacuzziCount} {jacuzziCount === 1 ? 'room' : 'rooms'} with an in-room jacuzzi in {cityName} &rarr;</span>
+              </a>
+            </div>
+          )}
         </div>
       </header>
 
