@@ -627,7 +627,7 @@ export default async function HotelDetailPage({
               {hotel.rating && Number(hotel.rating) > 0 ? (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/10</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} verified guest reviews` : ' by verified travelers'}.</span>
+                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/{Number(hotel.rating) <= 5 ? '5' : '10'}</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} verified guest reviews` : ' by verified travelers'}.</span>
                 </p>
               ) : null}
 
