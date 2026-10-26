@@ -51,22 +51,92 @@ function inferCountry(cityName: string): string {
   return CITY_TO_COUNTRY[cityName] || 'india';
 }
 
+function buildBlogDescription(rawDesc?: string): string {
+  if (!rawDesc) return 'Explore top romantic hotels with private bathtubs and jacuzzi suites worldwide.';
+  const clean = rawDesc.replace(/\s+/g, ' ').trim();
+  if (clean.length <= 155 && /[.!?]$/.test(clean)) {
+    return clean;
+  }
+
+  const candidates: string[] = [];
+  const sentences = clean.match(/[^.!?]+[.!?]+/g) || [];
+
+  let combo = '';
+  for (const s of sentences) {
+    const trimmed = s.trim();
+    const candidate = combo ? `${combo} ${trimmed}` : trimmed;
+    if (candidate.length <= 155) {
+      combo = candidate;
+    } else {
+      break;
+    }
+  }
+  if (combo) candidates.push(combo);
+
+  for (const s of sentences) {
+    const trimmed = s.trim();
+    if (trimmed.length <= 155 && trimmed.length >= 30) {
+      candidates.push(trimmed);
+    }
+  }
+
+  const clauses = clean.split(/\s+[—–-]\s+|;\s*/);
+  for (let cl of clauses) {
+    cl = cl.trim();
+    if (!/[.!?]$/.test(cl)) cl += '.';
+    cl = cl.charAt(0).toUpperCase() + cl.slice(1);
+    if (cl.length <= 155 && cl.length >= 35) {
+      candidates.push(cl);
+    }
+  }
+
+  if (candidates.length > 0) {
+    candidates.sort((a, b) => b.length - a.length);
+    return candidates[0];
+  }
+
+  const truncated = clean.slice(0, 150);
+  const lastSpace = truncated.lastIndexOf(' ');
+  const wordBoundary = lastSpace > 40 ? truncated.slice(0, lastSpace) : truncated;
+  return wordBoundary.replace(/[,;:\s-]+$/, '') + '.';
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   await connectToDatabase();
   const blog = await Blog.findOne({ slug: resolvedParams.slug, published: true });
 
   if (blog) {
-    let title = blog.title;
+    let title = (blog.title || '').trim();
     if (title.length > 60) {
       const parts = title.split(/[:|–—]/);
       if (parts[0] && parts[0].trim().length >= 25 && parts[0].trim().length <= 60) {
         title = parts[0].trim();
       }
     }
-    const rawDesc = blog.excerpt || `Read our curated travel guide: ${blog.title}. Discover top romantic hotels with bathtubs and jacuzzis.`;
-    // Cap at 155 chars to prevent Google from rewriting the snippet
-    const description = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc;
+    if (title.length > 60 && /\s*\([^)]+\)\s*$/.test(title)) {
+      const stripped = title.replace(/\s*\([^)]+\)\s*$/, '').trim();
+      if (stripped.length >= 25 && stripped.length <= 60) {
+        title = stripped;
+      }
+    }
+    if (title.length > 65) {
+      const sub = title.slice(0, 60);
+      const lastSpace = sub.lastIndexOf(' ');
+      if (lastSpace > 30) {
+        title = sub.slice(0, lastSpace).trim();
+      }
+    }
+    title = title.replace(/\s+(?:&|and|with|in|for|of|the|at|a|an|,|-)\s*$/i, '').trim();
+
+    // If post title is 50 chars or more, don't add the brand.
+    // Also don't add brand if it would exceed 65 chars.
+    const brand = ' | Hotels With Bathtubs';
+    const pageTitle = (title.includes('Hotels With Bathtubs') || title.length >= 50 || (title + brand).length > 65)
+      ? title
+      : `${title}${brand}`;
+
+    const description = buildBlogDescription(blog.excerpt || blog.title);
     let ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
 
     // Fix Item 9: Ensure non-Delhi blog posts do not use Leela Palace New Delhi photo
@@ -99,14 +169,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     return {
       title: {
-        absolute: title.includes('Hotels With Bathtubs') ? title : `${title} | Hotels With Bathtubs`,
+        absolute: pageTitle,
       },
       description,
       alternates: {
         canonical: `/blog/${resolvedParams.slug}`,
       },
       openGraph: {
-        title,
+        title: pageTitle,
         description,
         url: `https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`,
         siteName: 'Hotels with Bathtubs',
@@ -124,7 +194,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       },
       twitter: {
         card: 'summary_large_image',
-        title,
+        title: pageTitle,
         description,
         images: [ogImage],
       },

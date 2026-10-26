@@ -51,10 +51,20 @@ function getCityPageTitle(cityName: string, countrySlug: string, citySlug: strin
     if (standardUsTitle.length <= 60) {
       return standardUsTitle;
     }
-    return `Jacuzzi & Bathtub Hotels in ${cityName} (${currentYear})`;
+    const fallbackUs = `Jacuzzi & Bathtub Hotels in ${cityName} (${currentYear})`;
+    if (fallbackUs.length <= 60) return fallbackUs;
+    return `Bathtub Hotels in ${cityName} (${currentYear})`;
   }
   const verifiedWord = hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`;
-  return `Hotels with Bathtub in ${cityName}: ${verifiedWord} (${currentYear})`;
+  const standardTitle = `Hotels with Bathtub in ${cityName}: ${verifiedWord} (${currentYear})`;
+  if (standardTitle.length <= 60) {
+    return standardTitle;
+  }
+  const fallbackTitle = `Hotels with Bathtub in ${cityName} (${currentYear})`;
+  if (fallbackTitle.length <= 60) {
+    return fallbackTitle;
+  }
+  return `Bathtub Hotels in ${cityName} (${currentYear})`;
 }
 
 function truncateToWord(str: string, maxLen: number): string {
