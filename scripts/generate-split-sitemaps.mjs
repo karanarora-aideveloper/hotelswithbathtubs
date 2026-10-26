@@ -48,6 +48,14 @@ const countryMap = {
   'india': { slug: 'india', displayName: 'India' },
 };
 
+function isJacuzziRoom(h) {
+  if (!h) return false;
+  const tub = typeof h.tubType === 'string' ? h.tubType : '';
+  const room = typeof h.roomType === 'string' ? h.roomType : '';
+  const pattern = /jacuzzi|whirlpool|hot tub|jetted|hydro/i;
+  return pattern.test(tub) || pattern.test(room);
+}
+
 function resolveCountry(country) {
   if (!country) return { slug: '', displayName: '' };
   const raw = country.toLowerCase().trim();
@@ -132,9 +140,8 @@ export function generateSplitSitemaps() {
 
     locationHotelCount.set(locKey, (locationHotelCount.get(locKey) || 0) + 1);
 
-    const isJacuzzi = (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
-      (Array.isArray(h.amenities) && h.amenities.some((a) => /jacuzzi|hot tub|whirlpool/i.test(a)));
-    if (isJacuzzi) {
+    // Track jacuzzi hotels (M3 room-only rule)
+    if (isJacuzziRoom(h)) {
       locationJacuzziCount.set(locKey, (locationJacuzziCount.get(locKey) || 0) + 1);
     }
 

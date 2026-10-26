@@ -17,8 +17,8 @@ export const revalidate = false;
 const JACUZZI_FILTER = {
   flagged: { $ne: true },
   $or: [
-    { tubType: /jacuzzi|whirlpool|hot tub|jet/i },
-    { amenities: /jacuzzi|hot tub|whirlpool/i }
+    { tubType: /jacuzzi|whirlpool|hot tub|jetted|hydro/i },
+    { roomType: /jacuzzi|whirlpool|hot tub|jetted|hydro/i }
   ]
 };
 
@@ -78,9 +78,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = hotelCount === 1
-    ? `Hotels with Jacuzzi in Room in ${cityName}: 1 Verified Suite (${currentYear})`
-    : `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
+  const suiteText = hotelCount === 1 ? '1 Suite' : `${hotelCount} Suites`;
+  const standardTitle = `Hotels with Jacuzzi in Room in ${cityName}: ${suiteText} (${currentYear})`;
+  const pageTitle = standardTitle.length <= 60
+    ? standardTitle
+    : `Jacuzzi Suites in ${cityName} (${currentYear})`;
   const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 verified suite' : `${hotelCount}+ verified suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
 
   return {

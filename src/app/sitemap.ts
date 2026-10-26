@@ -3,7 +3,7 @@ import { shouldIndexDestination } from '@/lib/indexing';
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import Blog from '@/models/Blog';
-import { slugify, resolveCountry } from '@/lib/utils';
+import { slugify, resolveCountry, isJacuzziRoom } from '@/lib/utils';
 import { getAllStateSlugs } from '@/lib/usStates';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
@@ -65,10 +65,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // Track hotel count for thin-destination filtering
       locationHotelCount.set(locKey, (locationHotelCount.get(locKey) || 0) + 1);
 
-      // Track jacuzzi hotels
-      const isJacuzzi = (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
-        (Array.isArray(h.amenities) && h.amenities.some((a: string) => /jacuzzi|hot tub|whirlpool/i.test(a)));
-      if (isJacuzzi) {
+      // Track jacuzzi hotels (M3 room-only rule)
+      if (isJacuzziRoom(h)) {
         locationJacuzziCount.set(locKey, (locationJacuzziCount.get(locKey) || 0) + 1);
       }
 

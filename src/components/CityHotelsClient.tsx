@@ -6,7 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
-import { slugify, isVacationRental } from '@/lib/utils';
+import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
@@ -225,24 +225,8 @@ export default function CityHotelsClient({
     };
   }, [uniqueHotels, countryName]);
 
-  // Comprehensive bathtub feature matchers (inspects tubType, roomType, and amenities)
-  const isJacuzziHotel = (h: HotelData) => {
-    const tub = (h.tubType || '').toLowerCase();
-    const room = (h.roomType || '').toLowerCase();
-    const ams = (h.amenities || []).join(' ').toLowerCase();
-    return (
-      tub.includes('jacuzzi') ||
-      tub.includes('whirlpool') ||
-      tub.includes('hydro') ||
-      tub.includes('hot tub') ||
-      tub.includes('jet') ||
-      room.includes('jacuzzi') ||
-      room.includes('whirlpool') ||
-      ams.includes('jacuzzi') ||
-      ams.includes('whirlpool') ||
-      ams.includes('hot tub')
-    );
-  };
+  // M3: Jacuzzi filter matches on room only (tubType or roomType)
+  const isJacuzziHotel = (h: HotelData) => isJacuzziRoom(h);
 
   const isSoakingHotel = (h: HotelData) => {
     const tub = (h.tubType || '').toLowerCase();

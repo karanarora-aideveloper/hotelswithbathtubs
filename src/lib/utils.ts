@@ -56,6 +56,18 @@ export function isVacationRental(hotel?: any): boolean {
 }
 
 /**
+ * Matches only in-room jacuzzi/whirlpool/hot tub/jetted/hydro features on tubType or roomType.
+ * Drops general property amenities (e.g. shared pool/spa hot tubs).
+ */
+export function isJacuzziRoom(hotel?: any): boolean {
+  if (!hotel) return false;
+  const tub = typeof hotel.tubType === 'string' ? hotel.tubType : '';
+  const room = typeof hotel.roomType === 'string' ? hotel.roomType : '';
+  const pattern = /jacuzzi|whirlpool|hot tub|jetted|hydro/i;
+  return pattern.test(tub) || pattern.test(room);
+}
+
+/**
  * Builds a regex to match city names from unslugified url string, handling punctuation
  * variations such as "St." vs "St" vs "Saint", dots, hyphens, and spaces.
  */

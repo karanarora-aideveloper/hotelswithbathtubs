@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, isVacationRental } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -373,10 +373,7 @@ export default async function CityHotelsPage({
     ? new Date(maxTimestamp).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
     : 'October 2026';
 
-  const jacuzziCount = hotels.filter(h =>
-    (h.tubType && /jacuzzi|whirlpool|hot tub|jet/i.test(h.tubType)) ||
-    (h.amenities && h.amenities.some((a: string) => /jacuzzi|hot tub|whirlpool/i.test(a)))
-  ).length;
+  const jacuzziCount = hotels.filter((h) => isJacuzziRoom(h)).length;
 
 const CITY_ALIASES_MAP: Record<string, string[]> = {
   'new york': ['new york', 'nyc', 'new-york-city', 'manhattan'],
