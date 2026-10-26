@@ -4,6 +4,7 @@ import React from 'react';
 import OutboundLink from './OutboundLink';
 import { getUrlDirectnessTier } from '@/lib/affiliate';
 import { normalizePrice } from '@/lib/utils';
+import { formatMonthYear } from '@/lib/evidence';
 
 interface HotelAnalyticsProps {
   hotel: {
@@ -34,25 +35,6 @@ interface HotelAnalyticsProps {
   countrySlug: string;
 }
 
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-function formatMonthYear(dateStr?: string | Date | null): string {
-  if (!dateStr) return 'October 2026';
-  const str = String(dateStr);
-  const match = str.match(/^(\d{4})-(\d{2})/);
-  if (match) {
-    const year = match[1];
-    const monthIndex = parseInt(match[2], 10) - 1;
-    if (monthIndex >= 0 && monthIndex < 12) {
-      return `${MONTH_NAMES[monthIndex]} ${year}`;
-    }
-  }
-  return 'October 2026';
-}
-
 interface PartnerButtonConfig {
   name: string;
   url: string;
@@ -69,6 +51,7 @@ export default function HotelAnalyticsComparison({
 }: HotelAnalyticsProps) {
   const isIndia = countrySlug === 'india';
   const cleanPrice = normalizePrice(hotel.price) || hotel.price;
+  const displayPrice = cleanPrice ? cleanPrice.replace(/^~\s*/, '') : '';
   const monthYear = formatMonthYear(hotel.updatedAt);
 
   const partners: PartnerButtonConfig[] = [];
@@ -174,6 +157,16 @@ export default function HotelAnalyticsComparison({
     });
   }
 
+  if (partners.length === 0 && hotel.url && getUrlDirectnessTier(hotel.url) < 99) {
+    partners.push({
+      name: 'Booking Partner',
+      url: hotel.url,
+      source: 'Partner',
+      bgClass: 'bg-[#1a6fde] hover:bg-[#1559b8] text-white',
+      badge: 'Partner',
+    });
+  }
+
   // Deduplicate by URL
   const seenUrls = new Set<string>();
   const uniquePartners = partners.filter((p) => {
@@ -187,9 +180,9 @@ export default function HotelAnalyticsComparison({
       {/* P3 Honest Price Box */}
       <section className="bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 shadow-xs p-6 sm:p-8">
         <h2 className="font-playfair text-lg sm:text-xl font-normal text-[#1f262d] tracking-tight mb-4">
-          {cleanPrice ? (
+          {displayPrice ? (
             <>
-              Price we last saw: <span className="font-bold text-[#1a6fde]">{cleanPrice}</span> a night ({monthYear}). Check today&apos;s price:
+              Price we last saw: <span className="font-bold text-[#1a6fde]">{displayPrice}</span> a night ({monthYear}). Check today&apos;s price:
             </>
           ) : (
             <>Check today&apos;s price:</>
