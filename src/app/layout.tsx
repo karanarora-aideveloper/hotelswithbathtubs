@@ -7,10 +7,8 @@ import AnalyticsExclusionInit from "@/components/AnalyticsExclusionInit";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import NavigationProgressBar from "@/components/NavigationProgressBar";
-import MixpanelProvider from "@/components/MixpanelProvider";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
-import { PostHogProviderWrapper } from '@/components/PostHogProvider';
 import InternalTrafficBadge from '@/components/InternalTrafficBadge';
 import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
 
@@ -84,12 +82,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
         <link rel="dns-prefetch" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
-        <link rel="preconnect" href="https://us.i.posthog.com" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} ${lora.variable} ${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <ChunkErrorRecovery />
         <AnalyticsExclusionInit gaId={gaId} />
-        <PostHogProviderWrapper>
           <Suspense fallback={null}>
             <NavigationProgressBar />
           </Suspense>
@@ -101,11 +97,9 @@ export default function RootLayout({
           </main>
 
           <Footer />
-          <MixpanelProvider />
           {gaId && <GoogleAnalytics gaId={gaId} />}
           <GoogleAnalyticsProvider gaId={gaId} />
           <InternalTrafficBadge />
-        </PostHogProviderWrapper>
       </body>
     </html>
   );

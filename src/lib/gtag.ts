@@ -19,7 +19,6 @@ export const GA_MEASUREMENT_ID =
   '';
 
 import { isUserExcluded } from '@/lib/exclusion';
-import posthog from 'posthog-js';
 import {
   getUserRecurrenceData,
   recordSessionRecurrenceUpdate,
@@ -72,36 +71,6 @@ export const sendGA4Event = (eventName: string, params?: Record<string, any>) =>
     (window as any).dataLayer.push(['event', eventName, eventParams]);
   }
 
-  // 2. PostHog Event Stream
-  try {
-    if (eventName !== 'page_view') {
-      if (eventName === 'user_churn') {
-        posthog.capture('user_churn', {
-          ...params,
-          $set: {
-            last_churn_type: params?.churn_type,
-            last_exit_link: params?.last_clicked_url,
-            last_clicked_text: params?.last_clicked_text,
-            last_max_scroll: params?.max_scroll_depth,
-            last_time_spent_seconds: params?.time_spent_seconds,
-            last_active_time_seconds: params?.active_time_seconds,
-          },
-        });
-      } else if (eventName === 'hotel_booking_click') {
-        posthog.capture('hotel_booking_click', {
-          ...params,
-          $set: {
-            has_converted: true,
-            last_booked_hotel: params?.hotel_name || params?.hotelName,
-            last_booking_source: params?.booking_source || params?.bookingSource,
-            last_destination_url: params?.destination_url || params?.destinationUrl,
-          },
-        });
-      } else {
-        posthog.capture(eventName, params);
-      }
-    }
-  } catch (_) {}
 };
 
 // ==========================================

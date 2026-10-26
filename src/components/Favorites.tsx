@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import posthog from 'posthog-js';
+import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 
 
@@ -61,7 +61,7 @@ export function useFavorites() {
       // Track to PostHog (if not excluded)
       try {
         if (!isUserExcluded()) {
-          posthog.capture('wishlist_action', {
+          trackEvent('wishlist_action', {
             action: exists ? 'remove' : 'add',
             hotel_name: hotel.name,
             city: hotel.city,

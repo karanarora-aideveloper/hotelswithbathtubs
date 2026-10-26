@@ -1,119 +1,19 @@
-import type mixpanel from 'mixpanel-browser';
+// Product analytics now go to Google Analytics 4 only (decision D6, 25 Oct 2026).
+// Mixpanel and PostHog were removed to cut ~220 KB of compressed JavaScript from every page.
+// These helpers keep the existing call sites working and forward events to GA4.
+import { sendGA4Event } from '@/lib/gtag';
 import { isUserExcluded } from '@/lib/exclusion';
 
-type MixpanelInstance = typeof mixpanel;
-
-let mixpanelInstance: MixpanelInstance | null = null;
-let mixpanelPromise: Promise<MixpanelInstance> | null = null;
-
-async function getMixpanel(): Promise<MixpanelInstance> {
-  if (mixpanelInstance) return mixpanelInstance;
-  if (!mixpanelPromise) {
-    mixpanelPromise = import('mixpanel-browser').then((m) => {
-      mixpanelInstance = (m.default || m) as MixpanelInstance;
-      return mixpanelInstance;
-    });
-  }
-  return mixpanelPromise;
-}
-
-const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN || 'c19e5d48a1097faea5ce6f9a0fc44e3d';
-let isMixpanelInitialized = false;
-let isMixpanelReady = false;
-const pendingSuperProps: Record<string, unknown>[] = [];
-
-export const initMixpanel = () => {
-  if (typeof window !== 'undefined' && !isMixpanelInitialized) {
-    if (isUserExcluded()) return;
-    isMixpanelInitialized = true;
-    const runInit = async () => {
-      try {
-        const mp = await getMixpanel();
-        mp.init(MIXPANEL_TOKEN, {
-          debug: process.env.NODE_ENV !== 'production',
-          track_pageview: false,
-          persistence: 'localStorage',
-          batch_requests: false,
-          loaded: () => {
-            isMixpanelReady = true;
-            if (pendingSuperProps.length > 0) {
-              const merged = Object.assign({}, ...pendingSuperProps);
-              mp.register(merged);
-              pendingSuperProps.length = 0;
-            }
-          },
-        });
-      } catch (err) {
-        console.warn('[Mixpanel] Init deferred failed:', err);
-      }
-    };
-
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => runInit());
-    } else {
-      setTimeout(runInit, 150);
-    }
-  }
-};
+// Sent to GA4 elsewhere already (page views by the GA provider, booking clicks by gtag.ts).
+const ALREADY_SENT = new Set(['page_view', 'hotel_booking_click']);
 
 export const trackEvent = async (eventName: string, properties?: Record<string, any>) => {
-  if (typeof window !== 'undefined') {
-    if (isUserExcluded()) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.log(`[Mixpanel Blocked via Exclusion] Event: ${eventName}`, properties);
-      }
-      return;
-    }
-    initMixpanel();
-    try {
-      const mp = await getMixpanel();
-      if (!isMixpanelReady) {
-        setTimeout(() => {
-          try { mp.track(eventName, properties); } catch (_) {}
-        }, 300);
-        return;
-      }
-      mp.track(eventName, properties);
-    } catch (e) {
-      console.warn('[Mixpanel] track failed:', e);
-    }
-  }
+  if (typeof window === 'undefined' || isUserExcluded() || ALREADY_SENT.has(eventName)) return;
+  sendGA4Event(eventName, properties);
 };
 
-export const registerSuperProperties = async (properties: Record<string, any>) => {
-  if (typeof window !== 'undefined') {
-    initMixpanel();
-    if (isMixpanelReady && mixpanelInstance) {
-      try {
-        mixpanelInstance.register(properties);
-      } catch (e) {
-        console.warn('[Mixpanel] register failed:', e);
-      }
-    } else {
-      pendingSuperProps.push(properties);
-    }
-  }
-};
-
-export const identifyUser = async (userId: string, profileProperties?: Record<string, any>) => {
-  if (typeof window !== 'undefined') {
-    initMixpanel();
-    try {
-      const mp = await getMixpanel();
-      mp.identify(userId);
-      if (profileProperties) {
-        mp.people.set(profileProperties);
-      }
-    } catch (_) {}
-  }
-};
-
-export const resetUser = async () => {
-  if (typeof window !== 'undefined') {
-    initMixpanel();
-    try {
-      const mp = await getMixpanel();
-      mp.reset();
-    } catch (_) {}
-  }
-};
+// Kept as no-ops so older imports keep compiling.
+export const initMixpanel = () => {};
+export const registerSuperProperties = async (_properties: Record<string, any>) => {};
+export const identifyUser = async (_userId: string, _profileProperties?: Record<string, any>) => {};
+export const resetUser = async () => {};

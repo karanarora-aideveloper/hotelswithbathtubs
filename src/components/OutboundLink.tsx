@@ -4,7 +4,6 @@ import { trackEvent } from '@/lib/analytics';
 import { recordBookingConversion } from '@/lib/gtag';
 import { wrapOutboundAffiliateLink, type TripDates } from '@/lib/affiliate';
 import { recordSessionRecurrenceUpdate } from '@/lib/userRecurrence';
-import posthog from 'posthog-js';
 import { isUserExcluded } from '@/lib/exclusion';
 
 export default function OutboundLink({
@@ -55,8 +54,8 @@ export default function OutboundLink({
         const deviceCategory = typeof window !== 'undefined'
           ? window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1024 ? 'tablet' : 'desktop'
           : 'desktop';
-        const posthogDistinctId = (posthog as any)?.get_distinct_id?.() || '';
-        const posthogSessionId = (posthog as any)?.get_session_id?.() || '';
+        const posthogDistinctId = ''; // PostHog removed (D6); field kept for the click-log schema
+        const posthogSessionId = '';
 
         // Extract country from pathname e.g. /thailand/bangkok -> thailand
         const pathSegments = pagePath.split('/').filter(Boolean);
@@ -131,22 +130,6 @@ export default function OutboundLink({
           lastClickedUrl: affiliateLink,
         });
 
-        // 5. Track to PostHog — dedicated hotel link click event
-        try {
-          if (!isUserExcluded()) {
-            posthog.capture('hotel_booking_click', {
-              ...eventProps,
-              $set: {
-                has_ever_converted: true,
-                last_booking_source: source || provider,
-                last_booked_city: cityName,
-                last_booked_hotel: hotelName,
-                last_exit_link: affiliateLink,
-              },
-            });
-            posthog.capture('hotel_link_clicked', eventProps);
-          }
-        } catch (_) {}
       }}
     >
       {children}

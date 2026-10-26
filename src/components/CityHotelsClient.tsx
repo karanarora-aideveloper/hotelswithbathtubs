@@ -7,7 +7,7 @@ import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
-import posthog from 'posthog-js';
+import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
   recordHotelImpression,
@@ -621,7 +621,7 @@ export default function CityHotelsClient({
     recordFilterChange(filter, counts[filter]);
     try {
       if (!isUserExcluded()) {
-        posthog.capture('filter_applied', {
+        trackEvent('filter_applied', {
           filter_type: 'category',
           filter_value: filter,
           result_count: counts[filter],
@@ -644,7 +644,7 @@ export default function CityHotelsClient({
     recordFilterReset(cityName);
     try {
       if (!isUserExcluded()) {
-        posthog.capture('filter_reset', { city: cityName });
+        trackEvent('filter_reset', { city: cityName });
       }
     } catch (_) {}
   };

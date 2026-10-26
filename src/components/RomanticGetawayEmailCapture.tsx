@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import posthog from 'posthog-js';
+import { trackEvent } from '@/lib/analytics';
 
 interface EmailCaptureProps {
   destinationName?: string;
@@ -44,8 +44,8 @@ export default function RomanticGetawayEmailCapture({
         });
       }
 
-      if (posthog && typeof posthog.capture === 'function') {
-        posthog.capture('newsletter_signup', {
+      if (typeof window !== 'undefined') {
+        trackEvent('newsletter_signup', {
           destination: destinationName || 'global',
           source: 'romantic_getaway_capture',
         });
