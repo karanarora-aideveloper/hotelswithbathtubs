@@ -127,7 +127,7 @@ export default function CityHotelsClient({
     thisSun.setDate(thisFri.getDate() + 2);
 
     // 2. Next Weekend (Popular)
-    let daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
+    const daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
     const nextFri = new Date(today);
     nextFri.setDate(today.getDate() + daysUntilNextFriday);
     const nextSun = new Date(nextFri);
@@ -468,7 +468,7 @@ export default function CityHotelsClient({
   }, [searchTerm, selectedFilter, selectedTubCategory, sortBy, priceRange, stayStyle, selectedPerks, selectedCity]);
 
   const filteredHotels = useMemo(() => {
-    let result = uniqueHotels.filter((h) => {
+    const result = uniqueHotels.filter((h) => {
       // Destination / City filter (State Hubs with Multiple Cities)
       if (selectedCity !== 'all' && h.city !== selectedCity) return false;
 
