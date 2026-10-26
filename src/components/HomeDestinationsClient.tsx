@@ -118,7 +118,7 @@ function FlashDestinationSection({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-slate-200/80 pb-4 gap-3">
         <div>
           {hubUrl ? (
-            <Link href={hubUrl} className="group inline-flex items-center gap-2.5 hover:text-[#1a6fde] transition-colors">
+            <Link href={hubUrl} prefetch={false} className="group inline-flex items-center gap-2.5 hover:text-[#1a6fde] transition-colors">
               <span className="text-2xl">{emoji}</span>
               <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors tracking-tight">
                 {title}
@@ -144,6 +144,7 @@ function FlashDestinationSection({
           {hubUrl && hubLabel && (
             <Link
               href={hubUrl}
+              prefetch={false}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1a6fde]/10 hover:bg-[#1a6fde] hover:text-white text-[#1a6fde] font-bold text-xs sm:text-sm rounded-full border border-[#1a6fde]/20 whitespace-nowrap transition-all group shadow-2xs"
             >
               <span>{hubLabel}</span>
@@ -215,6 +216,7 @@ function FlashDestinationSection({
             {hubUrl && (
               <Link
                 href={hubUrl}
+                prefetch={false}
                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm rounded-xl border border-slate-200 shadow-2xs hover:shadow-sm transition-all"
               >
                 <span>{hubLabel || `Explore All ${totalCount} Destinations`}</span>
@@ -243,6 +245,7 @@ function FlashDestinationSection({
                 hubUrl ? (
                   <Link
                     href={hubUrl}
+                    prefetch={false}
                     className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors"
                   >
                     +{overflowPillsCount} more in directory →
@@ -273,6 +276,7 @@ function FlashDestinationSection({
             {hubUrl && (
               <Link
                 href={hubUrl}
+                prefetch={false}
                 className="ml-2 text-[#1a6fde] font-semibold hover:underline inline-flex items-center gap-1"
               >
                 Explore all {totalCount} in full directory →

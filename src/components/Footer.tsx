@@ -49,7 +49,7 @@ export default async function Footer() {
           <Column title="Company" links={COMPANY} />
         </div>
         <p className="mb-10">
-          <Link href="/destinations" className="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline">
+          <Link href="/destinations" prefetch={false} className="inline-flex items-center gap-1.5 text-sm font-bold text-accent hover:underline">
             Browse all destinations <span aria-hidden="true">&rarr;</span>
           </Link>
         </p>
@@ -136,9 +136,9 @@ export default async function Footer() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-muted pt-4 border-t border-border">
             <p className="font-medium">&copy; 2026 HotelsWithBathtubs.com. All rights reserved.</p>
             <div className="flex gap-4 flex-wrap justify-center sm:justify-end">
-              <Link href="/privacy" className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
-              <Link href="/terms" className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>
-              <Link href="/cookies" className="text-text-muted hover:text-accent font-medium transition-colors">Cookies</Link>
+              <Link href="/privacy" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
+              <Link href="/terms" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>
+              <Link href="/cookies" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Cookies</Link>
             </div>
           </div>
           <p className="text-center text-xs text-text-muted/70 pt-3">

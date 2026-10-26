@@ -247,6 +247,7 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
                 <div className="mt-6 pt-5 border-t border-[#E5E1D8] flex items-center justify-between gap-4">
                   <Link
                     href={hotel.cityUrl}
+                    prefetch={false}
                     className="text-xs font-semibold text-[#121518] hover:text-[#C5A880] transition-colors underline underline-offset-4"
                   >
                     View All {hotel.city} Stays &rarr;

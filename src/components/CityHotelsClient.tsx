@@ -1142,6 +1142,7 @@ export default function CityHotelsClient({
         </div>
         <Link
           href="/matchmaker"
+          prefetch={false}
           className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md whitespace-nowrap shrink-0"
         >
           Open Matchmaker &rarr;
@@ -1431,7 +1432,7 @@ export default function CityHotelsClient({
                 {/* Card Content */}
                 <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
                   {/* Hotel Title */}
-                  <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link mb-1">
+                  <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} prefetch={false} className="group/link mb-1">
                     <h2 className="text-sm sm:text-[15px] font-bold text-gray-900 leading-snug line-clamp-1 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
                   </Link>
 
@@ -1531,7 +1532,7 @@ export default function CityHotelsClient({
                           {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
                         </div>
                       </div>
-                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
+                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} prefetch={false} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
                         View Details &rarr;
                       </Link>
                     </div>
@@ -1555,6 +1556,7 @@ export default function CityHotelsClient({
                           {displayUrls.length > 2 && (
                             <Link
                               href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                              prefetch={false}
                               className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
                             >
                               Compare all {displayUrls.length} sites &amp; tub guide &rarr;
@@ -1564,6 +1566,7 @@ export default function CityHotelsClient({
                       ) : (
                         <Link
                           href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                          prefetch={false}
                           className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full"
                         >
                           <span>View Live Rates &amp; Availability &rarr;</span>

@@ -465,16 +465,17 @@ export default async function HotelDetailPage({
       <div className="border-b border-[#5b8296]/15 bg-white/70 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 text-xs font-medium text-slate-500 flex items-center justify-between flex-wrap gap-2 font-jakarta">
           <div className="flex items-center flex-wrap gap-1.5">
-            <Link href="/" className="text-slate-500 hover:text-[#1f262d] transition-colors">Home</Link>
+            <Link href="/" prefetch={false} className="text-slate-500 hover:text-[#1f262d] transition-colors">Home</Link>
             <span className="text-slate-300">/</span>
-            <Link href={`/${countrySlug}`} className="text-slate-500 hover:text-[#1f262d] transition-colors">{countryName}</Link>
+            <Link href={`/${countrySlug}`} prefetch={false} className="text-slate-500 hover:text-[#1f262d] transition-colors">{countryName}</Link>
             <span className="text-slate-300">/</span>
-            <Link href={`/${countrySlug}/${citySlug}`} className="text-slate-500 hover:text-[#1f262d] transition-colors">{cityName}</Link>
+            <Link href={`/${countrySlug}/${citySlug}`} prefetch={false} className="text-slate-500 hover:text-[#1f262d] transition-colors">{cityName}</Link>
             <span className="text-slate-300">/</span>
             <span className="text-[#1f262d] font-semibold truncate max-w-[200px] sm:max-w-xs">{hotel.name}</span>
           </div>
           <Link
             href={`/${countrySlug}/${citySlug}`}
+            prefetch={false}
             className="text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] transition-colors flex items-center gap-1"
           >
             <span>&larr;</span> Back to all {cityName} bathtub stays

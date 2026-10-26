@@ -319,7 +319,7 @@ export default async function CountryHubPage({
           <StructuredData data={faqSchema}>
             <>
               <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
-                <Link href="/" className="text-accent-secondary hover:underline">Home</Link>
+                <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
                 <span>&rsaquo;</span>
                 <span className="text-text-main font-semibold">Hotels with Bathtubs in {countryName}</span>
               </div>

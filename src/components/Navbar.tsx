@@ -56,6 +56,7 @@ export default function Navbar() {
           {/* Brand Logo & Name */}
           <Link
             href="/"
+            prefetch={false}
             className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           >
             <div className="w-9 h-9 bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] rounded-lg flex-shrink-0 flex items-center justify-center text-lg transition-transform group-hover:scale-105">
@@ -75,32 +76,34 @@ export default function Navbar() {
           <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-semibold text-text-main">
             <Link
               href="/matchmaker"
+              prefetch={false}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 hover:bg-blue-100 text-[#1a6fde] text-xs font-bold transition-all border border-blue-200/80 shadow-2xs hover:scale-105"
             >
               <span className="text-sm">✨</span>
               <span>Matchmaker</span>
             </Link>
-            <Link href="/#destinations" className="hover:text-accent transition-colors">
+            <Link href="/#destinations" prefetch={false} className="hover:text-accent transition-colors">
               Destinations
             </Link>
-            <Link href="/blog" className="hover:text-accent transition-colors">
+            <Link href="/blog" prefetch={false} className="hover:text-accent transition-colors">
               Travel Guides
             </Link>
-            <Link href="/couple-friendly" className="hover:text-accent transition-colors">
+            <Link href="/couple-friendly" prefetch={false} className="hover:text-accent transition-colors">
               Couple Stays
             </Link>
-            <Link href="/hostels" className="hover:text-accent transition-colors flex items-center gap-1">
+            <Link href="/hostels" prefetch={false} className="hover:text-accent transition-colors flex items-center gap-1">
               <span>Hostels</span>
               <span className="text-[9px] font-bold px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded-full">New</span>
             </Link>
-            <Link href="/#verification" className="hover:text-accent transition-colors">
+            <Link href="/#verification" prefetch={false} className="hover:text-accent transition-colors">
               Verification
             </Link>
-            <Link href="/#faq" className="hover:text-accent transition-colors">
+            <Link href="/#faq" prefetch={false} className="hover:text-accent transition-colors">
               FAQs
             </Link>
             <Link
               href="/wishlist"
+              prefetch={false}
               className="relative hover:text-rose-500 transition-colors flex items-center p-1"
               title="Your saved hotels"
             >
@@ -115,6 +118,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/#destinations"
+              prefetch={false}
               className="bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-2xs hover:shadow-md transform hover:-translate-y-0.5 whitespace-nowrap ml-1"
             >
               Browse 150+ Destinations &rarr;
@@ -189,6 +193,7 @@ export default function Navbar() {
           {/* Dream Soak Matchmaker Feature Card */}
           <Link
             href="/matchmaker"
+            prefetch={false}
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200/90 rounded-2xl shadow-xs transition-all group"
           >
@@ -213,6 +218,7 @@ export default function Navbar() {
             <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/usa"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-2.5 p-2.5 bg-gray-50 hover:bg-amber-50/60 border border-gray-200/80 rounded-xl transition-all group"
               >
@@ -224,6 +230,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/india"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-2.5 p-2.5 bg-gray-50 hover:bg-amber-50/60 border border-gray-200/80 rounded-xl transition-all group"
               >
@@ -235,6 +242,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/#destinations"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-2.5 p-2.5 bg-gray-50 hover:bg-amber-50/60 border border-gray-200/80 rounded-xl transition-all group col-span-2"
               >
@@ -255,6 +263,7 @@ export default function Navbar() {
             <nav className="flex flex-col space-y-1">
               <Link
                 href="/"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -269,6 +278,7 @@ export default function Navbar() {
 
               <Link
                 href="/#destinations"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -287,6 +297,7 @@ export default function Navbar() {
 
               <Link
                 href="/blog"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -304,6 +315,7 @@ export default function Navbar() {
 
               <Link
                 href="/couple-friendly"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -319,6 +331,7 @@ export default function Navbar() {
 
               <Link
                 href="/hostels"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -334,6 +347,7 @@ export default function Navbar() {
 
               <Link
                 href="/wishlist"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -367,6 +381,7 @@ export default function Navbar() {
             <nav className="flex flex-col space-y-1">
               <Link
                 href="/#verification"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -384,6 +399,7 @@ export default function Navbar() {
 
               <Link
                 href="/#faq"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -398,6 +414,7 @@ export default function Navbar() {
 
               <Link
                 href="/about"
+                prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
               >
@@ -417,6 +434,7 @@ export default function Navbar() {
         <div className="p-5 border-t border-border/80 bg-gray-50/70 space-y-3">
           <Link
             href="/#destinations"
+            prefetch={false}
             onClick={() => setIsOpen(false)}
             className="w-full bg-[#1a6fde] hover:bg-[#1559b8] text-white text-sm font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
           >

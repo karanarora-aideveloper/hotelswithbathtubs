@@ -27,6 +27,16 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(target.toString(), 301);
   }
 
+  // Answer pruned Next.js client-router prefetch files with empty 404 to avoid 66 KB error pages
+  if (url.pathname.includes('/__next.')) {
+    return new Response(null, {
+      status: 404,
+      headers: {
+        'Cache-Control': 'public, max-age=86400',
+      },
+    });
+  }
+
   const response = await context.next();
 
   // If 404 on a 3-segment route (/country/city/hotel-slug), check alternate slug variations
