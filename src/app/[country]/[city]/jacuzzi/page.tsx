@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
+import { sanitizePlaceholderText } from '@/lib/location';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const revalidate = false;
@@ -159,7 +160,7 @@ export default async function CityJacuzziHotelsPage({
     airbnbUrl: h.airbnbUrl,
     tripUrl: h.tripUrl,
     amenities: h.amenities || [],
-    description: h.description || '',
+    description: sanitizePlaceholderText(h.description || ''),
     rating: h.rating,
     reviewsCount: h.reviewsCount,
     roomType: h.roomType,
@@ -167,7 +168,7 @@ export default async function CityJacuzziHotelsPage({
     bookingTip: h.bookingTip,
     price: h.price,
     neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
-    landmarkDistance: h.landmarkDistance,
+    landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
   }));
 
   // Fetch related blog guides
@@ -226,7 +227,7 @@ export default async function CityJacuzziHotelsPage({
         "item": {
           "@type": "LodgingBusiness",
           "name": h.name,
-          "description": h.description || `Verified hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
+          "description": sanitizePlaceholderText(h.description) || `Verified hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
           "image": {
             "@type": "ImageObject",
             "url": imageUrl(h.image?.split('/').pop() || ''),

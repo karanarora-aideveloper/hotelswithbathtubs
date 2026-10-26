@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCou
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
-import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
+import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText } from '@/lib/location';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -40,19 +40,24 @@ async function getCachedHotelMap() {
 
   const map = new Map<string, any>();
   for (const h of allHotels) {
-    if (h.slug) {
-      map.set(h.slug, h);
-      map.set(slugify(h.slug), h);
+    const cleanH = {
+      ...h,
+      description: sanitizePlaceholderText(h.description),
+      landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
+    };
+    if (cleanH.slug) {
+      map.set(cleanH.slug, cleanH);
+      map.set(slugify(cleanH.slug), cleanH);
     }
-    const nSlug = slugify(h.name);
-    if (nSlug && !map.has(nSlug)) map.set(nSlug, h);
-    if (h.city) {
-      const cSlug = slugify(h.city);
-      if (h.slug) {
-        map.set(`${cSlug}/${h.slug}`, h);
-        map.set(`${cSlug}/${slugify(h.slug)}`, h);
+    const nSlug = slugify(cleanH.name);
+    if (nSlug && !map.has(nSlug)) map.set(nSlug, cleanH);
+    if (cleanH.city) {
+      const cSlug = slugify(cleanH.city);
+      if (cleanH.slug) {
+        map.set(`${cSlug}/${cleanH.slug}`, cleanH);
+        map.set(`${cSlug}/${slugify(cleanH.slug)}`, cleanH);
       }
-      map.set(`${cSlug}/${nSlug}`, h);
+      map.set(`${cSlug}/${nSlug}`, cleanH);
     }
   }
   memoryHotelMap = map;
@@ -120,7 +125,13 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
     }
   }
 
-  return { hotel, countryInfo, rawCity };
+  const cleanHotel = hotel ? {
+    ...hotel,
+    description: sanitizePlaceholderText(hotel.description),
+    landmarkDistance: sanitizePlaceholderText(hotel.landmarkDistance),
+  } : null;
+
+  return { hotel: cleanHotel, countryInfo, rawCity };
 }
 
 function getCurrencyForPrice(price?: string, countrySlug?: string): string {

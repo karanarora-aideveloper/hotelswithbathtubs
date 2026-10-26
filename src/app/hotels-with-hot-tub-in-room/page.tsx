@@ -8,6 +8,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, resolveCountry } from '@/lib/utils';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
+import { sanitizePlaceholderText } from '@/lib/location';
 
 export const dynamic = 'force-static';
 
@@ -249,7 +250,7 @@ export default async function HotelsWithHotTubInRoomPage() {
                       </p>
 
                       <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed mb-4 flex-grow">
-                        {h.description}
+                        {sanitizePlaceholderText(h.description)}
                       </p>
 
                       <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2 mt-auto">

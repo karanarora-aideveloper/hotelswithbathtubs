@@ -7,6 +7,7 @@ import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
+import { sanitizePlaceholderText } from '@/lib/location';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -169,7 +170,7 @@ export default async function HostelsHubPage() {
       "item": {
         "@type": "LodgingBusiness",
         "name": h.name,
-        "description": h.description || `Boutique hostel in ${h.city} with private ${h.tubType || 'bathtub'}.`,
+        "description": sanitizePlaceholderText(h.description) || `Boutique hostel in ${h.city} with private ${h.tubType || 'bathtub'}.`,
         "url": `https://www.hotelswithbathtubs.com/${slugify(h.country || 'india')}/${slugify(h.city)}/${h.slug}`,
         "image": imageUrl(h.image || (h.images && h.images[0])),
         ...(h.price ? { "priceRange": h.price } : {}),
@@ -353,7 +354,7 @@ export default async function HostelsHubPage() {
                     )}
 
                     <p className="text-xs text-gray-600 line-clamp-2 mb-4 leading-relaxed">
-                      {hostel.description || `Boutique hostel in ${hostel.city} featuring private en-suite bathtubs, digital nomad co-working spaces, and backpacker community events.`}
+                      {sanitizePlaceholderText(hostel.description) || `Boutique hostel in ${hostel.city} featuring private en-suite bathtubs, digital nomad co-working spaces, and backpacker community events.`}
                     </p>
 
                     <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between gap-3">

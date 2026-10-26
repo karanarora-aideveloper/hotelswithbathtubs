@@ -47,12 +47,17 @@ export function isValidStreetAddress(s?: string | null): boolean {
 }
 
 /**
- * Sanitizes placeholder enclave text from markdown or HTML content.
+ * Sanitizes placeholder enclave text from markdown, HTML content, descriptions, and landmarks.
  * Replaces "in Prime <X> Enclave" with "in <X>", and any other "Prime <X> Enclave" with "<X>".
+ * Real place names like "Diplomatic Enclave" are preserved.
  */
 export function sanitizePlaceholderText(text?: string | null): string {
   if (!text || typeof text !== 'string') return '';
   return text
-    .replace(/\bin\s+Prime\s+([A-Za-z\s]+?)\s+Enclave\b/gi, 'in $1')
-    .replace(/\bPrime\s+([A-Za-z\s]+?)\s+Enclave\b/gi, '$1');
+    // Preserve genuine localities, e.g. "Prime Diplomatic Enclave" -> "Diplomatic Enclave"
+    .replace(/\bPrime\s+Diplomatic\s+Enclave\b/gi, 'Diplomatic Enclave')
+    // Generic placeholder: "in Prime <X> Enclave" -> "in <X>"
+    .replace(/\bin\s+Prime\s+([A-Za-z\s.'-]+?)\s+Enclave\b/gi, 'in $1')
+    // Generic placeholder: "Prime <X> Enclave" -> "<X>"
+    .replace(/\bPrime\s+([A-Za-z\s.'-]+?)\s+Enclave\b/gi, '$1');
 }

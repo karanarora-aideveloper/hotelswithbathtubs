@@ -7,6 +7,7 @@ import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
+import { sanitizePlaceholderText } from '@/lib/location';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
@@ -170,7 +171,7 @@ export default async function CoupleFriendlyPage() {
       "item": {
         "@type": "LodgingBusiness",
         "name": h.name,
-        "description": h.description || `Verified romantic couple-friendly hotel with private in-room bathtub in ${h.city}`,
+        "description": sanitizePlaceholderText(h.description) || `Verified romantic couple-friendly hotel with private in-room bathtub in ${h.city}`,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": h.city,
@@ -338,7 +339,7 @@ export default async function CoupleFriendlyPage() {
                       </h3>
                       {hotel.description && (
                         <p className="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">
-                          {hotel.description}
+                          {sanitizePlaceholderText(hotel.description)}
                         </p>
                       )}
                     </div>
