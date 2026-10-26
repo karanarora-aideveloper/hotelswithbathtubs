@@ -81,7 +81,7 @@ export default async function AdminDashboard() {
               <li>✓ <strong>Specific Hotel Pages:</strong> 833/833 (100%) — Direct booking links for all</li>
               <li>✓ <strong>Booking URL Coverage:</strong> {hotelsWithBookingUrl}/{totalHotels} ({bookingUrlPercentage}%)</li>
               <li>✓ <strong>MakeMyTrip Fixer:</strong> 537/537 URLs replaced (specific hotelId pages)</li>
-              <li>✓ <strong>Mixpanel Analytics:</strong> Live (page_view, hotel_booking_click, site_exit)</li>
+              <li>✓ <strong>Analytics & Telemetry:</strong> Live GA4 & Affiliate Outbound Click Logging</li>
               <li>✓ <strong>Admin Tools:</strong> Bathtub review queue, URL fixer, SEO audit</li>
             </ul>
           </div>

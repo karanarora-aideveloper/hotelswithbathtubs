@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { isUserExcluded } from '@/lib/exclusion';
 
 export default function InternalTrafficBadge() {
-  const [excluded, setExcluded] = useState(false);
+  const [excluded, setExcluded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return isUserExcluded();
+    }
+    return false;
+  });
   const [minimized, setMinimized] = useState(false);
-
-  useEffect(() => {
-    setExcluded(isUserExcluded());
-  }, []);
 
   if (!excluded) return null;
 

@@ -15,7 +15,7 @@ export const revalidate = 86400; // Daily revalidation
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Hostels with Bathtubs & Jacuzzis (${currentYear} Guide) | Boutique Poshtels`,
+  title: 'Hostels & Poshtels with Bathtubs',
   description: 'Handpicked boutique hostels and poshtels with guaranteed private in-room bathtubs & jacuzzis. Experience vibrant social backpacker culture with private soaking luxury.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hostels',
@@ -25,7 +25,21 @@ export const metadata: Metadata = {
     description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
     url: 'https://www.hotelswithbathtubs.com/hostels',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Boutique Hostels & Poshtels with Bathtubs',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
+    description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 

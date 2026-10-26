@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
 
-  const [firstHotel, hotelCount, totalCityHotelCount] = await Promise.all([
+  const [firstHotel, hotelCount] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -57,11 +57,6 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
       ...JACUZZI_FILTER
-    }),
-    Hotel.countDocuments({
-      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
-      country: countryInfo.regex,
-      flagged: { $ne: true }
     }),
   ]);
 
@@ -80,8 +75,10 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
-  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount}+ verified suites with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
+  const pageTitle = hotelCount === 1
+    ? `Hotels with Jacuzzi in Room in ${cityName}: 1 Verified Suite (${currentYear})`
+    : `Hotels with Jacuzzi in Room in ${cityName} (${hotelCount} Top Suites) (${currentYear})`;
+  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 verified suite' : `${hotelCount}+ verified suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
 
   return {
     title: {
@@ -433,7 +430,7 @@ export default async function CityJacuzziHotelsPage({
                 How do I select the exact jacuzzi room?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                When clicking our partner links, be sure to reserve the specific suite tier (such as "Whirlpool Suite", "Jacuzzi Room", or "Spa Villa") rather than the baseline standard room.
+                When clicking our partner links, be sure to reserve the specific suite tier (such as &quot;Whirlpool Suite&quot;, &quot;Jacuzzi Room&quot;, or &quot;Spa Villa&quot;) rather than the baseline standard room.
               </p>
             </div>
             <div>

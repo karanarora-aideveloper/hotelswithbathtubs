@@ -7,30 +7,18 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import Image from 'next/image';
-import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
-import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
+import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
+import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 
 export const revalidate = false;
 
-function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, citySlug: string): string {
-  const customIntro = cityIntroContent[`${citySlug}-${countrySlug}`]?.intro || (countrySlug === 'india' ? cityIntroContent[`${citySlug}-india`]?.intro : undefined);
-  if (customIntro) {
-    if (customIntro.length <= 160) return customIntro;
-    const firstSentence = customIntro.split(/[.!?]\s+/)[0];
-    if (firstSentence && firstSentence.length >= 75 && firstSentence.length <= 150) {
-      const candidate = `${firstSentence}. Verified private in-room bathtubs.`;
-      if (candidate.length <= 160) return candidate;
-      return `${firstSentence}.`;
-    }
-    const truncated = customIntro.slice(0, 155).replace(/\s+\S*$/, '');
-    return `${truncated}...`;
-  }
-  return countrySlug === 'usa'
-    ? `Discover ${count}+ verified hotels with private bathtubs, jacuzzi suites & soaking tubs in ${cityName}. Hand-checked rooms guaranteed for couples.`
-    : `Find ${count}+ verified hotels with private bathtubs & jacuzzi suites in ${cityName}, ${countryName}. Hand-checked romantic stays with guaranteed in-room tubs.`;
+function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, minPrice?: string): string {
+  const roomWord = count === 1 ? 'hotel' : 'hotels';
+  const priceSnippet = minPrice ? ` Prices from ${minPrice.trim()}/night.` : '';
+  const desc = `${count} ${cityName} ${roomWord} where the room itself has a bathtub or jacuzzi, checked one by one.${priceSnippet} Couple-friendly picks, exact room type to book.`;
+  return desc.length <= 155 ? desc : desc.slice(0, 152).trim() + '...';
 }
 
 function truncateToWord(str: string, maxLen: number): string {
@@ -130,8 +118,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     };
   }
 
-  // Fetch the first hotel to get a city-specific image if available, and count for description
-  const [firstHotel, hotelCount] = await Promise.all([
+  // Fetch the first hotel to get a city-specific image if available, count and min price for description
+  const [firstHotel, hotelCount, minPriceHotel] = await Promise.all([
     Hotel.findOne({
       city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
       country: countryInfo.regex,
@@ -142,6 +130,12 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       country: countryInfo.regex,
       flagged: { $ne: true }
     }),
+    Hotel.findOne({
+      city: new RegExp(`^${escapeRegex(rawCity)}$`, 'i'),
+      country: countryInfo.regex,
+      flagged: { $ne: true },
+      price: { $exists: true, $ne: '' }
+    }).sort({ price: 1 }).select('price'),
   ]);
 
   if (hotelCount === 0) {
@@ -158,19 +152,16 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     ? imageUrl(firstHotel.image.split('/').pop() || '')
     : DEFAULT_HOTEL_IMAGE;
 
-  // SERP-Optimized Title (45-56 chars): Front-load exact high-volume search query
-  // For USA: "Hotels with Jacuzzi in Room in [City]" is 3.5x higher volume than "bathtub"
-  // Strictly capped under 58 chars to eliminate Google Mobile and Desktop title truncation
+  // SERP-Optimized Title (45-58 chars): Front-load exact high-volume search query
   const currentYear = new Date().getFullYear();
-  let pageTitle = `Hotels with Bathtub in ${cityName}: Top ${hotelCount} Stays (${currentYear})`;
-  if (countrySlug === 'usa') {
-    const usCandidate = `Hotels with Jacuzzi in Room in ${cityName}: Top ${hotelCount} (${currentYear})`;
-    pageTitle = usCandidate.length <= 58
-      ? usCandidate
-      : `Hotels with Jacuzzi in ${cityName}: Top ${hotelCount} (${currentYear})`;
+  let pageTitle = `Hotels with Bathtub in ${cityName}: ${hotelCount} Verified Rooms (${currentYear})`;
+  if (hotelCount === 1) {
+    pageTitle = `Hotels with Bathtub in ${cityName}: 1 Verified Room (${currentYear})`;
+  } else if (citySlug === 'new-york') {
+    pageTitle = `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
   }
 
-  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, citySlug);
+  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPriceHotel?.price);
 
 
   return {
@@ -431,11 +422,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
-    : `Hotels with Bathtub in ${cityName}: Top ${hotels.length} Stays (${currentYear})`;
+    : `Hotels with Bathtub in ${cityName}: ${hotels.length === 1 ? '1 Verified Room' : `${hotels.length} Verified Rooms`} (${currentYear})`;
 
   const pageDescription = stateConfig
     ? stateConfig.metaDescription
-    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, citySlug);
+    : getCityMetaDescription(cityName, countryName, countrySlug, hotels.length, hotels.find((h: any) => h.price)?.price);
 
   const destinationSchema = {
     "@context": "https://schema.org",

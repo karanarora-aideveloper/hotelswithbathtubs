@@ -34,10 +34,6 @@ export default function UrlFixerPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const fetchNext = useCallback(async (city = selectedCity) => {
-    setLoading(true);
-    setNewUrl('');
-    setError('');
-    setLastSaved('');
     try {
       const params = new URLSearchParams();
       if (city) params.set('city', city);
@@ -57,7 +53,7 @@ export default function UrlFixerPage() {
 
   useEffect(() => {
     fetchNext();
-  }, []);
+  }, [fetchNext]);
 
   const handleSave = async () => {
     if (!hotel || !newUrl.trim() || saving) return;

@@ -250,12 +250,6 @@ export default function HotelAnalyticsComparison({
     p.isLowest = false; // never claim a platform is cheapest: live prices are not known here
   });
 
-  // Date and Guest State for Real-Time Meta-Search Deep Linking
-  const [checkin, setCheckin] = useState<string>('');
-  const [checkout, setCheckout] = useState<string>('');
-  const [adults, setAdults] = useState<number>(2);
-  const [activeShortcut, setActiveShortcut] = useState<'weekend' | 'next-weekend' | 'next-month' | 'custom'>('weekend');
-
   const formatDateStr = (d: Date) => {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -287,11 +281,11 @@ export default function HotelAnalyticsComparison({
     return { checkin: formatDateStr(future), checkout: formatDateStr(sunday) };
   };
 
-  useEffect(() => {
-    const weekend = getUpcomingWeekend(0);
-    setCheckin(weekend.checkin);
-    setCheckout(weekend.checkout);
-  }, []);
+  // Date and Guest State for Real-Time Meta-Search Deep Linking
+  const [checkin, setCheckin] = useState<string>(() => getUpcomingWeekend(0).checkin);
+  const [checkout, setCheckout] = useState<string>(() => getUpcomingWeekend(0).checkout);
+  const [adults, setAdults] = useState<number>(2);
+  const [activeShortcut, setActiveShortcut] = useState<'weekend' | 'next-weekend' | 'next-month' | 'custom'>('weekend');
 
   const handleShortcut = (shortcut: 'weekend' | 'next-weekend' | 'next-month') => {
     setActiveShortcut(shortcut);
@@ -458,10 +452,12 @@ export default function HotelAnalyticsComparison({
             {/* Inputs: Check-in, Check-out, Guests */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 items-center">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                <label htmlFor="hotel-checkin-date" className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
                   Check-in
                 </label>
                 <input
+                  id="hotel-checkin-date"
+                  aria-label="Check-in Date"
                   type="date"
                   min={minCheckinDate}
                   value={checkin}
@@ -471,10 +467,12 @@ export default function HotelAnalyticsComparison({
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                <label htmlFor="hotel-checkout-date" className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
                   Check-out
                 </label>
                 <input
+                  id="hotel-checkout-date"
+                  aria-label="Check-out Date"
                   type="date"
                   min={checkin || minCheckinDate}
                   value={checkout}
@@ -484,10 +482,12 @@ export default function HotelAnalyticsComparison({
               </div>
 
               <div className="col-span-2 sm:col-span-1">
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
+                <label htmlFor="hotel-guests-select" className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-0.5">
                   Guests
                 </label>
                 <select
+                  id="hotel-guests-select"
+                  aria-label="Number of Guests"
                   value={adults}
                   onChange={(e) => setAdults(Number(e.target.value))}
                   className="w-full text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-[#5b8296]"

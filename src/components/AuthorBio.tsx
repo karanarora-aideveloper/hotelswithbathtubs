@@ -36,9 +36,13 @@ export default function AuthorBio() {
               Contact Desk
             </Link>
             <span className="hidden sm:inline">&bull;</span>
-            <a href="mailto:editorial@hotelswithbathtubs.com" className="hover:text-accent underline transition-colors break-all">
-              editorial@hotelswithbathtubs.com
-            </a>
+            <a
+              href="mailto:editorial@hotelswithbathtubs.com"
+              className="hover:text-accent underline transition-colors break-all"
+              dangerouslySetInnerHTML={{
+                __html: '<!--email_off-->editorial@hotelswithbathtubs.com<!--/email_off-->',
+              }}
+            />
           </div>
         </div>
       </div>

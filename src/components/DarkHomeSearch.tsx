@@ -53,8 +53,6 @@ export default function DarkHomeSearch() {
       })
       .then((data: SearchData) => setSearchData(data))
       .catch(console.error);
-
-    setIsNavigating(false);
   }, []);
 
   useEffect(() => {

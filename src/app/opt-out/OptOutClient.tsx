@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { isUserExcluded, setUserExcluded } from '@/lib/exclusion';
 
 export default function OptOutClient() {
-  const [excluded, setExcluded] = useState<boolean | null>(null);
+  const [excluded, setExcluded] = useState<boolean | null>(() => {
+    if (typeof window !== 'undefined') {
+      return isUserExcluded();
+    }
+    return false;
+  });
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  useEffect(() => {
-    setExcluded(isUserExcluded());
-  }, []);
 
   const handleToggle = (enableExclusion: boolean) => {
     setUserExcluded(enableExclusion);
@@ -51,7 +52,7 @@ export default function OptOutClient() {
               Internal Traffic Exclusion
             </h1>
             <p className="text-sm text-gray-500">
-              Exclude your personal device from Google Analytics, PostHog recordings, and Mixpanel
+              Exclude your personal device from Google Analytics (GA4) and the affiliate click log
             </p>
           </div>
         </div>
@@ -75,7 +76,7 @@ export default function OptOutClient() {
                 </p>
                 <p className="text-xs mt-0.5 opacity-90">
                   {excluded
-                    ? 'None of your visits, clicks, searches, or session recordings will reach GA4, PostHog, or Mixpanel.'
+                    ? 'None of your visits, clicks, searches, or events will reach GA4 or the affiliate click log.'
                     : 'Your visits will be recorded as regular user traffic in analytics reports.'}
                 </p>
               </div>
@@ -125,7 +126,7 @@ export default function OptOutClient() {
               ), and that device will be automatically excluded.
             </li>
             <li>
-              <strong className="text-gray-700">What gets blocked:</strong> GA4 pageviews and events, PostHog session recordings & heatmaps, and Mixpanel outbound click tracking.
+              <strong className="text-gray-700">What gets blocked:</strong> GA4 pageviews, churn telemetry events, and internal affiliate click log entries.
             </li>
           </ul>
 

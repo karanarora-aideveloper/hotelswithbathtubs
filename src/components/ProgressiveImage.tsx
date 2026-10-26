@@ -30,12 +30,13 @@ export default function ProgressiveImage({
   className = '',
   containerClassName = '',
 }: ProgressiveImageProps) {
+  const [prevSrc, setPrevSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
+  if (prevSrc !== src) {
+    setPrevSrc(src);
     setImgError(false);
-  }, [src]);
+  }
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const resolvedUrl = imgError ? DEFAULT_HOTEL_IMAGE : imageUrl(src);
   const [isLoaded, setIsLoaded] = useState<boolean>(() => loadedImageCache.has(resolvedUrl));

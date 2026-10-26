@@ -1,3 +1,5 @@
+import { CITY_COUNTRY_MAP, CITY_ALIASES } from './cityMap';
+
 interface EventContext {
   request: Request;
   env?: Record<string, any>;
@@ -20,6 +22,13 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(target.toString(), 301);
   }
 
+  // Uppercase URL normalization: 301 redirect any URL with uppercase letters to lowercase
+  if (/[A-Z]/.test(url.pathname) && !url.pathname.startsWith('/api')) {
+    const target = new URL(context.request.url);
+    target.pathname = url.pathname.toLowerCase();
+    return Response.redirect(target.toString(), 301);
+  }
+
   // Trailing slash normalization: 301 redirect /path/ to /path (except root / and /api)
   if (url.pathname.length > 1 && url.pathname.endsWith('/') && !url.pathname.startsWith('/api')) {
     const target = new URL(context.request.url);
@@ -27,11 +36,49 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(target.toString(), 301);
   }
 
+  // Answer Next.js segment prefetch trees (__next.*) with an empty-body 404
+  // Prevents serving the 66 KB HTML 404 page repeatedly on every card prefetch
+  if (url.pathname.includes('/__next.')) {
+    return new Response(null, {
+      status: 404,
+      statusText: 'Not Found',
+      headers: {
+        'content-type': 'text/plain',
+        'cache-control': 'public, max-age=86400',
+      },
+    });
+  }
+
   const response = await context.next();
 
-  // If 404 on a 3-segment route (/country/city/hotel-slug), check alternate slug variations
+  // On 404: check legacy naked city URLs, aliases, and 3-part hotel slugs
   if (response.status === 404) {
     const segments = url.pathname.split('/').filter(Boolean);
+
+    // 1-segment route (e.g. /kochi, /bengaluru, /paris)
+    if (segments.length === 1 && segments[0] !== 'api' && segments[0] !== '_next') {
+      const slug = segments[0].toLowerCase();
+      if (CITY_ALIASES[slug]) {
+        const alias = CITY_ALIASES[slug];
+        return Response.redirect(new URL(`/${alias.country}/${alias.city}`, url.origin).toString(), 301);
+      }
+      if (CITY_COUNTRY_MAP[slug]) {
+        const country = CITY_COUNTRY_MAP[slug];
+        return Response.redirect(new URL(`/${country}/${slug}`, url.origin).toString(), 301);
+      }
+    }
+
+    // 2-segment route with city alias (e.g. /india/bengaluru -> /india/bangalore)
+    if (segments.length === 2 && segments[0] !== 'api' && segments[0] !== '_next') {
+      const [country, city] = segments;
+      const cityLower = city.toLowerCase();
+      if (CITY_ALIASES[cityLower]) {
+        const alias = CITY_ALIASES[cityLower];
+        return Response.redirect(new URL(`/${country.toLowerCase()}/${alias.city}`, url.origin).toString(), 301);
+      }
+    }
+
+    // 3-segment route (/country/city/hotel-slug), check alternate slug variations
     if (segments.length === 3 && segments[0] !== 'api' && segments[0] !== '_next') {
       const [country, city, hotelSlug] = segments;
       const citySlug = city.toLowerCase();
@@ -41,7 +88,6 @@ export async function onRequest(context: EventContext): Promise<Response> {
         const candidates: string[] = [];
 
         // Scenario 1: Suffix slug requested (e.g. broncks-apartment-1-torshavn or capella-bangkok)
-        // Canonical page may be city-prefixed (torshavn-broncks-apartment-1), bare, or double-suffixed (capella-bangkok-bangkok)
         if (hotelSlug.endsWith(`-${citySlug}`)) {
           const stripped = hotelSlug.slice(0, -(citySlug.length + 1));
           if (stripped) {
@@ -51,7 +97,6 @@ export async function onRequest(context: EventContext): Promise<Response> {
           candidates.push(`/${country}/${city}/${hotelSlug}-${citySlug}`);
         }
         // Scenario 2: City-prefixed slug requested (e.g. torshavn-hotel-name)
-        // Canonical page may be city-suffixed (hotel-name-torshavn) or bare
         else if (hotelSlug.startsWith(`${citySlug}-`)) {
           const stripped = hotelSlug.slice(citySlug.length + 1);
           if (stripped) {
@@ -80,15 +125,11 @@ export async function onRequest(context: EventContext): Promise<Response> {
             }
           }
         }
-        // Without the ASSETS fetcher we cannot confirm a candidate exists, so fall through to the
-        // 404 instead of permanently redirecting to a guessed page.
       }
     }
   }
 
   // Attach Edge caching headers for HTML pages:
-  // Must revalidate so clients always get latest JS chunk hashes from new deployments
-  // Never cache 404/error statuses or use aggressive s-maxage on HTML (prevents ChunkLoadError)
   const contentType = response.headers.get('content-type') || '';
   if (contentType.includes('text/html')) {
     // Protect against 304/204 response body construction errors in Cloudflare Workers

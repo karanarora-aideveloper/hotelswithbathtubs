@@ -4,23 +4,19 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useFavorites } from '@/components/Favorites';
+import { useFavorites, useMounted } from '@/components/Favorites';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setIsOpen(false);
+  }
   const { favorites } = useFavorites();
   const favCount = mounted ? favorites.length : 0;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Close mobile menu on route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
 
   // Handle escape key to close menu
   useEffect(() => {

@@ -65,8 +65,6 @@ export default function HomeSearch() {
         setSearchData(data);
       })
       .catch(console.error);
-
-    setIsNavigating(false);
   }, []);
 
   // Handle clicking outside the search component

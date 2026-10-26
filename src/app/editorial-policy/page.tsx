@@ -3,7 +3,7 @@ import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
+  title: 'Editorial Policy & Verification Standards',
   description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
   alternates: {
     canonical: '/editorial-policy',
@@ -13,7 +13,21 @@ export const metadata: Metadata = {
     description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
     url: 'https://www.hotelswithbathtubs.com/editorial-policy',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Editorial Policy & Verification Standards - Hotels With Bathtubs',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
+    description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 

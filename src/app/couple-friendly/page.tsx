@@ -16,17 +16,31 @@ export const revalidate = 86400; // Daily revalidation
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (${currentYear} Guide)`,
+  title: 'Couple-Friendly Hotels with Bathtubs',
   description: 'Hand-picked couple-friendly hotels and romantic suites featuring guaranteed private in-room bathtubs and jacuzzis. Unmarried couples welcome, 100% private.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/couple-friendly',
   },
   openGraph: {
-    title: `Couple-Friendly Hotels with Private Bathtubs & Jacuzzis (${currentYear})`,
+    title: `Couple-Friendly Hotels with Bathtubs (${currentYear})`,
     description: 'Discover verified romantic hotels and suites with private in-room bathtubs & jacuzzis. Safe, welcoming, and judgment-free stays for couples.',
     url: 'https://www.hotelswithbathtubs.com/couple-friendly',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Couple-Friendly Hotels with Bathtubs',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Couple-Friendly Hotels with Bathtubs (${currentYear})`,
+    description: 'Discover verified romantic hotels and suites with private in-room bathtubs & jacuzzis.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
 

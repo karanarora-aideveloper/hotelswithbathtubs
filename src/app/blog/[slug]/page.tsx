@@ -57,14 +57,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const blog = await Blog.findOne({ slug: resolvedParams.slug, published: true });
 
   if (blog) {
-    const title = blog.title;
+    let title = blog.title;
+    if (title.length > 60) {
+      const parts = title.split(/[:|–—]/);
+      if (parts[0] && parts[0].trim().length >= 25 && parts[0].trim().length <= 60) {
+        title = parts[0].trim();
+      }
+    }
     const rawDesc = blog.excerpt || `Read our curated travel guide: ${blog.title}. Discover top romantic hotels with bathtubs and jacuzzis.`;
     // Cap at 155 chars to prevent Google from rewriting the snippet
     const description = rawDesc.length > 155 ? rawDesc.substring(0, 152) + '...' : rawDesc;
-    const ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
+    let ogImage = blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE;
+
+    // Fix Item 9: Ensure non-Delhi blog posts do not use Leela Palace New Delhi photo
+    if (ogImage.includes('leela-palace-new-delhi')) {
+      const isDelhi = /delhi/i.test(blog.slug) || /delhi/i.test(blog.title);
+      if (!isDelhi) {
+        let targetCity: string | null = null;
+        for (const [alias, canonical] of Object.entries(CITY_ALIASES)) {
+          if (new RegExp(`\\b${escapeRegex(alias)}\\b`, 'i').test(blog.slug) || new RegExp(`\\b${escapeRegex(alias)}\\b`, 'i').test(blog.title)) {
+            targetCity = canonical;
+            break;
+          }
+        }
+        if (!targetCity) {
+          const matched = blog.slug.match(/(miami|lucknow|gurgaon|bhopal|kolkata|bangalore|munnar|manali|rishikesh|goa|mumbai|jaipur|udaipur)/i);
+          if (matched) targetCity = matched[1];
+        }
+        if (targetCity) {
+          const sampleHotel = await Hotel.findOne({
+            city: new RegExp(`^${escapeRegex(targetCity)}$`, 'i'),
+            image: { $exists: true, $ne: '' },
+            flagged: { $ne: true }
+          }).select('image');
+          if (sampleHotel?.image) {
+            ogImage = imageUrl(sampleHotel.image);
+          }
+        }
+      }
+    }
 
     return {
-      title,
+      title: {
+        absolute: title.includes('Hotels With Bathtubs') ? title : `${title} | Hotels With Bathtubs`,
+      },
       description,
       alternates: {
         canonical: `/blog/${resolvedParams.slug}`,
@@ -115,8 +151,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     published: true 
   }).limit(3).sort({ createdAt: -1 });
 
-  // Convert markdown to HTML (also strips duplicate markdown H1)
-  const htmlContent = markdownToHtml(blog.content);
+  // Convert markdown to HTML (also strips duplicate markdown H1 & fixes legacy broken internal links)
+  const htmlContent = markdownToHtml((blog.content || '').replace(/\/india\/mahipalpur\b/g, '/india/delhi'));
 
   // Determine if this blog is strongly associated with a specific city
   // by checking if the title or slug contains a known city that we have hotels for.
@@ -371,30 +407,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </header>
 
-            {blog.image && (
-              <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs group">
-                <FallbackImg
-                  src={imageUrl(blog.image)}
-                  alt={blog.title}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  className="object-cover w-full h-full"
-                  />
-                <a
-                  href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(`https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`)}&media=${encodeURIComponent(imageUrl(blog.image))}&description=${encodeURIComponent(`${blog.title} - Read our curated guide on HotelsWithBathtubs.com`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-4 right-4 bg-red-600/95 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 z-10 transition-all opacity-90 sm:opacity-0 group-hover:opacity-100"
-                  title="Save to Pinterest"
-                >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
-                  </svg>
-                  <span>Save to Pinterest</span>
-                </a>
-              </div>
-            )}
+            {(() => {
+              let displayImage = blog.image;
+              if (displayImage && displayImage.includes('leela-palace-new-delhi') && matchedCity && !/delhi/i.test(matchedCity)) {
+                if (featuredHotels.length > 0 && featuredHotels[0].image) {
+                  displayImage = featuredHotels[0].image;
+                }
+              }
+              return displayImage ? (
+                <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs group">
+                  <FallbackImg
+                    src={imageUrl(displayImage)}
+                    alt={blog.title}
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                    className="object-cover w-full h-full"
+                    />
+                  <a
+                    href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(`https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`)}&media=${encodeURIComponent(imageUrl(displayImage))}&description=${encodeURIComponent(`${blog.title} - Read our curated guide on HotelsWithBathtubs.com`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 bg-red-600/95 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 z-10 transition-all opacity-90 sm:opacity-0 group-hover:opacity-100"
+                    title="Save to Pinterest"
+                  >
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                    </svg>
+                    <span>Save to Pinterest</span>
+                  </a>
+                </div>
+              ) : null;
+            })()}
 
             {/* Contextual Directory Authority Bridge Card (Resolves Cannibalization & Boosts City Rankings) */}
             {matchedCity && matchedCityCount > 0 && (
@@ -403,9 +447,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <span className="text-2xl mt-0.5">🛁</span>
                   <div>
                     <span className="text-2xs font-bold text-accent uppercase tracking-wider">Verified Live Inventory</span>
-                    <h3 className="font-heading text-sm sm:text-base font-bold text-accent-secondary mt-0.5">
+                    <h2 className="font-heading text-sm sm:text-base font-bold text-accent-secondary mt-0.5">
                       Explore All {matchedCityCount}+ Hotels with Bathtubs in {matchedCity}
-                    </h3>
+                    </h2>
                     <p className="text-xs text-text-muted mt-0.5">
                       Looking for confirmed in-room jacuzzi suites, real guest photos, and live room rates?
                     </p>
@@ -413,6 +457,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
                 <Link
                   href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                  prefetch={false}
                   className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap shadow-xs transition-all flex-shrink-0"
                 >
                   <span>Browse {matchedCity} Directory</span>
@@ -428,9 +473,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {!hasMarkdownFaq && effectiveFaqs.length > 0 && (
               <section className="mt-12 pt-8 border-t border-border">
-                <h3 className="font-heading text-2xl font-bold text-accent-secondary mb-6">
+                <h2 className="font-heading text-2xl font-bold text-accent-secondary mb-6">
                   Frequently Asked Questions
-                </h3>
+                </h2>
                 <div className="space-y-3.5">
                   {effectiveFaqs.map(({ q, a }) => (
                     <details key={q} className="group border border-border rounded-xl overflow-hidden bg-bg-main shadow-2xs">
@@ -457,12 +502,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
                       Top Verified Picks
                     </span>
-                    <h3 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mt-2">
+                    <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mt-2">
                       Featured Bathtub Hotels in {matchedCity}
-                    </h3>
+                    </h2>
                   </div>
                   <Link
                     href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                    prefetch={false}
                     className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
                   >
                     <span>View all {matchedCityCount}+ stays</span>
@@ -496,9 +542,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                           <div className="p-3.5">
                             <Link href={hotelUrl} className="block group">
-                              <h4 className="font-heading text-sm font-bold text-gray-900 group-hover:text-accent transition-colors line-clamp-1">
+                              <h3 className="font-heading text-sm font-bold text-gray-900 group-hover:text-accent transition-colors line-clamp-1">
                                 {h.name}
-                              </h4>
+                              </h3>
                             </Link>
                             <p className="text-2xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-1 font-semibold border border-emerald-100">
                               🛁 {h.roomType || 'Private In-Room Bathtub'}

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
-import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
@@ -88,6 +87,57 @@ const colorStyles: Record<string, string> = {
   gray: 'bg-gray-100 text-gray-800 border-gray-200',
 };
 
+function getCalculatedDatePills() {
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
+  const fmt = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const fmtShort = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  // 1. This Weekend
+  let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+  if (daysUntilFriday === 0 && today.getHours() >= 18) daysUntilFriday = 7;
+  const thisFri = new Date(today);
+  thisFri.setDate(today.getDate() + daysUntilFriday);
+  const thisSun = new Date(thisFri);
+  thisSun.setDate(thisFri.getDate() + 2);
+
+  // 2. Next Weekend (Popular)
+  const daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
+  const nextFri = new Date(today);
+  nextFri.setDate(today.getDate() + daysUntilNextFriday);
+  const nextSun = new Date(nextFri);
+  nextSun.setDate(nextFri.getDate() + 2);
+
+  // 3. Midweek (Tue–Thu)
+  let daysUntilTuesday = (2 - dayOfWeek + 7) % 7;
+  if (daysUntilTuesday === 0) daysUntilTuesday = 7;
+  const tue = new Date(today);
+  tue.setDate(today.getDate() + daysUntilTuesday);
+  const thu = new Date(tue);
+  thu.setDate(tue.getDate() + 2);
+
+  return {
+    'this-weekend': {
+      checkin: fmt(thisFri),
+      checkout: fmt(thisSun),
+      label: 'This Weekend',
+      range: `${fmtShort(thisFri)}–${fmtShort(thisSun)}`,
+    },
+    'next-weekend': {
+      checkin: fmt(nextFri),
+      checkout: fmt(nextSun),
+      label: 'Next Weekend (Popular)',
+      range: `${fmtShort(nextFri)}–${fmtShort(nextSun)}`,
+    },
+    midweek: {
+      checkin: fmt(tue),
+      checkout: fmt(thu),
+      label: 'Midweek (Tue–Thu)',
+      range: `${fmtShort(tue)}–${fmtShort(thu)}`,
+    },
+  };
+}
+
 export default function CityHotelsClient({
   hotels,
   cityName,
@@ -106,69 +156,15 @@ export default function CityHotelsClient({
   const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
   const [dateOption, setDateOption] = useState<'this-weekend' | 'next-weekend' | 'midweek' | 'custom'>('next-weekend');
-  const [customCheckin, setCustomCheckin] = useState<string>('');
-  const [customCheckout, setCustomCheckout] = useState<string>('');
+  const [customCheckin, setCustomCheckin] = useState<string>(() => getCalculatedDatePills()['next-weekend'].checkin);
+  const [customCheckout, setCustomCheckout] = useState<string>(() => getCalculatedDatePills()['next-weekend'].checkout);
   const [showCustomPicker, setShowCustomPicker] = useState<boolean>(false);
-  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(undefined);
+  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(() => {
+    const nextWk = getCalculatedDatePills()['next-weekend'];
+    return { checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 };
+  });
 
-  // Pre-calculate human readable ranges for all quick date pills
-  const calculatedDatePills = useMemo(() => {
-    const today = new Date();
-    const dayOfWeek = today.getDay(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
-    const fmt = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-    const fmtShort = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-    // 1. This Weekend
-    let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
-    if (daysUntilFriday === 0 && today.getHours() >= 18) daysUntilFriday = 7;
-    const thisFri = new Date(today);
-    thisFri.setDate(today.getDate() + daysUntilFriday);
-    const thisSun = new Date(thisFri);
-    thisSun.setDate(thisFri.getDate() + 2);
-
-    // 2. Next Weekend (Popular)
-    const daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
-    const nextFri = new Date(today);
-    nextFri.setDate(today.getDate() + daysUntilNextFriday);
-    const nextSun = new Date(nextFri);
-    nextSun.setDate(nextFri.getDate() + 2);
-
-    // 3. Midweek (Tue–Thu)
-    let daysUntilTuesday = (2 - dayOfWeek + 7) % 7;
-    if (daysUntilTuesday === 0) daysUntilTuesday = 7;
-    const tue = new Date(today);
-    tue.setDate(today.getDate() + daysUntilTuesday);
-    const thu = new Date(tue);
-    thu.setDate(tue.getDate() + 2);
-
-    return {
-      'this-weekend': {
-        checkin: fmt(thisFri),
-        checkout: fmt(thisSun),
-        label: 'This Weekend',
-        range: `${fmtShort(thisFri)}–${fmtShort(thisSun)}`,
-      },
-      'next-weekend': {
-        checkin: fmt(nextFri),
-        checkout: fmt(nextSun),
-        label: 'Next Weekend (Popular)',
-        range: `${fmtShort(nextFri)}–${fmtShort(nextSun)}`,
-      },
-      midweek: {
-        checkin: fmt(tue),
-        checkout: fmt(thu),
-        label: 'Midweek (Tue–Thu)',
-        range: `${fmtShort(tue)}–${fmtShort(thu)}`,
-      },
-    };
-  }, []);
-
-  useEffect(() => {
-    const nextWk = calculatedDatePills['next-weekend'];
-    setWeekendDates({ checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 });
-    setCustomCheckin(nextWk.checkin);
-    setCustomCheckout(nextWk.checkout);
-  }, [calculatedDatePills]);
+  const calculatedDatePills = useMemo(() => getCalculatedDatePills(), []);
 
   const handleSelectDateOption = useCallback((option: 'this-weekend' | 'next-weekend' | 'midweek') => {
     setDateOption(option);
@@ -462,10 +458,12 @@ export default function CityHotelsClient({
     return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
   }, [uniqueHotels]);
 
-  useEffect(() => {
-    // Reset visible count when filters change
+  const filterKey = `${searchTerm}|${selectedFilter}|${selectedTubCategory}|${sortBy}|${priceRange}|${stayStyle}|${selectedPerks.join(',')}|${selectedCity}`;
+  const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
+  if (prevFilterKey !== filterKey) {
+    setPrevFilterKey(filterKey);
     setVisibleCount(24);
-  }, [searchTerm, selectedFilter, selectedTubCategory, sortBy, priceRange, stayStyle, selectedPerks, selectedCity]);
+  }
 
   const filteredHotels = useMemo(() => {
     const result = uniqueHotels.filter((h) => {
@@ -1431,7 +1429,11 @@ export default function CityHotelsClient({
                 {/* Card Content */}
                 <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
                   {/* Hotel Title */}
-                  <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} className="group/link mb-1">
+                  <Link
+                    href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
+                    prefetch={false}
+                    className="group/link mb-1"
+                  >
                     <h2 className="text-sm sm:text-[15px] font-bold text-gray-900 leading-snug line-clamp-1 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
                   </Link>
 
@@ -1453,7 +1455,11 @@ export default function CityHotelsClient({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">{h.neighborhood ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
+                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">
+                      {h.neighborhood && !/^Prime .* Enclave/i.test(h.neighborhood)
+                        ? `${h.neighborhood}, ${h.city || cityName}`
+                        : `${h.city || cityName}, ${countryName}`}
+                    </span>
                     {h.landmarkDistance && (
                       <span className="hidden sm:inline text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                         {h.landmarkDistance}

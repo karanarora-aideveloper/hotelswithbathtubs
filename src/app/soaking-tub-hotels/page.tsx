@@ -14,17 +14,31 @@ export const dynamic = 'force-static';
 const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
-  title: `Hotels with Soaking Tub in Room | Deep Soaking Bath Suites (${currentYear})`,
+  title: 'Hotels with Soaking Tub in Room',
   description: 'Find verified luxury hotels with private deep soaking tubs in room, freestanding stone bathtubs, and scenic bath suites across top US & international destinations.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
   },
   openGraph: {
-    title: `Hotels with Soaking Tub in Room | Deep Soaking Bath Suites (${currentYear})`,
+    title: `Hotels with Soaking Tub in Room (${currentYear})`,
     description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
     url: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
     siteName: 'Hotels with Bathtubs',
+    images: [
+      {
+        url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Hotels with Soaking Tub in Room',
+      },
+    ],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Hotels with Soaking Tub in Room (${currentYear})`,
+    description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs.',
+    images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp'],
   },
 };
 

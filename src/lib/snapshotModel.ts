@@ -211,4 +211,5 @@ export function createSnapshotModel(file: string) {
   };
 }
 
-export const useSnapshot = () => process.env.DATA_SNAPSHOT === '1';
+export const isSnapshotMode = () => process.env.DATA_SNAPSHOT === '1';
+export const useSnapshot = isSnapshotMode;
