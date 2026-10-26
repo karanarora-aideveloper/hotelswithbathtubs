@@ -165,7 +165,7 @@ async function getSimilarHotels(countryParam: string, cityParam: string, current
     return rB - rA;
   });
 
-  return similar.slice(0, 4);
+  return similar.slice(0, 8);
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ country: string, city: string, hotel: string }> }) {
@@ -571,6 +571,63 @@ export default async function HotelDetailPage({
             countrySlug={countrySlug}
           />
 
+          {/* Bathtub facts (Server-rendered, deterministic, hotel-specific facts) */}
+          <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
+            <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-4">
+              Bathtub facts for {hotel.name}
+            </h2>
+            <div className="space-y-3 font-jakarta text-sm sm:text-[15px] text-slate-700 leading-relaxed">
+              {hotel.roomType && (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> to guarantee a private in-room bathtub. Lower room categories at this property may only offer a standard walk-in shower.</span>
+                </p>
+              )}
+
+              {hotel.tubType && (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> verified inside the private guest accommodation.</span>
+                </p>
+              )}
+
+              {hotel.rating && Number(hotel.rating) > 0 ? (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/10</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} verified guest reviews` : ' by verified travelers'}.</span>
+                </p>
+              ) : null}
+
+              {hotel.price && (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Typical benchmark rate is <strong className="font-semibold text-slate-900">{hotel.price.startsWith('~') ? hotel.price : `~${hotel.price}`}</strong> per night (rates fluctuate by season, weekend demand, and partner promotions).</span>
+                </p>
+              )}
+
+              {isValidNeighborhood(hotel.neighborhood) && (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Situated in the <strong className="font-semibold text-slate-900">{hotel.neighborhood}</strong> area of {cityName}, {countryName}.</span>
+                </p>
+              )}
+
+              {hotel.landmarkDistance && (
+                <p className="flex items-start gap-2.5">
+                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
+                  <span>Location highlight: {hotel.landmarkDistance}.</span>
+                </p>
+              )}
+
+              {hotel.bookingTip && (
+                <p className="flex items-start gap-2.5 bg-amber-50/70 border border-amber-200/60 rounded-xl p-3 text-amber-950">
+                  <span className="shrink-0 text-base">💡</span>
+                  <span><strong>Booking tip:</strong> {hotel.bookingTip}</span>
+                </p>
+              )}
+            </div>
+          </div>
+
           {/* About this Sanctuary */}
           {hotel.description && (
             <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
@@ -791,19 +848,19 @@ export default async function HotelDetailPage({
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="font-playfair text-2xl sm:text-3xl font-normal text-[#1f262d] tracking-tight">
-                More Verified Bathtub Hotels in {cityName}
+                More rooms with a bathtub in {cityName}
               </h2>
               <p className="text-sm text-slate-500 mt-1 font-jakarta">
                 Explore alternative romantic stays with guaranteed in-room bathtubs &amp; jacuzzi suites.
               </p>
             </div>
-            <Link 
+            <a 
               href={`/${countrySlug}/${citySlug}`}
               className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[#5b8296] hover:text-[#1f262d] hover:underline font-jakarta"
             >
               <span>View all in {cityName}</span>
               <span>&rarr;</span>
-            </Link>
+            </a>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
@@ -815,20 +872,19 @@ export default async function HotelDetailPage({
                   key={sim._id || idx}
                   className="bg-white/90 backdrop-blur-md rounded-2xl border border-[#5b8296]/20 shadow-2xs hover:shadow-md hover:border-[#5b8296] transition-all flex flex-col group overflow-hidden"
                 >
-                  <div className="relative aspect-[4/3] w-full bg-slate-100 overflow-hidden">
-                    <Image
+                  <a href={simUrl} className="block relative aspect-[4/3] w-full bg-slate-100 overflow-hidden">
+                    <img
                       src={imageUrl(sim.image)}
                       alt={sim.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute top-2.5 left-2.5">
                       <span className="bg-white/90 backdrop-blur-md text-[#1f262d] border border-white/40 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs font-jakarta">
                         <span className="text-emerald-700 font-bold">✓</span> Verified Tub
                       </span>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
@@ -845,9 +901,9 @@ export default async function HotelDetailPage({
                           )}
                         </div>
                       ) : null}
-                      <Link href={simUrl} className="font-playfair font-semibold text-base text-[#1f262d] group-hover:text-[#5b8296] transition-colors line-clamp-2 mb-2 leading-snug">
+                      <a href={simUrl} className="font-playfair font-semibold text-base text-[#1f262d] group-hover:text-[#5b8296] transition-colors line-clamp-2 mb-2 leading-snug">
                         {sim.name}
-                      </Link>
+                      </a>
                       {sim.tubType && (
                         <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#8eaab9]/15 text-[#1f262d] font-semibold text-[10px] rounded-full border border-[#5b8296]/25 mb-3 font-jakarta">
                           <span>🛁</span> {sim.tubType}
@@ -864,12 +920,12 @@ export default async function HotelDetailPage({
                       ) : (
                         <span className="text-[11px] text-slate-400">Usual Rates on OTA</span>
                       )}
-                      <Link
+                      <a
                         href={simUrl}
                         className="px-3 py-1.5 bg-[#1f262d] hover:bg-[#2c3640] text-white font-semibold text-xs rounded-xl transition-colors shadow-2xs"
                       >
                         Inspect Stay
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -878,12 +934,12 @@ export default async function HotelDetailPage({
           </div>
 
           <div className="mt-8 text-center sm:hidden">
-            <Link 
+            <a 
               href={`/${countrySlug}/${citySlug}`}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-800 font-semibold text-sm rounded-xl hover:bg-slate-200 transition-colors w-full font-jakarta"
             >
               <span>View all verified stays in {cityName} &rarr;</span>
-            </Link>
+            </a>
           </div>
         </section>
       )}
