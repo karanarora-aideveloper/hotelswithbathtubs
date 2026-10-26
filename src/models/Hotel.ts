@@ -8,6 +8,7 @@ export interface IHotel extends mongoose.Document {
   country: string;
   url: string;
   agodaUrl?: string;
+  partnerImages?: string[]; // partner CDN photo URLs (decision D8); R2 copies are the fallback
   bookingUrl?: string;
   expediaUrl?: string;
   hotelsComUrl?: string;
@@ -67,6 +68,10 @@ const HotelSchema = new mongoose.Schema<IHotel>({
   },
   agodaUrl: {
     type: String,
+  },
+  partnerImages: {
+    type: [String],
+    default: undefined,
   },
   airbnbUrl: {
     type: String,
