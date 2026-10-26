@@ -150,7 +150,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
     
     const blogRoutes = blogs
-      .filter(blog => blog.slug && blog.slug.trim() !== '')
+      .filter(blog => blog.slug && blog.slug.trim() !== '' && blog.slug !== 'kolkata-hotels-with-bathtub-couples-guide')
       .map(blog => ({
         url: `${baseUrl}/blog/${slugify(blog.slug)}`,
         ...(blog.updatedAt ? { lastModified: new Date(blog.updatedAt) } : {}),

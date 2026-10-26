@@ -87,10 +87,6 @@ export const redirects = [
   { source: '/hotels-with-bathtub-in-ooty', destination: '/india/ooty', permanent: true },
   { source: '/hotels-with-bathtub-in-ooty/', destination: '/india/ooty', permanent: true },
 
-  // Sitemaps
-  { source: '/sitemap_index.xml', destination: '/sitemap_index.xml', permanent: false },
-  { source: '/sitemap_index.xml/', destination: '/sitemap_index.xml', permanent: false },
-
   // Naked city legacy paths → canonical /india/[city]
   { source: '/delhi', destination: '/india/delhi', permanent: true },
   { source: '/delhi/', destination: '/india/delhi', permanent: true },
