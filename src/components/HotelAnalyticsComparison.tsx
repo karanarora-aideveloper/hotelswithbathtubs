@@ -601,6 +601,7 @@ export default function HotelAnalyticsComparison({
           </div>
           <Link
             href="/affiliate-policy"
+            prefetch={false}
             className="text-[#1a6fde] hover:underline font-medium text-2xs sm:text-xs shrink-0 self-start sm:self-auto"
           >
             Editorial Policy &rarr;

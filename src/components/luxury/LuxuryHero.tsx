@@ -371,6 +371,7 @@ export default function LuxuryHero() {
               <Link
                 key={city.name}
                 href={city.href}
+                prefetch={false}
                 className="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xs text-white text-xs font-medium transition-colors border border-white/15"
               >
                 {city.name}

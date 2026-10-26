@@ -287,6 +287,7 @@ export default function HomeSearch() {
                       <Link
                         key={sug.name}
                         href={sug.url}
+                        prefetch={false}
                         onClick={() => setIsOpen(false)}
                         className="text-xs font-bold px-3 py-1.5 bg-slate-100 hover:bg-[#1a6fde] hover:text-white text-slate-700 rounded-lg transition-colors"
                       >
@@ -300,7 +301,7 @@ export default function HomeSearch() {
                   <Link
                     key={`${item.type}-${item.url}`}
                     href={item.url}
-                    prefetch={true}
+                    prefetch={false}
                     onMouseDown={(e) => e.stopPropagation()}
                     onClick={() => {
                       setIsOpen(false);

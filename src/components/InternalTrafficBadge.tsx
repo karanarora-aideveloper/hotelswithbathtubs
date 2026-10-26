@@ -50,6 +50,7 @@ export default function InternalTrafficBadge() {
           <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px]">
             <Link
               href="/opt-out"
+              prefetch={false}
               className="text-sky-400 hover:text-sky-300 hover:underline font-medium"
             >
               Settings & Toggle &rarr;

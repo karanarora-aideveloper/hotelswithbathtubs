@@ -260,6 +260,7 @@ export default function DarkHomeSearch() {
                       <Link
                         key={sug.name}
                         href={sug.url}
+                        prefetch={false}
                         onClick={() => setIsOpen(false)}
                         className="text-xs font-semibold px-3 py-1.5 bg-slate-800 hover:bg-accent/20 hover:text-accent text-slate-200 rounded-lg transition-colors"
                       >
@@ -273,7 +274,7 @@ export default function DarkHomeSearch() {
                   <Link
                     key={`${item.type}-${item.url}`}
                     href={item.url}
-                    prefetch={true}
+                    prefetch={false}
                     onMouseDown={(e) => e.stopPropagation()}
                     onClick={() => {
                       setIsOpen(false);

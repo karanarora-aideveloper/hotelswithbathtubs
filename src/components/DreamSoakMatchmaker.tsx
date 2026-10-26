@@ -993,6 +993,7 @@ export default function DreamSoakMatchmaker({
                         {/* Hotel Name */}
                         <Link
                           href={hotel.pageUrl}
+                          prefetch={false}
                           className="font-heading font-bold text-gray-900 text-lg hover:text-[#1a6fde] transition-colors line-clamp-1 block mb-2"
                         >
                           {hotel.name}
@@ -1043,6 +1044,7 @@ export default function DreamSoakMatchmaker({
                       <div className="flex items-center gap-2">
                         <Link
                           href={hotel.pageUrl}
+                          prefetch={false}
                           className="px-3 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-semibold transition-colors"
                           title="View hotel photos and tub verification details"
                         >
@@ -1063,6 +1065,7 @@ export default function DreamSoakMatchmaker({
                         ) : (
                           <Link
                             href={hotel.pageUrl}
+                            prefetch={false}
                             className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1"
                           >
                             <span>Check Rates</span>

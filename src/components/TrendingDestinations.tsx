@@ -37,6 +37,7 @@ export default function TrendingDestinations({ currentCity }: { currentCity: str
           <Link
             key={dest.slug}
             href={dest.slug}
+            prefetch={false}
             className="block p-4 rounded-xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow group"
           >
             <span className="block font-bold text-accent-secondary group-hover:text-accent transition-colors">

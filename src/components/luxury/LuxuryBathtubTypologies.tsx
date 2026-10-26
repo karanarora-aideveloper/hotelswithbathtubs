@@ -150,6 +150,7 @@ export default function LuxuryBathtubTypologies({ initialIsIndia = true }: Luxur
           <Link
             key={item.id}
             href={item.href}
+            prefetch={false}
             className="group flex flex-col bg-[#F5F2EC] rounded-2xl overflow-hidden border border-[#E5E1D8] transition-all duration-300 hover:shadow-lg hover:border-[#C5A880]/60 hover:-translate-y-1"
           >
             {/* Image Box */}
