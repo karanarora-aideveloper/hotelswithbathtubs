@@ -12,6 +12,7 @@ import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } f
 import { generateCityPageContent, cityIntroContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
+import { isValidNeighborhood } from '@/lib/location';
 
 export const revalidate = false;
 
@@ -476,7 +477,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? 'valid government photo IDs (Aadhaar, Passport, or Driving License)'
     : 'valid government-issued photo ID (Passport or national ID card)';
 
-  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(Boolean))) as string[];
+  const neighborhoods = Array.from(new Set(hotels.map(h => h.neighborhood).filter(isValidNeighborhood))) as string[];
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 

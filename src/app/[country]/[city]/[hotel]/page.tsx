@@ -11,6 +11,7 @@ import { escapeRegex, titleCase, slugify, resolveCountry, getCountryCurrency } f
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
+import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -279,7 +280,7 @@ export default async function HotelDetailPage({
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {
       "@type": "PostalAddress",
-      ...(hotel.streetAddress ? { "streetAddress": hotel.streetAddress } : {}),
+      ...(isValidStreetAddress(hotel.streetAddress) ? { "streetAddress": hotel.streetAddress } : {}),
       "addressLocality": cityName,
       "addressCountry": countryName,
       ...(hotel.postalCode ? { "postalCode": hotel.postalCode } : {})
@@ -532,7 +533,7 @@ export default async function HotelDetailPage({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <span>{hotel.neighborhood ? `${hotel.neighborhood}, ${cityName}` : cityName}, {countryName}</span>
+                <span>{isValidNeighborhood(hotel.neighborhood) ? `${hotel.neighborhood}, ${cityName}` : cityName}, {countryName}</span>
                 {hotel.landmarkDistance && (
                   <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full ml-1">
                     {hotel.landmarkDistance}

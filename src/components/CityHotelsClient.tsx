@@ -7,6 +7,7 @@ import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify } from '@/lib/utils';
+import { isValidNeighborhood } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
@@ -1454,7 +1455,7 @@ export default function CityHotelsClient({
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">{h.neighborhood ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
+                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">{isValidNeighborhood(h.neighborhood) ? `${h.neighborhood}, ${h.city || cityName}` : `${h.city || cityName}, ${countryName}`}</span>
                     {h.landmarkDistance && (
                       <span className="hidden sm:inline text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                         {h.landmarkDistance}
