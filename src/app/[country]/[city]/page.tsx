@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
-import { isValidNeighborhood, cleanNeighborhood, sanitizePlaceholderText } from '@/lib/location';
+import { isValidNeighborhood, cleanNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 
 export const revalidate = false;
@@ -352,7 +352,7 @@ export default async function CityHotelsPage({
     bookingTip: h.bookingTip ? truncateToWord(h.bookingTip, 120) : '',
     price: h.price,
     neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
-    landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
+    landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
     updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
   }));
 

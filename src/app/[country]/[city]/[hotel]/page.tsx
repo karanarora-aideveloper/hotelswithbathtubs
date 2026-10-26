@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCou
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
-import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText } from '@/lib/location';
+import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -45,7 +45,7 @@ async function getCachedHotelMap() {
     const cleanH = {
       ...h,
       description: sanitizePlaceholderText(h.description),
-      landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
+      landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
     };
     if (cleanH.slug) {
       map.set(cleanH.slug, cleanH);
@@ -134,7 +134,7 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
   const cleanHotel = hotel ? {
     ...hotel,
     description: sanitizePlaceholderText(hotel.description),
-    landmarkDistance: sanitizePlaceholderText(hotel.landmarkDistance),
+    landmarkDistance: cleanLandmarkDistance(hotel.landmarkDistance),
   } : null;
 
   return { hotel: cleanHotel, countryInfo, rawCity };
@@ -584,7 +584,7 @@ export default async function HotelDetailPage({
                     ? `${hotel.neighborhood}, ${cityName}`
                     : cityName}, {countryName}
                 </span>
-                {hotel.landmarkDistance && (
+                {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (
                   <span className="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full ml-1">
                     {hotel.landmarkDistance}
                   </span>
@@ -634,7 +634,7 @@ export default async function HotelDetailPage({
               hotelsComUrl: hotel.hotelsComUrl,
               vrboUrl: hotel.vrboUrl,
               neighborhood: isValidNeighborhood(hotel.neighborhood) ? hotel.neighborhood : undefined,
-              landmarkDistance: hotel.landmarkDistance,
+              landmarkDistance: cleanLandmarkDistance(hotel.landmarkDistance),
             }}
             cityName={cityName}
             countryName={countryName}
@@ -682,7 +682,7 @@ export default async function HotelDetailPage({
                 </p>
               )}
 
-              {hotel.landmarkDistance && (
+              {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
                   <span>Location highlight: {hotel.landmarkDistance}.</span>

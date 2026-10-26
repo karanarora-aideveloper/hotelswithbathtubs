@@ -8,7 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
-import { sanitizePlaceholderText } from '@/lib/location';
+import { sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -173,7 +173,7 @@ export default async function CityJacuzziHotelsPage({
     bookingTip: h.bookingTip,
     price: h.price,
     neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
-    landmarkDistance: sanitizePlaceholderText(h.landmarkDistance),
+    landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
   }));
 
   // Fetch related blog guides

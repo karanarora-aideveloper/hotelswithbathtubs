@@ -7,7 +7,7 @@ import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
-import { isValidNeighborhood } from '@/lib/location';
+import { isValidNeighborhood, isPlaceholderLandmark } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
@@ -1479,7 +1479,7 @@ export default function CityHotelsClient({
                         ? `${h.neighborhood}, ${h.city || cityName}`
                         : `${h.city || cityName}, ${countryName}`}
                     </span>
-                    {h.landmarkDistance && (
+                    {h.landmarkDistance && !isPlaceholderLandmark(h.landmarkDistance) && (
                       <span className="hidden sm:inline text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
                         {h.landmarkDistance}
                       </span>

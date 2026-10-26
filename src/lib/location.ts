@@ -33,6 +33,16 @@ export function isPlaceholderLandmark(l?: string | null): boolean {
 }
 
 /**
+ * Returns sanitized landmark distance if valid, otherwise undefined.
+ * Suppresses synthetic placeholders like "Central New York Location".
+ */
+export function cleanLandmarkDistance(l?: string | null): string | undefined {
+  if (isPlaceholderLandmark(l)) return undefined;
+  const sanitized = sanitizePlaceholderText(l!.trim());
+  return isPlaceholderLandmark(sanitized) ? undefined : sanitized;
+}
+
+/**
  * Returns true if the neighborhood is a genuine, verified neighborhood name.
  */
 export function isValidNeighborhood(n?: string | null): boolean {

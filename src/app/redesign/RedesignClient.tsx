@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { isPlaceholderLandmark } from '@/lib/location';
 
 interface HotelItem {
   _id?: string;
@@ -631,7 +632,7 @@ export default function RedesignClient({
                               )}
                             </div>
                           )}
-                          {hotel.landmarkDistance && (
+                          {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (
                             <p className="text-[9px] text-slate-500 truncate flex items-center gap-0.5">
                               <span>📍</span>
                               <span className="truncate">{hotel.landmarkDistance}</span>
@@ -801,7 +802,7 @@ export default function RedesignClient({
                           )}
 
                           {/* Landmark distance */}
-                          {hotel.landmarkDistance && (
+                          {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (
                             <p className="text-[9px] text-slate-500 truncate flex items-center gap-0.5">
                               <span>📍</span>
                               <span className="truncate">{hotel.landmarkDistance}</span>
