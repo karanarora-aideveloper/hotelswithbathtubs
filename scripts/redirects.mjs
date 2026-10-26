@@ -39,8 +39,6 @@ export const redirects = [
   { source: '/arizona/', destination: '/usa/arizona', permanent: true },
   { source: '/tennessee', destination: '/usa/tennessee', permanent: true },
   { source: '/tennessee/', destination: '/usa/tennessee', permanent: true },
-  { source: '/georgia', destination: '/usa/georgia', permanent: true },
-  { source: '/georgia/', destination: '/usa/georgia', permanent: true },
   { source: '/pennsylvania', destination: '/usa/pennsylvania', permanent: true },
   { source: '/pennsylvania/', destination: '/usa/pennsylvania', permanent: true },
   { source: '/washington', destination: '/usa/washington', permanent: true },
@@ -87,6 +85,42 @@ export const redirects = [
   { source: '/hotels-with-bathtub-in-ooty', destination: '/india/ooty', permanent: true },
   { source: '/hotels-with-bathtub-in-ooty/', destination: '/india/ooty', permanent: true },
 
+  // City aliases (prefixed and naked)
+  { source: '/india/bengaluru', destination: '/india/bangalore', permanent: true },
+  { source: '/india/bengaluru/*', destination: '/india/bangalore/:splat', permanent: true },
+  { source: '/bengaluru', destination: '/india/bangalore', permanent: true },
+  { source: '/bengaluru/*', destination: '/india/bangalore/:splat', permanent: true },
+
+  { source: '/india/gurugram', destination: '/india/gurgaon', permanent: true },
+  { source: '/india/gurugram/*', destination: '/india/gurgaon/:splat', permanent: true },
+  { source: '/gurugram', destination: '/india/gurgaon', permanent: true },
+  { source: '/gurugram/*', destination: '/india/gurgaon/:splat', permanent: true },
+
+  { source: '/india/bombay', destination: '/india/mumbai', permanent: true },
+  { source: '/india/bombay/*', destination: '/india/mumbai/:splat', permanent: true },
+  { source: '/bombay', destination: '/india/mumbai', permanent: true },
+  { source: '/bombay/*', destination: '/india/mumbai/:splat', permanent: true },
+
+  { source: '/india/calcutta', destination: '/india/kolkata', permanent: true },
+  { source: '/india/calcutta/*', destination: '/india/kolkata/:splat', permanent: true },
+  { source: '/calcutta', destination: '/india/kolkata', permanent: true },
+  { source: '/calcutta/*', destination: '/india/kolkata/:splat', permanent: true },
+
+  { source: '/india/madras', destination: '/india/chennai', permanent: true },
+  { source: '/india/madras/*', destination: '/india/chennai/:splat', permanent: true },
+  { source: '/madras', destination: '/india/chennai', permanent: true },
+  { source: '/madras/*', destination: '/india/chennai/:splat', permanent: true },
+
+  { source: '/india/trivandrum', destination: '/india/thiruvananthapuram', permanent: true },
+  { source: '/india/trivandrum/*', destination: '/india/thiruvananthapuram/:splat', permanent: true },
+  { source: '/trivandrum', destination: '/india/thiruvananthapuram', permanent: true },
+  { source: '/trivandrum/*', destination: '/india/thiruvananthapuram/:splat', permanent: true },
+
+  { source: '/india/cochin', destination: '/india/kochi', permanent: true },
+  { source: '/india/cochin/*', destination: '/india/kochi/:splat', permanent: true },
+  { source: '/cochin', destination: '/india/kochi', permanent: true },
+  { source: '/cochin/*', destination: '/india/kochi/:splat', permanent: true },
+
   // Naked city legacy paths → canonical /india/[city]
   { source: '/delhi', destination: '/india/delhi', permanent: true },
   { source: '/delhi/', destination: '/india/delhi', permanent: true },
@@ -94,8 +128,6 @@ export const redirects = [
   { source: '/new-delhi/', destination: '/india/delhi', permanent: true },
   { source: '/bangalore', destination: '/india/bangalore', permanent: true },
   { source: '/bangalore/', destination: '/india/bangalore', permanent: true },
-  { source: '/bengaluru', destination: '/india/bangalore', permanent: true },
-  { source: '/bengaluru/', destination: '/india/bangalore', permanent: true },
   { source: '/chennai', destination: '/india/chennai', permanent: true },
   { source: '/chennai/', destination: '/india/chennai', permanent: true },
   { source: '/hyderabad', destination: '/india/hyderabad', permanent: true },

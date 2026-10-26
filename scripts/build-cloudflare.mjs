@@ -73,8 +73,9 @@ async function build() {
   }
   execSync('node scripts/audit-hotel-links.mjs', { cwd: rootDir, stdio: 'inherit' });
 
-  // 2. Generate _redirects
-  console.log('\n[2/4] Generating public/_redirects...');
+  // 2. Generate _redirects & city map
+  console.log('\n[2/4] Generating functions/cityMap.ts and public/_redirects...');
+  execSync('node scripts/generate-city-map.mjs', { cwd: rootDir, stdio: 'inherit' });
   execSync('node scripts/generate-redirects.mjs', { cwd: rootDir, stdio: 'inherit' });
 
   // 2b. Generate Image Sitemap, Split Sitemaps, LLMs & RSS Feed

@@ -1,8 +1,20 @@
+import { cityToCountry } from './cityMap';
+
 interface EventContext {
   request: Request;
   env?: Record<string, any>;
   next: () => Promise<Response>;
 }
+
+const CITY_ALIASES: Record<string, string> = {
+  'bengaluru': 'bangalore',
+  'gurugram': 'gurgaon',
+  'bombay': 'mumbai',
+  'calcutta': 'kolkata',
+  'madras': 'chennai',
+  'trivandrum': 'thiruvananthapuram',
+  'cochin': 'kochi',
+};
 
 export async function onRequest(context: EventContext): Promise<Response> {
   const url = new URL(context.request.url);
@@ -20,10 +32,34 @@ export async function onRequest(context: EventContext): Promise<Response> {
     return Response.redirect(target.toString(), 301);
   }
 
-  // Trailing slash normalization: 301 redirect /path/ to /path (except root / and /api)
+  // Case normalization: 301 redirect any URL with uppercase letters to lowercase in a single hop
+  if (/[A-Z]/.test(url.pathname)) {
+    const target = new URL(context.request.url);
+    let newPath = url.pathname.toLowerCase();
+    if (newPath.length > 1 && newPath.endsWith('/') && !newPath.startsWith('/api')) {
+      newPath = newPath.slice(0, -1);
+    }
+    const segs = newPath.split('/').filter(Boolean);
+    if (segs.length === 1 && cityToCountry[segs[0]]) {
+      newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
+    } else if (segs.length === 2 && CITY_ALIASES[segs[1]]) {
+      newPath = `/${segs[0]}/${CITY_ALIASES[segs[1]]}`;
+    }
+    target.pathname = newPath;
+    return Response.redirect(target.toString(), 301);
+  }
+
+  // Trailing slash normalization: 301 redirect /path/ to canonical /path (except root / and /api)
   if (url.pathname.length > 1 && url.pathname.endsWith('/') && !url.pathname.startsWith('/api')) {
     const target = new URL(context.request.url);
-    target.pathname = url.pathname.slice(0, -1);
+    let newPath = url.pathname.slice(0, -1);
+    const segs = newPath.split('/').filter(Boolean);
+    if (segs.length === 1 && cityToCountry[segs[0]]) {
+      newPath = `/${cityToCountry[segs[0]]}/${segs[0]}`;
+    } else if (segs.length === 2 && CITY_ALIASES[segs[1]]) {
+      newPath = `/${segs[0]}/${CITY_ALIASES[segs[1]]}`;
+    }
+    target.pathname = newPath;
     return Response.redirect(target.toString(), 301);
   }
 
@@ -39,9 +75,33 @@ export async function onRequest(context: EventContext): Promise<Response> {
 
   const response = await context.next();
 
-  // If 404 on a 3-segment route (/country/city/hotel-slug), check alternate slug variations
+  // If 404, rescue known 1-segment city URLs, 2-segment city aliases, or 3-segment hotel variations
   if (response.status === 404) {
     const segments = url.pathname.split('/').filter(Boolean);
+
+    // 1-segment rescue: e.g. /kochi -> /india/kochi
+    if (segments.length === 1 && segments[0] !== 'api' && segments[0] !== '_next') {
+      const citySlug = segments[0].toLowerCase();
+      const countrySlug = cityToCountry[citySlug];
+      if (countrySlug) {
+        const target = new URL(context.request.url);
+        target.pathname = `/${countrySlug}/${citySlug}`;
+        return Response.redirect(target.toString(), 301);
+      }
+    }
+
+    // 2-segment alias rescue: e.g. /india/bengaluru -> /india/bangalore
+    if (segments.length === 2 && segments[0] !== 'api' && segments[0] !== '_next') {
+      const [country, city] = segments;
+      const citySlug = city.toLowerCase();
+      if (CITY_ALIASES[citySlug]) {
+        const target = new URL(context.request.url);
+        target.pathname = `/${country}/${CITY_ALIASES[citySlug]}`;
+        return Response.redirect(target.toString(), 301);
+      }
+    }
+
+    // 3-segment route (/country/city/hotel-slug), check alternate slug variations
     if (segments.length === 3 && segments[0] !== 'api' && segments[0] !== '_next') {
       const [country, city, hotelSlug] = segments;
       const citySlug = city.toLowerCase();
