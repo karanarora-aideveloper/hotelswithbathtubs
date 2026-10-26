@@ -361,11 +361,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     : [
         {
           q: "How does Hotels with Bathtubs verify private in-room tubs?",
-          a: "Every hotel is cross-verified across Booking.com and Agoda by analyzing room category specifications, verified traveler photos, and amenity tags to guarantee the tub is private inside your room."
+          a: "Every hotel is cross-checked across Booking.com and Agoda by analyzing room category specifications, traveler photos, and amenity tags to confirm the tub is private inside your room."
         },
         {
           q: "Are hotel room bathtubs and jacuzzis private or shared?",
-          a: "All properties recommended on Hotels with Bathtubs guarantee private, in-room bathtubs or suites. We strictly filter out properties where tubs are located in shared hotel spas."
+          a: "All properties recommended on Hotels with Bathtubs feature private, in-room bathtubs or suites. We strictly filter out properties where tubs are located in shared hotel spas."
         },
         {
           q: "Which room categories usually have bathtubs?",
@@ -664,7 +664,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   Ready to book your stay in {matchedCity}?
                 </h2>
                 <p className="text-gray-700 font-serif text-lg mb-6 max-w-2xl mx-auto">
-                  We have triple-verified {matchedCityCount}+ luxury hotels and boutique resorts in {matchedCity} that guarantee a private, in-room bathtub or jacuzzi for your romantic getaway.
+                  We list {matchedCityCount}+ luxury hotels and boutique resorts in {matchedCity} that feature a private, in-room bathtub or jacuzzi for your romantic getaway.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
                   <Link 

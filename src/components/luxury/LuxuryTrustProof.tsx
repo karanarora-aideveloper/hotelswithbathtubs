@@ -10,7 +10,7 @@ export default function LuxuryTrustProof() {
             Verified In-Room Luxury
           </p>
           <p className="font-playfair text-lg sm:text-xl text-[#121518] leading-snug">
-            Every hotel is verified across Booking.com, Agoda, and MakeMyTrip to guarantee the bathtub is private inside your room.
+            Every hotel is checked across Booking.com, Agoda, and partner listings to confirm the bathtub is private inside your room.
           </p>
         </div>
 
@@ -21,7 +21,7 @@ export default function LuxuryTrustProof() {
           </div>
           <div>
             <span className="block font-playfair text-2xl sm:text-3xl text-[#121518] font-medium">100%</span>
-            <span className="text-[11px] font-medium tracking-wider uppercase text-[#6B6964]">In-Room Guarantee</span>
+            <span className="text-[11px] font-medium tracking-wider uppercase text-[#6B6964]">In-Room Tubs</span>
           </div>
           <div>
             <span className="block font-playfair text-2xl sm:text-3xl text-[#121518] font-medium">0</span>

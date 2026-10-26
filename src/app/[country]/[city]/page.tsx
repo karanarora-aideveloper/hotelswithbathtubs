@@ -631,7 +631,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   // M6 Data-driven FAQs
   const jacuzziHotels = hotels.filter((h) => isJacuzziRoom(h));
   const jacuzziFaqAnswer = jacuzziHotels.length > 0
-    ? `Verified hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Every room tier is individually checked to guarantee a private hot tub inside your suite rather than a shared hotel facility.`
+    ? `Verified hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Each property listing features a private hot tub inside your suite rather than a shared hotel facility.`
     : `Currently, no verified hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
 
   let cheapestFaqAnswer = cheapestHotel && cheapestHotelPrice
@@ -742,7 +742,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Verified Hotels{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''} · Triple-Source Validated · Verified {cityVerifiedDate}
+            <span>🏨</span> {hotels.length} Verified Hotels{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''} · Verified {cityVerifiedDate}
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {stateConfig
@@ -813,7 +813,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
           </svg>
-          <span>Guaranteed In-Room Tubs</span>
+          <span>Private In-Room Tubs</span>
         </div>
         <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -826,7 +826,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       {/* Editorial & Affiliate Disclosure */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
         <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We strictly recommend rooms independently verified to feature private in-room bathtubs.
+          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We recommend rooms listed with private in-room bathtubs.
         </p>
       </div>
 
@@ -844,7 +844,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
               Top verified hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
               <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-              All {hotels.length} stays in our directory have been independently verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your private room tier guarantees an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
+              All {hotels.length} stays in our directory have been checked across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your private room tier features an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
             </p>
           </div>
           <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
@@ -917,7 +917,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           countryName={countryName}
         />
 
-        {/* Full City Hotel Directory Index (Guarantees 100% Googlebot HTML crawlability & indexation for all properties) */}
+        {/* Full City Hotel Directory Index */}
         <section id="directory" aria-label={`Directory of all verified hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
           <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-200 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
@@ -930,7 +930,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                 </p>
               </div>
               <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
-                {hotels.length} Properties Guaranteed
+                {hotels.length} Properties Listed
               </span>
             </div>
 

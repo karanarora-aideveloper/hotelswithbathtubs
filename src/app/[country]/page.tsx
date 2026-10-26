@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : standardTitle.length <= 60
     ? standardTitle
     : `Best Hotels with Bathtub in ${countryName} (${currentYear})`;
-  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Triple-checked for couples & romantic stays.`;
+  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Curated for couples & romantic stays.`;
 
   return {
     title: { absolute: pageTitle },
@@ -286,7 +286,7 @@ export default async function CountryHubPage({
   const countryFaqs = [
     {
       q: `How are hotels with bathtubs in ${countryName} verified?`,
-      a: `Every hotel listed across ${countryName} is triple-verified across MakeMyTrip, Agoda, and Booking.com. We audit room specifications to guarantee that your room includes a private in-room soaking tub or jacuzzi rather than a shared hotel spa facility.`
+      a: `Every hotel listed across ${countryName} is checked across partner room listings. We inspect room details to confirm that your room includes a private in-room soaking tub or jacuzzi rather than a shared hotel spa facility.`
     },
     {
       q: `Are bathtub hotels in ${countryName} suitable for couples and romantic getaways?`,
@@ -297,7 +297,7 @@ export default async function CountryHubPage({
       a: `Top popular destinations for bathtub and jacuzzi stays in ${countryName} include ${topCitiesNames}. Each offers a diverse selection of luxury 5-star suites and boutique retreats.`
     },
     {
-      q: `How do I guarantee my room category includes a private bathtub?`,
+      q: `How do I ensure my room category includes a private bathtub?`,
       a: `When booking through our verified partner links, check that your chosen room tier (such as "Jacuzzi Suite", "Executive Room with Bathtub", or "Luxury Spa Villa") explicitly lists the private bathtub amenity before confirming your reservation.`
     }
   ];
@@ -336,7 +336,7 @@ export default async function CountryHubPage({
                   Hotels with Bathtub in Room in {countryName}
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
-                  Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis, triple-verified for couples.
+                  Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis, curated for couples.
                 </p>
               </div>
             </header>
@@ -351,7 +351,7 @@ export default async function CountryHubPage({
                   Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
                 </p>
                 <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                  Every property featured across our {countryName} destinations is triple-verified across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your chosen room tier guarantees a private in-room soaking tub or whirlpool jacuzzi.
+                  Every property featured across our {countryName} destinations is checked across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your chosen room tier includes a private in-room soaking tub or whirlpool jacuzzi.
                 </p>
               </div>
 
@@ -561,7 +561,7 @@ export default async function CountryHubPage({
                           Valentine&apos;s Day Hotels with In-Room Jacuzzis
                         </h3>
                         <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                          Hand-verified romantic hotel suites with private couple whirlpool tubs, champagne service, and candlelit ambiance.
+                          Romantic hotel suites featuring private couple whirlpool tubs, champagne service, and candlelit ambiance.
                         </p>
                       </div>
                       <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#1a6fde]">

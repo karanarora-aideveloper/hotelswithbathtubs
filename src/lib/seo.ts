@@ -16,7 +16,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top choice for honeymoons and romantic anniversaries',
       'Beachside resort locations with direct sunset vistas',
       'Seamless access to Goa’s coastal nightlife and beach clubs',
-      'Triple-verified across MakeMyTrip, Agoda, and Booking.com'
+      'Verified across MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -33,7 +33,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Stay in converted royal palaces and luxury heritage stays',
       'Minutes from the City Palace, Hawa Mahal, and Amber Fort',
       'Regal hospitality with personalized romantic dining',
-      'Verified in-room tub amenities guaranteed on booking'
+      'Verified in-room tub amenities confirmed on booking'
     ]
   },
 
@@ -84,7 +84,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene and peaceful tea estate hideaways',
       'Crisp mountain climate perfect for warm bubble baths',
       'Private villa and luxury glamping options for couples',
-      'Accurate room tier verification across all platforms'
+      'Clear room details across booking platforms'
     ]
   },
 
@@ -101,7 +101,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Historic Mall Road locations and peaceful forest outskirts',
       'Romantic pine-forested walking trails and scenic vistas',
       'Perfect romantic weekend escape from Delhi NCR',
-      'Verified private tub rooms with zero shared amenities'
+      'Private tub rooms matched against partner listings'
     ]
   },
 
@@ -119,7 +119,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Regal Awadhi hospitality and world-famous culinary heritage',
       'Prime Gomti Nagar riverfront and Hazratganj central locations',
       'Ideal for couples anniversaries, honeymoons, and weekend staycations',
-      'Triple-verified across Booking.com, Agoda, and MakeMyTrip'
+      'Verified across Booking.com, Agoda, and MakeMyTrip'
     ]
   },
 
@@ -136,7 +136,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Authentic Ganga Aarti and sunrise boat rides right from your stay',
       'Stay in restored 18th-century royal palaces and luxury cantonment estates',
       'Peaceful retreat from bustling ghats with verified in-room tubs',
-      'Triple-verified on MakeMyTrip, Agoda, Booking.com, and Trip.com'
+      'Verified on MakeMyTrip, Agoda, Booking.com, and Trip.com'
     ]
   },
 
@@ -152,7 +152,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Prime honeymoon sanctuary with world-renowned natural beauty',
       'Exclusive stays at royal heritage palaces and cedarwood houseboats',
-      'Verified heating and hot water guarantees for winter soaks',
+      'Verified heating and hot water for winter soaks',
       'Direct affiliate links across leading Indian and global booking channels'
     ]
   },
@@ -170,7 +170,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India’s top winter sports and high-altitude romance destination',
       'Unobstructed vistas of Mount Affarwat and alpine powder snow',
       'Verified in-room bathtubs ideal for warming up after skiing',
-      'Triple-checked room tiers with guaranteed private tubs'
+      'Verified room tiers with private tubs'
     ]
   },
 
@@ -204,7 +204,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India’s most romantic backwater honeymoon destination',
       'Private ancestral architecture with total couple seclusion',
       'Direct water access and tranquil bird sanctuary surroundings',
-      'Verified room tiers guaranteeing private open-to-sky bathtubs'
+      'Verified room tiers featuring private open-to-sky bathtubs'
     ]
   },
 
@@ -238,7 +238,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic luxury clifftop properties with uninterrupted horizon views',
       'World-class Ayurvedic wellness and rejuvenating treatments',
       'Secluded coastal romance with private beach access',
-      'Triple-verified across MakeMyTrip, Agoda, Booking.com, and Trip.com'
+      'Verified across MakeMyTrip, Agoda, Booking.com, and Trip.com'
     ]
   },
 
@@ -272,7 +272,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India’s premier tiger safari destination with luxury lodges',
       'Soothing private tubs to rejuvenate after dusty safari trails',
       'Convenient road drive from Delhi NCR and Chandigarh',
-      'Verified room tiers with guaranteed private in-room bathtubs'
+      'Verified room tiers with private in-room bathtubs'
     ]
   },
 
@@ -289,7 +289,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class luxury safari camps ranked among the globe\'s best',
       'Regal Rajasthani hospitality combined with tiger sightings',
       'Total privacy and romance in secluded jungle settings',
-      'Triple-verified room tiers on MMT, Agoda, Booking.com, and Trip.com'
+      'Verified room tiers on MMT, Agoda, Booking.com, and Trip.com'
     ]
   },
 
@@ -323,7 +323,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Rich royal palace heritage and silk and sandalwood markets',
       'Stay in authentic Italianate palaces built for maharajas',
       'Ideal romantic stopover between Bangalore, Coorg, and Wayanad',
-      'Triple-verified hotel tiers with guaranteed private tubs'
+      'Verified hotel tiers with private tubs'
     ]
   },
 
@@ -357,7 +357,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pristine Himalayan mountain vistas and clean mountain air',
       'Only destination in the region with integrated casino spa luxury',
       'Romantic base for exploring Tsomgo Lake and Nathula Pass',
-      'Verified heating and hot water guarantees for year-round comfort'
+      'Verified heating and hot water for year-round comfort'
     ]
   },
 
@@ -374,7 +374,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene desert spirituality with peaceful sunset vibes',
       'High-end villa resorts offering private plunge pool luxury',
       'Proximity to sacred Pushkar Lake and Brahma Temple',
-      'Triple-verified across MMT, Agoda, Booking.com, and Trip.com'
+      'Verified across MMT, Agoda, Booking.com, and Trip.com'
     ]
   },
 
@@ -407,7 +407,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Gateway to ancient Kalinga temples, Konark, and Puri coast',
       'Sprawling lagoon resort stays with resort-grade seclusion',
-      'Triple-verified across MakeMyTrip, Agoda, and Booking.com',
+      'Verified across MakeMyTrip, Agoda, and Booking.com',
       'Ideal for couples exploring Odisha’s Golden Triangle'
     ]
   },
@@ -441,7 +441,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Premier luxury gateway for exploring Assam, Meghalaya, and Kaziranga',
       'World-class 5-star brands including Vivanta, Radisson, and Novotel',
-      'Triple-verified room tiers with guaranteed private tubs',
+      'Verified room tiers with private tubs',
       'Seamless multi-platform booking with transparent rates'
     ]
   },
@@ -458,8 +458,8 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Scenic valley atmosphere with vibrant cafes and markets',
       'Modern boutique luxury with panoramic mountain tub views',
-      'Triple-verified across Booking.com, Agoda, and MakeMyTrip',
-      'Guaranteed private en-suite tubs for relaxing stays'
+      'Verified across Booking.com, Agoda, and MakeMyTrip',
+      'Private en-suite tubs for relaxing stays'
     ]
   },
 
@@ -476,7 +476,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Home to Wildflower Hall, one of the world\'s finest luxury mountain resorts',
       'Pure alpine serenity away from tourist traffic',
       'Unsurpassed couple privacy in virgin pine and cedar woodlands',
-      'Triple-verified listings with guaranteed private tubs'
+      'Verified listings with private tubs'
     ]
   },
 
@@ -510,7 +510,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unmatched snow mountain views combined with lush green tea estates',
       'Peaceful Himalayan retreat far from commercial crowds',
       'Proximity to Bir Billing, Kangra Fort, and Tibetan monasteries',
-      'Guaranteed room tiers with confirmed in-room bathtubs'
+      'Verified room tiers with confirmed in-room bathtubs'
     ]
   },
 
@@ -527,7 +527,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Rustic Himalayan warmth paired with private jacuzzi indulgence',
       'Base for romantic treks to Tosh, Malana, and Kheerganga',
       'Soothe trekking muscles in private hot tubs and heated baths',
-      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+      'Verified on MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -578,7 +578,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Home to Amanbagh, one of the globe\'s most celebrated ultra-luxury retreats',
       'Secluded regal privacy in pristine Aravalli valleys',
       'Bespoke royal heritage hospitality and private wildlife safaris',
-      'Triple-verified room tiers with guaranteed private luxury tubs'
+      'Verified room tiers with private luxury tubs'
     ]
   },
 
@@ -595,7 +595,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India\'s most iconic luxury leopard safari destination',
       'World-famous Relais & Châteaux glamping elegance',
       'Unsurpassed romance and seclusion in the Thar granite hills',
-      'Guaranteed private freestanding stone bathtubs in every luxury tent'
+      'Private freestanding stone bathtubs in every luxury tent'
     ]
   },
 
@@ -612,7 +612,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene beachside alternative to busy South Kerala resorts',
       'Private open-to-sky garden bathrooms for romantic tropical soaks',
       'Minutes from Alleppey backwaters yet peaceful and quiet',
-      'Triple-verified on MakeMyTrip, Agoda, Booking.com, and Trip.com'
+      'Verified on MakeMyTrip, Agoda, Booking.com, and Trip.com'
     ]
   },
 
@@ -629,7 +629,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unique worldwide experience: soak in a warm bath facing India\'s Niagara',
       'Lush rainforest setting with hornbills and misty morning spray',
       'Iconic cinematic retreat favored by movie directors and honeymooners',
-      'Verified room tiers with guaranteed waterfall-facing bathtubs'
+      'Verified room tiers with waterfall-facing bathtubs'
     ]
   },
 
@@ -646,7 +646,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India\'s ultimate tropical island luxury destination',
       'Stay at Taj Exotica and Barefoot directly on crescent beach sands',
       'Unmatched romantic seclusion with private villa tubs and plunge pools',
-      'Triple-verified across all leading international and Indian OTAs'
+      'Verified across all leading international and Indian OTAs'
     ]
   },
 
@@ -663,7 +663,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'High-altitude Himalayan wonder and Buddhist cultural heritage',
       'Authentic stays in five-star comfort and royal palaces',
       'Warm up after mountain passes in comforting heated bathtubs',
-      'Verified heating and hot water guarantees for high-altitude stays'
+      'Verified heating and hot water for high-altitude stays'
     ]
   },
 
@@ -697,7 +697,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quieter, more romantic alternative to bustling Ooty',
       'Authentic heritage tea planter bungalows with clawfoot baths',
       'Pleasant cool year-round climate perfect for hot baths',
-      'Triple-verified across MakeMyTrip, Agoda, and Booking.com'
+      'Verified across MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -714,7 +714,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class Relais & Châteaux sanctuary at Svatma Thanjavur',
       'Rich UNESCO heritage art and classical temple culture',
       'Unsurpassed refined luxury in South Tamil Nadu',
-      'Guaranteed private bathtubs with transparent partner pricing'
+      'Private bathtubs with transparent partner pricing'
     ]
   },
 
@@ -731,7 +731,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Royal heritage legacy: host to the Duke and Duchess of Cambridge',
       'World-famous wildlife encounters with one-horned rhinos',
       'Warm en-suite soaking tubs after morning mist safari drives',
-      'Triple-verified on leading travel booking platforms'
+      'Verified on leading travel booking platforms'
     ]
   },
 
@@ -748,7 +748,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spectacular clifftop views in the world\'s rainiest paradise',
       'Warm hydrotherapy jacuzzi soaks in cool, misty mountain air',
       'Proximity to Nohkalikai Falls and Mawsmai Caves',
-      'Verified private tub rooms with zero shared amenities'
+      'Private tub rooms matched against partner listings'
     ]
   },
 
@@ -765,7 +765,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top romantic weekend sanctuary from Mumbai and Pune',
       'Rare private island seclusion at Jalsrushti Island Resort',
       'Cool mountain climate ideal for hot baths and jacuzzi soaks',
-      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+      'Verified on MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -782,7 +782,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'India\'s ultimate high-altitude Eastern Himalayan frontier',
       'Five-star luxury at Vivanta Arunachal Pradesh Tawang',
       'Warm en-suite soaking tubs after high-altitude mountain passes',
-      'Verified heating and hot water guarantees for freezing weather'
+      'Verified heating and hot water for freezing weather'
     ]
   },
 
@@ -814,8 +814,8 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ],
     whyChoose: [
       'First among the twelve sacred Shiva Jyotirlingas',
-      'Coastline resort environments with guaranteed private tubs',
-      'Triple-verified across leading travel platforms',
+      'Coastline resort environments with private tubs',
+      'Verified across leading travel platforms',
       'Transparent booking with verified room categories'
     ]
   },
@@ -833,7 +833,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Natural world wonder of white marble river gorges',
       'Five-star luxury amenities with in-room whirlpool baths',
       'Gateway to Kanha and Bandhavgarh tiger reserves',
-      'Triple-verified on MakeMyTrip, Agoda, and Booking.com'
+      'Verified on MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -849,7 +849,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'World-famous spiritual enlightenment destination',
       'Peaceful architecture designed for mindful relaxation',
-      'Guaranteed private bathtubs for tranquil contemplation',
+      'Private bathtubs for tranquil contemplation',
       'Seamless multi-platform booking with verified rates'
     ]
   },
@@ -867,7 +867,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Rajasthan\'s most magnificent restored royal palaces',
       'Total privacy and romance in historical heritage bedchambers',
       'World-famous luxury heritage landmark for honeymoons',
-      'Triple-verified room tiers with guaranteed private tubs'
+      'Verified room tiers with private tubs'
     ]
   },
 
@@ -901,7 +901,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic locations in South Mumbai, Bandra, and Juhu',
       'Exceptional fine dining and nightlife minutes away',
       'Perfect city staycation retreats for couples',
-      'Triple-verified in-room bathtub amenities'
+      'Verified in-room bathtub amenities'
     ]
   },
 
@@ -918,7 +918,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Year-round pleasant weather perfect for couple retreats',
       'Located near premium dining and cafe hubs in Koramangala and Indiranagar',
       'Top-rated 5-star business and leisure properties',
-      'Guaranteed private in-room bathtubs across all listings'
+      'Private in-room bathtubs across all listings'
     ]
   },
 
@@ -934,9 +934,9 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ],
     whyChoose: [
       'Unrivaled luxury value with 5-star suite rates starting at ₹4,000–₹8,500/night (30–50% more affordable than Mumbai or Delhi)',
-      'Guaranteed private in-room bathtubs — independently cross-checked on MakeMyTrip, Booking.com, and Agoda to eliminate shared spa confusion',
+      'Private in-room bathtubs — independently cross-checked on MakeMyTrip, Booking.com, and Agoda to eliminate shared spa confusion',
       'Exceptional culinary and cultural retreats near Park Street, Salt Lake Sector V, and Rajarhat',
-      'Hassle-free romantic weekend staycations with late checkout and privacy guaranteed'
+      'Hassle-free romantic weekend staycations with late checkout and private suites'
     ]
   },
 
@@ -953,7 +953,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-leading luxury hotel architecture and hospitality',
       'Iconic romantic honeymoon setting with desert and sea experiences',
       'Michelin-starred dining and private beach club access',
-      'Triple-verified partner booking links with best price guarantees'
+      'Verified partner booking links with direct partner links'
     ]
   },
 
@@ -970,7 +970,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Prestigious Mayfair, Westminster, and Covent Garden addresses',
       'Iconic heritage hotels with world-class afternoon tea and dining',
       'Unforgettable romantic city breaks in the heart of London',
-      'Fully validated room categories ensuring guaranteed bathtub access'
+      'Fully validated room categories ensuring confirmed bathtub access'
     ]
   },
 
@@ -987,7 +987,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top choice for romantic political staycations and anniversary escapes',
       'Steps from the Smithsonian museums, Dupont Circle, and Lafayette Square',
       'Historic 5-star palace hotels and trendsetting Logan Circle boutiques',
-      'Every bathtub amenity hand-verified across Booking.com and direct partner channels'
+      'Bathtub amenities cross-checked with Booking.com and partner channels'
     ]
   },
 
@@ -1038,7 +1038,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted the world’s top honeymoon island destination',
       'Secluded private villa sanctuaries in Ubud, Uluwatu, and Seminyak',
       'World-class Balinese spa treatments and holistic wellness',
-      'Guaranteed private in-villa tubs verified across top OTAs'
+      'Private in-villa tubs verified across top OTAs'
     ]
   },
 
@@ -1055,7 +1055,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Exceptional 5-star luxury value with verified bathtub suites starting at ฿3,500–฿6,500/night',
       'Iconic riverside lifestyle, rooftop sky bars, and Michelin-starred dining minutes via BTS Skytrain and river shuttles',
-      'Triple-checked across Agoda, Booking.com, and partner networks to guarantee private in-room baths (never shared facilities)',
+      'Verified across Agoda, Booking.com, and partner networks to feature private in-room baths (never shared facilities)',
       'Ideal romantic couple retreats and honeymoon sanctuaries with complete privacy'
     ]
   },
@@ -1107,7 +1107,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Fabulous romantic mountain retreat in Northern Kerala',
       'Unobstructed views of the Western Ghats canopy',
       'Private pool and jacuzzi villas for couples',
-      'Triple-verified across MakeMyTrip, Agoda, and Booking.com'
+      'Verified across MakeMyTrip, Agoda, and Booking.com'
     ]
   },
 
@@ -1124,7 +1124,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Ultimate backwater romance and houseboat landscapes',
       'Private island resorts with direct canal access',
       'Intimate couples retreats with sunset water views',
-      'Guaranteed in-room tubs with zero shared spa pools'
+      'Private in-room bathtubs in backwater retreats'
     ]
   },
 
@@ -1141,7 +1141,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Classic North Indian romantic hill station',
       'Panoramic 360-degree Himalayan snow peak views',
       'Cozy mountain fireplaces and luxury room service',
-      'Verified room tier titles with guaranteed tubs'
+      'Verified room tier titles with confirmed tubs'
     ]
   },
 
@@ -1158,7 +1158,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Cobblestone streets, French cafes, and tranquil beaches',
       'Boutique heritage properties with intimate privacy',
       'Perfect coastal weekend escape from Chennai and Bangalore',
-      'Triple-checked listings for couples'
+      'Verified listings for couples'
     ]
   },
 
@@ -1192,7 +1192,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic Hollywood history and luxury boutique properties',
       'Secluded canyon hideaways in Bel-Air and Beverly Hills',
       'Minutes from Rodeo Drive, Sunset Strip, and Pacific beaches',
-      'Accurate room tier verification with zero shared tubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1209,7 +1209,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Romantic city breaks with world-class culinary scene',
       'Iconic cable car access and historic landmark architecture',
       'Spectacular views over San Francisco Bay and Alcatraz',
-      'Verified luxury stays with guaranteed bathtub access'
+      'Verified luxury stays with confirmed bathtub access'
     ]
   },
 
@@ -1226,7 +1226,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Magnificent Mile shopping and world-renowned dining',
       'Iconic architectural skyline and riverwalk access',
       'Cozy luxury winter staycations for couples',
-      'Triple-verified across top booking platforms'
+      'Verified across top booking platforms'
     ]
   },
 
@@ -1243,7 +1243,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Europe’s most romantic and historic capitals',
       'Atmospheric cobblestone Old Town and Royal Mile walks',
       'Cozy Scottish hospitality and Michelin-starred dining',
-      'Guaranteed in-room tubs with zero shared facilities'
+      'Private in-room tubs in romantic Scottish retreats'
     ]
   },
 
@@ -1260,7 +1260,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s undisputed capital of romance and anniversary celebrations',
       'Michelin three-star dining, Seine river cruises, and Louvre access',
       'Storied historic palaces where legendary artists and icons stayed',
-      'Triple-verified room tiers with guaranteed in-room bathtubs'
+      'Verified room tiers with in-room bathtubs'
     ]
   },
 
@@ -1294,7 +1294,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Picturesque canal cruises and world-famous museums',
       'Boutique Nine Streets shopping and candlelit dining',
       'Unique historic canal house architecture',
-      'Accurate room tier verification on all stays'
+      'Clear room tier details on listed stays'
     ]
   },
 
@@ -1328,7 +1328,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous caldera sunset views and Cycladic architecture',
       'Unsurpassed honeymoon and anniversary privacy',
       'Cliffside candlelit dining and volcanic wine tastings',
-      'Triple-verified private tubs with zero shared pools'
+      'Private tubs in volcanic cliffside suites'
     ]
   },
 
@@ -1379,7 +1379,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Mesmerizing glittering night panoramas from your private bath',
       'World-leading Michelin-starred culinary dining in Ginza and Roppongi',
       'Serene oasis of calm soaring high above the bustling metropolis',
-      'Triple-verified room tiers with guaranteed private tubs'
+      'Verified room tiers with private tubs'
     ]
   },
 
@@ -1396,7 +1396,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled views of the world’s most iconic twin skyscrapers',
       'Exceptional luxury value for 5-star suites and rooftop infinity pools',
       'Vibrant shopping in Bukit Bintang and world-renowned street dining',
-      'Guaranteed room tier verification across top booking platforms'
+      'Verified room tier listings across top booking platforms'
     ]
   },
 
@@ -1413,7 +1413,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Palatial Arabian luxury and peaceful island beaches',
       'Iconic Louvre Abu Dhabi and Sheikh Zayed Grand Mosque',
       'Ultra-exclusive private butler and spa services',
-      'Triple-checked room tiers with guaranteed tubs'
+      'Verified room tiers with confirmed tubs'
     ]
   },
 
@@ -1430,7 +1430,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top Texas weekend getaway and anniversary destination',
       'South Congress and 2nd Street dining right at your doorstep',
       'Secluded urban estates and modern design hotels',
-      'Triple-verified in-room bathtubs guaranteed on booking'
+      'Verified in-room bathtubs confirmed on booking'
     ]
   },
 
@@ -1447,7 +1447,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Steps from iconic Pike Place Market and Seattle waterfront',
       'Romantic moody Pacific Northwest coastal ambiance',
       'Floor-to-ceiling glass views over Elliott Bay ferries',
-      'Accurate room tier verification with zero shared tubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1464,7 +1464,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant live music, Honky Tonk Highway, and gourmet dining',
       'Iconic historic landmark hotels and sustainable luxury stays',
       'Ideal romantic couples getaway in the American South',
-      'Guaranteed private in-room tubs verified on all platforms'
+      'Private in-room tubs verified on all platforms'
     ]
   },
 
@@ -1481,7 +1481,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The #1 dream romantic honeymoon destination on Earth',
       'Complete private island seclusion with personal butler service',
       'Crystal-clear turquoise waters teeming with marine life',
-      'Guaranteed private overwater villa bathtubs verified on all channels'
+      'Private overwater villa bathtubs verified on all channels'
     ]
   },
 
@@ -1498,7 +1498,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Charming historic Old Town and luxury Bahnhofstrasse shopping',
       'Breathtaking Lake Zurich promenades and mountain excursions',
       'World-class Michelin-starred dining and private spa retreats',
-      'Triple-verified in-room bathtubs guaranteed on booking'
+      'Verified in-room bathtubs confirmed on booking'
     ]
   },
 
@@ -1515,7 +1515,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Car-free alpine village with horse-drawn carriage charm',
       'World-class glacier skiing and scenic mountain railways',
       'Cozy wood-burning fireplaces and warm hydrotherapy baths',
-      'Accurate room tier verification with zero shared tubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1532,7 +1532,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant Catalan tapas, culture, and beachside promenades',
       'Architectural masterpieces by Antoni Gaudí nearby',
       'Iconic rooftop bars with panoramic Mediterranean vistas',
-      'Guaranteed private in-room bathtubs verified on all platforms'
+      'Private in-room bathtubs verified on all platforms'
     ]
   },
 
@@ -1549,7 +1549,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous sunrise hot air balloon flight views',
       'Unsurpassed cave architecture romance and privacy',
       'Relais & Châteaux luxury dining and Anatolian wines',
-      'Triple-checked cave suite room tiers guaranteed on booking'
+      'Verified cave suite room tiers confirmed on booking'
     ]
   },
 
@@ -1566,7 +1566,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Majestic snow-capped Rocky Mountain peaks and turquoise lakes',
       'Romantic winter sleigh rides and summer canoe excursions',
       'Cozy wood-burning fireplaces and warm mineral baths',
-      'Verified in-cabin tubs with zero shared facilities'
+      'Private in-cabin tubs with mountain views'
     ]
   },
 
@@ -1583,7 +1583,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous Sydney Harbour panoramic vistas from your bath',
       'Steps from Circular Quay, historic The Rocks, and ferry piers',
       'World-class waterfront dining and coastal walks',
-      'Triple-verified private in-room tubs across top booking channels'
+      'Verified private in-room tubs across top booking channels'
     ]
   },
 
@@ -1600,7 +1600,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unforgettable desert romance, dune dining, and starlit nights',
       'Royal Rajasthani haveli architecture and opulent suites',
       'Intimate private courtyard stays with heated soaking tubs',
-      'Verified room tier titles with guaranteed bathtubs'
+      'Verified room tier titles with confirmed bathtubs'
     ]
   },
 
@@ -1617,7 +1617,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous royal palace heritage and living Maharaja history',
       'Dramatic illuminated views of Mehrangarh Fort from your bath',
       'Exclusive bespoke royal hospitality and spa wellness',
-      'Triple-verified in-room tubs guaranteed on booking'
+      'Verified in-room tubs confirmed on booking'
     ]
   },
 
@@ -1634,7 +1634,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene hill station getaway surrounded by aromatic coffee estates',
       'Breathtaking sunrise views from private mountain balconies',
       'Private plunge pools and intimate couple retreat villas',
-      'Guaranteed private tubs with zero shared pool confusion'
+      'Private in-room tubs in plantation suites'
     ]
   },
 
@@ -1651,7 +1651,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top romantic weekend getaway from Mumbai and Pune',
       'Cool mountain climate, scenic viewpoints, and strawberry farms',
       'Secluded 5-star forest resorts and private infinity pools',
-      'Triple-checked room categories guaranteed on check-in'
+      'Verified room categories confirmed on check-in'
     ]
   },
 
@@ -1668,7 +1668,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Effortless 20-minute speedboat access from Gateway of India',
       'Exclusive coastal celebrity retreat and weekend getaway',
       'Sprawling tropical pool resorts and intimate private villas',
-      'Accurate room tier verification with zero shared tubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1685,7 +1685,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'South India’s most celebrated honeymoon and couple sanctuary',
       'Crisp mountain air, botanical gardens, and Nilgiri Mountain Railway',
       'Historic 19th-century colonial luxury heritage estates',
-      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+      'Verified room tiers with private in-room bathtubs'
     ]
   },
 
@@ -1702,7 +1702,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       '100% pollution-free, vehicle-free peace just 2 hours from Mumbai and Pune',
       'Scenic red-soil trails, Charlotte Lake, and breathtaking cliffside lookouts',
       'Charming heritage bungalows dating back to 1854',
-      'Verified in-room tub amenities guaranteed upon booking'
+      'Verified in-room tub amenities confirmed upon booking'
     ]
   },
 
@@ -1719,7 +1719,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gujarat’s sole hill station with pleasant year-round mountain climate',
       'Saputara Lake boating, ropeway rides, and sunset viewpoints',
       'Peaceful weekend respite for couples from Surat, Ahmedabad, and Mumbai',
-      'Accurate room tier verification with guaranteed private bathtubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1736,7 +1736,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The #1 luxury ski and mountain resort in North America',
       'Ski-in/ski-out direct mountain access and five-star dining',
       'Cozy fireplace warmth paired with hydrotherapy baths',
-      'Guaranteed private in-room bathtubs verified on all channels'
+      'Private in-room bathtubs verified on all channels'
     ]
   },
 
@@ -1753,7 +1753,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Miles of pristine Pacific beaches and historic Coronado Island',
       'Vibrant Gaslamp nightlife, dining, and rooftop lounges',
       'Year-round perfect romantic getaway weather',
-      'Triple-verified private in-room tubs on all booking platforms'
+      'Verified private in-room tubs on all booking platforms'
     ]
   },
 
@@ -1770,7 +1770,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled live jazz, French Quarter romance, and Creole cuisine',
       'Historic 1800s landmark hotels and famous literary suites',
       'Intimate courtyard pools and private whirlpool suites',
-      'Accurate room tier verification with zero false positives'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1804,7 +1804,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Steps from the National Aquarium, Fells Point cobblestones, and Inner Harbor',
       'Romantic waterfront promenade dining and historic charm',
       'Exceptional value for private jacuzzi suites within easy reach of Washington D.C.',
-      'Triple-verified room specifications with guaranteed private tubs'
+      'Verified room specifications with private tubs'
     ]
   },
 
@@ -1821,7 +1821,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Minutes from Country Club Plaza shopping, historic fountains, and dining',
       'World-class 18th & Vine jazz clubs and celebrated culinary scene',
       'Spacious romantic suites with exceptional Midwestern hospitality',
-      'Verified partner booking links with guaranteed in-room tubs'
+      'Verified partner booking links with in-room tubs'
     ]
   },
 
@@ -1838,7 +1838,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class AAA Five Diamond lakeside luxury resorts and spas',
       'Michelin-starred dining and championship golf at your doorstep',
       'Quiet luxury retreats secluded from theme park bustle',
-      'Triple-verified in-room tubs guaranteed across booking partners'
+      'Verified in-room tubs available across booking partners'
     ]
   },
 
@@ -1855,7 +1855,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'America’s premier desert resort and wellness spa destination',
       'Dramatic terracotta sunrises and Old Town Scottsdale dining',
       'World-famous golf and luxury poolside cabanas',
-      'Guaranteed in-room tubs with confirmed room tiers'
+      'In-room tubs with confirmed room tiers'
     ]
   },
 
@@ -1872,7 +1872,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Crystal-clear alpine lake shores and world-renowned ski slopes',
       'Cozy fireside romance for winter getaways and summer beach retreats',
       'Slope-side ski-in/ski-out five-star lodges and private cottages',
-      'Accurate room tier verification with guaranteed private bathtubs'
+      'Clear room tier details with private in-room bathtubs'
     ]
   },
 
@@ -1889,7 +1889,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Opulent 120-year-old royal palace architecture and live classical music',
       'Historic hill fort known as the "Gibraltar of India"',
       'Intimate private royal suites with luxury deep soaking baths',
-      'Triple-verified room tiers guaranteed across all travel platforms'
+      'Verified room tiers available across all travel platforms'
     ]
   },
 
@@ -1906,7 +1906,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Minutes from iconic suspension bridges, Triveni Ghat evening aarti, and yoga ashrams',
       'Peaceful riverside wellness sanctuaries tailored for romantic retreats and rejuvenation',
       'Seamless access to river rafting, Rajaji National Park safaris, and organic cafes',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -1923,7 +1923,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Close proximity to Kaba Gandhi No Delo, Watson Museum, and vibrant handicraft markets',
       'Refined and serene suites perfect for couples seeking peaceful Saurashtra getaways',
       'Generous suite layouts with dedicated workspaces and authentic Kathiyawadi dining',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -1940,7 +1940,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled views and sunrise access to the Taj Mahal and historic Agra Fort',
       'World-class romantic heritage hospitality celebrating timeless Mughal romance',
       'Fine-dining Mughlai restaurants and luxury spa pavilions on-site',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -1957,7 +1957,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Steps from the Golden Temple, Jallianwala Bagh, and iconic culinary hubs',
       'Intimate, peaceful sanctuaries for couples after experiencing evening temple ceremonies',
       'Convenient shuttles to the Wagah Border retreat ceremony and airport',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -1974,7 +1974,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Front-row access to Sula Vineyards, boutique winery tasting rooms, and Godavari ghats',
       'Idyllic weekend wine country escape designed for romantic anniversaries and couples',
       'Boutique vineyard resort villas pairing private plunge baths with farm-to-fork dining',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -1991,7 +1991,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene beachfront access away from crowded shores with red crab-dotted sands',
       'Intimate coastal retreat for couples craving quiet seaside sunrises and candlelight dinners',
       'Short, scenic driving distance from Kolkata for spontaneous romantic weekend escapes',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -2008,7 +2008,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Minutes from Nek Chand\'s Rock Garden, Sukhna Lake promenades, and Sector 17 shopping',
       'Refined urban oasis for couples seeking a stylish, contemporary weekend staycation',
       'Spacious modernist suites with five-star dining and tranquil garden landscapes',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -2025,7 +2025,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spectacular proximity to Table Land, Sydney Point, and fresh strawberry farm trails',
       'Crisp highland air and mist-shrouded valleys ideal for cozy romantic retreats',
       'Private mountain-view chalets offering secluded luxury and artisanal Maharashtrian dining',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -2042,7 +2042,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Convenient access to historic Surajkund, the annual Crafts Mela, and Aravalli nature trails',
       'Peaceful green retreat for Delhi NCR couples seeking quiet weekend staycations',
       'Expansive resort grounds featuring golf courses, fine dining, and wellness spas',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
@@ -2059,13 +2059,13 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Surrounded by historic landmarks including Taj-ul-Masajid, Bhojtal, and Jehan Numa heritage estates',
       'Royal Nawabi charm and serene lakefront sunsets perfect for romantic escapes',
       'Gateway to UNESCO World Heritage treasures at Sanchi and Bhimbetka',
-      'Triple-verified across leading travel platforms'
+      'Verified across leading travel platforms'
     ]
   },
 
   // Default fallback for other destinations
   'default': {
-    intro: 'Discover handpicked hotels with private in-room bathtubs and jacuzzi suites curated for couples seeking romantic getaways. Every property is triple-verified across MakeMyTrip, Agoda, and Booking.com.',
+    intro: 'Discover handpicked hotels with private in-room bathtubs and jacuzzi suites curated for couples seeking romantic getaways. Every property is verified across MakeMyTrip, Agoda, and Booking.com.',
     amenities: [
       'Private in-room deep soaking bathtubs',
       'Jacuzzi suites with multi-jet hydrotherapy',
@@ -2074,9 +2074,9 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Secluded, intimate bathroom layouts for couples'
     ],
     whyChoose: [
-      'Guaranteed in-room tubs — no shared public spa pools',
+      'In-room tubs — no shared public spa pools',
       'Ideal for honeymoons, anniversaries, and romantic weekends',
-      'Triple-verified across leading travel platforms',
+      'Verified across leading travel platforms',
       'Direct links with transparent pricing and flexible cancellation'
     ]
   },
@@ -2216,7 +2216,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s most iconic overwater honeymoon destination',
       'Unsurpassed lagoon privacy with private boat transfers and outrigger canoe breakfasts',
       'World-class coral reef snorkeling right beneath your bungalow',
-      'Every luxury property verified with guaranteed in-suite tubs'
+      'Every luxury property verified with in-suite tubs'
     ]
   },
 
@@ -2252,7 +2252,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spectacular mix of turquoise lagoons and dramatic Le Morne peaks',
       'Renowned Mauritian five-star hospitality and Michelin-caliber dining',
       'Ideal year-round destination for romantic honeymoons and anniversaries',
-      'Triple-verified room tiers with guaranteed private in-room tubs'
+      'Verified room tiers with private in-room tubs'
     ]
   },
 
@@ -2270,7 +2270,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-renowned Fijian warmth and private island tranquility',
       'Adults-only romantic resorts surrounded by vibrant coral reefs',
       'Intimate private beachfront bures designed exclusively for couples',
-      'Guaranteed private in-room bathtubs verified on all platforms'
+      'Private in-room bathtubs verified on all platforms'
     ]
   },
 
@@ -2287,7 +2287,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant music, theatre, dining, and culture right outside your door',
       'Unique architectural heritage hotels and modern 5-star towers',
       'Convenient rail links to London, Edinburgh, and Peak District getaways',
-      'Every bathtub suite independently confirmed on Booking.com'
+      'Every bathtub suite confirmed on partner sites on Booking.com'
     ]
   },
 
@@ -2321,7 +2321,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Romantic waterfront promenades, Chinese fishing nets, and sunset cruises',
       'Award-winning heritage conversions with intimate boutique privacy',
       'Gateway to Kerala’s backwaters, Marari Beach, and Munnar hill tea estates',
-      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+      'Verified room tiers with private in-room bathtubs'
     ]
   },
 
@@ -2355,7 +2355,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant cafe culture, trendy microbreweries, and heritage landmarks',
       'Convenient weekend drive from Mumbai via the Mumbai-Pune Expressway',
       'Extensive selection of 5-star international chains with couple privacy',
-      'No shared spa facilities — every listed bathtub is 100% in-room'
+      'No shared spa facilities — every listed bathtub is in-room'
     ]
   },
 
@@ -2372,7 +2372,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Legendary food streets at Sarafa Bazaar and 56 Dukan for couple foodies',
       'Exceptional value for premium 5-star suite accommodations',
       'Centrally located with easy access to Ujjain and Mandu heritage getaways',
-      'Verified room tiers guaranteeing private bathtubs upon check-in'
+      'Verified room tiers featuring private bathtubs upon check-in'
     ]
   },
 
@@ -2389,7 +2389,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class fine dining, luxury malls, and rooftop cocktail lounges',
       'Effortless staycation access from Delhi and Indira Gandhi International Airport',
       'Highest concentration of 5-star luxury brand suites in North India',
-      'Every listing triple-checked for verified in-room bathtub guarantees'
+      'Every listing checked for verified in-room bathtub amenities'
     ]
   },
 
@@ -2457,7 +2457,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Peaceful, rejuvenating atmosphere for couples seeking spiritual wellness',
       'Close proximity to Raja Ji National Park and scenic Rishikesh',
       'Pure vegetarian fine dining and serene riverside meditative stays',
-      'Every bathtub suite independently confirmed for private in-room use'
+      'Every bathtub suite confirmed on partner sites for private in-room use'
     ]
   },
 
@@ -2491,7 +2491,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Classic hill station romance with boat rides, ropeway views, and Mall Road walks',
       'Historic colonial-era properties brimming with nostalgic charm',
       'Cool mountain escape within driving distance from Delhi NCR',
-      'Triple-verified room tiers to ensure private in-room tubs'
+      'Verified room tiers to ensure private in-room tubs'
     ]
   },
 
@@ -2508,7 +2508,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Cool year-round weather, boating on Kodai Lake, and scenic Coaker’s Walk',
       'Secluded luxury chalets ideal for honeymoons and quiet couple getaways',
       'Serene South Indian hill retreat away from urban crowds',
-      'Guaranteed private in-room tubs verified on Booking.com and Agoda'
+      'Private in-room tubs verified on Booking.com and Agoda'
     ]
   },
 
@@ -2525,7 +2525,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Prime gateway location with seamless access to Chandigarh, Shimla, and Kasauli',
       'High-value 5-star accommodations with top-tier spa and pool amenities',
       'Discreet, couple-friendly atmosphere with hassle-free check-in',
-      'Triple-verified across online booking channels for guaranteed tubs'
+      'Verified across online booking channels for confirmed tubs'
     ]
   },
 
@@ -2542,7 +2542,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Relaxing sea-beach walks, fresh coastal seafood, and romantic sunsets',
       'Popular weekend train or road trip escape from Kolkata',
       'New-generation upscale resort properties offering complete privacy',
-      'Guaranteed in-room tubs independently verified'
+      'In-room tubs verified on partner sites'
     ]
   },
 
@@ -2593,7 +2593,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spectacular monsoon clouds, mountain trails, and the Vipassana meditation center',
       'Under 2.5 hours scenic drive from Mumbai and Thane',
       'Unmatched couple privacy in standalone villas and luxury wellness resorts',
-      'All listed bathtub suites triple-checked for verified in-room tubs'
+      'All listed bathtub suites checked for verified in-room tubs'
     ]
   },
 
@@ -2627,7 +2627,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled views of the world’s third-highest peak from your room',
       'Intimate historic heritage properties with vintage British-era elegance',
       'Romantic walks through tea gardens and along the historic Mall',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -2644,7 +2644,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Cool year-round weather, waterfalls, and vibrant music culture',
       'Peaceful sanctuary for couples exploring Meghalaya’s natural wonders',
       'Intimate boutique lodges with personalized Khasi hospitality',
-      'Guaranteed private in-room bathtubs verified on partner platforms'
+      'Private in-room bathtubs verified on partner platforms'
     ]
   },
 
@@ -2678,7 +2678,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Popular coastal weekend road trip from Mumbai, Surat, and Vapi',
       'Historic Portuguese forts, lighthouse, and relaxing sandy beaches',
       'Couple-friendly beachside luxury resorts with full privacy',
-      'Triple-verified across online booking platforms'
+      'Verified across online booking platforms'
     ]
   },
 
@@ -2712,7 +2712,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Convenient luxury hub connecting Bagdogra Airport and New Jalpaiguri',
       'Top 5-star international hotel chains with excellent dining and spas',
       'Relaxing rest stop before or after mountain explorations',
-      'Guaranteed in-room tubs independently verified'
+      'In-room tubs verified on partner sites'
     ]
   },
 
@@ -2729,7 +2729,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quiet, uncrowded alternative to Ooty and Kodaikanal for couples',
       'Pleasant mountain climate with scenic boating on Yercaud Lake',
       'Intimate plantation retreats offering supreme privacy and peace',
-      'Every bathtub suite triple-checked across verified booking partners'
+      'Every bathtub suite checked across verified booking partners'
     ]
   },
 
@@ -2763,7 +2763,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quick weekend getaway from Mumbai without long driving times',
       'Proximity to Karnala Fort, bird sanctuary, and Gadelshwar Lake',
       'High-value modern 4-star and 5-star accommodations with full couple privacy',
-      'Triple-verified room tiers with guaranteed private in-room bathtubs'
+      'Verified room tiers with private in-room bathtubs'
     ]
   },
 
@@ -2780,7 +2780,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Comfortable sanctuary near Shri Krishna Janmabhoomi and Vrindavan temples',
       'Pure vegetarian dining, serene gardens, and couple/family privacy',
       'Well-managed boutique hotels offering modern comforts in sacred Braj',
-      'Independent verification guaranteeing private in-room tubs'
+      'Independent verification featuring private in-room tubs'
     ]
   },
 
@@ -2797,7 +2797,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted the world’s leading honeymoon destination for couples and anniversaries',
       'Iconic architectural sanctuaries offering complete privacy without fourth walls',
       'Nearby volcanic drive-in volcano, Sulphur Springs mud baths, and Diamond Falls',
-      'Every bathtub suite independently confirmed for guaranteed private in-room tubs'
+      'Every bathtub suite confirmed on partner sites for private in-room tubs'
     ]
   },
 
@@ -2814,7 +2814,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous reggae culture, beachfront dining, and catamaran sunset cruises',
       'Extensive selection of luxury adults-only all-inclusive couple sanctuaries',
       'Convenient direct flights from major US and UK airport hubs',
-      'Triple-verified across online booking platforms for authentic private tubs'
+      'Verified across online booking platforms for authentic private tubs'
     ]
   },
 
@@ -2831,7 +2831,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pristine powdery white beaches, private island boat charters, and vibrant marine life',
       'Historic colonial charm blended with 5-star international luxury resorts',
       'Quick and effortless nonstop travel access from the US East Coast and London',
-      'Strictly confirmed in-room bathtub guarantees on every listing'
+      'Strictly confirmed in-room bathtub amenities on every listing'
     ]
   },
 
@@ -2848,7 +2848,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Warm tropical weather and calm turquoise waters ideal for couple relaxation',
       'World-renowned all-inclusive luxury resort options with private butler service',
       'Exceptional value for ultra-luxury suite and villa experiences',
-      'Verified room tiers guaranteeing private bathtubs upon check-in'
+      'Verified room tiers featuring private bathtubs upon check-in'
     ]
   },
 
@@ -2865,7 +2865,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Grace Bay Beach consistently rated among the best beaches in the world',
       'Uncrowded, tranquil island atmosphere offering elite couple privacy',
       'World-class scuba diving, coral reefs, and romantic sunset yacht charters',
-      'Every listing independently verified for authentic in-room bathtub luxury'
+      'Every listing verified on partner sites for authentic in-room bathtub luxury'
     ]
   },
 
@@ -2882,13 +2882,13 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous dining scene known as the culinary capital of the Caribbean',
       'Historic UNESCO World Heritage garrison architecture and platinum beaches',
       'Elegant, intimate boutique luxury hotels tailored for romantic couples',
-      'Triple-verified room specifications with guaranteed private in-room tubs'
+      'Verified room specifications with private in-room tubs'
     ]
   },
 
   // Aruba - Palm Beach
   'palm-beach-aruba': {
-    intro: 'Palm Beach in Aruba, known as "One Happy Island", sits conveniently outside the hurricane belt, guaranteeing calm sunny skies year-round. Relax in luxury high-rise beach resorts featuring private balcony jacuzzi tubs and deep master soaking baths.',
+    intro: 'Palm Beach in Aruba, known as "One Happy Island", sits conveniently outside the hurricane belt, offering calm sunny skies year-round. Relax in luxury high-rise beach resorts featuring private balcony jacuzzi tubs and deep master soaking baths.',
     amenities: [
       'Private balcony jacuzzi hot tubs enjoying constant cooling trade winds',
       'Deep freestanding soaking bathtubs with premium Aloe Vera bath amenities',
@@ -2896,10 +2896,10 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spacious double-vanity bathrooms with walk-in glass rainfall showers'
     ],
     whyChoose: [
-      'Guaranteed year-round sunny tropical weather outside the Caribbean hurricane zone',
+      'Sunny tropical weather outside the Caribbean hurricane zone',
       'Vibrant nightlife, beachfront restaurants, and calm clear swimming waters',
       'Renowned warm hospitality and safe, couple-friendly island atmosphere',
-      'All listings verified across Booking.com and Agoda with guaranteed tubs'
+      'All listings verified across Booking.com and Agoda with confirmed tubs'
     ]
   },
 
@@ -2916,7 +2916,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'America’s premier tropical honeymoon capital with legendary surf and sunsets',
       'World-class luxury beachfront resorts with full couple-friendly privacy',
       'Direct access to Kalakaua Avenue shopping, fine dining, and catamaran sails',
-      'Every listing verified across Booking.com and Agoda for guaranteed private tubs'
+      'Every listing verified across Booking.com and Agoda for private tubs'
     ]
   },
 
@@ -2950,7 +2950,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous Michelin-starred dining, legendary wineries, and private tastings',
       'Intimate boutique luxury lodges offering discreet couple privacy',
       'Scenic hot air balloon rides over misty morning vine canopies',
-      'Independent verification confirming guaranteed private in-room bathtubs'
+      'Independent verification confirming private in-room bathtubs'
     ]
   },
 
@@ -2967,7 +2967,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant nightlife on Duval Street balanced with tranquil hidden alley romance',
       'Year-round subtropical warmth, snorkeling on coral reefs, and sailing cruises',
       'Charming adults-only boutique inns designed specifically for couples',
-      'Triple-verified room tiers to guarantee private in-room tubs'
+      'Verified room tiers to feature private in-room tubs'
     ]
   },
 
@@ -2984,7 +2984,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted America’s most romantic city for couple weekend getaways',
       'Celebrated Lowcountry culinary scene, carriage rides, and historic charm',
       'Exceptional boutique hospitality with evening wine receptions and turndown',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3001,7 +3001,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Prime base for exploring the Golden Circle, Blue Lagoon, and Northern Lights tours',
       'World-famous geothermal wellness culture and thermal springs',
       'Chic Nordic architecture with cutting-edge Icelandic culinary dining',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3018,7 +3018,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World’s premier destination for Northern Lights expeditions and whale watching',
       'Recharge in steaming hot water under dancing green auroras in total intimacy',
       'Vibrant Arctic maritime culture, polar dining, and midnight sun experiences',
-      'Triple-verified room tiers ensuring genuine in-room bathtubs'
+      'Verified room tiers ensuring genuine in-room bathtubs'
     ]
   },
 
@@ -3035,7 +3035,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Official hometown of Santa Claus and ultimate romantic Arctic winter wonderland',
       'Unrivaled views of the Northern Lights directly from your steaming private tub',
       'Husky sledding, snowmobile safaris, and reindeer sleigh rides outside your door',
-      'Guaranteed private tub suites verified across Booking.com and Agoda'
+      'Private tub suites verified across Booking.com and Agoda'
     ]
   },
 
@@ -3069,7 +3069,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The global capital of "hygge" — intimate, cozy comfort designed for couples',
       'World-renowned gastronomy from cozy bakeries to multi-starred culinary temples',
       'Walkable and bike-friendly historic neighborhoods, palaces, and harbor baths',
-      'Every hotel suite vetted on Booking.com and Agoda for guaranteed tub amenities'
+      'Every hotel suite vetted on Booking.com and Agoda for confirmed tub amenities'
     ]
   },
 
@@ -3086,7 +3086,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Stunning high-altitude romance overlooking Gangnam and central Seoul neon skylines',
       'World-class Korean culinary culture, K-beauty wellness spas, and vibrant night markets',
       'Ultra-modern luxury suites in iconic towers like Lotte World Tower and Signiel',
-      'Every bathtub listing independently verified across Booking.com and Agoda'
+      'Every bathtub listing verified on partner sites across Booking.com and Agoda'
     ]
   },
 
@@ -3103,7 +3103,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'South Korea’s premier honeymoon and romantic island retreat',
       'Spectacular natural wonders including Seongsan Ilchulbong, waterfalls, and white sand beaches',
       'Subtropical climate offering year-round warm soaking under starry coastal skies',
-      'Guaranteed private in-room bathtubs verified on Booking.com and Agoda'
+      'Private in-room bathtubs verified on Booking.com and Agoda'
     ]
   },
 
@@ -3120,7 +3120,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the world’s few capital cities with direct natural volcanic hot springs in hotel rooms',
       'Legendary night market gastronomy, Michelin-starred dining, and rich cultural heritage',
       'Peaceful mountain wellness just 30 minutes from vibrant downtown Taipei',
-      'Triple-verified accommodations ensuring authentic in-room hot spring tubs'
+      'Verified accommodations ensuring authentic in-room hot spring tubs'
     ]
   },
 
@@ -3154,7 +3154,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class beach resorts offering incredible luxury value for couples',
       'Golden Dragon Bridge, Ba Na Hills, and UNESCO-listed Hoi An Ancient Town minutes away',
       'Vibrant coastal culinary scene featuring fresh seafood and French-Vietnamese fusion',
-      'Triple-verified bathtub guarantees on Booking.com and Agoda'
+      'Verified bathtub amenities on Booking.com and Agoda'
     ]
   },
 
@@ -3171,7 +3171,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Atmospheric cobblestone alleys, boutique art galleries, and historic rampart walks',
       'Golden southern beaches of Unawatuna and Mirissa just minutes away for whale watching',
       'Tranquil tropical sanctuary blending European heritage with warm Sri Lankan hospitality',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3188,7 +3188,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The crown jewel of romantic honeymoon escapes on the Amalfi Coast',
       'Unmatched panoramic sunset vistas over Sirenuse islands and sapphire waters',
       'Cliffside Michelin-starred dining, private wooden boat charters, and Path of the Gods hiking',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3205,7 +3205,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The vibrant cultural and culinary capital of the French Riviera',
       'Stroll the sunlit Promenade des Anglais, vibrant flower markets, and Old Nice alleys',
       'Perfect luxury base for exploring Monaco, Cannes, and perched medieval villages like Èze',
-      'Triple-verified accommodations guaranteeing genuine in-room bathtubs'
+      'Verified accommodations featuring genuine in-room bathtubs'
     ]
   },
 
@@ -3222,7 +3222,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage medieval majesty paired with pristine crystal-clear waters',
       'Stroll centuries-old marble streets, ancient city ramparts, and secluded cliffside bars',
       'Private yacht day trips to the unspoiled Elaphiti Islands directly from hotel piers',
-      'Every bathtub suite independently verified on Booking.com and Agoda'
+      'Every bathtub suite verified on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3239,7 +3239,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Ultimate exotic couple retreat blending Berber traditions with palatial luxury',
       'Tranquil private courtyard oases hidden within the bustling UNESCO-listed Medina',
       'Exquisite Moroccan gastronomy, private desert excursions, and world-class spa pampering',
-      'Guaranteed private in-room soaking tubs verified across Booking.com and Agoda'
+      'Private in-room soaking tubs verified across Booking.com and Agoda'
     ]
   },
 
@@ -3256,7 +3256,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the world’s most pristine and romantic tropical beach honeymoon destinations',
       'Incredible marine biodiversity for snorkeling, dhow sunset cruises, and dolphin safaris',
       'Historic Stone Town UNESCO romance balanced with private island tranquility',
-      'Every bathtub listing independently verified across Booking.com and Agoda'
+      'Every bathtub listing verified on partner sites across Booking.com and Agoda'
     ]
   },
 
@@ -3273,7 +3273,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gateway to Chile’s celebrated Maipo Valley wineries, Andes ski resorts, and coastal Valparaíso',
       'Vibrant culinary scene with world-ranked restaurants and sophisticated rooftop nightlife',
       'Year-round mountain views paired with luxury urban design hospitality',
-      'Every bathtub listing independently verified on Booking.com and Agoda'
+      'Every bathtub listing verified on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3290,7 +3290,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The "Switzerland of South America" — ultimate Patagonian honeymoon and winter romance',
       'Artisanal chocolate shops, Swiss-style fondues, and world-class craft breweries',
       'Sailing on glacial lakes, alpine hiking, and snow sports at Cerro Catedral',
-      'Guaranteed private in-room bathtubs verified across Booking.com and Agoda'
+      'Private in-room bathtubs verified across Booking.com and Agoda'
     ]
   },
 
@@ -3307,7 +3307,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'South America’s premier wine and gastronomy destination for couples',
       'Exclusive boutique vineyard fincas in the Uco Valley and Luján de Cuyo',
       'Horseback rides through vineyards at sunset paired with world-class cellar dining',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3324,7 +3324,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage cultural sanctuary and direct gateway to Machu Picchu',
       'Incomparable atmospheric romance of cobblestone alleys and ancient Inca stonework',
       'World-renowned Novoandina gastronomy and authentic Peruvian hospitality',
-      'Triple-verified accommodations ensuring genuine in-room soaking tubs'
+      'Verified accommodations ensuring genuine in-room soaking tubs'
     ]
   },
 
@@ -3341,7 +3341,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the world’s most enchanting and vibrant colonial walled cities for couples',
       'Sensory delight of horse-drawn carriages, salsa clubs, and world-class Caribbean dining',
       'Day trips to the pristine coral reefs and turquoise waters of the Rosario Islands',
-      'Every bathtub listing independently confirmed on Booking.com and Agoda'
+      'Every bathtub listing confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3358,7 +3358,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Europe’s premier alpine adventure and luxury wellness haven for couples',
       'Gateway to Jungfraujoch "Top of Europe", Grindelwald, and scenic mountain railways',
       'Pristine crystal-clear glacial air and peaceful lakeside walking promenades',
-      'Every bathtub listing independently confirmed on Booking.com and Agoda'
+      'Every bathtub listing confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3375,7 +3375,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Picture-postcard Swiss romantic destination centered on the historic Chapel Bridge',
       'Paddle steamer cruises across Lake Lucerne and scenic cogwheel train excursions',
       'World-class luxury watch boutiques, Michelin-starred dining, and serene lakefront walks',
-      'Triple-verified accommodations ensuring authentic in-room soaking tubs'
+      'Verified accommodations ensuring authentic in-room soaking tubs'
     ]
   },
 
@@ -3392,7 +3392,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unique fusion of imperial Habsburg history and high-altitude alpine ski culture',
       'Funicular designed by Zaha Hadid ascending from the historic imperial center straight into the mountains',
       'Cozy Tyrolean culinary warmth, strudels, and romantic winter Christmas markets',
-      'Guaranteed private in-room bathtubs verified across Booking.com and Agoda'
+      'Private in-room bathtubs verified across Booking.com and Agoda'
     ]
   },
 
@@ -3409,7 +3409,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Europe’s best-preserved and most affordable UNESCO World Heritage romantic cities',
       'Enchanting cobblestone carriage rides around Rynek Główny (Europe’s largest medieval square)',
       'Rich bohemian café culture, hidden cellar wine bars, and thriving culinary creativity',
-      'Every bathtub suite independently confirmed on Booking.com and Agoda'
+      'Every bathtub suite confirmed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3426,7 +3426,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Poland’s premier mountain romance destination for winter snowscapes and summer hiking',
       'Thermal bath culture fed by natural geothermal subterranean springs across Podhale',
       'Vibrant highlander folklore, traditional grilled oscypek cheese, and fireside evenings',
-      'Triple-verified room tiers ensuring authentic in-room or private terrace hot tubs'
+      'Verified room tiers ensuring authentic in-room or private terrace hot tubs'
     ]
   },
 
@@ -3443,7 +3443,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Widely regarded as one of the most romantic and photogenic lake destinations on Earth',
       'Traditional wooden pletna boat rides to the island to ring the wishing bell with your partner',
       'Tranquil Julian Alps walking trails, Vintgar Gorge, and world-famous Bled cream cake',
-      'Every bathtub listing independently verified across Booking.com and Agoda'
+      'Every bathtub listing verified on partner sites across Booking.com and Agoda'
     ]
   },
 
@@ -3477,7 +3477,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pure romantic tranquility away from high-rise crowds with authentic low-rise Arabian architecture',
       'Sunset dhow cruises along dramatic mountain fjords to spot playful Arabian Sea dolphins',
       'Rich cultural explorations through the Sultan Qaboos Grand Mosque and the historic Mutrah Souq',
-      'Every bathtub listing independently audited for guaranteed private in-room amenities'
+      'Every bathtub listing checked on partner sites for private in-room amenities'
     ]
   },
 
@@ -3511,7 +3511,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Private island resorts just minutes from the vibrant dining hubs of Block 338 in Adliya',
       'Spectacular sunset views over the turquoise waters of the Arabian Gulf and modern skyline',
       'UNESCO-listed pearling pathways, Qal\'at al-Bahrain fortress, and luxury boutique shopping',
-      'Triple-verified across Booking.com and Agoda for guaranteed in-room bathtub amenities'
+      'Verified across Booking.com and Agoda for in-room bathtub amenities'
     ]
   },
 
@@ -3562,7 +3562,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted among the most visually breathtaking and romantic island archipelagos on Earth',
       'Effortless access to private catamarans touring the Big Lagoon, Secret Beach, and Snake Island',
       'Intimate eco-luxury resorts offering private candlelit beach dinners and stargazing over the Sulu Sea',
-      'Every hotel listing independently verified for authentic in-room and private villa bathtub amenities'
+      'Every hotel listing verified on partner sites for authentic in-room and private villa bathtub amenities'
     ]
   },
 
@@ -3579,7 +3579,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous powder-soft white sand that stays pleasantly cool under the tropical midday sun',
       'Romantic sunset paraw sailing cruises, beachfront candlelight dining, and vibrant nightlife',
       'Five-star hospitality retreats like Shangri-La Boracay and Discovery Shores delivering tailored butler service',
-      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room tubs'
+      'Verified across Booking.com and Agoda to ensure private in-room tubs'
     ]
   },
 
@@ -3613,7 +3613,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Southeast Asia\'s most tranquil and soul-soothing romantic destinations with preserved historic charm',
       'Participate in the sacred dawn alms-giving ceremony and explore the multi-tiered turquoise cascades of Kuang Si Falls',
       'Idyllic sunset longtail boat cruises along the Mekong River with French wines and traditional Lao cuisine',
-      'Every bathtub property independently audited to guarantee private in-room soaking amenities'
+      'Every bathtub property checked on partner sites to feature private in-room soaking amenities'
     ]
   },
 
@@ -3647,7 +3647,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage medieval Old Town offering unmatched fairy-tale romantic ambiance year-round',
       'Seamless fusion of ancient Hanseatic heritage and cutting-edge Nordic spa culture',
       'Enchanting snow-covered winter markets, cozy cellar restaurants, and vibrant summer white nights',
-      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room bathtubs'
+      'Verified across Booking.com and Agoda to ensure private in-room bathtubs'
     ]
   },
 
@@ -3664,7 +3664,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Stunning architectural elegance with hundreds of ornate Art Nouveau facades and romantic boulevards',
       'Serene canal boat rides through Bastejkalna park and evening strolls across the historic Dome Square',
       'Affordable European luxury with world-class classical opera, vibrant culinary scene, and boutique stays',
-      'Every hotel listing independently verified for authentic in-room bathtub amenities'
+      'Every hotel listing verified on partner sites for authentic in-room bathtub amenities'
     ]
   },
 
@@ -3698,7 +3698,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Centuries-old sulfur thermal bath culture providing an extraordinary wellness experience found nowhere else',
       'Legendary Georgian hospitality, world-renowned natural wine traditions, and unforgettable supra dining feasts',
       'Romantic cable car rides up to Narikala Fortress and vibrant nighttime strolls along cobblestone Shardeni Street',
-      'Every bathtub listing independently verified across Booking.com and Agoda'
+      'Every bathtub listing verified on partner sites across Booking.com and Agoda'
     ]
   },
 
@@ -3749,7 +3749,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the world\'s most concentrated and walkable historic open-air museum cities',
       'Romantic evening dgħajsa water taxi rides across the Grand Harbour and candlelit courtyard dining',
       'Proximity to St. John\'s Co-Cathedral, Caravaggio masterpieces, and the Upper Barrakka Gardens',
-      'Every bathtub listing independently verified for authentic in-room soaking amenities'
+      'Every bathtub listing verified on partner sites for authentic in-room soaking amenities'
     ]
   },
 
@@ -3766,7 +3766,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the Mediterranean\'s most photogenic and romantic artistic villages, beloved by painters and writers',
       'Sip fragrant pine nut mint tea at Café des Délices while watching fiery Mediterranean sunsets',
       'Minutes from the UNESCO-listed ancient ruins of Carthage and the vibrant artisan souqs of Tunis',
-      'Triple-verified across Booking.com and Agoda to ensure guaranteed private in-room bathtubs'
+      'Verified across Booking.com and Agoda to ensure private in-room bathtubs'
     ]
   },
 
@@ -3783,7 +3783,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'A timeless, poetic romantic escape steeped in ancient Egyptian history and Old World colonial glamour',
       'Private sunset felucca sailing journeys around the botanical gardens of Kitchener’s Island and Philae Temple',
       'Peaceful Nubian warmth, world-class riverfront high tea, and unforgettable desert tranquility',
-      'All listings verified across major booking channels for guaranteed private in-room soaking facilities'
+      'All listings verified across major booking channels for private in-room soaking facilities'
     ]
   },
 
@@ -3817,7 +3817,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of the oldest continuously inhabited and most poetic cities in human history',
       'Unforgettable evening illuminations across the majestic UNESCO-listed Registan Square',
       'Marvel at the sapphire tilework of Shah-i-Zinda necropolis and savor sweet halva at the historic Siab Bazaar',
-      'Triple-verified across Booking.com and Agoda for guaranteed private in-room bathtub amenities'
+      'Verified across Booking.com and Agoda for private in-room bathtub amenities'
     ]
   },
 
@@ -3834,7 +3834,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'A remarkably preserved UNESCO World Heritage ancient city that feels frozen in time',
       'Romantic candlelit dinners along the historic Lyabi-Khauz pool beneath centuries-old mulberry trees',
       'Explore ancient silk weaving, jewelers\' domes (Toqi Zargaron), and the towering Kalyan Minaret',
-      'Every bathtub listing independently audited to guarantee private in-room soaking amenities'
+      'Every bathtub listing checked on partner sites to feature private in-room soaking amenities'
     ]
   },
 
@@ -3885,7 +3885,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'An extraordinarily unique, bucket-list travel escape blending authentic nomadic culture with luxury comfort',
       'Horseback riding across pristine alpine meadows, hiking to Turtle Rock, and exploring the Aryapala Meditation Temple',
       'Absolute tranquility, pure mountain air, and unmatched celestial stargazing with zero light pollution',
-      'Every bathtub listing independently verified for authentic private in-room and terrace amenities'
+      'Every bathtub listing verified on partner sites for authentic private in-room and terrace amenities'
     ]
   },
 
@@ -3902,7 +3902,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class snorkeling and diving at Hol Chan Marine Reserve and the Great Blue Hole',
       'Golf cart cruising, barefoot beachfront dining, and laid-back Caribbean island vibes in San Pedro',
       'Ultra-private boutique beachfront villas tailored for romantic honeymoons and milestone escapes',
-      'Every bathtub and jacuzzi suite independently confirmed for verified private in-room use'
+      'Every bathtub and jacuzzi suite confirmed on partner sites for verified private in-room use'
     ]
   },
 
@@ -3953,7 +3953,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Enchanting colonial ambiance with candlelit courtyards, cobblestone lanes, and baroque church ruins',
       'World-class specialty coffee culture, gourmet volcanic dining, and views of Volcán de Agua and Fuego',
       'Boutique historical hotels offering exceptional colonial charm, romance, and warm hospitality',
-      'Every bathtub suite triple-checked for private in-room and courtyard installations'
+      'Every bathtub suite checked for private in-room and courtyard installations'
     ]
   },
 
@@ -3987,7 +3987,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Cosmopolitan international dining, vibrant rooftop cocktail bars, and rich historic architecture',
       'Fascinating cultural blend of modern global capital, tropical rainforests, and historic canal heritage',
       'Ultra-luxurious 5-star hotel towers and romantic boutique mansions at competitive global rates',
-      'Every bathtub listing independently verified across trusted global booking platforms'
+      'Every bathtub listing verified on partner sites across trusted global booking platforms'
     ]
   },
 
@@ -4021,7 +4021,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Bucket-list romantic safari with Big Five game drives and dawn hot air balloon flights',
       'Intimate all-inclusive luxury camps offering personalized butler service and campfire storytelling',
       'The quintessential African bush bath experience surrounded by raw wilderness',
-      'Every property independently confirmed for authentic private veranda and ensuite soaking baths'
+      'Every property confirmed on partner sites for authentic private veranda and ensuite soaking baths'
     ]
   },
 
@@ -4038,7 +4038,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Life-changing mountain gorilla and golden monkey trekking in pristine cloud forests',
       'Ultra-exclusive architectural lodges celebrated as global benchmarks in sustainable luxury',
       'Soulful Rwandan hospitality, farm-to-table cuisine, and tranquil mountain serenity',
-      'Guaranteed private in-room soaking amenities confirmed across trusted booking channels'
+      'Private in-room soaking amenities confirmed across trusted booking channels'
     ]
   },
 
@@ -4072,7 +4072,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Awe-inspiring close encounters with one of the planet\'s greatest natural spectacles',
       'Sunset cruises on the Zambezi, helicopter flights over the falls, and private island dinners',
       'Timeless romance blending historic heritage elegance with untamed wilderness adventure',
-      'Triple-verified private in-room and veranda tubs without misleading photos'
+      'Verified private in-room and veranda tubs without misleading photos'
     ]
   },
 
@@ -4106,7 +4106,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage medieval Old Town filled with winding cobbled lanes and Venetian architecture',
       'Serene and dramatic coastal fjord scenery unique to Southern Europe',
       'Romantic sunset boat cruises to Our Lady of the Rocks and Perast',
-      'Guaranteed private in-room or terrace tubs confirmed on every listing'
+      'Private in-room or terrace tubs confirmed on every listing'
     ]
   },
 
@@ -4140,7 +4140,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Incredible Mediterranean luxury value along Europe\'s fastest-emerging Riviera',
       'Gateway to the UNESCO World Heritage ancient ruins of Butrint and the turquoise Blue Eye spring',
       'Vibrant coastal promenade with fresh seafood tavernas and lively seaside cafes',
-      'Independently verified private in-room and terrace jacuzzi amenities'
+      'Verified private in-room and terrace jacuzzi amenities'
     ]
   },
 
@@ -4242,7 +4242,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Untouched volcanic wonderland featuring Sete Cidades twin lakes and Furnas thermal springs',
       'World-renowned whale and dolphin watching in the deep Atlantic',
       'Exceptional tranquility, clean air, and farm-to-table Azorean gastronomy',
-      'Guaranteed private in-room and terrace tubs independently confirmed'
+      'Private in-room and terrace tubs confirmed on partner sites'
     ]
   },
 
@@ -4310,7 +4310,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       '\'No Stress\' island philosophy offering pure relaxation, warmth, and soulful Morna music',
       'Year-round sunshine, kite-surfing, turtle watching, and pristine turquoise swimming lagoons',
       'Exceptional tropical island hospitality with unique Afro-Portuguese Creole culture',
-      'Triple-verified private in-room and terrace tubs for guaranteed romance'
+      'Verified private in-room and terrace tubs for romantic getaways'
     ]
   },
 
@@ -4327,7 +4327,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic pink sand beaches, crystal-clear turquoise waters, and world-class offshore reef diving',
       'Timeless British colonial sophistication, harborfront fine dining, and historic parish tranquility',
       'Effortless luxury romantic escape just a short direct flight from the US East Coast',
-      'Guaranteed private in-room and terrace tubs verified across Booking.com and Agoda'
+      'Private in-room and terrace tubs verified across Booking.com and Agoda'
     ]
   },
 
@@ -4344,7 +4344,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous sapphire waters, deserted sandbars, and intimate swimming pig encounters',
       'Pure Out Island privacy and untouched natural romance far from cruise ship crowds',
       'World-class private boating, bonefishing, and snorkeling in crystal-clear visibility',
-      'Triple-verified private in-room and deck soaking tubs for an unforgettable honeymoon'
+      'Verified private in-room and deck soaking tubs for an unforgettable honeymoon'
     ]
   },
 
@@ -4412,7 +4412,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Arguably the most breathtaking tropical lagoon on the planet for ultimate honeymoon seclusion',
       'Private boat charters to One Foot Island and deserted sandbanks for unforgettable picnics',
       'Unspoiled natural paradise with supreme privacy far from mass tourism',
-      'Triple-verified private in-room and overwater tub facilities'
+      'Verified private in-room and overwater tub facilities'
     ]
   },
 
@@ -4429,7 +4429,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Authentic South Pacific culture, ancient Polynesian hospitality, and peaceful island rhythm',
       'Swimming in natural volcanic wonders like the world-famous To Sua Ocean Trench and Lalomanu Beach',
       'Lush tropical rainforest waterfalls, coastal blowholes, and serene mountain vistas',
-      'Guaranteed private in-room and garden bathtubs verified across Booking.com and Agoda'
+      'Private in-room and garden bathtubs verified across Booking.com and Agoda'
     ]
   },
 
@@ -4480,7 +4480,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Untouched tropical island paradise famous for lemur wildlife sanctuaries, whale sharks, and coral atolls',
       'Sensory bliss from rolling ylang-ylang, coffee, and clove plantations perfuming the tropical breeze',
       'Intimate barefoot luxury eco-villas offering total privacy and authentic Malagasy hospitality',
-      'Triple-verified private in-room and terrace soaking tubs for unforgettable romantic escapes'
+      'Verified private in-room and terrace soaking tubs for unforgettable romantic escapes'
     ]
   },
 
@@ -4497,7 +4497,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gateway to the world-class Bazaruto Archipelago Marine National Park with dugongs, dolphins, and flamingos',
       'Romantic traditional dhow sailboat sunset cruises and private sandbank picnics in turquoise waters',
       'Exquisite fresh seafood, cashew nuts, and authentic Mozambican-Portuguese culinary fusion',
-      'Guaranteed private in-room and deck tubs independently verified on Booking.com and Agoda'
+      'Private in-room and deck tubs verified on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -4565,7 +4565,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class Pacific surfing, turtle nesting beaches, and dramatic coastal cliff landscapes',
       'Incredible value for ultra-luxury private villa stays and eco-chic architectural retreats',
       'Vibrant coastal town energy balanced with supreme secluded cove privacy',
-      'Guaranteed private in-room and terrace tubs verified on Booking.com and Agoda'
+      'Private in-room and terrace tubs verified on Booking.com and Agoda'
     ]
   },
 
@@ -4582,7 +4582,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO-listed Handelskade harborfront charm with colorful Dutch baroque merchant architecture',
       'Secluded limestone coves like Grote Knip and Playa Lagun with crystal-clear turquoise waters',
       'Outside the Atlantic hurricane belt, ensuring idyllic romantic sunshine year-round',
-      'Triple-verified private in-room and terrace tubs for romantic couples'
+      'Verified private in-room and terrace tubs for romantic couples'
     ]
   },
 
@@ -4631,7 +4631,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gateway to the Charles Darwin Research Station, Tortuga Bay, and daily uninhabited island boat excursions',
       'Lively waterfront culinary scene featuring fresh catch-of-the-day ceviches and harborfront cocktails',
       'Intimate eco-conscious romantic retreats prioritizing environmental sustainability and privacy',
-      'Guaranteed private in-room and terrace tubs verified on Booking.com and Agoda'
+      'Private in-room and terrace tubs verified on Booking.com and Agoda'
     ]
   },
 
@@ -4648,7 +4648,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'South America’s most fashionable seaside resort with world-class beach clubs, art galleries, and dining',
       'Chic bohemian-luxe atmosphere in nearby Jose Ignacio and iconic sunsets at Casapueblo',
       'Glamorous couple getaways combining Atlantic surf, coastal dunes, and boutique wine estates',
-      'Triple-verified private in-room and terrace tubs for an unforgettable romantic escape'
+      'Verified private in-room and terrace tubs for an unforgettable romantic escape'
     ]
   },
 
@@ -4700,7 +4700,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic mid-century modern architecture and retro Hollywood glamor',
       'Secluded adults-only boutique retreats with complete outdoor bath privacy',
       'Year-round desert sunshine and dramatic mountain landscapes',
-      'Triple-verified in-room and private patio tub amenities on every listing'
+      'Verified in-room and private patio tub amenities on every listing'
     ]
   },
 
@@ -4754,7 +4754,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unmatched natural beauty and restorative wellness atmosphere',
       'Ideal retreat for romantic honeymoons, anniversaries, and mindful getaways',
       'Minutes from iconic hiking trails, scenic canyon drives, and art galleries',
-      'Triple-checked suite listings guaranteeing guaranteed private soaking tubs'
+      'Verified suite listings featuring private soaking tubs'
     ]
   },
 
@@ -4772,7 +4772,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Convenient weekend staycation destination for Delhi-NCR couples',
       'Close access to expressway corridors, premium malls, and golf courses',
       'Modern 5-star hospitality with contemporary wellness and spa facilities',
-      'Verified in-room bathtubs guaranteed on booking through MakeMyTrip and Agoda'
+      'Verified in-room bathtubs confirmed on booking through MakeMyTrip and Agoda'
     ]
   },
 
@@ -4790,7 +4790,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Experience authentic royal heritage at iconic palace hotels like Taj Falaknuma',
       'World-famous Hyderabadi culinary heritage paired with lavish luxury suites',
       'Prime locations spanning historic Old City to bustling Jubilee Hills and HITEC City',
-      'Individually verified across MakeMyTrip, Agoda, and Booking.com for guaranteed tubs'
+      'Verified across MakeMyTrip, Agoda, and Booking.com for confirmed tubs'
     ]
   },
 
@@ -4808,7 +4808,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Peaceful, unhurried hill station escape easily accessible from Chandigarh and Delhi',
       'Crisp mountain air, quiet walking trails, and spectacular sunset viewpoints',
       'Intimate boutique properties and colonial villas offering complete privacy',
-      'Triple-checked listings ensuring confirmed in-room tubs and heating'
+      'Verified listings ensuring confirmed in-room tubs and heating'
     ]
   },
 
@@ -4843,7 +4843,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top spiritual and cultural pilgrimage destination in North India',
       'New generation of five-star and boutique luxury stays',
       'Serene evening Saryu River aarti and historic temples',
-      'Triple-verified in-room bathtub amenities across major OTAs'
+      'Verified in-room bathtub amenities across major OTAs'
     ]
   },
 
@@ -4877,7 +4877,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Premier spiritual getaway destination in Uttar Pradesh',
       'Boutique palace resorts offering tranquil couple retreats',
       'Close proximity to Prem Mandir, ISKCON, and Banke Bihari',
-      'Verified in-room hot tub and bath amenities guaranteed'
+      'Verified in-room hot tub and bath amenities confirmed'
     ]
   },
 
@@ -4894,7 +4894,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quick romantic mountain escape just 45 minutes from Bangalore Airport',
       'World-class golf and wellness resorts with scenic cliff views',
       'Crisp hillside air, paragliding, and historic Tipu’s Drop',
-      'Guaranteed private jacuzzis verified across international platforms'
+      'Private jacuzzis verified across international platforms'
     ]
   },
 
@@ -4911,7 +4911,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pristine UNESCO-protected nature reserve away from commercial hill crowds',
       'Unique boutique treehouse and chalet architecture with private tubs',
       'Ideal base for Jalori Pass and Serolsar Lake treks',
-      'Triple-verified mountain stays with confirmed heating and private baths'
+      'Verified mountain stays with confirmed heating and private baths'
     ]
   },
 
@@ -4928,7 +4928,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quieter, romantic alternative to bustling Darjeeling and Siliguri',
       'Stay in world-famous luxury tea resorts and colonial planter bungalows',
       'Sublime views of Mount Kanchenjunga and misty pine valleys',
-      'Verified luxury bathtub listings with guaranteed tea estate views'
+      'Verified luxury bathtub listings with panoramic tea estate views'
     ]
   },
 
@@ -4962,7 +4962,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of India’s most atmospheric and serene royal heritage settings',
       'World-famous Ahilya Fort hospitality with gourmet organic dining',
       'Authentic Maheshwari handloom weaving and riverboat excursions',
-      'Verified luxury heritage accommodations with guaranteed in-room tubs'
+      'Verified luxury heritage accommodations with in-room tubs'
     ]
   },
 
@@ -5012,7 +5012,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Laid-back, uncrowded island paradise ideal for honeymooners',
       'Vibrant coral reefs, snorkeling, and the famous Natural Bridge',
-      'Exclusive private pool villas with guaranteed luxury tubs',
+      'Exclusive private pool villas with luxury tubs',
       'Individually inspected and verified island accommodations'
     ]
   },
@@ -5030,7 +5030,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Surreal landscapes of white sand dunes surrounded by snowy Himalayas',
       'Ultimate high-altitude luxury comfort after crossing Khardung La',
       'Diskit Monastery, Panamik hot springs, and Turtuk culture',
-      'Verified heating and hot tub guarantees for extreme altitude comfort'
+      'Verified heating and hot tub for extreme altitude comfort'
     ]
   },
 
@@ -5081,7 +5081,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Crisp, crowd-free alternative to neighboring Mussoorie',
       'Snow-capped Himalayan views right from your private bathtub',
       'Close to Surkanda Devi Temple and scenic Eco Park forests',
-      'Triple-verified mountain rooms with guaranteed hot water and tubs'
+      'Verified mountain rooms with reliable hot water and tubs'
     ]
   },
 
@@ -5098,7 +5098,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Home to the historic Ajmer Sharif Dargah and scenic Ana Sagar Lake',
       'Convenient stopover between Jaipur, Pushkar, and Udaipur',
       'Luxury palace hospitality managed by top Indian hotel brands',
-      'Confirmed en-suite bathtub accommodations guaranteed on reservation'
+      'Confirmed en-suite bathtub accommodations confirmed on reservation'
     ]
   },
 
@@ -5132,7 +5132,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Premier spiritual and cultural destination in southern Rajasthan',
       'Iconic Statue of Belief (Vishwas Swaroopam) and Pichwai art legacy',
       'Plush 5-star international and heritage palace accommodations',
-      'Guaranteed private bathtub and jacuzzi amenities across OTAs'
+      'Private bathtub and jacuzzi amenities across OTAs'
     ]
   },
 
@@ -5149,7 +5149,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gateway to Orchha, Khajuraho, and historic Bundelkhand citadels',
       'Comfortable business and leisure hotels with top amenities',
       'Strategic rail and highway hub in central North India',
-      'Individually verified bathtub rooms across major booking platforms'
+      'Verified bathtub rooms across major booking platforms'
     ]
   },
 
@@ -5200,7 +5200,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Deep cultural immersion in Tamil Nadu’s sacred temple heartland',
       'Stay in authentic restored Brahmin village cottages with open-sky tubs',
       'Close to UNESCO World Heritage Chola temples and Mahamaham Tank',
-      'Triple-verified heritage listings ensuring confirmed private tubs'
+      'Verified heritage listings ensuring confirmed private tubs'
     ]
   },
 
@@ -5234,7 +5234,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Accessible, relaxing weekend hill getaway from Chennai and Bangalore',
       'Pleasant year-round climate with uncrowded scenic walking routes',
       'Family and couple-friendly resort suites offering privacy and tubs',
-      'Guaranteed private bathtub amenities verified across booking sites'
+      'Private bathtub amenities verified across booking sites'
     ]
   },
 
@@ -5269,7 +5269,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous honeymoon and anniversary capital of the East Coast',
       'Unmatched novelty tubs and suites designed exclusively for romantic couples',
       'Scenic mountain setting offering hiking, skiing, and lake recreation',
-      'Individually verified across Booking.com and Agoda for guaranteed tub suites'
+      'Verified across Booking.com and Agoda for confirmed tub suites'
     ]
   },
 
@@ -5287,7 +5287,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s most sought-after wedding, anniversary, and honeymoon destination',
       'Unmatched historic grandeur at iconic estates like Grand Hotel Tremezzo and Villa d’Este',
       'Private wooden boat charters departing directly from lakeside hotel docks',
-      'Every lake-view bathtub suite individually verified across booking partners'
+      'Every lake-view bathtub suite verified across booking partners'
     ]
   },
 
@@ -5305,7 +5305,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Breathtaking coastal vistas overlooking the Amalfi Coast and Mount Vesuvius',
       'World-renowned luxury shopping and Michelin-starred cliffside dining',
       'Complete privacy and romantic seclusion in Anacapri and Capri town',
-      'Triple-checked listings guaranteeing private in-room and terrace tubs'
+      'Verified listings featuring private in-room and terrace tubs'
     ]
   },
 
@@ -5323,7 +5323,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous sunset views, cosmopolitan nightlife, and golden beach clubs',
       'Iconic cave pool architecture engineered for ultimate couple romance',
       'Minutes from Little Venice, beach clubs, and seaside tavernas',
-      'Guaranteed private hydrotherapy amenities confirmed on booking'
+      'Private hydrotherapy amenities confirmed on booking'
     ]
   },
 
@@ -5341,7 +5341,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spectacular nightly views of the Symphony of Lights from your bathtub',
       'World-class Michelin-starred dining and premier luxury shopping at your doorstep',
       'Legendary Asian hospitality at flagships like The Ritz-Carlton and Rosewood',
-      'Individually verified skyline soaking baths across all booking platforms'
+      'Verified skyline soaking baths across all booking platforms'
     ]
   },
 
@@ -5359,7 +5359,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Ultra-luxury suite experiences offering world-class entertainment and shopping',
       'Michelin-starred Portuguese and Cantonese fine dining within the resort',
       'Exceptional suite square footage and opulent bathroom craftsmanship',
-      'Triple-checked suite listings with confirmed private jetted whirlpools'
+      'Verified suite listings with confirmed private jetted whirlpools'
     ]
   },
 
@@ -5377,7 +5377,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class ski-in/ski-out access across Whistler and Blackcomb mountains',
       'Cozy, romantic winter ambiance paired with five-star luxury resort amenities',
       'Year-round outdoor recreation from alpine skiing to championship golf and hiking',
-      'Verified in-room fireplaces and private tubs guaranteed on booking'
+      'Verified in-room fireplaces and private tubs confirmed on booking'
     ]
   },
 
@@ -5395,7 +5395,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s most prestigious winter sports destination in Les Trois Vallées',
       'Unrivaled density of Michelin-starred restaurants and high-fashion boutiques',
       'Unmatched privacy, bespoke butler service, and alpine glamour',
-      'Triple-verified suite amenities ensuring confirmed private whirlpools and tubs'
+      'Verified suite amenities ensuring confirmed private whirlpools and tubs'
     ]
   },
 
@@ -5431,7 +5431,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s finest powder snow paired with authentic Japanese onsen culture',
       'Incredible Hokkaido gastronomy featuring fresh seafood, wagyu, and ramen',
       'Tranquil birch forest setting providing deep restorative relaxation',
-      'Individually verified natural spring onsens and private in-room tubs'
+      'Verified natural spring onsens and private in-room tubs'
     ]
   },
 
@@ -5449,7 +5449,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic, unforgettable views of Mount Fuji from your private hot tub',
       'Deep cultural immersion in centuries-old Japanese hospitality (omotenashi)',
       'Serene lakeside walking trails, maple corridors, and cherry blossom vistas',
-      'Guaranteed private onsen tubs confirmed across all booking channels'
+      'Private onsen tubs confirmed across all booking channels'
     ]
   },
 
@@ -5467,7 +5467,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Idyllic tropical island escape perfect for honeymoons and romantic retreats',
       'Luxurious pool villa living with total privacy and personalized butler service',
       'World-class wellness spas and beachside candlelit seafood dining',
-      'Triple-checked private tub and plunge pool amenities on every listing'
+      'Verified private tub and plunge pool amenities on every listing'
     ]
   },
 
@@ -5503,7 +5503,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Trendsetting boho-chic beach vibe with world-class wellness and yoga retreats',
       'Direct proximity to ancient Mayan ruins, sacred cenotes, and coral reefs',
       'Innovative organic gastronomy and intimate candlelit beach clubs',
-      'Individually verified unique bathtub features across all platforms'
+      'Verified unique bathtub features across all platforms'
     ]
   },
 
@@ -5521,7 +5521,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Dramatic natural beauty where arid desert landscapes meet crashing ocean waves',
       'Prime seasonal whale-watching right from your private terrace hot tub',
       'Championship oceanfront golf courses and farm-to-table culinary scenes',
-      'Triple-checked suite listings guaranteeing private soaking tubs and plunge pools'
+      'Verified suite listings featuring private soaking tubs and plunge pools'
     ]
   },
 
@@ -5575,7 +5575,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The only destination in the UK where you can bathe in natural thermal waters',
       'Architectural marvels including the Royal Crescent and the Roman Baths',
       'Idyllic romantic weekend getaway just 90 minutes from London',
-      'Individually verified thermal baths and clawfoot tubs on every listing'
+      'Verified thermal baths and clawfoot tubs on every listing'
     ]
   },
 
@@ -5627,7 +5627,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Consistently voted home to the Caribbean’s best white sand beaches',
       'Unrivaled culinary scene spanning upscale French cuisine to beach shacks',
       'Serene, uncrowded luxury atmosphere designed for couples and honeymooners',
-      'Triple-checked listings guaranteeing private in-room and terrace tubs'
+      'Verified listings featuring private in-room and terrace tubs'
     ]
   },
 
@@ -5663,7 +5663,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Europe’s most romantic and best-preserved medieval towns',
       'Enchanting horse-drawn carriage rides and picturesque canal cruises',
       'Intimate boutique properties offering authentic aristocratic charm',
-      'Triple-checked suite listings with confirmed private bathtubs'
+      'Verified suite listings with confirmed private bathtubs'
     ]
   },
 
@@ -5681,7 +5681,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s premier Big Five game viewing with expert trackers and rangers',
       'Unmatched safari luxury, vintage wine cellars, and campfire boma dining',
       'Complete wilderness privacy in exclusive private game reserves',
-      'Every safari lodge bathtub individually verified for guaranteed views'
+      'Every safari lodge bathtub verified for scenic views'
     ]
   },
 
@@ -5717,7 +5717,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Spiritual and cultural sanctuary with preserved ancient Buddhist traditions',
       'Pristine Himalayan landscapes, dzongs, and the iconic Tiger’s Nest monastery',
       'World-leading sustainable luxury hospitality at Amankora and Six Senses',
-      'Guaranteed private hot-stone and soaking tubs confirmed on booking'
+      'Private hot-stone and soaking tubs confirmed on booking'
     ]
   },
 
@@ -5735,7 +5735,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Australia’s top dining, coffee culture, and live arts entertainment scene',
       'Premier luxury accommodations within walking distance of Crown precinct',
       'Convenient base for day trips to Yarra Valley wineries and Great Ocean Road',
-      'Triple-checked listings guaranteeing private in-room spa baths and tubs'
+      'Verified listings featuring private in-room spa baths and tubs'
     ]
   },
 
@@ -5753,7 +5753,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-famous luxury at qualia and direct access to Whitehaven Beach',
       'Snorkeling and scenic helicopter flights over the Great Barrier Reef and Heart Reef',
       'Idyllic tropical climate and pristine island waters ideal for romance',
-      'Individually verified oceanfront bathtubs across all booking channels'
+      'Verified oceanfront bathtubs across all booking channels'
     ]
   },
 
@@ -5788,7 +5788,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Italy’s historic first capital boasting aristocratic elegance and chocolate mastery',
       'World-class Egyptian Museum and royal residences of the House of Savoy',
       'Intimate boutique palace stays featuring verified private in-room bathtubs',
-      'Guaranteed rate parity and instant confirmation across Booking.com and Agoda'
+      'Instant rate confirmation and instant confirmation across Booking.com and Agoda'
     ]
   },
 
@@ -5804,8 +5804,8 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Historic Clifton Village atmosphere surrounded by Brunel’s engineering marvels',
       'Dynamic harborside dining, independent art, and thriving speakeasy culture',
-      'Romantic Georgian suites featuring guaranteed in-room roll-top bathtubs',
-      'Triple-verified across leading travel platforms with zero shared amenities'
+      'Romantic Georgian suites featuring in-room roll-top bathtubs',
+      'Cross-referenced across leading booking partner platforms'
     ]
   },
 
@@ -5821,7 +5821,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'World-famous street food capital and UNESCO heritage shophouse culture',
       'Legendary Sarkies Brothers luxury hospitality on the Andaman Sea waterfront',
-      'Authentic heritage suites with guaranteed private clawfoot and stone tubs',
+      'Authentic heritage suites with private clawfoot and stone tubs',
       'Verified rates and seamless booking across Agoda and Booking.com'
     ]
   },
@@ -5839,7 +5839,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Historic Alte Oper and Römerberg paired with high-energy cosmopolitan dining',
       'Palatial grand hotel hospitality operating continuously since 1876',
       'Spacious luxury suites with verified in-room tubs for romantic city breaks',
-      'Triple-verified booking links with flexible cancellation on all partners'
+      'Verified booking links with flexible cancellation on all partners'
     ]
   },
 
@@ -5856,7 +5856,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The world’s capital of sauna culture, Nordic gastronomy, and sea fortress charm',
       'Historic 1887 five-star grand luxury right on the Esplanade Park',
       'Unique private in-room sauna and bathtub pairings for couples',
-      'Individually inspected and triple-verified on Booking.com and Agoda'
+      'Individually inspected and verified on Booking.com and Agoda'
     ]
   },
 
@@ -5873,7 +5873,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unsurpassed alpine grandeur framing the pristine blue waters of Lake Geneva',
       'Centuries of Swiss watchmaking excellence and Michelin-starred dining',
       'Ultra-exclusive 5-star palace suites with verified in-room soaking bathtubs',
-      'Direct affiliate reservation links with guaranteed best rate protection'
+      'Direct affiliate reservation links with instant partner confirmation'
     ]
   },
 
@@ -5889,8 +5889,8 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Authentic Neapolitan culture, world-capital pizza, and ancient Spaccanapoli charm',
       'Historic 1882 waterfront hospitality along the Santa Lucia harbor',
-      'Romantic suites featuring guaranteed private bathtubs and sea panoramas',
-      'Triple-verified across leading travel platforms with zero shared amenities'
+      'Romantic suites featuring private bathtubs and sea panoramas',
+      'Cross-referenced across leading booking partner platforms'
     ]
   },
 
@@ -5907,7 +5907,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene lakefront walks and historic Speicherstadt warehouse architecture',
       'World-famous Elbphilharmonie concert hall and vibrant culinary culture',
       'Sculptural luxury suites with verified in-room tubs for couple getaways',
-      'Guaranteed rate parity and instant confirmation across Booking.com and Agoda'
+      'Instant rate confirmation and instant confirmation across Booking.com and Agoda'
     ]
   },
 
@@ -5924,7 +5924,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World capital of port wine with UNESCO World Heritage Ribeira architecture',
       'Michelin-starred gastronomy and breathtaking Douro Valley excursions',
       'Bespoke wine spa suites featuring verified in-room soaking bathtubs',
-      'Triple-verified across leading travel platforms with zero misleading photos'
+      'Verified across leading travel platforms with zero misleading photos'
     ]
   },
 
@@ -5940,7 +5940,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Royal Alcázar, Seville Cathedral, and authentic flamenco tablaos',
       'King Alfonso XIII’s commissioned 1929 royal palace hotel experience',
-      'Intimate courtyard palace suites with guaranteed private in-room bathtubs',
+      'Intimate courtyard palace suites with private in-room bathtubs',
       'Verified rates and seamless booking across Agoda and Booking.com'
     ]
   },
@@ -5958,7 +5958,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World capital of French gastronomy and UNESCO World Heritage Vieux-Lyon',
       'Dramatic hilltop vistas overlooking the Rhône and Saône river confluence',
       'Historic suites with authentic private soaking tubs verified on all channels',
-      'Direct affiliate reservation links with guaranteed best rate protection'
+      'Direct affiliate reservation links with instant partner confirmation'
     ]
   },
 
@@ -6015,7 +6015,7 @@ export function generateCityPageContent(
     : `
       <li><strong>Booking.com:</strong> Instant confirmation with free cancellation and member discounts.</li>
       <li><strong>Agoda:</strong> Competitive rates and exclusive mobile savings worldwide.</li>
-      <li><strong>Direct Partner Channels:</strong> Hand-verified boutique stay channels and flexible reservation options.</li>
+      <li><strong>Direct Partner Channels:</strong> Boutique stay channels and flexible reservation options.</li>
     `;
 
   // US-specific section: targets "soaking tub", "jacuzzi suite", "hot tub in room" queries
@@ -6028,7 +6028,7 @@ export function generateCityPageContent(
       <li><strong>Hot tubs in room</strong> — Private to your room only (not shared). Found at select resort properties.</li>
       <li><strong>Roman soaking tubs</strong> — Oversized, wide, shallow marble tubs. The classic Vegas-style resort tub.</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-4">Every listing has been <strong>individually verified</strong> — not a shared spa, not a walk-in shower. Triple-checked across ${verificationSources}.</p>
+    <p class="text-gray-700 leading-relaxed mb-4">Every listing has been <strong>verified</strong> — not a shared spa, not a walk-in shower. Verified across ${verificationSources}.</p>
   ` : '';
 
   const h2 = isUSA
@@ -6037,7 +6037,7 @@ export function generateCityPageContent(
 
   const introLine2 = isUSA
     ? `Browse <strong>${hotelCount}+ verified hotels</strong> with private soaking tubs, jacuzzi suites, and in-room hot tubs in ${formattedCity} — each individually confirmed across ${verificationSources}.`
-    : `Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property triple-checked across ${verificationSources} to guarantee private in-room tubs without misleading photos.`;
+    : `Explore <strong>${hotelCount}+ verified hotels</strong> with private in-room bathtubs in ${formattedCity} — each property checked across ${verificationSources} to feature private in-room tubs without misleading photos.`;
 
   return `
     <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">${h2}</h2>

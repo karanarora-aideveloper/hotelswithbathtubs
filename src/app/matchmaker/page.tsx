@@ -107,7 +107,7 @@ export default function MatchmakerPage() {
                 <span className="text-3xl mb-3 block">🎯</span>
                 <h3 className="font-bold text-gray-900 text-base mb-2">Zero Guesswork</h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  We don’t just show hotels that have a tub somewhere on the property. Every match guarantees the bathtub or jacuzzi is inside your private room.
+                  We don’t just show hotels that have a tub somewhere on the property. Every match features a bathtub or jacuzzi inside the private room.
                 </p>
               </div>
 
@@ -121,9 +121,9 @@ export default function MatchmakerPage() {
 
               <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                 <span className="text-3xl mb-3 block">🛡️</span>
-                <h3 className="font-bold text-gray-900 text-base mb-2">Triple-Platform Verified</h3>
+                <h3 className="font-bold text-gray-900 text-base mb-2">Partner Room Details</h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Cross-checked against Booking.com, Agoda, and MakeMyTrip room specifications. You always book the right room tier with 100% confidence.
+                  Matched against room details on booking partner listings so you can easily find rooms with private tubs.
                 </p>
               </div>
             </div>

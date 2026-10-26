@@ -17,13 +17,13 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Hostels & Poshtels with Bathtubs',
-  description: 'Boutique hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Experience social backpacker vibes with private soaking luxury.',
+  description: 'Boutique hostels and poshtels featuring private in-room bathtubs & jacuzzis. Experience social backpacker vibes with private soaking luxury.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hostels',
   },
   openGraph: {
     title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
-    description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
+    description: 'Discover verified hostels and poshtels featuring private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
     url: 'https://www.hotelswithbathtubs.com/hostels',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
-    description: 'Discover verified hostels and poshtels featuring guaranteed private in-room bathtubs & jacuzzis.',
+    description: 'Discover verified hostels and poshtels featuring private in-room bathtubs & jacuzzis.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -219,7 +219,7 @@ export default async function HostelsHubPage() {
 
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
               Why choose between meeting fellow travelers and having your own private sanctuary? 
-              Discover handpicked boutique poshtels, co-living lodges, and alpine chalets with guaranteed 
+              Discover handpicked boutique poshtels, co-living lodges, and alpine chalets with 
               private en-suite bathtubs and jacuzzis.
             </p>
 
@@ -227,7 +227,7 @@ export default async function HostelsHubPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
               <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-2xs">
                 <span className="text-lg mb-1 block">🛁</span>
-                <p className="text-xs font-bold text-gray-900">100% Private Tubs</p>
+                <p className="text-xs font-bold text-gray-900">Private Tubs</p>
                 <p className="text-[11px] text-gray-500">Never shared dorm baths</p>
               </div>
               <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-2xs">
@@ -242,7 +242,7 @@ export default async function HostelsHubPage() {
               </div>
               <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-2xs">
                 <span className="text-lg mb-1 block">🔒</span>
-                <p className="text-xs font-bold text-gray-900">Room Guarantee</p>
+                <p className="text-xs font-bold text-gray-900">Verified Room</p>
                 <p className="text-[11px] text-gray-500">Room tier checked</p>
               </div>
             </div>
@@ -424,11 +424,11 @@ export default async function HostelsHubPage() {
               <ul className="list-disc pl-5 space-y-2 text-gray-700">
                 <li>
                   <strong>Social Energy Without Compromise:</strong> Attend rooftop yoga, sunset bonfire jams, 
-                  and guided city treks during the day, then retreat to your private en-suite sanctuary for a soothing shoulder-deep warm water soak at night.
+                  and guided city treks during the day, then retreat to your private en-suite room for a soothing shoulder-deep warm water soak at night.
                 </li>
                 <li>
                   <strong>Affordable Indulgence:</strong> 5-star resorts charge ₹15,000 to ₹35,000+ per night for rooms with bathtubs. 
-                  Boutique poshtels deliver guaranteed private soaking tubs and jacuzzi suites at a fraction of the cost (typically ₹2,500 to ₹5,500).
+                  Boutique poshtels deliver private soaking tubs and jacuzzi suites at a fraction of the cost (typically ₹2,500 to ₹5,500).
                 </li>
                 <li>
                   <strong>Built for Remote Workers &amp; Couples:</strong> Enjoy dedicated co-working tables, reliable plug points, and welcoming couple-friendly check-in policies with zero invasive questioning.

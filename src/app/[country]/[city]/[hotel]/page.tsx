@@ -231,7 +231,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   if (pageDescription.length > 155) {
     pageDescription = `Book the ${roomType} at ${displayName}, ${cityName} for a verified in-room ${tubType.toLowerCase()}.`;
     if (pageDescription.length > 155) {
-      pageDescription = `Verified private ${tubType.toLowerCase()} at ${displayName} in ${cityName}. Book guaranteed in-room tub.`;
+      pageDescription = `Verified private ${tubType.toLowerCase()} at ${displayName} in ${cityName}. Book verified in-room tub.`;
       if (pageDescription.length > 155) {
         pageDescription = `Verified in-room bathtub at ${displayName}, ${cityName}.`;
         if (pageDescription.length > 155) {
@@ -550,7 +550,7 @@ export default async function HotelDetailPage({
           <div className="mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-2.5 font-jakarta">
               <span className="bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full">
-                Sanctuary Audit #HTB-{hotel.slug?.slice(0, 8) || 'VERIFIED'}
+                Verified Listing
               </span>
               <span className="text-xs text-slate-500 font-medium">
                 Verified In-Room Soaking Bath
@@ -605,7 +605,7 @@ export default async function HotelDetailPage({
                 </span>
               )}
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm rounded-full border border-emerald-200/80">
-                <span>✦</span> 100% In-Room Tub Guaranteed
+                <span>✦</span> In-Room Bathtub Confirmed
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-800 font-semibold text-xs sm:text-sm rounded-full border border-sky-200/80">
                 <span className="text-sky-600 font-bold">✓</span> Verified {hotel.crossVerifiedAt || (hotel.updatedAt ? new Date(hotel.updatedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'October 2026')}
@@ -650,7 +650,7 @@ export default async function HotelDetailPage({
               {hotel.roomType && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> to guarantee a private in-room bathtub. Lower room categories at this property may only offer a standard walk-in shower.</span>
+                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub. Lower room categories at this property may only offer a standard walk-in shower.</span>
                 </p>
               )}
 
@@ -698,11 +698,11 @@ export default async function HotelDetailPage({
             </div>
           </div>
 
-          {/* About this Sanctuary */}
+          {/* About this Property */}
           {hotel.description && (
             <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
               <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-3">
-                About this Sanctuary
+                About this Property
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-jakarta">
                 {hotel.description}
@@ -753,10 +753,10 @@ export default async function HotelDetailPage({
             <div className="space-y-4 font-jakarta">
               <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
                 <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  Does {hotel.name} guarantee a private in-room bathtub?
+                  Which room at {hotel.name} has the bathtub?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  Yes, {hotel.name} offers rooms with a private in-room bathtub or jacuzzi. To guarantee this feature, you must reserve the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong> rather than the entry-level shower-only room.
+                  {hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. Always verify this room category when reserving.
                 </p>
               </div>
 
@@ -804,7 +804,7 @@ export default async function HotelDetailPage({
                   <span className="text-sm text-slate-500 font-medium">/ night</span>
                 </div>
                 <p className="text-[11px] text-slate-400 mt-1 leading-normal">
-                  *Historical benchmark rate. Rates exclude taxes &amp; resort fees — shown at partner checkout.
+                  *Rates exclude taxes &amp; resort fees — shown at partner checkout.
                 </p>
               </div>
 
@@ -835,11 +835,11 @@ export default async function HotelDetailPage({
                 </div>
               </div>
 
-              {/* Bathtub Guarantee Checklist */}
+              {/* Bathtub Amenities Checklist */}
               <div className="pt-4 border-t border-[#5b8296]/15 space-y-2 text-xs text-slate-600 font-jakarta">
                 <div className="flex items-center gap-2 font-medium">
                   <span className="text-emerald-700 font-bold">✓</span>
-                  <span>100% In-Room Tub (Never Shared Spa)</span>
+                  <span>Private In-Room Tub</span>
                 </div>
                 <div className="flex items-center gap-2 font-medium">
                   <span className="text-emerald-700 font-bold">✓</span>
@@ -854,12 +854,12 @@ export default async function HotelDetailPage({
               {/* Room Tier Alert in Sidebar */}
               <div className="mt-5 p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 text-xs text-amber-900 leading-snug font-jakarta">
                 <strong className="font-bold block mb-1">Remember:</strong>
-                Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout to guarantee the tub.
+                Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout for the private tub.
               </div>
 
               {/* FTC / ASA Reader Disclosure */}
               <div className="mt-4 pt-3.5 border-t border-[#5b8296]/15 text-[11px] text-slate-500 leading-relaxed font-jakarta">
-                <span className="font-semibold text-slate-700">Reader Disclosure:</span> When you book through our verified partner links, we may earn an affiliate commission at no extra cost to you. This supports our independent room verification audits.
+                <span className="font-semibold text-slate-700">Reader Disclosure:</span> When you book through our partner links, we may earn an affiliate commission at no extra cost to you. This supports our research and maintenance of this guide.
               </div>
             </div>
 
@@ -921,7 +921,7 @@ export default async function HotelDetailPage({
                 More rooms with a bathtub in {cityName}
               </h2>
               <p className="text-sm text-slate-500 mt-1 font-jakarta">
-                Explore alternative romantic stays with guaranteed in-room bathtubs &amp; jacuzzi suites.
+                Explore alternative romantic stays with confirmed in-room bathtubs &amp; jacuzzi suites.
               </p>
             </div>
             <a 

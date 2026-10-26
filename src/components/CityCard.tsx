@@ -72,7 +72,7 @@ export default function CityCard({
     ? totalReviews >= 1000
       ? `${(totalReviews / 1000).toFixed(1)}k+ guest reviews`
       : `${totalReviews} guest reviews`
-    : 'Triple-verified stays';
+    : 'Verified stays';
 
   const defaultPrice = country.toLowerCase() === 'india' ? 'From ₹2,499' : 'From $149';
   const displayPrice = minPrice ? (minPrice.startsWith('From') ? minPrice : `From ${minPrice}`) : defaultPrice;
@@ -152,7 +152,7 @@ export default function CityCard({
             <p className="text-xs text-slate-500 font-medium line-clamp-1 mt-1 flex items-center gap-1.5">
               <span>{reviewsFormatted}</span>
               <span className="hidden sm:inline opacity-40">•</span>
-              <span className="hidden sm:inline text-emerald-700 font-semibold">100% In-Room</span>
+              <span className="hidden sm:inline text-emerald-700 font-semibold">In-Room Tubs</span>
             </p>
           </div>
         </div>

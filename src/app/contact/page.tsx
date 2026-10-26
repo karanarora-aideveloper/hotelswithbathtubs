@@ -65,7 +65,7 @@ export default function ContactPage() {
               Get in Touch with Our Team
             </h1>
             <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-              Have a question about a bathtub suite, noticed a room renovation, or represent a hotel with guaranteed private in-room soaking baths? We would love to hear from you.
+              Have a question about a bathtub suite, noticed a room renovation, or represent a hotel with private in-room soaking baths? We would love to hear from you.
             </p>
           </header>
 

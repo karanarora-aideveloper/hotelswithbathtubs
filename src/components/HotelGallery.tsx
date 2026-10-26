@@ -77,7 +77,7 @@ export default function HotelGallery({
                   src={allImages[0]}
                   data-src={allImages[0]}
                   onError={onImgError}
-                  alt={`${hotelName} - Guaranteed in-room bathtub in ${cityName}`}
+                  alt={`${hotelName} - In-room bathtub in ${cityName}`}
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -163,9 +163,6 @@ export default function HotelGallery({
               <span className="bg-white/95 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
                 <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
               </span>
-              <span className="bg-[#1f262d]/80 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/20 hidden sm:flex items-center gap-1.5">
-                <span className="text-[#8eaab9]">✦</span> Triple-Source Audited
-              </span>
             </div>
 
             {/* "View All Photos" Button (Bottom Right) */}
@@ -200,15 +197,12 @@ export default function HotelGallery({
               <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
                 <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
               </span>
-              <span className="bg-[#1f262d]/75 backdrop-blur-md text-white text-xs font-medium px-3.5 py-1.5 rounded-full border border-white/20 hidden sm:flex items-center gap-1.5">
-                <span className="text-[#8eaab9]">✦</span> Triple-Source Audited
-              </span>
             </div>
 
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white z-10 font-jakarta pointer-events-none">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white mb-2 border border-white/30">
-                  <span>🏷️</span> Guaranteed Tier: {roomType || 'Suite / Deluxe Room with Bathtub'}
+                  <span>🏷️</span> Room Tier: {roomType || 'Suite / Deluxe Room with Bathtub'}
                 </div>
                 <p className="text-xs sm:text-sm text-white/85 font-medium">
                   {verifiedPlatformsText}

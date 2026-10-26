@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Hotels with Soaking Tub in Room (${currentYear})`,
-    description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
+    description: 'Explore hand-picked luxury hotels with private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
     url: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Soaking Tub in Room (${currentYear})`,
-    description: 'Explore hand-picked luxury hotels with guaranteed private in-room deep soaking bathtubs.',
+    description: 'Explore hand-picked luxury hotels with private in-room deep soaking bathtubs.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp'],
   },
 };
@@ -96,7 +96,7 @@ export default async function SoakingTubHotelsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Hotels with Soaking Tub in Room",
-    "description": "Curated collection of verified luxury hotels featuring guaranteed private deep soaking bathtubs and freestanding stone baths in room.",
+    "description": "Curated collection of verified luxury hotels featuring private deep soaking bathtubs and freestanding stone baths in room.",
     "url": "https://www.hotelswithbathtubs.com/soaking-tub-hotels",
   };
 
@@ -142,7 +142,7 @@ export default async function SoakingTubHotelsPage() {
               Hotels with Private Deep Soaking Tubs in Room
             </h1>
             <p className="text-base sm:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed">
-              Every listing verified. Every soaking bath guaranteed. Discover handcrafted stone tubs, Japanese ofuro soaking baths, and freestanding panoramic tubs for the ultimate mindful retreat.
+              Every listing verified. Discover handcrafted stone tubs, Japanese ofuro soaking baths, and freestanding panoramic tubs for the ultimate mindful retreat.
             </p>
           </div>
         </header>
@@ -189,13 +189,13 @@ export default async function SoakingTubHotelsPage() {
           <section className="mb-16">
             <div className="mb-8">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
-                Triple-Verified Inventory
+                Curated Inventory
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2">
                 Hand-Picked Deep Soaking Bath Suites
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                Audited against floorplans and verified traveler photography to ensure deep soaking tubs are private and inside the room.
+                Room categories where booking partners specify a deep soaking tub inside the private suite.
               </p>
             </div>
 
@@ -318,7 +318,7 @@ export default async function SoakingTubHotelsPage() {
                     Valentine's Day Hotels with In-Room Jacuzzis
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                    Hand-verified romantic hotel suites with private couple whirlpool tubs, champagne service, and candlelit ambiance.
+                    Romantic hotel suites featuring private couple whirlpool tubs, champagne service, and candlelit ambiance.
                   </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#1a6fde]">
@@ -331,7 +331,7 @@ export default async function SoakingTubHotelsPage() {
 
           {/* Reader Disclosure & E-E-A-T Assurance */}
           <div className="p-4 bg-slate-50 border border-gray-200 rounded-2xl text-xs text-gray-500 mb-12">
-            <strong>Affiliate Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
+            <strong>Affiliate Disclosure:</strong> When you book through our partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
             <Link href="/editorial-policy" className="text-[#1a6fde] underline">Editorial Policy</Link>.
           </div>
 

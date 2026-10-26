@@ -218,7 +218,7 @@ export default async function Home() {
         "name": "How do I find a hotel with a private bathtub in room?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Use the destination search or browse our curated city collections. Every hotel listed on Hotels with Bathtubs is triple-verified across Booking.com, Agoda, and MakeMyTrip to guarantee the bathtub or jacuzzi is private inside your room."
+          "text": "Use the destination search or browse our curated city collections. Every hotel listed on Hotels with Bathtubs is checked across partner room listings on Booking.com, Agoda, and MakeMyTrip to confirm the bathtub or jacuzzi is private inside your room."
         }
       },
       {

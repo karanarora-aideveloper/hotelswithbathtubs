@@ -376,7 +376,7 @@ export default function Navbar() {
             </span>
             <nav className="flex flex-col space-y-1">
               <Link
-                href="/#verification"
+                href="/how-we-check-bathtubs"
                 prefetch={false}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-main hover:bg-gray-50 hover:text-accent transition-colors"
@@ -386,8 +386,8 @@ export default function Navbar() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                   </svg>
                   <div>
-                    <span className="block">Triple-Verification</span>
-                    <span className="block text-2xs text-text-muted font-normal">How we guarantee private tubs</span>
+                    <span className="block">How We Check</span>
+                    <span className="block text-2xs text-text-muted font-normal">Our room verification method</span>
                   </div>
                 </div>
                 <span className="text-text-muted text-xs">&rarr;</span>
@@ -438,7 +438,7 @@ export default function Navbar() {
             <span>&rarr;</span>
           </Link>
           <p className="text-3xs text-center text-text-muted">
-            Triple-verified across Booking.com &amp; Agoda · Guaranteed private tubs
+            Verified listings across Booking.com &amp; Agoda · Private in-room tubs
           </p>
         </div>
       </div>

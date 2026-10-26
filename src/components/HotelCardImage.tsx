@@ -155,7 +155,7 @@ export default function HotelCardImage({
 
       {/* Pinterest Save Button */}
       <a
-        href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent((currentSrc))}&description=${encodeURIComponent(`${hotelName} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Guaranteed private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
+        href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent((currentSrc))}&description=${encodeURIComponent(`${hotelName} - Verified Luxury Hotel with Private Bathtub in ${cityName}, ${countryName}. Private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="absolute top-3 right-3 bg-red-600/95 hover:bg-red-700 text-white text-[11px] font-bold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full shadow-md flex items-center gap-1 z-10 transition-all opacity-90 sm:opacity-0 group-hover/image:opacity-100"

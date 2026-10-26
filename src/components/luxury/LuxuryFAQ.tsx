@@ -3,7 +3,7 @@ import React from 'react';
 const FAQS = [
   {
     q: 'How do I find a hotel with a private bathtub in room?',
-    a: 'Use the destination search or browse our curated city collections. Every hotel listed on Hotels with Bathtubs is triple-verified across Booking.com, Agoda, and MakeMyTrip to guarantee the bathtub or jacuzzi is private inside your room, never in a shared spa or wellness floor.',
+    a: 'Use the destination search or browse our curated city collections. Every hotel listed on Hotels with Bathtubs is checked across Booking.com, Agoda, and partner listings to confirm the bathtub or jacuzzi is private inside your room, never in a shared spa or wellness floor.',
   },
   {
     q: 'What is the difference between a soaking bathtub and a jacuzzi suite?',

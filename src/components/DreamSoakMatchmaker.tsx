@@ -117,9 +117,9 @@ const TUB_OPTIONS = [
   {
     id: 'any_tub' as TubId,
     label: 'Surprise Me with Any Luxury Tub',
-    tagline: 'Show top-rated guaranteed bathtub suites across all styles',
+    tagline: 'Show top-rated bathtub suites across all styles',
     emoji: '✨',
-    highlight: 'Guaranteed Bathtub Suite',
+    highlight: 'Private Bathtub Suite',
   },
 ];
 
@@ -613,7 +613,7 @@ export default function DreamSoakMatchmaker({
           </h1>
         )}
         <p className="mt-2 text-sm sm:text-base text-gray-600">
-          Can&apos;t decide on a destination? Tell us your dream soaking fantasy and we&apos;ll match you with triple-verified luxury suites worldwide.
+          Can&apos;t decide on a destination? Tell us your dream soaking fantasy and we&apos;ll match you with curated luxury suites worldwide.
         </p>
       </div>
 
@@ -697,7 +697,7 @@ export default function DreamSoakMatchmaker({
           <div className="text-center mb-6">
             <span className="text-3xl mb-1 block">🛁</span>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900">What’s your dream bathtub style?</h3>
-            <p className="text-sm text-gray-500 mt-1">Every listing has guaranteed in-room tubs — pick your preferred type</p>
+            <p className="text-sm text-gray-500 mt-1">Every listing features an in-room tub — pick your preferred type</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1023,9 +1023,6 @@ export default function DreamSoakMatchmaker({
                                 {amenity}
                               </span>
                             ))}
-                            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[11px] font-semibold border border-emerald-200">
-                              Triple Verified
-                            </span>
                           </div>
                         )}
                       </div>

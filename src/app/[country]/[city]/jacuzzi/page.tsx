@@ -277,7 +277,7 @@ export default async function CityJacuzziHotelsPage({
         "name": `Are the jacuzzis in ${cityName} hotel rooms completely private?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes. Every property featured on this page guarantees that the whirlpool jacuzzi or jetted tub is located directly inside your private guest room or on your secluded suite balcony — never in a communal hotel spa or public wellness area.`
+          "text": `Yes. Every property featured on this page confirms that the whirlpool jacuzzi or jetted tub is located directly inside your private guest room or on your secluded suite balcony — never in a communal hotel spa or public wellness area.`
         }
       },
       {
@@ -285,7 +285,7 @@ export default async function CityJacuzziHotelsPage({
         "name": `Which hotels in ${cityName} offer the best private jacuzzi in room?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Top-rated hotels in ${cityName} with guaranteed in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing has been verified with direct room category tracking.`
+          "text": `Top-rated hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing has been verified with direct room category tracking.`
         }
       },
       {
@@ -348,7 +348,7 @@ export default async function CityJacuzziHotelsPage({
             Hotels with Jacuzzi in Room in {cityName}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-            Every suite verified with guaranteed private hydrotherapy whirlpool jets, in-room jacuzzis, and romantic hot tubs in {cityName}, {countryName}. Zero shared spa facilities.
+            Every suite verified with private hydrotherapy whirlpool jets, in-room jacuzzis, and romantic hot tubs in {cityName}, {countryName}.
           </p>
         </div>
       </header>
@@ -359,7 +359,7 @@ export default async function CityJacuzziHotelsPage({
           <svg className="w-5 h-5 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>100% Private In-Room Jacuzzi</span>
+          <span>Private In-Room Jacuzzi</span>
         </div>
         <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
           <svg className="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">

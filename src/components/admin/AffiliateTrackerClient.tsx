@@ -72,7 +72,7 @@ export default function AffiliateTrackerClient({ trackers }: { trackers: any[] }
           Your Affiliate Pitch Template
         </h3>
         <p className="text-blue-800 text-sm leading-relaxed pr-24" id="pitch-text">
-          Hotels with Bathtubs is a premium travel directory tailored for couples seeking romantic getaways. We rigorously cross-verify hotel amenities across MakeMyTrip, Agoda, and Booking.com to guarantee that every listed property features a private in-room bathtub or jacuzzi. By solving a major pain point—inaccurate hotel amenity listings—we attract a highly targeted audience with strong booking intent, resulting in excellent conversion rates for our OTA partners.
+          Hotels with Bathtubs is a premium travel directory tailored for couples seeking romantic getaways. We cross-check hotel amenities across MakeMyTrip, Agoda, and Booking.com to confirm that every listed property features a private in-room bathtub or jacuzzi. By solving a major pain point—inaccurate hotel amenity listings—we attract a highly targeted audience with strong booking intent, resulting in excellent conversion rates for our OTA partners.
         </p>
         <button 
           onClick={(e) => {

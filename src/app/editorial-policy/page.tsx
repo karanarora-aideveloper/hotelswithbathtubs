@@ -4,13 +4,13 @@ import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Editorial Policy & Verification Standards',
-  description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
+  description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
   alternates: {
     canonical: '/editorial-policy',
   },
   openGraph: {
     title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
-    description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
+    description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
     url: 'https://www.hotelswithbathtubs.com/editorial-policy',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
-    description: 'Learn about our rigorous 3-step hotel verification process, editorial independence, and how we guarantee authentic in-room bathtubs & jacuzzi suites.',
+    description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -77,13 +77,13 @@ export default function EditorialPolicyPage() {
                 <li>The hotel underwent bathroom renovations and replaced traditional tubs with walk-in showers without updating OTA photos.</li>
               </ul>
               <p className="mt-3">
-                HotelsWithBathtubs was founded to eliminate this uncertainty through rigorous, independent room-tier auditing.
+                HotelsWithBathtubs was founded to provide transparent room-tier information.
               </p>
             </section>
 
             <section className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-gray-200">
               <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-                2. Our 3-Step Verification Methodology
+                2. How We Check Rooms
               </h2>
               <div className="space-y-4 text-xs sm:text-sm">
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-2xs">
@@ -92,27 +92,27 @@ export default function EditorialPolicyPage() {
                     Room-Tier Inventory Cross-Referencing
                   </h3>
                   <p className="text-gray-600">
-                    We independently audit room specifications across Booking.com, Agoda, MakeMyTrip, and partner inventory networks. We identify the exact room tier code (e.g. &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is contractual, and explicitly guide users to select that tier.
+                    We check room specifications across Booking.com, Agoda, MakeMyTrip, and partner inventory networks. We identify the specific room tier (such as &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is listed, and guide users to select that tier.
                   </p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-2xs">
                   <h3 className="font-bold text-gray-900 text-sm mb-1 flex items-center gap-2">
                     <span className="w-6 h-6 rounded-full bg-[#1a6fde] text-white flex items-center justify-center text-xs">2</span>
-                    Photographic &amp; Floorplan Inspection
+                    Photographic &amp; Listing Details
                   </h3>
                   <p className="text-gray-600">
-                    Every property listing is cross-checked against verified guest review photos and property floorplans to guarantee that the bathtub or jacuzzi is private, enclosed, and situated directly inside the guest bedroom or en-suite bathroom.
+                    Property listings are checked against partner photos and room details to confirm that the bathtub or jacuzzi is private to that guest room.
                   </p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-2xs">
                   <h3 className="font-bold text-gray-900 text-sm mb-1 flex items-center gap-2">
                     <span className="w-6 h-6 rounded-full bg-[#1a6fde] text-white flex items-center justify-center text-xs">3</span>
-                    Continuous Automated &amp; Editorial Audits
+                    Regular Link &amp; Inventory Updates
                   </h3>
                   <p className="text-gray-600">
-                    Hotels continually update their room layouts. Our auditing pipeline monitors link integrity, partner availability, and user feedback weekly to correct outdated listings and deprecate properties that replace bathtubs with showers.
+                    Hotels continually update their room layouts. Our pipeline monitors link integrity, partner availability, and user feedback to update outdated listings and remove properties that replace bathtubs with showers.
                   </p>
                 </div>
               </div>
@@ -120,27 +120,27 @@ export default function EditorialPolicyPage() {
               {/* Visual Methodology Walkthrough Card */}
               <div className="mt-6 p-5 sm:p-6 bg-gradient-to-br from-gray-900 to-slate-800 rounded-2xl text-white">
                 <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 mb-2">
-                  <span>🎥</span>
-                  <span className="uppercase tracking-wider">Visual Inspection Standard</span>
+                  <span>ℹ️</span>
+                  <span className="uppercase tracking-wider">Listing Details</span>
                 </div>
                 <h3 className="font-heading text-lg sm:text-xl font-bold mb-2">
-                  Field &amp; Digital Audit Walkthrough
+                  Room Details &amp; Checkouts
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
-                  Our verification scouts examine photographic clues that automated scrapers miss: mirror reflections confirming enclosed bathroom boundaries, plumbing fixtures distinguishing private tubs from communal hydro-spa pools, and exact contractual room tier labeling on booking checkouts.
+                  We look at partner listings to confirm room tier names, bathtub types, and partner booking links before adding a property to our directory.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="bg-white/10 p-3 rounded-xl border border-white/10">
-                    <strong className="block text-white mb-1">01. Inventory Code</strong>
-                    <span className="text-gray-300">Matching property rate codes to guaranteed tub categories.</span>
+                    <strong className="block text-white mb-1">01. Room Category</strong>
+                    <span className="text-gray-300">Matching property rate codes to tub categories.</span>
                   </div>
                   <div className="bg-white/10 p-3 rounded-xl border border-white/10">
-                    <strong className="block text-white mb-1">02. Enclosure Audit</strong>
-                    <span className="text-gray-300">Confirming 100% private walls — never shared facilities.</span>
+                    <strong className="block text-white mb-1">02. Private Room</strong>
+                    <span className="text-gray-300">Confirming in-room tubs rather than shared spa pools.</span>
                   </div>
                   <div className="bg-white/10 p-3 rounded-xl border border-white/10">
-                    <strong className="block text-white mb-1">03. Weekly Parity</strong>
-                    <span className="text-gray-300">Continuous link &amp; price health validation across OTAs.</span>
+                    <strong className="block text-white mb-1">03. Regular Updates</strong>
+                    <span className="text-gray-300">Monitoring link availability across partner sites.</span>
                   </div>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function EditorialPolicyPage() {
               </p>
               <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-gray-600 mt-2">
                 <li>Bathtub quality, tub dimensions, and room aesthetics (clawfoot, whirlpool, freestanding, mountain/ocean view)</li>
-                <li>Aggregated guest satisfaction scores across verified traveler platforms</li>
+                <li>Aggregated guest satisfaction scores across traveler review platforms</li>
                 <li>Value for money, neighborhood convenience, and romance factor</li>
               </ul>
             </section>

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Hotels with Hot Tub in Room (${currentYear})`,
-    description: 'Explore verified romantic hotels featuring guaranteed private in-room hot tubs, private balcony jacuzzis, and hydrotherapy suites.',
+    description: 'Explore verified romantic hotels featuring private in-room hot tubs, private balcony jacuzzis, and hydrotherapy suites.',
     url: 'https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Hot Tub in Room (${currentYear})`,
-    description: 'Explore verified romantic hotels featuring guaranteed private in-room hot tubs.',
+    description: 'Explore verified romantic hotels featuring private in-room hot tubs.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -148,7 +148,7 @@ export default async function HotelsWithHotTubInRoomPage() {
               Hotels with Private In-Room Hot Tubs &amp; Jacuzzi Suites
             </h1>
             <p className="text-base sm:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed">
-              No shared community spas. No guesswork. Every listing independently audited so you get a private, in-suite hot tub or jetted whirlpool inside your room.
+              No guesswork. We list rooms where booking partners specify a private in-room hot tub or jetted whirlpool.
             </p>
           </div>
         </header>
@@ -195,13 +195,13 @@ export default async function HotelsWithHotTubInRoomPage() {
           <section className="mb-16">
             <div className="mb-8">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
-                Triple-Verified Inventory
+                Curated Inventory
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2">
                 Hand-Picked In-Room Hot Tub &amp; Jacuzzi Suites
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                Independently audited across room inventories and verified traveler photos to guarantee a private hot tub inside the room.
+                Checked across partner room listings and traveler photos for private hot tubs inside the room.
               </p>
             </div>
 
@@ -324,7 +324,7 @@ export default async function HotelsWithHotTubInRoomPage() {
                     Valentine's Day Hotels with In-Room Jacuzzis
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                    Hand-verified romantic hotel suites with private couple whirlpool tubs, champagne service, and candlelit ambiance.
+                    Romantic hotel suites featuring private couple whirlpool tubs, champagne service, and candlelit ambiance.
                   </p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#1a6fde]">
@@ -337,7 +337,7 @@ export default async function HotelsWithHotTubInRoomPage() {
 
           {/* Reader Disclosure & E-E-A-T Assurance */}
           <div className="p-4 bg-slate-50 border border-gray-200 rounded-2xl text-xs text-gray-500 mb-12">
-            <strong>Affiliate Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
+            <strong>Affiliate Disclosure:</strong> When you book through our partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
             <Link href="/editorial-policy" className="text-[#1a6fde] underline">Editorial Policy</Link>.
           </div>
 

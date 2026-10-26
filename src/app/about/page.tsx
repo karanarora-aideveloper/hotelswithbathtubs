@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about Hotels With Bathtubs, our verification process, and our commitment to helping travelers find guaranteed in-room bathtubs & jacuzzi suites.',
+  description: 'Learn about Hotels With Bathtubs, how we check room listings, and our commitment to helping travelers find private in-room bathtubs & jacuzzi suites.',
   alternates: {
     canonical: '/about',
   },
@@ -17,7 +17,7 @@ export default function AboutUs() {
             About Hotels With Bathtubs
           </h1>
           <p className="text-text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-            Your independent, expert guide to discovering verified luxury hotels with guaranteed private in-room bathtubs &amp; jacuzzi suites worldwide.
+            Your independent guide to discovering verified luxury hotels with private in-room bathtubs &amp; jacuzzi suites worldwide.
           </p>
         </header>
 
@@ -28,25 +28,25 @@ export default function AboutUs() {
           
           <h2>Our Mission</h2>
           <p>
-            Planning a romantic anniversary, a honeymoon, or a relaxing weekend staycation should be joyful and stress-free. Yet finding a hotel room that <em>guarantees</em> a private in-room bathtub is one of the most frustrating challenges in travel booking. Too often, online travel agencies show photos of bathtubs that turn out to be located in shared spa facilities or only exist in ultra-exclusive penthouse suites, leaving guests with a standard standing shower upon arrival.
+            Planning a romantic anniversary, a honeymoon, or a relaxing weekend staycation should be joyful and stress-free. Yet finding a hotel room that features a private in-room bathtub is one of the most frustrating challenges in travel booking. Too often, online travel agencies show photos of bathtubs that turn out to be located in shared spa facilities or only exist in ultra-exclusive penthouse suites, leaving guests with a standard standing shower upon arrival.
           </p>
           <p>
-            Our mission is simple: eliminate that uncertainty. We do the meticulous research and cross-validation so you can book with complete peace of mind.
+            Our mission is simple: eliminate that uncertainty. We do the research and partner-listing checks so you can book with confidence.
           </p>
 
-          <h2>Our Triple-Verification System</h2>
+          <h2>How We Check Rooms</h2>
           <p>
-            Every property listed in our directory undergoes our proprietary <strong>Triple-Verification Process</strong>:
+            To curate our directory, we check rooms using booking partner listings:
           </p>
           <ul>
-            <li><strong>Room Specification Audit:</strong> We cross-reference verified guest room inventories across major reservation channels including Booking.com, Expedia, Agoda, and direct hotel property systems to ensure the bathtub is strictly inside the guest room or private suite, not in a shared public spa.</li>
+            <li><strong>Room Specification Checks:</strong> We cross-reference guest room listings across major reservation channels including Booking.com, Expedia, Agoda, and direct hotel property systems to confirm the bathtub is inside the guest room or private suite, not in a shared public spa.</li>
             <li><strong>Specific Room Tier Identification:</strong> We identify the exact room category name (such as &ldquo;Executive Suite with Bathtub&rdquo; or &ldquo;Deluxe Jacuzzi Room&rdquo;) and provide direct booking guidance so guests don&rsquo;t accidentally select base-tier rooms with standing showers.</li>
-            <li><strong>Continuous Link &amp; Inventory Auditing:</strong> Hotel room configurations change over time. Our automated and manual auditing monitors booking link integrity and amenity confirmation on a weekly basis.</li>
+            <li><strong>Regular Link &amp; Inventory Updates:</strong> Hotel room configurations change over time. Our automated and manual checks monitor booking link integrity and amenity details on a regular basis.</li>
           </ul>
 
           <h2>Editorial Independence &amp; Integrity</h2>
           <p>
-            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Every property is curated strictly based on verified amenities, guest review scores, and room quality. While we participate in verified affiliate programs with major OTAs (Booking.com, Expedia, Agoda, Trip.com) to maintain our research platform free for readers, our editorial rankings remain 100% independent.
+            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Every property is curated strictly based on listed amenities, guest review scores, and room quality. While we participate in affiliate programs with major OTAs (Booking.com, Expedia, Agoda, Trip.com) to maintain our research platform free for readers, our editorial rankings remain editorially independent.
           </p>
 
           <h2>Contact &amp; Editorial Feedback</h2>

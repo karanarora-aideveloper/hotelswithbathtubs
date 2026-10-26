@@ -21,7 +21,7 @@ export default function AuthorBio() {
             Founder &amp; Travel Editor · HotelsWithBathtubs.com
           </p>
           <p className="text-xs sm:text-sm text-text-muted leading-relaxed font-serif mb-3">
-            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan pioneered the platform&rsquo;s <strong>Triple-Verification Methodology</strong>. Every hotel and jacuzzi suite featured on this site is independently audited across room inventories on Booking.com, Agoda, MakeMyTrip, and partner networks to guarantee authentic, in-room soaking experiences for couples and honeymooners.
+            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan founded Hotels with Bathtubs to document confirmed in-room tubs. Every hotel and jacuzzi suite featured on this site is checked against partner room listings on Booking.com, Agoda, MakeMyTrip, and partner networks to highlight authentic in-room soaking experiences for couples and honeymooners.
           </p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-semibold text-accent-secondary">
             <Link href="/about" prefetch={false} className="hover:text-accent underline transition-colors">

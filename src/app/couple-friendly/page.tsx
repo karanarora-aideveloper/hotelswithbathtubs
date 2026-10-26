@@ -18,7 +18,7 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Couple-Friendly Hotels with Bathtubs',
-  description: 'Hand-picked couple-friendly hotels and romantic suites featuring guaranteed private in-room bathtubs and jacuzzis. Unmarried couples welcome, 100% private.',
+  description: 'Hand-picked couple-friendly hotels and romantic suites featuring private in-room bathtubs and jacuzzis. Unmarried couples welcome, private suites.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/couple-friendly',
   },
@@ -65,7 +65,7 @@ const ROMANTIC_DESTINATIONS = [
 export default async function CoupleFriendlyPage() {
   await connectToDatabase();
 
-  // Top romantic hotels with guaranteed tubs & high ratings
+  // Top romantic hotels with confirmed tubs & high ratings
   const topRomanticHotels = await Hotel.find({
     flagged: { $ne: true },
     rating: { $gte: 4.4 },
@@ -205,7 +205,7 @@ export default async function CoupleFriendlyPage() {
               Couple-Friendly Hotels with Private Bathtubs &amp; Jacuzzis
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-rose-100/90 font-medium max-w-2xl mx-auto leading-relaxed">
-              Curated romantic escapes, anniversary suites, and weekend staycations. Hand-verified room categories with zero shared tubs and judgment-free check-ins.
+              Curated romantic escapes, anniversary suites, and weekend staycations with private in-room bathtubs and hassle-free check-ins.
             </p>
           </div>
         </header>
@@ -217,8 +217,8 @@ export default async function CoupleFriendlyPage() {
               🔒
             </div>
             <div>
-              <p className="font-bold text-gray-900 text-sm">100% Private In-Room Tubs</p>
-              <p className="text-xs text-gray-500">Inside your private room — zero communal spa facilities.</p>
+              <p className="font-bold text-gray-900 text-sm">Private In-Room Tubs</p>
+              <p className="text-xs text-gray-500">Inside your private room or suite rather than a shared spa.</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -235,7 +235,7 @@ export default async function CoupleFriendlyPage() {
               🛡️
             </div>
             <div>
-              <p className="font-bold text-gray-900 text-sm">Triple-Checked Inventory</p>
+              <p className="font-bold text-gray-900 text-sm">Verified Inventory</p>
               <p className="text-xs text-gray-500">Verified across Booking.com &amp; Agoda room tiers.</p>
             </div>
           </div>
@@ -248,7 +248,7 @@ export default async function CoupleFriendlyPage() {
               Explore Top Romantic Destinations
             </h2>
             <p className="text-sm text-gray-600">
-              Browse hand-verified bathtub and jacuzzi suites across premier honeymoon and weekend getaway hubs.
+              Browse bathtub and jacuzzi suites across premier honeymoon and weekend getaway hubs.
             </p>
           </div>
 
@@ -288,7 +288,7 @@ export default async function CoupleFriendlyPage() {
             <div>
               <span className="text-xs font-bold text-rose-600 uppercase tracking-wider">Editor&apos;s Romantic Selection</span>
               <h2 className="font-heading text-2xl sm:text-3xl font-black text-gray-900 mt-1">
-                Top-Rated Suites with Guaranteed In-Room Bathtubs
+                Top-Rated Suites with Private In-Room Bathtubs
               </h2>
             </div>
             <p className="text-xs text-gray-500 max-w-sm">
@@ -404,13 +404,13 @@ export default async function CoupleFriendlyPage() {
                 <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100">
                   <h3 className="font-bold text-gray-900 text-sm mb-1">🛁 Confirm the Room Tier</h3>
                   <p className="text-xs text-gray-600">
-                    Base rooms often only offer walk-in showers. Always reserve the room category explicitly named &ldquo;Suite with Bathtub&rdquo; or &ldquo;Jacuzzi King&rdquo; to guarantee your tub.
+                    Base rooms often only offer walk-in showers. Always reserve the room category explicitly named &ldquo;Suite with Bathtub&rdquo; or &ldquo;Jacuzzi King&rdquo; to secure your tub.
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-purple-50/60 border border-purple-100">
-                  <h3 className="font-bold text-gray-900 text-sm mb-1">✨ Privacy Guaranteed</h3>
+                  <h3 className="font-bold text-gray-900 text-sm mb-1">✨ Private In-Room Soaking</h3>
                   <p className="text-xs text-gray-600">
-                    All bathtubs and jacuzzis listed in our catalog are 100% private and located inside your guest room quarters or private villa patio.
+                    All bathtubs and jacuzzis listed in our catalog are private and located inside your guest room quarters or private villa patio.
                   </p>
                 </div>
               </div>
@@ -473,7 +473,7 @@ export default async function CoupleFriendlyPage() {
                 Are the bathtubs and jacuzzis private?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Yes. Our strict triple-verification standard ensures that bathtubs and jacuzzis are completely private and situated within your private room or suite, never in a communal wellness area.
+                Yes. We catalogue rooms where booking partner listings indicate a private bathtub or jacuzzi in the room or suite, rather than a shared spa.
               </p>
             </div>
             <div className="bg-white p-5 rounded-2xl border border-gray-200">

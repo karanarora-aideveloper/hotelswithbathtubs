@@ -28,7 +28,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'From Napa Valley vineyard soaking tubs to Pacific Coast jacuzzi suites and alpine mountain retreats.',
     metaTitle: 'Hotels with Bathtub in California: Top Jacuzzi & Soaking Suites (2026)',
     metaDescription: 'Discover 60+ verified hotels with private in-room bathtubs, jacuzzi suites & deep soaking tubs across California. Napa, LA, Lake Tahoe & San Diego.',
-    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways. Whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe, every property in our California guide features guaranteed private in-room tubs.',
+    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways. Whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe, every property in our California guide features verified private in-room tubs.',
     highlights: [
       {
         region: 'Napa Valley & Wine Country',
@@ -232,7 +232,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'Manhattan skyline soaking tubs, Tribeca loft deep baths, and Central Park luxury couple suites.',
     metaTitle: 'Hotels with Bathtub in New York: Top NYC Jacuzzi Suites (2026)',
     metaDescription: 'Find verified hotels with private in-room bathtubs & jacuzzi suites in New York State & NYC. Deep soaking tubs with Manhattan skyline views.',
-    intro: 'New York offers some of the most spectacular hotel bathrooms in the world. After a day exploring Manhattan’s world-class museums, Broadway theaters, and Michelin-starred dining, nothing compares to relaxing in a private soaking tub overlooking the city skyline. Our New York guide hand-checks every room to guarantee private in-room tubs.',
+    intro: 'New York offers some of the most spectacular hotel bathrooms in the world. After a day exploring Manhattan’s world-class museums, Broadway theaters, and Michelin-starred dining, nothing compares to relaxing in a private soaking tub overlooking the city skyline. Our New York guide highlights confirmed private in-room tubs.',
     highlights: [
       {
         region: 'Manhattan (SoHo, Tribeca & Village)',
@@ -304,7 +304,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'Rocky Mountain alpine hot tubs, ski chalet fireside jacuzzis, and luxury Aspen spa retreats.',
     metaTitle: 'Hotels with Bathtub in Colorado: Rocky Mountain Jacuzzi Suites (2026)',
     metaDescription: 'Find verified Colorado hotels & mountain chalets with private in-room bathtubs & hot tubs. Aspen ski-in ski-out luxury suites verified for couples.',
-    intro: 'Colorado is America’s premier alpine playground, where crisp mountain air and snow-dusted peaks make a hot soak the ultimate reward. From historic Victorian mountain lodges like Hotel Jerome in Aspen to ski-in/ski-out chalets with private balcony hot tubs, our Colorado collection guarantees authentic in-room tubs and jetted spas.',
+    intro: 'Colorado is America’s premier alpine playground, where crisp mountain air and snow-dusted peaks make a hot soak the ultimate reward. From historic Victorian mountain lodges like Hotel Jerome in Aspen to ski-in/ski-out chalets with private balcony hot tubs, our Colorado collection features authentic in-room tubs and jetted spas.',
     highlights: [
       {
         region: 'Aspen & Roaring Fork Valley',
@@ -335,7 +335,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-venetian-resort-las-vegas-las-vegas-1.webp',
     tagline: 'Las Vegas Strip oversized jacuzzi suites, Bellagio fountain views, and penthouse Roman tubs.',
     metaTitle: 'Hotels with Bathtub in Nevada: Las Vegas Jacuzzi Suites (2026)',
-    metaDescription: 'Discover verified Nevada hotels with private in-room jacuzzi suites & deep soaking tubs on the Las Vegas Strip. Hand-verified romantic couple stays.',
+    metaDescription: 'Discover verified Nevada hotels with private in-room jacuzzi suites & deep soaking tubs on the Las Vegas Strip. Romantic couple stays.',
     intro: 'Nevada is the world capital of entertainment and luxury hospitality. The Las Vegas Strip features some of the grandest suites ever created, boasting oversized Italian marble jetted tubs, Roman hydrotherapy baths, and penthouse jacuzzis with sweeping views of the neon skyline and dancing fountains.',
     highlights: [
       {
@@ -472,7 +472,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'From historic Savannah squares with clawfoot soaking tubs to Buckhead Atlanta skyline jacuzzi suites.',
     metaTitle: 'Hotels with Bathtub in Georgia: Top 25+ Jacuzzi & Soaking Suites (2026)',
     metaDescription: 'Find verified hotels with private in-room bathtubs and jacuzzi suites in Georgia. Hand-checked romantic suites in Atlanta & Savannah.',
-    intro: 'Georgia effortlessly blends deep Southern heritage with vibrant urban sophistication. From the Spanish-moss-canopied squares and 19th-century Victorian verandas of historic Savannah to the glittering skyline towers and lush residential avenues of Buckhead Atlanta, our Georgia guide features hand-verified private in-room bathtubs, deep soaking tubs, and couple jacuzzi suites.',
+    intro: 'Georgia effortlessly blends deep Southern heritage with vibrant urban sophistication. From the Spanish-moss-canopied squares and 19th-century Victorian verandas of historic Savannah to the glittering skyline towers and lush residential avenues of Buckhead Atlanta, our Georgia guide features private in-room bathtubs, deep soaking tubs, and couple jacuzzi suites.',
     highlights: [
       {
         region: 'Historic Savannah & Riverfront',
@@ -564,7 +564,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'Willamette Valley vineyard soaking tubs, Willamette Riverfront suites, and historic downtown Portland boutique retreats.',
     metaTitle: 'Hotels with Bathtub in Oregon: Top Portland & Wine Country Suites (2026)',
     metaDescription: 'Find verified hotels with private in-room bathtubs in Oregon. Portland boutique hotels, Willamette Valley vineyard soaking tubs & spa suites.',
-    intro: 'Oregon combines rich culinary culture, lush Willamette Valley vineyards, and rugged Pacific Northwest landscapes. Whether you are retreating to a vineyard spa with deep soaking tubs overlooking pinot noir vines or booking a historic boutique hideaway in downtown Portland with clawfoot bathtubs, our Oregon collection ensures guaranteed in-room tubs.',
+    intro: 'Oregon combines rich culinary culture, lush Willamette Valley vineyards, and rugged Pacific Northwest landscapes. Whether you are retreating to a vineyard spa with deep soaking tubs overlooking pinot noir vines or booking a historic boutique hideaway in downtown Portland with clawfoot bathtubs, our Oregon collection highlights verified in-room tubs.',
     highlights: [
       {
         region: 'Portland & Willamette Valley',

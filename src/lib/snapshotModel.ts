@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
+import { sanitizePlaceholderText } from '@/lib/location';
 
 type Doc = Record<string, any>;
 type Filter = Record<string, any>;
@@ -18,6 +19,13 @@ function load(file: string): Doc[] {
     let raw = JSON.parse(fs.readFileSync(path.join(process.cwd(), '.cache', file), 'utf8')) as Doc[];
     if (file === 'all-hotels.json') {
       raw = raw.filter((d) => !isDuplicateDropSlug(d.slug));
+    }
+    if (file === 'all-blogs.json') {
+      for (const d of raw) {
+        if (d.content && typeof d.content === 'string') d.content = sanitizePlaceholderText(d.content);
+        if (d.excerpt && typeof d.excerpt === 'string') d.excerpt = sanitizePlaceholderText(d.excerpt);
+        if (d.title && typeof d.title === 'string') d.title = sanitizePlaceholderText(d.title);
+      }
     }
     for (const d of raw) for (const k of DATE_FIELDS) if (typeof d[k] === 'string') d[k] = new Date(d[k]);
     cache.set(file, raw);

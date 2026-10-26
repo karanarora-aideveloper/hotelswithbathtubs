@@ -152,7 +152,7 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
               Iconic Bathtub Suites
             </h2>
             <p className="text-sm text-[#6B6964] mt-2 max-w-xl">
-              Hand-verified suites where the bathtub is the central architectural feature of the room.
+              Suites where the bathtub is a standout feature of the room.
             </p>
           </div>
 
