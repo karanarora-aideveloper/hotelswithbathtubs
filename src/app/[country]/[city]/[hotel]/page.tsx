@@ -12,6 +12,7 @@ import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
+import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip } from '@/lib/evidence';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -46,6 +47,10 @@ async function getCachedHotelMap() {
       ...h,
       description: sanitizePlaceholderText(h.description),
       landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
+      bookingTip: sanitizeBookingTip(h.bookingTip),
+      amenities: Array.isArray(h.amenities)
+        ? h.amenities.filter((a: any) => typeof a !== 'string' || !/gourmet\s+kitchen/i.test(a))
+        : h.amenities,
     };
     if (cleanH.slug) {
       map.set(cleanH.slug, cleanH);
@@ -227,15 +232,15 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   let pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
 
   const roomType = hotel.roomType || 'Room with Bathtub';
-  let pageDescription = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for a verified in-room ${tubType.toLowerCase()}.`;
+  let pageDescription = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for an in-room ${tubType.toLowerCase()}.`;
   if (pageDescription.length > 155) {
-    pageDescription = `Book the ${roomType} at ${displayName}, ${cityName} for a verified in-room ${tubType.toLowerCase()}.`;
+    pageDescription = `Book the ${roomType} at ${displayName}, ${cityName} for an in-room ${tubType.toLowerCase()}.`;
     if (pageDescription.length > 155) {
-      pageDescription = `Verified private ${tubType.toLowerCase()} at ${displayName} in ${cityName}. Book verified in-room tub.`;
+      pageDescription = `Private in-room ${tubType.toLowerCase()} at ${displayName} in ${cityName}.`;
       if (pageDescription.length > 155) {
-        pageDescription = `Verified in-room bathtub at ${displayName}, ${cityName}.`;
+        pageDescription = `In-room bathtub at ${displayName}, ${cityName}.`;
         if (pageDescription.length > 155) {
-          pageDescription = `Verified hotel rooms with in-room bathtubs in ${cityName}.`;
+          pageDescription = `Hotel rooms with in-room bathtubs in ${cityName}.`;
         }
       }
     }
@@ -500,8 +505,12 @@ export default async function HotelDetailPage({
   const cleanTrip = (hotel.tripUrl && !hotel.tripUrl.includes('/hotels/list') && !hotel.tripUrl.includes('keyword=')) || (hotel.url && hotel.url.includes('trip.com') && !hotel.url.includes('/hotels/list') && !hotel.url.includes('keyword='));
   if (cleanTrip) availableSources.push('Trip.com');
   const verifiedPlatformsText = availableSources.length > 0
-    ? `Verified on ${availableSources.join(', ')}`
+    ? `Listed on ${availableSources.join(', ')}`
     : 'Listed on partner platforms';
+
+  const linkedPartners = getLinkedPartners(hotel);
+  const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners);
+  const evidence = getEvidenceLine(hotel);
 
   return (
     <>
@@ -550,10 +559,7 @@ export default async function HotelDetailPage({
           <div className="mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-2.5 font-jakarta">
               <span className="bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full">
-                Verified Listing
-              </span>
-              <span className="text-xs text-slate-500 font-medium">
-                Verified In-Room Soaking Bath
+                {hotel.tubType || 'In-Room Bathtub'}
               </span>
             </div>
 
@@ -592,24 +598,14 @@ export default async function HotelDetailPage({
               </div>
             </div>
 
-            {/* Badges row in Stitch porcelain & mist style */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 font-jakarta">
-              {hotel.tubType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-xs sm:text-sm rounded-full">
-                  <span className="text-base">🛁</span> {hotel.tubType}
-                </span>
-              )}
-              {hotel.roomType && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-[#1f262d] font-semibold text-xs sm:text-sm rounded-full border border-slate-200/80">
-                  <span>🏷️</span> Room Tier: {hotel.roomType}
-                </span>
-              )}
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-800 font-bold text-xs sm:text-sm rounded-full border border-emerald-200/80">
-                <span>✦</span> In-Room Bathtub Confirmed
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 text-sky-800 font-semibold text-xs sm:text-sm rounded-full border border-sky-200/80">
-                <span className="text-sky-600 font-bold">✓</span> Verified {hotel.crossVerifiedAt || (hotel.updatedAt ? new Date(hotel.updatedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'October 2026')}
-              </span>
+            {/* P2 Honest Evidence Line */}
+            <div className="inline-flex flex-wrap items-center gap-1.5 px-4 py-2 bg-slate-50 text-slate-700 text-xs sm:text-sm rounded-2xl border border-slate-200/80 font-jakarta">
+              <span>{evidence.textPrefix}</span>
+              {evidence.roomType && <strong className="font-bold text-slate-900">{evidence.roomType}</strong>}
+              <span>{evidence.textSuffix}</span>
+              <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-semibold ml-1">
+                How we check
+              </Link>
             </div>
           </div>
 
@@ -623,7 +619,7 @@ export default async function HotelDetailPage({
               tubType: hotel.tubType,
               roomType: hotel.roomType,
               description: hotel.description,
-              bookingTip: hotel.bookingTip,
+              bookingTip: cleanTip,
               url: hotel.url,
               agodaUrl: hotel.agodaUrl,
               bookingUrl: hotel.bookingUrl,
@@ -635,6 +631,8 @@ export default async function HotelDetailPage({
               vrboUrl: hotel.vrboUrl,
               neighborhood: isValidNeighborhood(hotel.neighborhood) ? hotel.neighborhood : undefined,
               landmarkDistance: cleanLandmarkDistance(hotel.landmarkDistance),
+              updatedAt: hotel.updatedAt,
+              amenities: hotel.amenities,
             }}
             cityName={cityName}
             countryName={countryName}
@@ -657,21 +655,21 @@ export default async function HotelDetailPage({
               {hotel.tubType && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> verified inside the private guest accommodation.</span>
+                  <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> inside the private guest accommodation.</span>
                 </p>
               )}
 
               {hotel.rating && Number(hotel.rating) > 0 ? (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/{Number(hotel.rating) <= 5 ? '5' : '10'}</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} verified guest reviews` : ' by verified travelers'}.</span>
+                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/{Number(hotel.rating) <= 5 ? '5' : '10'}</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} guest reviews` : ' by travelers'}.</span>
                 </p>
               ) : null}
 
               {hotel.price && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Typical benchmark rate is <strong className="font-semibold text-slate-900">{hotel.price.startsWith('~') ? hotel.price : `~${hotel.price}`}</strong> per night (rates fluctuate by season, weekend demand, and partner promotions).</span>
+                  <span>Typical rate is <strong className="font-semibold text-slate-900">{hotel.price.startsWith('~') ? hotel.price : `~${hotel.price}`}</strong> per night (rates fluctuate by season, weekend demand, and partner promotions).</span>
                 </p>
               )}
 
@@ -689,10 +687,10 @@ export default async function HotelDetailPage({
                 </p>
               )}
 
-              {hotel.bookingTip && (
+              {cleanTip && (
                 <p className="flex items-start gap-2.5 bg-amber-50/70 border border-amber-200/60 rounded-xl p-3 text-amber-950">
                   <span className="shrink-0 text-base">💡</span>
-                  <span><strong>Booking tip:</strong> {hotel.bookingTip}</span>
+                  <span><strong>Booking tip:</strong> {cleanTip}</span>
                 </p>
               )}
             </div>
@@ -711,7 +709,7 @@ export default async function HotelDetailPage({
           )}
 
           {/* Concierge Booking Tip Callout Card */}
-          {hotel.bookingTip && (
+          {cleanTip && (
             <div className="bg-[#f8fafb] border border-[#5b8296]/20 rounded-2xl p-5 mb-8 flex items-start gap-3.5 shadow-2xs font-jakarta">
               <div className="w-9 h-9 rounded-xl bg-[#8eaab9]/20 text-[#1f262d] flex items-center justify-center shrink-0 mt-0.5 font-bold text-base">
                 💡
@@ -720,7 +718,7 @@ export default async function HotelDetailPage({
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#5b8296] block mb-0.5">
                   Concierge Booking Advice
                 </span>
-                {hotel.bookingTip}
+                {cleanTip}
               </div>
             </div>
           )}
@@ -728,7 +726,7 @@ export default async function HotelDetailPage({
           {/* Curated Amenities Grid */}
           <div className="mb-8 bg-white/90 backdrop-blur-md rounded-3xl border border-[#5b8296]/20 p-6 sm:p-8 shadow-xs">
             <h2 className="font-playfair text-xl sm:text-2xl font-normal text-[#1f262d] mb-5">
-              Verified In-Room &amp; Property Amenities
+              In-Room &amp; Property Amenities
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-jakarta">
               {(hotel.amenities || []).map((amenity: string, idx: number) => {
@@ -756,7 +754,7 @@ export default async function HotelDetailPage({
                   Which room at {hotel.name} has the bathtub?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  {hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. Always verify this room category when reserving.
+                  {hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. {evidence.fullPlainText} <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link>
                 </p>
               </div>
 
@@ -765,20 +763,18 @@ export default async function HotelDetailPage({
                   Is {hotel.name} in {cityName} couple-friendly?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  Yes, {hotel.name} is verified as couple-friendly. Both unmarried and married couples are welcomed with standard government photo IDs and complete discretion.
+                  Yes, {hotel.name} is couple-friendly. Both unmarried and married couples are welcomed with standard government photo IDs and complete discretion.
                 </p>
               </div>
 
               <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
                 <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  {hotel.bookingTip ? `What is the insider booking tip for ${hotel.name}?` : (isIndia ? 'Why do bathtub rates vary between Agoda, MakeMyTrip, and Booking.com?' : 'Why do bathtub rates vary between Expedia, Agoda, and Booking.com?')}
+                  {cleanTip ? `What is the booking tip for ${hotel.name}?` : `How do I book the bathtub room at ${hotel.name}?`}
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  {hotel.bookingTip
-                    ? `${hotel.bookingTip} Ensure you select the ${hotel.roomType || 'Bathtub Suite'} tier and confirm "Bathtub" is listed in room amenities before payment.`
-                    : (isIndia
-                      ? 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile discounts, MakeMyTrip provides domestic bank card cashbacks, and Booking.com offers Genius loyalty tiers and flexible cancellation on select rates.'
-                      : 'Online travel agencies negotiate unique promotional inventory with the hotel. Agoda typically offers instant mobile discounts, Expedia provides OneKey rewards, and Booking.com offers Genius loyalty tiers and flexible cancellation on select rates.')
+                  {cleanTip
+                    ? `${cleanTip} Ensure you select the ${hotel.roomType || 'Bathtub Suite'} tier and confirm "Bathtub" is listed in room amenities before payment.`
+                    : `Select the ${hotel.roomType || 'Bathtub Suite'} tier on ${linkedPartners.length > 0 ? linkedPartners.join(' or ') : 'the partner site'} and confirm "Bathtub" is listed in room amenities before payment.`
                   }
                 </p>
               </div>
@@ -793,10 +789,10 @@ export default async function HotelDetailPage({
               <div className="pb-5 border-b border-[#5b8296]/15 mb-5 font-jakarta">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                    Usual Nightly Benchmark
+                    Nightly Rate
                   </span>
                   <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-                    Verified Rates
+                    Partner Rates
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1 mt-1">
@@ -829,7 +825,7 @@ export default async function HotelDetailPage({
                       href={`/${countrySlug}/${citySlug}`}
                       className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full font-jakarta"
                     >
-                      <span>Browse All {cityName} Verified Stays &rarr;</span>
+                      <span>Browse All {cityName} Stays &rarr;</span>
                     </Link>
                   )}
                 </div>

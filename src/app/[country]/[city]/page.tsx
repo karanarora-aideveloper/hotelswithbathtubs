@@ -343,6 +343,8 @@ export default async function CityHotelsPage({
     bookingUrl: h.bookingUrl,
     airbnbUrl: h.airbnbUrl,
     tripUrl: h.tripUrl,
+    mmtUrl: h.mmtUrl || h.makemytripUrl,
+    bathtubConfirmed: h.bathtubConfirmed === true,
     amenities: (h.amenities || []).slice(0, 6),
     description: h.description ? truncateToWord(sanitizePlaceholderText(h.description), 140) : '',
     rating: h.rating,

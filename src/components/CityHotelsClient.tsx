@@ -16,6 +16,7 @@ import {
   recordFilterReset,
   recordFilterChange,
 } from '@/lib/gtag';
+import { getEvidenceLine, sanitizeBookingTip, getLinkedPartners } from '@/lib/evidence';
 
 type HotelData = {
   _id?: string;
@@ -46,6 +47,8 @@ type HotelData = {
   neighborhood?: string;
   landmarkDistance?: string;
   crossVerifiedAt?: string;
+  bathtubConfirmed?: boolean;
+  updatedAt?: string | Date | null;
 };
 
 
@@ -1504,6 +1507,21 @@ export default function CityHotelsClient({
                     )}
                   </div>
 
+                  {/* P2 Honest Evidence Line */}
+                  {(() => {
+                    const ev = getEvidenceLine(h);
+                    return (
+                      <p className="text-[11px] text-gray-600 mb-2 leading-relaxed">
+                        <span>{ev.textPrefix}</span>
+                        {ev.roomType && <strong>{ev.roomType}</strong>}
+                        <span>{ev.textSuffix} </span>
+                        <Link href="/how-we-check-bathtubs" prefetch={false} className="text-[#1a6fde] hover:underline whitespace-nowrap">
+                          How we check
+                        </Link>
+                      </p>
+                    );
+                  })()}
+
                   {/* Description snippet if any */}
                   {h.description && (
                     <p className="hidden sm:block text-[11px] sm:text-xs text-gray-500 mb-2 line-clamp-2 leading-relaxed">
@@ -1515,7 +1533,7 @@ export default function CityHotelsClient({
                   {h.bookingTip && (
                     <div className="hidden sm:flex bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug items-start gap-1.5">
                       <span className="shrink-0 text-xs">💡</span>
-                      <span className="line-clamp-2"><strong>Tip:</strong> {h.bookingTip}</span>
+                      <span className="line-clamp-2"><strong>Tip:</strong> {sanitizeBookingTip(h.bookingTip, getLinkedPartners(h))}</span>
                     </div>
                   )}
 

@@ -102,22 +102,6 @@ export default function HotelCardImage({
         }}
       />
 
-      {/* Verified Badges */}
-      {verifiedSources.length > 0 && (
-        <div className="absolute top-3 left-3 group/tooltip flex z-20">
-          <span className="bg-emerald-500/90 text-white border border-emerald-400/30 text-[11px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs backdrop-blur-xs cursor-help">
-            <span className="font-black">✓</span>
-            <span className="inline sm:hidden">Verified</span>
-            <span className="hidden sm:inline">Verified on {verifiedSources.join(', ')}</span>
-            <button type="button" className="ml-0.5 opacity-80 hover:opacity-100 bg-white/20 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center text-[9px] outline-none">i</button>
-          </span>
-          <div className="absolute top-full left-0 mt-1.5 w-64 p-2.5 bg-gray-900 text-white text-[11px] rounded-xl shadow-xl opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:visible transition-all z-30 pointer-events-none">
-            {isUSOrIntl 
-              ? `We manually verify every hotel across Booking.com, Expedia, and Agoda to confirm the specific room tier includes a private in-room bathtub. Last verified: ${crossVerifiedAt || 'Oct 2026'}.`
-              : `We manually check every hotel across Booking.com, Agoda, and partner channels to confirm the specific room tier includes a private in-room bathtub. Last verified: ${crossVerifiedAt || 'Oct 2026'}.`}
-          </div>
-        </div>
-      )}
 
       {/* Multi-Image Hover Navigation (Lazy initialized on first hover/touch to save INP) */}
       {allImages.length > 1 && (
