@@ -92,7 +92,7 @@ export default function EditorialPolicyPage() {
                     Room-Tier Inventory Cross-Referencing
                   </h3>
                   <p className="text-gray-600">
-                    We check room specifications across Booking.com, Agoda, MakeMyTrip, and partner inventory networks. We identify the specific room tier (such as &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is listed, and guide users to select that tier.
+                    We review room specifications on Booking.com, Agoda, MakeMyTrip, and partner inventory networks. We identify the specific room tier (such as &ldquo;Executive Suite with Bathtub&rdquo;) where the in-room tub is listed, and guide users to select that tier.
                   </p>
                 </div>
 
@@ -102,7 +102,7 @@ export default function EditorialPolicyPage() {
                     Photographic &amp; Listing Details
                   </h3>
                   <p className="text-gray-600">
-                    Property listings are checked against partner photos and room details to confirm that the bathtub or jacuzzi is private to that guest room.
+                    Property listings are reviewed against partner photos and room details to determine whether the bathtub or jacuzzi is private to that guest room.
                   </p>
                 </div>
 

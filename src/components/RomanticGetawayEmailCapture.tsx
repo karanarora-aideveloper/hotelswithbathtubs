@@ -78,7 +78,7 @@ export default function RomanticGetawayEmailCapture({
         </h3>
 
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6 font-normal max-w-xl mx-auto">
-          Planning an anniversary, Valentine&apos;s getaway, or spontaneous couples trip? We track private in-room jacuzzi suites and email secret rate drops once a month. Zero spam, unsubscribe anytime.
+          Planning an anniversary, Valentine&apos;s getaway, or spontaneous couples trip? Zero spam, unsubscribe anytime.
         </p>
 
         {status === 'success' ? (

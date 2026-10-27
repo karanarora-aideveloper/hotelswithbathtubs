@@ -3,11 +3,11 @@ import React from 'react';
 const FAQS = [
   {
     q: 'How do I find a hotel with a private bathtub in room?',
-    a: 'Use the destination search or browse our curated city collections. Every hotel listed on Hotels with Bathtubs is checked across Booking.com, Agoda, and partner listings to confirm the bathtub or jacuzzi is private inside your room, never in a shared spa or wellness floor.',
+    a: 'Use the destination search or browse our city collections. We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.',
   },
   {
     q: 'What is the difference between a soaking bathtub and a jacuzzi suite?',
-    a: 'A soaking bathtub features a deep freestanding marble, stone, or clawfoot bath designed for still, immersive hot baths. A jacuzzi suite includes a hydrotherapy tub equipped with powered massage jets and temperature controls. Both are fully private to your room.',
+    a: 'A soaking bathtub features a deep freestanding marble, stone, or clawfoot bath designed for still, immersive hot baths. A jacuzzi suite includes a hydrotherapy tub equipped with powered massage jets and temperature controls.',
   },
   {
     q: 'What bathtub types are most common across luxury hotels in India?',

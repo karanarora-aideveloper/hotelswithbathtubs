@@ -348,16 +348,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           a: `Top options in ${matchedCity} include properties featured in this guide and directory, listed with private in-room tubs on Booking.com and Agoda rather than shared hotel wellness facilities.`
         },
         {
-          q: `Are hotels with bathtubs in ${matchedCity} couple-friendly?`,
-          a: `Yes, hotels with bathtubs in ${matchedCity} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and getaways.`
-        },
-        {
           q: `How do I ensure my room tier in ${matchedCity} includes a private bathtub?`,
           a: `When booking through partner links, check that your chosen room tier (such as "Suite with Bathtub", "Executive Room", or "Jacuzzi Suite") explicitly lists a private bathtub in the amenities list before reserving.`
         },
         {
           q: `What is the difference between a bathtub and a jacuzzi suite in ${matchedCity}?`,
-          a: `A hotel room with a bathtub typically features a deep freestanding soaking tub or Roman bath, while a jacuzzi suite includes hydrotherapy jets and whirlpool water massage. Both are private to your room.`
+          a: `A hotel room with a bathtub typically features a deep freestanding soaking tub or Roman bath, while a jacuzzi suite includes hydrotherapy jets and whirlpool water massage.`
         }
       ]
     : [
@@ -525,7 +521,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Explore All {matchedCityCount}+ Hotels with Bathtubs in {matchedCity}
                     </h2>
                     <p className="text-xs text-text-muted mt-0.5">
-                      Looking for in-room jacuzzi suites, real guest photos, and live room rates?
+                      Looking for in-room jacuzzi suites?
                     </p>
                   </div>
                 </div>
