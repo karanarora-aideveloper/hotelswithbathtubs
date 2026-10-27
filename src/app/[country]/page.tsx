@@ -293,10 +293,6 @@ export default async function CountryHubPage({
       a: `We list rooms whose partner details mention a private in-room soaking tub or jacuzzi rather than a shared hotel spa facility.`
     },
     {
-      q: `Are bathtub hotels in ${countryName} suitable for couples and romantic getaways?`,
-      a: `Yes. All hotels in ${countryName} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and honeymoons.`
-    },
-    {
       q: `Which destinations in ${countryName} have the best bathtub hotels?`,
       a: `Top popular destinations for bathtub and jacuzzi stays in ${countryName} include ${topCitiesNames}. Each offers a diverse selection of luxury 5-star suites and boutique retreats.`
     },
@@ -351,11 +347,8 @@ export default async function CountryHubPage({
                 <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
                   Why Book a Bathtub Hotel in {countryName}?
                 </h2>
-                <p className="text-gray-700 leading-relaxed mb-3 text-xs sm:text-sm md:text-base">
-                  Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
-                </p>
                 <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                  Every property featured across our {countryName} destinations is checked across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your chosen room tier includes a private in-room soaking tub or whirlpool jacuzzi.
+                  Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
                 </p>
               </div>
 
