@@ -16,7 +16,7 @@ import {
   recordFilterReset,
   recordFilterChange,
 } from '@/lib/gtag';
-import { getEvidenceLine, sanitizeBookingTip, getLinkedPartners } from '@/lib/evidence';
+import { getEvidenceLine, sanitizeBookingTip, getLinkedPartners, getBathtubLabel } from '@/lib/evidence';
 
 type HotelData = {
   _id?: string;
@@ -1491,15 +1491,13 @@ export default function CityHotelsClient({
 
                   {/* Room Category & Tub Badges */}
                   <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                    {h.tubType && (() => {
-                      const norm = normalizeTubType(h.tubType);
-                      const style = colorStyles[norm.color] || colorStyles.gray;
-                      return (
-                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 font-bold text-[11px] rounded-md border ${style}`}>
-                          <span>{norm.emoji}</span> {norm.category}
-                        </span>
-                      );
-                    })()}
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 font-bold text-[11px] rounded-md border ${
+                      h.bathtubConfirmed
+                        ? 'bg-sky-50 text-sky-800 border-sky-200'
+                        : 'bg-amber-50 text-amber-800 border-amber-200'
+                    }`}>
+                      <span>{isJacuzziRoom(h) ? '🌊' : '🛁'}</span> {getBathtubLabel(h)}
+                    </span>
                     {h.roomType && (
                       <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 text-gray-700 font-medium text-[11px] rounded-md">
                         <span>🏷️</span> <span className="line-clamp-1">{h.roomType}</span>

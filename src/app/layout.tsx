@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s | Hotels With Bathtubs",
     default: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
-  description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
+  description: "Hotel rooms with a private bathtub or in-room jacuzzi.",
   // No site-wide canonical here: every page sets its own, so a page that forgets cannot
   // accidentally canonicalize to the homepage.
   alternates: {
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     locale: 'en_US',
-    title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
+    title: "Hotels with Bathtubs & Jacuzzi Suites",
+    description: "Hotel rooms with a private bathtub or in-room jacuzzi.",
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -59,15 +59,15 @@ export const metadata: Metadata = {
         url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/los-angeles-the-beverly-hills-hotel-1.webp',
         width: 1200,
         height: 630,
-        alt: 'Hotels with Bathtubs - Verified Luxury Suites',
+        alt: 'Hotels with Bathtubs - Stays with Private Tubs',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Hotels with Bathtubs & Jacuzzi Suites | Verified Stays",
-    description: "Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.",
+    title: "Hotels with Bathtubs & Jacuzzi Suites",
+    description: "Hotel rooms with a private bathtub or in-room jacuzzi.",
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/los-angeles-the-beverly-hills-hotel-1.webp'],
   },
   other: {

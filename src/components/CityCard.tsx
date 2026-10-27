@@ -72,7 +72,7 @@ export default function CityCard({
     ? totalReviews >= 1000
       ? `${(totalReviews / 1000).toFixed(1)}k+ guest reviews`
       : `${totalReviews} guest reviews`
-    : 'Verified stays';
+    : 'Rooms with bathtubs';
 
   const defaultPrice = country.toLowerCase() === 'india' ? 'From ₹2,499' : 'From $149';
   const displayPrice = minPrice ? (minPrice.startsWith('From') ? minPrice : `From ${minPrice}`) : defaultPrice;
@@ -124,11 +124,11 @@ export default function CityCard({
       {/* Bottom Information Body */}
       <div className="p-3 sm:p-5 flex flex-col justify-between flex-1 bg-white">
         <div>
-          {/* Verification & Tub Type Badges */}
+          {/* Bathtub Status & Tub Type Badges */}
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shadow-2xs">
-              <span className="font-black">✓</span>
-              <span>{hotelCount} Verified Tubs</span>
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-800 border border-slate-200/80 shadow-2xs">
+              <span>🛁</span>
+              <span>{hotelCount} {hotelCount === 1 ? 'Room with Tub' : 'Rooms with Bathtubs'}</span>
             </span>
             {hasJacuzzi && (
               <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 shadow-2xs">

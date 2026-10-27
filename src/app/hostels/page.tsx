@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
+import { getBathtubLabel } from '@/lib/evidence';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -315,11 +316,9 @@ export default async function HostelsHubPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                      {hostel.tubType && (
-                        <span className="px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-xs text-white text-[11px] font-bold shadow-xs">
-                          🛁 {hostel.tubType}
-                        </span>
-                      )}
+                      <span className="px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-xs text-white text-[11px] font-bold shadow-xs">
+                        {hostel.bathtubConfirmed ? '🛁' : '⚠️'} {getBathtubLabel(hostel)}
+                      </span>
                       <span className="px-2.5 py-1 rounded-full bg-amber-500 text-white text-[11px] font-bold shadow-xs">
                         🎒 Boutique Hostel
                       </span>

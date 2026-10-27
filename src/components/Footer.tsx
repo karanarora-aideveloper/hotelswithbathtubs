@@ -143,7 +143,7 @@ export default async function Footer() {
             </div>
           </div>
           <p className="text-center text-xs text-text-muted/70 pt-3">
-            Hotels with Bathtubs is an independent travel guide connecting you to luxury hotels with verified in-room bathtubs &amp; jacuzzis worldwide.
+            Hotels with Bathtubs is an independent travel guide connecting you to hotel rooms with a private bathtub or in-room jacuzzi.
           </p>
         </div>
       </div>

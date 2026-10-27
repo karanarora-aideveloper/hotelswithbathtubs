@@ -12,7 +12,7 @@ import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel } from '@/lib/evidence';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -331,7 +331,7 @@ export default async function HotelDetailPage({
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": hotel.name,
-    "description": hotel.description || `Verified hotel with private in-room bathtub in ${cityName}`,
+    "description": hotel.description || `Hotel with private in-room bathtub in ${cityName}`,
     "image": imageUrl(hotel.image),
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {
@@ -549,6 +549,7 @@ export default async function HotelDetailPage({
         countryName={countryName}
         roomType={hotel.roomType}
         verifiedPlatformsText={verifiedPlatformsText}
+        bathtubLabel={getBathtubLabel(hotel)}
       />
 
       {/* Main Content Layout with 2/3 Content and 1/3 Sticky Booking Sidebar */}
@@ -558,8 +559,12 @@ export default async function HotelDetailPage({
           {/* Header Title Block */}
           <div className="mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-2.5 font-jakarta">
-              <span className="bg-[#8eaab9]/15 text-[#1f262d] border border-[#5b8296]/30 font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full">
-                {hotel.tubType || 'In-Room Bathtub'}
+              <span className={`border font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full ${
+                hotel.bathtubConfirmed
+                  ? 'bg-[#8eaab9]/15 text-[#1f262d] border-[#5b8296]/30'
+                  : 'bg-amber-50 text-amber-800 border-amber-200/80'
+              }`}>
+                {getBathtubLabel(hotel)}
               </span>
             </div>
 
@@ -890,7 +895,7 @@ export default async function HotelDetailPage({
             <span className="text-[10px] text-gray-400 font-normal">/ night</span>
           </div>
           <p className="text-[10px] text-emerald-700 font-semibold truncate flex items-center gap-1 mt-0.5">
-            <span>🛁</span> {hotel.roomType || 'Verified Bathtub Room'}
+            <span>🛁</span> {hotel.roomType || 'Bathtub Room'}
           </p>
         </div>
 
@@ -917,7 +922,7 @@ export default async function HotelDetailPage({
                 More rooms with a bathtub in {cityName}
               </h2>
               <p className="text-sm text-slate-500 mt-1 font-jakarta">
-                Explore alternative romantic stays with confirmed in-room bathtubs &amp; jacuzzi suites.
+                More rooms with a bathtub in {cityName}.
               </p>
             </div>
             <a 
@@ -947,7 +952,8 @@ export default async function HotelDetailPage({
                     />
                     <div className="absolute top-2.5 left-2.5">
                       <span className="bg-white/90 backdrop-blur-md text-[#1f262d] border border-white/40 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs font-jakarta">
-                        <span className="text-emerald-700 font-bold">✓</span> Verified Tub
+                        {sim.bathtubConfirmed && <span className="text-emerald-700 font-bold">✓</span>}
+                        {getBathtubLabel(sim)}
                       </span>
                     </div>
                   </a>
@@ -1004,7 +1010,7 @@ export default async function HotelDetailPage({
               href={`/${countrySlug}/${citySlug}`}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-800 font-semibold text-sm rounded-xl hover:bg-slate-200 transition-colors w-full font-jakarta"
             >
-              <span>View all verified stays in {cityName} &rarr;</span>
+              <span>View all stays in {cityName} &rarr;</span>
             </a>
           </div>
         </section>

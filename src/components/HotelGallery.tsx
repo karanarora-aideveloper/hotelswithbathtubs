@@ -13,6 +13,7 @@ interface HotelGalleryProps {
   countryName: string;
   roomType?: string;
   verifiedPlatformsText: string;
+  bathtubLabel?: string;
 }
 
 export default function HotelGallery({
@@ -24,6 +25,7 @@ export default function HotelGallery({
   countryName,
   roomType,
   verifiedPlatformsText,
+  bathtubLabel = 'In-room bathtub',
 }: HotelGalleryProps) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
@@ -158,10 +160,11 @@ export default function HotelGallery({
               </div>
             </div>
 
-            {/* Verification Badges (Top Left) */}
+            {/* Bathtub Status Badges (Top Left) */}
             <div className="absolute top-4 left-4 flex flex-wrap items-center gap-2 z-10 font-jakarta pointer-events-none">
               <span className="bg-white/95 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
-                <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
+                {bathtubLabel?.startsWith('In-room') && <span className="text-emerald-700 font-bold">✓</span>}
+                {bathtubLabel || 'In-room bathtub'}
               </span>
             </div>
 
@@ -195,7 +198,8 @@ export default function HotelGallery({
 
             <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex flex-wrap items-center gap-2 z-10 font-jakarta pointer-events-none">
               <span className="bg-white/90 backdrop-blur-md text-[#1f262d] text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-xs border border-white/40 flex items-center gap-1.5">
-                <span className="text-emerald-700 font-bold">✓</span> Verified In-Room Bathtub
+                {bathtubLabel?.startsWith('In-room') && <span className="text-emerald-700 font-bold">✓</span>}
+                {bathtubLabel || 'In-room bathtub'}
               </span>
             </div>
 

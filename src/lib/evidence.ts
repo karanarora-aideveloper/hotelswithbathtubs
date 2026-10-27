@@ -1,7 +1,16 @@
+import { isJacuzziRoom } from '@/lib/utils';
+
 export const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
+
+export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
+  if (hotel?.bathtubConfirmed === true) {
+    return isJacuzziRoom(hotel) ? 'In-room jacuzzi' : 'In-room bathtub';
+  }
+  return 'Bathtub not yet confirmed';
+}
 
 export function formatMonthYear(dateStr?: string | Date | null): string {
   if (!dateStr) return 'October 2026';

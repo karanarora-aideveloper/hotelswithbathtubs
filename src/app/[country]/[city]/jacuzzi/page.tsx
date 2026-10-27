@@ -232,7 +232,7 @@ export default async function CityJacuzziHotelsPage({
         "item": {
           "@type": "LodgingBusiness",
           "name": h.name,
-          "description": sanitizePlaceholderText(h.description) || `Verified hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
+          "description": sanitizePlaceholderText(h.description) || `Hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
           "image": {
             "@type": "ImageObject",
             "url": imageUrl(h.image?.split('/').pop() || ''),

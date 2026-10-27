@@ -91,8 +91,8 @@ export default function Navbar() {
               <span>Hostels</span>
               <span className="text-[9px] font-bold px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded-full">New</span>
             </Link>
-            <Link href="/#verification" prefetch={false} className="hover:text-accent transition-colors">
-              Verification
+            <Link href="/how-we-check-bathtubs" prefetch={false} className="hover:text-accent transition-colors">
+              How we check
             </Link>
             <Link href="/#faq" prefetch={false} className="hover:text-accent transition-colors">
               FAQs
@@ -386,8 +386,8 @@ export default function Navbar() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                   </svg>
                   <div>
-                    <span className="block">How We Check</span>
-                    <span className="block text-2xs text-text-muted font-normal">Our room verification method</span>
+                    <span className="block">How we check</span>
+                    <span className="block text-2xs text-text-muted font-normal">Our listing criteria</span>
                   </div>
                 </div>
                 <span className="text-text-muted text-xs">&rarr;</span>

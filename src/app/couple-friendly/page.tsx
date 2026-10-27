@@ -8,6 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
+import { getBathtubLabel } from '@/lib/evidence';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
@@ -171,7 +172,7 @@ export default async function CoupleFriendlyPage() {
       "item": {
         "@type": "LodgingBusiness",
         "name": h.name,
-        "description": sanitizePlaceholderText(h.description) || `Verified romantic couple-friendly hotel with private in-room bathtub in ${h.city}`,
+        "description": sanitizePlaceholderText(h.description) || `Romantic couple-friendly hotel with private in-room bathtub in ${h.city}`,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": h.city,
@@ -323,11 +324,9 @@ export default async function CoupleFriendlyPage() {
                           <span>★</span> {Number(hotel.rating).toFixed(1)}
                         </div>
                       )}
-                      {hotel.tubType && (
-                        <div className="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-white">
-                          🛁 {hotel.tubType}
-                        </div>
-                      )}
+                      <div className="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-white">
+                        🛁 {getBathtubLabel(hotel)}
+                      </div>
                     </div>
 
                     <div className="p-4">
