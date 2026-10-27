@@ -1,5 +1,5 @@
 import { isJacuzziRoom } from '@/lib/utils';
-import { hasClaimPhrase } from '@/lib/claims';
+import { hasClaimPhrase, dropClaimSentences } from '@/lib/claims';
 
 export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
   if (hotel?.bathtubConfirmed === true) {
@@ -183,22 +183,31 @@ export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[
   return `Book the ${room} on ${partnersText} and check that 'Bathtub' is listed in the room details before you pay.`;
 }
 
+export function buildDataDescription(h: {
+  name?: string;
+  city?: string;
+  roomType?: string;
+  tubType?: string;
+  neighborhood?: string;
+}): string {
+  if (!h || !h.name) return '';
+  const room = h.roomType || 'room';
+  const tub = h.tubType || 'private in-room bathtub';
+  const loc = h.neighborhood ? `in ${h.neighborhood}` : (h.city ? `in ${h.city}` : '');
+  return `${h.name} features a ${tub} in the ${room}${loc ? ` ${loc}` : ''}.`;
+}
+
 export function sanitizeHotelData(h: any): any {
   if (!h) return h;
   if (h.description && typeof h.description === 'string') {
-    h.description = h.description
-      .replace(new RegExp('\\b' + 'guaran' + 'teed\\b', 'gi'), 'confirmed')
-      .replace(new RegExp('\\b' + 'guaran' + 'tees\\b', 'gi'), 'ensures')
-      .replace(new RegExp('\\b' + 'guaran' + 'tee\\b', 'gi'), 'secure')
-      .replace(new RegExp('\\b' + 'acoust' + 'ic\\s+wall\\s+dampening\\b', 'gi'), 'wall insulation')
-      .replace(new RegExp('\\b' + 'acoust' + 'ic\\s+privacy\\b', 'gi'), 'privacy')
-      .replace(new RegExp('\\b' + 'acoust' + 'ic\\b', 'gi'), '');
+    const cleaned = dropClaimSentences(h.description);
+    h.description = cleaned || buildDataDescription(h);
   }
   if (h.bookingTip && typeof h.bookingTip === 'string') {
-    h.bookingTip = sanitizeBookingTip(h.bookingTip);
+    h.bookingTip = sanitizeBookingTip(h.bookingTip, getLinkedPartners(h), h.roomType);
   }
   if (Array.isArray(h.amenities)) {
-    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || !/gourmet\s+kitchen/i.test(a));
+    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || !hasClaimPhrase(a));
   }
   return h;
 }

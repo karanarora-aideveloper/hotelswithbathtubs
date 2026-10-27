@@ -8,6 +8,7 @@ import path from 'node:path';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { sanitizeHotelData } from '@/lib/evidence';
+import { dropClaimSentences, dropClaimSentencesFromHtml } from '@/lib/claims';
 
 type Doc = Record<string, any>;
 type Filter = Record<string, any>;
@@ -24,8 +25,8 @@ function load(file: string): Doc[] {
     }
     if (file === 'all-blogs.json') {
       for (const d of raw) {
-        if (d.content && typeof d.content === 'string') d.content = sanitizePlaceholderText(d.content);
-        if (d.excerpt && typeof d.excerpt === 'string') d.excerpt = sanitizePlaceholderText(d.excerpt);
+        if (d.content && typeof d.content === 'string') d.content = dropClaimSentencesFromHtml(sanitizePlaceholderText(d.content));
+        if (d.excerpt && typeof d.excerpt === 'string') d.excerpt = dropClaimSentences(sanitizePlaceholderText(d.excerpt));
         if (d.title && typeof d.title === 'string') d.title = sanitizePlaceholderText(d.title);
       }
     }
