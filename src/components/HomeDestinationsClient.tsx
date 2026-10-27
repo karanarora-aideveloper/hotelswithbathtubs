@@ -543,17 +543,6 @@ export default function HomeDestinationsClient({
             )}
           </div>
         </div>
-
-        {/* Region detection prompt */}
-        <div className="text-2xs text-slate-500 font-medium flex items-center justify-between border-t border-slate-100 pt-2 px-1">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>
-              Detected location: <strong className="text-slate-700">{geo.country}</strong> {isIndiaVisitor ? '(🇮🇳 India layout active)' : '(🇺🇸 USA layout active)'}
-            </span>
-          </div>
-          <span className="text-slate-400 hidden sm:inline">Flash List progressive streaming active</span>
-        </div>
       </div>
 
       {/* When filtering by text, render Instant Matches Grid */}
