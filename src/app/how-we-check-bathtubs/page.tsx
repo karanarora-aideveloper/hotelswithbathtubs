@@ -28,19 +28,19 @@ export default function HowWeCheckBathtubsPage() {
         <div className="space-y-6 text-sm sm:text-base text-slate-700 leading-relaxed">
           <section>
             <h2 className="font-playfair text-lg sm:text-xl font-normal text-[#1f262d] mb-2">
-              1. Listed Room Amenities
+              1. What We List
             </h2>
             <p>
-              We list a hotel room only when a booking partner&apos;s listing for that specific room mentions a private bathtub, deep soaking tub, hot tub, or jacuzzi. We do not list rooms that only offer a standing shower or where the tub is in a communal public spa.
+              We list a room when its details on a booking partner or rental site mention a private bathtub, soaking tub, hot tub or jacuzzi. We don&apos;t list rooms with only a shower, or where the tub is in a shared spa.
             </p>
           </section>
 
           <section>
             <h2 className="font-playfair text-lg sm:text-xl font-normal text-[#1f262d] mb-2">
-              2. Room Tier and Date Recorded
+              2. Confirmed or Not
             </h2>
             <p>
-              When we catalogue a property, we record the exact room name (such as &ldquo;Executive Suite with Bathtub&rdquo; or &ldquo;King Room with Whirlpool&rdquo;) and the month and year the listing was last checked. This helps you select the right room tier during checkout.
+              When we&apos;ve matched the bathtub to a specific room, the page names that room. When we haven&apos;t yet, the page says &ldquo;Bathtub reported but not yet confirmed&rdquo;.
             </p>
           </section>
 
@@ -55,7 +55,7 @@ export default function HowWeCheckBathtubsPage() {
 
           <section className="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 mt-6">
             <h2 className="font-playfair text-base sm:text-lg font-normal text-[#1f262d] mb-1.5">
-              Spotted an Error?
+              4. Report a Mistake
             </h2>
             <p className="text-sm text-slate-600 mb-3">
               If a hotel has replaced a bathtub with a shower, changed room names, or if any detail in our guide is incorrect, please let us know so we can update it immediately.
