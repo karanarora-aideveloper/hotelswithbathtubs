@@ -1,0 +1,72 @@
+[
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f3d",
+    "slug": "taj-palace-new-delhi",
+    "ourName": "Taj Palace, New Delhi",
+    "theirName": "Taj Palace, New Delhi",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/4290274",
+    "tripHotelId": "4290274",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6ac488b781f9e2d8880e5052",
+    "slug": "radisson-blu-plaza-delhi-airport",
+    "ourName": "Radisson Blu Plaza Delhi Airport",
+    "theirName": "Radisson Blu Hotel New Delhi Paschim Vihar",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/radisson-blu-hotel-new-delhi-paschim-vihar-379933",
+    "tripHotelId": "379933",
+    "confidence": "review",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6ac488b781f9e2d8880e5056",
+    "slug": "the-diplomat-chanakyapuri-delhi",
+    "ourName": "The Diplomat, Chanakyapuri",
+    "theirName": "hotel diplomat chanakyapuri new delhi a boutique hotel",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/hotel-diplomat-chanakyapuri-new-delhi-a-boutique-hotel-3954073",
+    "tripHotelId": "3954073",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f40",
+    "slug": "pullman-new-delhi-aerocity",
+    "ourName": "Pullman New Delhi Aerocity",
+    "theirName": "Pullman New Delhi Aerocity Hotel",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/pullman-new-delhi-aerocity-hotel-786492",
+    "tripHotelId": "786492",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f44",
+    "slug": "the-leela-palace-new-delhi",
+    "ourName": "The Leela Palace New Delhi",
+    "theirName": "Hotel Shanti Palace (Mahipalpur)",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/hotel-shanti-palace-41178",
+    "tripHotelId": "41178",
+    "confidence": "review",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f37",
+    "slug": "the-pratiq-luxe-paschim-vihar",
+    "ourName": "The PratiQ Luxe, Paschim Vihar",
+    "theirName": "Radisson Blu Hotel New Delhi Paschim Vihar",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/radisson-blu-hotel-new-delhi-paschim-vihar-379933",
+    "tripHotelId": "379933",
+    "confidence": "review",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f35",
+    "slug": "clay-inn-hotels-paschim-vihar",
+    "ourName": "Clay Inn Hotel, Paschim Vihar",
+    "theirName": "Radisson Blu Hotel New Delhi Paschim Vihar",
+    "tripUrl": "https://www.cleartrip.com/hotels/details/radisson-blu-hotel-new-delhi-paschim-vihar-379933",
+    "tripHotelId": "379933",
+    "confidence": "review",
+    "evidenceFile": "data-collect/pages/cleartrip/hotels-in-aerocity-new-delhi.html.gz"
+  }
+]
