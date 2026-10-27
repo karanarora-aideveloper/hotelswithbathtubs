@@ -350,7 +350,9 @@ export default async function HotelDetailPage({
       "makesOffer": {
         "@type": "Offer",
         "name": `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`,
-        "description": `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`,
+        "description": hotel.bathtubConfirmed === true
+          ? `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`
+          : `Room with a reported bathtub (not yet confirmed) in ${cityName}`,
         "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
         "priceSpecification": {
           "@type": "UnitPriceSpecification",
