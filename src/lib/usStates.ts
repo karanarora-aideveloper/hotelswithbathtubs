@@ -28,7 +28,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     tagline: 'From Napa Valley vineyard soaking tubs to Pacific Coast jacuzzi suites and alpine mountain retreats.',
     metaTitle: 'Hotels with Bathtub in California: Top Jacuzzi & Soaking Suites (2026)',
     metaDescription: 'Discover 60+ hotels with private in-room bathtubs, jacuzzi suites & deep soaking tubs across California. Napa, LA, Lake Tahoe & San Diego.',
-    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways. Whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe, every property in our California guide features private in-room tubs.',
+    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways, whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe.',
     highlights: [
       {
         region: 'Napa Valley & Wine Country',

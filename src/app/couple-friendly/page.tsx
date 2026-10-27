@@ -237,7 +237,7 @@ export default async function CoupleFriendlyPage() {
             </div>
             <div>
               <p className="font-bold text-gray-900 text-sm">Room Details</p>
-              <p className="text-xs text-gray-500">Checked across Booking.com &amp; Agoda room tiers.</p>
+              <p className="text-xs text-gray-500">Booking.com &amp; Agoda room tiers.</p>
             </div>
           </div>
         </div>

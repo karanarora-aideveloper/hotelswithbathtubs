@@ -58,6 +58,11 @@ export const CLAIM_PHRASES: string[] = [
   'live room rates',
   'top-rated',
   'accept local residents',
+  'cross-check',
+  'flexible cancellation',
+  'transparent pricing',
+  'special member rates',
+  'private to your room only',
 ];
 
 export function hasClaimPhrase(text: string): boolean {
