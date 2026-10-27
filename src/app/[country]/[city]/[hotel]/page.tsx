@@ -526,6 +526,7 @@ export default async function HotelDetailPage({
           <HotelAnalyticsComparison
             hotel={{
               name: hotel.name,
+              bathtubConfirmed: hotel.bathtubConfirmed,
               price: hotel.price || null,
               rating: hotel.rating,
               reviewsCount: hotel.reviewsCount,
@@ -561,11 +562,15 @@ export default async function HotelDetailPage({
               {hotel.roomType && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub.</span>
+                  {hotel.bathtubConfirmed ? (
+                    <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub.</span>
+                  ) : (
+                    <span>Reported room: <strong className="font-semibold text-slate-900">{hotel.roomType}</strong>. Check that &#x27;Bathtub&#x27; is listed in the room details before you pay.</span>
+                  )}
                 </p>
               )}
 
-              {hotel.tubType && (
+              {hotel.tubType && hotel.bathtubConfirmed && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
                   <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> inside the private guest accommodation.</span>
@@ -653,7 +658,11 @@ export default async function HotelDetailPage({
                   Which room at {hotel.name} has the bathtub?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  {hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. {evidence.fullPlainText} <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link>
+                  {hotel.bathtubConfirmed ? (
+                    <>{hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. {evidence.fullPlainText} <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link></>
+                  ) : (
+                    <>A bathtub is reported in the <strong className="text-[#1f262d]">{hotel.roomType || 'room'}</strong>, but we haven&#x27;t confirmed it yet. Check the room details on {linkedPartners[0] || 'the partner'} before booking. <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link></>
+                  )}
                 </p>
               </div>
 

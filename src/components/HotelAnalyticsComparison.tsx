@@ -28,6 +28,7 @@ interface HotelAnalyticsProps {
     landmarkDistance?: string;
     updatedAt?: string | Date;
     amenities?: string[];
+    bathtubConfirmed?: boolean;
   };
   cityName: string;
   countryName: string;
@@ -212,7 +213,11 @@ export default function HotelAnalyticsComparison({
         {/* Room Tier Alert under Q2 price box */}
         <div className="mt-5 p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 text-xs text-amber-900 leading-snug font-jakarta">
           <strong className="font-bold block mb-1">Remember:</strong>
-          Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout for the private tub.
+          {hotel.bathtubConfirmed ? (
+            <>Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout for the private tub.</>
+          ) : (
+            <>check the room details on {uniquePartners[0]?.name || 'the booking partner'} for a bathtub before you pay.</>
+          )}
         </div>
 
         {/* FTC / ASA Reader Disclosure */}
