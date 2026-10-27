@@ -65,21 +65,21 @@ export function primaryNeighborhood(n?: string | null, cityName?: string | null)
   let cleaned = n.trim();
   if (!cleaned) return undefined;
 
+  // Drop trailing city name only when after a comma (", Nashville", ", New Orleans", ", North Goa")
+  if (cityName && typeof cityName === 'string' && cityName.trim()) {
+    const trailingCityRe = new RegExp(`,\\s*(?:(?:North|South|East|West)\\s+)?${escapeRegex(cityName.trim())}\\s*$`, 'i');
+    cleaned = cleaned.replace(trailingCityRe, '').trim();
+  }
+
   // 1. Keep only part before " / ", " & ", or ", "
   const delimiterMatch = cleaned.split(/\s+[\/&]\s+|,\s*/);
   cleaned = delimiterMatch[0].trim();
 
-  // 2. Drop trailing/embedded city name
-  if (cityName && typeof cityName === 'string' && cityName.trim()) {
-    const cityRe = new RegExp(`\\b${escapeRegex(cityName.trim())}\\b`, 'gi');
-    cleaned = cleaned.replace(cityRe, '').trim();
-    cleaned = cleaned.replace(/^[-,\/&\s]+|[-,\/&\s]+$/g, '').replace(/\s{2,}/g, ' ').trim();
-  }
-
-  // Drop common region suffixes/prefixes (e.g. "North Goa", "South Delhi")
-  cleaned = cleaned.replace(/\b(North|South|East|West)\s+(Goa|Delhi|London|Paris)\b/gi, '').trim();
-  cleaned = cleaned.replace(/\s*\(\s*(?:East|West|North|South)?\s*\)/gi, '').trim();
+  // Clean trailing punctuation or spaces
   cleaned = cleaned.replace(/^[-,\/&\s]+|[-,\/&\s]+$/g, '').replace(/\s{2,}/g, ' ').trim();
+
+  // If the neighborhood is identical to the city name, it is not a neighborhood
+  if (cityName && cleaned.toLowerCase() === cityName.trim().toLowerCase()) return undefined;
 
   // 3. Existing placeholder checks
   if (isPlaceholderNeighborhood(cleaned)) return undefined;

@@ -13,31 +13,36 @@ export async function GET(request: NextRequest) {
     const host = parsed.hostname.toLowerCase();
 
     // Security validation to prevent open redirect vulnerabilities
-    const isAllowedDomain =
-      host.endsWith('makemytrip.com') ||
-      host.endsWith('trip.com') ||
-      host.endsWith('expedia.com') ||
-      host.endsWith('expedia.co.uk') ||
-      host.endsWith('hotels.com') ||
-      host.endsWith('vrbo.com') ||
-      host.endsWith('airbnb.com') ||
-      host.endsWith('airbnb.co.in') ||
-      host.endsWith('agoda.com') ||
-      host.endsWith('agoda.net') ||
-      host.endsWith('booking.com') ||
-      host.endsWith('trivago.in') ||
-      host.endsWith('trivago.com') ||
-      host.endsWith('tripadvisor.in') ||
-      host.endsWith('tripadvisor.com') ||
-      host.endsWith('tripadvisor.co.in') ||
-      host.endsWith('amazon.in') ||
-      host.endsWith('nykaa.com') ||
-      host.endsWith('earnkaro.com') ||
-      host.endsWith('ekaro.in') ||
-      host.endsWith('linkredirect.in') ||
-      host.endsWith('bitli.in') ||
-      host.endsWith('google.com') ||
-      host.endsWith('google.co.in');
+    const ALLOWED_DOMAINS = [
+      'makemytrip.com',
+      'trip.com',
+      'expedia.com',
+      'expedia.co.uk',
+      'hotels.com',
+      'vrbo.com',
+      'airbnb.com',
+      'airbnb.co.in',
+      'agoda.com',
+      'agoda.net',
+      'booking.com',
+      'trivago.in',
+      'trivago.com',
+      'tripadvisor.in',
+      'tripadvisor.com',
+      'tripadvisor.co.in',
+      'amazon.in',
+      'nykaa.com',
+      'earnkaro.com',
+      'ekaro.in',
+      'linkredirect.in',
+      'linksredirect.com',
+      'clnk.in',
+      'bitli.in',
+    ];
+
+    const isAllowedDomain = ALLOWED_DOMAINS.some(
+      (domain) => host === domain || host.endsWith('.' + domain)
+    );
 
     if (!isAllowedDomain) {
       return new Response('Invalid redirect destination', { status: 400 });
