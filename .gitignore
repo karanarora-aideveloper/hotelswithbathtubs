@@ -52,3 +52,5 @@ public/pins/
 web_pages/
 *.apk
 !.env.example
+data-collect/pages/
+
