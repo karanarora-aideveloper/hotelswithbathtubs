@@ -1524,27 +1524,32 @@ export default function CityHotelsClient({
                   )}
 
                   {/* Amenities Chips (Modern compact tags) */}
-                  <div className="hidden sm:flex flex-wrap items-center gap-1.5 mb-3 pt-2 border-t border-gray-100">
-                    {h.amenities.slice(0, 3).map((amenity: string, idx: number) => {
-                      const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub');
-                      return (
-                        <span
-                          key={idx}
-                          className="inline-flex items-center gap-1 text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md"
-                        >
-                          <span className={isJacuzzi ? "text-[#1a6fde]" : "text-emerald-600"}>
-                            {isJacuzzi ? '🛁' : '✓'}
+                  {(() => {
+                    const displayAmenities = (h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a));
+                    return (
+                      <div className="hidden sm:flex flex-wrap items-center gap-1.5 mb-3 pt-2 border-t border-gray-100">
+                        {displayAmenities.slice(0, 3).map((amenity: string, idx: number) => {
+                          const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub');
+                          return (
+                            <span
+                              key={idx}
+                              className="inline-flex items-center gap-1 text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md"
+                            >
+                              <span className={isJacuzzi ? "text-[#1a6fde]" : "text-emerald-600"}>
+                                {isJacuzzi ? '🛁' : '✓'}
+                              </span>
+                              <span>{amenity}</span>
+                            </span>
+                          );
+                        })}
+                        {displayAmenities.length > 3 && (
+                          <span className="text-[10px] font-medium text-gray-400">
+                            +{displayAmenities.length - 3} more
                           </span>
-                          <span>{amenity}</span>
-                        </span>
-                      );
-                    })}
-                    {h.amenities.length > 3 && (
-                      <span className="text-[10px] font-medium text-gray-400">
-                        +{h.amenities.length - 3} more
-                      </span>
-                    )}
-                  </div>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   <div className="flex-1" />
 

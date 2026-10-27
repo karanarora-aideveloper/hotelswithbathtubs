@@ -1005,7 +1005,7 @@ export default function DreamSoakMatchmaker({
                         {/* Amenities Chips */}
                         {hotel.amenities && hotel.amenities.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 mb-4">
-                            {hotel.amenities.slice(0, 3).map((amenity) => (
+                            {hotel.amenities.filter((a) => !/couple[- ]?friendly/i.test(a)).slice(0, 3).map((amenity) => (
                               <span
                                 key={amenity}
                                 className="px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 text-[11px] font-medium"

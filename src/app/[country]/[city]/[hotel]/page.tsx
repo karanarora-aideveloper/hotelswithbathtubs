@@ -344,7 +344,7 @@ export default async function HotelDetailPage({
     // review-snippet policy disallows marking up as the site's own ratings.
     "amenityFeature": [
       { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
-      ...(hotel.amenities || []).map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
+      ...(hotel.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
     ],
     ...(schemaPrice ? {
       "makesOffer": {
@@ -633,7 +633,7 @@ export default async function HotelDetailPage({
               In-Room &amp; Property Amenities
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-jakarta">
-              {(hotel.amenities || []).map((amenity: string, idx: number) => {
+              {(hotel.amenities || []).filter((amenity: string) => !/couple[- ]?friendly/i.test(amenity)).map((amenity: string, idx: number) => {
                 const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub') || amenity.toLowerCase().includes('bathtub');
                 return (
                   <li key={idx} className="flex items-center text-sm text-slate-700 gap-3 p-2.5 rounded-xl hover:bg-[#f8fafb] transition-colors">

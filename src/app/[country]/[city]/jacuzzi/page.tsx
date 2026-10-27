@@ -257,7 +257,7 @@ export default async function CityJacuzziHotelsPage({
           "amenityFeature": [
             { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
             { "@type": "LocationFeatureSpecification", "name": "Whirlpool Hydrotherapy Tub", "value": true },
-            ...(h.amenities || []).map((a: string) => ({
+            ...(h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({
               "@type": "LocationFeatureSpecification",
               "name": a,
               "value": true

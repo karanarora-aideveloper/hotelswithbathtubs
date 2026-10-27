@@ -207,7 +207,7 @@ export function sanitizeHotelData(h: any): any {
     h.bookingTip = sanitizeBookingTip(h.bookingTip, getLinkedPartners(h), h.roomType);
   }
   if (Array.isArray(h.amenities)) {
-    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || !hasClaimPhrase(a));
+    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
   }
   return h;
 }

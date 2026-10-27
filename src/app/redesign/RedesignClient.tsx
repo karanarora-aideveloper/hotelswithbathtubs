@@ -642,7 +642,7 @@ export default function RedesignClient({
                         {/* Amenity chips */}
                         {hotel.amenities && hotel.amenities.length > 1 && (
                           <div className="flex flex-wrap gap-1">
-                            {hotel.amenities.filter(a => a !== 'Bathtub').slice(0, 3).map(a => {
+                            {hotel.amenities.filter(a => a !== 'Bathtub' && !/couple[- ]?friendly/i.test(a)).slice(0, 3).map(a => {
                               const icon = a === 'Free WiFi' ? '📶' : a === 'Couple Friendly' ? '❤️' : a === 'Air Conditioning' ? '❄️' : a === 'Jacuzzi' ? '🌊' : a === 'Breakfast Included' ? '🍳' : '✓';
                               return (
                                 <span key={a} className="text-[8.5px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
@@ -793,7 +793,7 @@ export default function RedesignClient({
                           {/* Amenity chips */}
                           {hotel.amenities && hotel.amenities.length > 1 && (
                             <div className="flex flex-wrap gap-1">
-                              {hotel.amenities.filter((a: string) => a !== 'Bathtub').slice(0, 3).map((a: string) => {
+                              {hotel.amenities.filter((a: string) => a !== 'Bathtub' && !/couple[- ]?friendly/i.test(a)).slice(0, 3).map((a: string) => {
                                 const icon = a === 'Free WiFi' ? '📶' : a === 'Couple Friendly' ? '❤️' : a === 'Air Conditioning' ? '❄️' : a === 'Jacuzzi' ? '🌊' : a === 'Breakfast Included' ? '🍳' : '✓';
                                 return (
                                   <span key={a} className="text-[8px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md flex items-center gap-0.5 leading-tight">
