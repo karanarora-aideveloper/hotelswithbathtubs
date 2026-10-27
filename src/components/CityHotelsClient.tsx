@@ -1564,16 +1564,16 @@ export default function CityHotelsClient({
                   <div className="pt-2.5 border-t border-gray-100 mt-auto">
                     <div className="flex items-baseline justify-between mb-1">
                       <div>
-                        <span className="text-[10px] text-gray-400 font-medium block leading-none mb-0.5">Usual Rate</span>
-                        <div className="flex items-baseline">
+                        {h.price ? (
                           <span className="text-base sm:text-[17px] font-black text-gray-900">
-                            {h.price ? (h.price.startsWith('~') ? h.price : `~${h.price}`) : 'See live partner rates'}
+                            About {h.price.replace(/^~\s*/, '')} a night
                           </span>
-                          {h.price && <span className="text-[10px] text-gray-400 font-medium ml-1">/ night</span>}
-                        </div>
+                        ) : (
+                          <span className="text-sm text-gray-500 font-medium">See live partner rates</span>
+                        )}
                       </div>
                       <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} prefetch={false} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
-                        View Details &rarr;
+                        View room &rarr;
                       </Link>
                     </div>
 

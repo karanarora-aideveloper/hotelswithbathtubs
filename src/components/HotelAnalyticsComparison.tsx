@@ -208,6 +208,17 @@ export default function HotelAnalyticsComparison({
             No direct booking partner available for this stay yet.
           </p>
         )}
+
+        {/* Room Tier Alert under Q2 price box */}
+        <div className="mt-5 p-3.5 bg-amber-50/80 rounded-2xl border border-amber-200/80 text-xs text-amber-900 leading-snug font-jakarta">
+          <strong className="font-bold block mb-1">Remember:</strong>
+          Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout for the private tub.
+        </div>
+
+        {/* FTC / ASA Reader Disclosure */}
+        <div className="mt-4 pt-3.5 border-t border-[#5b8296]/15 text-[11px] text-slate-500 leading-relaxed font-jakarta">
+          <span className="font-semibold text-slate-700">Reader Disclosure:</span> When you book through our partner links, we may earn an affiliate commission at no extra cost to you. This supports our research and maintenance of this guide.
+        </div>
       </section>
     </div>
   );
