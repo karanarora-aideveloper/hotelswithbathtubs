@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const pageTitle = standardTitle.length <= 60
     ? standardTitle
     : `Jacuzzi Suites in ${cityName} (${currentYear})`;
-  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 verified suite' : `${hotelCount}+ verified suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
+  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 suite' : `${hotelCount}+ suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
 
   return {
     title: {
@@ -218,7 +218,7 @@ export default async function CityJacuzziHotelsPage({
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `Hotels with Jacuzzi in Room in ${cityName}`,
-    "description": `Curated list of verified hotel suites featuring private in-room whirlpool tubs, jacuzzis, and hot tubs in ${cityName}, ${countryName}.`,
+    "description": `Curated list of hotel suites featuring private in-room whirlpool tubs, jacuzzis, and hot tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => {
       const hasRealRating = h.rating && Number(h.rating) > 0;
@@ -285,7 +285,7 @@ export default async function CityJacuzziHotelsPage({
         "name": `Which hotels in ${cityName} offer the best private jacuzzi in room?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Top-rated hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing has been verified with direct room category tracking.`
+          "text": `Top-rated hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing includes direct room category guidance.`
         }
       },
       {
@@ -293,7 +293,7 @@ export default async function CityJacuzziHotelsPage({
         "name": `How do I ensure I get the jacuzzi room when booking online?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Standard base rooms rarely have hydrotherapy jets. When clicking through our verified partner links, select rooms titled "Jacuzzi Suite", "Whirlpool King", "Presidential Suite", or "Spa Villa" where the room amenities explicitly state private hot tub or whirlpool.`
+          "text": `Standard base rooms rarely have hydrotherapy jets. When clicking through our partner links, select rooms titled "Jacuzzi Suite", "Whirlpool King", "Presidential Suite", or "Spa Villa" where the room amenities explicitly state private hot tub or whirlpool.`
         }
       },
       {
@@ -342,13 +342,13 @@ export default async function CityJacuzziHotelsPage({
       <header className="relative py-12 sm:py-18 md:py-20 px-4 sm:px-8 text-center bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white overflow-hidden rounded-2xl max-w-7xl mx-auto">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-blue-500/20 border border-blue-400/30 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 flex items-center gap-2 text-blue-200">
-            <span>🌊</span> {hotels.length} Verified In-Room Jacuzzi Suites
+            <span>🌊</span> {hotels.length} In-Room Jacuzzi Suites
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-black mb-3 leading-tight tracking-tight">
             Hotels with Jacuzzi in Room in {cityName}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-            Every suite verified with private hydrotherapy whirlpool jets, in-room jacuzzis, and romantic hot tubs in {cityName}, {countryName}.
+            Hotel suites featuring private hydrotherapy whirlpool jets, in-room jacuzzis, and romantic hot tubs in {cityName}, {countryName}.
           </p>
         </div>
       </header>
@@ -371,7 +371,7 @@ export default async function CityJacuzziHotelsPage({
           <svg className="w-5 h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
           </svg>
-          <span>Verified Room Tiers</span>
+          <span>Room Tiers</span>
         </div>
       </div>
 
@@ -387,9 +387,9 @@ export default async function CityJacuzziHotelsPage({
               Where can I book a hotel room with a private jacuzzi in {cityName}?
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-              Top verified hotel suites featuring private in-room whirlpool jacuzzis in {cityName} include{' '}
+              Top hotel suites featuring private in-room whirlpool jacuzzis in {cityName} include{' '}
               <strong className="text-gray-900 font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-              All {hotels.length} properties featured below have undergone room-tier verification to ensure you book an authentic private whirlpool or hot tub directly in your quarters.
+              All {hotels.length} properties featured below include room tier details to help you book a private whirlpool or hot tub directly in your quarters.
             </p>
           </div>
         </div>
@@ -447,7 +447,7 @@ export default async function CityJacuzziHotelsPage({
                 Are couples welcomed at these jacuzzi suites?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Yes. All verified accommodations on HotelsWithBathtubs welcome couples and respect complete guest privacy.
+                Yes. Accommodations on HotelsWithBathtubs welcome couples and respect complete guest privacy.
               </p>
             </div>
             <div>

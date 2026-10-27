@@ -121,7 +121,7 @@ export default function ReportWrongData({ hotelName, hotelId, cityName }: Report
               {submitting ? 'Sending…' : 'Send Report'}
             </button>
             <p className="text-2xs text-text-muted mt-2 text-center">
-              Helps us maintain verified data 🛁
+              Helps us maintain accurate data 🛁
             </p>
           </div>
         </>

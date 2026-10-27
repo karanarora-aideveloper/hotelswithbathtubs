@@ -6,7 +6,7 @@ import { getDestinationsDirectory, REGION_ORDER } from '@/lib/destinationsDirect
 export const metadata: Metadata = {
   title: 'All Destinations by City',
   description:
-    'Browse destinations with verified hotel rooms featuring private in-room bathtubs & jacuzzi suites, from New York and Las Vegas to Jaipur and Goa.',
+    'Browse destinations with hotel rooms featuring private in-room bathtubs & jacuzzi suites, from New York and Las Vegas to Jaipur and Goa.',
   alternates: { canonical: 'https://www.hotelswithbathtubs.com/destinations' },
 };
 
@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "All Destinations with Bathtub & Jacuzzi Hotels",
-    "description": `Directory of ${totalHotels.toLocaleString('en-US')} verified hotel rooms featuring private in-room bathtubs and jacuzzi suites across ${cities.length} cities worldwide.`,
+    "description": `Directory of ${totalHotels.toLocaleString('en-US')} hotel rooms featuring private in-room bathtubs and jacuzzi suites across ${cities.length} cities worldwide.`,
     "url": "https://www.hotelswithbathtubs.com/destinations",
   };
 

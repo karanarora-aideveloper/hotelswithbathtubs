@@ -27,8 +27,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/los-angeles-the-beverly-hills-hotel-1.webp',
     tagline: 'From Napa Valley vineyard soaking tubs to Pacific Coast jacuzzi suites and alpine mountain retreats.',
     metaTitle: 'Hotels with Bathtub in California: Top Jacuzzi & Soaking Suites (2026)',
-    metaDescription: 'Discover 60+ verified hotels with private in-room bathtubs, jacuzzi suites & deep soaking tubs across California. Napa, LA, Lake Tahoe & San Diego.',
-    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways. Whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe, every property in our California guide features verified private in-room tubs.',
+    metaDescription: 'Discover 60+ hotels with private in-room bathtubs, jacuzzi suites & deep soaking tubs across California. Napa, LA, Lake Tahoe & San Diego.',
+    intro: 'California offers one of America’s most diverse landscapes for romantic bathtub getaways. Whether you seek cedar hot tubs tucked among Napa Valley vineyards, oceanfront whirlpool baths overlooking the Pacific in San Diego and Los Angeles, mid-century desert soaking spas in Palm Springs, or fireside jetted jacuzzis after a day skiing in Lake Tahoe, every property in our California guide features private in-room tubs.',
     highlights: [
       {
         region: 'Napa Valley & Wine Country',
@@ -50,7 +50,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     faqs: [
       {
         question: 'Which hotels in California have the best private in-room bathtubs or jacuzzis?',
-        answer: 'Top verified stays across California include Bardessono and Archer Hotel in Napa Valley, The Beverly Hills Hotel and Shutters on the Beach in Los Angeles, The US Grant in San Diego, and Nordic spa chalets in Lake Tahoe. All rooms have been hand-checked to confirm authentic in-room tubs.'
+        answer: 'Top stays across California include Bardessono and Archer Hotel in Napa Valley, The Beverly Hills Hotel and Shutters on the Beach in Los Angeles, The US Grant in San Diego, and Nordic spa chalets in Lake Tahoe. All rooms have been checked to confirm in-room tubs.'
       },
       {
         question: 'What are the top romantic destinations in California for a bathtub getaway?',
@@ -75,7 +75,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/miami-faena-hotel-miami-beach-1.webp',
     tagline: 'Oceanfront South Beach jacuzzi suites, tropical Key West garden tubs, and Orlando luxury spa retreats.',
     metaTitle: 'Hotels with Bathtub in Florida: Top 45+ Jacuzzi Suites (2026)',
-    metaDescription: 'Find verified hotels with private in-room bathtubs and jacuzzi suites in Florida. Hand-checked romantic suites in Miami, Key West & Orlando.',
+    metaDescription: 'Find hotels with private in-room bathtubs and jacuzzi suites in Florida. Romantic suites in Miami, Key West & Orlando.',
     intro: 'From the sun-drenched art deco coastline of Miami Beach to the laid-back Victorian porches of Key West and the world-class resort spas of Orlando, Florida is a premier destination for warm-weather relaxation. Our curated Florida selection focuses strictly on accommodations featuring private, in-suite whirlpool jacuzzis, freestanding deep soaking tubs, and secluded balcony baths.',
     highlights: [
       {
@@ -119,8 +119,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/honolulu-pacific-monarch-hotel-1.webp',
     tagline: 'Pacific oceanfront sunset tubs, open-air lanai jetted baths, and tropical Hawaiian paradise retreats.',
     metaTitle: 'Hotels with Bathtub in Hawaii: Top Oceanfront Jacuzzi Stays (2026)',
-    metaDescription: 'Discover verified Hawaii hotels & resorts with private in-room bathtubs & oceanfront jacuzzi suites across Honolulu, Oahu & Maui.',
-    intro: 'Nothing rivals soaking in a deep tub while listening to Pacific surf and watching the Hawaiian sunset. From the iconic skyline of Waikiki Beach in Honolulu to the pristine shores of Kaanapali and Wailea in Maui, our Hawaii collection features verified luxury resorts and intimate condos equipped with private deep soaking tubs and in-room hydrotherapy whirlpools.',
+    metaDescription: 'Discover Hawaii hotels & resorts with private in-room bathtubs & oceanfront jacuzzi suites across Honolulu, Oahu & Maui.',
+    intro: 'Nothing rivals soaking in a deep tub while listening to Pacific surf and watching the Hawaiian sunset. From the iconic skyline of Waikiki Beach in Honolulu to the pristine shores of Kaanapali and Wailea in Maui, our Hawaii collection features luxury resorts and intimate condos equipped with private deep soaking tubs and in-room hydrotherapy whirlpools.',
     highlights: [
       {
         region: 'Honolulu & Oahu',
@@ -142,7 +142,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       },
       {
         question: 'What is the price range for a bathtub suite in Hawaii?',
-        answer: 'Due to premium island resort demand, verified bathtub suites generally start around $280 to $450 per night, with 5-star luxury beachfront suites ranging from $750 to $1,800+ per night.'
+        answer: 'Due to premium island resort demand, bathtub suites generally start around $280 to $450 per night, with 5-star luxury beachfront suites ranging from $750 to $1,800+ per night.'
       }
     ]
   },
@@ -155,8 +155,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/austin-commodore-perry-estate-auberge-resorts-collection-austin-1.webp',
     tagline: 'Hill Country estate soaking tubs, Houston Galleria luxury suites, and chic Dallas boutique jacuzzi baths.',
     metaTitle: 'Hotels with Bathtub in Texas: Top Jacuzzi & Spa Suites (2026)',
-    metaDescription: 'Explore 24+ verified Texas hotels with private in-room bathtubs & jacuzzi suites across Austin, Houston, and Dallas. Hand-checked for couples.',
-    intro: 'Texas combines Southern hospitality with vibrant metropolitan culture and serene Hill Country escapes. Whether you are planning a romantic weekend getaway in Austin with artisanal soaking tubs, a shopping and spa trip to Houston with marble soaking baths, or an upscale stay in Dallas featuring jetted jacuzzi suites, our Texas directory verifies every room tier.',
+    metaDescription: 'Explore 24+ Texas hotels with private in-room bathtubs & jacuzzi suites across Austin, Houston, and Dallas. Curated for couples.',
+    intro: 'Texas combines Southern hospitality with vibrant metropolitan culture and serene Hill Country escapes. Whether you are planning a romantic weekend getaway in Austin with artisanal soaking tubs, a shopping and spa trip to Houston with marble soaking baths, or an upscale stay in Dallas featuring jetted jacuzzi suites, our Texas directory lists exact room tiers.',
     highlights: [
       {
         region: 'Austin & Texas Hill Country',
@@ -195,7 +195,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/boston-harbor-hotel-boston-1.webp',
     tagline: 'Historic Back Bay clawfoot soaking tubs, Boston Harbor waterfront suites, and Beacon Hill boutique romance.',
     metaTitle: 'Hotels with Bathtub in Massachusetts: Boston Jacuzzi Suites (2026)',
-    metaDescription: 'Discover verified Massachusetts & Boston hotels with private in-room bathtubs, deep soaking tubs & jacuzzi suites. Verified stays for couples.',
+    metaDescription: 'Discover Massachusetts & Boston hotels with private in-room bathtubs, deep soaking tubs & jacuzzi suites. Stays for couples.',
     intro: 'Rich with American heritage and New England charm, Massachusetts is ideal for cozy romantic getaways. Our Massachusetts collection highlights Boston’s premier luxury hotels and historic brownstones featuring deep soaking tubs overlooking Boston Harbor, Back Bay, and the Charles River.',
     highlights: [
       {
@@ -231,8 +231,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp',
     tagline: 'Manhattan skyline soaking tubs, Tribeca loft deep baths, and Central Park luxury couple suites.',
     metaTitle: 'Hotels with Bathtub in New York: Top NYC Jacuzzi Suites (2026)',
-    metaDescription: 'Find verified hotels with private in-room bathtubs & jacuzzi suites in New York State & NYC. Deep soaking tubs with Manhattan skyline views.',
-    intro: 'New York offers some of the most spectacular hotel bathrooms in the world. After a day exploring Manhattan’s world-class museums, Broadway theaters, and Michelin-starred dining, nothing compares to relaxing in a private soaking tub overlooking the city skyline. Our New York guide highlights confirmed private in-room tubs.',
+    metaDescription: 'Find hotels with private in-room bathtubs & jacuzzi suites in New York State & NYC. Deep soaking tubs with Manhattan skyline views.',
+    intro: 'New York offers some of the most spectacular hotel bathrooms in the world. After a day exploring Manhattan’s world-class museums, Broadway theaters, and Michelin-starred dining, nothing compares to relaxing in a private soaking tub overlooking the city skyline. Our New York guide highlights private in-room tubs.',
     highlights: [
       {
         region: 'Manhattan (SoHo, Tribeca & Village)',
@@ -254,7 +254,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       },
       {
         question: 'What do bathtub hotel rooms in NYC typically cost?',
-        answer: 'New York rates for rooms with confirmed soaking tubs generally start from $260 to $420 per night, with premier 5-star suites ranging from $700 to $1,500+.'
+        answer: 'New York rates for rooms with soaking tubs generally start from $260 to $420 per night, with premier 5-star suites ranging from $700 to $1,500+.'
       }
     ]
   },
@@ -267,8 +267,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/chicago-trump-international-hotel-tower-chicago-1.webp',
     tagline: 'Magnificent Mile skyline soaking tubs, Chicago River luxury suites, and Michigan Lake views.',
     metaTitle: 'Hotels with Bathtub in Illinois: Chicago Jacuzzi Suites (2026)',
-    metaDescription: 'Explore verified Illinois & Chicago hotels with private in-room bathtubs & jacuzzi suites. Panoramic Lake Michigan & skyline view soaking tubs.',
-    intro: 'Illinois boasts world-famous architectural beauty, cultural attractions, and dramatic lakefront vistas. Centered around Chicago’s iconic Magnificent Mile and Loop, our Illinois collection highlights verified hotel suites featuring deep soaking tubs and hydrotherapy whirlpools overlooking the Chicago River and Lake Michigan.',
+    metaDescription: 'Explore Illinois & Chicago hotels with private in-room bathtubs & jacuzzi suites. Panoramic Lake Michigan & skyline view soaking tubs.',
+    intro: 'Illinois boasts world-famous architectural beauty, cultural attractions, and dramatic lakefront vistas. Centered around Chicago’s iconic Magnificent Mile and Loop, our Illinois collection highlights hotel suites featuring deep soaking tubs and hydrotherapy whirlpools overlooking the Chicago River and Lake Michigan.',
     highlights: [
       {
         region: 'Magnificent Mile & River North',
@@ -282,7 +282,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     faqs: [
       {
         question: 'What are the best hotels in Chicago with private bathtubs?',
-        answer: 'Top verified properties include Trump International Hotel & Tower Chicago, The Peninsula Chicago, and Waldorf Astoria Chicago, renowned for their opulent soaking baths and city panoramas.'
+        answer: 'Top properties include Trump International Hotel & Tower Chicago, The Peninsula Chicago, and Waldorf Astoria Chicago, renowned for their opulent soaking baths and city panoramas.'
       },
       {
         question: 'Can I find affordable jacuzzi rooms in Chicago?',
@@ -303,7 +303,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/aspen-hotel-jerome-auberge-resorts-collection-aspen-1.webp',
     tagline: 'Rocky Mountain alpine hot tubs, ski chalet fireside jacuzzis, and luxury Aspen spa retreats.',
     metaTitle: 'Hotels with Bathtub in Colorado: Rocky Mountain Jacuzzi Suites (2026)',
-    metaDescription: 'Find verified Colorado hotels & mountain chalets with private in-room bathtubs & hot tubs. Aspen ski-in ski-out luxury suites verified for couples.',
+    metaDescription: 'Find Colorado hotels & mountain chalets with private in-room bathtubs & hot tubs. Aspen ski-in ski-out luxury suites for couples.',
     intro: 'Colorado is America’s premier alpine playground, where crisp mountain air and snow-dusted peaks make a hot soak the ultimate reward. From historic Victorian mountain lodges like Hotel Jerome in Aspen to ski-in/ski-out chalets with private balcony hot tubs, our Colorado collection features authentic in-room tubs and jetted spas.',
     highlights: [
       {
@@ -335,7 +335,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-venetian-resort-las-vegas-las-vegas-1.webp',
     tagline: 'Las Vegas Strip oversized jacuzzi suites, Bellagio fountain views, and penthouse Roman tubs.',
     metaTitle: 'Hotels with Bathtub in Nevada: Las Vegas Jacuzzi Suites (2026)',
-    metaDescription: 'Discover verified Nevada hotels with private in-room jacuzzi suites & deep soaking tubs on the Las Vegas Strip. Romantic couple stays.',
+    metaDescription: 'Discover Nevada hotels with private in-room jacuzzi suites & deep soaking tubs on the Las Vegas Strip. Romantic couple stays.',
     intro: 'Nevada is the world capital of entertainment and luxury hospitality. The Las Vegas Strip features some of the grandest suites ever created, boasting oversized Italian marble jetted tubs, Roman hydrotherapy baths, and penthouse jacuzzis with sweeping views of the neon skyline and dancing fountains.',
     highlights: [
       {
@@ -367,7 +367,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/charleston-springhill-suites-by-marriott-charleston-riverview-1.webp',
     tagline: 'Historic Charleston French Quarter clawfoot tubs, veranda jetted suites, and Southern hospitality.',
     metaTitle: 'Hotels with Bathtub in South Carolina: Charleston Stays (2026)',
-    metaDescription: 'Explore verified South Carolina & Charleston hotels with private in-room bathtubs & jacuzzi suites. Romantic Southern historic inns and waterfront stays.',
+    metaDescription: 'Explore South Carolina & Charleston hotels with private in-room bathtubs & jacuzzi suites. Romantic Southern historic inns and waterfront stays.',
     intro: 'South Carolina charms travelers with moss-draped live oaks, historic cobblestone streets, and warm coastal breezes. Centered in romantic Charleston, our South Carolina directory showcases boutique carriage houses and waterfront hotels featuring antique clawfoot tubs, marble soaking baths, and jetted couple suites.',
     highlights: [
       {
@@ -399,7 +399,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-phoenician-a-luxury-collection-resort-scottsdale-scottsdale-1.webp',
     tagline: 'Sedona Red Rock vortex soaking tubs, Sonoran Desert casita baths, and Scottsdale luxury resort spas.',
     metaTitle: 'Hotels with Bathtub in Arizona: Sedona & Scottsdale Jacuzzis (2026)',
-    metaDescription: 'Discover verified Arizona hotels & desert resorts with private in-room bathtubs & jacuzzi suites across Sedona and Scottsdale. Hand-checked for couples.',
+    metaDescription: 'Discover Arizona hotels & desert resorts with private in-room bathtubs & jacuzzi suites across Sedona and Scottsdale. Curated for couples.',
     intro: 'Arizona offers magical desert sunsets, dramatic red rock canyons, and world-renowned wellness sanctuaries. From Sedona’s mystical red rock views to Scottsdale’s luxurious Sonoran Desert oasis resorts, our Arizona collection highlights private outdoor tubs, deep copper soaking baths, and jetted casita spa suites.',
     highlights: [
       {
@@ -435,8 +435,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/nashville-the-hermitage-hotel-nashville-1.webp',
     tagline: 'Great Smoky Mountain rustic hot tub cabins, Gatlinburg jacuzzi suites, and Nashville boutique luxury.',
     metaTitle: 'Hotels with Bathtub in Tennessee: Nashville & Gatlinburg (2026)',
-    metaDescription: 'Find verified Tennessee hotels & mountain cabins with private in-room bathtubs & jacuzzi suites across Nashville & Gatlinburg. Hand-checked for couples.',
-    intro: 'Tennessee brings together the vibrant musical pulse of Nashville with the misty, forested beauty of the Great Smoky Mountains in Gatlinburg. Whether you crave a high-end luxury soak at The Hermitage Hotel in downtown Nashville or a secluded mountain cabin featuring a heart-shaped jacuzzi and private outdoor hot tub in Gatlinburg, our directory verifies every listing.',
+    metaDescription: 'Find Tennessee hotels & mountain cabins with private in-room bathtubs & jacuzzi suites across Nashville & Gatlinburg. Curated for couples.',
+    intro: 'Tennessee brings together the vibrant musical pulse of Nashville with the misty, forested beauty of the Great Smoky Mountains in Gatlinburg. Whether you crave a high-end luxury soak at The Hermitage Hotel in downtown Nashville or a secluded mountain cabin featuring a heart-shaped jacuzzi and private outdoor hot tub in Gatlinburg, our directory checks each listing.',
     highlights: [
       {
         region: 'Great Smoky Mountains & Gatlinburg',
@@ -454,7 +454,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       },
       {
         question: 'Which luxury hotels in Nashville have private bathtubs?',
-        answer: 'The Hermitage Hotel in downtown Nashville features five-star Italian marble bathrooms with deep soaking tubs. Other top boutique hotels in The Gulch and Midtown also feature confirmed deep tubs.'
+        answer: 'The Hermitage Hotel in downtown Nashville features five-star Italian marble bathrooms with deep soaking tubs. Other top boutique hotels in The Gulch and Midtown also feature deep tubs.'
       },
       {
         question: 'What are typical nightly rates for Tennessee jacuzzi accommodations?',
@@ -471,7 +471,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-st-regis-atlanta.webp',
     tagline: 'From historic Savannah squares with clawfoot soaking tubs to Buckhead Atlanta skyline jacuzzi suites.',
     metaTitle: 'Hotels with Bathtub in Georgia: Top 25+ Jacuzzi & Soaking Suites (2026)',
-    metaDescription: 'Find verified hotels with private in-room bathtubs and jacuzzi suites in Georgia. Hand-checked romantic suites in Atlanta & Savannah.',
+    metaDescription: 'Find hotels with private in-room bathtubs and jacuzzi suites in Georgia. Romantic suites in Atlanta & Savannah.',
     intro: 'Georgia effortlessly blends deep Southern heritage with vibrant urban sophistication. From the Spanish-moss-canopied squares and 19th-century Victorian verandas of historic Savannah to the glittering skyline towers and lush residential avenues of Buckhead Atlanta, our Georgia guide features private in-room bathtubs, deep soaking tubs, and couple jacuzzi suites.',
     highlights: [
       {
@@ -503,8 +503,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-rittenhouse-hotel-philadelphia.webp',
     tagline: 'From Rittenhouse Square marble soaking tubs to iconic Pocono Mountains couples jacuzzi retreats.',
     metaTitle: 'Hotels with Bathtub in Pennsylvania: Top Jacuzzi & Spa Suites (2026)',
-    metaDescription: 'Discover verified hotels with in-room bathtubs and jacuzzi suites across Pennsylvania. Philadelphia luxury hotels & Pocono couples resorts.',
-    intro: 'Pennsylvania offers an unmatched spectrum of bathtub getaways, spanning the high-culture urban sophistication of Philadelphia to the timeless romantic mountain hideaways of the Pocono Mountains. Whether you dream of soaking 57 floors above Center City at the Four Seasons or relaxing in an iconic heart-shaped whirlpool spa nestled among Pocono pine forests, every room in our guide has been verified.',
+    metaDescription: 'Discover hotels with in-room bathtubs and jacuzzi suites across Pennsylvania. Philadelphia luxury hotels & Pocono couples resorts.',
+    intro: 'Pennsylvania offers an unmatched spectrum of bathtub getaways, spanning the high-culture urban sophistication of Philadelphia to the timeless romantic mountain hideaways of the Pocono Mountains. Whether you dream of soaking 57 floors above Center City at the Four Seasons or relaxing in an iconic heart-shaped whirlpool spa nestled among Pocono pine forests, every room in our guide features an in-room tub.',
     highlights: [
       {
         region: 'Philadelphia (Rittenhouse Square & Old City)',
@@ -535,7 +535,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-four-seasons-hotel-seattle.webp',
     tagline: 'Puget Sound waterfront soaking tubs, Elliott Bay views, and cozy Pacific Northwest fireside suites.',
     metaTitle: 'Hotels with Bathtub in Washington State: Top Seattle Jacuzzi Suites (2026)',
-    metaDescription: 'Verified hotels with private in-room bathtubs and jacuzzi suites in Washington State. Elliott Bay views, Seattle luxury hotels & soaking tubs.',
+    metaDescription: 'Hotels with private in-room bathtubs and jacuzzi suites in Washington State. Elliott Bay views, Seattle luxury hotels & soaking tubs.',
     intro: 'Framed by Puget Sound, Mount Rainier, and evergreen forests, Washington State offers quintessential Pacific Northwest serenity. In downtown Seattle, luxurious waterfront suites place deep soaking tubs next to floor-to-ceiling glass framing ferries gliding across Elliott Bay, while historic boutique hotels in Pioneer Square and Belltown deliver fireside whirlpool baths.',
     highlights: [
       {
@@ -563,8 +563,8 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-allison-inn-and-spa-oregon.webp',
     tagline: 'Willamette Valley vineyard soaking tubs, Willamette Riverfront suites, and historic downtown Portland boutique retreats.',
     metaTitle: 'Hotels with Bathtub in Oregon: Top Portland & Wine Country Suites (2026)',
-    metaDescription: 'Find verified hotels with private in-room bathtubs in Oregon. Portland boutique hotels, Willamette Valley vineyard soaking tubs & spa suites.',
-    intro: 'Oregon combines rich culinary culture, lush Willamette Valley vineyards, and rugged Pacific Northwest landscapes. Whether you are retreating to a vineyard spa with deep soaking tubs overlooking pinot noir vines or booking a historic boutique hideaway in downtown Portland with clawfoot bathtubs, our Oregon collection highlights verified in-room tubs.',
+    metaDescription: 'Find hotels with private in-room bathtubs in Oregon. Portland boutique hotels, Willamette Valley vineyard soaking tubs & spa suites.',
+    intro: 'Oregon combines rich culinary culture, lush Willamette Valley vineyards, and rugged Pacific Northwest landscapes. Whether you are retreating to a vineyard spa with deep soaking tubs overlooking pinot noir vines or booking a historic boutique hideaway in downtown Portland with clawfoot bathtubs, our Oregon collection highlights in-room tubs.',
     highlights: [
       {
         region: 'Portland & Willamette Valley',
@@ -591,7 +591,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     heroImage: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-omni-grove-park-inn-asheville.webp',
     tagline: 'Blue Ridge Mountain stone soaking tubs, Biltmore Estate luxury, and romantic historic Asheville inns.',
     metaTitle: 'Hotels with Bathtub in North Carolina: Top Asheville Jacuzzi Suites (2026)',
-    metaDescription: 'Discover verified hotels with private in-room bathtubs in North Carolina. Blue Ridge Mountain views, Biltmore Village luxury & Asheville jacuzzi suites.',
+    metaDescription: 'Discover hotels with private in-room bathtubs in North Carolina. Blue Ridge Mountain views, Biltmore Village luxury & Asheville jacuzzi suites.',
     intro: 'Nestled in the majestic Blue Ridge Mountains, North Carolina is a premier romantic mountain destination. From George Vanderbilt’s historic 8,000-acre Biltmore Estate to the legendary granite halls of The Omni Grove Park Inn, our North Carolina guide features mountain-view soaking tubs, subterranean rock spas, and romantic Arts and Crafts suites with two-person jetted jacuzzis.',
     highlights: [
       {
@@ -602,7 +602,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     faqs: [
       {
         question: 'Which hotels in Asheville, NC have private in-room jacuzzi or soaking tubs?',
-        answer: 'The Omni Grove Park Inn, The Inn on Biltmore Estate, Grand Bohemian Hotel Asheville, and 1900 Inn on Montford feature confirmed private soaking tubs or jetted jacuzzis.'
+        answer: 'The Omni Grove Park Inn, The Inn on Biltmore Estate, Grand Bohemian Hotel Asheville, and 1900 Inn on Montford feature private soaking tubs or jetted jacuzzis.'
       },
       {
         question: 'What is the best time of year to visit Asheville for a romantic mountain getaway?',

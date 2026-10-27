@@ -12,7 +12,7 @@ interface HotelGalleryProps {
   cityName: string;
   countryName: string;
   roomType?: string;
-  verifiedPlatformsText: string;
+  listedPlatformsText: string;
   bathtubLabel?: string;
 }
 
@@ -24,7 +24,7 @@ export default function HotelGallery({
   cityName,
   countryName,
   roomType,
-  verifiedPlatformsText,
+  listedPlatformsText,
   bathtubLabel = 'In-room bathtub',
 }: HotelGalleryProps) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
@@ -209,7 +209,7 @@ export default function HotelGallery({
                   <span>🏷️</span> Room Tier: {roomType || 'Suite / Deluxe Room with Bathtub'}
                 </div>
                 <p className="text-xs sm:text-sm text-white/85 font-medium">
-                  {verifiedPlatformsText}
+                  {listedPlatformsText}
                 </p>
               </div>
             </div>

@@ -17,7 +17,7 @@ export default function AboutUs() {
             About Hotels With Bathtubs
           </h1>
           <p className="text-text-muted text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
-            Your independent guide to discovering verified luxury hotels with private in-room bathtubs &amp; jacuzzi suites worldwide.
+            Your independent guide to discovering hotels with private in-room bathtubs &amp; jacuzzi suites worldwide.
           </p>
         </header>
 

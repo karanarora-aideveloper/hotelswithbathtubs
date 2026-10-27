@@ -54,7 +54,7 @@ export default function WishlistPage() {
           <p className="text-sm text-gray-500 mt-1">
             {favorites.length === 0
               ? 'No hotels saved yet'
-              : `${favorites.length} verified stay${favorites.length > 1 ? 's' : ''} saved for comparison`}
+              : `${favorites.length} stay${favorites.length > 1 ? 's' : ''} saved for comparison`}
           </p>
         </div>
         {favorites.length > 0 && (

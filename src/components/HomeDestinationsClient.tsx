@@ -181,7 +181,7 @@ function FlashDestinationSection({
               </svg>
             </div>
             <p className="font-heading text-base font-bold text-slate-900 mb-1">More Cities Coming Soon</p>
-            <p className="text-xs text-slate-500 leading-relaxed mb-3">Continuously adding verified boutique stays across Europe &amp; Asia.</p>
+            <p className="text-xs text-slate-500 leading-relaxed mb-3">Continuously adding boutique stays across Europe &amp; Asia.</p>
             <span className="text-2xs font-bold text-[#1a6fde] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">Updated Weekly</span>
           </div>
         )}
@@ -192,7 +192,7 @@ function FlashDestinationSection({
         <div ref={sentinelRef} className="h-10 w-full flex items-center justify-center my-6" aria-hidden="true">
           <div className="flex items-center gap-2 text-xs text-slate-600 font-medium bg-white px-4 py-2 rounded-full border border-slate-200 shadow-2xs animate-pulse">
             <div className="w-2 h-2 rounded-full bg-[#1a6fde] animate-ping" />
-            <span>Streaming verified destinations ({visibleCount} of {totalCount})...</span>
+            <span>Streaming destinations ({visibleCount} of {totalCount})...</span>
           </div>
         </div>
       )}
@@ -378,7 +378,7 @@ export default function HomeDestinationsClient({
       id="section-usa"
       emoji="🇺🇸"
       title="United States Luxury Escapes"
-      subtitle="Premier American city stays and romantic getaways featuring verified in-room jacuzzis & deep soaking tubs"
+      subtitle="Premier American city stays and romantic getaways featuring in-room jacuzzis & deep soaking tubs"
       hubUrl="/usa"
       hubLabel={`Explore All ${totalUsaCount ?? usaCities.length} US Destinations`}
       badgeLabel={`${totalUsaCount ?? usaCities.length} Destinations`}
@@ -399,7 +399,7 @@ export default function HomeDestinationsClient({
       id="section-global"
       emoji="🌍"
       title="Global Romantic Escapes"
-      subtitle="World-class luxury destinations in Europe, Asia & the Middle East with verified private tubs"
+      subtitle="World-class luxury destinations in Europe, Asia & the Middle East with private in-room tubs"
       badgeLabel={`${totalInternationalCount ?? internationalCities.length} Global Cities`}
       cities={internationalCities}
       totalCount={totalInternationalCount}
@@ -422,7 +422,7 @@ export default function HomeDestinationsClient({
       id="section-india"
       emoji="🇮🇳"
       title="India Getaways"
-      subtitle="Top romantic destinations across India featuring verified private jacuzzi suites & in-room soaking tubs"
+      subtitle="Top romantic destinations across India featuring private jacuzzi suites & in-room soaking tubs"
       hubUrl="/india"
       hubLabel={`Explore All ${totalIndiaCount ?? indiaCities.length} Indian Cities`}
       badgeLabel={`${totalIndiaCount ?? indiaCities.length} Indian Cities`}
@@ -565,7 +565,7 @@ export default function HomeDestinationsClient({
                 Search Results for &ldquo;{filterQuery}&rdquo;
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Found {filteredMatches.length} matching verified bathtub destinations
+                Found {filteredMatches.length} matching bathtub destinations
               </p>
             </div>
             <button
@@ -612,7 +612,7 @@ export default function HomeDestinationsClient({
               <span className="text-3xl mb-2 block">🔍</span>
               <h4 className="font-heading font-bold text-slate-900 text-base mb-1">No destinations found</h4>
               <p className="text-xs text-slate-500 mb-4 leading-relaxed">
-                No verified bathtub stays match &ldquo;{filterQuery}&rdquo;. Try searching for popular hubs like Paris, New York, Goa, London, or Tokyo.
+                No bathtub stays match &ldquo;{filterQuery}&rdquo;. Try searching for popular hubs like Paris, New York, Goa, London, or Tokyo.
               </p>
               <button
                 type="button"

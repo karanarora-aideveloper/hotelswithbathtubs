@@ -10,6 +10,7 @@ import StructuredData, { safeJsonLd } from '@/components/StructuredData';
 import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
+import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } from '@/lib/claims';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
 import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
@@ -223,7 +224,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }).limit(3).sort({ createdAt: -1 });
 
   // Convert markdown to HTML (also strips duplicate markdown H1 & fixes legacy broken internal links)
-  const sanitizedContent = sanitizePlaceholderText(blog.content || '');
+  const sanitizedContent = dropClaimSentencesFromMarkdown(sanitizePlaceholderText(blog.content || ''));
   const htmlContent = markdownToHtml(sanitizedContent.replace(/\/india\/mahipalpur\b/g, '/india/delhi'));
 
   // Determine if this blog is strongly associated with a specific city
@@ -330,10 +331,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       ...faqSection.matchAll(/\*\*([^*]+\?)\*\*\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g),
       ...faqSection.matchAll(/###\s+([^\n?]+\?)\s*\n+([^\n*#][^\n]*(?:\n(?![*#\n])[^\n]*)*)/g)
     ];
-    return pairs.map((m: RegExpExecArray) => ({
-      q: m[1].trim(),
-      a: m[2].trim()
-    }));
+    return pairs.map((m: RegExpExecArray) => {
+      const q = m[1].trim();
+      const a = dropClaimSentences(m[2].trim());
+      return { q, a };
+    }).filter((item) => item.q && item.a && !hasClaimPhrase(item.q) && !hasClaimPhrase(item.a));
   })();
 
   const hasMarkdownFaq = markdownFaqPairs.length > 0;
@@ -343,15 +345,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ? [
         {
           q: `Which hotels in ${matchedCity} feature private in-room bathtubs or jacuzzis?`,
-          a: `Top verified options in ${matchedCity} include properties curated in this guide and directory, hand-checked across Booking.com and Agoda to confirm private in-room tubs rather than shared hotel wellness facilities.`
+          a: `Top options in ${matchedCity} include properties featured in this guide and directory, listed with private in-room tubs on Booking.com and Agoda rather than shared hotel wellness facilities.`
         },
         {
           q: `Are hotels with bathtubs in ${matchedCity} couple-friendly?`,
-          a: `Yes, verified bathtub hotels in ${matchedCity} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and getaways.`
+          a: `Yes, hotels with bathtubs in ${matchedCity} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and getaways.`
         },
         {
           q: `How do I ensure my room tier in ${matchedCity} includes a private bathtub?`,
-          a: `When booking through verified partner links, check that your chosen room tier (such as "Suite with Bathtub", "Executive Room", or "Jacuzzi Suite") explicitly lists a private bathtub in the amenities list before reserving.`
+          a: `When booking through partner links, check that your chosen room tier (such as "Suite with Bathtub", "Executive Room", or "Jacuzzi Suite") explicitly lists a private bathtub in the amenities list before reserving.`
         },
         {
           q: `What is the difference between a bathtub and a jacuzzi suite in ${matchedCity}?`,
@@ -360,12 +362,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       ]
     : [
         {
-          q: "How does Hotels with Bathtubs verify private in-room tubs?",
-          a: "Every hotel is cross-checked across Booking.com and Agoda by analyzing room category specifications, traveler photos, and amenity tags to confirm the tub is private inside your room."
+          q: "How does Hotels with Bathtubs list in-room tubs?",
+          a: "We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi."
         },
         {
           q: "Are hotel room bathtubs and jacuzzis private or shared?",
-          a: "All properties recommended on Hotels with Bathtubs feature private, in-room bathtubs or suites. We strictly filter out properties where tubs are located in shared hotel spas."
+          a: "Properties listed on Hotels with Bathtubs feature private, in-room bathtubs or suites. We do not list properties where tubs are located in shared hotel spas."
         },
         {
           q: "Which room categories usually have bathtubs?",
@@ -518,12 +520,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div className="flex items-start gap-3">
                   <span className="text-2xl mt-0.5">🛁</span>
                   <div>
-                    <span className="text-2xs font-bold text-accent uppercase tracking-wider">Verified Live Inventory</span>
+                    <span className="text-2xs font-bold text-accent uppercase tracking-wider">Live Inventory</span>
                     <h2 className="font-heading text-sm sm:text-base font-bold text-accent-secondary mt-0.5">
                       Explore All {matchedCityCount}+ Hotels with Bathtubs in {matchedCity}
                     </h2>
                     <p className="text-xs text-text-muted mt-0.5">
-                      Looking for confirmed in-room jacuzzi suites, real guest photos, and live room rates?
+                      Looking for in-room jacuzzi suites, real guest photos, and live room rates?
                     </p>
                   </div>
                 </div>
@@ -566,13 +568,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </section>
             )}
 
-            {/* Top 3 Verified Hotel Direct Booking Cards */}
+            {/* Top 3 Hotel Direct Booking Cards */}
             {featuredHotels.length > 0 && matchedCity && (
-              <section aria-label={`Featured verified hotels in ${matchedCity}`} className="mt-12 pt-8 border-t border-border">
+              <section aria-label={`Featured hotels in ${matchedCity}`} className="mt-12 pt-8 border-t border-border">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
                   <div>
                     <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
-                      Top Verified Picks
+                      Featured Rooms
                     </span>
                     <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mt-2">
                       Featured Bathtub Hotels in {matchedCity}
@@ -641,7 +643,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             href={hotelUrl}
                             className="w-full text-center py-1.5 px-3 bg-gray-50 hover:bg-gray-100 text-gray-600 text-2xs font-semibold rounded-lg transition-colors border border-gray-200"
                           >
-                            View Verified Photos &amp; Specs
+                            View Photos &amp; Room Details
                           </Link>
                         </div>
                       </div>

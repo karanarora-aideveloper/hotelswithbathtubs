@@ -17,13 +17,13 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Hotels with Soaking Tub in Room',
-  description: 'Verified luxury hotels with private deep soaking tubs, freestanding stone bathtubs, and scenic bath suites across top US & international getaways.',
+  description: 'Luxury hotels with private deep soaking tubs, freestanding stone bathtubs, and scenic bath suites across top US & international getaways.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
   },
   openGraph: {
     title: `Hotels with Soaking Tub in Room (${currentYear})`,
-    description: 'Explore hand-picked luxury hotels with private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
+    description: 'Explore luxury hotels with private in-room deep soaking bathtubs, Japanese ofuro tubs, and freestanding stone baths.',
     url: 'https://www.hotelswithbathtubs.com/soaking-tub-hotels',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Soaking Tub in Room (${currentYear})`,
-    description: 'Explore hand-picked luxury hotels with private in-room deep soaking bathtubs.',
+    description: 'Explore luxury hotels with private in-room deep soaking bathtubs.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-greenwich-hotel-new-york-1.webp'],
   },
 };
@@ -97,7 +97,7 @@ export default async function SoakingTubHotelsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Hotels with Soaking Tub in Room",
-    "description": "Curated collection of verified luxury hotels featuring private deep soaking bathtubs and freestanding stone baths in room.",
+    "description": "Collection of luxury hotels featuring private deep soaking bathtubs and freestanding stone baths in room.",
     "url": "https://www.hotelswithbathtubs.com/soaking-tub-hotels",
   };
 
@@ -137,13 +137,13 @@ export default async function SoakingTubHotelsPage() {
         <header className="relative py-14 sm:py-20 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-950 via-slate-900 to-[#1a6fde] text-white overflow-hidden">
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-bold mb-4 shadow-sm">
-              <span>🛁</span> {totalCount}+ Verified Deep Soaking Tubs Worldwide
+              <span>🛁</span> {totalCount}+ Deep Soaking Tubs Worldwide
             </div>
             <h1 className="font-heading text-3xl sm:text-5xl font-black mb-4 tracking-tight leading-tight">
               Hotels with Private Deep Soaking Tubs in Room
             </h1>
             <p className="text-base sm:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed">
-              Every listing verified. Discover handcrafted stone tubs, Japanese ofuro soaking baths, and freestanding panoramic tubs for the ultimate mindful retreat.
+              Discover handcrafted stone tubs, Japanese ofuro soaking baths, and freestanding panoramic tubs for the ultimate mindful retreat.
             </p>
           </div>
         </header>
@@ -186,14 +186,14 @@ export default async function SoakingTubHotelsPage() {
             </div>
           </section>
 
-          {/* Curated Top Stays Grid */}
+          {/* Featured Top Stays Grid */}
           <section className="mb-16">
             <div className="mb-8">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
-                Curated Inventory
+                Featured Rooms
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2">
-                Hand-Picked Deep Soaking Bath Suites
+                Deep Soaking Bath Suites
               </h2>
               <p className="text-sm text-gray-500 mt-1">
                 Room categories where booking partners specify a deep soaking tub inside the private suite.
@@ -270,7 +270,7 @@ export default async function SoakingTubHotelsPage() {
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6 border-b border-gray-200 pb-3">
               <div>
-                <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900">Curated Soaking & Hot Tub Guides</h2>
+                <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900">Soaking &amp; Hot Tub Guides</h2>
                 <p className="text-gray-500 text-xs sm:text-sm mt-1">Deep dives into seasonal getaways, romantic suites, and cozy winter retreats</p>
               </div>
               <Link href="/blog" className="text-xs font-semibold text-[#1a6fde] hover:underline hidden sm:block">

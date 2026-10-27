@@ -1169,7 +1169,7 @@ export default function CityHotelsClient({
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 px-1">
         <div className="text-xs sm:text-sm text-gray-700 font-medium">
           Showing <strong className="text-gray-900 font-black">{filteredHotels.length}</strong> of{' '}
-          <span className="text-gray-500">{uniqueHotels.length} verified stays</span> in{' '}
+          <span className="text-gray-500">{uniqueHotels.length} stays</span> in{' '}
           <span className="font-semibold text-gray-900">{cityName}</span>
           {activeFilterCount > 0 && <span className="text-[#1a6fde] font-semibold ml-1.5">(matching filters)</span>}
         </div>
@@ -1622,7 +1622,7 @@ export default function CityHotelsClient({
             No hotels match your filters
           </h3>
           <p className="text-xs sm:text-sm text-gray-500 mb-6 leading-relaxed">
-            We couldn&apos;t find any stays in {cityName} matching all selected filters. Try broadening your criteria or resetting to explore all {uniqueHotels.length} verified stays.
+            We couldn&apos;t find any stays in {cityName} matching all selected filters. Try broadening your criteria or resetting to explore all {uniqueHotels.length} stays.
           </p>
           <button
             onClick={handleResetFilters}

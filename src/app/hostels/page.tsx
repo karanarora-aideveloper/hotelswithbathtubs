@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
-    description: 'Discover verified hostels and poshtels featuring private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
+    description: 'Discover hostels and poshtels featuring private in-room bathtubs & jacuzzis. Vibrant community vibes meet private soaking luxury.',
     url: 'https://www.hotelswithbathtubs.com/hostels',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Boutique Hostels & Poshtels with Bathtubs (${currentYear} Guide)`,
-    description: 'Discover verified hostels and poshtels featuring private in-room bathtubs & jacuzzis.',
+    description: 'Discover hostels and poshtels featuring private in-room bathtubs & jacuzzis.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -130,7 +130,7 @@ export default async function HostelsHubPage() {
         "name": "Are the bathtubs private or shared with dormitory guests?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every hostel room featured on HotelsWithBathtubs comes with a 100% private, en-suite bathtub or private terrace jacuzzi. We strictly filter out properties with shared bathrooms or communal spa areas."
+          "text": "Every hostel room featured on HotelsWithBathtubs comes with a private, en-suite bathtub or private terrace jacuzzi. We filter out properties with shared bathrooms or communal spa areas."
         }
       },
       {
@@ -220,7 +220,7 @@ export default async function HostelsHubPage() {
 
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-8">
               Why choose between meeting fellow travelers and having your own private sanctuary? 
-              Discover handpicked boutique poshtels, co-living lodges, and alpine chalets with 
+              Discover boutique poshtels, co-living lodges, and alpine chalets with 
               private en-suite bathtubs and jacuzzis.
             </p>
 
@@ -243,7 +243,7 @@ export default async function HostelsHubPage() {
               </div>
               <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-2xs">
                 <span className="text-lg mb-1 block">🔒</span>
-                <p className="text-xs font-bold text-gray-900">Verified Room</p>
+                <p className="text-xs font-bold text-gray-900">Room Details</p>
                 <p className="text-[11px] text-gray-500">Room tier checked</p>
               </div>
             </div>
@@ -282,15 +282,15 @@ export default async function HostelsHubPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
             <div>
               <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900">
-                Verified Hostels &amp; Poshtels with Bathtubs
+                Hostels &amp; Poshtels with Bathtubs
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                Showing {hostels.length} verified stays with confirmed en-suite soaking tubs or private hot tubs.
+                Showing {hostels.length} stays with en-suite soaking tubs or private hot tubs.
               </p>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full text-xs font-semibold w-fit">
               <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-              {totalHostels} Verified Stays
+              {totalHostels} Stays Listed
             </div>
           </div>
 
@@ -451,7 +451,7 @@ export default async function HostelsHubPage() {
                 Are the bathtubs private or shared with dorm guests?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Every hostel room featured on HotelsWithBathtubs comes with a 100% private, en-suite in-room bathtub or private terrace jacuzzi. We strictly filter out properties with shared bathrooms.
+                Every hostel room featured on HotelsWithBathtubs comes with a private, en-suite in-room bathtub or private terrace jacuzzi. We filter out properties with shared bathrooms.
               </p>
             </div>
 

@@ -5,7 +5,7 @@ import TrendingDestinations from '@/components/TrendingDestinations';
 
 export const metadata: Metadata = {
   title: 'Page Not Found | Hotels With Bathtubs',
-  description: 'The page you were looking for could not be found. Explore verified luxury hotels with private bathtubs and jacuzzi suites worldwide.',
+  description: 'The page you were looking for could not be found. Explore luxury hotels with private bathtubs and jacuzzi suites worldwide.',
   alternates: {
     canonical: undefined,
   },
@@ -37,7 +37,7 @@ export default function NotFound() {
       </h1>
 
       <p className="text-gray-500 text-sm sm:text-base mb-8 max-w-md mx-auto leading-relaxed">
-        The destination or hotel URL you requested may have moved or been updated. Discover verified in-room soaking tubs &amp; jacuzzi suites below:
+        The destination or hotel URL you requested may have moved or been updated. Discover in-room soaking tubs &amp; jacuzzi suites below:
       </p>
 
       {/* Quick Search Hub Links */}

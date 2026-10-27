@@ -4,7 +4,7 @@ import WishlistPage from './WishlistPage';
 
 export const metadata: Metadata = {
   title: 'My Saved Hotels — Wishlist',
-  description: 'Your saved hotels with private bathtubs, jacuzzi suites, and soaking tubs. Compare and book your favorite verified stays.',
+  description: 'Your saved hotels with private bathtubs, jacuzzi suites, and soaking tubs. Compare and book your favorite stays.',
   robots: { index: false, follow: false },
 };
 

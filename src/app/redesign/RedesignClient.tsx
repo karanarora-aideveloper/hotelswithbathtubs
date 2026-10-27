@@ -380,7 +380,7 @@ export default function RedesignClient({
             {isCityDropdownOpen && (
               <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl border border-gray-200 shadow-2xl overflow-hidden z-50 max-h-72 overflow-y-auto">
                 <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                  {allCities.length} Cities with Verified Bathtub Hotels
+                  {allCities.length} Cities with Bathtub Hotels
                 </div>
                 <div className="py-1">
                   {filteredCityOptions.map(c => (
@@ -430,7 +430,7 @@ export default function RedesignClient({
                 {city} Hotels with a Bathtub
               </h1>
               <p className="text-[13px] text-gray-500 mt-1.5 font-medium">
-                <span className="text-emerald-600 font-semibold">✓ Every listing photographically verified.</span>
+                <span className="text-emerald-600 font-semibold">✓ Private in-room bathtubs.</span>
                 {' '}Book what you see — a real bathtub in your room.
               </p>
             </div>
@@ -519,13 +519,13 @@ export default function RedesignClient({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white px-4 py-3 rounded-xl border border-gray-200 shadow-sm mb-3">
               <div>
                 <h2 className="text-[15px] font-bold text-gray-900 flex items-center gap-2">
-                  <span>{sortedHotels.length} Verified Bathtub Hotels in {selectedArea === 'All' ? city : `${selectedArea}, ${city}`}</span>
+                  <span>{sortedHotels.length} Bathtub Hotels in {selectedArea === 'All' ? city : `${selectedArea}, ${city}`}</span>
                   <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    ✓ In-Room Verified
+                    ✓ In-Room Bathtub
                   </span>
                 </h2>
                 <p className="text-[11px] text-gray-400 mt-0.5">
-                  100% photographic room verification. Zero shower-only surprises.
+                  Private in-room bathtubs and jacuzzis. No shower-only surprises.
                 </p>
               </div>
 
@@ -553,7 +553,7 @@ export default function RedesignClient({
             {sortedHotels.length === 0 ? (
               <div className="bg-white rounded-2xl p-12 text-center border border-slate-200/80 shadow-xs">
                 <span className="text-3xl block mb-2">🛁</span>
-                <h3 className="text-base font-bold text-slate-900">No verified bathtubs found for this filter</h3>
+                <h3 className="text-base font-bold text-slate-900">No bathtubs found for this filter</h3>
                 <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
                   Try switching back to &quot;All {city}&quot; or resetting the tub filter to see all stays.
                 </p>
@@ -893,7 +893,7 @@ export default function RedesignClient({
           <div className="flex items-center gap-4 text-slate-500">
             <span>{allCities.length} Cities Worldwide</span>
             <span>•</span>
-            <span>100% Free Transparent Comparison</span>
+            <span>Free Transparent Comparison</span>
           </div>
         </div>
       </footer>

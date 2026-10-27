@@ -47,7 +47,7 @@ export const metadata = {
         url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
-        alt: 'Hotels with Bathtubs in Room - Verified Luxury Suites',
+        alt: 'Hotels with Bathtubs in Room - Luxury Suites',
       },
     ],
     type: 'website',
@@ -166,7 +166,7 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Hotels with Bathtubs",
-    "description": "Discover verified hotel rooms with private in-room bathtubs and jacuzzi suites across 60+ global destinations.",
+    "description": "Discover hotel rooms with private in-room bathtubs and jacuzzi suites across 60+ global destinations.",
     "url": "https://www.hotelswithbathtubs.com",
     "image": "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
     "potentialAction": {
@@ -193,7 +193,7 @@ export default async function Home() {
     "url": "https://www.hotelswithbathtubs.com",
     "logo": "https://www.hotelswithbathtubs.com/apple-icon",
     "image": "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
-    "description": "Verified directory for hotel rooms with in-room bathtubs and private jacuzzis worldwide",
+    "description": "Directory for hotel rooms with in-room bathtubs and private jacuzzis worldwide",
     "founder": {
       "@type": "Person",
       "name": "Karan Arora",
@@ -279,7 +279,7 @@ export default async function Home() {
                     Top US Bathtub Destinations
                   </h2>
                   <p className="font-playfair text-lg sm:text-xl text-[#121518] mt-0.5">
-                    Popular American cities with verified in-room tubs &amp; jacuzzi suites
+                    Popular American cities with in-room tubs &amp; jacuzzi suites
                   </p>
                 </div>
                 <a

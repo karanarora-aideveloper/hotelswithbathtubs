@@ -17,13 +17,13 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Hotels with Hot Tub in Room',
-  description: 'Find verified hotels with private in-room hot tubs, jetted whirlpool suites, and romantic balcony jacuzzi rooms across popular US & global getaways.',
+  description: 'Find hotels with private in-room hot tubs, jetted whirlpool suites, and romantic balcony jacuzzi rooms across popular US & global getaways.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room',
   },
   openGraph: {
     title: `Hotels with Hot Tub in Room (${currentYear})`,
-    description: 'Explore verified romantic hotels featuring private in-room hot tubs, private balcony jacuzzis, and hydrotherapy suites.',
+    description: 'Explore romantic hotels featuring private in-room hot tubs, private balcony jacuzzis, and hydrotherapy suites.',
     url: 'https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Hot Tub in Room (${currentYear})`,
-    description: 'Explore verified romantic hotels featuring private in-room hot tubs.',
+    description: 'Explore romantic hotels featuring private in-room hot tubs.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -103,7 +103,7 @@ export default async function HotelsWithHotTubInRoomPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Hotels with Hot Tub in Room",
-    "description": "Curated collection of verified hotels and romantic suites featuring private in-room hot tubs and whirlpool jacuzzis.",
+    "description": "Collection of hotels and romantic suites featuring private in-room hot tubs and whirlpool jacuzzis.",
     "url": "https://www.hotelswithbathtubs.com/hotels-with-hot-tub-in-room",
   };
 
@@ -143,7 +143,7 @@ export default async function HotelsWithHotTubInRoomPage() {
         <header className="relative py-14 sm:py-20 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-950 via-slate-900 to-indigo-900 text-white overflow-hidden">
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-bold mb-4 shadow-sm">
-              <span>♨️</span> {totalCount}+ Verified In-Room Hot Tub Suites Worldwide
+              <span>♨️</span> {totalCount}+ In-Room Hot Tub Suites Worldwide
             </div>
             <h1 className="font-heading text-3xl sm:text-5xl font-black mb-4 tracking-tight leading-tight">
               Hotels with Private In-Room Hot Tubs &amp; Jacuzzi Suites
@@ -192,17 +192,17 @@ export default async function HotelsWithHotTubInRoomPage() {
             </div>
           </section>
 
-          {/* Curated Top Hot Tub Stays Grid */}
+          {/* Featured Top Hot Tub Stays Grid */}
           <section className="mb-16">
             <div className="mb-8">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
-                Curated Inventory
+                Featured Rooms
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2">
-                Hand-Picked In-Room Hot Tub &amp; Jacuzzi Suites
+                In-Room Hot Tub &amp; Jacuzzi Suites
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                Checked across partner room listings and traveler photos for private hot tubs inside the room.
+                Rooms listed with a private hot tub or jacuzzi inside the room.
               </p>
             </div>
 
@@ -276,7 +276,7 @@ export default async function HotelsWithHotTubInRoomPage() {
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6 border-b border-gray-200 pb-3">
               <div>
-                <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900">Curated Hot Tub Travel Guides</h2>
+                <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900">Hot Tub Travel Guides</h2>
                 <p className="text-gray-500 text-xs sm:text-sm mt-1">Deep dives into seasonal getaways, romantic suites, and cozy winter retreats</p>
               </div>
               <Link href="/blog" className="text-xs font-semibold text-[#1a6fde] hover:underline hidden sm:block">

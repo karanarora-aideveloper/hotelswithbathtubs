@@ -78,13 +78,13 @@ export default function RomanticGetawayEmailCapture({
         </h3>
 
         <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6 font-normal max-w-xl mx-auto">
-          Planning an anniversary, Valentine&apos;s getaway, or spontaneous couples trip? We hand-verify private in-room jacuzzi suites and email secret rate drops once a month. Zero spam, unsubscribe anytime.
+          Planning an anniversary, Valentine&apos;s getaway, or spontaneous couples trip? We track private in-room jacuzzi suites and email secret rate drops once a month. Zero spam, unsubscribe anytime.
         </p>
 
         {status === 'success' ? (
           <div className="bg-emerald-900/60 border border-emerald-500/50 rounded-2xl p-5 text-emerald-200 text-sm font-semibold flex items-center justify-center gap-2 animate-fade-in">
             <span className="text-xl">🎉</span>
-            <span>You&apos;re on the list! We&apos;ll send you hand-curated jacuzzi suite drops and seasonal getaways.</span>
+            <span>You&apos;re on the list! We&apos;ll send you jacuzzi suite drops and seasonal getaways.</span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
@@ -122,7 +122,7 @@ export default function RomanticGetawayEmailCapture({
           </span>
           <span className="text-slate-600">•</span>
           <span className="flex items-center gap-1">
-            <span className="text-emerald-400 font-bold">✓</span> 100% verified private tubs
+            <span className="text-emerald-400 font-bold">✓</span> Private in-room tubs
           </span>
           <span className="text-slate-600">•</span>
           <span className="flex items-center gap-1">

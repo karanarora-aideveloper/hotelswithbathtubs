@@ -19,13 +19,13 @@ const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: 'Couple-Friendly Hotels with Bathtubs',
-  description: 'Hand-picked couple-friendly hotels and romantic suites featuring private in-room bathtubs and jacuzzis. Unmarried couples welcome, private suites.',
+  description: 'Couple-friendly hotels and romantic suites featuring private in-room bathtubs and jacuzzis. Unmarried couples welcome, private suites.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com/couple-friendly',
   },
   openGraph: {
     title: `Couple-Friendly Hotels with Bathtubs (${currentYear})`,
-    description: 'Discover verified romantic hotels and suites with private in-room bathtubs & jacuzzis. Safe, welcoming, and judgment-free stays for couples.',
+    description: 'Discover romantic hotels and suites with private in-room bathtubs & jacuzzis. Welcoming stays for couples.',
     url: 'https://www.hotelswithbathtubs.com/couple-friendly',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Couple-Friendly Hotels with Bathtubs (${currentYear})`,
-    description: 'Discover verified romantic hotels and suites with private in-room bathtubs & jacuzzis.',
+    description: 'Discover romantic hotels and suites with private in-room bathtubs & jacuzzis.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -137,7 +137,7 @@ export default async function CoupleFriendlyPage() {
         "name": "Are the bathtubs and jacuzzis completely private?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, absolutely. Our entire verification standard requires that the bathtub, jacuzzi, or whirlpool tub is situated privately inside the reserved guest room or on an enclosed private suite balcony. We strictly exclude properties where bathtubs are part of a shared wellness or spa center."
+          "text": "Yes, absolutely. Our listing criteria require that the bathtub, jacuzzi, or whirlpool tub is situated privately inside the reserved guest room or on an enclosed private suite balcony. We exclude properties where bathtubs are part of a shared wellness or spa center."
         }
       },
       {
@@ -153,7 +153,7 @@ export default async function CoupleFriendlyPage() {
         "name": "How can we make sure our room has a bathtub upon arrival?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Standard rooms frequently only offer standing showers. Always select room tiers specifically labeled 'Deluxe Room with Bathtub', 'Jacuzzi Suite', 'Executive Whirlpool Room', or 'Spa Villa' when clicking through our verified partner links on Booking.com or Agoda."
+          "text": "Standard rooms frequently only offer standing showers. Always select room tiers specifically labeled 'Deluxe Room with Bathtub', 'Jacuzzi Suite', 'Executive Whirlpool Room', or 'Spa Villa' when clicking through our partner links on Booking.com or Agoda."
         }
       }
     ]
@@ -200,7 +200,7 @@ export default async function CoupleFriendlyPage() {
         <header className="relative pt-12 pb-16 sm:pt-18 sm:pb-24 px-4 sm:px-8 text-center bg-gradient-to-br from-rose-950 via-slate-900 to-indigo-950 text-white overflow-hidden rounded-b-3xl">
           <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
             <div className="bg-rose-500/20 border border-rose-400/30 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 flex items-center gap-2 text-rose-200">
-              <span>💖</span> Verified Couple-Friendly Stays · 100% Private In-Room Tubs
+              <span>💖</span> Couple-Friendly Stays · Private In-Room Tubs
             </div>
             <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-black mb-4 leading-tight tracking-tight">
               Couple-Friendly Hotels with Private Bathtubs &amp; Jacuzzis
@@ -236,8 +236,8 @@ export default async function CoupleFriendlyPage() {
               🛡️
             </div>
             <div>
-              <p className="font-bold text-gray-900 text-sm">Verified Inventory</p>
-              <p className="text-xs text-gray-500">Verified across Booking.com &amp; Agoda room tiers.</p>
+              <p className="font-bold text-gray-900 text-sm">Room Details</p>
+              <p className="text-xs text-gray-500">Checked across Booking.com &amp; Agoda room tiers.</p>
             </div>
           </div>
         </div>
@@ -283,7 +283,7 @@ export default async function CoupleFriendlyPage() {
           </div>
         </section>
 
-        {/* Featured Hand-Picked Romantic Hotels */}
+        {/* Featured Romantic Hotels */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 bg-gray-50/50 rounded-3xl my-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-2">
             <div>
@@ -380,7 +380,7 @@ export default async function CoupleFriendlyPage() {
             </h2>
             <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
               <p>
-                Booking a private romantic weekend or celebrating an anniversary should be seamless and stress-free. Here are our verified recommendations to ensure a frictionless check-in experience:
+                Booking a private romantic weekend or celebrating an anniversary should be seamless and stress-free. Here are our recommendations to ensure a frictionless check-in experience:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                 <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-100">

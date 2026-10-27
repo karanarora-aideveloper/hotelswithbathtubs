@@ -43,7 +43,7 @@ export default function AffiliatePolicy() {
 
           <h2>Editorial Integrity</h2>
           <p>
-            Please note that our participation in affiliate programs does not influence our editorial content or the hotels we choose to feature. We curate and verify hotels strictly based on their amenities, specifically ensuring they offer premium in-room bathtub experiences. We only recommend properties that meet our high standards for a romantic getaway.
+            Please note that our participation in affiliate programs does not influence our editorial content or the hotels we choose to feature. We select hotels strictly based on their amenities, specifically focusing on in-room bathtub listings. We only recommend properties that meet our standards for a relaxing getaway.
           </p>
 
           <h2>Questions?</h2>

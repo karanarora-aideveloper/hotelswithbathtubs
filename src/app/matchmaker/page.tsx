@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Bathtub Hotel Matchmaker: Find Your Perfect Soak (${currentYear})`,
     description:
-      'Take our 30-second Dream Soak Matchmaker quiz to discover verified hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
+      'Take our 30-second Dream Soak Matchmaker quiz to discover hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
     url: 'https://www.hotelswithbathtubs.com/matchmaker',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `Bathtub Hotel Matchmaker: Find Your Perfect Soak (${currentYear})`,
     description:
-      'Take our 30-second Dream Soak Matchmaker quiz to discover verified hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
+      'Take our 30-second Dream Soak Matchmaker quiz to discover hotels with private in-room bathtubs, outdoor jacuzzis, and onsen tubs worldwide.',
     images: [
       'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
     ],
@@ -52,7 +52,7 @@ export default function MatchmakerPage() {
     applicationCategory: 'TravelApplication',
     operatingSystem: 'All',
     description:
-      'Interactive hotel finder matching travelers to verified hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, style, and budget.',
+      'Interactive hotel finder matching travelers to hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, style, and budget.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -140,7 +140,7 @@ export default function MatchmakerPage() {
                   How does the Dream Soak Matchmaker score hotels?
                 </h4>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Our algorithm analyzes room-level bathtub metadata (hydro whirlpools, clawfoot tubs, deep soaking baths, cedar onsens), verified room tiers, traveler review sentiment, and location ambiance to return the highest-scoring properties for your specific fantasy.
+                  Our algorithm analyzes room-level bathtub metadata (hydro whirlpools, clawfoot tubs, deep soaking baths, cedar onsens), room tiers, traveler review sentiment, and location ambiance to return the highest-scoring properties for your specific fantasy.
                 </p>
               </div>
 
@@ -149,7 +149,7 @@ export default function MatchmakerPage() {
                   Can I book directly through the matchmaker?
                 </h4>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Yes. Each matched card includes direct links to official booking partners (Booking.com, Agoda, MakeMyTrip) pre-filtered to the verified hotel listing, or you can explore the hotel’s full photo gallery and room tier guide right here.
+                  Yes. Each matched card includes direct links to official booking partners (Booking.com, Agoda, MakeMyTrip) pre-filtered to the hotel listing, or you can explore the hotel’s full photo gallery and room tier guide right here.
                 </p>
               </div>
 
@@ -158,7 +158,7 @@ export default function MatchmakerPage() {
                   Are the bathtubs private to the room?
                 </h4>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Yes, 100%. We exclude shared spas, communal swimming pools, and public hotel wellness centers. Only hotels with private in-room bathtubs or private balcony tubs are included in our directory.
+                  We focus on private bathtubs. We exclude shared spas, communal swimming pools, and public hotel wellness centers. Only hotels with private in-room bathtubs or private balcony tubs are included in our directory.
                 </p>
               </div>
             </div>

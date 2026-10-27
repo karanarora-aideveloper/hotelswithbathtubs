@@ -258,7 +258,7 @@ export default async function CountryHubPage({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": `Hotels with Bathtub in ${countryName}`,
-    "description": `Discover ${totalHotels}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}.`,
+    "description": `Discover ${totalHotels}+ hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}.`,
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}`,
     "spatialCoverage": {
       "@type": "Country",
@@ -275,7 +275,7 @@ export default async function CountryHubPage({
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": `Destinations with Bathtubs in ${countryName}`,
-    "description": `Browse top cities in ${countryName} featuring verified hotels with in-room bathtubs and private jacuzzis.`,
+    "description": `Browse top cities in ${countryName} featuring hotels with in-room bathtubs and private jacuzzis.`,
     "numberOfItems": cities.length,
     "itemListElement": cities.map((c, idx) => ({
       "@type": "ListItem",
@@ -289,12 +289,12 @@ export default async function CountryHubPage({
 
   const countryFaqs = [
     {
-      q: `How are hotels with bathtubs in ${countryName} verified?`,
-      a: `Every hotel listed across ${countryName} is checked across partner room listings. We inspect room details to confirm that your room includes a private in-room soaking tub or jacuzzi rather than a shared hotel spa facility.`
+      q: `How are hotels with bathtubs in ${countryName} listed?`,
+      a: `We list rooms whose partner details mention a private in-room soaking tub or jacuzzi rather than a shared hotel spa facility.`
     },
     {
       q: `Are bathtub hotels in ${countryName} suitable for couples and romantic getaways?`,
-      a: `Yes. All verified hotels in ${countryName} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and honeymoons.`
+      a: `Yes. All hotels in ${countryName} featured in our guide welcome couples and provide complete privacy for romantic staycations, anniversaries, and honeymoons.`
     },
     {
       q: `Which destinations in ${countryName} have the best bathtub hotels?`,
@@ -302,7 +302,7 @@ export default async function CountryHubPage({
     },
     {
       q: `How do I ensure my room category includes a private bathtub?`,
-      a: `When booking through our verified partner links, check that your chosen room tier (such as "Jacuzzi Suite", "Executive Room with Bathtub", or "Luxury Spa Villa") explicitly lists the private bathtub amenity before confirming your reservation.`
+      a: `When booking through our partner links, check that your chosen room tier (such as "Jacuzzi Suite", "Executive Room with Bathtub", or "Luxury Spa Villa") explicitly lists the private bathtub amenity before confirming your reservation.`
     }
   ];
 
@@ -366,7 +366,7 @@ export default async function CountryHubPage({
                     Explore Hand-Curated In-Room Tub Categories
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 max-w-2xl">
-                    Looking for a specific bathing style? Browse our verified global guides for deep Japanese soaking tubs and private in-room whirlpool jacuzzi suites.
+                    Looking for a specific bathing style? Browse our global guides for deep Japanese soaking tubs and private in-room whirlpool jacuzzi suites.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 shrink-0">
@@ -441,7 +441,7 @@ export default async function CountryHubPage({
                         Top US States for In-Room Bathtubs &amp; Jacuzzi Suites
                       </h2>
                       <p className="text-text-muted text-xs sm:text-sm mt-1">
-                        Explore verified romantic getaways, wine country soaking tubs, and mountain hot tub chalets statewide
+                        Explore romantic getaways, wine country soaking tubs, and mountain hot tub chalets statewide
                       </p>
                     </div>
                     <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full w-fit">

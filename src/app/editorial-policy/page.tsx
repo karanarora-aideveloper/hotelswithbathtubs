@@ -3,14 +3,14 @@ import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy & Verification Standards',
-  description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
+  title: 'Editorial Policy & Standards',
+  description: 'Learn about our hotel listing process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
   alternates: {
     canonical: '/editorial-policy',
   },
   openGraph: {
-    title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
-    description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
+    title: 'Editorial Policy & Standards | Hotels With Bathtubs',
+    description: 'Learn about our hotel listing process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
     url: 'https://www.hotelswithbathtubs.com/editorial-policy',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -18,15 +18,15 @@ export const metadata: Metadata = {
         url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
-        alt: 'Editorial Policy & Verification Standards - Hotels With Bathtubs',
+        alt: 'Editorial Policy & Standards - Hotels With Bathtubs',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Editorial Policy & Verification Standards | Hotels With Bathtubs',
-    description: 'Learn about our hotel verification process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
+    title: 'Editorial Policy & Standards | Hotels With Bathtubs',
+    description: 'Learn about our hotel listing process, editorial independence, and how we check and list authentic in-room bathtubs & jacuzzi suites.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -35,8 +35,8 @@ export default function EditorialPolicyPage() {
   const editorialSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "Editorial Policy & Verification Standards",
-    "description": "Our editorial standards, verification methodology, and affiliate disclosure policies.",
+    "name": "Editorial Policy & Standards",
+    "description": "Our editorial standards, research methodology, and affiliate disclosure policies.",
     "url": "https://www.hotelswithbathtubs.com/editorial-policy",
     "publisher": {
       "@type": "Organization",
@@ -53,13 +53,13 @@ export default function EditorialPolicyPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 bg-white sm:rounded-3xl shadow-sm border-y sm:border border-gray-200 pb-12 pt-8 sm:pb-16 sm:pt-12 font-jakarta">
           <header className="mb-10 sm:mb-12 border-b border-gray-100 pb-8 text-center">
             <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-full mb-3 border border-emerald-100">
-              Trust &amp; Verification Standards
+              Trust &amp; Listing Standards
             </span>
             <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
-              Our Editorial &amp; Verification Policy
+              Our Editorial Policy
             </h1>
             <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-              How we inspect, verify, and maintain the web&apos;s most accurate directory of hotels with private in-room bathtubs, deep soaking tubs, and jacuzzi suites.
+              How we research and maintain our directory of hotels with private in-room bathtubs, deep soaking tubs, and jacuzzi suites.
             </p>
           </header>
 
@@ -168,7 +168,7 @@ export default function EditorialPolicyPage() {
                 4. Affiliate Transparency &amp; Compensation
               </h2>
               <p>
-                HotelsWithBathtubs is free for readers. To support our extensive research and database infrastructure, we participate in affiliate marketing programs with verified online travel agencies, including Booking.com, Agoda, MakeMyTrip, and trusted global partner networks.
+                HotelsWithBathtubs is free for readers. To support our extensive research and database infrastructure, we participate in affiliate marketing programs with online travel agencies, including Booking.com, Agoda, MakeMyTrip, and trusted global partner networks.
               </p>
               <p className="mt-2">
                 When you click through our partner links and complete a booking, we may earn an affiliate commission at <strong>zero additional cost to you</strong>. Our editorial curation remains entirely impartial: we recommend the best stay regardless of partner commission rates.

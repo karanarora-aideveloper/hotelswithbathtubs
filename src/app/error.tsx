@@ -30,7 +30,7 @@ export default function ErrorBoundary({
         Let's refresh your stay
       </h2>
       <p className="text-gray-500 text-sm max-w-md mb-6 leading-relaxed">
-        We just updated our verified bathtub inventory. Click below to load the latest stays.
+        We just updated our bathtub inventory. Click below to load the latest stays.
       </p>
       <div className="flex items-center gap-3">
         <button

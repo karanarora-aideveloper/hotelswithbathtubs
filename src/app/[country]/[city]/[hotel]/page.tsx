@@ -7,12 +7,12 @@ import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import OutboundLink from '@/components/OutboundLink';
 import { getUrlDirectnessTier } from '@/lib/affiliate';
-import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCountryCurrency, normalizePrice } from '@/lib/utils';
 import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, sanitizeHotelData, buildDataDescription } from '@/lib/evidence';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,16 +41,15 @@ async function getCachedHotelMap() {
   }
 
   const map = new Map<string, any>();
-  for (const h of allHotels) {
-    if (isDuplicateDropSlug(h.slug)) continue;
+  for (const rawH of allHotels) {
+    if (isDuplicateDropSlug(rawH.slug)) continue;
+    const h = sanitizeHotelData(rawH);
     const cleanH = {
       ...h,
       description: sanitizePlaceholderText(h.description),
       landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
-      bookingTip: sanitizeBookingTip(h.bookingTip),
-      amenities: Array.isArray(h.amenities)
-        ? h.amenities.filter((a: any) => typeof a !== 'string' || !/gourmet\s+kitchen/i.test(a))
-        : h.amenities,
+      bookingTip: h.bookingTip,
+      amenities: h.amenities,
     };
     if (cleanH.slug) {
       map.set(cleanH.slug, cleanH);
@@ -136,11 +135,11 @@ async function getHotel(countryParam: string, cityParam: string, hotelParam: str
     }
   }
 
-  const cleanHotel = hotel ? {
+  const cleanHotel = hotel ? sanitizeHotelData({
     ...hotel,
     description: sanitizePlaceholderText(hotel.description),
     landmarkDistance: cleanLandmarkDistance(hotel.landmarkDistance),
-  } : null;
+  }) : null;
 
   return { hotel: cleanHotel, countryInfo, rawCity };
 }
@@ -331,7 +330,7 @@ export default async function HotelDetailPage({
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": hotel.name,
-    "description": hotel.description || `Hotel with private in-room bathtub in ${cityName}`,
+    "description": hotel.description || buildDataDescription(hotel),
     "image": imageUrl(hotel.image),
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {
@@ -425,7 +424,7 @@ export default async function HotelDetailPage({
   if (cleanAirbnb) availableSources.push('Airbnb');
   const cleanTrip = (hotel.tripUrl && !hotel.tripUrl.includes('/hotels/list') && !hotel.tripUrl.includes('keyword=')) || (hotel.url && hotel.url.includes('trip.com') && !hotel.url.includes('/hotels/list') && !hotel.url.includes('keyword='));
   if (cleanTrip) availableSources.push('Trip.com');
-  const verifiedPlatformsText = availableSources.length > 0
+  const listedPlatformsText = availableSources.length > 0
     ? `Listed on ${availableSources.join(', ')}`
     : 'Listed on partner platforms';
 
@@ -469,7 +468,7 @@ export default async function HotelDetailPage({
         cityName={cityName}
         countryName={countryName}
         roomType={hotel.roomType}
-        verifiedPlatformsText={verifiedPlatformsText}
+        listedPlatformsText={listedPlatformsText}
         bathtubLabel={getBathtubLabel(hotel)}
       />
 
@@ -723,7 +722,7 @@ export default async function HotelDetailPage({
         )}
       </div>
 
-      {/* Similar Verified Bathtub Hotels in the City */}
+      {/* Similar Bathtub Hotels in the City */}
       {similarHotels.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12 border-t border-[#5b8296]/15">
           <div className="flex items-center justify-between mb-8">

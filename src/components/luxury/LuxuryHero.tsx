@@ -234,7 +234,7 @@ export default function LuxuryHero() {
           {/* Understated Geo-Indicator */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs font-medium tracking-wider mb-6 text-white/90">
             <span>
-              {activeRegion === 'india' ? 'Showing verified luxury stays for 🇮🇳 India' : 'Showing verified luxury stays worldwide'}
+              {activeRegion === 'india' ? 'Showing luxury stays for 🇮🇳 India' : 'Showing luxury stays worldwide'}
             </span>
             <button
               type="button"
@@ -250,8 +250,7 @@ export default function LuxuryHero() {
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-white/90 font-light max-w-2xl mx-auto mb-10 leading-relaxed font-sans drop-shadow-sm">
-            Hand-picked luxury suites across 60 global destinations. <br className="hidden sm:inline" />
-            Every bathtub verified inside your private room.
+            Hotel rooms and suites with private in-room bathtubs and jacuzzis across 60+ destinations worldwide.
           </p>
 
           {/* Floating Monolithic Concierge Search Bar */}
@@ -332,7 +331,7 @@ export default function LuxuryHero() {
             {/* Autocomplete Dropdown */}
             {isOpen && cleanQuery && !searchData && (
               <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl border border-[#E5E1D8] p-3 text-center text-xs text-[#6B6964] z-50">
-                Searching verified luxury stays...
+                Searching stays...
               </div>
             )}
             {isOpen && filtered.length > 0 && (

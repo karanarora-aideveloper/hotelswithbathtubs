@@ -54,7 +54,7 @@ export default function BathEssentialsWidget() {
           </h3>
         </div>
         <div className="text-xs text-text-muted">
-          Handpicked for Romantic Anniversaries &amp; Honeymoons
+          Selected for Romantic Anniversaries &amp; Honeymoons
         </div>
       </div>
 

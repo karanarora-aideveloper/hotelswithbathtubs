@@ -21,18 +21,29 @@ export const CLAIM_PHRASES: string[] = [
   'historical benchmark',
   'verified platforms',
   'inspected',
+  'inspection',
   'hand-picked',
   'handpicked',
+  'hand-checked',
+  'hand checked',
   'audited',
+  'audit',
   'verification team',
   '100% private',
   '100% verified',
+  '100%',
   '0 shared',
+  'checked one by one',
+  'zero booking fees',
+  'hidden markups',
+  'direct canonical',
+  'verified',
 ];
 
 export function hasClaimPhrase(text: string): boolean {
   if (!text) return false;
   const lower = text.toLowerCase();
+  if (/(?<!not yet )\bconfirmed\b/i.test(lower)) return true;
   return CLAIM_PHRASES.some((phrase) => lower.includes(phrase));
 }
 
@@ -64,4 +75,21 @@ export function dropClaimSentencesFromHtml(html: string): string {
     }
     return `<p>${resultInner}</p>`;
   });
+}
+
+export function dropClaimSentencesFromMarkdown(md: string): string {
+  if (!md) return '';
+  const lines = md.split('\n');
+  const keptLines: string[] = [];
+  for (let line of lines) {
+    if (/★\s*\d|guest reviews/i.test(line)) continue;
+    if (hasClaimPhrase(line)) {
+      const sentences = line.match(/([^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$)/g) || [];
+      const kept = sentences.filter((s) => !hasClaimPhrase(s.trim()));
+      line = kept.join(' ').trim();
+      if (!line) continue;
+    }
+    keptLines.push(line);
+  }
+  return keptLines.join('\n');
 }

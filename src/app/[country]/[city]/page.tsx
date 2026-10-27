@@ -633,8 +633,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   // M6 Data-driven FAQs
   const jacuzziHotels = hotels.filter((h) => isJacuzziRoom(h));
   const jacuzziFaqAnswer = jacuzziHotels.length > 0
-    ? `Verified hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Each property listing features a private hot tub inside your suite rather than a shared hotel facility.`
-    : `Currently, no verified hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
+    ? `Hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Each property listing features a private hot tub inside your suite rather than a shared hotel facility.`
+    : `Currently, no hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
 
   let cheapestFaqAnswer = cheapestHotel && cheapestHotelPrice
     ? `The cheapest hotel with a bathtub in ${cityName} is ${cheapestHotel.name}, with rates starting from approximately ${cheapestHotelPrice}/night.`
@@ -650,7 +650,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`;
 
   const whereToStayFaqAnswer = hasWhereToStaySection
-    ? `Top neighborhoods in ${cityName} with multiple verified bathtub hotels include ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}. Each area offers multiple verified properties within walking distance of local attractions and dining.`
+    ? `Top neighborhoods in ${cityName} with multiple bathtub hotels include ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}. Each area offers multiple properties within walking distance of local attractions and dining.`
     : '';
 
   const faqItems = stateConfig
@@ -658,7 +658,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         ...stateConfig.faqs,
         ...(cheapestHotel && cheapestHotelPrice ? [{
           question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
-          answer: `Nightly rates for verified bathtub suites in ${stateConfig.name} typically start from approximately ${cheapestHotelPrice}/night (e.g. at ${cheapestHotel.name} in ${cheapestHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
+          answer: `Nightly rates for bathtub suites in ${stateConfig.name} typically start from approximately ${cheapestHotelPrice}/night (e.g. at ${cheapestHotel.name} in ${cheapestHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
         }] : [])
       ]
     : [
@@ -676,7 +676,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         }] : []),
         {
           question: `Which hotels in ${cityName} have private in-room bathtubs?`,
-          answer: `Top verified hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been verified across ${otas} to confirm that the specific room tier includes an authentic bathtub rather than a standing shower.`
+          answer: `Top hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been checked across ${otas} to confirm that the specific room tier includes an authentic bathtub rather than a standing shower.`
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
@@ -684,11 +684,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         },
         {
           question: `Are bathtub hotels in ${cityName} couple-friendly?`,
-          answer: `Yes. Verified properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
+          answer: `Yes. Properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
         },
         {
           question: `How do I make sure my room in ${cityName} definitely has a bathtub?`,
-          answer: `Standard base rooms often only include standing showers. When clicking through our verified partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
+          answer: `Standard base rooms often only include standing showers. When clicking through our partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
         }
       ];
 
@@ -785,7 +785,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-center sm:text-left">Verified on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Booking.com, Agoda'} &amp; partner networks</span>
+          <span className="text-center sm:text-left">Listed on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Booking.com, Agoda'} &amp; partner networks</span>
         </div>
         <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -804,7 +804,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       {/* Editorial & Affiliate Disclosure */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
         <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-          <strong>Reader Disclosure:</strong> When you book through our verified partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We recommend rooms listed with private in-room bathtubs.
+          <strong>Reader Disclosure:</strong> When you book through our partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We recommend rooms listed with private in-room bathtubs.
         </p>
       </div>
 
@@ -814,19 +814,19 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           <div className="space-y-1.5 max-w-3xl">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-2xs font-bold text-accent uppercase tracking-wider">Quick Verified Answer</span>
+              <span className="text-2xs font-bold text-accent uppercase tracking-wider">Quick Answer</span>
             </div>
             <h2 className="font-heading text-base sm:text-lg font-bold text-accent-secondary">
               What are the best hotels with bathtubs in {cityName}?
             </h2>
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-              Top verified hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
+              Top hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
               <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
               All {hotels.length} stays in our directory have been checked across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your private room tier features an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
             </p>
           </div>
           <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
-            <span className="text-2xs text-text-muted font-medium">Verified Stays</span>
+            <span className="text-2xs text-text-muted font-medium">Stays Listed</span>
             <span className="font-heading text-xl font-extrabold text-accent">{hotels.length}</span>
           </div>
         </div>
@@ -837,7 +837,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <div>
                 <h3 className="font-heading text-sm sm:text-base font-bold text-gray-900">
-                  Explore {stateConfig.name} Destinations with Verified Bathtubs
+                  Explore {stateConfig.name} Destinations with In-Room Bathtubs
                 </h3>
                 <p className="text-xs text-gray-500 mt-0.5">
                   Select a destination below to jump directly to detailed city guides and neighborhood listings:
@@ -875,7 +875,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   Looking specifically for In-Room Jacuzzis in {cityName}?
                 </p>
                 <p className="text-xs text-gray-600">
-                  We found {jacuzziCount} verified hotel suites with private whirlpool jacuzzis and hydrotherapy jets.
+                  We found {jacuzziCount} hotel suites with private whirlpool jacuzzis and hydrotherapy jets.
                 </p>
               </div>
             </div>
@@ -896,15 +896,15 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         />
 
         {/* Full City Hotel Directory Index */}
-        <section id="directory" aria-label={`Directory of all verified hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
+        <section id="directory" aria-label={`Directory of all hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
           <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-200 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
               <div>
                 <h3 className="font-heading text-lg font-bold text-gray-900">
-                  All {hotels.length} Verified Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
+                  All {hotels.length} Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
                 </h3>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Every property listed below has been verified to confirm private in-room soaking tubs.
+                  Every property listed below features private in-room soaking tubs.
                 </p>
               </div>
               <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
@@ -930,7 +930,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
         {/* Nearby US destinations block (6 plain <a> links for crawler discovery across US cities) */}
         {countrySlug === 'usa' && !stateConfig && (
-          <section aria-label="Nearby US destinations with verified bathtubs" className="my-10 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-2xs">
+          <section aria-label="Nearby US destinations with in-room bathtubs" className="my-10 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-2xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
               <div>
                 <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full">
@@ -940,7 +940,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   Nearby US destinations
                 </h3>
                 <p className="text-text-muted text-xs sm:text-sm mt-0.5">
-                  Explore alternative American cities featuring verified private in-room bathtubs &amp; jacuzzis
+                  Explore alternative American cities featuring private in-room bathtubs &amp; jacuzzis
                 </p>
               </div>
               <a
@@ -990,7 +990,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               Looking for a Specific Bathtub Experience?
             </h3>
             <p className="text-xs sm:text-sm text-gray-600 max-w-2xl">
-              Compare our verified thematic collections featuring private jacuzzi whirlpool suites, outdoor mountain hot tubs, and deep Japanese soaking baths globally.
+              Compare our thematic collections featuring private jacuzzi whirlpool suites, outdoor mountain hot tubs, and deep Japanese soaking baths globally.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
@@ -1078,7 +1078,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                 Where to stay in {cityName} for a room with a bathtub
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 mt-2 max-w-2xl mx-auto">
-                Compare verified hotels with private in-room bathtubs across top {cityName} neighborhoods:
+                Compare hotels with private in-room bathtubs across top {cityName} neighborhoods:
               </p>
             </div>
 
@@ -1197,7 +1197,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
               {/* Regional State Hub Mesh or Sister Cities */}
               {stateConfig ? (
-                <section aria-label="Explore other US states with verified bathtubs" className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
+                <section aria-label="Explore other US states with in-room bathtubs" className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                     <div>
                       <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
@@ -1236,14 +1236,14 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   </div>
                 </section>
               ) : siblingCities.length > 0 ? (
-                <section aria-label={`Other destinations in ${countryName} with verified bathtubs`} className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
+                <section aria-label={`Other destinations in ${countryName} with in-room bathtubs`} className="mt-14 pt-10 border-t border-gray-200 max-w-5xl mx-auto">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
                     <div>
                       <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
                         Regional Exploration
                       </span>
                       <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mt-2">
-                        More Verified Bathtub &amp; Jacuzzi Stays in {countryName}
+                        More Bathtub &amp; Jacuzzi Stays in {countryName}
                       </h3>
                     </div>
                     <Link

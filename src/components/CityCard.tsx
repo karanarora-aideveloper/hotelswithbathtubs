@@ -150,7 +150,7 @@ export default function CityCard({
         {/* Divider & Action Footer */}
         <div className="mt-3 sm:mt-4 pt-3 border-t border-slate-100 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <span className="hidden sm:block text-xs text-slate-400 font-normal">Best verified rate</span>
+            <span className="hidden sm:block text-xs text-slate-400 font-normal">Guide price</span>
             <span className="text-[15px] font-extrabold text-slate-900">{displayPrice}</span>
           </div>
 

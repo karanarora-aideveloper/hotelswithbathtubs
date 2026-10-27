@@ -4,13 +4,13 @@ import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Contact Us & Editorial Desk',
-  description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
+  description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or report private in-room bathtub listings.',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
     title: 'Contact Us & Editorial Desk | Hotels With Bathtubs',
-    description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
+    description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or report private in-room bathtub listings.',
     url: 'https://www.hotelswithbathtubs.com/contact',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Us & Editorial Desk | Hotels With Bathtubs',
-    description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or verify private in-room bathtub listings.',
+    description: 'Get in touch with the HotelsWithBathtubs editorial team. Submit hotel correction requests, partner inquiries, or report private in-room bathtub listings.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -36,7 +36,7 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": "Contact Hotels With Bathtubs",
-    "description": "Editorial contact and verification request desk for Hotels With Bathtubs.",
+    "description": "Editorial contact desk for Hotels With Bathtubs.",
     "url": "https://www.hotelswithbathtubs.com/contact",
     "mainEntity": {
       "@type": "Organization",
@@ -59,7 +59,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 bg-white sm:rounded-3xl shadow-sm border-y sm:border border-gray-200 pb-12 pt-8 sm:pb-16 sm:pt-12 font-jakarta">
           <header className="mb-10 sm:mb-12 border-b border-gray-100 pb-8 text-center">
             <span className="inline-block px-3 py-1 bg-sky-50 text-sky-800 text-xs font-bold rounded-full mb-3 border border-sky-100">
-              Editorial &amp; Verification Desk
+              Editorial &amp; Support Desk
             </span>
             <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
               Get in Touch with Our Team
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 ✉
               </div>
               <h2 className="font-heading text-lg font-bold text-gray-900 mb-1">
-                Editorial &amp; Verification Team
+                Editorial Team
               </h2>
               <p className="text-xs text-gray-500 mb-4 leading-relaxed">
                 For corrections, bathroom amenity changes, or reporting a hotel where the bathtub is no longer in-room.
@@ -96,19 +96,19 @@ export default function ContactPage() {
                 🏨
               </div>
               <h2 className="font-heading text-lg font-bold text-gray-900 mb-1">
-                Hoteliers &amp; Property Audits
+                Hoteliers &amp; Property Listings
               </h2>
               <p className="text-xs text-gray-500 mb-4 leading-relaxed">
-                If you manage a hotel or resort with verified in-room tubs and want your property audited for inclusion in our curated directory.
+                If you manage a hotel or resort with in-room bathtubs and want your property listed in our directory.
               </p>
               <a
-                href="mailto:audit@hotelswithbathtubs.com"
+                href="mailto:listings@hotelswithbathtubs.com"
                 className="text-sm font-bold text-emerald-700 hover:underline break-all"
               >
-                audit@hotelswithbathtubs.com
+                listings@hotelswithbathtubs.com
               </a>
               <p className="text-[11px] text-gray-400 mt-2">
-                Audits are free and strictly editorially independent
+                Listing submissions are free and editorially independent
               </p>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                 <li>Any supporting screenshots or booking confirmation details</li>
               </ul>
               <p className="mt-2">
-                Our verification team will inspect the property inventory across our partner databases within 24 hours and update the listing accordingly.
+                We will review the property details across our partner databases within 24 hours and update the listing accordingly.
               </p>
             </div>
 

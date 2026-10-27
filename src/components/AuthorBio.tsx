@@ -14,18 +14,18 @@ export default function AuthorBio() {
             </h3>
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-2xs font-bold rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Verified Travel Curator
+              Travel Curator
             </span>
           </div>
           <p className="text-2xs sm:text-xs font-semibold uppercase tracking-wider text-accent mb-2">
             Founder &amp; Travel Editor · HotelsWithBathtubs.com
           </p>
           <p className="text-xs sm:text-sm text-text-muted leading-relaxed font-serif mb-3">
-            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan founded Hotels with Bathtubs to document confirmed in-room tubs. Every hotel and jacuzzi suite featured on this site is checked against partner room listings on Booking.com, Agoda, MakeMyTrip, and partner networks to highlight authentic in-room soaking experiences for couples and honeymooners.
+            Frustrated by misleading hotel photos where advertised &ldquo;bathtubs&rdquo; turned out to be shared hotel spa pools or standing showers, Karan founded Hotels with Bathtubs to document private in-room bathtubs. Every hotel and jacuzzi suite featured on this site is checked against partner room listings on Booking.com, Agoda, MakeMyTrip, and partner networks to highlight authentic in-room soaking experiences for couples and honeymooners.
           </p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-semibold text-accent-secondary">
-            <Link href="/about" prefetch={false} className="hover:text-accent underline transition-colors">
-              Our Verification Process
+            <Link href="/how-we-check-bathtubs" prefetch={false} className="hover:text-accent underline transition-colors">
+              How We Check Rooms
             </Link>
             <span className="hidden sm:inline">&bull;</span>
             <Link href="/editorial-policy" prefetch={false} className="hover:text-accent underline transition-colors">

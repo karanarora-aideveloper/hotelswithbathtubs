@@ -15,7 +15,7 @@ export default function GlobalError({
           </div>
           <h2 className="text-xl font-bold mb-2">Hotels With Bathtubs</h2>
           <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-            We updated our inventory with fresh verified listings. Please refresh to continue.
+            We updated our inventory with fresh listings. Please refresh to continue.
           </p>
           <button
             onClick={() => window.location.reload()}

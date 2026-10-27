@@ -165,13 +165,13 @@ const BUDGET_OPTIONS = [
   {
     id: 'any' as BudgetId,
     label: 'Any Budget',
-    tagline: 'Show verified bathtub suites across all price tiers',
+    tagline: 'Show bathtub suites across all price tiers',
     emoji: '✨',
   },
   {
     id: 'budget' as BudgetId,
     label: 'Affordable Luxury',
-    tagline: 'Under $150 / ₹8,000 per night with verified private tubs',
+    tagline: 'Under $150 / ₹8,000 per night with private in-room tubs',
     emoji: '🪙',
   },
   {
@@ -291,7 +291,7 @@ function calculateMatchScore(
   } else {
     // any_tub
     tubMatched = true;
-    tubReason = h.tubType || 'Verified Luxury Bathtub';
+    tubReason = h.tubType || 'Private In-Room Bathtub';
   }
 
   // 4. Vibe Scoring
@@ -803,7 +803,7 @@ export default function DreamSoakMatchmaker({
           <div className="text-center mb-6">
             <span className="text-3xl mb-1 block">💎</span>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900">What’s your nightly budget preference?</h3>
-            <p className="text-sm text-gray-500 mt-1">We verify genuine value in every price category</p>
+            <p className="text-sm text-gray-500 mt-1">Value in every price category</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -846,7 +846,7 @@ export default function DreamSoakMatchmaker({
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-                  {matchedHotels.length} Verified Soak Matches Found
+                  {matchedHotels.length} Soak Matches Found
                 </span>
               </div>
               <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -968,7 +968,7 @@ export default function DreamSoakMatchmaker({
                         {/* Bottom Highlight on Image */}
                         <div className="absolute bottom-2.5 left-3 right-3 pointer-events-none">
                           <span className="inline-block text-[11px] font-bold text-white bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-lg truncate max-w-full">
-                            🛁 {hotel.tubType || 'Verified Luxury Bathtub'}
+                            🛁 {hotel.tubType || 'Private In-Room Bathtub'}
                           </span>
                         </div>
                       </div>
@@ -989,7 +989,7 @@ export default function DreamSoakMatchmaker({
                           {hotel.name}
                         </Link>
 
-                        {/* Verified Room Type */}
+                        {/* Room Type */}
                         {hotel.roomType && (
                           <div className="mb-3 px-2.5 py-1.5 rounded-lg bg-blue-50/70 border border-blue-100 text-xs text-blue-900 font-medium flex items-center gap-1.5">
                             <span className="text-[#1a6fde] font-bold">✓ Room Tier:</span>
@@ -1033,7 +1033,7 @@ export default function DreamSoakMatchmaker({
                           href={hotel.pageUrl}
                           prefetch={false}
                           className="px-3 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-semibold transition-colors"
-                          title="View hotel photos and tub verification details"
+                          title="View hotel photos and room details"
                         >
                           Details
                         </Link>
@@ -1073,7 +1073,7 @@ export default function DreamSoakMatchmaker({
               <span className="text-4xl mb-3 block">🔍</span>
               <h3 className="text-lg font-bold text-gray-900 mb-2">No exact matches for this specific combination</h3>
               <p className="text-sm text-gray-500 mb-6">
-                Try widening your budget or selecting &quot;Surprise Me with Any Luxury Tub&quot; to see verified bathtub stays.
+                Try widening your budget or selecting &quot;Surprise Me with Any Luxury Tub&quot; to see bathtub stays.
               </p>
               <button
                 onClick={handleRestart}

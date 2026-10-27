@@ -228,7 +228,7 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
 
                   <div className="mt-4 p-3.5 bg-white/70 rounded-xl border border-[#E5E1D8]/80 text-xs">
                     <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#6B6964] mb-0.5">
-                      Verified Bathtub Specification
+                      Bathtub Details
                     </span>
                     <p className="text-[#121518] font-medium leading-relaxed">
                       {hotel.tubType}

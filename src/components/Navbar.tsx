@@ -438,7 +438,7 @@ export default function Navbar() {
             <span>&rarr;</span>
           </Link>
           <p className="text-3xs text-center text-text-muted">
-            Verified listings across Booking.com &amp; Agoda · Private in-room tubs
+            Listings across Booking.com &amp; Agoda · Private in-room tubs
           </p>
         </div>
       </div>
