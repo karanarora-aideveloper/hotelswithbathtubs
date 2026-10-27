@@ -344,7 +344,7 @@ export default function RedesignClient({
                 Hotels<span className="text-[#1a6fde]">WithBathtubs</span>
               </span>
               <span className="text-[9.5px] font-medium text-gray-400 mt-0.5">
-                Soak in. No Surprises.
+                Soak in.
               </span>
             </div>
           </Link>
@@ -525,7 +525,7 @@ export default function RedesignClient({
                   </span>
                 </h2>
                 <p className="text-[11px] text-gray-400 mt-0.5">
-                  Private in-room bathtubs and jacuzzis. No shower-only surprises.
+                  Private in-room bathtubs and jacuzzis.
                 </p>
               </div>
 

@@ -63,7 +63,7 @@ export default function Navbar() {
                 Hotels<span className="text-[#1a6fde]">WithBathtubs</span>
               </span>
               <p className="text-gray-400 text-[9.5px] font-medium hidden sm:block normal-case">
-                Soak in. No Surprises.
+                Soak in.
               </p>
             </div>
           </Link>
