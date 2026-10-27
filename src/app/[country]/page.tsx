@@ -39,11 +39,12 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
 
   // Count active hotels and grab the highest-rated hotel image for a country-specific OG image
-  const [hotelCount, firstHotel] = await Promise.all([
+  const [hotelCount, firstHotel, unconfirmedCount] = await Promise.all([
     Hotel.countDocuments({ country: countryInfo.regex, flagged: { $ne: true } }),
     Hotel.findOne({ country: countryInfo.regex, flagged: { $ne: true }, image: { $exists: true, $ne: '' } })
       .sort({ rating: -1 })
       .select('image'),
+    Hotel.countDocuments({ country: countryInfo.regex, flagged: { $ne: true }, bathtubConfirmed: { $ne: true } }),
   ]);
 
   if (hotelCount === 0) {
@@ -61,14 +62,17 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // SERP-optimised title: front-loaded, year for freshness, trust hook
   // India gets shorter title (was 80 chars, Google truncates at ~60) 
+  const allConfirmed = hotelCount > 0 && unconfirmedCount === 0;
   const currentYear = new Date().getFullYear();
-  const standardTitle = `Best Hotels with Bathtub in ${countryName} (${currentYear}) | Verified Stays`;
+  const standardTitle = allConfirmed
+    ? `Best Hotels with Bathtub in ${countryName} (${currentYear}) | Verified Stays`
+    : `Best Hotels with Bathtub in ${countryName} (${currentYear})`;
   const pageTitle = countrySlug === 'india'
     ? `Best Hotels with Bathtub & Jacuzzi in India (${currentYear})`
     : standardTitle.length <= 60
     ? standardTitle
     : `Best Hotels with Bathtub in ${countryName} (${currentYear})`;
-  const pageDescription = `Discover ${hotelCount}+ verified hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Curated for couples & romantic stays.`;
+  const pageDescription = `Discover ${hotelCount}+ hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Ideal for romantic stays.`;
 
   return {
     title: { absolute: pageTitle },
@@ -330,13 +334,13 @@ export default async function CountryHubPage({
             <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
               <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
                 <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-                  <span>🌍</span> {cities.length} {cities.length === 1 ? 'City' : 'Cities'} · {totalHotels} Verified Stays
+                  <span>🌍</span> {cities.length} {cities.length === 1 ? 'City' : 'Cities'} · {totalHotels} Rooms Listed
                 </div>
                 <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
                   Hotels with Bathtub in Room in {countryName}
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
-                  Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis, curated for couples.
+                  Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis.
                 </p>
               </div>
             </header>

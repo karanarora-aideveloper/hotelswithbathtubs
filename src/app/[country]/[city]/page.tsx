@@ -19,12 +19,11 @@ export const revalidate = false;
 function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, minPrice?: string): string {
   const hotelWord = count === 1 ? 'hotel' : 'hotels';
   const sentences: string[] = [
-    `${count} ${cityName} ${hotelWord} with a bathtub or jacuzzi in the room, checked one by one.`,
+    `${count} ${cityName} ${hotelWord} with a bathtub or jacuzzi in the room, with the exact room to book.`,
   ];
   if (minPrice && minPrice.trim()) {
     sentences.push(`From ${minPrice.trim()}/night.`);
   }
-  sentences.push('See the exact room to book.');
 
   let result = '';
   for (const s of sentences) {
@@ -36,12 +35,12 @@ function getCityMetaDescription(cityName: string, countryName: string, countrySl
     }
   }
   if (!result) {
-    result = `${count} ${cityName} ${hotelWord} with verified in-room tubs.`;
+    result = `${count} ${cityName} ${hotelWord} with in-room bathtubs.`;
   }
   return result;
 }
 
-function getCityPageTitle(cityName: string, countrySlug: string, citySlug: string, hotelCount: number): string {
+function getCityPageTitle(cityName: string, countrySlug: string, citySlug: string, hotelCount: number, allConfirmed: boolean = true): string {
   const currentYear = new Date().getFullYear();
   if (citySlug === 'new-york') {
     return `Hotels with Soaking Tubs & Bathtubs in New York (${currentYear})`;
@@ -56,8 +55,10 @@ function getCityPageTitle(cityName: string, countrySlug: string, citySlug: strin
     if (fallbackUs.length <= 60) return fallbackUs;
     return `Bathtub Hotels in ${cityName} (${currentYear})`;
   }
-  const verifiedWord = hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`;
-  const standardTitle = `Hotels with Bathtub in ${cityName}: ${verifiedWord} (${currentYear})`;
+  const roomsWord = allConfirmed
+    ? (hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`)
+    : (hotelCount === 1 ? '1 Room Listed' : `${hotelCount} Rooms Listed`);
+  const standardTitle = `Hotels with Bathtub in ${cityName}: ${roomsWord} (${currentYear})`;
   if (standardTitle.length <= 60) {
     return standardTitle;
   }
@@ -167,7 +168,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // Fetch the first hotel to get a city-specific image if available, count and prices for lowest price description
   const cityRegex = buildCityRegex(rawCity);
-  const [firstHotel, hotelCount, cityHotelPrices] = await Promise.all([
+  const [firstHotel, hotelCount, cityHotelPrices, unconfirmedCount] = await Promise.all([
     Hotel.findOne({
       city: cityRegex,
       country: countryInfo.regex,
@@ -184,10 +185,17 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       flagged: { $ne: true },
       price: { $exists: true, $ne: '' }
     }).select('price').lean(),
+    Hotel.countDocuments({
+      city: cityRegex,
+      country: countryInfo.regex,
+      flagged: { $ne: true },
+      bathtubConfirmed: { $ne: true }
+    }),
   ]);
 
   const lowestPriceInfo = findLowestPriceHotel(cityHotelPrices);
   const minPrice = lowestPriceInfo?.price;
+  const allConfirmed = hotelCount > 0 && unconfirmedCount === 0;
 
   if (hotelCount === 0) {
     return {
@@ -204,7 +212,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   // SERP-Optimized Title (45-60 chars): Front-load exact high-volume search query
-  const pageTitle = getCityPageTitle(cityName, countrySlug, citySlug, hotelCount);
+  const pageTitle = getCityPageTitle(cityName, countrySlug, citySlug, hotelCount, allConfirmed);
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
@@ -455,8 +463,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     "@type": "ItemList",
     "name": `Hotels with Bathtubs & Jacuzzis in ${cityName}`,
     "description": stateConfig
-      ? `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs across ${stateConfig.name}.`
-      : `Curated list of verified hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
+      ? `Hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs across ${stateConfig.name}.`
+      : `Hotels and resorts with private in-room bathtubs, jacuzzis, and soaking tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => ({
       "@type": "ListItem",
@@ -466,10 +474,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     }))
   };
 
+  const allConfirmed = hotels.length > 0 && hotels.every((h: any) => h.bathtubConfirmed === true);
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
-    : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length);
+    : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length, allConfirmed);
 
   const lowestPriceResult = findLowestPriceHotel(hotels);
   const minPrice = lowestPriceResult?.price;
