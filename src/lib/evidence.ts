@@ -1,4 +1,5 @@
 import { isJacuzziRoom } from '@/lib/utils';
+import { hasClaimPhrase } from '@/lib/claims';
 
 export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
   if (hotel?.bathtubConfirmed === true) {
@@ -171,23 +172,15 @@ export function getEvidenceLine(hotel: {
   };
 }
 
-export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[]): string {
-  if (!tip) return '';
-  let cleaned = tip
-    .replace(new RegExp('\\b' + 'guaran' + 'teed\\b', 'gi'), 'confirmed')
-    .replace(new RegExp('\\b' + 'guaran' + 'tees\\b', 'gi'), 'ensures')
-    .replace(new RegExp('\\b' + 'guaran' + 'tee\\b', 'gi'), 'secure')
-    .replace(new RegExp('\\b100% ' + 'in-room tub\\b', 'gi'), 'in-room tub')
-    .replace(new RegExp('\\btriple-' + 'verified\\b', 'gi'), 'verified');
-
-  if (linkedPartners && linkedPartners.length > 0) {
-    if (/checkout on/i.test(cleaned) || /booking channels/i.test(cleaned)) {
-      const partnerStr = linkedPartners.join(', ');
-      cleaned = cleaned.replace(/on (Agoda|Booking\.com|MakeMyTrip|Expedia|Airbnb)(, (Agoda|Booking\.com|MakeMyTrip|Expedia|Airbnb))*/gi, `on ${partnerStr}`);
-    }
+export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[], roomType?: string | null): string {
+  if (tip && !hasClaimPhrase(tip)) {
+    return tip.trim();
   }
-
-  return cleaned.trim();
+  const partnersText = linkedPartners && linkedPartners.length > 0
+    ? linkedPartners.join(', ')
+    : 'booking partner channels';
+  const room = roomType || 'room';
+  return `Book the ${room} on ${partnersText} and check that 'Bathtub' is listed in the room details before you pay.`;
 }
 
 export function sanitizeHotelData(h: any): any {

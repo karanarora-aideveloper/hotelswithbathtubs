@@ -121,7 +121,7 @@ export default async function CoupleFriendlyPage() {
         "name": "Are unmarried couples allowed to book hotels with bathtubs?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. There is no law prohibiting unmarried consenting adults (18+) from booking or staying together in a hotel room. All verified properties in our directory welcome couples regardless of marital status, provided both guests present valid government-issued photo identification at check-in."
+          "text": "Yes. There is no law prohibiting unmarried consenting adults (18+) from booking or staying together in a hotel room, provided both guests present valid government-issued photo identification at check-in."
         }
       },
       {
@@ -456,7 +456,7 @@ export default async function CoupleFriendlyPage() {
                 Are unmarried couples allowed to book hotels with bathtubs?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Yes. There is no law preventing unmarried adult couples (18+) from sharing a hotel room. All verified properties in our catalog welcome couples without judgment when carrying valid government photo IDs.
+                Yes. There is no law preventing unmarried adult couples (18+) from sharing a hotel room, provided both guests carry valid government photo IDs.
               </p>
             </div>
             <div className="bg-white p-5 rounded-2xl border border-gray-200">

@@ -430,7 +430,7 @@ export default async function HotelDetailPage({
     : 'Listed on partner platforms';
 
   const linkedPartners = getLinkedPartners(hotel);
-  const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners);
+  const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners, hotel.roomType);
   const evidence = getEvidenceLine(hotel);
 
   return (
@@ -574,7 +574,7 @@ export default async function HotelDetailPage({
               {hotel.roomType && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub. Lower room categories at this property may only offer a standard walk-in shower.</span>
+                  <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub.</span>
                 </p>
               )}
 
@@ -679,22 +679,10 @@ export default async function HotelDetailPage({
 
               <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
                 <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  Is {hotel.name} in {cityName} couple-friendly?
+                  What is the booking tip for {hotel.name}?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  Yes, {hotel.name} is couple-friendly. Both unmarried and married couples are welcomed with standard government photo IDs and complete discretion.
-                </p>
-              </div>
-
-              <div className="bg-[#f8fafb] rounded-2xl p-5 border border-[#5b8296]/15">
-                <h3 className="font-bold text-sm sm:text-base text-[#1f262d] mb-2">
-                  {cleanTip ? `What is the booking tip for ${hotel.name}?` : `How do I book the bathtub room at ${hotel.name}?`}
-                </h3>
-                <p className="text-slate-600 leading-relaxed text-sm">
-                  {cleanTip
-                    ? `${cleanTip} Ensure you select the ${hotel.roomType || 'Bathtub Suite'} tier and confirm "Bathtub" is listed in room amenities before payment.`
-                    : `Select the ${hotel.roomType || 'Bathtub Suite'} tier on ${linkedPartners.length > 0 ? linkedPartners.join(' or ') : 'the partner site'} and confirm "Bathtub" is listed in room amenities before payment.`
-                  }
+                  {cleanTip}
                 </p>
               </div>
             </div>
