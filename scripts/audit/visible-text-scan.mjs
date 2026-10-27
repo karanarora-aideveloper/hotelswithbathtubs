@@ -22,6 +22,8 @@ const CHECKS = {
   highDemand: /in high demand/i,
   coupleTag: /✓ couple friendly/i,
   contradiction: /^(?=[\s\S]*not yet confirmed)(?=[\s\S]*(?:features an in-room|for a private in-room bathtub|for the private tub))/i,
+  templateClaims: /checked (?:across|against)|cross-check|welcome couples|strictly private|complete (?:guest )?privacy|full privacy|every (?:property|listing|bathtub suite|hotel)\b[^.]{0,80}(?:features|confirms|is checked|listed)|each property listing features|private to your room only|all (?:listings|stays|hotels|jacuzzis)\b[^.]{0,60}(?:have been|are strictly|feature direct links|welcome)|free cancellation|exclusive (?:offers|mobile|deals)|special member rates|transparent pricing|flexible cancellation|secret rate|live room rates|top-rated hotels|across all listings|on every listing|listed on all (?:platforms|channels)|accept local residents/i,
+  ldOfferUnconfirmed: /^(?=[\s\S]*not yet confirmed)(?=[\s\S]*"description":"Private in-room bathtub)/i,
 };
 const visible = (h) => h
   .replace(/<script(?![^>]*ld\+json)[\s\S]*?<\/script>/gi, ' ')
@@ -64,7 +66,7 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       const t = visible(h), type = typeOf(u);
       for (const [k, re] of Object.entries(CHECKS)) {
         let textToCheck = t;
-        if (k === 'contradiction') {
+        if (k === 'contradiction' || k === 'ldOfferUnconfirmed') {
           if (type !== 'hotel') continue;
           const cutoff = t.search(/More rooms with a bathtub in/i);
           textToCheck = cutoff !== -1 ? t.slice(0, cutoff) : t;

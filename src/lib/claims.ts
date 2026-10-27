@@ -41,12 +41,29 @@ export const CLAIM_PHRASES: string[] = [
   'hidden markups',
   'direct canonical',
   'verified',
+  'checked across',
+  'checked against',
+  'cross-checked',
+  'welcome couples',
+  'strictly private',
+  'complete privacy',
+  'full privacy',
+  'across all listings',
+  'on every listing',
+  'listed on all platforms',
+  'listed on all channels',
+  'free cancellation',
+  'exclusive offers',
+  'secret rate',
+  'live room rates',
+  'top-rated',
+  'accept local residents',
 ];
 
 export function hasClaimPhrase(text: string): boolean {
   if (!text) return false;
   const lower = text.toLowerCase();
-  if (/(?<!not yet )\bconfirmed\b/i.test(lower)) return true;
+  if (/(?<!not yet |haven['’]t )\bconfirmed\b/i.test(lower)) return true;
   return CLAIM_PHRASES.some((phrase) => lower.includes(phrase));
 }
 
