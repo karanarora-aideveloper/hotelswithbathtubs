@@ -918,7 +918,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Year-round pleasant weather perfect for couple retreats',
       'Located near premium dining and cafe hubs in Koramangala and Indiranagar',
       'Top-rated 5-star business and leisure properties',
-      'Private in-room bathtubs across all listings'
     ]
   },
 
@@ -934,7 +933,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ],
     whyChoose: [
       'Unrivaled luxury value with 5-star suite rates starting at ₹4,000–₹8,500/night (30–50% more affordable than Mumbai or Delhi)',
-      'Private in-room bathtubs — independently cross-checked on MakeMyTrip, Booking.com, and Agoda to eliminate shared spa confusion',
       'Exceptional culinary and cultural retreats near Park Street, Salt Lake Sector V, and Rajarhat',
       'Hassle-free romantic weekend staycations with late checkout and private suites'
     ]
@@ -987,7 +985,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Top choice for romantic political staycations and anniversary escapes',
       'Steps from the Smithsonian museums, Dupont Circle, and Lafayette Square',
       'Historic 5-star palace hotels and trendsetting Logan Circle boutiques',
-      'Bathtub amenities cross-checked with Booking.com and partner channels'
     ]
   },
 
@@ -1056,7 +1053,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Exceptional 5-star luxury value with bathtub suites starting at ฿3,500–฿6,500/night',
       'Iconic riverside lifestyle, rooftop sky bars, and Michelin-starred dining minutes via BTS Skytrain and river shuttles',
       'Listed across Agoda, Booking.com, and partner networks to feature private in-room baths',
-      'Ideal romantic couple retreats and honeymoon sanctuaries with complete privacy'
+      'Ideal romantic couple retreats and honeymoon sanctuaries '
     ]
   },
 
@@ -1073,7 +1070,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class dining, botanical gardens, and luxury shopping',
       'Ultra-clean, safe, and romantic modern metropolis',
       'Iconic luxury stays like Marina Bay Sands and Raffles',
-      'Every property listed across top booking channels'
     ]
   },
 
@@ -1089,7 +1085,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Top honeymoon sanctuary in South India',
       'Cool mountain climate ideal for evening warm baths',
-      'Secluded luxury eco-resorts with complete privacy',
+      'Secluded luxury eco-resorts ',
       'in-room tub and private jacuzzi amenities'
     ]
   },
@@ -1464,7 +1460,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant live music, Honky Tonk Highway, and gourmet dining',
       'Iconic historic landmark hotels and sustainable luxury stays',
       'Ideal romantic couples getaway in the American South',
-      'Private in-room tubs listed on all platforms'
     ]
   },
 
@@ -1481,7 +1476,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The #1 dream romantic honeymoon destination on Earth',
       'Complete private island seclusion with personal butler service',
       'Crystal-clear turquoise waters teeming with marine life',
-      'Private overwater villa bathtubs listed on all channels'
     ]
   },
 
@@ -1532,7 +1526,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant Catalan tapas, culture, and beachside promenades',
       'Architectural masterpieces by Antoni Gaudí nearby',
       'Iconic rooftop bars with panoramic Mediterranean vistas',
-      'Private in-room bathtubs listed on all platforms'
     ]
   },
 
@@ -1736,7 +1729,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The #1 luxury ski and mountain resort in North America',
       'Ski-in/ski-out direct mountain access and five-star dining',
       'Cozy fireplace warmth paired with hydrotherapy baths',
-      'Private in-room bathtubs listed on all channels'
     ]
   },
 
@@ -2077,7 +2069,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'In-room tubs — no shared public spa pools',
       'Ideal for honeymoons, anniversaries, and romantic weekends',
       'listed across leading travel platforms',
-      'Direct links with transparent pricing and flexible cancellation'
     ]
   },
 
@@ -2270,7 +2261,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-renowned Fijian warmth and private island tranquility',
       'Adults-only romantic resorts surrounded by vibrant coral reefs',
       'Intimate private beachfront bures designed exclusively for couples',
-      'Private in-room bathtubs listed on all platforms'
     ]
   },
 
@@ -2287,7 +2277,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Vibrant music, theatre, dining, and culture right outside your door',
       'Unique architectural heritage hotels and modern 5-star towers',
       'Convenient rail links to London, Edinburgh, and Peak District getaways',
-      'Every bathtub suite listed on Booking.com'
     ]
   },
 
@@ -2389,7 +2378,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'World-class fine dining, luxury malls, and rooftop cocktail lounges',
       'Effortless staycation access from Delhi and Indira Gandhi International Airport',
       'Highest concentration of 5-star luxury brand suites in North India',
-      'Every listing checked for in-room bathtub amenities'
     ]
   },
 
@@ -2423,7 +2411,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Serene escape from urban noise with fresh mountain air and clear skies',
       'Ideal for couples seeking offbeat, quiet nature retreats',
       'Short scenic drive from Mumbai, Thane, and Navi Mumbai',
-      'private in-room installations on every listing'
     ]
   },
 
@@ -2457,7 +2444,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Peaceful, rejuvenating atmosphere for couples seeking spiritual wellness',
       'Close proximity to Raja Ji National Park and scenic Rishikesh',
       'Pure vegetarian fine dining and serene riverside meditative stays',
-      'Every bathtub suite listed on partner sites with private in-room tubs'
     ]
   },
 
@@ -2541,7 +2527,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Relaxing sea-beach walks, fresh coastal seafood, and romantic sunsets',
       'Popular weekend train or road trip escape from Kolkata',
-      'New-generation upscale resort properties offering complete privacy',
+      'New-generation upscale resort properties ',
       'In-room tubs listed on partner sites'
     ]
   },
@@ -2610,7 +2596,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Scenic East Coast Road (ECR) beach getaway just 1 hour from Chennai',
       '7th-century Shore Temple and UNESCO rock reliefs right at your doorstep',
       'World-class beach resorts offering unmatched couple luxury and privacy',
-      'in-room and private villa bathtubs checked across partner platforms'
     ]
   },
 
@@ -2627,7 +2612,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled views of the world’s third-highest peak from your room',
       'Intimate historic heritage properties with vintage British-era elegance',
       'Romantic walks through tea gardens and along the historic Mall',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -2677,7 +2661,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Popular coastal weekend road trip from Mumbai, Surat, and Vapi',
       'Historic Portuguese forts, lighthouse, and relaxing sandy beaches',
-      'Couple-friendly beachside luxury resorts with full privacy',
+      'Beachside luxury resorts',
       'listed across online booking platforms'
     ]
   },
@@ -2729,7 +2713,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Quiet, uncrowded alternative to Ooty and Kodaikanal for couples',
       'Pleasant mountain climate with scenic boating on Yercaud Lake',
       'Intimate plantation retreats offering supreme privacy and peace',
-      'Every bathtub suite checked across booking partners'
     ]
   },
 
@@ -2795,9 +2778,8 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ],
     whyChoose: [
       'Voted the world’s leading honeymoon destination for couples and anniversaries',
-      'Iconic architectural sanctuaries offering complete privacy without fourth walls',
+      'Iconic architectural sanctuaries without fourth walls',
       'Nearby volcanic drive-in volcano, Sulphur Springs mud baths, and Diamond Falls',
-      'Every bathtub suite listed on partner sites with private in-room tubs'
     ]
   },
 
@@ -2831,7 +2813,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Pristine powdery white beaches, private island boat charters, and vibrant marine life',
       'Historic colonial charm blended with 5-star international luxury resorts',
       'Quick and effortless nonstop travel access from the US East Coast and London',
-      'Private in-room bathtub amenities on every listing'
     ]
   },
 
@@ -2865,7 +2846,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Grace Bay Beach consistently rated among the best beaches in the world',
       'Uncrowded, tranquil island atmosphere offering elite couple privacy',
       'World-class scuba diving, coral reefs, and romantic sunset yacht charters',
-      'Every listing listed on partner sites for authentic in-room bathtub luxury'
     ]
   },
 
@@ -2916,7 +2896,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'America’s premier tropical honeymoon capital with legendary surf and sunsets',
       'World-class luxury beachfront resorts with full couple-friendly privacy',
       'Direct access to Kalakaua Avenue shopping, fine dining, and catamaran sails',
-      'Every listing listed across Booking.com and Agoda for private tubs'
     ]
   },
 
@@ -2984,7 +2963,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted America’s most romantic city for couple weekend getaways',
       'Celebrated Lowcountry culinary scene, carriage rides, and historic charm',
       'Exceptional boutique hospitality with evening wine receptions and turndown',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3001,7 +2979,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Prime base for exploring the Golden Circle, Blue Lagoon, and Northern Lights tours',
       'World-famous geothermal wellness culture and thermal springs',
       'Chic Nordic architecture with cutting-edge Icelandic culinary dining',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3069,7 +3046,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The global capital of "hygge" — intimate, cozy comfort designed for couples',
       'World-renowned gastronomy from cozy bakeries to multi-starred culinary temples',
       'Walkable and bike-friendly historic neighborhoods, palaces, and harbor baths',
-      'Every hotel suite vetted on Booking.com and Agoda for private tub amenities'
     ]
   },
 
@@ -3171,7 +3147,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Atmospheric cobblestone alleys, boutique art galleries, and historic rampart walks',
       'Golden southern beaches of Unawatuna and Mirissa just minutes away for whale watching',
       'Tranquil tropical sanctuary blending European heritage with warm Sri Lankan hospitality',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3188,7 +3163,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The crown jewel of romantic honeymoon escapes on the Amalfi Coast',
       'Unmatched panoramic sunset vistas over Sirenuse islands and sapphire waters',
       'Cliffside Michelin-starred dining, private wooden boat charters, and Path of the Gods hiking',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3222,7 +3196,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage medieval majesty paired with pristine crystal-clear waters',
       'Stroll centuries-old marble streets, ancient city ramparts, and secluded cliffside bars',
       'Private yacht day trips to the unspoiled Elaphiti Islands directly from hotel piers',
-      'Every bathtub suite listed on partner sites on Booking.com and Agoda'
     ]
   },
 
@@ -3307,7 +3280,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'South America’s premier wine and gastronomy destination for couples',
       'Exclusive boutique vineyard fincas in the Uco Valley and Luján de Cuyo',
       'Horseback rides through vineyards at sunset paired with world-class cellar dining',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3409,7 +3381,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'One of Europe’s best-preserved and most affordable UNESCO World Heritage romantic cities',
       'Enchanting cobblestone carriage rides around Rynek Główny (Europe’s largest medieval square)',
       'Rich bohemian café culture, hidden cellar wine bars, and thriving culinary creativity',
-      'Every bathtub suite listed on Booking.com and Agoda'
     ]
   },
 
@@ -3562,7 +3533,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Voted among the most visually breathtaking and romantic island archipelagos on Earth',
       'Effortless access to private catamarans touring the Big Lagoon, Secret Beach, and Snake Island',
       'Intimate eco-luxury resorts offering private candlelit beach dinners and stargazing over the Sulu Sea',
-      'Every hotel listing listed on partner sites for authentic in-room and private villa bathtub amenities'
     ]
   },
 
@@ -3664,7 +3634,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Stunning architectural elegance with hundreds of ornate Art Nouveau facades and romantic boulevards',
       'Serene canal boat rides through Bastejkalna park and evening strolls across the historic Dome Square',
       'Affordable European luxury with world-class classical opera, vibrant culinary scene, and boutique stays',
-      'Every hotel listing listed on partner sites for authentic in-room bathtub amenities'
     ]
   },
 
@@ -3953,7 +3922,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Enchanting colonial ambiance with candlelit courtyards, cobblestone lanes, and baroque church ruins',
       'World-class specialty coffee culture, gourmet volcanic dining, and views of Volcán de Agua and Fuego',
       'Boutique historical hotels offering exceptional colonial charm, romance, and warm hospitality',
-      'Every bathtub suite checked for private in-room and courtyard installations'
     ]
   },
 
@@ -4021,7 +3989,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Bucket-list romantic safari with Big Five game drives and dawn hot air balloon flights',
       'Intimate all-inclusive luxury camps offering personalized butler service and campfire storytelling',
       'The quintessential African bush bath experience surrounded by raw wilderness',
-      'Every property listed on partner sites with private veranda and ensuite soaking baths'
     ]
   },
 
@@ -4106,7 +4073,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'UNESCO World Heritage medieval Old Town filled with winding cobbled lanes and Venetian architecture',
       'Serene and dramatic coastal fjord scenery unique to Southern Europe',
       'Romantic sunset boat cruises to Our Lady of the Rocks and Perast',
-      'Private in-room or terrace tubs on every listing'
     ]
   },
 
@@ -4700,7 +4666,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic mid-century modern architecture and retro Hollywood glamor',
       'Secluded adults-only boutique retreats with complete outdoor bath privacy',
       'Year-round desert sunshine and dramatic mountain landscapes',
-      'in-room and private patio tub amenities on every listing'
     ]
   },
 
@@ -4807,7 +4772,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Peaceful, unhurried hill station escape easily accessible from Chandigarh and Delhi',
       'Crisp mountain air, quiet walking trails, and spectacular sunset viewpoints',
-      'Intimate boutique properties and colonial villas offering complete privacy',
+      'Intimate boutique properties and colonial villas ',
       'listings featuring in-room tubs and heating'
     ]
   },
@@ -5304,7 +5269,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Breathtaking coastal vistas overlooking the Amalfi Coast and Mount Vesuvius',
       'World-renowned luxury shopping and Michelin-starred cliffside dining',
-      'Complete privacy and romantic seclusion in Anacapri and Capri town',
+      'Romantic seclusion in Anacapri and Capri town',
       'listings featuring private in-room and terrace tubs'
     ]
   },
@@ -5467,7 +5432,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Idyllic tropical island escape perfect for honeymoons and romantic retreats',
       'Luxurious pool villa living with total privacy and personalized butler service',
       'World-class wellness spas and beachside candlelit seafood dining',
-      'private tub and plunge pool amenities on every listing'
     ]
   },
 
@@ -5575,7 +5539,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'The only destination in the UK where you can bathe in natural thermal waters',
       'Architectural marvels including the Royal Crescent and the Roman Baths',
       'Idyllic romantic weekend getaway just 90 minutes from London',
-      'thermal baths and clawfoot tubs on every listing'
     ]
   },
 
@@ -5590,7 +5553,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Private sundecks with direct VIP beach access and yacht tenders'
     ],
     whyChoose: [
-      'The pinnacle of Caribbean ultra-luxury with complete privacy and elite security',
+      'The pinnacle of Caribbean ultra-luxury with elite security',
       'World-class French gastronomy and chic beachside champagne lounges',
       'Unspoiled powder-white sand beaches and crystalline turquoise coves',
       'Private tub suites listed across Booking.com and luxury channels'
@@ -5606,7 +5569,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Private sundecks with direct VIP beach access and yacht tenders'
     ],
     whyChoose: [
-      'The pinnacle of Caribbean ultra-luxury with complete privacy and elite security',
+      'The pinnacle of Caribbean ultra-luxury with elite security',
       'World-class French gastronomy and chic beachside champagne lounges',
       'Unspoiled powder-white sand beaches and crystalline turquoise coves',
       'Private tub suites listed across Booking.com and luxury channels'
@@ -5839,7 +5802,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Historic Alte Oper and Römerberg paired with high-energy cosmopolitan dining',
       'Palatial grand hotel hospitality operating continuously since 1876',
       'Spacious luxury suites with in-room tubs for romantic city breaks',
-      'booking links with flexible cancellation on all partners'
     ]
   },
 
@@ -5957,7 +5919,6 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'World capital of French gastronomy and UNESCO World Heritage Vieux-Lyon',
       'Dramatic hilltop vistas overlooking the Rhône and Saône river confluence',
-      'Historic suites with authentic private soaking tubs listed on all channels',
       'Direct affiliate reservation links with instant partner confirmation'
     ]
   },
@@ -6008,14 +5969,13 @@ export function generateCityPageContent(
 
   const bookingPartners = isIndia
     ? `
-      <li><strong>Booking.com:</strong> Instant confirmation with free cancellation options.</li>
-      <li><strong>Agoda:</strong> Special member rates and mobile discounts across Asia & global stays.</li>
-      <li><strong>MakeMyTrip:</strong> Leading platform for India and international destinations with exclusive offers.</li>
+      <li>Booking.com</li>
+      <li>Agoda</li>
+      <li>MakeMyTrip</li>
     `
     : `
-      <li><strong>Booking.com:</strong> Instant confirmation with free cancellation and member discounts.</li>
-      <li><strong>Agoda:</strong> Competitive rates and exclusive mobile savings worldwide.</li>
-      <li><strong>Direct Partner Channels:</strong> Boutique stay channels and flexible reservation options.</li>
+      <li>Booking.com</li>
+      <li>Agoda</li>
     `;
 
   // US-specific section: targets "soaking tub", "jacuzzi suite", "hot tub in room" queries
@@ -6025,10 +5985,10 @@ export function generateCityPageContent(
     <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-5">
       <li><strong>Deep soaking tubs</strong> — Japanese-style or freestanding baths that fill 20–24 inches deep. No jets. The most common type in boutique hotels.</li>
       <li><strong>Jacuzzi suites / whirlpool suites</strong> — Jetted tubs with hydrotherapy massage jets. Found in premium room tiers at luxury properties.</li>
-      <li><strong>Hot tubs in room</strong> — Private to your room only (not shared). Found at select resort properties.</li>
+      <li><strong>Hot tubs in room</strong> — Found at select resort properties.</li>
       <li><strong>Roman soaking tubs</strong> — Oversized, wide, shallow marble tubs. The classic Vegas-style resort tub.</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-4">Every listing features a private bathtub in the room — not a shared spa, not a walk-in shower. Listed across ${verificationSources}.</p>
+    <p class="text-gray-700 leading-relaxed mb-4">We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.</p>
   ` : '';
 
   const h2 = isUSA
@@ -6055,7 +6015,7 @@ export function generateCityPageContent(
     </ul>
 
     <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">How to Book Your Stay in ${formattedCity}</h3>
-    <p class="text-gray-700 leading-relaxed mb-2">All hotels listed on this guide feature direct links to booking partner channels:</p>
+    <p class="text-gray-700 leading-relaxed mb-2">Book through these partners:</p>
     <ul class="list-disc pl-5 space-y-1 text-gray-700">
       ${bookingPartners}
     </ul>

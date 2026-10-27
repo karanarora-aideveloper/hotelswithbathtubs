@@ -633,7 +633,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   // M6 Data-driven FAQs
   const jacuzziHotels = hotels.filter((h) => isJacuzziRoom(h));
   const jacuzziFaqAnswer = jacuzziHotels.length > 0
-    ? `Hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}. Each property listing features a private hot tub inside your suite rather than a shared hotel facility.`
+    ? `Hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}.`
     : `Currently, no hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
 
   let cheapestFaqAnswer = cheapestHotel && cheapestHotelPrice
@@ -676,15 +676,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         }] : []),
         {
           question: `Which hotels in ${cityName} have private in-room bathtubs?`,
-          answer: `Top hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. All listings on this page have been checked across ${otas} to confirm that the specific room tier includes an authentic bathtub rather than a standing shower.`
+          answer: `Top hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}.`
         },
         {
           question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
           answer: typicalRateFaqAnswer
-        },
-        {
-          question: `Are bathtub hotels in ${cityName} couple-friendly?`,
-          answer: `Yes. Properties in ${cityName} featured on our guide welcome couples and provide full privacy in their suites. We recommend carrying ${idRequirement} for check-in.`
         },
         {
           question: `How do I make sure my room in ${cityName} definitely has a bathtub?`,
@@ -822,7 +818,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
               Top hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
               <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-              All {hotels.length} stays in our directory have been checked across {countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks'} to confirm that your private room tier features an in-room bathtub or jacuzzi rather than a shared hotel spa facility.
             </p>
           </div>
           <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
@@ -904,7 +899,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   All {hotels.length} Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
                 </h3>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Every property listed below features private in-room soaking tubs.
+                  We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.
                 </p>
               </div>
               <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
