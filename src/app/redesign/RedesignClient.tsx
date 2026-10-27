@@ -535,7 +535,6 @@ export default function RedesignClient({
                 {[
                   { val: 'recommended', label: 'Recommended' },
                   { val: 'price_asc', label: 'Price ↑' },
-                  { val: 'rating_desc', label: 'Top Rated' },
                 ].map(s => (
                   <button key={s.val} type="button" onClick={() => setSortOrder(s.val as any)}
                     className={`px-3 py-1.5 rounded-full text-[12px] font-semibold transition-all border ${

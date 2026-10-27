@@ -201,12 +201,6 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
                 <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[10px] font-semibold tracking-wider uppercase text-[#121518] border border-white/40 shadow-xs">
                   {hotel.tag}
                 </span>
-                <div className="absolute bottom-4 left-4 right-4 flex items-baseline justify-between text-white">
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-white/80 font-medium">Starting Rate</span>
-                    <p className="font-playfair text-2xl font-normal">{hotel.price} <span className="text-xs text-white/80 font-sans">/ night</span></p>
-                  </div>
-                </div>
               </div>
 
               {/* Suite Specs & Description */}
@@ -216,7 +210,6 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
                     <span className="text-[11px] font-semibold tracking-widest uppercase text-[#C5A880]">
                       {hotel.city}, {hotel.country}
                     </span>
-                    <span className="text-[11px] text-[#6B6964]">{hotel.reviewsCount} reviews</span>
                   </div>
 
                   <h3 className="font-playfair text-2xl text-[#121518] font-normal leading-snug">
@@ -233,9 +226,6 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
                     <p className="text-[#121518] font-medium leading-relaxed">
                       {hotel.tubType}
                     </p>
-                    <span className="inline-block mt-1.5 text-[10.5px] text-[#C5A880] font-medium">
-                      Material: {hotel.material}
-                    </span>
                   </div>
                 </div>
 

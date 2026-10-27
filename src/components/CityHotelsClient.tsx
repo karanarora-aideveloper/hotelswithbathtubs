@@ -811,18 +811,6 @@ export default function CityHotelsClient({
             >
               Price ↓
             </button>
-            <button
-              onClick={() => setSortBy('rating')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'rating' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
-            >
-              Top Rated
-            </button>
-            <button
-              onClick={() => setSortBy('reviews')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'reviews' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
-            >
-              Most Reviewed
-            </button>
 
             {activeFilterCount > 0 && (
               <button

@@ -82,7 +82,7 @@ export function dropClaimSentencesFromMarkdown(md: string): string {
   const lines = md.split('\n');
   const keptLines: string[] = [];
   for (let line of lines) {
-    if (/★\s*\d|guest reviews/i.test(line)) continue;
+    if (/★\s*\d|guest reviews|\b\d[\d,]*\s+reviews\b/i.test(line)) continue;
     if (hasClaimPhrase(line)) {
       const sentences = line.match(/([^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$)/g) || [];
       const kept = sentences.filter((s) => !hasClaimPhrase(s.trim()));
