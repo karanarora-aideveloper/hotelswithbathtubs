@@ -319,11 +319,6 @@ export default async function CoupleFriendlyPage() {
                         className="object-cover"
                         loading="lazy"
                       />
-                      {hotel.rating && Number(hotel.rating) > 0 && (
-                        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-gray-900 shadow-sm flex items-center gap-1">
-                          <span>★</span> {Number(hotel.rating).toFixed(1)}
-                        </div>
-                      )}
                       <div className="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-white">
                         🛁 {getBathtubLabel(hotel)}
                       </div>

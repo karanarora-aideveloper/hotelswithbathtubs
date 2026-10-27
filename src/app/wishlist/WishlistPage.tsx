@@ -135,12 +135,6 @@ export default function WishlistPage() {
                       🛁 {h.tubType}
                     </span>
                   )}
-                  {h.rating && (
-                    <div className="flex items-center gap-1 text-sm font-bold text-gray-800 mb-3">
-                      <span className="text-amber-500">★</span>
-                      <span>{h.rating}</span>
-                    </div>
-                  )}
                   {h.price && (
                     <div className="mt-auto flex items-baseline justify-between border-t border-dashed border-gray-200 pt-3 mb-3">
                       <span className="text-2xs text-gray-400 font-bold uppercase tracking-wider">Rates From</span>

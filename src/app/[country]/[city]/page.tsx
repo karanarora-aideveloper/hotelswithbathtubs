@@ -751,31 +751,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               <>
                 {introSentence1}
                 {introSentence2 ? ` ${introSentence2}` : ''}
-                {minPrice && hasTopRating ? (
-                  <>
-                    {` Prices start at ${minPrice} a night, and the highest-rated is `}
-                    <Link
-                      href={`/${countrySlug}/${slugify(topRatedHotel.city || citySlug)}/${topRatedHotel.slug || slugify(topRatedHotel.name)}`}
-                      className="underline decoration-white/60 hover:decoration-white font-semibold"
-                    >
-                      {topRatedHotel.name}
-                    </Link>
-                    {` (${Number(topRatedHotel.rating).toFixed(1)}★).`}
-                  </>
-                ) : minPrice ? (
-                  ` Prices start at ${minPrice} a night.`
-                ) : hasTopRating ? (
-                  <>
-                    {` The highest-rated is `}
-                    <Link
-                      href={`/${countrySlug}/${slugify(topRatedHotel.city || citySlug)}/${topRatedHotel.slug || slugify(topRatedHotel.name)}`}
-                      className="underline decoration-white/60 hover:decoration-white font-semibold"
-                    >
-                      {topRatedHotel.name}
-                    </Link>
-                    {` (${Number(topRatedHotel.rating).toFixed(1)}★).`}
-                  </>
-                ) : null}
+                {minPrice ? ` Prices start at ${minPrice} a night.` : ''}
               </>
             )}
           </p>
@@ -937,11 +913,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   <span className="font-medium text-gray-800 group-hover:text-[#1a6fde] line-clamp-1">
                     🛁 {h.name}
                   </span>
-                  {h.rating && Number(h.rating) > 0 ? (
-                    <span className="text-[11px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded ml-1 shrink-0">
-                      ★ {Number(h.rating).toFixed(1)}
-                    </span>
-                  ) : null}
                 </Link>
               ))}
             </nav>

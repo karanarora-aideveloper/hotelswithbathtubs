@@ -607,12 +607,6 @@ export default function RedesignClient({
                           </span>
                         </div>
                         {/* Rating badge */}
-                        {hotel.rating && (
-                          <div className="absolute top-1.5 right-1.5 bg-white/95 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-md shadow-sm flex items-center gap-0.5">
-                            <span className="text-amber-500">★</span>
-                            <span>{hotel.rating}</span>
-                          </div>
-                        )}
                       </div>
 
                       {/* Content */}
@@ -622,16 +616,8 @@ export default function RedesignClient({
                           {hotel.name}
                         </h2>
 
-                        {/* Rating + Reviews + Landmark */}
+                        {/* Landmark */}
                         <div className="flex flex-col gap-0.5">
-                          {hotel.rating && (
-                            <div className="flex items-center gap-1 text-[10px]">
-                              <span className="text-amber-500 font-black">★ {hotel.rating}</span>
-                              {hotel.reviewsCount && (
-                                <span className="text-slate-400">({hotel.reviewsCount.toLocaleString()} reviews)</span>
-                              )}
-                            </div>
-                          )}
                           {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (
                             <p className="text-[9px] text-slate-500 truncate flex items-center gap-0.5">
                               <span>📍</span>
@@ -774,12 +760,6 @@ export default function RedesignClient({
                             🛁 {hotel.displayTubType}
                           </span>
                         </div>
-                        {hotel.rating && (
-                          <div className="absolute top-1.5 right-1.5 bg-white/90 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-md shadow-sm flex items-center gap-0.5">
-                            <span className="text-amber-500">★</span>
-                            <span>{hotel.rating}</span>
-                          </div>
-                        )}
                         <div className="absolute bottom-1.5 left-1.5 bg-white/90 backdrop-blur-sm text-slate-800 text-[9px] font-semibold px-1.5 py-0.5 rounded-md">
                           📍 {hotel.displayNeighborhood}
                         </div>
@@ -790,16 +770,6 @@ export default function RedesignClient({
                           <h2 className="text-[15px] font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#1a6fde] transition-colors">
                             {hotel.name}
                           </h2>
-
-                          {/* Rating + reviews */}
-                          {hotel.rating && (
-                            <div className="flex items-center gap-1 text-[10px]">
-                              <span className="text-amber-500 font-black">★ {hotel.rating}</span>
-                              {hotel.reviewsCount && (
-                                <span className="text-slate-400">({hotel.reviewsCount.toLocaleString()} reviews)</span>
-                              )}
-                            </div>
-                          )}
 
                           {/* Landmark distance */}
                           {hotel.landmarkDistance && !isPlaceholderLandmark(hotel.landmarkDistance) && (

@@ -957,18 +957,8 @@ export default function DreamSoakMatchmaker({
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
-                        {/* Top Ribbon: Match % and Tub Type */}
-                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                          <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-gray-900 font-black text-xs shadow-md border border-black/5 flex items-center gap-1">
-                            {Number(hotel.rating) > 0 && (
-                              <>
-                                <span className="text-amber-500">★</span> {Number(hotel.rating).toFixed(1)}
-                              </>
-                            )}
-                            {Number(hotel.reviewsCount) > 0 && (
-                              <span className="text-[10px] text-gray-400 font-medium">({hotel.reviewsCount})</span>
-                            )}
-                          </span>
+                        {/* Top Ribbon: Match % */}
+                        <div className="absolute top-3 right-3 flex items-center justify-end pointer-events-none">
                           <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs shadow-md flex items-center gap-1">
                             <span>🔥</span>
                             <span>{matchScore}% Match</span>

@@ -357,19 +357,7 @@ export default async function HostelsHubPage() {
                     </p>
 
                     <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
-                      {(hostel.rating && Number(hostel.rating) > 0) || (hostel.reviewsCount && Number(hostel.reviewsCount) > 0) ? (
-                        <div className="flex items-center gap-1 text-xs font-bold text-gray-900">
-                          {hostel.rating && Number(hostel.rating) > 0 && (
-                            <>
-                              <span className="text-amber-500">★</span>
-                              <span>{hostel.rating}</span>
-                            </>
-                          )}
-                          {hostel.reviewsCount && Number(hostel.reviewsCount) > 0 && (
-                            <span className="text-gray-400 font-normal">({hostel.reviewsCount})</span>
-                          )}
-                        </div>
-                      ) : <span />}
+                      <span />
 
                       <div className="flex items-center gap-2">
                         <Link

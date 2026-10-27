@@ -68,11 +68,7 @@ export default function CityCard({
     setTimeout(() => setClicked(false), 4000);
   };
 
-  const reviewsFormatted = totalReviews > 0
-    ? totalReviews >= 1000
-      ? `${(totalReviews / 1000).toFixed(1)}k+ guest reviews`
-      : `${totalReviews} guest reviews`
-    : 'Rooms with bathtubs';
+  const reviewsFormatted = `${hotelCount} ${hotelCount === 1 ? 'room' : 'rooms'} listed`;
 
   const defaultPrice = country.toLowerCase() === 'india' ? 'From ₹2,499' : 'From $149';
   const displayPrice = minPrice ? (minPrice.startsWith('From') ? minPrice : `From ${minPrice}`) : defaultPrice;
@@ -134,12 +130,6 @@ export default function CityCard({
               <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200/80 shadow-2xs">
                 <span>🌊</span>
                 <span>Jacuzzi</span>
-              </span>
-            )}
-            {typeof rating === 'number' && rating > 0 && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 shadow-2xs ml-auto">
-                <span className="text-amber-500 font-black">★</span>
-                <span>{rating}</span>
               </span>
             )}
           </div>

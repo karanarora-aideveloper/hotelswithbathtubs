@@ -231,11 +231,6 @@ export default async function SoakingTubHotelsPage() {
                         <Link href={hotelUrl} className="font-bold text-gray-900 hover:text-[#1a6fde] transition-colors line-clamp-1 text-base">
                           {h.name}
                         </Link>
-                        {h.rating && (
-                          <span className="text-xs font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200/60 shrink-0">
-                            ★ {h.rating}
-                          </span>
-                        )}
                       </div>
 
                       <p className="text-xs text-gray-500 mb-2 font-medium">

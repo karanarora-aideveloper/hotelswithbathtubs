@@ -1459,18 +1459,6 @@ export default function CityHotelsClient({
                     <h2 className="text-sm sm:text-[15px] font-bold text-gray-900 leading-snug line-clamp-1 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
                   </Link>
 
-                  {/* Rating & Reviews */}
-                  {h.rating ? (
-                    <div className="flex items-center gap-1.5 text-[11px] mb-1.5">
-                      <span className="inline-flex items-center gap-0.5 bg-amber-50 text-amber-800 font-bold px-1.5 py-0.5 rounded border border-amber-200/70">
-                        <span className="text-amber-500 font-black">★</span> {h.rating}
-                      </span>
-                      {h.reviewsCount && (
-                        <span className="text-gray-400 text-2xs">({h.reviewsCount.toLocaleString()} reviews)</span>
-                      )}
-                    </div>
-                  ) : null}
-
                   {/* Neighborhood Location & Distance */}
                   <p className="text-xs text-gray-500 font-medium mb-2 flex items-center gap-1 sm:flex-wrap">
                     <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">

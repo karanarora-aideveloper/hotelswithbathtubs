@@ -8,7 +8,7 @@ const ESSENTIALS = [
     tag: 'Bestseller',
     description: 'Extendable waterproof bamboo tray with wine glass holder, phone slot & candle stand for couple bath nights.',
     price: '₹1,499',
-    rating: '4.8 ★',
+    rating: '4.8',
     url: 'https://www.amazon.in/dp/B08X4N9XYZ?tag=hotelswithbathtubs-21',
     source: 'EarnKaro'
   },
@@ -17,7 +17,7 @@ const ESSENTIALS = [
     tag: 'Spa Grade',
     description: 'Infused with lavender, Epsom salt, and pure rose essential oils for deep muscular relaxation.',
     price: '₹799',
-    rating: '4.9 ★',
+    rating: '4.9',
     url: 'https://www.nykaa.com/forest-essentials-bath-salts?tag=hotelswithbathtubs-21',
     source: 'EarnKaro'
   },
@@ -26,7 +26,7 @@ const ESSENTIALS = [
     tag: 'Romantic Fav',
     description: 'Handmade fizzy bubble bath bombs with moisturizing shea butter, jasmine & vanilla aroma.',
     price: '₹649',
-    rating: '4.7 ★',
+    rating: '4.7',
     url: 'https://www.amazon.in/dp/B07Y8M7KLN?tag=hotelswithbathtubs-21',
     source: 'EarnKaro'
   },
@@ -35,7 +35,7 @@ const ESSENTIALS = [
     tag: 'Atmosphere',
     description: 'Warm ambient glow tea lights that float safely in warm tub water for romantic date night ambiance.',
     price: '₹499',
-    rating: '4.6 ★',
+    rating: '4.6',
     url: 'https://www.amazon.in/dp/B08P5Q9M7K?tag=hotelswithbathtubs-21',
     source: 'EarnKaro'
   }

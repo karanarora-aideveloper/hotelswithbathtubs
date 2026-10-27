@@ -203,12 +203,8 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
                 </span>
                 <div className="absolute bottom-4 left-4 right-4 flex items-baseline justify-between text-white">
                   <div>
-                    <span className="text-xs uppercase tracking-wider text-white/80 font-medium">Verified Starting Rate</span>
+                    <span className="text-xs uppercase tracking-wider text-white/80 font-medium">Starting Rate</span>
                     <p className="font-playfair text-2xl font-normal">{hotel.price} <span className="text-xs text-white/80 font-sans">/ night</span></p>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-xs border border-white/20">
-                    <span className="text-[#C5A880]">★</span>
-                    <span>{hotel.rating}</span>
                   </div>
                 </div>
               </div>

@@ -494,18 +494,6 @@ export default async function HotelDetailPage({
             </h1>
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-600 mb-4 font-jakarta">
-              {hasRealRating && (
-                <div className="flex items-center gap-1.5 font-bold text-[#1f262d]">
-                  <span className="text-amber-500 text-base">★</span>
-                  <span>{Number(hotel.rating).toFixed(1)}</span>
-                  {hasRealReviews && (
-                    <span className="text-slate-400 font-normal">({Number(hotel.reviewsCount).toLocaleString()} guest reviews on partner platforms)</span>
-                  )}
-                </div>
-              )}
-              {hasRealRating && (
-                <span className="text-slate-300 hidden sm:inline">•</span>
-              )}
               <div className="flex items-center gap-1.5 font-medium text-slate-600">
                 <svg className="w-4 h-4 text-[#5b8296]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -584,13 +572,6 @@ export default async function HotelDetailPage({
                   <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> inside the private guest accommodation.</span>
                 </p>
               )}
-
-              {hotel.rating && Number(hotel.rating) > 0 ? (
-                <p className="flex items-start gap-2.5">
-                  <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  <span>Rated <strong className="font-semibold text-slate-900">{Number(hotel.rating).toFixed(1)}/{Number(hotel.rating) <= 5 ? '5' : '10'}</strong>{hotel.reviewsCount && Number(hotel.reviewsCount) > 0 ? ` from ${Number(hotel.reviewsCount).toLocaleString('en-US')} guest reviews` : ' by travelers'}.</span>
-                </p>
-              ) : null}
 
               {isValidNeighborhood(hotel.neighborhood) && (
                 <p className="flex items-start gap-2.5">
@@ -789,19 +770,6 @@ export default async function HotelDetailPage({
 
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      {(sim.rating && Number(sim.rating) > 0) || (sim.reviewsCount && Number(sim.reviewsCount) > 0) ? (
-                        <div className="flex items-center gap-1 text-xs font-bold text-slate-800 mb-1.5 font-jakarta">
-                          {sim.rating && Number(sim.rating) > 0 && (
-                            <>
-                              <span className="text-amber-500">★</span>
-                              <span>{Number(sim.rating).toFixed(1)}</span>
-                            </>
-                          )}
-                          {sim.reviewsCount && Number(sim.reviewsCount) > 0 && (
-                            <span className="text-slate-400 font-normal">({Number(sim.reviewsCount)})</span>
-                          )}
-                        </div>
-                      ) : null}
                       <a href={simUrl} className="font-playfair font-semibold text-base text-[#1f262d] group-hover:text-[#5b8296] transition-colors line-clamp-2 mb-2 leading-snug">
                         {sim.name}
                       </a>

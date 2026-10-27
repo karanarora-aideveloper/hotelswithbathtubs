@@ -605,11 +605,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                               decoding="async"
                               className="object-cover w-full h-full"
                               />
-                            {h.rating && Number(h.rating) > 0 && (
-                              <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md text-amber-300 font-black text-xs px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
-                                <span>★</span> {Number(h.rating).toFixed(1)}
-                              </div>
-                            )}
                           </div>
 
                           <div className="p-3.5">
