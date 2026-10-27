@@ -1,29 +1,10 @@
 import { isJacuzziRoom } from '@/lib/utils';
 
-export const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-
 export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
   if (hotel?.bathtubConfirmed === true) {
     return isJacuzziRoom(hotel) ? 'In-room jacuzzi' : 'In-room bathtub';
   }
   return 'Bathtub not yet confirmed';
-}
-
-export function formatMonthYear(dateStr?: string | Date | null): string {
-  if (!dateStr) return 'October 2026';
-  const str = String(dateStr);
-  const match = str.match(/^(\d{4})-(\d{2})/);
-  if (match) {
-    const year = match[1];
-    const monthIndex = parseInt(match[2], 10) - 1;
-    if (monthIndex >= 0 && monthIndex < 12) {
-      return `${MONTH_NAMES[monthIndex]} ${year}`;
-    }
-  }
-  return 'October 2026';
 }
 
 export function getFirstPartner(hotel: {
@@ -164,15 +145,14 @@ export function getEvidenceLine(hotel: {
 }): EvidenceLineData {
   const partner = getFirstPartner(hotel);
   const isConfirmed = hotel.bathtubConfirmed === true;
-  const monthYear = formatMonthYear(hotel.updatedAt);
   const room = hotel.roomType || 'room';
 
   if (isConfirmed && partner) {
     return {
-      textPrefix: 'Bathtub listed for the ',
+      textPrefix: 'Bathtub in the ',
       roomType: room,
-      textSuffix: ` on ${partner}. Last checked ${monthYear}.`,
-      fullPlainText: `Bathtub listed for the ${room} on ${partner}. Last checked ${monthYear}.`,
+      textSuffix: `. Check this room on ${partner} before you book.`,
+      fullPlainText: `Bathtub in the ${room}. Check this room on ${partner} before you book.`,
     };
   }
 

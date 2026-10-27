@@ -366,15 +366,6 @@ export default async function CityHotelsPage({
     return (Number(b.rating) || 0) - (Number(a.rating) || 0);
   });
 
-  // Grounded freshness date derived from real MongoDB timestamps
-  const maxTimestamp = hotels.reduce((max, h) => {
-    const t = h.updatedAt ? new Date(h.updatedAt).getTime() : 0;
-    return t > max ? t : max;
-  }, 0);
-  const cityVerifiedDate = maxTimestamp > 0
-    ? new Date(maxTimestamp).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-    : 'October 2026';
-
   const jacuzziCount = hotels.filter((h) => isJacuzziRoom(h)).length;
   const isJacuzziIndexable = !stateConfig && shouldIndexDestination(jacuzziCount);
 
@@ -744,7 +735,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Verified Hotels{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''} · Verified {cityVerifiedDate}
+            <span>🏨</span> {hotels.length} Rooms Listed{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''}
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {stateConfig

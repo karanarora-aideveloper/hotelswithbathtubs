@@ -4,7 +4,6 @@ import React from 'react';
 import OutboundLink from './OutboundLink';
 import { getUrlDirectnessTier } from '@/lib/affiliate';
 import { normalizePrice } from '@/lib/utils';
-import { formatMonthYear } from '@/lib/evidence';
 
 interface HotelAnalyticsProps {
   hotel: {
@@ -52,7 +51,6 @@ export default function HotelAnalyticsComparison({
   const isIndia = countrySlug === 'india';
   const cleanPrice = normalizePrice(hotel.price) || hotel.price;
   const displayPrice = cleanPrice ? cleanPrice.replace(/^~\s*/, '') : '';
-  const monthYear = formatMonthYear(hotel.updatedAt);
 
   const partners: PartnerButtonConfig[] = [];
 
@@ -182,10 +180,10 @@ export default function HotelAnalyticsComparison({
         <h2 className="font-playfair text-lg sm:text-xl font-normal text-[#1f262d] tracking-tight mb-4">
           {displayPrice ? (
             <>
-              Price we last saw: <span className="font-bold text-[#1a6fde]">{displayPrice}</span> a night ({monthYear}). Check today&apos;s price:
+              Guide price: about <span className="font-bold text-[#1a6fde]">{displayPrice}</span> a night. Prices change, so check today&apos;s price:
             </>
           ) : (
-            <>Check today&apos;s price:</>
+            <>Prices change, so check today&apos;s price:</>
           )}
         </h2>
 
