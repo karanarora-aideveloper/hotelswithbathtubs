@@ -6,7 +6,7 @@ const P = process.argv[2].replace(/\/$/, ''), W = 'https://www.hotelswithbathtub
 const CHECKS = {
   banned: /field-verified|architectural metrics|acoustic|water dynamics|sanctuary audit|triple-(?:source|verified|checked)|100% (?:in-room|en-suite)|guarantee|independently verified|every room verified|superhost|gourmet kitchen|keyless|historical benchmark|verified platforms/i,
   verified: /\bverif(?:ied|ication|y)\b/i,
-  confirmed: /(?<!not yet )\bconfirmed\b/i,
+  confirmed: /(?<!not yet |haven['’]t )\bconfirmed\b/i,
   inspected: /\binspect(?:ed|ion)\b/i,
   handpicked: /\bhand-?picked\b/i,
   audited: /\baudit(?:ed|s)?\b|verification team/i,
@@ -15,6 +15,13 @@ const CHECKS = {
   ratings: /★\s*\d|guest reviews/i,
   checkedOneByOne: /checked one by one/i,
   zeroFees: /zero booking fees|hidden markups|direct canonical/i,
+  reviewCounts: /\b\d[\d,]*\s+reviews\b|top rated|most reviewed/i,
+  noSurprises: /no surprises/i,
+  debugText: /layout active|progressive streaming/i,
+  tripleVerify: /triple-verif/i,
+  highDemand: /in high demand/i,
+  coupleTag: /✓ couple friendly/i,
+  contradiction: /^(?=[\s\S]*not yet confirmed)(?=[\s\S]*(?:features an in-room|for a private in-room bathtub|for the private tub))/i,
 };
 const visible = (h) => h
   .replace(/<script(?![^>]*ld\+json)[\s\S]*?<\/script>/gi, ' ')
@@ -56,11 +63,17 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       ok++;
       const t = visible(h), type = typeOf(u);
       for (const [k, re] of Object.entries(CHECKS)) {
-        const m = re.exec(t);
+        let textToCheck = t;
+        if (k === 'contradiction') {
+          if (type !== 'hotel') continue;
+          const cutoff = t.search(/More rooms with a bathtub in/i);
+          textToCheck = cutoff !== -1 ? t.slice(0, cutoff) : t;
+        }
+        const m = re.exec(textToCheck);
         if (!m) continue;
         counts[k] = counts[k] || {}; counts[k][type] = (counts[k][type] || 0) + 1;
         examples[k] = examples[k] || [];
-        if (examples[k].length < 5) examples[k].push(u + ' :: ' + t.slice(Math.max(0, m.index - 80), m.index + 80).trim());
+        if (examples[k].length < 5) examples[k].push(u + ' :: ' + textToCheck.slice(Math.max(0, m.index - 80), m.index + 80).trim());
       }
     } catch (e) { problems.push('ERROR ' + u + ' ' + e.message.slice(0, 60)); }
   }
