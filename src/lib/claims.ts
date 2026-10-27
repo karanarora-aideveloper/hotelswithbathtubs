@@ -1,4 +1,7 @@
 export const CLAIM_PHRASES: string[] = [
+  'triple-verif',
+  'triple-verify',
+  'in high demand',
   'field-verified',
   'architectural metrics',
   'acoustic',
