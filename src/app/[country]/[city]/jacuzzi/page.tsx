@@ -274,18 +274,10 @@ export default async function CityJacuzziHotelsPage({
     "mainEntity": [
       {
         "@type": "Question",
-        "name": `Are the jacuzzis in ${cityName} hotel rooms completely private?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Yes. Every property featured on this page confirms that the whirlpool jacuzzi or jetted tub is located directly inside your private guest room or on your secluded suite balcony — never in a communal hotel spa or public wellness area.`
-        }
-      },
-      {
-        "@type": "Question",
         "name": `Which hotels in ${cityName} offer the best private jacuzzi in room?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Top-rated hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing includes direct room category guidance.`
+          "text": `Hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing includes direct room category guidance.`
         }
       },
       {
@@ -428,26 +420,10 @@ export default async function CityJacuzziHotelsPage({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
-                Are these jacuzzis private or shared?
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                All jacuzzis and whirlpool tubs listed on this page are strictly private and located inside the private guest room or on a secluded private balcony.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
                 How do I select the exact jacuzzi room?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 When clicking our partner links, be sure to reserve the specific suite tier (such as &quot;Whirlpool Suite&quot;, &quot;Jacuzzi Room&quot;, or &quot;Spa Villa&quot;) rather than the baseline standard room.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
-                Are couples welcomed at these jacuzzi suites?
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Yes. Accommodations on HotelsWithBathtubs welcome couples and respect complete guest privacy.
               </p>
             </div>
             <div>
