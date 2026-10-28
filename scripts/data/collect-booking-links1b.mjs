@@ -157,6 +157,12 @@ async function main() {
     console.log(`Processing slice of ${retryCandidates.length} candidate hotels.`);
   }
 
+  const reverseArg = args.includes('--reverse');
+  if (reverseArg) {
+    retryCandidates.reverse();
+    console.log(`>>> Running in REVERSE order from end of list`);
+  }
+
   // Load results tracking file
   const resultsPath = path.join(privateDir, 'links1b-retry-results.json');
   let resultsMap = {};
@@ -192,6 +198,13 @@ async function main() {
     for (let i = 0; i < retryCandidates.length; i++) {
       const hotel = retryCandidates[i];
       console.log(`\n[${i + 1}/${retryCandidates.length}] Hotel: "${hotel.name}" (${hotel.town}, ${hotel.state}) [${hotel.citySlug}] key: ${hotel.key}`);
+
+      // Check in MongoDB directly if already linked by another worker
+      const liveCand = await db.collection('hotel_candidates').findOne({ _id: hotel._id });
+      if (liveCand && liveCand.bookingLinks && liveCand.bookingLinks.length > 0) {
+        console.log(`  -> Already linked in DB with ${liveCand.bookingLinks[0].url}, skipping.`);
+        continue;
+      }
 
       if (resultsMap[hotel.key] && resultsMap[hotel.key].status !== 'stop_block') {
         const cached = resultsMap[hotel.key];

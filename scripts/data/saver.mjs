@@ -2,7 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
+let puppeteer;
+try {
+  puppeteer = (await import('puppeteer')).default;
+} catch {
+  puppeteer = (await import('puppeteer-core')).default;
+}
 import robotsParser from './vendor/robots-parser/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -65,8 +70,11 @@ export async function ensureDelay(hostname, minDelayMs = 10000) {
 
 async function getBrowser() {
   if (!activeBrowser || (typeof activeBrowser.isConnected === 'function' && !activeBrowser.isConnected())) {
+    const chromePath = process.env.CHROME_BIN || (process.platform === 'darwin'
+      ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      : '/home/arora/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome');
     activeBrowser = await puppeteer.launch({
-      executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+      executablePath: chromePath,
       headless: 'new',
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     });
