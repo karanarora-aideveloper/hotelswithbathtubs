@@ -8,29 +8,46 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const worktreeDir = path.resolve(__dirname, '../..');
 
-const BATH_FACILITY_PATTERNS = [
-  { regex: /\bspa[_\s-]?bath\b/i, canonical: 'Spa bath' },
-  { regex: /\bhot[_\s-]?tub\b/i, canonical: 'Hot tub' },
-  { regex: /\bjacuzzi\b/i, canonical: 'Jacuzzi' },
-  { regex: /\bwhirlpool\b/i, canonical: 'Whirlpool' },
-  { regex: /\bbathtub\b/i, canonical: 'Bathtub' },
-  { regex: /\bbath\b/i, canonical: 'Bath' }
+const ALLOWED_BATH_FACILITIES = [
+  { match: /^bath$/i, canonical: 'Bath' },
+  { match: /^bathtub$/i, canonical: 'Bathtub' },
+  { match: /^(?:spa\s+tub|spa\s+bath)$/i, canonical: 'Spa bath' },
+  { match: /^(?:hot\s+tub|private\s+hot\s+tub)$/i, canonical: 'Hot tub' },
+  { match: /^whirlpool$/i, canonical: 'Whirlpool' },
+  { match: /^jacuzzi$/i, canonical: 'Jacuzzi' }
 ];
+
+export function matchBathFacility(facilityTitle) {
+  if (!facilityTitle) return null;
+  const clean = facilityTitle.trim();
+  // "Bath or shower" must never count as a bath. Ignore it completely.
+  if (/^bath\s+or\s+shower$/i.test(clean) || /^shower\s+or\s+bath$/i.test(clean)) {
+    return null;
+  }
+  for (const { match, canonical } of ALLOWED_BATH_FACILITIES) {
+    if (match.test(clean)) return canonical;
+  }
+  return null;
+}
 
 export function extractBathWords(text) {
   if (!text) return [];
+  // Strip "bath or shower" / "shower or bath" completely so it never triggers a match
+  const sanitized = text.replace(/\b(?:bath\s+or\s+shower|shower\s+or\s+bath)\b/gi, ' ');
   const found = new Set();
-  for (const { regex, canonical } of BATH_FACILITY_PATTERNS) {
-    if (regex.test(text)) {
-      found.add(canonical);
-    }
-  }
+  if (/\b(?:spa\s+bath|spa\s+tub)\b/i.test(sanitized)) found.add('Spa bath');
+  if (/\b(?:private\s+)?hot\s+tub\b/i.test(sanitized)) found.add('Hot tub');
+  if (/\bjacuzzi\b/i.test(sanitized)) found.add('Jacuzzi');
+  if (/\bwhirlpool\b/i.test(sanitized)) found.add('Whirlpool');
+  if (/\bbathtub\b/i.test(sanitized)) found.add('Bathtub');
+  if (/\bbath\b/i.test(sanitized)) found.add('Bath');
   return Array.from(found);
 }
 
 export function parseBookingHtml(html, meta = {}) {
   const $ = cheerio.load(html);
 
+  const pageTitle = $('title').text().trim() || null;
   let lat = null;
   let lng = null;
   let address = null;
@@ -183,20 +200,16 @@ export function parseBookingHtml(html, meta = {}) {
         if (!roomName || seenRoomNames.has(roomName)) continue;
         seenRoomNames.add(roomName);
 
-        const textToScan = [];
-        textToScan.push(roomName);
-        if (v.description) textToScan.push(v.description);
-
+        const bathWords = new Set();
         if (Array.isArray(v.facilities)) {
           for (const fid of v.facilities) {
-            if (instances[fid]) textToScan.push(instances[fid]);
-            if (baseFacilities[fid]) textToScan.push(baseFacilities[fid]);
+            const title = instances[fid];
+            const matched = matchBathFacility(title);
+            if (matched) bathWords.add(matched);
           }
         }
 
-        const combinedText = textToScan.join(' ');
-        const words = extractBathWords(combinedText);
-        rooms.push({ name: roomName, bathWords: words });
+        rooms.push({ name: roomName, bathWords: Array.from(bathWords) });
       }
     }
   }
@@ -216,14 +229,19 @@ export function parseBookingHtml(html, meta = {}) {
       }
       if (name && !seenRoomNames.has(name) && !name.startsWith('Room type') && !name.startsWith('MoTuWe')) {
         seenRoomNames.add(name);
-        const rowText = row.text();
-        const words = extractBathWords(rowText);
-        rooms.push({ name, bathWords: words });
+        const bathWords = new Set();
+        row.find('.hprt-facilities-facility, .facility-badge, [data-name="facility"], li').each((_, facEl) => {
+          const facText = $(facEl).text().trim();
+          const matched = matchBathFacility(facText);
+          if (matched) bathWords.add(matched);
+        });
+        rooms.push({ name, bathWords: Array.from(bathWords) });
       }
     });
   }
 
   return {
+    pageTitle,
     lat: isNaN(lat) ? null : lat,
     lng: isNaN(lng) ? null : lng,
     address: address || null,
