@@ -86,7 +86,13 @@ function detectBlock(html, status, url) {
     return `HTTP ${status}`;
   }
   const lower = html.toLowerCase();
-  if (lower.includes('verify you are human') || lower.includes('unusual traffic') || lower.includes('cf-browser-verification')) {
+  if (
+    lower.includes('verify you are human') ||
+    lower.includes("verify that you're not a robot") ||
+    lower.includes('unusual traffic') ||
+    lower.includes('cf-browser-verification') ||
+    lower.includes('challenge-container')
+  ) {
     return 'Verification/Challenge text detected in page';
   }
   // Check for suspicious tiny pages
@@ -127,13 +133,14 @@ export async function savePage(site, url, filenameSlug, options = {}) {
   let finalStatus = 200;
 
   try {
-    if (site === 'booking') {
+    if (site === 'booking' || site.startsWith('booking')) {
       const browser = await getBrowser();
       const page = await browser.newPage();
       page.setDefaultNavigationTimeout(45000);
+      await page.setUserAgent(USER_AGENT);
 
       page.on('response', res => {
-        if (res.url().includes(filenameSlug) || res.url().includes('/hotel/')) {
+        if (res.url().includes(filenameSlug) || res.url().includes('/hotel/') || res.url().includes('searchresults')) {
           finalStatus = res.status();
         }
       });
@@ -145,11 +152,12 @@ export async function savePage(site, url, filenameSlug, options = {}) {
       }
 
       // Check if redirect / challenge is running
-      const currentUrl = page.url();
-      if (currentUrl.includes('chal_t') || finalStatus === 202) {
+      let currentUrl = page.url();
+      let currentContent = await page.content().catch(() => '');
+      if (currentUrl.includes('chal_t') || finalStatus === 202 || currentContent.includes('challenge-container') || currentContent.includes('challenge.js')) {
         console.log(`[saver] Challenge redirect detected, waiting for final page load...`);
         await page.waitForNavigation({ waitUntil: 'load', timeout: 20000 }).catch(() => {});
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 4000));
       }
 
       html = await page.content();
