@@ -30,8 +30,18 @@ if (!fs.existsSync(privateDir)) {
 }
 
 // Load env
-const envPath = path.resolve(worktreeDir, '../hotelswithbathtubs/.env.local');
-dotenv.config({ path: envPath, quiet: true });
+const envCandidates = [
+  path.resolve(worktreeDir, '.env.local'),
+  path.resolve(worktreeDir, '../hotelswithbathtubs/.env.local'),
+  path.resolve(process.cwd(), '.env.local'),
+  path.resolve(process.cwd(), '../hotelswithbathtubs/.env.local')
+];
+for (const p of envCandidates) {
+  if (fs.existsSync(p)) {
+    dotenv.config({ path: p, quiet: true });
+    break;
+  }
+}
 
 function getMongoUri() {
   if (process.env.MONGODB_URI) return process.env.MONGODB_URI;
@@ -152,15 +162,15 @@ async function main() {
 
   console.log(`Found ${retryCandidates.length} candidate hotels needing retry.`);
 
-  if (startIdx > 0 || limit) {
-    retryCandidates = retryCandidates.slice(startIdx, limit ? startIdx + limit : undefined);
-    console.log(`Processing slice of ${retryCandidates.length} candidate hotels.`);
-  }
-
   const reverseArg = args.includes('--reverse');
   if (reverseArg) {
     retryCandidates.reverse();
     console.log(`>>> Running in REVERSE order from end of list`);
+  }
+
+  if (startIdx > 0 || limit) {
+    retryCandidates = retryCandidates.slice(startIdx, limit ? startIdx + limit : undefined);
+    console.log(`Processing slice of ${retryCandidates.length} candidate hotels.`);
   }
 
   // Load results tracking file
