@@ -104,7 +104,6 @@ for (const raw of rawUsHotels) {
 
     if (newRoom || newTub) {
       if (newRoom !== existingRoom || newTub !== existingTub) {
-        // Check if not already in variants
         const isAlreadyVariant = existing.variants.some(v => 
           (v.verifiedRoomName || '').trim() === newRoom && 
           (v.tubPlacement || '').trim() === newTub
@@ -121,16 +120,13 @@ for (const raw of rawUsHotels) {
       }
     }
 
-    // If existing had empty room name but new one has room name, upgrade primary
     if (!existingRoom && newRoom) {
       existing.verifiedRoomName = cleanRecord.verifiedRoomName;
       existing.roomMeta = cleanRecord.roomMeta;
     }
-    // If existing had no geo but new one has geo, upgrade
     if (!existing.geo && cleanRecord.geo) {
       existing.geo = cleanRecord.geo;
     }
-    // If existing had no street but new one has street, upgrade
     if (!existing.address.street && cleanRecord.address.street) {
       existing.address.street = cleanRecord.address.street;
       existing.address.formatted = cleanRecord.address.formatted;
@@ -141,7 +137,206 @@ for (const raw of rawUsHotels) {
 const uniqueUsHotels = Array.from(dedupMap.values());
 console.log(`Deduplicated: ${uniqueUsHotels.length} unique US hotels (merged ${duplicatesCount} duplicates)`);
 
-// T2. Match to our hotels
+// B1: Extract Town and State from address facts, drop non-US records
+const US_STATES = new Set([
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
+  'DC'
+]);
+
+const US_STATE_NAMES = new Set([
+  'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut',
+  'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa',
+  'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan',
+  'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire',
+  'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio',
+  'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota',
+  'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia',
+  'wisconsin', 'wyoming', 'district of columbia'
+]);
+
+const CA_PROVINCES = new Set(['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']);
+const UK_POSTCODE_REGEX = /\b([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2})\b/i;
+
+function extractTownAndState(h) {
+  const fmt = (h.address?.formatted || '').trim();
+  let state = null;
+  let town = '';
+
+  if (fmt) {
+    const parts = fmt.split(',').map(s => s.trim()).filter(Boolean);
+    if (parts.length >= 2) {
+      const last = parts[parts.length - 1];
+      const m1 = last.match(/\b([A-Z]{2})\b/);
+      if (m1 && US_STATES.has(m1[1])) {
+        state = m1[1];
+        let cand = parts[parts.length - 2];
+        if (cand.toUpperCase() === state && parts.length >= 3) {
+          cand = parts[parts.length - 3];
+        }
+        if (!US_STATE_NAMES.has(cand.toLowerCase()) || (cand.toLowerCase() === 'washington' && state === 'DC') || (cand.toLowerCase() === 'new york' && state === 'NY')) {
+          town = cand;
+        } else {
+          const loc = (h.address?.locality || '').trim();
+          if (loc && !US_STATE_NAMES.has(loc.toLowerCase())) {
+            town = loc;
+          } else if (state === 'MI' && cand.toLowerCase() === 'wyoming') {
+            town = 'Grand Rapids';
+          } else if (state === 'PA' && cand.toLowerCase() === 'washington') {
+            town = 'Pittsburgh';
+          } else {
+            town = cand;
+          }
+        }
+      } else if (parts.length >= 3) {
+        const secondLast = parts[parts.length - 2];
+        const m2 = secondLast.match(/\b([A-Z]{2})\b/);
+        if (m2 && US_STATES.has(m2[1])) {
+          state = m2[1];
+          let cand = parts[parts.length - 3];
+          if (cand.toUpperCase() === state && parts.length >= 4) {
+            cand = parts[parts.length - 4];
+          }
+          if (!US_STATE_NAMES.has(cand.toLowerCase()) || (cand.toLowerCase() === 'washington' && state === 'DC') || (cand.toLowerCase() === 'new york' && state === 'NY')) {
+            town = cand;
+          } else {
+            const loc = (h.address?.locality || '').trim();
+            if (loc && !US_STATE_NAMES.has(loc.toLowerCase())) {
+              town = loc;
+            } else if (state === 'MI' && cand.toLowerCase() === 'wyoming') {
+              town = 'Grand Rapids';
+            } else if (state === 'PA' && cand.toLowerCase() === 'washington') {
+              town = 'Pittsburgh';
+            } else {
+              town = cand;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (!state) {
+    const reg = (h.address?.region || '').trim().toUpperCase();
+    if (US_STATES.has(reg)) state = reg;
+  }
+
+  if (!town) {
+    const loc = (h.address?.locality || '').trim();
+    if (loc && !US_STATE_NAMES.has(loc.toLowerCase())) {
+      town = loc;
+    }
+  }
+
+  return { town: town.trim(), state };
+}
+
+function getNonUsDropReason(h) {
+  const fmt = (h.address?.formatted || '').trim();
+  const reg = (h.address?.region || '').trim().toUpperCase();
+  const dest = (h.destinationSlug || '').toLowerCase();
+  
+  if (UK_POSTCODE_REGEX.test(fmt) || dest.includes('uk') || dest.includes('scotland') || dest.includes('windermere') || dest.includes('highland') || dest.includes('dumfries') || dest.includes('perth') || dest.includes('stirling') || dest.includes('penrith') || dest.includes('ulverston') || dest.includes('cumbria') || dest.includes('leeds') || dest.includes('liverpool') || dest.includes('manchester') || dest.includes('blackpool') || dest.includes('yorkshire') || dest.includes('peak-district')) {
+    return 'UK postcode or region';
+  }
+  if (CA_PROVINCES.has(reg) || dest.includes('canada') || dest.includes('british-columbia') || dest.includes('ontario') || dest.includes('quebec') || dest.includes('alberta') || dest.includes('nova-scotia') || dest.includes('new-brunswick') || dest.includes('manitoba')) {
+    return 'Canadian province';
+  }
+  if (dest.includes('es-es') || dest.includes('spain') || dest.includes('madrid') || dest.includes('barcelona') || dest.includes('mallorca') || dest.includes('tenerife') || dest.includes('ibiza') || dest.includes('valencia') || dest.includes('sevilla')) {
+    return 'Spain destination or province';
+  }
+  return 'Unknown / missing US state code';
+}
+
+const keptUsHotels = [];
+const nonUsRecords = [];
+
+for (const h of uniqueUsHotels) {
+  const { town, state } = extractTownAndState(h);
+  if (!state) {
+    nonUsRecords.push({
+      name: h.name,
+      reason: getNonUsDropReason(h),
+      address: {
+        street: h.address.street,
+        locality: h.address.locality,
+        region: h.address.region,
+        country: h.address.country,
+        formatted: h.address.formatted
+      },
+      destinationSlug: h.destinationSlug,
+      sourceUrl: h.sourceUrl
+    });
+  } else {
+    keptUsHotels.push({
+      ...h,
+      town,
+      state
+    });
+  }
+}
+
+console.log(`US Records Filtered: Kept=${keptUsHotels.length}, Dropped Non-US=${nonUsRecords.length} (Sum: ${keptUsHotels.length + nonUsRecords.length})`);
+
+// B2. City Aliases and City Center Coordinates
+export const CITY_ALIASES = [
+  { town: 'Washington', state: 'DC', citySlug: 'washington-dc' },
+  { town: 'Washington DC', state: 'DC', citySlug: 'washington-dc' },
+  { town: 'Las Vegas', state: 'NV', citySlug: 'las-vegas' },
+  { town: 'Paradise', state: 'NV', citySlug: 'las-vegas' },
+  { town: 'Kihei', state: 'HI', citySlug: 'maui' },
+  { town: 'Wailea', state: 'HI', citySlug: 'maui' },
+  { town: 'Lahaina', state: 'HI', citySlug: 'maui' },
+  { town: 'Kaanapali', state: 'HI', citySlug: 'maui' },
+  { town: 'Maui', state: 'HI', citySlug: 'maui' },
+  { town: 'New York', state: 'NY', citySlug: 'new-york' },
+  { town: 'New York City', state: 'NY', citySlug: 'new-york' }
+];
+
+export const OUR_CITY_SPECS = {
+  'asheville': { city: 'Asheville', state: 'NC', lat: 35.5951, lng: -82.5515 },
+  'aspen': { city: 'Aspen', state: 'CO', lat: 39.1945, lng: -106.8579 },
+  'atlanta': { city: 'Atlanta', state: 'GA', lat: 33.7490, lng: -84.3880 },
+  'austin': { city: 'Austin', state: 'TX', lat: 30.2667, lng: -97.7408 },
+  'baltimore': { city: 'Baltimore', state: 'MD', lat: 39.2885, lng: -76.6062 },
+  'boston': { city: 'Boston', state: 'MA', lat: 42.3601, lng: -71.0589 },
+  'charleston': { city: 'Charleston', state: 'SC', lat: 32.7765, lng: -79.9311 },
+  'chicago': { city: 'Chicago', state: 'IL', lat: 41.8781, lng: -87.6298 },
+  'dallas': { city: 'Dallas', state: 'TX', lat: 32.7767, lng: -96.7970 },
+  'denver': { city: 'Denver', state: 'CO', lat: 39.7392, lng: -104.9903 },
+  'gatlinburg': { city: 'Gatlinburg', state: 'TN', lat: 35.7175, lng: -83.5062 },
+  'honolulu': { city: 'Honolulu', state: 'HI', lat: 21.3069, lng: -157.8583 },
+  'houston': { city: 'Houston', state: 'TX', lat: 29.7604, lng: -95.3698 },
+  'kansas-city': { city: 'Kansas City', state: 'MO', lat: 39.0997, lng: -94.5786 },
+  'key-west': { city: 'Key West', state: 'FL', lat: 24.5584, lng: -81.7833 },
+  'lake-tahoe': { city: 'Lake Tahoe', state: 'CA', lat: 39.0968, lng: -120.0324 },
+  'las-vegas': { city: 'Las Vegas', state: 'NV', lat: 36.1699, lng: -115.1398 },
+  'los-angeles': { city: 'Los Angeles', state: 'CA', lat: 34.0522, lng: -118.2437 },
+  'maui': { city: 'Maui', state: 'HI', lat: 20.7984, lng: -156.3319 },
+  'miami': { city: 'Miami', state: 'FL', lat: 25.7617, lng: -80.1918 },
+  'napa': { city: 'Napa', state: 'CA', lat: 38.3055, lng: -122.2901 },
+  'nashville': { city: 'Nashville', state: 'TN', lat: 36.1627, lng: -86.7816 },
+  'new-orleans': { city: 'New Orleans', state: 'LA', lat: 29.9511, lng: -90.0715 },
+  'new-york': { city: 'New York', state: 'NY', lat: 40.7128, lng: -74.0060 },
+  'orlando': { city: 'Orlando', state: 'FL', lat: 28.5383, lng: -81.3792 },
+  'palm-springs': { city: 'Palm Springs', state: 'CA', lat: 33.8303, lng: -116.5453 },
+  'philadelphia': { city: 'Philadelphia', state: 'PA', lat: 39.9526, lng: -75.1652 },
+  'phoenix': { city: 'Phoenix', state: 'AZ', lat: 33.4484, lng: -112.0740 },
+  'poconos': { city: 'Poconos', state: 'PA', lat: 41.1343, lng: -75.3001 },
+  'portland': { city: 'Portland', state: 'OR', lat: 45.5152, lng: -122.6784 },
+  'san-antonio': { city: 'San Antonio', state: 'TX', lat: 29.4241, lng: -98.4936 },
+  'san-diego': { city: 'San Diego', state: 'CA', lat: 32.7157, lng: -117.1611 },
+  'san-francisco': { city: 'San Francisco', state: 'CA', lat: 37.7749, lng: -122.4194 },
+  'savannah': { city: 'Savannah', state: 'GA', lat: 32.0809, lng: -81.0912 },
+  'scottsdale': { city: 'Scottsdale', state: 'AZ', lat: 33.4942, lng: -111.9261 },
+  'seattle': { city: 'Seattle', state: 'WA', lat: 47.6062, lng: -122.3321 },
+  'sedona': { city: 'Sedona', state: 'AZ', lat: 34.8697, lng: -111.7610 },
+  'washington-dc': { city: 'Washington DC', state: 'DC', lat: 38.9072, lng: -77.0369 }
+};
+
 function haversineMeters(lat1, lon1, lat2, lon2) {
   const R = 6371000;
   const toRad = Math.PI / 180;
@@ -181,24 +376,59 @@ function isRealGeo(lat, lng) {
   return true;
 }
 
-function matchCity(thLoc, thReg, ourCity) {
-  const normTh = normCity(thLoc);
-  const normOur = normCity(ourCity);
-  if (normTh === normOur) return true;
-  if ((normTh === 'washington' || normTh === 'washingtondc') && (thReg || '').toLowerCase() === 'dc' && normOur === 'washingtondc') return true;
-  if ((normTh === 'newyork' || normTh === 'nyc') && normOur === 'newyork') return true;
+function matchCity(thLoc, thTown, thState, ourCity) {
+  for (const a of CITY_ALIASES) {
+    if (a.town.toLowerCase() === thTown.toLowerCase() && (!a.state || a.state === thState)) {
+      if (a.citySlug.replace(/-/g, '') === normCity(ourCity)) return true;
+    }
+  }
+  if (normCity(thTown) === normCity(ourCity)) return true;
+  if (normCity(thLoc) === normCity(ourCity)) return true;
+  if ((normCity(thLoc) === 'washington' || normCity(thLoc) === 'washingtondc') && (thState || '').toLowerCase() === 'dc' && normCity(ourCity) === 'washingtondc') return true;
+  if ((normCity(thLoc) === 'newyork' || normCity(thLoc) === 'nyc') && normCity(ourCity) === 'newyork') return true;
   return false;
 }
 
+function resolveCityAndNearCity(town, state, geo) {
+  for (const a of CITY_ALIASES) {
+    if (a.town.toLowerCase() === town.toLowerCase() && (!a.state || a.state === state)) {
+      return { citySlug: a.citySlug, nearCity: null };
+    }
+  }
+
+  for (const [slug, spec] of Object.entries(OUR_CITY_SPECS)) {
+    if (spec.city.toLowerCase() === town.toLowerCase() && (spec.state === state || (slug === 'lake-tahoe' && (state === 'CA' || state === 'NV')))) {
+      return { citySlug: slug, nearCity: null };
+    }
+  }
+
+  if (geo && geo.lat != null && geo.lng != null && isRealGeo(geo.lat, geo.lng)) {
+    let closestSlug = null;
+    let closestDist = Infinity;
+    for (const [slug, spec] of Object.entries(OUR_CITY_SPECS)) {
+      const d = haversineMeters(geo.lat, geo.lng, spec.lat, spec.lng);
+      if (d <= 40000 && d < closestDist) {
+        closestDist = d;
+        closestSlug = slug;
+      }
+    }
+    if (closestSlug) {
+      return { citySlug: null, nearCity: closestSlug };
+    }
+  }
+
+  return { citySlug: null, nearCity: null };
+}
+
+// T2. Match against our hotels
 const highMatches = [];
 const mediumMatches = [];
 const newHotels = [];
 
-for (const th of uniqueUsHotels) {
+for (const th of keptUsHotels) {
   const thName = cleanHotelName(th.name);
-  const thLoc = th.address?.locality || '';
-  const thReg = th.address?.region || '';
   const thGeo = isRealGeo(th.geo?.lat, th.geo?.lng) ? th.geo : null;
+  const thLoc = th.address?.locality || '';
 
   let bestMatch = null;
   let matchLevel = 'none';
@@ -209,21 +439,19 @@ for (const th of uniqueUsHotels) {
 
     const bothGeo = !!(thGeo && ourGeo);
     const dist = bothGeo ? haversineMeters(thGeo.lat, thGeo.lng, ourGeo.lat, ourGeo.lng) : null;
-    const sameCity = matchCity(thLoc, thReg, our.city);
+    const sameCity = matchCity(thLoc, th.town, th.state, our.city);
 
     // Rule 1: High
-    // same normalised name and the same city, and geo within 300 m when both have real coordinates
     const sameName = thName.length > 0 && thName === ourName;
     if (sameName && sameCity) {
       if (!bothGeo || dist <= 300) {
         matchLevel = 'high';
         bestMatch = { th, our, dist, reason: 'same_name_city_geo_300m' };
-        break; // High match is strongest
+        break;
       }
     }
 
     // Rule 2: Medium (if not already high)
-    // same city and one name contains the other, or geo within 150 m with a different name
     if (matchLevel !== 'high') {
       const nameContains = sameCity && thName.length >= 4 && ourName.length >= 4 && (thName.includes(ourName) || ourName.includes(thName));
       const geoCloseDiffName = bothGeo && dist <= 150 && thName !== ourName;
@@ -250,7 +478,7 @@ for (const th of uniqueUsHotels) {
 
 console.log(`Matching results: High=${highMatches.length}, Medium=${mediumMatches.length}, New=${newHotels.length} (Sum: ${highMatches.length + mediumMatches.length + newHotels.length})`);
 
-// T3. Fill empty facts on matched hotels (proposal only) & conflicts
+// T3. Fill empty facts on matched hotels & conflicts
 const proposedFills = [];
 const conflicts = [];
 const fillsByField = {
@@ -265,7 +493,7 @@ for (const match of highMatches) {
   const th = match.th;
   const fills = {};
   
-  // 1. Address fill: propose only if ours is empty or a placeholder (e.g. no street number or 'Prime ... Enclave')
+  // 1. Address fill: only if ours is empty or a placeholder
   const ourAddr = (our.streetAddress || '').trim();
   const isAddrPlaceholder = !ourAddr || !/\d/.test(ourAddr) || /Enclave/i.test(ourAddr);
   if (isAddrPlaceholder && th.address.street && /\d/.test(th.address.street)) {
@@ -273,18 +501,18 @@ for (const match of highMatches) {
     fillsByField.address++;
   }
 
-  // 2. Coordinates fill: propose only if ours is missing or placeholder
+  // 2. Coordinates fill: only if ours is missing or placeholder
   const hasRealOurGeo = isRealGeo(our.latitude, our.longitude);
   if (!hasRealOurGeo && th.geo && isRealGeo(th.geo.lat, th.geo.lng)) {
     fills.coordinates = { lat: th.geo.lat, lng: th.geo.lng };
     fillsByField.coordinates++;
   }
 
-  // 3. Area or neighbourhood fill: propose only if ours is empty or placeholder
+  // 3. Area or neighbourhood fill: only if ours is empty or placeholder
   const ourNeighbourhood = (our.neighborhood || '').trim();
   const isNeighbourhoodPlaceholder = !ourNeighbourhood || /Prime .* Enclave/i.test(ourNeighbourhood);
-  if (isNeighbourhoodPlaceholder && th.address.locality && th.address.locality !== our.city) {
-    fills.neighborhood = th.address.locality;
+  if (isNeighbourhoodPlaceholder && th.town && th.town !== our.city) {
+    fills.neighborhood = th.town;
     fillsByField.area_or_neighbourhood++;
   }
 
@@ -311,7 +539,7 @@ for (const match of highMatches) {
     });
   }
 
-  // Conflicts check: when our room name or tub type disagrees with theirs
+  // Check conflicts
   const ourTub = (our.tubType || '').toLowerCase();
   const thTubPlacement = (th.tubPlacement || '').toLowerCase();
   const thRoom = (th.verifiedRoomName || '').trim();
@@ -323,7 +551,6 @@ for (const match of highMatches) {
     roomConflict = true;
   }
 
-  // Check tub type disagreement (e.g. jacuzzi vs soaking tub)
   if (ourTub && thTubPlacement) {
     const ourIsJacuzzi = /jacuzzi|whirlpool|jetted|hot tub/i.test(ourTub);
     const thIsJacuzzi = /jacuzzi|whirlpool|jetted|hot tub/i.test(th.tubPlacementLabel || '') || /jacuzzi|whirlpool|jetted|hot tub/i.test(thRoom);
@@ -355,84 +582,43 @@ for (const match of highMatches) {
 console.log(`Proposed fills count: ${proposedFills.length}`);
 console.log(`Conflicts count: ${conflicts.length}`);
 
-// T4. Propose new hotels & Map towns
-const ourCitySlugs = new Set([
-  'asheville', 'aspen', 'atlanta', 'austin', 'baltimore', 'boston', 'charleston', 'chicago',
-  'dallas', 'denver', 'gatlinburg', 'honolulu', 'houston', 'kansas-city', 'key-west',
-  'lake-tahoe', 'las-vegas', 'los-angeles', 'maui', 'miami', 'napa', 'nashville',
-  'new-orleans', 'new-york', 'orlando', 'palm-springs', 'philadelphia', 'phoenix',
-  'poconos', 'portland', 'san-antonio', 'san-diego', 'san-francisco', 'savannah',
-  'scottsdale', 'seattle', 'sedona', 'washington-dc'
-]);
-
-const US_STATES = {
-  'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
-  'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA',
-  'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
-  'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
-  'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
-  'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new-hampshire': 'NH', 'new-jersey': 'NJ',
-  'new-mexico': 'NM', 'new-york': 'NY', 'north-carolina': 'NC', 'north-dakota': 'ND', 'ohio': 'OH',
-  'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode-island': 'RI', 'south-carolina': 'SC',
-  'south-dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
-  'virginia': 'VA', 'washington': 'WA', 'west-virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY',
-  'district-of-columbia': 'DC'
-};
-const STATE_CODES = new Set(Object.values(US_STATES));
-
-function slugify(s) {
-  return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
-
-function resolveState(h) {
-  let r = (h.address?.region || '').toUpperCase().trim();
-  if (r && STATE_CODES.has(r)) return r;
-  if (h.address?.formatted) {
-    const m = h.address.formatted.match(/,\s*([A-Z]{2})(?:\s*,\s*\d{5}|\s+\d{5}|$)/);
-    if (m && STATE_CODES.has(m[1])) return m[1];
-  }
-  if (h.destinationSlug) {
-    for (const [sName, sCode] of Object.entries(US_STATES)) {
-      if (h.destinationSlug.toLowerCase().includes(sName)) {
-        return sCode;
-      }
-    }
-  }
-  return r || '';
-}
-
+// T4 & B2. Propose new hotels & Map towns
 const proposedNewHotelRecords = [];
 const newTownsMap = new Map();
+const cityAttachedCounts = {};
 let newHotelsAttachedToExisting = 0;
 let newHotelsInNewTowns = 0;
+let newHotelsInSuburbs = 0;
 let newHotelsLackingRoomName = 0;
 let newHotelsLackingCoordinates = 0;
 
 for (const th of newHotels) {
-  const town = th.address?.locality || '';
-  const state = resolveState(th);
-  let townSlug = slugify(town);
-  if (townSlug === 'washington' && state === 'DC') townSlug = 'washington-dc';
-
-  const matchesExistingCity = ourCitySlugs.has(townSlug);
-  if (matchesExistingCity) {
+  const { citySlug, nearCity } = resolveCityAndNearCity(th.town, th.state, th.geo);
+  
+  if (citySlug) {
     newHotelsAttachedToExisting++;
+    cityAttachedCounts[citySlug] = (cityAttachedCounts[citySlug] || 0) + 1;
   } else {
     newHotelsInNewTowns++;
-    const townKey = `${town}::${state}`;
+    if (nearCity) {
+      newHotelsInSuburbs++;
+    }
+    const townKey = `${th.town}::${th.state}`;
     if (!newTownsMap.has(townKey)) {
       newTownsMap.set(townKey, {
-        town,
-        state,
+        town: th.town,
+        state: th.state,
         hotelsCount: 0,
         withRoomNameCount: 0,
-        withRealGeoCount: 0
+        withRealGeoCount: 0,
+        nearCities: new Set()
       });
     }
     const tEntry = newTownsMap.get(townKey);
     tEntry.hotelsCount++;
     if ((th.verifiedRoomName || '').trim()) tEntry.withRoomNameCount++;
     if (isRealGeo(th.geo?.lat, th.geo?.lng)) tEntry.withRealGeoCount++;
+    if (nearCity) tEntry.nearCities.add(nearCity);
   }
 
   const hasRoom = !!(th.verifiedRoomName && th.verifiedRoomName.trim());
@@ -440,15 +626,14 @@ for (const th of newHotels) {
   if (!hasRoom) newHotelsLackingRoomName++;
   if (!hasGeo) newHotelsLackingCoordinates++;
 
-  // Record strictly conforming to Rule 1 & T4
   const record = {
     name: th.name,
     brand: th.brand || null,
     stars: th.stars || null,
     address: {
       street: th.address?.street || '',
-      locality: th.address?.locality || '',
-      region: state || th.address?.region || '',
+      locality: th.town || th.address?.locality || '',
+      region: th.state || th.address?.region || '',
       country: 'US',
       formatted: th.address?.formatted || ''
     },
@@ -465,27 +650,44 @@ for (const th of newHotels) {
     },
     roomNameStatus: 'unconfirmed',
     bookingLinks: [],
-    citySlug: matchesExistingCity ? townSlug : null,
+    town: th.town,
+    state: th.state,
+    citySlug: citySlug || null,
+    nearCity: nearCity || null,
     variants: th.variants && th.variants.length > 0 ? th.variants : undefined
   };
 
   proposedNewHotelRecords.push(record);
 }
 
-// T5. New towns list
-const newTownsList = Array.from(newTownsMap.values()).map(t => ({
-  ...t,
-  isCandidate: t.hotelsCount >= 5
-})).sort((a, b) => b.hotelsCount - a.hotelsCount);
+// B3. New towns list & City-page candidates
+const newTownsList = Array.from(newTownsMap.values()).map(t => {
+  const isCandidate = t.hotelsCount >= 5 && t.withRoomNameCount >= 3;
+  const nearestCity = t.nearCities.size > 0 ? Array.from(t.nearCities).join(';') : '';
+  return {
+    town: t.town,
+    state: t.state,
+    hotelsCount: t.hotelsCount,
+    withRoomNameCount: t.withRoomNameCount,
+    withRealGeoCount: t.withRealGeoCount,
+    nearestCity,
+    isCandidate
+  };
+}).sort((a, b) => b.hotelsCount - a.hotelsCount);
 
-const townsWith5PlusHotels = newTownsList.filter(t => t.isCandidate);
-console.log(`New towns count: ${newTownsList.length} (5+ hotels candidates: ${townsWith5PlusHotels.length})`);
-console.log(`New hotels lacking room name: ${newHotelsLackingRoomName}, lacking coordinates: ${newHotelsLackingCoordinates}`);
+const candidateTowns = newTownsList.filter(t => t.isCandidate);
+console.log(`New towns count: ${newTownsList.length} (Candidates with 5+ hotels AND 3+ room names: ${candidateTowns.length})`);
+console.log(`New hotels attached to existing cities: ${newHotelsAttachedToExisting}`);
+console.log(`New hotels in suburbs (nearCity set): ${newHotelsInSuburbs}`);
 
 // Write JSON files to data-collect/private/
+fs.writeFileSync(path.join(PRIVATE_DIR, 'non-us-records.json'), JSON.stringify(nonUsRecords, null, 2));
+
 fs.writeFileSync(path.join(PRIVATE_DIR, 'us-matches.json'), JSON.stringify(highMatches.map(m => ({
   thHotel: {
     name: m.th.name,
+    town: m.th.town,
+    state: m.th.state,
     address: m.th.address,
     geo: m.th.geo,
     verifiedRoomName: m.th.verifiedRoomName,
@@ -510,6 +712,8 @@ fs.writeFileSync(path.join(PRIVATE_DIR, 'us-matches.json'), JSON.stringify(highM
 fs.writeFileSync(path.join(PRIVATE_DIR, 'us-medium-review.json'), JSON.stringify(mediumMatches.map(m => ({
   thHotel: {
     name: m.th.name,
+    town: m.th.town,
+    state: m.th.state,
     address: m.th.address,
     geo: m.th.geo,
     verifiedRoomName: m.th.verifiedRoomName,
@@ -534,29 +738,57 @@ fs.writeFileSync(path.join(PRIVATE_DIR, 'us-conflicts.json'), JSON.stringify(con
 fs.writeFileSync(path.join(PRIVATE_DIR, 'us-new-hotels.json'), JSON.stringify(proposedNewHotelRecords, null, 2));
 
 // Write us-new-towns.csv
-const csvHeader = 'town,state,hotelsCount,withRoomNameCount,withRealGeoCount,isCandidate\n';
+const csvHeader = 'town,state,hotelsCount,withRoomNameCount,withRealGeoCount,nearestCity,isCandidate\n';
 const csvRows = newTownsList.map(t => 
-  `"${t.town.replace(/"/g, '""')}","${t.state}",${t.hotelsCount},${t.withRoomNameCount},${t.withRealGeoCount},${t.isCandidate}`
+  `"${t.town.replace(/"/g, '""')}","${t.state}",${t.hotelsCount},${t.withRoomNameCount},${t.withRealGeoCount},"${t.nearestCity}",${t.isCandidate}`
 ).join('\n');
 fs.writeFileSync(path.join(PRIVATE_DIR, 'us-new-towns.csv'), csvHeader + csvRows);
 
-// Write sample-20.md
-// 10 new hotels, 5 matched hotels with proposed fills, 5 conflicts
-const sampleNew = proposedNewHotelRecords.slice(0, 10);
+// B3. Rebuild sample-20.md
+// Requirements: 10 new hotels from 10 different towns, at least 3 suburbs with nearCity; 5 fills; 5 conflicts.
+const sampleNewHotels = [];
+const seenSampleTowns = new Set();
+let suburbSampleCount = 0;
+
+// First select 3+ suburb hotels from distinct towns
+for (const h of proposedNewHotelRecords) {
+  if (h.nearCity && !seenSampleTowns.has(h.town)) {
+    sampleNewHotels.push(h);
+    seenSampleTowns.add(h.town);
+    suburbSampleCount++;
+    if (suburbSampleCount >= 4) break;
+  }
+}
+
+// Then fill remaining up to 10 from distinct non-suburb towns
+for (const h of proposedNewHotelRecords) {
+  if (sampleNewHotels.length >= 10) break;
+  if (!h.nearCity && !seenSampleTowns.has(h.town)) {
+    sampleNewHotels.push(h);
+    seenSampleTowns.add(h.town);
+  }
+}
+
 const sampleFills = proposedFills.slice(0, 5);
 const sampleConflicts = conflicts.slice(0, 5);
 
 let sampleMd = '# US Hotel Import Sample (20 Hotels)\n\n';
 sampleMd += 'This sample provides a representative cross-section for owner review before database integration.\n\n';
-sampleMd += '| Category | Hotel | Town | Room Name (Theirs) | Tub Placement | Address | What We\'d Change |\n';
-sampleMd += '|---|---|---|---|---|---|---|\n';
+sampleMd += '| Category | Hotel | Town | Near City | Room Name (Theirs) | Tub Placement | Address | What We\'d Change |\n';
+sampleMd += '|---|---|---|---|---|---|---|---|\n';
 
-for (const h of sampleNew) {
-  const townStr = `${h.address.locality || ''}, ${h.address.region || ''}`.trim().replace(/^,\s*|,\s*$/g, '');
+for (const h of sampleNewHotels) {
+  const townStr = `${h.town}, ${h.state}`.trim();
+  const nearStr = h.nearCity ? `\`${h.nearCity}\`` : '*(none)*';
   const room = h.verifiedRoomName || '*(none)*';
   const tub = h.tubPlacementLabel || h.tubPlacement || '*(unspecified)*';
   const addr = h.address.street || h.address.formatted || '*(no street)*';
-  sampleMd += `| **New Hotel** | ${h.name} | ${townStr} | ${room} | ${tub} | ${addr} | Add as new unconfirmed property; assign town ${townStr}; links to be added later |\n`;
+  const changeDesc = h.nearCity 
+    ? `Add as new unconfirmed property in suburb ${townStr}; attach nearCity: ${h.nearCity}; links to be added later`
+    : (h.citySlug 
+        ? `Add as new unconfirmed property; attach to city page ${h.citySlug}; links to be added later`
+        : `Add as new unconfirmed property in town ${townStr}; links to be added later`);
+  sampleMd += `| **New Hotel** | ${h.name} | ${townStr} | ${nearStr} | ${room} | ${tub} | ${addr} | ${changeDesc} |\n`;
 }
 
 for (const f of sampleFills) {
@@ -570,7 +802,7 @@ for (const f of sampleFills) {
     if (k === 'coordinates') return `coordinates (${v.lat.toFixed(4)}, ${v.lng.toFixed(4)})`;
     return `${k}: "${v}"`;
   }).join('; ');
-  sampleMd += `| **Proposed Fill** | ${f.hotelName} | ${townStr} | ${room} | ${tub} | ${addr} | Fill placeholder fields: ${changes} |\n`;
+  sampleMd += `| **Proposed Fill** | ${f.hotelName} | ${townStr} | *(n/a)* | ${room} | ${tub} | ${addr} | Fill placeholder fields: ${changes} |\n`;
 }
 
 for (const c of sampleConflicts) {
@@ -581,19 +813,19 @@ for (const c of sampleConflicts) {
   const tub = c.tubHotelsData.tubPlacementLabel || c.tubHotelsData.tubPlacement || '*(unspecified)*';
   const addr = th?.address?.street || th?.address?.formatted || '*(no street)*';
   const what = `Conflict: our room is "${c.ourData.roomType || ''}" (${c.ourData.tubType || ''}), theirs is "${room}" (${tub}). Keep our data; flag for source check.`;
-  sampleMd += `| **Conflict** | ${c.hotelName} | ${townStr} | ${room} | ${tub} | ${addr} | ${what} |\n`;
+  sampleMd += `| **Conflict** | ${c.hotelName} | ${townStr} | *(n/a)* | ${room} | ${tub} | ${addr} | ${what} |\n`;
 }
 
 fs.writeFileSync(path.join(PRIVATE_DIR, 'sample-20.md'), sampleMd);
 console.log('Private files written to data-collect/private/');
 
-// Write data-collect/import1-report.md (committed; counts only, no hotel data!)
+// Write data-collect/import1-report.md (committed; counts only, no hotel data except the 20 conflicts table)
 const top30Towns = newTownsList.slice(0, 30);
 
-const reportMd = `# US Hotel Import Preparation Report (IMPORT1-PREP)
+const reportMd = `# US Hotel Import Preparation Report (IMPORT1-PREP-B)
 
 **Date:** 2026-10-28  
-**Scope:** United States hotel facts preparation (zero database writes, local analysis only).
+**Scope:** United States hotel facts preparation — refined town placement, suburb detection, and full conflict reporting (zero database writes, local analysis only).
 
 ---
 
@@ -610,28 +842,45 @@ Raw records in source dataset (\`all-extracted-hotels.json\`): **${rawTubHotels.
 
 ---
 
-## 2. Deduplication & Matching Breakdown
+## 2. Deduplication & State Code Filtering (Task B1)
 
 Following the de-duplication rules (normalised name + normalised street / geo rounded to 4 decimals), the US inventory resolves to:
 
-- **Unique US Hotels:** **${uniqueUsHotels.length}**
+- **Total Unique US Input Records:** **${uniqueUsHotels.length}**
 - **Duplicate Records Merged:** **${duplicatesCount}**
 - **Hotels with Differing Variants Preserved:** **${uniqueUsHotels.filter(h => h.variants && h.variants.length > 0).length}**
 
-### Matching Against Existing 562 US Hotels
+### Non-US Records Dropped to \`data-collect/private/non-us-records.json\`
 
-The ${uniqueUsHotels.length} unique US hotels classify as:
+- **Valid US Records Kept:** **${keptUsHotels.length}**
+- **Non-US Records Dropped:** **${nonUsRecords.length}**
+- **Sum Verification:** **${keptUsHotels.length} + ${nonUsRecords.length} = ${keptUsHotels.length + nonUsRecords.length}** (equals ${uniqueUsHotels.length})
+
+#### Breakdown of Dropped Non-US Records by Reason
+
+| Reason | Count | Notes |
+|---|---|---|
+| UK postcode or region | ${nonUsRecords.filter(r => r.reason.startsWith('UK')).length} | UK regions (e.g. Highland, Windermere, Cumbria) and postcodes |
+| Canadian province | ${nonUsRecords.filter(r => r.reason.startsWith('Canadian')).length} | Canadian provinces (e.g. BC, ON, QC) and postal codes |
+| Spain destination or province | ${nonUsRecords.filter(r => r.reason.startsWith('Spain')).length} | Spanish destinations and provinces |
+| Unknown / missing US state code | ${nonUsRecords.filter(r => r.reason.startsWith('Unknown')).length} | Records without valid 2-letter US state code |
+
+---
+
+## 3. Matching Against Existing 562 US Hotels
+
+Matching the ${keptUsHotels.length} valid US hotels against our existing 562 US properties:
 
 | Classification | Count | Description |
 |---|---|---|
 | **High Match** | **${highMatches.length}** | Same normalised name, same city, geo within 300 m |
 | **Medium Match** | **${mediumMatches.length}** | Same city name substring, or geo within 150 m with different name (written to review list) |
 | **New Hotels** | **${newHotels.length}** | Unmatched US properties proposed for import |
-| **Total Unique US** | **${uniqueUsHotels.length}** | **High (${highMatches.length}) + Medium (${mediumMatches.length}) + New (${newHotels.length}) = ${highMatches.length + mediumMatches.length + newHotels.length}** |
+| **Total Valid US Kept** | **${keptUsHotels.length}** | **High (${highMatches.length}) + Medium (${mediumMatches.length}) + New (${newHotels.length}) = ${highMatches.length + mediumMatches.length + newHotels.length}** |
 
 ---
 
-## 3. High Match Fact Fills & Conflicts
+## 4. High Match Fact Fills & Conflicts (Task B4)
 
 Proposals for the ${highMatches.length} high-confidence matched hotels:
 
@@ -641,35 +890,47 @@ Proposals for the ${highMatches.length} high-confidence matched hotels:
   - \`area / neighbourhood\` filled: **${fillsByField.area_or_neighbourhood}**
   - \`roomType\` filled (only if ours was empty): **${fillsByField.room_name}**
 - **Hotels with Room / Tub Type Conflicts:** **${conflicts.length}**
-  - Preserved existing database values; queued for manual source verification against partner listings.
+
+### All 20 Room-Name Conflicts (Task B4 Full Table)
+
+| # | Hotel | City | Our Room Name | Their Room Name |
+|---|---|---|---|---|
+${conflicts.map((c, idx) => `| ${idx + 1} | ${c.hotelName} | ${c.city} | ${c.ourData.roomType || '*(empty)*'} | ${c.tubHotelsData.verifiedRoomName || '*(empty)*'} |`).join('\n')}
 
 ---
 
-## 4. Proposed New Hotels & Town Mapping
+## 5. Town Placement, Suburbs & City Attachment (Task B2)
 
 For the **${newHotels.length}** proposed new hotels:
 
 - **Attached to Existing 38 US City Pages:** **${newHotelsAttachedToExisting}**
-- **Mapped to New Towns:** **${newHotelsInNewTowns}**
+- **Identified as Suburbs (\`nearCity\` within 40 km):** **${newHotelsInSuburbs}**
+- **Mapped to Distinct New Towns:** **${newHotelsInNewTowns}**
 - **New Hotels Lacking Verified Room Name:** **${newHotelsLackingRoomName}**
 - **New Hotels Lacking Real Coordinates:** **${newHotelsLackingCoordinates}**
 
+### Attached Hotels Count by City Page
+
+| City Slug | Attached Hotels |
+|---|---|
+${Object.entries(cityAttachedCounts).sort((a, b) => b[1] - a[1]).map(([slug, count]) => `| \`${slug}\` | ${count} |`).join('\n')}
+
 ---
 
-## 5. New Towns & City-Page Candidates
+## 6. New Towns & City-Page Candidates (Task B3)
 
 - **Distinct New Towns Identified:** **${newTownsList.length}**
-- **Towns with 5+ Hotels (City-Page Candidates):** **${townsWith5PlusHotels.length}**
+- **Towns Meeting City-Page Criteria (5+ hotels AND 3+ with verified room name):** **${candidateTowns.length}**
 
 ### Top 30 New Towns by Hotel Count
 
-| Rank | Town | State | Hotels | With Room Name | With Real Geo | City-Page Candidate |
-|---|---|---|---|---|---|---|
-${top30Towns.map((t, idx) => `| ${idx + 1} | ${t.town} | ${t.state || '*(unplaced)*'} | ${t.hotelsCount} | ${t.withRoomNameCount} | ${t.withRealGeoCount} | ${t.isCandidate ? 'Yes (5+)' : 'No'} |`).join('\n')}
+| Rank | Town | State | Hotels | With Room Name | With Real Geo | Nearest City | City-Page Candidate |
+|---|---|---|---|---|---|---|---|
+${top30Towns.map((t, idx) => `| ${idx + 1} | ${t.town} | ${t.state} | ${t.hotelsCount} | ${t.withRoomNameCount} | ${t.withRealGeoCount} | ${t.nearestCity ? `\`${t.nearestCity}\`` : '*(none)*'} | ${t.isCandidate ? 'Yes (5+ & 3+ rooms)' : 'No'} |`).join('\n')}
 
 ---
 
-## 6. Verification & Data Integrity Checks
+## 7. Verification & Data Integrity Checks
 
 - **Database Writes:** 0 (read-only execution)
 - **External Network Requests:** 0 (local execution)
@@ -678,4 +939,4 @@ ${top30Towns.map((t, idx) => `| ${idx + 1} | ${t.town} | ${t.state || '*(unplace
 
 fs.writeFileSync(REPORT_PATH, reportMd);
 console.log('Report written to data-collect/import1-report.md');
-console.log('IMPORT1-PREP successfully completed.');
+console.log('IMPORT1-PREP-B successfully completed.');
