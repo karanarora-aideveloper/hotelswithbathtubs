@@ -179,18 +179,9 @@ export function parseBookingHtml(html, meta = {}) {
 
   if (apolloState) {
     const instances = {};
-    const baseFacilities = {};
-
     for (const v of Object.values(apolloState)) {
-      if (v.__typename === 'Instance' && v.title) {
+      if (v.__typename === 'Instance' && v.title && v.id) {
         instances[v.id] = v.title;
-      }
-      if (v.__ref && v.__ref.startsWith('BaseFacility:')) {
-        try {
-          const jsonStr = v.__ref.replace(/^BaseFacility:/, '');
-          const bf = JSON.parse(jsonStr);
-          baseFacilities[bf.id] = bf.slug || '';
-        } catch {}
       }
     }
 
@@ -201,11 +192,41 @@ export function parseBookingHtml(html, meta = {}) {
         seenRoomNames.add(roomName);
 
         const bathWords = new Set();
+
+        // (b) Room name check
+        const roomNameLower = roomName.toLowerCase();
+        if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+          if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
+          if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
+          if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
+          if (/spa\s+tub|spa\s+bath/i.test(roomNameLower)) bathWords.add('Spa bath');
+          if (/soak/i.test(roomNameLower)) bathWords.add('Soaking tub');
+          if (/bathtub/i.test(roomNameLower)) bathWords.add('Bathtub');
+          if (/jetted/i.test(roomNameLower)) bathWords.add('Jetted tub');
+        }
+
+        // (a) RTRoomCard.facilities check
         if (Array.isArray(v.facilities)) {
           for (const fid of v.facilities) {
             const title = instances[fid];
             const matched = matchBathFacility(title);
             if (matched) bathWords.add(matched);
+          }
+        }
+
+        // (a) RoomData amenities check for explicit tub facilities
+        const roomId = v.roomId;
+        const roomData = apolloState['RoomData:' + roomId];
+        if (roomData && Array.isArray(roomData.amenities)) {
+          for (const a of roomData.amenities) {
+            const ref = a.__ref || '';
+            if (/slug\":\"(?:spa_bath|hot_tub|whirlpool|jacuzzi|bathtub)\"/i.test(ref)) {
+              if (/spa_bath/i.test(ref)) bathWords.add('Spa bath');
+              if (/hot_tub/i.test(ref)) bathWords.add('Hot tub');
+              if (/whirlpool/i.test(ref)) bathWords.add('Whirlpool');
+              if (/jacuzzi/i.test(ref)) bathWords.add('Jacuzzi');
+              if (/bathtub/i.test(ref)) bathWords.add('Bathtub');
+            }
           }
         }
 
@@ -230,6 +251,18 @@ export function parseBookingHtml(html, meta = {}) {
       if (name && !seenRoomNames.has(name) && !name.startsWith('Room type') && !name.startsWith('MoTuWe')) {
         seenRoomNames.add(name);
         const bathWords = new Set();
+
+        const roomNameLower = name.toLowerCase();
+        if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+          if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
+          if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
+          if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
+          if (/spa\s+tub|spa\s+bath/i.test(roomNameLower)) bathWords.add('Spa bath');
+          if (/soak/i.test(roomNameLower)) bathWords.add('Soaking tub');
+          if (/bathtub/i.test(roomNameLower)) bathWords.add('Bathtub');
+          if (/jetted/i.test(roomNameLower)) bathWords.add('Jetted tub');
+        }
+
         row.find('.hprt-facilities-facility, .facility-badge, [data-name="facility"], li').each((_, facEl) => {
           const facText = $(facEl).text().trim();
           const matched = matchBathFacility(facText);
@@ -240,6 +273,7 @@ export function parseBookingHtml(html, meta = {}) {
     });
   }
 
+  const tubRooms = rooms.filter(r => r.bathWords.length > 0);
   return {
     pageTitle,
     lat: isNaN(lat) ? null : lat,
@@ -248,7 +282,11 @@ export function parseBookingHtml(html, meta = {}) {
     district: district || null,
     score10: isNaN(score10) ? null : score10,
     reviewCount: isNaN(reviewCount) ? null : reviewCount,
-    rooms
+    rooms,
+    tubRooms: tubRooms.map(r => r.name),
+    tubRoomsCount: tubRooms.length,
+    hasTubRoom: tubRooms.length > 0,
+    tubFacilitiesFound: Array.from(new Set(tubRooms.flatMap(r => r.bathWords)))
   };
 }
 
