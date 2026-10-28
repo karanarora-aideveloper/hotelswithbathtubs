@@ -64,7 +64,7 @@ export async function ensureDelay(hostname, minDelayMs = 10000) {
 }
 
 async function getBrowser() {
-  if (!activeBrowser) {
+  if (!activeBrowser || (typeof activeBrowser.isConnected === 'function' && !activeBrowser.isConnected())) {
     activeBrowser = await puppeteer.launch({
       executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
       headless: 'new',
@@ -160,8 +160,18 @@ export async function savePage(site, url, filenameSlug, options = {}) {
         await new Promise(r => setTimeout(r, 4000));
       }
 
-      html = await page.content();
-      await page.close();
+      try {
+        html = await page.content();
+      } catch (err) {
+        if (err.message && (err.message.includes('detached') || err.message.includes('destroyed') || err.message.includes('navigation'))) {
+          console.log(`[saver] Frame detached/navigated during content read, waiting 2s for settled page...`);
+          await new Promise(r => setTimeout(r, 2000));
+          html = await page.content();
+        } else {
+          throw err;
+        }
+      }
+      await page.close().catch(() => {});
     } else {
       // S2 (Trip) and S3 (Cleartrip) use standard honest fetch
       const res = await fetch(url, {

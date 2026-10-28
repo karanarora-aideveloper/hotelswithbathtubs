@@ -211,7 +211,26 @@ async function main() {
           };
           break;
         }
-        throw err;
+        console.warn(`\n[warning] Transient browser error for ${hotel.key}: ${err.message}. Retrying once...`);
+        await closeBrowser();
+        await new Promise(r => setTimeout(r, 5000));
+        try {
+          const saveRes = await savePage('booking-links1', searchUrl, searchSlug, { skipIfExists: true });
+          searchGzPath = saveRes.gzPath;
+        } catch (retryErr) {
+          if (retryErr instanceof BlockError || retryErr.name === 'BlockError') {
+            console.error(`\n🚨 CRITICAL: BlockError during search retry for ${hotel.key}: ${retryErr.message}`);
+            stopBlockError = {
+              atKey: hotel.key,
+              hotelName: hotel.name,
+              url: searchUrl,
+              error: retryErr.message,
+              atIndex: i + 1
+            };
+            break;
+          }
+          throw retryErr;
+        }
       }
 
       // Step 2: Parse search results & match
@@ -260,7 +279,27 @@ async function main() {
           };
           break;
         }
-        throw err;
+        console.warn(`\n[warning] Transient browser error fetching hotel ${hotel.key}: ${err.message}. Retrying once...`);
+        await closeBrowser();
+        await new Promise(r => setTimeout(r, 5000));
+        try {
+          const hotelSaveRes = await savePage('booking-links1', matched.cleanUrl, hotelSlug, { skipIfExists: true });
+          hotelGzPath = hotelSaveRes.gzPath;
+          fetchedMeta = hotelSaveRes.meta;
+        } catch (retryErr) {
+          if (retryErr instanceof BlockError || retryErr.name === 'BlockError') {
+            console.error(`\n🚨 CRITICAL: BlockError during hotel retry for ${hotel.key}: ${retryErr.message}`);
+            stopBlockError = {
+              atKey: hotel.key,
+              hotelName: hotel.name,
+              url: matched.cleanUrl,
+              error: retryErr.message,
+              atIndex: i + 1
+            };
+            break;
+          }
+          throw retryErr;
+        }
       }
 
       // Step 4: Parse hotel page facts
