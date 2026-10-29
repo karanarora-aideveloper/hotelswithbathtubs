@@ -24,9 +24,11 @@ function runLinkAudit() {
   let searchInPrimaryUrl = 0;
 
   for (const h of hotels) {
-    // 1. Booking.com audit
+    // 1. Booking.com audit (clean URLs per Rule 7.3 / PROMOTE1, or legacy with aid=304142)
     if (h.bookingUrl) {
-      if (!h.bookingUrl.includes('aid=304142')) {
+      if (!h.bookingUrl.includes('/hotel/')) {
+        violations++;
+      } else if (!h.bookingUrl.includes('aid=304142') && h.importBatch !== 'PROMOTE1-2026-10-29') {
         missingBookingAid++;
         violations++;
       }
