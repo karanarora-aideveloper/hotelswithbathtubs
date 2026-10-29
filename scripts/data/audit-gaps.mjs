@@ -50,8 +50,11 @@ export function computeGaps(directory = dir) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const res = computeGaps();
-  console.log(`Total saved pages in booking-links2: ${res.total}`);
+  const dirArg = process.argv.slice(2).find(a => a.startsWith('--dir='));
+  const targetDir = dirArg ? path.join(worktreeDir, 'data-collect', 'pages', dirArg.split('=')[1]) : dir;
+  const targetName = dirArg ? dirArg.split('=')[1] : 'booking-links2';
+  const res = computeGaps(targetDir);
+  console.log(`Total saved pages in ${targetName}: ${res.total}`);
   if (res.total >= 2) {
     console.log(`Smallest gap: ${res.minGapSec}s`);
     console.log(`Gaps under 10 seconds: ${res.under10s}`);

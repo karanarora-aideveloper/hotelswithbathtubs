@@ -190,12 +190,20 @@ async function main() {
   const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : null;
   const startArg = args.find(a => a.startsWith('--start='));
   const startIdx = startArg ? parseInt(startArg.split('=')[1], 10) : 0;
+  const folderArg = args.find(a => a.startsWith('--folder='));
+  const folderName = folderArg ? folderArg.split('=')[1] : 'booking-links2';
+  const progressArg = args.find(a => a.startsWith('--progress='));
+  const progressFilename = progressArg ? progressArg.split('=')[1] : 'links2-progress.md';
+  const resultsArg = args.find(a => a.startsWith('--results='));
+  const resultsFilename = resultsArg ? resultsArg.split('=')[1] : 'links2-results.json';
 
   console.log('=============================================================');
   console.log('>>> RUNNING LINKS2: Booking.com Collection for Hidden US Hotels');
   console.log(`>>> Mode: ${isWrite ? 'WRITE TO DATABASE' : 'DRY RUN (no DB writes)'}`);
   if (limit) console.log(`>>> Limit: ${limit} hotels`);
   if (startIdx > 0) console.log(`>>> Starting at index: ${startIdx}`);
+  console.log(`>>> Storage Folder: ${folderName}`);
+  console.log(`>>> Progress File: ${progressFilename}`);
   console.log('=============================================================');
 
   const uri = getMongoUri();
@@ -283,7 +291,7 @@ async function main() {
   }
 
   // Load results tracking file
-  const resultsPath = path.join(privateDir, 'links2-results.json');
+  const resultsPath = path.join(privateDir, resultsFilename);
   let resultsMap = {};
   if (fs.existsSync(resultsPath)) {
     try {
@@ -296,10 +304,10 @@ async function main() {
     } catch {}
   }
 
-  const progressFilePath = path.join(worktreeDir, 'data-collect', 'links2-progress.md');
+  const progressFilePath = path.join(worktreeDir, 'data-collect', progressFilename);
 
   function getGapStats() {
-    const res = computeGaps();
+    const res = computeGaps(path.join(worktreeDir, 'data-collect', 'pages', folderName));
     return {
       totalRequests: res.total,
       minGapMs: res.minGapMs,
@@ -379,7 +387,7 @@ async function main() {
       let searchGzPath = null;
       let searchMeta = null;
       try {
-        const saveRes = await savePage('booking-links2', searchUrl, searchSlug, { minDelayMs: 10500 });
+        const saveRes = await savePage(folderName, searchUrl, searchSlug, { minDelayMs: 10500 });
         searchGzPath = saveRes.gzPath;
         searchMeta = saveRes.meta;
       } catch (err) {
@@ -400,7 +408,7 @@ async function main() {
         await closeBrowser();
         await new Promise(r => setTimeout(r, 5000));
         try {
-          const saveRes = await savePage('booking-links2', searchUrl, searchSlug, { minDelayMs: 10500 });
+          const saveRes = await savePage(folderName, searchUrl, searchSlug, { minDelayMs: 10500 });
           searchGzPath = saveRes.gzPath;
           searchMeta = saveRes.meta;
         } catch (retryErr) {
@@ -502,7 +510,7 @@ async function main() {
       let hotelGzPath = null;
       let hotelMeta = null;
       try {
-        const hotelSaveRes = await savePage('booking-links2', matched.cleanUrl, hotelSlug, { minDelayMs: 10500 });
+        const hotelSaveRes = await savePage(folderName, matched.cleanUrl, hotelSlug, { minDelayMs: 10500 });
         hotelGzPath = hotelSaveRes.gzPath;
         hotelMeta = hotelSaveRes.meta;
       } catch (err) {
@@ -523,7 +531,7 @@ async function main() {
         await closeBrowser();
         await new Promise(r => setTimeout(r, 5000));
         try {
-          const hotelSaveRes = await savePage('booking-links2', matched.cleanUrl, hotelSlug, { minDelayMs: 10500 });
+          const hotelSaveRes = await savePage(folderName, matched.cleanUrl, hotelSlug, { minDelayMs: 10500 });
           hotelGzPath = hotelSaveRes.gzPath;
           hotelMeta = hotelSaveRes.meta;
         } catch (retryErr) {
@@ -675,11 +683,11 @@ async function main() {
 
       // Checkpoint every 1,000 processed candidates
       if (stats.processed > 0 && stats.processed % 1000 === 0) {
-        console.log(`\n>>> CHECKPOINT at ${stats.processed} candidates. Appending to links2-progress.md...`);
+        console.log(`\n>>> CHECKPOINT at ${stats.processed} candidates. Appending to ${progressFilename}...`);
         const gapStats = getGapStats();
         appendProgressCheckpoint(progressFilePath, stats, gapStats, false);
         try {
-          execSync(`git add data-collect/links2-progress.md && git commit -m "chore(data): links2 progress checkpoint (${stats.processed} processed)"`, {
+          execSync(`git add data-collect/${progressFilename} && git commit -m "chore(data): links2 progress checkpoint (${stats.processed} processed)"`, {
             cwd: worktreeDir,
             stdio: 'inherit'
           });
@@ -711,7 +719,7 @@ async function main() {
   // Append final checkpoint report
   appendProgressCheckpoint(progressFilePath, stats, finalGapStats, true);
   try {
-    execSync(`git add data-collect/links2-progress.md && git commit -m "chore(data): links2 final checkpoint (${stats.processed} processed)"`, {
+    execSync(`git add data-collect/${progressFilename} && git commit -m "chore(data): links2 final checkpoint (${stats.processed} processed)"`, {
       cwd: worktreeDir,
       stdio: 'inherit'
     });
