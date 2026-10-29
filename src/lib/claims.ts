@@ -72,14 +72,21 @@ export function hasClaimPhrase(text: string): boolean {
   return CLAIM_PHRASES.some((phrase) => lower.includes(phrase));
 }
 
+export function splitIntoSentences(text: string): string[] {
+  if (!text) return [];
+  // Tokenize sentences: match characters up to a sentence terminator (. ! ?) followed by whitespace or end of string,
+  // while preserving abbreviations (e.g., i.e., sq.m., approx., etc., vs., Dr., Mr., Mrs., Ms., Inc., Ltd.)
+  // and domain names/numbers (Booking.com, 12.5) inside their sentence.
+  const regex = /[\s\S]+?(?:(?<!\b(?:e\.g|i\.e|sq\.m|approx|etc|vs|dr|mr|mrs|ms|inc|ltd))\b[.!?]+(?=\s+|$)|$)/gi;
+  const matches = text.match(regex);
+  if (!matches) return [text.trim()].filter(Boolean);
+  return matches.map((s) => s.trim()).filter(Boolean);
+}
+
 export function dropClaimSentences(text: string): string {
   if (!text) return '';
-  // Split on sentence boundaries (. ! ?) while preserving punctuation
-  const sentenceRegex = /([^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$)/g;
-  const matches = text.match(sentenceRegex);
-  if (!matches) return '';
-
-  const kept = matches.filter((s) => !hasClaimPhrase(s.trim()));
+  const sentences = splitIntoSentences(text);
+  const kept = sentences.filter((s) => !hasClaimPhrase(s));
   return kept.join(' ').replace(/\s+/g, ' ').trim();
 }
 
@@ -92,7 +99,7 @@ export function dropClaimSentencesFromHtml(html: string): string {
       return match;
     }
     // Drop sentences containing claim phrases
-    const sentences = inner.match(/([^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$)/g) || [];
+    const sentences = splitIntoSentences(inner);
     const kept = sentences.filter((s: string) => !hasClaimPhrase(s.replace(/<[^>]+>/g, ' ').trim()));
     const resultInner = kept.join(' ').trim();
     if (!resultInner || resultInner === '<br>' || resultInner === '<br/>') {
@@ -109,7 +116,7 @@ export function dropClaimSentencesFromMarkdown(md: string): string {
   for (let line of lines) {
     if (/★\s*\d|guest reviews|\b\d[\d,]*\s+reviews\b/i.test(line)) continue;
     if (hasClaimPhrase(line)) {
-      const sentences = line.match(/([^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$)/g) || [];
+      const sentences = splitIntoSentences(line);
       const kept = sentences.filter((s) => !hasClaimPhrase(s.trim()));
       line = kept.join(' ').trim();
       if (!line) continue;

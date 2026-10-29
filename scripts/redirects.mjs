@@ -287,6 +287,10 @@ export const redirects = [
   { source: '/usa/san-francisco/1-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-1-hotel-san-francisco', permanent: true },
   { source: '/usa/san-francisco/palace-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-palace-hotel-a-luxury-collection-hotel-san-francisco', permanent: true },
 
+  // Round 9: duplicate Inn at Playa del Rey redirect
+  { source: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles-2', destination: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles', permanent: true },
+  { source: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles-2/', destination: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles', permanent: true },
+
   { source: '/usa/miami/miami-1-hotel-south-beach', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
   { source: '/usa/miami/miami-1-hotel-south-beach/', destination: '/usa/miami/1-hotel-south-beach-miami', permanent: true },
   { source: '/faroe-islands/torshavn/broncks-apartment-1-torshavn', destination: '/faroe-islands/torshavn/torshavn-broncks-apartment-1', permanent: true },

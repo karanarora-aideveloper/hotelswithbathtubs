@@ -79,7 +79,7 @@ export default function HotelGallery({
                   src={allImages[0]}
                   data-src={allImages[0]}
                   onError={onImgError}
-                  alt={`${hotelName} - In-room bathtub in ${cityName}`}
+                  alt={`${hotelName}, ${cityName}`}
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -87,7 +87,7 @@ export default function HotelGallery({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
-                  🛁 In-Room Bathtub
+                  {bathtubLabel || 'In-room bathtub'}
                 </span>
               </div>
 
@@ -101,7 +101,7 @@ export default function HotelGallery({
                     src={allImages[1] || allImages[0]}
                   data-src={allImages[1] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName} suite interior`}
+                    alt={`${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -116,7 +116,7 @@ export default function HotelGallery({
                     src={allImages[2] || allImages[0]}
                   data-src={allImages[2] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName} bathroom and tub space`}
+                    alt={`${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -135,7 +135,7 @@ export default function HotelGallery({
                     src={allImages[3] || allImages[0]}
                   data-src={allImages[3] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName} room view`}
+                    alt={`${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -150,7 +150,7 @@ export default function HotelGallery({
                     src={allImages[4] || allImages[0]}
                   data-src={allImages[4] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName} property and ambiance`}
+                    alt={`${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -188,7 +188,7 @@ export default function HotelGallery({
               src={allImages[0]}
                   data-src={allImages[0]}
                   onError={onImgError}
-              alt={`${hotelName} with private bathtub in ${cityName}`}
+              alt={`${hotelName}, ${cityName}`}
               fill
               priority
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -243,7 +243,7 @@ export default function HotelGallery({
               src={allImages[activeModalIndex]}
                   data-src={allImages[activeModalIndex]}
                   onError={onImgError}
-              alt={`${hotelName} photo ${activeModalIndex + 1}`}
+              alt={`${hotelName}, ${cityName} photo ${activeModalIndex + 1}`}
               fill
               className="object-contain"
               sizes="(max-width: 1280px) 100vw, 1280px"
