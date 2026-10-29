@@ -192,10 +192,12 @@ export function parseBookingHtml(html, meta = {}) {
         seenRoomNames.add(roomName);
 
         const bathWords = new Set();
+        const labels = new Set();
 
         // (b) Room name check
         const roomNameLower = roomName.toLowerCase();
         if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+          labels.add('room name');
           if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
           if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
           if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
@@ -210,7 +212,11 @@ export function parseBookingHtml(html, meta = {}) {
           for (const fid of v.facilities) {
             const title = instances[fid];
             const matched = matchBathFacility(title);
-            if (matched) bathWords.add(matched);
+            if (matched) {
+              bathWords.add(matched);
+              if (matched === 'Spa bath') labels.add('Spa tub');
+              else labels.add(matched);
+            }
           }
         }
 
@@ -221,16 +227,16 @@ export function parseBookingHtml(html, meta = {}) {
           for (const a of roomData.amenities) {
             const ref = a.__ref || '';
             if (/slug\":\"(?:spa_bath|hot_tub|whirlpool|jacuzzi|bathtub)\"/i.test(ref)) {
-              if (/spa_bath/i.test(ref)) bathWords.add('Spa bath');
-              if (/hot_tub/i.test(ref)) bathWords.add('Hot tub');
-              if (/whirlpool/i.test(ref)) bathWords.add('Whirlpool');
-              if (/jacuzzi/i.test(ref)) bathWords.add('Jacuzzi');
-              if (/bathtub/i.test(ref)) bathWords.add('Bathtub');
+              if (/spa_bath/i.test(ref)) { bathWords.add('Spa bath'); labels.add('Spa tub'); }
+              if (/hot_tub/i.test(ref)) { bathWords.add('Hot tub'); labels.add('Hot tub'); }
+              if (/whirlpool/i.test(ref)) { bathWords.add('Whirlpool'); labels.add('Whirlpool'); }
+              if (/jacuzzi/i.test(ref)) { bathWords.add('Jacuzzi'); labels.add('Jacuzzi'); }
+              if (/bathtub/i.test(ref)) { bathWords.add('Bathtub'); labels.add('Bathtub'); }
             }
           }
         }
 
-        rooms.push({ name: roomName, bathWords: Array.from(bathWords) });
+        rooms.push({ name: roomName, bathWords: Array.from(bathWords), labels: Array.from(labels) });
       }
     }
   }
@@ -251,9 +257,11 @@ export function parseBookingHtml(html, meta = {}) {
       if (name && !seenRoomNames.has(name) && !name.startsWith('Room type') && !name.startsWith('MoTuWe')) {
         seenRoomNames.add(name);
         const bathWords = new Set();
+        const labels = new Set();
 
         const roomNameLower = name.toLowerCase();
         if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+          labels.add('room name');
           if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
           if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
           if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
@@ -266,14 +274,25 @@ export function parseBookingHtml(html, meta = {}) {
         row.find('.hprt-facilities-facility, .facility-badge, [data-name="facility"], li').each((_, facEl) => {
           const facText = $(facEl).text().trim();
           const matched = matchBathFacility(facText);
-          if (matched) bathWords.add(matched);
+          if (matched) {
+            bathWords.add(matched);
+            if (matched === 'Spa bath') labels.add('Spa tub');
+            else labels.add(matched);
+          }
         });
-        rooms.push({ name, bathWords: Array.from(bathWords) });
+        rooms.push({ name, bathWords: Array.from(bathWords), labels: Array.from(labels) });
       }
     });
   }
 
-  const tubRooms = rooms.filter(r => r.bathWords.length > 0);
+  const tubRooms = rooms.filter(r => (r.labels && r.labels.length > 0) || (r.bathWords && r.bathWords.length > 0));
+  const formattedTubRooms = tubRooms.map(r => ({
+    roomName: r.name,
+    labels: Array.from(new Set(r.labels && r.labels.length > 0 ? r.labels : r.bathWords))
+  }));
+
+  const photos = extractPhotos(html);
+
   return {
     pageTitle,
     lat: isNaN(lat) ? null : lat,
@@ -283,11 +302,36 @@ export function parseBookingHtml(html, meta = {}) {
     score10: isNaN(score10) ? null : score10,
     reviewCount: isNaN(reviewCount) ? null : reviewCount,
     rooms,
-    tubRooms: tubRooms.map(r => r.name),
-    tubRoomsCount: tubRooms.length,
-    hasTubRoom: tubRooms.length > 0,
-    tubFacilitiesFound: Array.from(new Set(tubRooms.flatMap(r => r.bathWords)))
+    tubRooms: formattedTubRooms,
+    tubRoomNames: tubRooms.map(r => r.name),
+    tubRoomsCount: formattedTubRooms.length,
+    hasTubRoom: formattedTubRooms.length > 0,
+    tubFacilitiesFound: Array.from(new Set(tubRooms.flatMap(r => r.bathWords))),
+    photos
   };
+}
+
+export function extractPhotos(html) {
+  const photos = [];
+  const seenIds = new Set();
+  const regex = /https:\/\/[a-z0-9.-]*cf\.bstatic\.com\/xdata\/images\/hotel\/[^\s"']+/g;
+  const matches = html.match(regex) || [];
+  for (let m of matches) {
+    const idMatch = m.match(/\/([0-9]+)\.(?:jpg|webp)/i);
+    if (!idMatch) continue;
+    const imgId = idMatch[1];
+    if (seenIds.has(imgId)) continue;
+    seenIds.add(imgId);
+
+    let normalized = m.replace(/\/(?:max[0-9]+x[0-9]+|square[0-9]+|thumbnail[0-9]+|max[0-9]+)\//, '/max1024x768/');
+    if (!normalized.includes('/max1024x768/')) {
+      normalized = normalized.replace(/\/images\/hotel\/([^/]+)\/([0-9]+\.(?:jpg|webp))/, '/images/hotel/max1024x768/$2');
+    }
+    normalized = normalized.replace(new RegExp(`/${imgId}\\.webp`), `/${imgId}.jpg`);
+    photos.push(normalized);
+    if (photos.length >= 6) break;
+  }
+  return photos;
 }
 
 export function parseSavedBookingFile(gzFilePath) {

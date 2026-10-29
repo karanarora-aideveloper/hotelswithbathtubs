@@ -54,7 +54,7 @@ export async function isAllowedByRobots(url) {
   return allowed !== false; // null or true is allowed
 }
 
-export async function ensureDelay(hostname, minDelayMs = 10000) {
+export async function ensureDelay(hostname, minDelayMs = 10500) {
   const last = lastFetchTime[hostname];
   const now = Date.now();
   if (last) {
@@ -65,6 +65,9 @@ export async function ensureDelay(hostname, minDelayMs = 10000) {
       await new Promise(r => setTimeout(r, waitTime));
     }
   }
+}
+
+export function markFetchComplete(hostname) {
   lastFetchTime[hostname] = Date.now();
 }
 
@@ -134,7 +137,7 @@ export async function savePage(site, url, filenameSlug, options = {}) {
   }
 
   // 2. Slow and honest: at least 10s between pages on the same host
-  await ensureDelay(parsedUrl.hostname, 10000);
+  await ensureDelay(parsedUrl.hostname, options.minDelayMs || 10500);
 
   console.log(`[saver] [${site}] Fetching: ${url}`);
   let html = '';
@@ -193,6 +196,7 @@ export async function savePage(site, url, filenameSlug, options = {}) {
       html = await res.text();
     }
   } catch (err) {
+    markFetchComplete(parsedUrl.hostname);
     console.error(`[saver] Network/browser error fetching ${url}:`, err.message);
     throw err;
   }
@@ -200,6 +204,7 @@ export async function savePage(site, url, filenameSlug, options = {}) {
   // 3. Stop at the first sign of a block
   const blockReason = detectBlock(html, finalStatus, url);
   if (blockReason) {
+    markFetchComplete(parsedUrl.hostname);
     const blockErr = new BlockError(blockReason, finalStatus, url);
     console.error(`[saver] 🚨 CRITICAL STOP: ${blockErr.message}`);
     throw blockErr;
@@ -219,6 +224,7 @@ export async function savePage(site, url, filenameSlug, options = {}) {
     gzSizeBytes: gzBuffer.length
   };
   fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), 'utf-8');
+  markFetchComplete(parsedUrl.hostname);
 
   console.log(`[saver] Saved ${filenameSlug}.html.gz (${(gzBuffer.length / 1024).toFixed(1)} KB gzipped)`);
   return { success: true, gzPath, metaPath, meta };
