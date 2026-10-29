@@ -68,7 +68,7 @@ export const CLAIM_PHRASES: string[] = [
 export function hasClaimPhrase(text: string): boolean {
   if (!text) return false;
   const lower = text.toLowerCase();
-  if (/(?<!not yet |haven['’]t )\bconfirmed\b/i.test(lower)) return true;
+  if (/(?<!not yet |haven['’]t |isn['’]t )\bconfirmed\b/i.test(lower)) return true;
   return CLAIM_PHRASES.some((phrase) => lower.includes(phrase));
 }
 
