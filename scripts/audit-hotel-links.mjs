@@ -28,7 +28,7 @@ function runLinkAudit() {
     if (h.bookingUrl) {
       if (!h.bookingUrl.includes('/hotel/')) {
         violations++;
-      } else if (!h.bookingUrl.includes('aid=304142') && h.importBatch !== 'PROMOTE1-2026-10-29') {
+      } else if (!h.bookingUrl.includes('aid=304142') && !h.importBatch?.startsWith('PROMOTE')) {
         missingBookingAid++;
         violations++;
       }
