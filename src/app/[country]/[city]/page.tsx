@@ -7,7 +7,7 @@ import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
-import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, normalizePrice, parsePriceNumber, isVacationRental, isJacuzziRoom } from '@/lib/utils';
+import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -482,26 +482,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const lowestPriceResult = findLowestPriceHotel(hotels);
   const minPrice = lowestPriceResult?.price;
 
-  // Hotel price range for typical nightly rate FAQ
+  // Count hotels vs vacation rentals
   const hotelList = hotels.filter((h) => !isVacationRental(h));
   const rentalList = hotels.filter((h) => isVacationRental(h));
-  let minHotelNum = Infinity;
-  let maxHotelNum = -Infinity;
-  let minHotelPriceStr = '';
-  let maxHotelPriceStr = '';
-  for (const h of hotelList) {
-    const num = parsePriceNumber(h.price);
-    if (num !== null) {
-      if (num < minHotelNum) {
-        minHotelNum = num;
-        minHotelPriceStr = normalizePrice(h.price) || h.price || '';
-      }
-      if (num > maxHotelNum) {
-        maxHotelNum = num;
-        maxHotelPriceStr = normalizePrice(h.price) || h.price || '';
-      }
-    }
-  }
 
   // M4 unique data-driven intro components
   const hCount = hotelList.length;
@@ -638,20 +621,13 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 
-  // M6 Data-driven FAQs
-  const jacuzziHotels = hotels.filter((h) => isJacuzziRoom(h));
-  const jacuzziFaqAnswer = jacuzziHotels.length > 0
-    ? `Hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}.`
-    : `Currently, no hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
-
-  const typicalRateFaqAnswer = (minHotelNum !== Infinity && maxHotelNum !== -Infinity)
-    ? (minHotelNum < maxHotelNum
-        ? `Nightly rates for hotels with a bathtub in ${cityName} typically range from ${minHotelPriceStr} to ${maxHotelPriceStr} a night, depending on the season, room category, and day of the week.`
-        : `Nightly rates for hotels with a bathtub in ${cityName} typically start from ${minHotelPriceStr} a night, depending on the season, room category, and day of the week.`)
-    : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to ultra-luxury 5-star suites depending on seasonal demand and room tier.`;
+  // M6 Data-driven FAQs (confirmed properties only)
+  const confirmedJacuzzis = hotels.filter((h) => Boolean(h.bathtubConfirmed) && isJacuzziRoom(h));
+  const confirmedBathtubs = hotels.filter((h) => Boolean(h.bathtubConfirmed) && !isVacationRental(h));
+  const confirmedBathtubList = confirmedBathtubs.length > 0 ? confirmedBathtubs : hotels.filter((h) => Boolean(h.bathtubConfirmed));
 
   const whereToStayFaqAnswer = hasWhereToStaySection
-    ? `Top neighborhoods in ${cityName} with multiple bathtub hotels include ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}. Each area offers multiple properties within walking distance of local attractions and dining.`
+    ? `Areas in ${cityName} with more than one listed hotel: ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}.`
     : '';
 
   const faqItems = stateConfig
@@ -659,22 +635,18 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         ...stateConfig.faqs
       ]
     : [
-        {
+        ...(confirmedJacuzzis.length > 0 ? [{
           question: `Which hotels in ${cityName} have a jacuzzi in the room?`,
-          answer: jacuzziFaqAnswer
-        },
+          answer: `Hotels in ${cityName} with a jacuzzi listed for the room include ${confirmedJacuzzis.slice(0, 3).map(h => h.name).join(', ')}.`
+        }] : []),
         ...(hasWhereToStaySection ? [{
           question: `Where should I stay in ${cityName} for a hotel with a bathtub?`,
           answer: whereToStayFaqAnswer
         }] : []),
-        {
+        ...(confirmedBathtubList.length > 0 ? [{
           question: `Which hotels in ${cityName} have private in-room bathtubs?`,
-          answer: `Top hotels in ${cityName} offering private in-room tubs include ${hotels.slice(0, 3).map(h => h.name).join(', ')}.`
-        },
-        {
-          question: `What is the typical nightly rate for a bathtub hotel in ${cityName}?`,
-          answer: typicalRateFaqAnswer
-        },
+          answer: `Hotels in ${cityName} with a bathtub listed for the room include ${confirmedBathtubList.slice(0, 3).map(h => h.name).join(', ')}.`
+        }] : []),
         {
           question: `How do I make sure my room in ${cityName} definitely has a bathtub?`,
           answer: `Check that the room you pick lists a bathtub before you book.`
@@ -737,8 +709,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {stateConfig
-              ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${stateConfig.name}`
-              : `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName}`}
+              ? `Hotels with a Bathtub or Jacuzzi in ${stateConfig.name}`
+              : `Hotels with a Bathtub or Jacuzzi in ${cityName}`}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
             {stateConfig ? (
@@ -1113,31 +1085,33 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         )}
 
               {/* Frequently Asked Questions Section (SEO & Conversion) */}
-              <section className="mt-20 pt-12 border-t border-gray-200">
-                <div className="max-w-4xl mx-auto">
-                  <div className="text-center mb-10">
-                    <span className="text-xs font-bold uppercase tracking-wider text-accent-secondary bg-accent-secondary/10 px-3 py-1 rounded-full">
-                      Frequently Asked Questions
-                    </span>
-                    <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mt-3">
-                      Booking Bathtub &amp; Jacuzzi Hotels in {cityName}
-                    </h2>
-                  </div>
+              {faqItems.length > 0 && (
+                <section className="mt-20 pt-12 border-t border-gray-200">
+                  <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-10">
+                      <span className="text-xs font-bold uppercase tracking-wider text-accent-secondary bg-accent-secondary/10 px-3 py-1 rounded-full">
+                        Frequently Asked Questions
+                      </span>
+                      <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mt-3">
+                        Booking Bathtub &amp; Jacuzzi Hotels in {cityName}
+                      </h2>
+                    </div>
 
-                  <div className="space-y-6">
-                    {faqItems.map((item, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2">
-                          {item.question}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed">
-                          {item.answer}
-                        </p>
-                      </div>
-                    ))}
+                    <div className="space-y-6">
+                      {faqItems.map((item, idx) => (
+                        <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                          <h3 className="font-bold text-lg text-gray-900 mb-2">
+                            {item.question}
+                          </h3>
+                          <p className="text-gray-600 leading-relaxed">
+                            {item.answer}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              )}
 
               {/* Related Blogs Section */}
               {relatedBlogs.length > 0 && (

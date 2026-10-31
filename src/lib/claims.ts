@@ -82,6 +82,10 @@ export const CLAIM_PHRASES: string[] = [
   'request a high-floor room',
   'front desk upon check-in',
   'double-checking the room amenities',
+  'typical nightly rate',
+  'walking distance',
+  'whirlpool hydrotherapy',
+  'private in-room tubs include',
 ];
 
 export function hasClaimPhrase(text: string): boolean {

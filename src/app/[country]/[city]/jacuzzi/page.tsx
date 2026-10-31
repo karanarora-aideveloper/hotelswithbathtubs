@@ -164,6 +164,7 @@ export default async function CityJacuzziHotelsPage({
     bookingUrl: h.bookingUrl,
     airbnbUrl: h.airbnbUrl,
     tripUrl: h.tripUrl,
+    bathtubConfirmed: h.bathtubConfirmed === true,
     amenities: h.amenities || [],
     description: sanitizePlaceholderText(h.description || ''),
     rating: h.rating,
@@ -256,7 +257,7 @@ export default async function CityJacuzziHotelsPage({
           } : {}),
           "amenityFeature": [
             { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
-            { "@type": "LocationFeatureSpecification", "name": "Whirlpool Hydrotherapy Tub", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Jetted Tub or Jacuzzi", "value": true },
             ...(h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({
               "@type": "LocationFeatureSpecification",
               "name": a,
@@ -268,11 +269,13 @@ export default async function CityJacuzziHotelsPage({
     })
   };
 
+  const confirmedJacuzzis = hotels.filter((h) => Boolean(h.bathtubConfirmed));
+
   const faqItems = [
-    {
-      question: `Which hotels in ${cityName} offer private in-room jacuzzis?`,
-      answer: `Hotels in ${cityName} featuring private in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}.`
-    },
+    ...(confirmedJacuzzis.length > 0 ? [{
+      question: `Which hotels in ${cityName} have a jacuzzi in the room?`,
+      answer: `Hotels in ${cityName} with a jacuzzi listed for the room include ${confirmedJacuzzis.slice(0, 3).map(h => h.name).join(', ')}.`
+    }] : []),
     {
       question: `How do I make sure my room definitely has a jacuzzi?`,
       answer: `Check that the room you pick lists a jacuzzi or whirlpool before you book.`
@@ -366,21 +369,23 @@ export default async function CityJacuzziHotelsPage({
 
       <section className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-8">
         {/* Quick Answer Block */}
-        <div className="bg-gradient-to-r from-blue-50/80 via-sky-50/60 to-indigo-50/60 border border-blue-200 rounded-2xl p-4 sm:p-6 mb-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-3xl">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-              <span className="text-2xs font-bold text-blue-700 uppercase tracking-wider">Jacuzzi Guide Answer</span>
+        {confirmedJacuzzis.length > 0 && (
+          <div className="bg-gradient-to-r from-blue-50/80 via-sky-50/60 to-indigo-50/60 border border-blue-200 rounded-2xl p-4 sm:p-6 mb-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1.5 max-w-3xl">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                <span className="text-2xs font-bold text-blue-700 uppercase tracking-wider">Jacuzzi Guide Answer</span>
+              </div>
+              <h2 className="font-heading text-base sm:text-lg font-bold text-gray-900">
+                Where can I book a hotel room with a private jacuzzi in {cityName}?
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                Hotels in {cityName} with a jacuzzi listed for the room include{' '}
+                <strong className="text-gray-900 font-semibold">{confirmedJacuzzis.slice(0, 3).map(h => h.name).join(', ')}</strong>.
+              </p>
             </div>
-            <h2 className="font-heading text-base sm:text-lg font-bold text-gray-900">
-              Where can I book a hotel room with a private jacuzzi in {cityName}?
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-              Top hotel suites featuring private in-room whirlpool jacuzzis in {cityName} include{' '}
-              <strong className="text-gray-900 font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-            </p>
           </div>
-        </div>
+        )}
 
         {/* Client Hotel Grid */}
         <CityHotelsClient hotels={hotels} cityName={cityName} countryName={countryName} />

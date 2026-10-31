@@ -220,7 +220,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Spectacular sunset views over dramatic red cliffs',
       'Laidback coastal bohemian vibe with upscale comfort',
-      'Walking distance to cliff cafes and Papanasam Beach',
+      'Convenient access to cliff cafes and Papanasam Beach',
       'in-room tubs with transparent partner pricing'
     ]
   },
@@ -1306,7 +1306,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     whyChoose: [
       'Unobstructed sunset panoramas over the Parthenon and Temple of Olympian Zeus',
       'Boutique accommodations nestled in historic Plaka, Psyrri, and chic Kolonaki',
-      'Effortless walking distance to classical ruins and Michelin-starred Greek dining',
+      'Convenient access to classical ruins and Greek dining',
       'in-room private tub tiers across Booking.com and direct partner channels'
     ]
   },
@@ -5696,7 +5696,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
     ],
     whyChoose: [
       'Australia’s top dining, coffee culture, and live arts entertainment scene',
-      'Premier luxury accommodations within walking distance of Crown precinct',
+      'Premier luxury accommodations situated near the Crown precinct',
       'Convenient base for day trips to Yarra Valley wineries and Great Ocean Road',
       'listings featuring private in-room spa baths and tubs'
     ]

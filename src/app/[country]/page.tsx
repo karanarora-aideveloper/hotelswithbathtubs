@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // SERP-optimised title: front-loaded, year for freshness, under 65 chars
   const currentYear = new Date().getFullYear();
-  const baseTitle = `Best Hotels with a Bathtub in ${countryName} (${currentYear})`;
+  const baseTitle = `Hotels with a Bathtub in ${countryName} (${currentYear})`;
   const brandedTitle = `${baseTitle} | Hotels with Bathtubs`;
   const pageTitle = brandedTitle.length <= 65 ? brandedTitle : baseTitle;
   const pageDescription = `Discover ${hotelCount}+ hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Ideal for romantic stays.`;

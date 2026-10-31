@@ -66,10 +66,6 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
         answer: 'Napa Valley is celebrated for private outdoor soaking tubs and vineyard views, Lake Tahoe is famous for winter mountain hot tub cabins, and the coastal stretches of Los Angeles and San Diego offer oceanfront jetted jacuzzi suites.'
       },
       {
-        question: 'What is the typical nightly rate for a jacuzzi suite in California?',
-        answer: 'Nightly rates typically range from $180 to $350 for boutique and upscale city hotels, scaling to $600 to $1,200+ per night for world-class luxury resorts in Napa Valley, Beverly Hills, and beachfront San Diego.'
-      },
-      {
         question: 'How do I ensure my California hotel room has a private tub rather than a shared facility?',
         answer: 'When booking through our partner links, always select specific room tiers labeled "Jacuzzi Suite", "Spa Tub Suite", "King Room with Soaking Tub", or "Executive Suite with Whirlpool". Standard entry-level rooms often only feature standing showers.'
       }
@@ -227,7 +223,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       },
       {
         question: 'Are bathtub hotels in Boston convenient for sightseeing?',
-        answer: 'Yes, our featured properties are situated in central Back Bay, Downtown Waterfront, and Beacon Hill, placing you within walking distance of the Freedom Trail, Boston Common, and top dining.'
+        answer: 'Yes, our featured properties are situated in central Back Bay, Downtown Waterfront, and Beacon Hill, giving convenient access to the Freedom Trail, Boston Common, and local dining.'
       }
     ]
   },
@@ -464,10 +460,6 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       {
         question: 'Which luxury hotels in Nashville have private bathtubs?',
         answer: 'The Hermitage Hotel in downtown Nashville features five-star Italian marble bathrooms with deep soaking tubs. Other top boutique hotels in The Gulch and Midtown also feature deep tubs.'
-      },
-      {
-        question: 'What are typical nightly rates for Tennessee jacuzzi accommodations?',
-        answer: 'Rates in Gatlinburg and Nashville typically start from $140 to $220 per night, with luxury suites and prime mountain chalets ranging between $280 and $550 per night.'
       }
     ]
   },
@@ -496,10 +488,6 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       {
         question: 'Which hotels in Georgia have the best private in-room bathtubs or jacuzzis?',
         answer: 'Standout stays include The St. Regis Atlanta and Nobu Hotel in Buckhead, The Kehoe House and The Gastonian on Savannah historic squares, and The Perry Lane Hotel along the riverfront.'
-      },
-      {
-        question: 'What are typical nightly rates for a bathtub suite in Georgia?',
-        answer: 'Rates typically range from $185 to $295 for boutique hotels in Midtown Atlanta and historic Savannah, scaling to $380 to $600+ for Five-Star luxury stays like The St. Regis or Waldorf Astoria.'
       }
     ]
   },
@@ -584,10 +572,6 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       {
         question: 'Where can I find the best hotels with bathtubs in Oregon?',
         answer: 'The Allison Inn & Spa in Willamette Wine Country, Sentinel Hotel in Downtown Portland (private terrace whirlpool hot tubs), and The Nines on Pioneer Square are the highest rated.'
-      },
-      {
-        question: 'What are typical nightly rates in Portland for bathtub rooms?',
-        answer: 'Downtown Portland boutique hotels range from $185 to $265 per night, with premier vineyard resort suites at $480 to $650 per night.'
       }
     ]
   },
