@@ -269,6 +269,16 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     pageDescription = pDesc;
   }
 
+  // ROUND 13: For hotels without importBatch, apply dropHotelTextClaimSentences to description.
+  // If nothing is left, meta description must be: "{name} in {city}. A bathtub is listed for this hotel; check the room details before you book."
+  if (!hotel.importBatch) {
+    if (hotel.description) {
+      pageDescription = hotel.description;
+    } else {
+      pageDescription = `${hotelName} in ${cityName}. A bathtub is listed for this hotel; check the room details before you book.`;
+    }
+  }
+
   const hotelSlug = slugify(hotel.slug || hotel.name);
   const ogImage = imageUrl(hotel.image);
   const hotelUrl = `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotelSlug}`;
@@ -354,7 +364,9 @@ export default async function HotelDetailPage({
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": hotel.name,
-    "description": hotel.description || buildDataDescription(hotel),
+    "description": hotel.importBatch
+      ? (hotel.description || buildDataDescription(hotel))
+      : (hotel.description || `${hotel.name} in ${cityName}. A bathtub is listed for this hotel; check the room details before you book.`),
     "image": imageUrl(hotel.image),
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {

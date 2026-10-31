@@ -189,6 +189,67 @@ export function dropIntroClaimSentences(text: string): string {
   return kept.join(' ').replace(/\s+/g, ' ').trim();
 }
 
+const HOTEL_TEXT_ACTION_STARTS = /^\s*["'“‘(]?\b(stay|experience|indulge|relax|discover|enjoy|unwind|escape|retreat|book)(?:ing|s)?\b/i;
+const HOTEL_TEXT_FEATURE_WORDS = /\b(features?|featuring|boasts?|boasting|equipped with|complete with)\b/i;
+
+export const HOTEL_TEXT_CLAIM_REGEXES = [
+  /\bwalking distance\b/i,
+  /\b(?:min|mins|minutes?)\s+from\b/i,
+  /\bsteps?\s+from\b/i,
+  /\b(?:km|kms|kilometers?|kilometres?|miles?|m|meters?)\s+from\b/i,
+  /\bnear the\b/i,
+  /\bclose to\b/i,
+  /\boverlook(?:s|ing|ed)?\b/i,
+  /\bviews?\b/i,
+  /\bpanoram(?:a|as|ic|ically)?\b/i,
+  /\bplunge pools?\b/i,
+  /\bprivate pools?\b/i,
+  /\bhot[- ]tubs?\b/i,
+  /\bluxur(?:y|ious|ies)\b/i,
+  /\b(?:five|5)[- ]stars?\b/i,
+  /\bpresidential\b/i,
+  /\bbutlers?\b/i,
+  /\bworld[- ]famous\b/i,
+  /\bfinest\b/i,
+  /\bbest\b/i,
+  /\bgreatest\b/i,
+  /\bultimate\b/i,
+  /\bpremiere?s?\b/i,
+  /\bexclusiv(?:e|es|ely)\b/i,
+  /\bideal for couples?\b/i,
+  /\bperfect for couples?\b/i,
+  /\bromantic getaways?\b/i,
+  /\bevery room\b/i,
+  /\ball rooms\b/i,
+  /\b(?:awards?|award-winning|awarded)\b/i,
+  /\bmichelin\b/i,
+  /\bheritage\b/i,
+  /\bpalaces?\b/i,
+  /\bsanctuar(?:y|ies)\b/i,
+  /\boas(?:is|es)\b/i,
+  /\bparadise\b/i,
+  /\bhavens?\b/i,
+  /\biconic\b/i,
+  /\blegendary\b/i,
+  /\b(?:ranked|ranking)\b/i,
+  /\b#1\b/i,
+];
+
+export function dropHotelTextClaimSentences(text: string): string {
+  if (!text) return '';
+  const sentences = splitIntoSentences(text);
+  const kept = sentences.filter((s) => {
+    if (HOTEL_TEXT_ACTION_STARTS.test(s)) return false;
+    if (HOTEL_TEXT_FEATURE_WORDS.test(s)) return false;
+    for (const re of HOTEL_TEXT_CLAIM_REGEXES) {
+      if (re.test(s)) return false;
+    }
+    if (hasClaimPhrase(s)) return false;
+    return true;
+  });
+  return kept.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 export function dropClaimSentencesFromHtml(html: string): string {
   if (!html) return '';
   // Process paragraphs

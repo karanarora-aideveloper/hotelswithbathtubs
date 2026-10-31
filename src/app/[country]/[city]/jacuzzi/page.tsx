@@ -9,6 +9,7 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import { sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
+import { sanitizeHotelData } from '@/lib/evidence';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -150,32 +151,36 @@ export default async function CityJacuzziHotelsPage({
     notFound();
   }
 
-  const hotels = activeHotels.map((h: any) => ({
-    _id: h._id?.toString(),
-    name: h.name,
-    city: h.city,
-    country: h.country,
-    slug: h.slug || slugify(h.name),
-    image: h.image,
-    images: Array.isArray(h.images) && h.images.length > 0 ? h.images : (h.image ? [h.image] : []),
-    partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
-    url: h.url,
-    agodaUrl: h.agodaUrl,
-    bookingUrl: h.bookingUrl,
-    airbnbUrl: h.airbnbUrl,
-    tripUrl: h.tripUrl,
-    bathtubConfirmed: h.bathtubConfirmed === true,
-    amenities: h.amenities || [],
-    description: sanitizePlaceholderText(h.description || ''),
-    rating: h.rating,
-    reviewsCount: h.reviewsCount,
-    roomType: h.roomType,
-    tubType: h.tubType,
-    bookingTip: h.bookingTip,
-    price: h.price,
-    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
-    landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
-  }));
+  const hotels = activeHotels.map((rawH: any) => {
+    const h = sanitizeHotelData(rawH);
+    return {
+      _id: h._id?.toString(),
+      name: h.name,
+      city: h.city,
+      country: h.country,
+      slug: h.slug || slugify(h.name),
+      image: h.image,
+      images: Array.isArray(h.images) && h.images.length > 0 ? h.images : (h.image ? [h.image] : []),
+      partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
+      url: h.url,
+      agodaUrl: h.agodaUrl,
+      bookingUrl: h.bookingUrl,
+      airbnbUrl: h.airbnbUrl,
+      tripUrl: h.tripUrl,
+      bathtubConfirmed: h.bathtubConfirmed === true,
+      amenities: h.amenities || [],
+      description: sanitizePlaceholderText(h.description || ''),
+      rating: h.rating,
+      reviewsCount: h.reviewsCount,
+      roomType: h.roomType,
+      tubType: h.tubType,
+      bookingTip: h.bookingTip,
+      price: h.price,
+      neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
+      landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
+      importBatch: h.importBatch,
+    };
+  });
 
   // Fetch related blog guides
   const relatedBlogs = await Blog.find({

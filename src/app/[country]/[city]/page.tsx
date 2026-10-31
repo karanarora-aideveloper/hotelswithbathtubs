@@ -9,7 +9,8 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
-import { dropIntroClaimSentences } from '@/lib/claims';
+import { dropIntroClaimSentences, dropHotelTextClaimSentences } from '@/lib/claims';
+import { sanitizeHotelData } from '@/lib/evidence';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -333,34 +334,44 @@ export default async function CityHotelsPage({
     count: s.hotelCount
   }));
 
-  const hotels = activeHotels.map((h: any) => ({
-    _id: h._id?.toString(),
-    name: h.name,
-    city: h.city,
-    country: h.country,
-    slug: h.slug || slugify(h.name),
-    image: h.image,
-    images: Array.isArray(h.images) && h.images.length > 0 ? h.images.slice(0, 3) : (h.image ? [h.image] : []),
-    partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
-    url: h.url,
-    agodaUrl: h.agodaUrl,
-    bookingUrl: h.bookingUrl,
-    airbnbUrl: h.airbnbUrl,
-    tripUrl: h.tripUrl,
-    mmtUrl: h.mmtUrl || h.makemytripUrl,
-    bathtubConfirmed: h.bathtubConfirmed === true,
-    amenities: (h.amenities || []).slice(0, 6),
-    description: h.description ? truncateToWord(sanitizePlaceholderText(h.description), 140) : '',
-    rating: h.rating,
-    reviewsCount: h.reviewsCount,
-    roomType: h.roomType,
-    tubType: h.tubType,
-    bookingTip: h.bookingTip ? truncateToWord(h.bookingTip, 120) : '',
-    price: h.price,
-    neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
-    landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
-    updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
-  }));
+  const hotels = activeHotels.map((rawH: any) => {
+    const h = sanitizeHotelData(rawH);
+    const cleanDesc = h.importBatch
+      ? (h.description ? truncateToWord(sanitizePlaceholderText(h.description), 140) : '')
+      : (h.description ? truncateToWord(dropHotelTextClaimSentences(sanitizePlaceholderText(h.description)), 140) : '');
+    const cleanTip = h.importBatch
+      ? (h.bookingTip ? truncateToWord(h.bookingTip, 120) : '')
+      : (h.bookingTip ? truncateToWord(dropHotelTextClaimSentences(h.bookingTip), 120) : '');
+    return {
+      _id: h._id?.toString(),
+      name: h.name,
+      city: h.city,
+      country: h.country,
+      slug: h.slug || slugify(h.name),
+      image: h.image,
+      images: Array.isArray(h.images) && h.images.length > 0 ? h.images.slice(0, 3) : (h.image ? [h.image] : []),
+      partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
+      url: h.url,
+      agodaUrl: h.agodaUrl,
+      bookingUrl: h.bookingUrl,
+      airbnbUrl: h.airbnbUrl,
+      tripUrl: h.tripUrl,
+      mmtUrl: h.mmtUrl || h.makemytripUrl,
+      bathtubConfirmed: h.bathtubConfirmed === true,
+      amenities: (h.amenities || []).slice(0, 6),
+      description: cleanDesc,
+      rating: h.rating,
+      reviewsCount: h.reviewsCount,
+      roomType: h.roomType,
+      tubType: h.tubType,
+      bookingTip: cleanTip,
+      price: h.price,
+      neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
+      landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
+      updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
+      importBatch: h.importBatch,
+    };
+  });
 
   // M2: Hotels before vacation rentals, preserving rating order inside each group
   hotels.sort((a, b) => {
