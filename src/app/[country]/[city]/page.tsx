@@ -863,19 +863,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         )}
 
         {(() => {
-          const clientHotels = hotels.map((h, idx) => {
-            if (idx >= 24) {
-              return {
-                _id: h._id,
-                name: h.name,
-                slug: h.slug,
-                city: h.city,
-                country: h.country,
-              };
-            }
-            const { partnerImages: _unused, ...cardHotel } = h;
-            return cardHotel;
-          });
+          const clientHotels = hotels.map(({ partnerImages: _unused, ...cardHotel }) => cardHotel);
 
           return (
             <CityHotelsClient
