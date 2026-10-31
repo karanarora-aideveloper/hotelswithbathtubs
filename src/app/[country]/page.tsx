@@ -6,6 +6,7 @@ import StructuredData from '@/components/StructuredData';
 import CountryCitiesClient from '@/components/CountryCitiesClient';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import { getAllStates } from '@/lib/usStates';
+import { dropIntroClaimSentences } from '@/lib/claims';
 
 export const revalidate = false;
 
@@ -336,14 +337,19 @@ export default async function CountryHubPage({
 
             <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
               {/* Country Hub Editorial Context */}
-              <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs mb-8 sm:mb-12">
-                <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
-                  Why Book a Bathtub Hotel in {countryName}?
-                </h2>
-                <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                  Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, {countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.
-                </p>
-              </div>
+              {(() => {
+                const countryIntro = dropIntroClaimSentences(`Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, ${countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.`);
+                return countryIntro ? (
+                  <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs mb-8 sm:mb-12">
+                    <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
+                      Why Book a Bathtub Hotel in {countryName}?
+                    </h2>
+                    <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
+                      {countryIntro}
+                    </p>
+                  </div>
+                ) : null;
+              })()}
 
               {/* Specialty Bathtub Collections Navigation */}
               <div className="mb-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">

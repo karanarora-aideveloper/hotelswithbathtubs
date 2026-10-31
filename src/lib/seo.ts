@@ -1,5 +1,6 @@
 // SEO content generation for city pages
-import { titleCase } from '@/lib/utils';
+import { titleCase } from './utils';
+import { dropIntroClaimSentences } from './claims';
 
 export const cityIntroContent: Record<string, { intro: string; amenities: string[]; whyChoose: string[] }> = {
   // India - Goa
@@ -5959,6 +5960,8 @@ export function generateCityPageContent(
   const isIndia = country.toLowerCase() === 'india';
   const isUSA = country.toLowerCase() === 'usa' || country.toLowerCase() === 'united states';
   const content = getCityContent(city, country);
+  const filteredIntro = dropIntroClaimSentences(content.intro);
+  const introParagraph = filteredIntro ? `<p class="text-gray-700 leading-relaxed mb-4">${filteredIntro}</p>` : '';
 
   const amenitiesList = content.amenities.map(a => `<li><strong>${a.split(' ')[0]}</strong> ${a.slice(a.indexOf(' ') + 1)}</li>`).join('');
   const whyChooseList = content.whyChoose.map(w => `<li>${w}</li>`).join('');
@@ -6001,7 +6004,7 @@ export function generateCityPageContent(
 
   return `
     <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">${h2}</h2>
-    <p class="text-gray-700 leading-relaxed mb-4">${content.intro}</p>
+    ${introParagraph}
     <p class="text-gray-700 leading-relaxed mb-6">${introLine2}</p>
     ${usaSection}
     <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">${isUSA ? 'Suite Amenities &amp; Features' : `Popular Bathtub Amenities in ${formattedCity}`}</h3>

@@ -9,6 +9,7 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
+import { dropIntroClaimSentences } from '@/lib/claims';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -137,7 +138,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
     const currentYear = new Date().getFullYear();
     const pageTitle = `Hotels with Bathtub in ${state.name}: Top ${hotelCount} Stays (${currentYear})`;
-    const pageDescription = state.metaDescription;
+    const pageDescription = dropIntroClaimSentences(state.metaDescription);
 
     return {
       title: { absolute: pageTitle },
@@ -710,17 +711,22 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               ? `Hotels with a Bathtub or Jacuzzi in ${stateConfig.name}`
               : `Hotels with a Bathtub or Jacuzzi in ${cityName}`}
           </h1>
-          <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
-            {stateConfig ? (
-              stateConfig.intro
-            ) : (
-              <>
-                {introSentence1}
-                {introSentence2 ? ` ${introSentence2}` : ''}
-                {minPrice ? ` Prices start at ${minPrice} a night.` : ''}
-              </>
-            )}
-          </p>
+          {stateConfig ? (
+            (() => {
+              const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
+              return filteredStateIntro ? (
+                <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
+                  {filteredStateIntro}
+                </p>
+              ) : null;
+            })()
+          ) : (
+            <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
+              {introSentence1}
+              {introSentence2 ? ` ${introSentence2}` : ''}
+              {minPrice ? ` Prices start at ${minPrice} a night.` : ''}
+            </p>
+          )}
 
           {isJacuzziIndexable && (
             <div className="mt-3 sm:mt-4">

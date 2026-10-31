@@ -113,6 +113,52 @@ export function dropClaimSentences(text: string): string {
   return kept.join(' ').replace(/\s+/g, ' ').trim();
 }
 
+export const INTRO_CLAIM_WORDS: string[] = [
+  'luxury',
+  'luxurious',
+  'overlooking',
+  'panoramic',
+  'plunge pool',
+  'private pool',
+  'five-star',
+  '5-star',
+  'presidential',
+  'butler',
+  'iconic',
+  'world-famous',
+  'finest',
+  'best',
+  'ultimate',
+  'premier',
+  'exclusive',
+  'award',
+  'michelin',
+  'ideal for couples',
+  'perfect for couples',
+  'romantic getaway',
+  'private in-room bathtubs',
+  'jacuzzi suites',
+  'every room',
+  'all rooms',
+];
+
+const INTRO_CLAIM_REGEXES = INTRO_CLAIM_WORDS.map(
+  (w) => new RegExp(`\\b${w.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\b`, 'i')
+);
+
+export function dropIntroClaimSentences(text: string): string {
+  if (!text) return '';
+  const sentences = splitIntoSentences(text);
+  const kept = sentences.filter((s) => {
+    for (const re of INTRO_CLAIM_REGEXES) {
+      if (re.test(s)) return false;
+    }
+    if (hasClaimPhrase(s)) return false;
+    return true;
+  });
+  return kept.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 export function dropClaimSentencesFromHtml(html: string): string {
   if (!html) return '';
   // Process paragraphs
