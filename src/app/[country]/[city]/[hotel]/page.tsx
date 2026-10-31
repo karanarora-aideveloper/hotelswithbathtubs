@@ -216,33 +216,73 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     }
   }
 
-  // Target title under 65 chars: shorten tub type to first part or simplify, never cut mid-word or append "..."
-  const shortTub = tubType.split(/\s*(?:&|and|,|\/|\+)\s*/i)[0].trim() || 'Bathtub';
-  const titleCandidates = [
-    `${displayName} – Room with ${tubType}, ${cityName}`,
-    `${displayName} – ${tubType}, ${cityName}`,
-    `${displayName} – Room with ${shortTub}, ${cityName}`,
-    `${displayName} – ${shortTub}, ${cityName}`,
-    `${displayName} – Bathtub, ${cityName}`,
-    `${displayName}, ${cityName}`,
-    displayName,
-  ];
+  let pageTitle: string;
+  let pageDescription: string;
 
-  let pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
+  if (hotel.bathtubConfirmed !== true) {
+    const reportedTitle = `${displayName} – Bathtub reported, ${cityName}`;
+    const fallbackTitle = `${displayName}, ${cityName}`;
+    if (reportedTitle.length <= 65) {
+      pageTitle = reportedTitle;
+    } else if (fallbackTitle.length <= 65) {
+      pageTitle = fallbackTitle;
+    } else {
+      pageTitle = displayName.slice(0, 65);
+    }
 
-  const roomType = hotel.roomType || 'Room with Bathtub';
-  let pageDescription = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for an in-room ${tubType.toLowerCase()}.`;
-  if (pageDescription.length > 155) {
-    pageDescription = `Book the ${roomType} at ${displayName}, ${cityName} for an in-room ${tubType.toLowerCase()}.`;
-    if (pageDescription.length > 155) {
-      pageDescription = `Private in-room ${tubType.toLowerCase()} at ${displayName} in ${cityName}.`;
-      if (pageDescription.length > 155) {
-        pageDescription = `In-room bathtub at ${displayName}, ${cityName}.`;
-        if (pageDescription.length > 155) {
-          pageDescription = `Hotel rooms with in-room bathtubs in ${cityName}.`;
+    let roomPhrase = 'in some rooms';
+    if (hotel.roomType && hotel.roomType.trim()) {
+      const rt = hotel.roomType.trim();
+      if (/^the\s+/i.test(rt) || /^some\s+rooms/i.test(rt)) {
+        roomPhrase = `in ${rt}`;
+      } else {
+        roomPhrase = `in the ${rt}`;
+      }
+    }
+    const rawDesc = `${displayName} in ${cityName}. A bathtub or jetted tub is reported ${roomPhrase}; check the room details before you book.`;
+    if (rawDesc.length <= 155) {
+      pageDescription = rawDesc;
+    } else {
+      const cut = rawDesc.slice(0, 155);
+      const lastSpace = cut.lastIndexOf(' ');
+      if (lastSpace > 0) {
+        let trimmed = cut.slice(0, lastSpace).replace(/[,;:\s]+$/, '');
+        if (!/[.!?]$/.test(trimmed)) trimmed += '.';
+        pageDescription = trimmed;
+      } else {
+        pageDescription = cut;
+      }
+    }
+  } else {
+    // Target title under 65 chars: shorten tub type to first part or simplify, never cut mid-word or append "..."
+    const shortTub = tubType.split(/\s*(?:&|and|,|\/|\+)\s*/i)[0].trim() || 'Bathtub';
+    const titleCandidates = [
+      `${displayName} – Room with ${tubType}, ${cityName}`,
+      `${displayName} – ${tubType}, ${cityName}`,
+      `${displayName} – Room with ${shortTub}, ${cityName}`,
+      `${displayName} – ${shortTub}, ${cityName}`,
+      `${displayName} – Bathtub, ${cityName}`,
+      `${displayName}, ${cityName}`,
+      displayName,
+    ];
+
+    pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
+
+    const roomType = hotel.roomType || 'Room with Bathtub';
+    let pDesc = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for an in-room ${tubType.toLowerCase()}.`;
+    if (pDesc.length > 155) {
+      pDesc = `Book the ${roomType} at ${displayName}, ${cityName} for an in-room ${tubType.toLowerCase()}.`;
+      if (pDesc.length > 155) {
+        pDesc = `Private in-room ${tubType.toLowerCase()} at ${displayName} in ${cityName}.`;
+        if (pDesc.length > 155) {
+          pDesc = `In-room bathtub at ${displayName}, ${cityName}.`;
+          if (pDesc.length > 155) {
+            pDesc = `Hotel rooms with in-room bathtubs in ${cityName}.`;
+          }
         }
       }
     }
+    pageDescription = pDesc;
   }
 
   const hotelSlug = slugify(hotel.slug || hotel.name);
@@ -349,7 +389,9 @@ export default async function HotelDetailPage({
     ...(schemaPrice ? {
       "makesOffer": {
         "@type": "Offer",
-        "name": `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`,
+        "name": hotel.bathtubConfirmed === true
+          ? `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`
+          : `${hotel.roomType || 'Room'} at ${hotel.name}`,
         "description": hotel.bathtubConfirmed === true
           ? `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`
           : `Room with a reported bathtub (not yet confirmed) in ${cityName}`,

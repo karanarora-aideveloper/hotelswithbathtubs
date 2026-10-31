@@ -529,11 +529,18 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     countPhrase = `We list ${rCount} ${cityName} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'} with a bathtub in the room`;
   }
 
+  const confirmedHotels = hotels.filter((h) => h.bathtubConfirmed === true);
+  const unconfirmedHotels = hotels.filter((h) => h.bathtubConfirmed !== true);
+  const confirmedCount = confirmedHotels.length;
+  const unconfirmedCount = unconfirmedHotels.length;
+  const allConfirmed = unconfirmedCount === 0;
+
   let jacuzziMix = 0;
   let clawfootMix = 0;
   let soakingMix = 0;
   let enSuiteMix = 0;
-  for (const h of hotels) {
+  const breakdownSource = allConfirmed ? hotels : confirmedHotels;
+  for (const h of breakdownSource) {
     if (isJacuzziRoom(h)) jacuzziMix++;
     else if (/clawfoot/i.test(h.tubType || '')) clawfootMix++;
     else if (/soak|deep|freestanding|marble/i.test(h.tubType || '')) soakingMix++;
@@ -551,7 +558,19 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   else if (tubParts.length === 2) tubPhrase = `${tubParts[0]} and ${tubParts[1]}`;
   else if (tubParts.length >= 3) tubPhrase = `${tubParts.slice(0, -1).join(', ')}, and ${tubParts[tubParts.length - 1]}`;
 
-  const introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
+  let introSentence1 = '';
+  if (allConfirmed) {
+    introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
+  } else {
+    const hotelNoun = hCount === 1 ? 'hotel' : 'hotels';
+    const baseSentence = `We list ${hCount} ${cityName} ${hotelNoun} where a bathtub is listed or reported: ${confirmedCount} confirmed on a booking site, ${unconfirmedCount} reported but not yet confirmed.`;
+    if (confirmedCount > 0 && tubPhrase) {
+      const confirmedNoun = confirmedCount === 1 ? 'The confirmed hotel includes' : 'The confirmed hotels include';
+      introSentence1 = `${baseSentence} ${confirmedNoun} ${tubPhrase}.`;
+    } else {
+      introSentence1 = baseSentence;
+    }
+  }
 
   // N1: Unify neighbourhood extraction across Intro (M4), "Where to stay" (M5), and FAQ (M6)
   const neighborhoodHotelMap = new Map<string, typeof hotels>();
@@ -800,7 +819,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       {/* Editorial & Affiliate Disclosure */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
         <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-          <strong>Reader Disclosure:</strong> When you book through our partner links on Booking.com, Agoda{countrySlug === 'india' ? ', or MakeMyTrip' : ', or partner networks'}, we may earn an affiliate commission at zero additional cost to you. We recommend rooms listed with private in-room bathtubs.
+          We earn a commission if you book through our links, at no extra cost to you.
         </p>
       </div>
 

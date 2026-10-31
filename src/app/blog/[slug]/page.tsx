@@ -673,6 +673,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     All {matchedCountryName} Stays &rarr;
                   </Link>
                 </div>
+                <p className="text-xs text-text-muted text-center mt-6">
+                  We earn a commission if you book through our links, at no extra cost to you.
+                </p>
               </div>
             )}
 

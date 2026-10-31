@@ -11,6 +11,7 @@ import NavigationProgressBar from "@/components/NavigationProgressBar";
 import GoogleAnalyticsProvider from '@/components/GoogleAnalyticsProvider';
 import InternalTrafficBadge from '@/components/InternalTrafficBadge';
 import ChunkErrorRecovery from '@/components/ChunkErrorRecovery';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -103,6 +104,34 @@ export default function RootLayout({
           </main>
 
           <Footer />
+          <script
+            id="google-consent-mode-init"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('consent', 'default', {
+                  analytics_storage: 'denied',
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied',
+                  region: ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK']
+                });
+                gtag('consent', 'default', {
+                  analytics_storage: 'granted',
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied'
+                });
+                try {
+                  var saved = localStorage.getItem('hwb_consent');
+                  if (saved === 'granted' || saved === 'denied') {
+                    gtag('consent', 'update', { analytics_storage: saved });
+                  }
+                } catch (e) {}
+              `,
+            }}
+          />
           {gaId && (
             <>
               <Script
@@ -126,6 +155,7 @@ export default function RootLayout({
             </>
           )}
           <GoogleAnalyticsProvider gaId={gaId} />
+          <CookieConsentBanner />
           <InternalTrafficBadge />
       </body>
     </html>

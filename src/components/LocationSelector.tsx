@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-
-function titleCase(str: string) {
-  return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-}
+import { titleCase } from '@/lib/utils';
 
 // Static top-level routes that are NOT /{country}/{city} pages — the
 // selector shouldn't try to read a location out of these.

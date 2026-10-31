@@ -1600,6 +1600,9 @@ export default function CityHotelsClient({
             );
           })}
         </div>
+        <p className="text-xs text-gray-500 text-center mt-8 mb-2">
+          We earn a commission if you book through our links, at no extra cost to you.
+        </p>
         {visibleCount < filteredHotels.length && (
           <div ref={observerTarget} className="w-full h-20 flex items-center justify-center mt-8">
             <div className="w-6 h-6 border-2 border-[#1a6fde] border-t-transparent rounded-full animate-spin"></div>

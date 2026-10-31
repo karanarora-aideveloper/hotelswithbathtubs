@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from './Logo';
 import { getDestinationsDirectory } from '@/lib/destinationsDirectory';
+import CookieSettingsButton from './CookieSettingsButton';
 
 // Slim footer (decision D7): about 30 links instead of 226. The full city and country lists
 // live on the /destinations hub page.
@@ -140,6 +141,7 @@ export default async function Footer() {
               <Link href="/privacy" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Privacy</Link>
               <Link href="/terms" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Terms</Link>
               <Link href="/cookies" prefetch={false} className="text-text-muted hover:text-accent font-medium transition-colors">Cookies</Link>
+              <CookieSettingsButton />
             </div>
           </div>
           <p className="text-center text-xs text-text-muted/70 pt-3">

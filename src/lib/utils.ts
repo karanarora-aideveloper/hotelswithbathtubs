@@ -1,3 +1,5 @@
+import { US_STATE_CODES } from './usStates';
+
 /**
  * Slugifies a given text string (e.g., replaces spaces/special characters with hyphens).
  */
@@ -17,13 +19,20 @@ export function slugify(text: string): string {
 }
 
 /**
- * Capitalizes the first letter of each word in a hyphenated or spaced string.
+ * Capitalizes the first letter of each word in a hyphenated or spaced string,
+ * while keeping US state postal abbreviations (e.g. MO, GA, ME) uppercase.
  */
 export function titleCase(str: string): string {
   if (!str) return '';
-  return str
-    .split(/[- ]+/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+  const words = str.split(/[- ]+/);
+  return words
+    .map((word, index) => {
+      const upper = word.toUpperCase();
+      if (index === words.length - 1 && word.length === 2 && US_STATE_CODES.has(upper)) {
+        return upper;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
     .join(' ');
 }
 
