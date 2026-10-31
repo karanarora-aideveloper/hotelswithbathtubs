@@ -60,18 +60,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       : `https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/${firstHotel.image.split('/').pop()}`
     : 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp';
 
-  // SERP-optimised title: front-loaded, year for freshness, trust hook
-  // India gets shorter title (was 80 chars, Google truncates at ~60) 
-  const allConfirmed = hotelCount > 0 && unconfirmedCount === 0;
+  // SERP-optimised title: front-loaded, year for freshness, under 65 chars
   const currentYear = new Date().getFullYear();
-  const standardTitle = allConfirmed
-    ? `Best Hotels with Bathtub in ${countryName} (${currentYear}) | Verified Stays`
-    : `Best Hotels with Bathtub in ${countryName} (${currentYear})`;
-  const pageTitle = countrySlug === 'india'
-    ? `Best Hotels with Bathtub & Jacuzzi in India (${currentYear})`
-    : standardTitle.length <= 60
-    ? standardTitle
-    : `Best Hotels with Bathtub in ${countryName} (${currentYear})`;
+  const baseTitle = `Best Hotels with a Bathtub in ${countryName} (${currentYear})`;
+  const brandedTitle = `${baseTitle} | Hotels with Bathtubs`;
+  const pageTitle = brandedTitle.length <= 65 ? brandedTitle : baseTitle;
   const pageDescription = `Discover ${hotelCount}+ hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Ideal for romantic stays.`;
 
   return {
@@ -297,8 +290,8 @@ export default async function CountryHubPage({
       a: `Top popular destinations for bathtub and jacuzzi stays in ${countryName} include ${topCitiesNames}. Each offers a diverse selection of luxury 5-star suites and boutique retreats.`
     },
     {
-      q: `How do I ensure my room category includes a private bathtub?`,
-      a: `When booking through our partner links, check that your chosen room tier (such as "Jacuzzi Suite", "Executive Room with Bathtub", or "Luxury Spa Villa") explicitly lists the private bathtub amenity before confirming your reservation.`
+      q: `How do I make sure my room definitely has a bathtub?`,
+      a: `Check that the room you pick lists a bathtub before you book.`
     }
   ];
 

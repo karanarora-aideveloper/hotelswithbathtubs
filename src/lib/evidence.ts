@@ -176,11 +176,7 @@ export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[
   if (tip && !hasClaimPhrase(tip)) {
     return tip.trim();
   }
-  const partnersText = linkedPartners && linkedPartners.length > 0
-    ? linkedPartners.join(', ')
-    : 'booking partner channels';
-  const room = roomType || 'room';
-  return `Book the ${room} on ${partnersText} and check that 'Bathtub' is listed in the room details before you pay.`;
+  return '';
 }
 
 export function buildDataDescription(h: {

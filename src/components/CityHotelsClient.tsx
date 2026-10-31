@@ -1504,12 +1504,16 @@ export default function CityHotelsClient({
                   )}
 
                   {/* Booking Tip (Compact) */}
-                  {h.bookingTip && (
-                    <div className="hidden sm:flex bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug items-start gap-1.5">
-                      <span className="shrink-0 text-xs">💡</span>
-                      <span className="line-clamp-2"><strong>Tip:</strong> {sanitizeBookingTip(h.bookingTip, getLinkedPartners(h))}</span>
-                    </div>
-                  )}
+                  {(() => {
+                    const tip = sanitizeBookingTip(h.bookingTip, getLinkedPartners(h));
+                    if (!tip) return null;
+                    return (
+                      <div className="hidden sm:flex bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug items-start gap-1.5">
+                        <span className="shrink-0 text-xs">💡</span>
+                        <span className="line-clamp-2"><strong>Tip:</strong> {tip}</span>
+                      </div>
+                    );
+                  })()}
 
                   {/* Amenities Chips (Modern compact tags) */}
                   {(() => {

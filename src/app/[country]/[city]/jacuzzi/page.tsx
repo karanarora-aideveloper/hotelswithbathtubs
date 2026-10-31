@@ -268,35 +268,32 @@ export default async function CityJacuzziHotelsPage({
     })
   };
 
+  const faqItems = [
+    {
+      question: `Which hotels in ${cityName} offer private in-room jacuzzis?`,
+      answer: `Hotels in ${cityName} featuring private in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}.`
+    },
+    {
+      question: `How do I make sure my room definitely has a jacuzzi?`,
+      answer: `Check that the room you pick lists a jacuzzi or whirlpool before you book.`
+    },
+    {
+      question: `What is the difference between a soaking tub and a jacuzzi?`,
+      answer: `A soaking tub is a deep bath designed for still immersion, while a jacuzzi or whirlpool features powered jets providing massage bubbles.`
+    }
+  ];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `Which hotels in ${cityName} offer the best private jacuzzi in room?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Hotels in ${cityName} with in-room jacuzzis include ${hotels.slice(0, 3).map(h => h.name).join(', ')}. Each listing includes direct room category guidance.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `How do I ensure I get the jacuzzi room when booking online?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `Standard base rooms rarely have hydrotherapy jets. When clicking through our partner links, select rooms titled "Jacuzzi Suite", "Whirlpool King", "Presidential Suite", or "Spa Villa" where the room amenities explicitly state private hot tub or whirlpool.`
-        }
-      },
-      {
-        "@type": "Question",
-        "name": `What is the difference between a soaking tub and a jacuzzi in ${cityName}?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": `A soaking tub is a deep, free-standing bath designed for peaceful immersion without mechanical jets. A jacuzzi or whirlpool features powered motorized water jets, air bubbles, and hydrotherapy massage systems designed for relaxation and muscle relief.`
-        }
+    "mainEntity": faqItems.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
       }
-    ]
+    }))
   };
 
   return (
@@ -381,7 +378,6 @@ export default async function CityJacuzziHotelsPage({
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
               Top hotel suites featuring private in-room whirlpool jacuzzis in {cityName} include{' '}
               <strong className="text-gray-900 font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-              All {hotels.length} properties featured below include room tier details to help you book a private whirlpool or hot tub directly in your quarters.
             </p>
           </div>
         </div>
@@ -418,22 +414,16 @@ export default async function CityJacuzziHotelsPage({
             Frequently Asked Questions: Jacuzzi Hotels in {cityName}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
-                How do I select the exact jacuzzi room?
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                When clicking our partner links, be sure to reserve the specific suite tier (such as &quot;Whirlpool Suite&quot;, &quot;Jacuzzi Room&quot;, or &quot;Spa Villa&quot;) rather than the baseline standard room.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
-                What is the difference between a soaking bath and a jacuzzi?
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Soaking baths are deep, still water baths. Jacuzzis and whirlpools include powered motorized jets providing hydrotherapy and soothing massage bubbles.
-              </p>
-            </div>
+            {faqItems.map((item, idx) => (
+              <div key={idx}>
+                <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-2">
+                  {item.question}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  {item.answer}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 

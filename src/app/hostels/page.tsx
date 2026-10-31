@@ -417,9 +417,6 @@ export default async function HostelsHubPage() {
                   <strong>Affordable Indulgence:</strong> 5-star resorts charge ₹15,000 to ₹35,000+ per night for rooms with bathtubs. 
                   Boutique poshtels deliver private soaking tubs and jacuzzi suites at a fraction of the cost (typically ₹2,500 to ₹5,500).
                 </li>
-                <li>
-                  <strong>Built for Remote Workers &amp; Couples:</strong> Enjoy dedicated co-working tables, reliable plug points, and welcoming couple-friendly check-in policies with zero invasive questioning.
-                </li>
               </ul>
             </div>
           </div>

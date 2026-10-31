@@ -618,13 +618,6 @@ export default async function HotelDetailPage({
                   <span>Location highlight: {hotel.landmarkDistance}.</span>
                 </p>
               )}
-
-              {cleanTip && (
-                <p className="flex items-start gap-2.5 bg-amber-50/70 border border-amber-200/60 rounded-xl p-3 text-amber-950">
-                  <span className="shrink-0 text-base">💡</span>
-                  <span><strong>Booking tip:</strong> {cleanTip}</span>
-                </p>
-              )}
             </div>
           </div>
 
@@ -637,21 +630,6 @@ export default async function HotelDetailPage({
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-jakarta">
                 {hotel.description}
               </p>
-            </div>
-          )}
-
-          {/* Concierge Booking Tip Callout Card */}
-          {cleanTip && (
-            <div className="bg-[#f8fafb] border border-[#5b8296]/20 rounded-2xl p-5 mb-8 flex items-start gap-3.5 shadow-2xs font-jakarta">
-              <div className="w-9 h-9 rounded-xl bg-[#8eaab9]/20 text-[#1f262d] flex items-center justify-center shrink-0 mt-0.5 font-bold text-base">
-                💡
-              </div>
-              <div className="text-sm text-slate-700 leading-relaxed">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#5b8296] block mb-0.5">
-                  Concierge Booking Advice
-                </span>
-                {cleanTip}
-              </div>
             </div>
           )}
 
@@ -699,7 +677,7 @@ export default async function HotelDetailPage({
                   What is the booking tip for {hotel.name}?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  {cleanTip}
+                  {cleanTip || 'Check that the room you pick lists a bathtub before you book.'}
                 </p>
               </div>
             </div>

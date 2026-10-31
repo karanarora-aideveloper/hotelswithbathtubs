@@ -398,8 +398,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     const termEscaped = escapeRegex(term);
     const slugEscaped = escapeRegex(term.replace(/\s+/g, '-'));
     blogOrConditions.push({ title: new RegExp(`\\b${termEscaped}\\b`, 'i') });
-    blogOrConditions.push({ slug: new RegExp(`\\b${slugEscaped}\\b`, 'i') });
-    blogOrConditions.push({ slug: new RegExp(slugEscaped, 'i') });
+    blogOrConditions.push({ slug: new RegExp(`(^|-)${slugEscaped}(-|$)`, 'i') });
   }
 
   const relatedBlogs = await Blog.find({
@@ -483,21 +482,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const lowestPriceResult = findLowestPriceHotel(hotels);
   const minPrice = lowestPriceResult?.price;
 
-  // N2: "Cheapest hotel" FAQ must name a hotel, not a vacation rental
-  const rentalList = hotels.filter((h) => isVacationRental(h));
+  // Hotel price range for typical nightly rate FAQ
   const hotelList = hotels.filter((h) => !isVacationRental(h));
-  const lowestHotelResult = findLowestPriceHotel(hotelList);
-  const cheapestHotel = lowestHotelResult?.hotel;
-  const cheapestHotelPrice = lowestHotelResult?.price;
-
-  const lowestRentalResult = findLowestPriceHotel(rentalList);
-  const cheapestRentalPrice = lowestRentalResult?.price;
-
-  const hotelMinNum = lowestHotelResult ? parsePriceNumber(lowestHotelResult.hotel.price) : null;
-  const rentalMinNum = lowestRentalResult ? parsePriceNumber(lowestRentalResult.hotel.price) : null;
-  const rentalCheaper = (rentalMinNum !== null && hotelMinNum !== null && rentalMinNum < hotelMinNum);
-
-  // N2: Hotel price range for typical nightly rate FAQ
+  const rentalList = hotels.filter((h) => isVacationRental(h));
   let minHotelNum = Infinity;
   let maxHotelNum = -Infinity;
   let minHotelPriceStr = '';
@@ -657,13 +644,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     ? `Hotels in ${cityName} featuring private in-room jacuzzis or whirlpool hydrotherapy tubs include ${jacuzziHotels.slice(0, 5).map(h => h.name).join(', ')}.`
     : `Currently, no hotels in ${cityName} offer private in-room jacuzzis or jetted whirlpool tubs. However, you can enjoy deep soaking tubs and freestanding baths at top properties including ${hotels.filter(h => !isVacationRental(h)).slice(0, 3).map(h => h.name).join(', ')}.`;
 
-  let cheapestFaqAnswer = cheapestHotel && cheapestHotelPrice
-    ? `The cheapest hotel with a bathtub in ${cityName} is ${cheapestHotel.name}, with rates starting from approximately ${cheapestHotelPrice}/night.`
-    : `Nightly rates for bathtub accommodations in ${cityName} vary from affordable boutique stays to luxury suites depending on seasonal demand and room tier.`;
-  if (rentalCheaper && cheapestRentalPrice) {
-    cheapestFaqAnswer += ` Vacation rentals start from ${cheapestRentalPrice}.`;
-  }
-
   const typicalRateFaqAnswer = (minHotelNum !== Infinity && maxHotelNum !== -Infinity)
     ? (minHotelNum < maxHotelNum
         ? `Nightly rates for hotels with a bathtub in ${cityName} typically range from ${minHotelPriceStr} to ${maxHotelPriceStr} a night, depending on the season, room category, and day of the week.`
@@ -676,20 +656,12 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const faqItems = stateConfig
     ? [
-        ...stateConfig.faqs,
-        ...(cheapestHotel && cheapestHotelPrice ? [{
-          question: `What is the typical starting rate for a bathtub suite in ${stateConfig.name}?`,
-          answer: `Nightly rates for bathtub suites in ${stateConfig.name} typically start from approximately ${cheapestHotelPrice}/night (e.g. at ${cheapestHotel.name} in ${cheapestHotel.city}), scaling to luxury 5-star spa suites depending on season and view.`
-        }] : [])
+        ...stateConfig.faqs
       ]
     : [
         {
           question: `Which hotels in ${cityName} have a jacuzzi in the room?`,
           answer: jacuzziFaqAnswer
-        },
-        {
-          question: `What is the cheapest hotel with a bathtub in ${cityName}?`,
-          answer: cheapestFaqAnswer
         },
         ...(hasWhereToStaySection ? [{
           question: `Where should I stay in ${cityName} for a hotel with a bathtub?`,
@@ -705,7 +677,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         },
         {
           question: `How do I make sure my room in ${cityName} definitely has a bathtub?`,
-          answer: `Standard base rooms often only include standing showers. When clicking through our partner links, ensure you select room categories named "Suite with Bathtub", "Jacuzzi Suite", "Executive Room", or "Royal Suite" where the amenity list explicitly itemizes a private bathtub.`
+          answer: `Check that the room you pick lists a bathtub before you book.`
         }
       ];
 
@@ -766,9 +738,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
             {stateConfig
               ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${stateConfig.name}`
-              : countrySlug === 'usa'
-              ? `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName}`
-              : `Hotels with Bathtub & Jacuzzi in ${cityName} for Couples`}
+              : `Hotels with Bathtubs, Jacuzzis & Soaking Tubs in ${cityName}`}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
             {stateConfig ? (

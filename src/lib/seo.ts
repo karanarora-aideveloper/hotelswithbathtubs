@@ -1188,7 +1188,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Iconic Hollywood history and luxury boutique properties',
       'Secluded canyon hideaways in Bel-Air and Beverly Hills',
       'Minutes from Rodeo Drive, Sunset Strip, and Pacific beaches',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1290,7 +1290,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Picturesque canal cruises and world-famous museums',
       'Boutique Nine Streets shopping and candlelit dining',
       'Unique historic canal house architecture',
-      'Clear room tier details on listed stays'
+      'Private in-room bathtubs on listed stays'
     ]
   },
 
@@ -1443,7 +1443,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Steps from iconic Pike Place Market and Seattle waterfront',
       'Romantic moody Pacific Northwest coastal ambiance',
       'Floor-to-ceiling glass views over Elliott Bay ferries',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1509,7 +1509,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Car-free alpine village with horse-drawn carriage charm',
       'World-class glacier skiing and scenic mountain railways',
       'Cozy wood-burning fireplaces and warm hydrotherapy baths',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1661,7 +1661,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Effortless 20-minute speedboat access from Gateway of India',
       'Exclusive coastal celebrity retreat and weekend getaway',
       'Sprawling tropical pool resorts and intimate private villas',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1712,7 +1712,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Gujarat’s sole hill station with pleasant year-round mountain climate',
       'Saputara Lake boating, ropeway rides, and sunset viewpoints',
       'Peaceful weekend respite for couples from Surat, Ahmedabad, and Mumbai',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1762,7 +1762,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Unrivaled live jazz, French Quarter romance, and Creole cuisine',
       'Historic 1800s landmark hotels and famous literary suites',
       'Intimate courtyard pools and private whirlpool suites',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
@@ -1864,7 +1864,7 @@ export const cityIntroContent: Record<string, { intro: string; amenities: string
       'Crystal-clear alpine lake shores and world-renowned ski slopes',
       'Cozy fireside romance for winter getaways and summer beach retreats',
       'Slope-side ski-in/ski-out five-star lodges and private cottages',
-      'Clear room tier details with private in-room bathtubs'
+      'Rooms with private in-room bathtubs'
     ]
   },
 
