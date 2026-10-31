@@ -9,7 +9,7 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
-import { dropIntroClaimSentences, dropHotelTextClaimSentences } from '@/lib/claims';
+import { dropIntroClaimSentences } from '@/lib/claims';
 import { sanitizeHotelData } from '@/lib/evidence';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
@@ -336,12 +336,8 @@ export default async function CityHotelsPage({
 
   const hotels = activeHotels.map((rawH: any) => {
     const h = sanitizeHotelData(rawH);
-    const cleanDesc = h.importBatch
-      ? (h.description ? truncateToWord(sanitizePlaceholderText(h.description), 140) : '')
-      : (h.description ? truncateToWord(dropHotelTextClaimSentences(sanitizePlaceholderText(h.description)), 140) : '');
-    const cleanTip = h.importBatch
-      ? (h.bookingTip ? truncateToWord(h.bookingTip, 120) : '')
-      : (h.bookingTip ? truncateToWord(dropHotelTextClaimSentences(h.bookingTip), 120) : '');
+    const cleanDesc = h.description ? truncateToWord(h.description, 140) : '';
+    const cleanTip = h.bookingTip ? truncateToWord(h.bookingTip, 120) : '';
     return {
       _id: h._id?.toString(),
       name: h.name,

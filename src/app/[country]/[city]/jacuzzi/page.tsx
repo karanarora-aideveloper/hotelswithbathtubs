@@ -169,7 +169,7 @@ export default async function CityJacuzziHotelsPage({
       tripUrl: h.tripUrl,
       bathtubConfirmed: h.bathtubConfirmed === true,
       amenities: h.amenities || [],
-      description: sanitizePlaceholderText(h.description || ''),
+      description: h.description || '',
       rating: h.rating,
       reviewsCount: h.reviewsCount,
       roomType: h.roomType,
@@ -238,7 +238,7 @@ export default async function CityJacuzziHotelsPage({
         "item": {
           "@type": "LodgingBusiness",
           "name": h.name,
-          "description": sanitizePlaceholderText(h.description) || `Hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
+          "description": h.description || `Hotel suite with private in-room jacuzzi whirlpool tub in ${cityName}`,
           "image": {
             "@type": "ImageObject",
             "url": imageUrl(h.image?.split('/').pop() || ''),

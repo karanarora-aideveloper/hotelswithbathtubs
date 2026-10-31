@@ -13,6 +13,7 @@ import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
 import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, sanitizeHotelData, buildDataDescription } from '@/lib/evidence';
+import { buildHotelDescription } from '@/lib/hotelText';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -269,14 +270,9 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     pageDescription = pDesc;
   }
 
-  // ROUND 13: For hotels without importBatch, apply dropHotelTextClaimSentences to description.
-  // If nothing is left, meta description must be: "{name} in {city}. A bathtub is listed for this hotel; check the room details before you book."
+  // ROUND 13B: For hotels without importBatch, use buildHotelDescription(hotel)
   if (!hotel.importBatch) {
-    if (hotel.description) {
-      pageDescription = hotel.description;
-    } else {
-      pageDescription = `${hotelName} in ${cityName}. A bathtub is listed for this hotel; check the room details before you book.`;
-    }
+    pageDescription = buildHotelDescription(hotel);
   }
 
   const hotelSlug = slugify(hotel.slug || hotel.name);
@@ -366,7 +362,7 @@ export default async function HotelDetailPage({
     "name": hotel.name,
     "description": hotel.importBatch
       ? (hotel.description || buildDataDescription(hotel))
-      : (hotel.description || `${hotel.name} in ${cityName}. A bathtub is listed for this hotel; check the room details before you book.`),
+      : buildHotelDescription(hotel),
     "image": imageUrl(hotel.image),
     "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
     "address": {

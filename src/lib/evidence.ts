@@ -1,5 +1,6 @@
 import { isJacuzziRoom } from '@/lib/utils';
-import { hasClaimPhrase, dropClaimSentences, dropHotelTextClaimSentences } from '@/lib/claims';
+import { hasClaimPhrase, dropClaimSentences } from '@/lib/claims';
+import { buildHotelDescription } from '@/lib/hotelText';
 
 export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
   if (hotel?.bathtubConfirmed === true) {
@@ -173,8 +174,7 @@ export function getEvidenceLine(hotel: {
 }
 
 export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[], roomType?: string | null): string {
-  if (!tip) return '';
-  return dropHotelTextClaimSentences(tip);
+  return 'Check that the room you pick lists a bathtub before you book.';
 }
 
 export function buildDataDescription(h: {
@@ -194,12 +194,8 @@ export function buildDataDescription(h: {
 export function sanitizeHotelData(h: any): any {
   if (!h) return h;
   if (!h.importBatch) {
-    if (h.description && typeof h.description === 'string') {
-      h.description = dropHotelTextClaimSentences(h.description);
-    }
-    if (h.bookingTip && typeof h.bookingTip === 'string') {
-      h.bookingTip = sanitizeBookingTip(h.bookingTip, getLinkedPartners(h), h.roomType);
-    }
+    h.description = buildHotelDescription(h);
+    h.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
   }
   if (Array.isArray(h.amenities)) {
     h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
