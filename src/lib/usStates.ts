@@ -67,7 +67,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
       },
       {
         question: 'How do I ensure my California hotel room has a private tub rather than a shared facility?',
-        answer: 'When booking through our partner links, always select specific room tiers labeled "Jacuzzi Suite", "Spa Tub Suite", "King Room with Soaking Tub", or "Executive Suite with Whirlpool". Standard entry-level rooms often only feature standing showers.'
+        answer: 'When booking through our partner links, always select room tiers labeled "Jacuzzi Suite", "Spa Tub Suite", "King Room with Soaking Tub", or "Executive Suite with Whirlpool". Standard entry-level rooms often only feature standing showers.'
       }
     ]
   },

@@ -466,7 +466,7 @@ export default async function HostelsHubPage() {
                 How do I ensure I get the room with the bathtub on checkout?
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Always select the specific room tier designated as &quot;Private Jacuzzi Suite&quot;, &quot;Deluxe Chalet with Bath&quot;, or &quot;En-suite Soaking Tub&quot; when booking through our partner links.
+                Always select the room tier designated as &quot;Private Jacuzzi Suite&quot;, &quot;Deluxe Chalet with Bath&quot;, or &quot;En-suite Soaking Tub&quot; when booking through our partner links.
               </p>
             </div>
           </div>

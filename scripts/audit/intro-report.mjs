@@ -72,3 +72,17 @@ sampleIndices.forEach((idx, i) => {
   console.log(`  AFTER:  ${item.filtered ? `"${item.filtered}"` : '[REMOVED COMPLETELY]'}`);
   console.log('');
 });
+
+console.log('=== Specific Requested Cities (DoD 1) ===');
+const requestedCities = ['edinburgh', 'bridgetown', 'gatlinburg', 'hong-kong', 'scottsdale'];
+for (const target of requestedCities) {
+  const found = pairs.find((p) => p.slug.toLowerCase().includes(target));
+  if (found) {
+    console.log(`City: ${found.slug}`);
+    console.log(`  BEFORE:     "${found.original}"`);
+    console.log(`  AFTER-TEXT: ${found.filtered ? `"${found.filtered}"` : '[REMOVED COMPLETELY]'}`);
+    console.log('');
+  } else {
+    console.log(`City ${target}: NOT FOUND`);
+  }
+}

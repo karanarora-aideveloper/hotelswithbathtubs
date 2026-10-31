@@ -142,15 +142,43 @@ export const INTRO_CLAIM_WORDS: string[] = [
   'all rooms',
 ];
 
-const INTRO_CLAIM_REGEXES = INTRO_CLAIM_WORDS.map(
-  (w) => new RegExp(`\\b${w.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\b`, 'i')
-);
+const INTRO_ACTION_STARTS = /^\s*["'“‘(]?\b(stay|experience|indulge|relax|discover|enjoy|unwind|escape|retreat|book)\b/i;
+const INTRO_FEATURE_WORDS = /\b(featuring|boasting|equipped with|complete with)\b/i;
+
+const INTRO_STEM_REGEXES = [
+  /\bluxur(?:y|ious|ies)\b/i,
+  /\boverlook(?:s|ing|ed)?\b/i,
+  /\bpanoram(?:a|as|ic|ically)?\b/i,
+  /\bplunge pools?\b/i,
+  /\bprivate pools?\b/i,
+  /\b(?:five|5)[- ]stars?\b/i,
+  /\bpresidential\b/i,
+  /\bbutlers?\b/i,
+  /\biconic\b/i,
+  /\bworld[- ]famous\b/i,
+  /\bfinest\b/i,
+  /\bbest\b/i,
+  /\bultimate\b/i,
+  /\bpremiere?s?\b/i,
+  /\bexclusiv(?:e|es|ely)\b/i,
+  /\b(?:awards?|award-winning|awarded)\b/i,
+  /\bmichelin\b/i,
+  /\bideal for couples?\b/i,
+  /\bperfect for couples?\b/i,
+  /\bromantic getaways?\b/i,
+  /\bprivate in-room bathtubs?\b/i,
+  /\bjacuzzi suites?\b/i,
+  /\bevery room\b/i,
+  /\ball rooms\b/i,
+];
 
 export function dropIntroClaimSentences(text: string): string {
   if (!text) return '';
   const sentences = splitIntoSentences(text);
   const kept = sentences.filter((s) => {
-    for (const re of INTRO_CLAIM_REGEXES) {
+    if (INTRO_ACTION_STARTS.test(s)) return false;
+    if (INTRO_FEATURE_WORDS.test(s)) return false;
+    for (const re of INTRO_STEM_REGEXES) {
       if (re.test(s)) return false;
     }
     if (hasClaimPhrase(s)) return false;

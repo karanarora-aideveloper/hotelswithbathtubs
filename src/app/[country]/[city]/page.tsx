@@ -17,14 +17,11 @@ import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotel
 
 export const revalidate = false;
 
-function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, minPrice?: string): string {
+function getCityMetaDescription(cityName: string, countryName: string, countrySlug: string, count: number, _minPrice?: string): string {
   const hotelWord = count === 1 ? 'hotel' : 'hotels';
   const sentences: string[] = [
     `${count} ${cityName} ${hotelWord} with a bathtub or jacuzzi in the room, with the exact room to book.`,
   ];
-  if (minPrice && minPrice.trim()) {
-    sentences.push(`From ${minPrice.trim()}/night.`);
-  }
 
   let result = '';
   for (const s of sentences) {
@@ -724,7 +721,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
               {introSentence1}
               {introSentence2 ? ` ${introSentence2}` : ''}
-              {minPrice ? ` Prices start at ${minPrice} a night.` : ''}
             </p>
           )}
 

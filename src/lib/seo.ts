@@ -5966,10 +5966,6 @@ export function generateCityPageContent(
   const amenitiesList = content.amenities.map(a => `<li><strong>${a.split(' ')[0]}</strong> ${a.slice(a.indexOf(' ') + 1)}</li>`).join('');
   const whyChooseList = content.whyChoose.map(w => `<li>${w}</li>`).join('');
 
-  const verificationSources = isIndia
-    ? 'Booking.com, Agoda, and MakeMyTrip'
-    : 'Booking.com, Agoda, and partner networks';
-
   const bookingPartners = isIndia
     ? `
       <li>Booking.com</li>
@@ -5998,9 +5994,7 @@ export function generateCityPageContent(
     ? `Jacuzzi Suites &amp; Hotels With Soaking Tubs in ${formattedCity}`
     : `Why Book a Hotel Room with a Bathtub in ${formattedCity}, ${formattedCountry}?`;
 
-  const introLine2 = isUSA
-    ? `Browse <strong>${hotelCount}+ hotels</strong> with private soaking tubs, jacuzzi suites, and in-room hot tubs in ${formattedCity} — with the specific room tier to book on ${verificationSources}.`
-    : `Explore <strong>${hotelCount}+ hotels</strong> with private in-room bathtubs in ${formattedCity} — with the specific room tier to book on ${verificationSources}.`;
+  const introLine2 = `We list ${hotelCount} hotels in ${formattedCity} with a bathtub or jacuzzi in the room.`;
 
   return `
     <h2 class="text-2xl font-bold text-gray-900 mt-6 mb-3">${h2}</h2>
