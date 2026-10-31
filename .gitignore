@@ -47,6 +47,7 @@ __pycache__/
 .pinterest_browser_profile
 .wrangler/
 .cache/
+.cache
 public/pins/
 *_files/
 web_pages/

@@ -29,12 +29,10 @@ export default function RomanticGetawayEmailCapture({
     setStatus('loading');
 
     try {
-      // Save locally to persist across sessions
-      const existing = JSON.parse(localStorage.getItem('hwb_subscribers') || '[]');
-      if (!existing.includes(email)) {
-        existing.push(email);
-        localStorage.setItem('hwb_subscribers', JSON.stringify(existing));
-      }
+      // Do not store personal data (emails) in localStorage or cookies
+      try {
+        localStorage.removeItem('hwb_subscribers');
+      } catch {}
 
       // Telemetry
       if (typeof window !== 'undefined' && (window as any).gtag) {

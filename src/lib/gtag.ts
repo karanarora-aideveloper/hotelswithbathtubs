@@ -19,6 +19,7 @@ export const GA_MEASUREMENT_ID =
   '';
 
 import { isUserExcluded } from '@/lib/exclusion';
+import { hasAnalyticsConsent } from '@/lib/consent';
 import {
   getUserRecurrenceData,
   recordSessionRecurrenceUpdate,
@@ -163,6 +164,7 @@ export const initPageSession = (
  * Record active interaction heartbeat (mouse, scroll, keypress, touch)
  */
 export const recordActiveHeartbeat = () => {
+  if (!hasAnalyticsConsent()) return;
   const now = Date.now();
   const elapsedSinceLastActive = (now - currentSession.lastActiveTime) / 1000;
   // If active within last 5 seconds, increment active time
@@ -251,6 +253,7 @@ export const recordHotelImpression = (
   position: number,
   hasPrice: boolean
 ) => {
+  if (!hasAnalyticsConsent()) return;
   if (!currentSession.viewedHotelNames.has(hotelName)) {
     currentSession.viewedHotelNames.add(hotelName);
     currentSession.hotelsViewedCount = currentSession.viewedHotelNames.size;
@@ -305,6 +308,7 @@ export const recordBookingConversion = (params: {
  * Record search with 0 results (Crucial User Pain Point)
  */
 export const recordSearchZeroResults = (searchTerm: string, source: string) => {
+  if (!hasAnalyticsConsent()) return;
   currentSession.hadSearchZeroResults = true;
   currentSession.lastFailedSearch = searchTerm;
 
@@ -320,6 +324,7 @@ export const recordSearchZeroResults = (searchTerm: string, source: string) => {
  * Record search query abandoned without selection
  */
 export const recordSearchAbandoned = (searchTerm: string, charactersTyped: number) => {
+  if (!hasAnalyticsConsent()) return;
   sendGA4Event('search_abandoned', {
     search_term: searchTerm,
     chars_count: charactersTyped,
@@ -331,6 +336,7 @@ export const recordSearchAbandoned = (searchTerm: string, charactersTyped: numbe
  * Record successful destination search selection
  */
 export const recordSearchSelection = (city: string, country: string, query: string) => {
+  if (!hasAnalyticsConsent()) return;
   sendGA4Event('search_selection', {
     selected_city: city,
     selected_country: country,
@@ -347,6 +353,7 @@ export const recordFilterDeadEnd = (
   filterQuery: string,
   cityName: string
 ) => {
+  if (!hasAnalyticsConsent()) return;
   currentSession.hadFilterDeadEnd = true;
   currentSession.lastFailedFilter = `${filterType}:${filterQuery}`;
 
@@ -362,6 +369,7 @@ export const recordFilterDeadEnd = (
  * Record filter reset after dead end
  */
 export const recordFilterReset = (cityName: string) => {
+  if (!hasAnalyticsConsent()) return;
   sendGA4Event('filter_reset', {
     city_name: cityName,
     page_path: currentSession.pagePath,
@@ -372,6 +380,7 @@ export const recordFilterReset = (cityName: string) => {
  * Record filter change
  */
 export const recordFilterChange = (filterType: string, resultCount: number) => {
+  if (!hasAnalyticsConsent()) return;
   sendGA4Event('filter_applied', {
     filter_type: filterType,
     result_count: resultCount,
@@ -384,6 +393,7 @@ export const recordFilterChange = (filterType: string, resultCount: number) => {
  * Record rage click (Rapid clicks indicating user frustration / pain point)
  */
 export const recordRageClick = (elementTag: string, elementText: string, elementClass: string) => {
+  if (!hasAnalyticsConsent()) return;
   currentSession.hadRageClick = true;
   currentSession.rageClickDetails = `${elementTag}:${elementText.slice(0, 30)}`;
 
@@ -400,6 +410,7 @@ export const recordRageClick = (elementTag: string, elementText: string, element
  * Record exit intent (Desktop user moving mouse toward close/tab bar)
  */
 export const recordExitIntent = (timeSpentSeconds: number) => {
+  if (!hasAnalyticsConsent()) return;
   sendGA4Event('exit_intent', {
     time_spent_seconds: timeSpentSeconds,
     max_scroll_depth: currentSession.maxScrollPercent,
@@ -427,6 +438,7 @@ export const record404Error = (path: string, referrer: string) => {
  */
 export const dispatchUserChurn = (explicitExitTrigger?: 'link_click' | 'tab_close_or_nav') => {
   if (!currentSession.pagePath || currentSession.churnDispatched) return;
+  if (!hasAnalyticsConsent()) return;
   currentSession.churnDispatched = true;
 
   if (explicitExitTrigger) {

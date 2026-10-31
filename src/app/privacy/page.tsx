@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">2. Outbound Partner-Click Log</h2>
           <p>
-            HotelsWithBathtubs.com provides direct links to trusted booking platforms (such as Booking.com, Agoda, and Expedia) so you can view live rates and book rooms. When you click an outbound partner link, the request passes through our redirect edge worker (<code>/out</code>).
+            HotelsWithBathtubs.com provides direct links to trusted booking platforms (such as Booking.com, Agoda, and Expedia) so you can view partner prices and book rooms. When you click an outbound partner link, the request passes through our redirect edge worker (<code>/out</code>).
           </p>
           <p>
             Our edge worker records the following technical click data:

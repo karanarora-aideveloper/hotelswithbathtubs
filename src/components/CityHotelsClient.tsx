@@ -1226,11 +1226,11 @@ export default function CityHotelsClient({
               <div className="flex items-center gap-2">
                 <span className="font-bold text-gray-900 text-sm sm:text-base">Target Travel Dates</span>
                 <span className="text-[10px] font-bold text-[#1a6fde] bg-blue-100/70 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Live Rates
+                  Partner Rates
                 </span>
               </div>
               <p className="text-xs text-gray-500 mt-0.5">
-                Pre-fills real-time check-in &amp; check-out directly into Booking.com, Agoda &amp; Expedia.
+                Pre-fills check-in &amp; check-out dates directly into Booking.com, Agoda &amp; Expedia.
               </p>
             </div>
           </div>
@@ -1550,7 +1550,7 @@ export default function CityHotelsClient({
                             About {h.price.replace(/^~\s*/, '')} a night
                           </span>
                         ) : (
-                          <span className="text-sm text-gray-500 font-medium">See live partner rates</span>
+                          <span className="text-sm text-gray-500 font-medium">See partner prices</span>
                         )}
                       </div>
                       <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} prefetch={false} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
@@ -1590,7 +1590,7 @@ export default function CityHotelsClient({
                           prefetch={false}
                           className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full"
                         >
-                          <span>View Live Rates &amp; Availability &rarr;</span>
+                          <span>View Prices &amp; Availability &rarr;</span>
                         </Link>
                       )}
                     </div>

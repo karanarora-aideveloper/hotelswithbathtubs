@@ -374,7 +374,7 @@ export default async function HostelsHubPage() {
                             source={hostel.bookingUrl ? 'Booking.com' : 'Agoda'}
                             className="px-3.5 py-1.5 rounded-xl bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold shadow-2xs transition-colors"
                           >
-                            Check Live Rate &rarr;
+                            Check Price &rarr;
                           </OutboundLink>
                         )}
                       </div>

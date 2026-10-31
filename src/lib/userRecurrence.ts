@@ -5,7 +5,14 @@
  *
  * Tracks user sessions, repeat visits, churn history, and lifetime engagement
  * without collecting any Personally Identifiable Information (PII).
+ *
+ * In the UK, EEA, and Switzerland, non-essential analytics storage is blocked
+ * until the visitor explicitly accepts cookie consent.
  */
+
+import { hasAnalyticsConsent, clearAnalyticsStorage, STORAGE_KEYS } from './consent';
+
+export { STORAGE_KEYS };
 
 export interface UserRecurrenceData {
   userId: string;
@@ -20,39 +27,51 @@ export interface UserRecurrenceData {
   previousChurnType?: string;
 }
 
-const STORAGE_KEYS = {
-  USER_ID: 'htb_uid',
-  SESSION_COUNT: 'htb_session_count',
-  FIRST_SEEN: 'htb_first_seen',
-  LAST_SEEN: 'htb_last_seen',
-  LAST_SESSION_TIME: 'htb_last_session_time',
-  LIFETIME_TIME: 'htb_lifetime_time_seconds',
-  LIFETIME_HOTELS: 'htb_lifetime_hotels_count',
-  LIFETIME_CONVERSIONS: 'htb_lifetime_conversions',
-  HAS_CONVERTED: 'htb_has_ever_converted',
-  LAST_CHURN_TYPE: 'htb_last_churn_type',
-  LAST_EXIT_LINK: 'htb_last_exit_link',
-};
-
 // Generate an anonymous unique visitor ID
 function generateAnonymousId(): string {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-    return `htb_${crypto.randomUUID()}`;
+    return `hwb_${crypto.randomUUID()}`;
   }
-  return `htb_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  return `hwb_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
 let cachedRecurrence: UserRecurrenceData | null = null;
 let sessionInitialized = false;
 
+export function resetRecurrenceCache(): void {
+  cachedRecurrence = null;
+  sessionInitialized = false;
+}
+
 /**
  * Initializes or retrieves user recurrence status for the current session.
  * A new session is counted if > 30 minutes have elapsed since the user was last active.
+ *
+ * In consent-required regions (UK/EU/CH), if consent is not granted,
+ * returns an in-memory anonymous object without writing to localStorage or cookies.
  */
-export function getUserRecurrenceData(): UserRecurrenceData {
+export function getUserRecurrenceData(
+  countryCode?: string,
+  explicitConsent?: string
+): UserRecurrenceData {
   if (typeof window === 'undefined') {
     return {
       userId: 'anonymous_ssr',
+      isReturningUser: false,
+      sessionNumber: 1,
+      daysSinceFirstVisit: 0,
+      daysSinceLastVisit: 0,
+      lifetimeTimeSpentSeconds: 0,
+      lifetimeHotelsViewed: 0,
+      lifetimeConversions: 0,
+      hasEverConverted: false,
+    };
+  }
+
+  // Check consent for UK/EU/CH
+  if (!hasAnalyticsConsent(countryCode, explicitConsent)) {
+    return {
+      userId: 'anonymous_unconsented',
       isReturningUser: false,
       sessionNumber: 1,
       daysSinceFirstVisit: 0,
@@ -165,6 +184,7 @@ export function recordSessionRecurrenceUpdate({
   lastClickedUrl?: string;
 }) {
   if (typeof window === 'undefined') return;
+  if (!hasAnalyticsConsent()) return;
 
   try {
     const currentLifetime = parseInt(localStorage.getItem(STORAGE_KEYS.LIFETIME_TIME) || '0', 10);

@@ -91,10 +91,10 @@ export default function CookiePolicy() {
                 </tr>
                 <tr>
                   <td className="p-3 font-mono text-xs border border-slate-200">hwb_user_id, hwb_session_count, hwb_first_seen, hwb_last_seen, hwb_lifetime_time, hwb_lifetime_hotels, hwb_has_converted, hwb_last_churn_type, hwb_last_exit_link</td>
-                  <td className="p-3 border border-slate-200">localStorage</td>
+                  <td className="p-3 border border-slate-200">localStorage &amp; Cookie</td>
                   <td className="p-3 border border-slate-200">Hotels With Bathtubs</td>
-                  <td className="p-3 border border-slate-200">Anonymous navigation metrics stored locally on your device to analyze usability bottlenecks and zero-result searches. They contain no names, emails, or personal identifiers.</td>
-                  <td className="p-3 border border-slate-200">Persistent until cleared</td>
+                  <td className="p-3 border border-slate-200">Anonymous navigation metrics to analyze usability bottlenecks and zero-result searches. They contain no names, emails, or personal identifiers. In the UK, EEA, and Switzerland, these are set only after you click Accept.</td>
+                  <td className="p-3 border border-slate-200">Persistent until cleared / 1 year</td>
                 </tr>
                 <tr>
                   <td className="p-3 font-mono text-xs border border-slate-200">ignore_ga, ignore_analytics</td>
@@ -106,6 +106,9 @@ export default function CookiePolicy() {
               </tbody>
             </table>
           </div>
+          <p className="mt-3 text-xs sm:text-sm text-slate-600">
+            <strong>No personal data stored:</strong> We do not keep subscriber emails, names, or payment details in browser storage (localStorage or cookies).
+          </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Outbound Partner-Click Log</h2>
           <p>

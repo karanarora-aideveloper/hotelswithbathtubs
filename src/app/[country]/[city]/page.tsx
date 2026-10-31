@@ -520,14 +520,16 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const hCount = hotelList.length;
   const rCount = rentalList.length;
 
-  let countPhrase = '';
+  let countLead = '';
   if (hCount > 0 && rCount > 0) {
-    countPhrase = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'} and ${rCount} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'} with a bathtub in the room`;
+    countLead = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'} and ${rCount} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'}`;
   } else if (hCount > 0) {
-    countPhrase = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'} with a bathtub in the room`;
+    countLead = `We list ${hCount} ${cityName} ${hCount === 1 ? 'hotel' : 'hotels'}`;
   } else if (rCount > 0) {
-    countPhrase = `We list ${rCount} ${cityName} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'} with a bathtub in the room`;
+    countLead = `We list ${rCount} ${cityName} ${rCount === 1 ? 'vacation rental' : 'vacation rentals'}`;
   }
+
+  const countPhrase = countLead ? `${countLead} with a bathtub in the room` : '';
 
   const confirmedHotels = hotels.filter((h) => h.bathtubConfirmed === true);
   const unconfirmedHotels = hotels.filter((h) => h.bathtubConfirmed !== true);
@@ -561,10 +563,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   if (allConfirmed) {
     introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
   } else {
-    const hotelNoun = hCount === 1 ? 'hotel' : 'hotels';
-    const baseSentence = `We list ${hCount} ${cityName} ${hotelNoun} where a bathtub is listed or reported: ${confirmedCount} confirmed on a booking site, ${unconfirmedCount} reported but not yet confirmed.`;
+    const baseSentence = `${countLead} where a bathtub is listed or reported: ${confirmedCount} confirmed on a booking site, ${unconfirmedCount} reported but not yet confirmed.`;
     if (confirmedCount > 0 && tubPhrase) {
-      const confirmedNoun = confirmedCount === 1 ? 'The confirmed hotel includes' : 'The confirmed hotels include';
+      const confirmedNoun = confirmedCount === 1
+        ? (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed rental includes' : 'The confirmed hotel includes')
+        : (confirmedHotels.every((h) => isVacationRental(h)) ? 'The confirmed vacation rentals include' : (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed stays include' : 'The confirmed hotels include'));
       introSentence1 = `${baseSentence} ${confirmedNoun} ${tubPhrase}.`;
     } else {
       introSentence1 = baseSentence;

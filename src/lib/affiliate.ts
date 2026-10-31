@@ -245,7 +245,7 @@ export type TripDates = {
 
 /**
  * Dynamically appends check-in, check-out, and guest counts to OTA booking URLs
- * for zero-friction real-time price lookup on partner checkout pages.
+ * for zero-friction price lookup on partner checkout pages.
  */
 export function appendTripDates(url: string, dates?: TripDates): string {
   if (!url || !dates || !dates.checkin || !dates.checkout) return url;

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { clearAnalyticsStorage } from '@/lib/consent';
+import { getUserRecurrenceData, resetRecurrenceCache } from '@/lib/userRecurrence';
 
 export const CONSENT_REGIONS = new Set([
   'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
@@ -38,8 +40,16 @@ export default function CookieConsentBanner() {
         })
         .then((data) => {
           const code = (data?.countryCode || '').toUpperCase();
+          if (data) {
+            try {
+              sessionStorage.setItem('hwb_geo', JSON.stringify(data));
+            } catch {}
+          }
           if (CONSENT_REGIONS.has(code)) {
             setIsOpen(true);
+            if (savedConsent !== 'granted') {
+              clearAnalyticsStorage();
+            }
           }
         })
         .catch(() => {
@@ -61,6 +71,9 @@ export default function CookieConsentBanner() {
         analytics_storage: 'granted',
       });
     }
+    resetRecurrenceCache();
+    getUserRecurrenceData();
+    window.dispatchEvent(new CustomEvent('hwb-consent-updated', { detail: { consent: 'granted' } }));
     setIsOpen(false);
   };
 
@@ -73,6 +86,9 @@ export default function CookieConsentBanner() {
         analytics_storage: 'denied',
       });
     }
+    clearAnalyticsStorage();
+    resetRecurrenceCache();
+    window.dispatchEvent(new CustomEvent('hwb-consent-updated', { detail: { consent: 'denied' } }));
     setIsOpen(false);
   };
 

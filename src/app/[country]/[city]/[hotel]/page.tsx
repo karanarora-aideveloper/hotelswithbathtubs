@@ -202,80 +202,64 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   const cityName = titleCase(rawCity);
   const tubType = hotel.tubType || 'Bathtub';
-  let displayName = hotel.name;
-  if (displayName.length > 40) {
-    const splitMatch = displayName.match(/^([^|•–-]+)[|•–-]/);
-    if (splitMatch && splitMatch[1].trim().length >= 5) {
-      displayName = splitMatch[1].trim();
-    }
-  }
-  if (displayName.length > 42) {
-    const lastSpace = displayName.slice(0, 42).lastIndexOf(' ');
-    if (lastSpace > 20) {
-      displayName = displayName.slice(0, lastSpace).trim();
-    }
-  }
+  const hotelName = hotel.name;
 
   let pageTitle: string;
   let pageDescription: string;
 
   if (hotel.bathtubConfirmed !== true) {
-    const reportedTitle = `${displayName} – Bathtub reported, ${cityName}`;
-    const fallbackTitle = `${displayName}, ${cityName}`;
+    const reportedTitle = `${hotelName} – Bathtub reported, ${cityName}`;
+    const fallbackTitle = `${hotelName}, ${cityName}`;
     if (reportedTitle.length <= 65) {
       pageTitle = reportedTitle;
     } else if (fallbackTitle.length <= 65) {
       pageTitle = fallbackTitle;
     } else {
-      pageTitle = displayName.slice(0, 65);
+      pageTitle = hotelName;
     }
 
-    let roomPhrase = 'in some rooms';
+    let roomPhrase = '';
     if (hotel.roomType && hotel.roomType.trim()) {
       const rt = hotel.roomType.trim();
       if (/^the\s+/i.test(rt) || /^some\s+rooms/i.test(rt)) {
-        roomPhrase = `in ${rt}`;
+        roomPhrase = ` in ${rt}`;
       } else {
-        roomPhrase = `in the ${rt}`;
+        roomPhrase = ` in the ${rt}`;
       }
     }
-    const rawDesc = `${displayName} in ${cityName}. A bathtub or jetted tub is reported ${roomPhrase}; check the room details before you book.`;
-    if (rawDesc.length <= 155) {
-      pageDescription = rawDesc;
+    const descWithRoom = roomPhrase
+      ? `${hotelName} in ${cityName}. A bathtub or jetted tub is reported${roomPhrase}; check the room details before you book.`
+      : '';
+    const descWithoutRoom = `${hotelName} in ${cityName}. A bathtub or jetted tub is reported; check the room details before you book.`;
+
+    if (descWithRoom && descWithRoom.length <= 155) {
+      pageDescription = descWithRoom;
     } else {
-      const cut = rawDesc.slice(0, 155);
-      const lastSpace = cut.lastIndexOf(' ');
-      if (lastSpace > 0) {
-        let trimmed = cut.slice(0, lastSpace).replace(/[,;:\s]+$/, '');
-        if (!/[.!?]$/.test(trimmed)) trimmed += '.';
-        pageDescription = trimmed;
-      } else {
-        pageDescription = cut;
-      }
+      pageDescription = descWithoutRoom;
     }
   } else {
     // Target title under 65 chars: shorten tub type to first part or simplify, never cut mid-word or append "..."
     const shortTub = tubType.split(/\s*(?:&|and|,|\/|\+)\s*/i)[0].trim() || 'Bathtub';
     const titleCandidates = [
-      `${displayName} – Room with ${tubType}, ${cityName}`,
-      `${displayName} – ${tubType}, ${cityName}`,
-      `${displayName} – Room with ${shortTub}, ${cityName}`,
-      `${displayName} – ${shortTub}, ${cityName}`,
-      `${displayName} – Bathtub, ${cityName}`,
-      `${displayName}, ${cityName}`,
-      displayName,
+      `${hotelName} – Room with ${tubType}, ${cityName}`,
+      `${hotelName} – ${tubType}, ${cityName}`,
+      `${hotelName} – Room with ${shortTub}, ${cityName}`,
+      `${hotelName} – ${shortTub}, ${cityName}`,
+      `${hotelName} – Bathtub, ${cityName}`,
+      `${hotelName}, ${cityName}`,
+      hotelName,
     ];
 
-    pageTitle = titleCandidates.find((c) => c.length <= 65) || displayName.slice(0, 65);
+    pageTitle = titleCandidates.find((c) => c.length <= 65) || hotelName;
 
     const roomType = hotel.roomType || 'Room with Bathtub';
-    let pDesc = `Stay at ${displayName} in ${cityName}. Book the ${roomType} for an in-room ${tubType.toLowerCase()}.`;
+    let pDesc = `Stay at ${hotelName} in ${cityName}. Book the ${roomType} for an in-room ${tubType.toLowerCase()}.`;
     if (pDesc.length > 155) {
-      pDesc = `Book the ${roomType} at ${displayName}, ${cityName} for an in-room ${tubType.toLowerCase()}.`;
+      pDesc = `Book the ${roomType} at ${hotelName}, ${cityName} for an in-room ${tubType.toLowerCase()}.`;
       if (pDesc.length > 155) {
-        pDesc = `Private in-room ${tubType.toLowerCase()} at ${displayName} in ${cityName}.`;
+        pDesc = `Private in-room ${tubType.toLowerCase()} at ${hotelName} in ${cityName}.`;
         if (pDesc.length > 155) {
-          pDesc = `In-room bathtub at ${displayName}, ${cityName}.`;
+          pDesc = `In-room bathtub at ${hotelName}, ${cityName}.`;
           if (pDesc.length > 155) {
             pDesc = `Hotel rooms with in-room bathtubs in ${cityName}.`;
           }
@@ -309,7 +293,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${displayName} with bathtub in ${cityName}`,
+          alt: `${hotelName} with bathtub in ${cityName}`,
         },
       ],
       type: 'website',
