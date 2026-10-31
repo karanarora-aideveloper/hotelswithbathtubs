@@ -533,7 +533,6 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const unconfirmedHotels = hotels.filter((h) => h.bathtubConfirmed !== true);
   const confirmedCount = confirmedHotels.length;
   const unconfirmedCount = unconfirmedHotels.length;
-  const allConfirmed = unconfirmedCount === 0;
 
   let jacuzziMix = 0;
   let clawfootMix = 0;
