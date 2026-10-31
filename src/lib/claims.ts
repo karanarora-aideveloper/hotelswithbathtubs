@@ -144,6 +144,7 @@ export const INTRO_CLAIM_WORDS: string[] = [
 
 const INTRO_ACTION_STARTS = /^\s*["'“‘(]?\b(stay|experience|indulge|relax|discover|enjoy|unwind|escape|retreat|book)\b/i;
 const INTRO_FEATURE_WORDS = /\b(featuring|boasting|equipped with|complete with)\b/i;
+const INTRO_TUB_STEMS = /\b(bathtubs?|tubs?|jacuzzis?|whirlpools?|hot[- ]tubs?|soak(?:s|ing|ed)?)\b/i;
 
 const INTRO_STEM_REGEXES = [
   /\bluxur(?:y|ious|ies)\b/i,
@@ -178,6 +179,7 @@ export function dropIntroClaimSentences(text: string): string {
   const kept = sentences.filter((s) => {
     if (INTRO_ACTION_STARTS.test(s)) return false;
     if (INTRO_FEATURE_WORDS.test(s)) return false;
+    if (INTRO_TUB_STEMS.test(s)) return false;
     for (const re of INTRO_STEM_REGEXES) {
       if (re.test(s)) return false;
     }

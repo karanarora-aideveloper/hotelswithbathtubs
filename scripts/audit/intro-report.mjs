@@ -73,9 +73,32 @@ sampleIndices.forEach((idx, i) => {
   console.log('');
 });
 
-console.log('=== Specific Requested Cities (DoD 1) ===');
-const requestedCities = ['edinburgh', 'bridgetown', 'gatlinburg', 'hong-kong', 'scottsdale'];
-for (const target of requestedCities) {
+console.log('=== Kept Intro Sentences Containing Tub Word Stems (DoD 2) ===');
+const tubStemRegex = /\b(bathtubs?|tubs?|jacuzzis?|whirlpools?|hot[- ]tubs?|soak(?:s|ing|ed)?)\b/i;
+const violations = [];
+for (const p of pairs) {
+  if (p.filtered) {
+    const keptSentences = splitIntoSentences(p.filtered);
+    for (const s of keptSentences) {
+      if (tubStemRegex.test(s)) {
+        violations.push({ slug: p.slug, sentence: s });
+      }
+    }
+  }
+}
+if (violations.length === 0) {
+  console.log('None. (0 kept sentences contain tub word stems)');
+} else {
+  console.log(`Found ${violations.length} violations:`);
+  for (const v of violations) {
+    console.log(`  - [${v.slug}]: "${v.sentence}"`);
+  }
+}
+
+console.log('');
+console.log('=== After-Text for Requested Cities (DoD 3) ===');
+const dod3Cities = ['zermatt', 'sydney', 'pune', 'kota', 'valparai'];
+for (const target of dod3Cities) {
   const found = pairs.find((p) => p.slug.toLowerCase().includes(target));
   if (found) {
     console.log(`City: ${found.slug}`);
