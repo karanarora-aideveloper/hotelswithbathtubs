@@ -76,6 +76,19 @@ function detectBlock(status, bodyText) {
   return null;
 }
 
+// Database retry helper for transient network/DNS blips
+async function withDbRetry(fn, maxRetries = 5, delayMs = 3000) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (attempt === maxRetries) throw err;
+      console.warn(`   [db-retry] DB operation failed (${err.message}). Retrying in ${delayMs / 1000}s (attempt ${attempt}/${maxRetries})...`);
+      await new Promise(r => setTimeout(r, delayMs));
+    }
+  }
+}
+
 let lastRequestTime = 0;
 
 async function honestFetch(url, slug) {
@@ -92,18 +105,26 @@ async function honestFetch(url, slug) {
   const reqTimestamp = new Date().toISOString();
   let res;
   let text = '';
-  try {
-    res = await fetch(url, {
-      headers: {
-        'User-Agent': USER_AGENT,
-        'Accept': 'application/json, text/html, */*',
-        'Accept-Language': 'en-US,en;q=0.9'
+  
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      res = await fetch(url, {
+        headers: {
+          'User-Agent': USER_AGENT,
+          'Accept': 'application/json, text/html, */*',
+          'Accept-Language': 'en-US,en;q=0.9'
+        }
+      });
+      text = await res.text();
+      break;
+    } catch (err) {
+      if (attempt === 3) {
+        lastRequestTime = Date.now();
+        throw new Error(`Network error fetching ${url}: ${err.message}`);
       }
-    });
-    text = await res.text();
-  } catch (err) {
-    lastRequestTime = Date.now();
-    throw new Error(`Network error fetching ${url}: ${err.message}`);
+      console.warn(`   [net-retry] Transient network error (${err.message}) on ${url}. Retrying in 5s (attempt ${attempt}/3)...`);
+      await new Promise(r => setTimeout(r, 5000));
+    }
   }
 
   lastRequestTime = Date.now();
@@ -470,7 +491,8 @@ async function main() {
   console.log(`\n--- STEP 4: Processing Candidates with Honest 22s Gap ---`);
   for (let idx = 0; idx < fullQueue.length; idx++) {
     const cand = fullQueue[idx];
-    const candId = cand._id.toString();
+    try {
+      const candId = cand._id.toString();
     const candName = cand.name;
     const candTown = cand.address?.locality || cand.town || '';
     const candStreet = cand.address?.street || '';
@@ -495,7 +517,7 @@ async function main() {
       continue;
     }
 
-    const liveCand = await db.collection('hotel_candidates').findOne({ _id: cand._id });
+    const liveCand = await withDbRetry(() => db.collection('hotel_candidates').findOne({ _id: cand._id }));
     const hasAgodaCheck = (liveCand?.platformChecks || []).some(c => c.platform === 'agoda.com');
     if (hasAgodaCheck) {
       console.log(`   -> Candidate already has agoda.com platformCheck, skipping.`);
@@ -584,10 +606,10 @@ async function main() {
         };
         const existingChecks = (cand.platformChecks || []).filter(c => c.platform !== 'agoda.com');
         existingChecks.push(checkEntry);
-        await db.collection('hotel_candidates').updateOne(
+        await withDbRetry(() => db.collection('hotel_candidates').updateOne(
           { _id: cand._id },
           { $set: { platformChecks: existingChecks, updatedAt: new Date().toISOString() } }
-        );
+        ));
       }
 
       // Checkpoint check
@@ -690,10 +712,10 @@ async function main() {
         };
         const existingChecks = (cand.platformChecks || []).filter(c => c.platform !== 'agoda.com');
         existingChecks.push(checkEntry);
-        await db.collection('hotel_candidates').updateOne(
+        await withDbRetry(() => db.collection('hotel_candidates').updateOne(
           { _id: cand._id },
           { $set: { platformChecks: existingChecks, updatedAt: new Date().toISOString() } }
-        );
+        ));
       }
 
       if (stats.processed > 0 && stats.processed % 1000 === 0) {
@@ -778,7 +800,7 @@ async function main() {
         fetchedAt: new Date().toISOString()
       };
 
-      await db.collection('hotel_candidates').updateOne(
+      await withDbRetry(() => db.collection('hotel_candidates').updateOne(
         { _id: cand._id },
         {
           $set: {
@@ -788,7 +810,7 @@ async function main() {
             updatedAt: new Date().toISOString()
           }
         }
-      );
+      ));
     }
 
     // Checkpoint every 1,000 processed candidates
@@ -805,7 +827,16 @@ async function main() {
         console.warn('Warning committing progress report:', gitErr.message);
       }
     }
+  } catch (err) {
+    if (err.isBlock) {
+      console.error(`🚨 CRITICAL BLOCK: ${err.message}`);
+      stopBlockError = { time: err.time, url: err.url, status: err.status, atIndex: idx + 1 };
+      stats.blocks++;
+      break;
+    }
+    console.error(`   [error] Unexpected error processing candidate ${cand.name}: ${err.message}. Continuing...`);
   }
+}
 
   // 5. Final Verification & Checkpoint Report
   const finalGapStats = getGapStats();
