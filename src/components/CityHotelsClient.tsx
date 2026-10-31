@@ -22,9 +22,9 @@ type HotelData = {
   _id?: string;
   name: string;
   slug?: string;
-  city: string;
-  country: string;
-  image: string;
+  city?: string;
+  country?: string;
+  image?: string;
   images?: string[];
   partnerImages?: string[];
   url?: string;
@@ -36,7 +36,7 @@ type HotelData = {
   mmtUrl?: string;
   airbnbUrl?: string;
   tripUrl?: string;
-  amenities: string[];
+  amenities?: string[];
   description?: string;
   rating?: number;
   reviewsCount?: number;
@@ -1416,7 +1416,7 @@ export default function CityHotelsClient({
               >
                 {/* Image & Badges */}
                 <HotelCardImage
-                  primaryImage={h.image}
+                  primaryImage={h.image || ''}
                   images={h.images}
                   partnerImages={h.partnerImages}
                   hotelName={h.name}

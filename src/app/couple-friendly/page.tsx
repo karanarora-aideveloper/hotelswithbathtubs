@@ -7,11 +7,16 @@ import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
+import dynamic from 'next/dynamic';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { getBathtubLabel } from '@/lib/evidence';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
-import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
+
+const RomanticGetawayEmailCapture = dynamic(
+  () => import('@/components/RomanticGetawayEmailCapture'),
+  { ssr: false }
+);
 
 export const revalidate = 86400; // Daily revalidation
 

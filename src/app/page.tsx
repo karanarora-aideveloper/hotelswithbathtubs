@@ -8,19 +8,7 @@ import LuxuryBathtubTypologies from '@/components/luxury/LuxuryBathtubTypologies
 import LuxuryFeaturedSuites from '@/components/luxury/LuxuryFeaturedSuites';
 import LuxuryFAQ from '@/components/luxury/LuxuryFAQ';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
-
-// Lazy-load the heavy interactive 5-step matchmaker quiz into a separate JS chunk
-const DreamSoakMatchmaker = dynamic(
-  () => import('@/components/DreamSoakMatchmaker'),
-  {
-    loading: () => (
-      <div className="min-h-[460px] flex flex-col items-center justify-center p-8 text-center bg-white rounded-3xl border border-[#E5E1D8]">
-        <div className="w-10 h-10 rounded-full border-2 border-[#1a6fde] border-t-transparent animate-spin mb-4" />
-        <p className="text-sm font-medium text-slate-600">Loading Dream Soak Matchmaker™...</p>
-      </div>
-    ),
-  }
-);
+import HomeMatchmakerSection from '@/components/HomeMatchmakerSection';
 
 // Static page generation with on-demand cache
 export const revalidate = false;
@@ -333,7 +321,7 @@ export default async function Home() {
             style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 650px' }}
           >
             <div className="border border-[#E5E1D8] rounded-3xl overflow-hidden bg-white shadow-xs">
-              <DreamSoakMatchmaker embedded={true} />
+              <HomeMatchmakerSection />
             </div>
           </section>
 

@@ -1,4 +1,4 @@
-import { US_STATE_CODES } from './usStates';
+import { US_STATE_CODES } from './usStateCodes';
 
 /**
  * Slugifies a given text string (e.g., replaces spaces/special characters with hyphens).

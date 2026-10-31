@@ -11,9 +11,14 @@ import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } from '@/lib/claims';
+import dynamic from 'next/dynamic';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
-import RomanticGetawayEmailCapture from '@/components/RomanticGetawayEmailCapture';
+
+const RomanticGetawayEmailCapture = dynamic(
+  () => import('@/components/RomanticGetawayEmailCapture'),
+  { ssr: false }
+);
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
 function toISO(dateStr: string | undefined): string {

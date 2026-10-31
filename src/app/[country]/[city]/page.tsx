@@ -4,7 +4,7 @@ import Hotel from '@/models/Hotel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
-import StructuredData from '@/components/StructuredData';
+import { safeJsonLd } from '@/components/StructuredData';
 import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
@@ -665,11 +665,26 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   return (
     <>
-      <StructuredData data={breadcrumbSchema} />
-      <StructuredData data={hotelListSchema} />
-      <StructuredData data={destinationSchema} />
-      <StructuredData data={faqSchema} />
-      <StructuredData data={speakableSchema} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(hotelListSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(destinationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(speakableSchema) }}
+      />
       {hotels[0]?.image && (
         <link rel="preload" as="image" href={imageUrl(hotels[0].image)} fetchPriority="high" />
       )}
@@ -847,11 +862,29 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
         )}
 
-        <CityHotelsClient
-          hotels={hotels}
-          cityName={cityName}
-          countryName={countryName}
-        />
+        {(() => {
+          const clientHotels = hotels.map((h, idx) => {
+            if (idx >= 24) {
+              return {
+                _id: h._id,
+                name: h.name,
+                slug: h.slug,
+                city: h.city,
+                country: h.country,
+              };
+            }
+            const { partnerImages: _unused, ...cardHotel } = h;
+            return cardHotel;
+          });
+
+          return (
+            <CityHotelsClient
+              hotels={clientHotels}
+              cityName={cityName}
+              countryName={countryName}
+            />
+          );
+        })()}
 
         {/* Full City Hotel Directory Index */}
         <section id="directory" aria-label={`Directory of all hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
