@@ -144,10 +144,11 @@ console.log(`  Bathtub:    ${bathtubCount}`);
 
 console.log('\n5 CONFIRMED EXAMPLES WITH LABELS:');
 confirmedRecords.slice(0, 5).forEach((r, idx) => {
-  console.log(`  [${idx + 1}] Name:     ${r.name}`);
-  console.log(`      Room:     ${r.roomType}`);
-  console.log(`      Labels:   [${(r.agodaTubLabels || []).join(', ')}]`);
-  console.log(`      tubType:  ${r.tubType}`);
+  console.log(`  [${idx + 1}] Name:        ${r.name}`);
+  console.log(`      Room:        ${r.roomType}`);
+  console.log(`      Labels:      [${(r.agodaTubLabels || []).join(', ')}]`);
+  console.log(`      tubType:     ${r.tubType}`);
+  console.log(`      Description: "${r.description}"`);
 });
 
 let towns1 = 0;

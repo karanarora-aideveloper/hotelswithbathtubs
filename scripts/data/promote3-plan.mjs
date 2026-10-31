@@ -1,5 +1,5 @@
 // scripts/data/promote3-plan.mjs
-// PROMOTE3-PREP: Plan promotion of Agoda-matched US hotels into the hotels collection.
+// PROMOTE3-PREP-B: Strict planning for Agoda hotels promotion.
 // READ-ONLY: No database writes and no web requests.
 
 import fs from 'fs';
@@ -34,7 +34,7 @@ await client.connect();
 const db = client.db();
 
 console.log('=============================================================');
-console.log('>>> PROMOTE3 PLANNER (Agoda Hotels Promotion Preparation)');
+console.log('>>> PROMOTE3 PLANNER (Agoda Hotels Promotion Preparation — Kit B)');
 console.log('Mode: READ-ONLY (No database writes, no network requests)');
 console.log('=============================================================\n');
 
@@ -57,9 +57,12 @@ function slugify(name) {
     .replace(/^-+|-+$/g, '');
 }
 
-function extractStreetNumber(str) {
-  if (!str) return null;
-  const m = str.match(/\b(\d+)\b/);
+// Extract street number from street line or full address
+// Looks only at the street segment (before commas) to prevent grabbing zip codes (e.g. 37738)
+function extractStreetNumberFromAddress(addr) {
+  if (!addr) return null;
+  const streetPart = addr.split(',')[0].trim();
+  const m = streetPart.match(/^\s*(\d+[A-Za-z]?)\b/) || streetPart.match(/\b(\d+)\b/);
   return m ? m[1] : null;
 }
 
@@ -120,6 +123,7 @@ const candidateMap = new Map(candidateDocs.map(c => [c._id.toString(), c]));
 
 // 8. Classify all results into Safe vs Hold
 const holdByReason = {
+  no_street_number: [],
   wrong_hotel_street_mismatch: [],
   wrong_hotel_name_mismatch: [],
   wrong_hotel_other: [],
@@ -136,6 +140,10 @@ const safeRecords = [];
 const seenBatchAgodaUrls = new Set();
 const seenBatchCandidateIds = new Set();
 const usedSlugs = new Set([...liveSlugs, ...redirectSources]);
+
+// Proof regexes
+const tubNameRegex = /\b(bathtub|jacuzzi|whirlpool|hot\s+tub|spa\s+bath|spa\s+tub|jetted\s+tub)\b/i;
+const jettedKeywordRegex = /\b(jacuzzi|whirlpool|hot\s+tub|spa\s+bath|spa\s+tub|jetted\s+tub)\b/i;
 
 // First pass on towns to detect cross-state clashes within this batch
 const townSlugStates = new Map();
@@ -158,6 +166,13 @@ for (const [s, states] of townSlugStates.entries()) {
   }
 }
 
+// Track proof types for confirmed hotels
+const proofTypeCounts = {
+  label_whirlpool_bathtub: 0,
+  label_bathtub: 0,
+  room_name_only: 0
+};
+
 // Evaluation loop
 for (const r of allResults) {
   const cand = candidateMap.get(r.hotelId);
@@ -166,6 +181,9 @@ for (const r of allResults) {
   const candStreet = r.street || cand?.address?.street || '';
   const candState = cand?.address?.region || cand?.state || '';
   const agodaUrl = cleanHotelUrl(r.agodaUrl);
+
+  const candStreetNum = extractStreetNumberFromAddress(candStreet);
+  const agodaStreetNum = extractStreetNumberFromAddress(r.agodaAddress);
 
   // Status check: if not found in collector
   if (r.status === 'not_found') {
@@ -181,7 +199,15 @@ for (const r of allResults) {
 
   // Status check: wrong_hotel (F1 failed)
   if (r.status === 'wrong_hotel' || r.f1Check?.pass === false) {
-    const f1Reason = r.f1Check?.reason || 'f1_check_failed';
+    let f1Reason = r.f1Check?.reason || 'f1_check_failed';
+
+    // Step 5: Fix street-mismatch reason: when Agoda's address has no street number, use agoda_no_street_number
+    if (!agodaStreetNum) {
+      f1Reason = 'agoda_no_street_number';
+    } else if (f1Reason.startsWith('street_number_mismatch')) {
+      f1Reason = `street_number_mismatch_${candStreetNum}_vs_${agodaStreetNum}`;
+    }
+
     const entry = {
       hotelId: r.hotelId,
       name: candName,
@@ -191,13 +217,30 @@ for (const r of allResults) {
       agodaUrl: r.agodaUrl || '',
       reason: f1Reason
     };
-    if (f1Reason.startsWith('street_number_mismatch')) {
+
+    if (f1Reason.startsWith('street_number_mismatch') || f1Reason === 'agoda_no_street_number') {
       holdByReason.wrong_hotel_street_mismatch.push(entry);
     } else if (f1Reason.startsWith('name_mismatch')) {
       holdByReason.wrong_hotel_name_mismatch.push(entry);
     } else {
       holdByReason.wrong_hotel_other.push(entry);
     }
+    continue;
+  }
+
+  // Step 1: Hold if no street number on either side or name_and_town_match_no_street_num
+  if (r.f1Check?.reason === 'name_and_town_match_no_street_num' || !candStreetNum || !agodaStreetNum) {
+    holdByReason.no_street_number.push({
+      hotelId: r.hotelId,
+      name: candName,
+      town: candTown,
+      candStreet,
+      candStreetNum,
+      agodaAddress: r.agodaAddress || '',
+      agodaStreetNum,
+      agodaUrl: r.agodaUrl || '',
+      originalReason: r.f1Check?.reason || 'missing_street_number'
+    });
     continue;
   }
 
@@ -311,29 +354,89 @@ for (const r of allResults) {
   seenBatchCandidateIds.add(r.hotelId);
   seenBatchAgodaUrls.add(agodaUrl);
 
-  // Tub wording & Confirmation
-  const isConfirmed = r.hasTubRoom === true && (r.tubRooms || []).length > 0;
+  // STEP 2 & 3: Strict Room Proof Evaluation & Room Selection Hierarchy
+  const rooms = r.rooms || [];
+  const countingRooms = [];
+
+  for (const rm of rooms) {
+    const rName = (rm.roomName || '').trim();
+    const rawLabels = rm.tubPhrases || [];
+
+    // Strict proof criteria:
+    // a room counts only if its labels include exactly "Bathtub" or "Whirlpool bathtub",
+    // or its name contains bathtub, jacuzzi, whirlpool, hot tub, spa bath, spa tub or jetted tub.
+    // "Separate shower/bathtub", "Bathtub grab bar" and "Bathtub seat" do NOT count on their own.
+    const hasBathtubLabel = rawLabels.includes('Bathtub');
+    const hasWhirlpoolLabel = rawLabels.includes('Whirlpool bathtub');
+    const hasTubInName = tubNameRegex.test(rName);
+
+    if (hasBathtubLabel || hasWhirlpoolLabel || hasTubInName) {
+      const countingLabels = [];
+      if (hasBathtubLabel) countingLabels.push('Bathtub');
+      if (hasWhirlpoolLabel) countingLabels.push('Whirlpool bathtub');
+      if (hasTubInName && !hasBathtubLabel && !hasWhirlpoolLabel) {
+        countingLabels.push('room name');
+      }
+
+      countingRooms.push({
+        roomName: rName,
+        countingLabels,
+        hasTubInName,
+        hasShowerInName: /shower/i.test(rName)
+      });
+    }
+  }
+
+  // Room Selection Hierarchy (Step 3):
+  // 1. first, a counting room whose name mentions the tub
+  let chosenRoom = countingRooms.find(cr => cr.hasTubInName);
+
+  // 2. otherwise, the first counting room whose name doesn't contain "shower"
+  if (!chosenRoom) {
+    chosenRoom = countingRooms.find(cr => !cr.hasShowerInName);
+  }
+
+  // 3. if every counting room's name contains "shower" (or no counting rooms), plan the hotel as "reported" with no room name
+  const isConfirmed = !!chosenRoom;
   let roomType = '';
-  let tubLabels = [];
+  let agodaTubLabels = [];
   let tubType = '';
   let amenities = [];
   let description = '';
 
   if (isConfirmed) {
-    const firstTubRoom = r.tubRooms[0];
-    roomType = (firstTubRoom?.roomName || '').split('\n')[0].replace(/\s+/g, ' ').trim();
-    tubLabels = firstTubRoom?.labels || r.tubPhrases || [];
+    roomType = chosenRoom.roomName.split('\n')[0].replace(/\s+/g, ' ').trim();
+    agodaTubLabels = chosenRoom.countingLabels;
 
-    const roomLower = roomType.toLowerCase();
-    const hasJettedInRoom = /(?:jacuzzi|whirlpool|jetted|hot\s+tub|spa\s+tub|spa\s+bath)/i.test(roomLower);
-    const hasJettedInLabels = tubLabels.some(l => /(?:jacuzzi|whirlpool|jetted|hot\s+tub|spa\s+tub|spa\s+bath)/i.test(l));
-    tubType = (hasJettedInRoom || hasJettedInLabels) ? 'Jetted tub' : 'Bathtub';
+    // STEP 4: Exact tub word
+    const isJetted = agodaTubLabels.includes('Whirlpool bathtub') || jettedKeywordRegex.test(chosenRoom.roomName);
+    tubType = isJetted ? 'Jetted tub' : 'Bathtub';
     amenities = ['Bathtub'];
-    description = `${candName} is in ${candTown}, ${candState}. Agoda lists a bathtub or jetted tub in the ${roomType}.`;
+
+    if (isJetted) {
+      description = `${candName} is in ${candTown}, ${candState}. Agoda lists a jetted tub in the ${roomType}.`;
+    } else {
+      description = `${candName} is in ${candTown}, ${candState}. Agoda lists a bathtub in the ${roomType}.`;
+    }
+
+    // Track proof type count
+    if (agodaTubLabels.includes('Whirlpool bathtub')) {
+      proofTypeCounts.label_whirlpool_bathtub++;
+    } else if (agodaTubLabels.includes('Bathtub')) {
+      proofTypeCounts.label_bathtub++;
+    } else {
+      proofTypeCounts.room_name_only++;
+    }
   } else {
-    roomType = cand?.roomName ? cand.roomName.replace(/\s+/g, ' ').trim() : '';
+    // Hotel has no counting room or all counting rooms had shower in name -> reported
+    const candRoom = cand?.roomName ? cand.roomName.replace(/\s+/g, ' ').trim() : '';
+    // If every counting room had "shower", brief says: "plan the hotel as 'reported' with no room name"
+    const hadAllShower = countingRooms.length > 0 && countingRooms.every(cr => cr.hasShowerInName);
+    roomType = hadAllShower ? '' : candRoom;
     tubType = getTubType(cand?.tubPlacement);
     amenities = [];
+    agodaTubLabels = [];
+
     if (roomType) {
       description = `${candName} is in ${candTown}, ${candState}. A jetted tub has been reported in the ${roomType}; it isn't confirmed yet, so check the room details on Agoda before you book.`;
     } else {
@@ -393,7 +496,7 @@ for (const r of allResults) {
       { platform: 'agoda.com', result: 'found', query: r.searchQuery, checkedAt: r.processedAt }
     ],
     agodaFactsSeenAt: r.processedAt || new Date().toISOString(),
-    agodaTubLabels: tubLabels,
+    agodaTubLabels,
     _candidateId: r.hotelId,
     _firstPhotoUrl: photos[0],
     _town: candTown,
@@ -411,6 +514,7 @@ const reportedSafe = safeRecords.filter(r => !r.bathtubConfirmed);
 
 const totalHold = totalChecked - totalSafe;
 const holdCounts = {
+  no_street_number: holdByReason.no_street_number.length,
   wrong_hotel_street_mismatch: holdByReason.wrong_hotel_street_mismatch.length,
   wrong_hotel_name_mismatch: holdByReason.wrong_hotel_name_mismatch.length,
   wrong_hotel_other: holdByReason.wrong_hotel_other.length,
@@ -483,9 +587,10 @@ console.log('>>> SUMMARY OF PROMOTE3 PLANNING');
 console.log('-------------------------------------------------------------');
 console.log(`Hotels evaluated in agoda1-results.json: ${totalChecked}`);
 console.log(`\nSAFE TO PROMOTE: ${totalSafe}`);
-console.log(`  - Confirmed (Agoda tub room evidence):        ${confirmedSafe.length}`);
+console.log(`  - Confirmed (strict Agoda tub proof):         ${confirmedSafe.length}`);
 console.log(`  - Reported, not yet confirmed (source fact):  ${reportedSafe.length}`);
 console.log(`\nHOLD (Total: ${totalHold}):`);
+console.log(`  - no_street_number:                           ${holdCounts.no_street_number}`);
 console.log(`  - wrong_hotel: street mismatch:               ${holdCounts.wrong_hotel_street_mismatch}`);
 console.log(`  - wrong_hotel: name mismatch (no street num):  ${holdCounts.wrong_hotel_name_mismatch}`);
 console.log(`  - wrong_hotel: other F1 failure:              ${holdCounts.wrong_hotel_other}`);
@@ -496,44 +601,72 @@ console.log(`  - already_live in hotels (slug):              ${holdCounts.alread
 console.log(`  - duplicate_in_batch:                         ${holdCounts.duplicate_in_batch}`);
 console.log(`  - missing_agoda_url:                          ${holdCounts.missing_agoda_url}`);
 console.log(`  - no_photos:                                  ${holdCounts.no_photos}`);
-console.log(`\n(Note: If owner decides on confirmed-only promotion, the ${reportedSafe.length} unconfirmed hotels would be placed on hold under 'no tub evidence on Agoda'.)`);
 
 console.log('\n-------------------------------------------------------------');
-console.log('>>> NEW TOWNS ANALYSIS');
+console.log('>>> CONFIRMED HOTELS BY PROOF TYPE');
 console.log('-------------------------------------------------------------');
-console.log(`Total new towns in this batch: ${newTownsCounts.totalNewTowns}`);
-console.log(`  - 1 hotel (noindex until 2+):  ${newTownsCounts.size1}`);
-console.log(`  - 2-4 hotels (indexed):        ${newTownsCounts.size2to4}`);
-console.log(`  - 5+ hotels (indexed):         ${newTownsCounts.size5plus}`);
-if (newTowns.length > 0) {
-  console.log(`New towns list:`);
-  newTowns.forEach(t => {
-    const cnt = townHotelCounts[t];
-    const indexable = cnt >= 2 ? 'INDEXABLE' : 'NOINDEX (<2)';
-    console.log(`  - ${t}: ${cnt} hotel(s) [${indexable}]`);
-  });
+console.log(`Total confirmed hotels: ${confirmedSafe.length}`);
+console.log(`  - Label "Bathtub":            ${proofTypeCounts.label_bathtub}`);
+console.log(`  - Label "Whirlpool bathtub":  ${proofTypeCounts.label_whirlpool_bathtub}`);
+console.log(`  - Room Name only:             ${proofTypeCounts.room_name_only}`);
+
+console.log('\n-------------------------------------------------------------');
+console.log('>>> PROBLEM 1 VERIFICATION (Hotels held for no_street_number)');
+console.log('-------------------------------------------------------------');
+holdByReason.no_street_number.forEach((h, idx) => {
+  console.log(`[${idx + 1}] ${h.name}`);
+  console.log(`    Town:            ${h.town}`);
+  console.log(`    Our Street:      "${h.candStreet}" (Extracted Num: ${h.candStreetNum || 'null'})`);
+  console.log(`    Agoda Address:   "${h.agodaAddress}" (Extracted Num: ${h.agodaStreetNum || 'null'})`);
+  console.log(`    Status:          HOLD: no_street_number`);
+  console.log(`    Original Reason: ${h.originalReason}`);
+});
+
+console.log('\n-------------------------------------------------------------');
+console.log('>>> PROBLEM 2 & 3 VERIFICATION (Delta Denver & Amarillo West)');
+console.log('-------------------------------------------------------------');
+const deltaRecord = safeRecords.find(r => r.name.includes('Delta Hotels Denver Thornton')) ||
+  holdByReason.already_live_name_town.find(r => r.name.includes('Delta Hotels Denver Thornton')) ||
+  safeRecords.find(r => r.name.toLowerCase().includes('delta hotels denver'));
+
+const amarilloRecord = safeRecords.find(r => r.name.includes('Amarillo West'));
+
+console.log(`Hotel: Delta Hotels Denver Thornton`);
+if (deltaRecord) {
+  console.log(`  New Status:      ${deltaRecord.bathtubConfirmed ? 'CONFIRMED' : 'REPORTED (not yet confirmed)'}`);
+  console.log(`  Chosen Room:     ${deltaRecord.roomType || '(none)'}`);
+  console.log(`  agodaTubLabels:  [${(deltaRecord.agodaTubLabels || []).join(', ')}]`);
+  console.log(`  Description:     "${deltaRecord.description}"`);
+} else {
+  console.log(`  (Not found in safe records)`);
+}
+
+console.log(`\nHotel: Holiday Inn Express & Suites Amarillo West, an IHG Hotel`);
+if (amarilloRecord) {
+  console.log(`  New Status:      ${amarilloRecord.bathtubConfirmed ? 'CONFIRMED' : 'REPORTED (not yet confirmed)'}`);
+  console.log(`  Chosen Room:     ${amarilloRecord.roomType || '(none)'}`);
+  console.log(`  agodaTubLabels:  [${(amarilloRecord.agodaTubLabels || []).join(', ')}]`);
+  console.log(`  Description:     "${amarilloRecord.description}"`);
+} else {
+  console.log(`  (Not found in safe records)`);
 }
 
 console.log('\n-------------------------------------------------------------');
-console.log('>>> 10 SAMPLE "SAFE" ROWS');
+console.log('>>> 5 SAMPLE CONFIRMED ROWS WITH LABELS AND DESCRIPTION');
 console.log('-------------------------------------------------------------');
-const sampleCount = Math.min(10, safeRecords.length);
-// Deterministic sample across the array
-const step = safeRecords.length > 0 ? Math.max(1, Math.floor(safeRecords.length / sampleCount)) : 1;
-const sampleIndices = [];
-for (let i = 0; i < safeRecords.length && sampleIndices.length < sampleCount; i += step) {
-  sampleIndices.push(i);
+const confirmedSampleCount = Math.min(5, confirmedSafe.length);
+const cStep = confirmedSafe.length > 0 ? Math.max(1, Math.floor(confirmedSafe.length / confirmedSampleCount)) : 1;
+const confirmedIndices = [];
+for (let i = 0; i < confirmedSafe.length && confirmedIndices.length < confirmedSampleCount; i += cStep) {
+  confirmedIndices.push(i);
 }
-sampleIndices.forEach((idx, n) => {
-  const r = safeRecords[idx];
+confirmedIndices.forEach((idx, n) => {
+  const r = confirmedSafe[idx];
   console.log(`[${n + 1}] ${r.name}`);
-  console.log(`    Slug:       ${r.slug}`);
-  console.log(`    City/Town:  ${r.city}, USA`);
-  console.log(`    Street:     ${r.streetAddress}`);
-  console.log(`    Status:     ${r.bathtubConfirmed ? 'CONFIRMED' : 'REPORTED (unconfirmed)'}`);
-  console.log(`    Room:       ${r.roomType || '(none)'}`);
-  console.log(`    Tub Type:   ${r.tubType}`);
-  console.log(`    Agoda URL:  ${r.agodaUrl}`);
+  console.log(`    City/Town:   ${r.city}, USA`);
+  console.log(`    Room:        ${r.roomType}`);
+  console.log(`    Labels:      [${(r.agodaTubLabels || []).join(', ')}]`);
+  console.log(`    Tub Type:    ${r.tubType}`);
   console.log(`    Description: ${r.description}`);
 });
 
@@ -550,6 +683,32 @@ mismatches.forEach((m, idx) => {
   console.log(`    Agoda URL:    ${m.agodaUrl}`);
   console.log(`    F1 Reason:    ${m.reason}`);
 });
+
+const westgateMismatch = holdByReason.wrong_hotel_street_mismatch.find(m => m.name.includes('Westgate'));
+if (westgateMismatch) {
+  console.log('\n[Verification of Step 5: Westgate Smoky Mountain Resort]');
+  console.log(`  Name:         ${westgateMismatch.name}`);
+  console.log(`  Town:         ${westgateMismatch.town}`);
+  console.log(`  Our Street:   ${westgateMismatch.candStreet}`);
+  console.log(`  Agoda Street: ${westgateMismatch.agodaAddress}`);
+  console.log(`  F1 Reason:    ${westgateMismatch.reason} (fixed: no longer zip code 37738)`);
+}
+
+console.log('\n-------------------------------------------------------------');
+console.log('>>> NEW TOWNS ANALYSIS');
+console.log('-------------------------------------------------------------');
+console.log(`Total new towns in this batch: ${newTownsCounts.totalNewTowns}`);
+console.log(`  - 1 hotel (noindex until 2+):  ${newTownsCounts.size1}`);
+console.log(`  - 2-4 hotels (indexed):        ${newTownsCounts.size2to4}`);
+console.log(`  - 5+ hotels (indexed):         ${newTownsCounts.size5plus}`);
+if (newTowns.length > 0) {
+  console.log(`New towns list:`);
+  newTowns.forEach(t => {
+    const cnt = townHotelCounts[t];
+    const indexable = cnt >= 2 ? 'INDEXABLE' : 'NOINDEX (<2)';
+    console.log(`  - ${t}: ${cnt} hotel(s) [${indexable}]`);
+  });
+}
 
 console.log('\n-------------------------------------------------------------');
 console.log(`Saved planned records: ${sanitizedPlanned.length} -> ${plannedPath}`);
