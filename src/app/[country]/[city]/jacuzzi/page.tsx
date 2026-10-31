@@ -340,7 +340,7 @@ export default async function CityJacuzziHotelsPage({
             Hotels with Jacuzzi in Room in {cityName}
           </h1>
           <p className="text-sm sm:text-base md:text-lg font-medium text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-            Hotel suites featuring private hydrotherapy whirlpool jets, in-room jacuzzis, and romantic hot tubs in {cityName}, {countryName}.
+            Hotels in {cityName}, {countryName} with a jacuzzi or hot tub in the room.
           </p>
         </div>
       </header>

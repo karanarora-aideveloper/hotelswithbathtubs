@@ -55,9 +55,7 @@ function getCityPageTitle(cityName: string, countrySlug: string, citySlug: strin
     if (fallbackUs.length <= 60) return fallbackUs;
     return `Bathtub Hotels in ${cityName} (${currentYear})`;
   }
-  const roomsWord = allConfirmed
-    ? (hotelCount === 1 ? '1 Verified Room' : `${hotelCount} Verified Rooms`)
-    : (hotelCount === 1 ? '1 Room Listed' : `${hotelCount} Rooms Listed`);
+  const roomsWord = hotelCount === 1 ? '1 Room Listed' : `${hotelCount} Rooms Listed`;
   const standardTitle = `Hotels with Bathtub in ${cityName}: ${roomsWord} (${currentYear})`;
   if (standardTitle.length <= 60) {
     return standardTitle;
@@ -776,10 +774,10 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               <span className="text-2xs font-bold text-accent uppercase tracking-wider">Quick Answer</span>
             </div>
             <h2 className="font-heading text-base sm:text-lg font-bold text-accent-secondary">
-              What are the best hotels with bathtubs in {cityName}?
+              Which hotels in {cityName} have a bathtub?
             </h2>
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-              Top hotels featuring private in-room bathtubs and jacuzzi suites in {cityName} include{' '}
+              Hotels listed here include{' '}
               <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
             </p>
           </div>
@@ -833,7 +831,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   Looking specifically for In-Room Jacuzzis in {cityName}?
                 </p>
                 <p className="text-xs text-gray-600">
-                  We found {jacuzziCount} hotel suites with private whirlpool jacuzzis and hydrotherapy jets.
+                  We list {jacuzziCount} {jacuzziCount === 1 ? 'hotel' : 'hotels'} in {cityName} with a jacuzzi in the room.
                 </p>
               </div>
             </div>

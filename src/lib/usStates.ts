@@ -570,7 +570,7 @@ export const US_STATE_HUBS: Record<string, USStateConfig> = {
     ],
     faqs: [
       {
-        question: 'Where can I find the best hotels with bathtubs in Oregon?',
+        question: 'Where can I find hotels with bathtubs in Oregon?',
         answer: 'The Allison Inn & Spa in Willamette Wine Country, Sentinel Hotel in Downtown Portland (private terrace whirlpool hot tubs), and The Nines on Pioneer Square are the highest rated.'
       }
     ]
