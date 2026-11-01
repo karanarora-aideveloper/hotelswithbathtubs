@@ -180,6 +180,9 @@ const reclassStats = {
   f1PassHotels: 0,
   oldProof: 0,
   newProof: 0,
+  strength1: 0,
+  strength2: 0,
+  strength3: 0,
   oldProofNewProof: 0,
   newlyLost: [],
   newlyGained: [],
@@ -246,22 +249,37 @@ for (const r of allResults) {
   let hotelNewProof = false;
   let firstProofRoomName = '';
   let firstProofWords = [];
+  let hotelStrength = null;
 
+  const provenRooms = [];
   for (const rm of r.rooms || []) {
     const facs = (rm.tubPhrases || []).filter(p => !p.startsWith('Room Name:'));
     const tRes = classifyTub({ roomName: rm.roomName, facilities: facs });
     if (tRes.isProof) {
-      if (!hotelNewProof) {
-        hotelNewProof = true;
-        firstProofRoomName = rm.roomName;
-        firstProofWords = tRes.words;
-      }
+      provenRooms.push({
+        roomName: rm.roomName,
+        words: tRes.words,
+        strength: tRes.strength
+      });
     }
+  }
+
+  if (provenRooms.length > 0) {
+    hotelNewProof = true;
+    provenRooms.sort((a, b) => a.strength - b.strength);
+    firstProofRoomName = provenRooms[0].roomName;
+    firstProofWords = provenRooms[0].words;
+    hotelStrength = provenRooms[0].strength;
   }
 
   reclassStats.f1PassHotels++;
   if (hotelOldProof) reclassStats.oldProof++;
-  if (hotelNewProof) reclassStats.newProof++;
+  if (hotelNewProof) {
+    reclassStats.newProof++;
+    if (hotelStrength === 1) reclassStats.strength1++;
+    else if (hotelStrength === 2) reclassStats.strength2++;
+    else if (hotelStrength === 3) reclassStats.strength3++;
+  }
 
   if (hotelOldProof && hotelNewProof) {
     reclassStats.oldProofNewProof++;
@@ -279,7 +297,8 @@ for (const r of allResults) {
       name: candName,
       town: candTown,
       proofRoomName: firstProofRoomName,
-      proofWords: firstProofWords
+      proofWords: firstProofWords,
+      strength: hotelStrength
     });
   } else {
     reclassStats.oldNoNewNo++;
@@ -292,7 +311,8 @@ for (const r of allResults) {
     oldProof: hotelOldProof ? 'yes' : 'no',
     newProof: hotelNewProof ? 'yes' : 'no',
     proofRoomName: firstProofRoomName,
-    proofWords: firstProofWords.join('; ')
+    proofWords: firstProofWords.join('; '),
+    strength: hotelStrength !== null ? hotelStrength : ''
   });
 
   // Step 1: Hold if no street number on either side or name_and_town_match_no_street_num
@@ -431,30 +451,28 @@ for (const r of allResults) {
     const tubRes = classifyTub({ roomName: rName, facilities: facs });
 
     if (tubRes.isProof) {
-      const nameOnlyRes = classifyTub({ roomName: rName });
-      const hasTubInName = nameOnlyRes.isProof;
-
       countingRooms.push({
         roomName: rName,
         countingLabels: tubRes.words,
         words: tubRes.words,
-        hasTubInName,
-        hasShowerInName: /shower/i.test(rName),
+        strength: tubRes.strength,
         mayBeOutdoor: tubRes.mayBeOutdoor
       });
     }
   }
 
-  // Room Selection Hierarchy (Step 3):
-  // 1. first, a counting room whose name mentions the tub
-  let chosenRoom = countingRooms.find(cr => cr.hasTubInName);
-
-  // 2. otherwise, the first counting room whose name doesn't contain "shower"
-  if (!chosenRoom) {
-    chosenRoom = countingRooms.find(cr => !cr.hasShowerInName);
+  // Room Selection Hierarchy:
+  // Brief Step 3 & Owner grab bar decision (1 Nov 2026):
+  // When a hotel has more than one proof room, pick the room with the strongest proof (the lowest number).
+  // Break ties by keeping the first room. Save strength in the plan.
+  // There is NO roll-in-shower exclusion.
+  let chosenRoom = null;
+  if (countingRooms.length > 0) {
+    // Array.prototype.sort in Node.js (V8) is stable, preserving original room order on ties
+    countingRooms.sort((a, b) => a.strength - b.strength);
+    chosenRoom = countingRooms[0];
   }
 
-  // 3. if every counting room's name contains "shower" (or no counting rooms), plan the hotel as "reported" with no room name
   const isConfirmed = !!chosenRoom;
   let roomType = '';
   let agodaTubLabels = [];
@@ -487,11 +505,9 @@ for (const r of allResults) {
       proofTypeCounts.room_name_only++;
     }
   } else {
-    // Hotel has no counting room or all counting rooms had shower in name -> reported
+    // Hotel has no counting room -> reported
     const candRoom = cand?.roomName ? cand.roomName.replace(/\s+/g, ' ').trim() : '';
-    // If every counting room had "shower", brief says: "plan the hotel as 'reported' with no room name"
-    const hadAllShower = countingRooms.length > 0 && countingRooms.every(cr => cr.hasShowerInName);
-    roomType = hadAllShower ? '' : candRoom;
+    roomType = candRoom;
     tubType = getTubType(cand?.tubPlacement);
     amenities = [];
     agodaTubLabels = [];
@@ -536,6 +552,7 @@ for (const r of allResults) {
     latitude: lat,
     longitude: lng,
     bathtubConfirmed: isConfirmed,
+    strength: isConfirmed ? chosenRoom.strength : null,
     roomType,
     tubType,
     amenities,
@@ -630,8 +647,8 @@ fs.writeFileSync(plannedPath, JSON.stringify(sanitizedPlanned, null, 2), 'utf8')
 
 // 11. Write promote3-reclassify.csv (CEO Sheet T48 / promote3-reclassify)
 const reclassCsvPath = path.join(plannedDir, 'promote3-reclassify.csv');
-const esc = s => `"${String(s || '').replace(/"/g, '""')}"`;
-const reclassCsvHeader = 'hotel id,name,town,old proof (yes/no),new proof (yes/no),proof room name,proof words\n';
+const esc = s => `"${String(s !== null && s !== undefined ? s : '').replace(/"/g, '""')}"`;
+const reclassCsvHeader = 'hotel id,name,town,old proof (yes/no),new proof (yes/no),proof room name,proof words,strength\n';
 const reclassCsvBody = reclassRows.map(r => [
   esc(r.hotelId),
   esc(r.name),
@@ -639,7 +656,8 @@ const reclassCsvBody = reclassRows.map(r => [
   esc(r.oldProof),
   esc(r.newProof),
   esc(r.proofRoomName),
-  esc(r.proofWords)
+  esc(r.proofWords),
+  esc(r.strength)
 ].join(',')).join('\n');
 fs.writeFileSync(reclassCsvPath, reclassCsvHeader + reclassCsvBody, 'utf8');
 
@@ -795,32 +813,56 @@ if (newTowns.length > 0) {
 console.log('\n=============================================================');
 console.log('>>> DOD 2: F1-PASS RECLASSIFICATION TOTALS');
 console.log('=============================================================');
-console.log(`F1-pass hotels:           ${reclassStats.f1PassHotels}`);
-console.log(`Proof old (AGODA1 rule):  ${reclassStats.oldProof}`);
-console.log(`Proof new (classifyTub):  ${reclassStats.newProof}`);
-console.log(`proof old -> new:         ${reclassStats.oldProofNewProof}`);
-console.log(`newly lost:               ${reclassStats.newlyLost.length}`);
-console.log(`newly gained:             ${reclassStats.newlyGained.length}`);
-console.log(`old no -> new no:         ${reclassStats.oldNoNewNo}`);
+console.log(`F1-pass hotels total:             ${reclassStats.f1PassHotels}`);
+console.log(`Proven before this task (old):    ${reclassStats.oldProof}`);
+console.log(`Proven after this task (new):     ${reclassStats.newProof}`);
+console.log(`Hotels at strength 1:             ${reclassStats.strength1}`);
+console.log(`Hotels at strength 2:             ${reclassStats.strength2}`);
+console.log(`Hotels at strength 3:             ${reclassStats.strength3}`);
+console.log(`Total across strengths (1+2+3):   ${reclassStats.strength1 + reclassStats.strength2 + reclassStats.strength3}`);
+console.log(`proof old -> new:                 ${reclassStats.oldProofNewProof}`);
+console.log(`newly lost:                       ${reclassStats.newlyLost.length}`);
+console.log(`newly gained:                     ${reclassStats.newlyGained.length}`);
+console.log(`old no -> new no:                 ${reclassStats.oldNoNewNo}`);
 
 console.log('\n=============================================================');
-console.log('>>> DOD 3: NEWLY LOST & NEWLY GAINED HOTELS');
+console.log('>>> DOD 3: PLAN ROWS FOR HILTON GARDEN INN & BEST WESTERN SUITES');
 console.log('=============================================================');
-console.log(`--- EVERY NEWLY LOST HOTEL (${reclassStats.newlyLost.length} total) ---`);
-reclassStats.newlyLost.forEach((h, idx) => {
-  console.log(`[${idx + 1}] "${h.name}" in ${h.town} (ID: ${h.hotelId})`);
-  console.log(`    Disqualified labels: [${h.labels.join('; ')}]`);
-});
+const hiltonTampa = safeRecords.find(r => r.name.includes('Hilton Garden Inn Tampa East/Brandon')) ||
+  safeRecords.find(r => r.name.toLowerCase().includes('hilton garden inn tampa'));
+const bwColumbus = safeRecords.find(r => r.name.includes('Best Western Suites Columbus')) ||
+  safeRecords.find(r => r.name.toLowerCase().includes('best western suites columbus'));
 
-console.log(`\n--- NEWLY GAINED HOTELS (${reclassStats.newlyGained.length} total) ---`);
-reclassStats.newlyGained.slice(0, 10).forEach((h, idx) => {
-  console.log(`[${idx + 1}] "${h.name}" in ${h.town} (ID: ${h.hotelId})`);
-  console.log(`    Room Name: "${h.proofRoomName}"`);
-  console.log(`    Proof Words: [${h.proofWords.join('; ')}]`);
-});
+console.log('Hotel: Hilton Garden Inn Tampa East/Brandon');
+if (hiltonTampa) {
+  console.log(`  Name:           ${hiltonTampa.name}`);
+  console.log(`  City:           ${hiltonTampa.city}, ${hiltonTampa.country}`);
+  console.log(`  Status:         ${hiltonTampa.bathtubConfirmed ? 'CONFIRMED' : 'REPORTED'}`);
+  console.log(`  Chosen Room:    ${hiltonTampa.roomType}`);
+  console.log(`  Strength:       ${hiltonTampa.strength}`);
+  console.log(`  Tub Labels:     [${(hiltonTampa.agodaTubLabels || []).join(', ')}]`);
+  console.log(`  Tub Type:       ${hiltonTampa.tubType}`);
+  console.log(`  Description:    "${hiltonTampa.description}"`);
+} else {
+  console.log('  (Not found in safeRecords)');
+}
+
+console.log('\nHotel: Best Western Suites Columbus');
+if (bwColumbus) {
+  console.log(`  Name:           ${bwColumbus.name}`);
+  console.log(`  City:           ${bwColumbus.city}, ${bwColumbus.country}`);
+  console.log(`  Status:         ${bwColumbus.bathtubConfirmed ? 'CONFIRMED' : 'REPORTED'}`);
+  console.log(`  Chosen Room:    ${bwColumbus.roomType}`);
+  console.log(`  Strength:       ${bwColumbus.strength}`);
+  console.log(`  Tub Labels:     [${(bwColumbus.agodaTubLabels || []).join(', ')}]`);
+  console.log(`  Tub Type:       ${bwColumbus.tubType}`);
+  console.log(`  Description:    "${bwColumbus.description}"`);
+} else {
+  console.log('  (Not found in safeRecords)');
+}
 
 console.log('\n=============================================================');
-console.log('>>> DOD 4: PLANNED PROMOTE3 COUNT COMPARISON');
+console.log('>>> DOD 4: PLANNED PROMOTE3 COUNT');
 console.log('=============================================================');
 console.log(`Old planned count in promote3-planned.json: ${oldPlannedCount}`);
 console.log(`New planned count in promote3-planned.json: ${sanitizedPlanned.length}`);
