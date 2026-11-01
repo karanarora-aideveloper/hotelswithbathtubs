@@ -9,7 +9,7 @@ import CityHotelsClient from '@/components/CityHotelsClient';
 import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import { sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
-import { sanitizeHotelData } from '@/lib/evidence';
+import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -167,7 +167,7 @@ export default async function CityJacuzziHotelsPage({
       bookingUrl: h.bookingUrl,
       airbnbUrl: h.airbnbUrl,
       tripUrl: h.tripUrl,
-      bathtubConfirmed: h.bathtubConfirmed === true,
+      bathtubConfirmed: isHotelConfirmed(h),
       amenities: h.amenities || [],
       description: h.description || '',
       rating: h.rating,
@@ -274,7 +274,7 @@ export default async function CityJacuzziHotelsPage({
     })
   };
 
-  const confirmedJacuzzis = hotels.filter((h) => Boolean(h.bathtubConfirmed));
+  const confirmedJacuzzis = hotels.filter((h) => isHotelConfirmed(h));
 
   const faqItems = [
     ...(confirmedJacuzzis.length > 0 ? [{

@@ -9,7 +9,7 @@ import { slugify, resolveCountry } from '@/lib/utils';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { sanitizePlaceholderText } from '@/lib/location';
-import { getBathtubLabel } from '@/lib/evidence';
+import { getBathtubLabel, isHotelConfirmed } from '@/lib/evidence';
 
 export const dynamic = 'force-static';
 
@@ -222,7 +222,7 @@ export default async function SoakingTubHotelsPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-gray-900 border border-gray-200/80 shadow-xs">
-                        {h.bathtubConfirmed ? '🛁' : '⚠️'} {getBathtubLabel(h)}
+                        {isHotelConfirmed(h) ? '🛁' : '⚠️'} {getBathtubLabel(h)}
                       </div>
                     </div>
 

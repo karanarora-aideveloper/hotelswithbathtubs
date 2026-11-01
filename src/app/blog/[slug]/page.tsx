@@ -11,6 +11,7 @@ import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } from '@/lib/claims';
+import { isHotelConfirmed } from '@/lib/evidence';
 import dynamic from 'next/dynamic';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
@@ -617,7 +618,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                               </h3>
                             </Link>
                             <p className="text-2xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-1 font-semibold border border-emerald-100">
-                              🛁 {h.roomType || 'Private In-Room Bathtub'}
+                              🛁 {h.roomType ? (isHotelConfirmed(h) ? h.roomType : `Reported room: ${h.roomType}`) : (isHotelConfirmed(h) ? 'Private In-Room Bathtub' : 'Reported Bathtub')}
                             </p>
                             {h.price && (
                               <div className="mt-2 text-xs font-bold text-gray-900">

@@ -10,7 +10,7 @@ import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLowestPriceHotel, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { generateCityPageContent } from '@/lib/seo';
 import { dropIntroClaimSentences } from '@/lib/claims';
-import { sanitizeHotelData } from '@/lib/evidence';
+import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -353,7 +353,7 @@ export default async function CityHotelsPage({
       airbnbUrl: h.airbnbUrl,
       tripUrl: h.tripUrl,
       mmtUrl: h.mmtUrl || h.makemytripUrl,
-      bathtubConfirmed: h.bathtubConfirmed === true,
+      bathtubConfirmed: isHotelConfirmed(h),
       amenities: (h.amenities || []).slice(0, 6),
       description: cleanDesc,
       rating: h.rating,
@@ -476,7 +476,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     }))
   };
 
-  const allConfirmed = hotels.length > 0 && hotels.every((h: any) => h.bathtubConfirmed === true);
+  const allConfirmed = hotels.length > 0 && hotels.every((h: any) => isHotelConfirmed(h));
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
@@ -504,8 +504,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const countPhrase = countLead ? `${countLead} with a bathtub in the room` : '';
 
-  const confirmedHotels = hotels.filter((h) => h.bathtubConfirmed === true);
-  const unconfirmedHotels = hotels.filter((h) => h.bathtubConfirmed !== true);
+  const confirmedHotels = hotels.filter((h) => isHotelConfirmed(h));
+  const unconfirmedHotels = hotels.filter((h) => !isHotelConfirmed(h));
   const confirmedCount = confirmedHotels.length;
   const unconfirmedCount = unconfirmedHotels.length;
 
@@ -625,9 +625,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
 
   // M6 Data-driven FAQs (confirmed properties only)
-  const confirmedJacuzzis = hotels.filter((h) => Boolean(h.bathtubConfirmed) && isJacuzziRoom(h));
-  const confirmedBathtubs = hotels.filter((h) => Boolean(h.bathtubConfirmed) && !isVacationRental(h));
-  const confirmedBathtubList = confirmedBathtubs.length > 0 ? confirmedBathtubs : hotels.filter((h) => Boolean(h.bathtubConfirmed));
+  const confirmedJacuzzis = hotels.filter((h) => isHotelConfirmed(h) && isJacuzziRoom(h));
+  const confirmedBathtubs = hotels.filter((h) => isHotelConfirmed(h) && !isVacationRental(h));
+  const confirmedBathtubList = confirmedBathtubs.length > 0 ? confirmedBathtubs : hotels.filter((h) => isHotelConfirmed(h));
 
   const whereToStayFaqAnswer = hasWhereToStaySection
     ? `Areas in ${cityName} with more than one listed hotel: ${qualifiedNeighborhoods.slice(0, 3).map(([n, list]) => `${n} (${list.length} ${list.length === 1 ? 'hotel' : 'hotels'})`).join(', ')}.`

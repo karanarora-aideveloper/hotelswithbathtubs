@@ -6,6 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { trackEvent } from '@/lib/analytics';
 import { sendGA4Event } from '@/lib/gtag';
+import { isHotelConfirmed } from '@/lib/evidence';
 
 export interface MatchmakerHotel {
   name: string;
@@ -23,6 +24,9 @@ export interface MatchmakerHotel {
   tubType: string;
   amenities: string[];
   bookingTip?: string;
+  bathtubConfirmed?: boolean;
+  importBatch?: string;
+  bookingTubLabels?: string[];
   bookingUrl?: string;
   agodaUrl?: string;
   airbnbUrl?: string;
@@ -991,9 +995,17 @@ export default function DreamSoakMatchmaker({
 
                         {/* Room Type */}
                         {hotel.roomType && (
-                          <div className="mb-3 px-2.5 py-1.5 rounded-lg bg-blue-50/70 border border-blue-100 text-xs text-blue-900 font-medium flex items-center gap-1.5">
-                            <span className="text-[#1a6fde] font-bold">✓ Room Tier:</span>
-                            <span className="truncate">{hotel.roomType}</span>
+                          <div className={`mb-3 px-2.5 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1.5 ${
+                            isHotelConfirmed(hotel)
+                              ? 'bg-blue-50/70 border-blue-100 text-blue-900'
+                              : 'bg-amber-50/70 border-amber-100 text-amber-900'
+                          }`}>
+                            <span className={isHotelConfirmed(hotel) ? 'text-[#1a6fde] font-bold' : 'text-amber-800 font-bold'}>
+                              {isHotelConfirmed(hotel) ? '✓ Room Tier:' : '🏷️'}
+                            </span>
+                            <span className="truncate">
+                              {isHotelConfirmed(hotel) ? hotel.roomType : `Reported room: ${hotel.roomType}`}
+                            </span>
                           </div>
                         )}
 
