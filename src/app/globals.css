@@ -35,6 +35,15 @@
   --font-serif: var(--font-playfair-display, "Playfair Display"), Georgia, serif;
 }
 
+@media (min-width: 1400px) {
+  .nav-wide-show {
+    display: inline-flex !important;
+  }
+  .nav-wide-hide {
+    display: none !important;
+  }
+}
+
 html {
   font-size: 16px;
 }

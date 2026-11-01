@@ -11,12 +11,15 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
   const request = context.request;
 
   // Cloudflare provides cf-ipcountry and cf-ipcity headers natively
-  const countryCode = (
+  const headerCountry =
     request.headers.get('cf-ipcountry') ||
-    'US'
-  ).toUpperCase();
+    request.headers.get('x-vercel-ip-country') ||
+    '';
 
-  let city = request.headers.get('cf-ipcity') || '';
+  const hasCountry = Boolean(headerCountry && headerCountry.trim() !== '');
+  const countryCode = hasCountry ? headerCountry.trim().toUpperCase() : 'XX';
+
+  let city = request.headers.get('cf-ipcity') || request.headers.get('x-vercel-ip-city') || '';
   if (city) {
     city = decodeURIComponent(city);
   }
@@ -38,11 +41,21 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
     'CH': 'Switzerland',
     'CA': 'Canada',
     'AU': 'Australia',
+    'ES': 'Spain',
+    'DE': 'Germany',
+    'MX': 'Mexico',
+    'TR': 'Turkey',
+    'MV': 'Maldives',
+    'ZA': 'South Africa',
+    'PT': 'Portugal',
+    'AT': 'Austria',
+    'IE': 'Ireland',
+    'NZ': 'New Zealand',
   };
 
   const isIndia = countryCode === 'IN';
   const isUS = countryCode === 'US';
-  const fullCountryName = countryMap[countryCode] || (isIndia ? 'India' : 'USA');
+  const fullCountryName = countryCode === 'XX' ? '' : (countryMap[countryCode] || countryCode);
 
   return new Response(
     JSON.stringify({

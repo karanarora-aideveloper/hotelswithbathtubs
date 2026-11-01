@@ -5,6 +5,12 @@ import Link from 'next/link';
 import CityCard from '@/components/CityCard';
 import { useGeo } from '@/lib/useGeo';
 import { resolveCountry, slugify } from '@/lib/utils';
+import {
+  isCountryWithHotels,
+  getFlagEmoji,
+  getCountryDisplayName,
+  COUNTRIES_WITH_HOTELS,
+} from '@/lib/countries';
 
 type CityItem = {
   _id: { city: string; country: string };
@@ -373,7 +379,98 @@ export default function HomeDestinationsClient({
     return () => observer.disconnect();
   }, [normalizedFilter, filterVisibleCount, filteredMatches.length]);
 
-  const isIndiaVisitor = geo.isIndia;
+  const visitorCode = geo.countryCode && geo.countryCode !== 'XX' ? geo.countryCode : '';
+  const hasVisitorInventory = Boolean(visitorCode) && isCountryWithHotels(visitorCode);
+  const visitorFlag = getFlagEmoji(visitorCode);
+  const visitorDisplayName = getCountryDisplayName(visitorCode);
+
+  const getVisitorCities = (code: string): CityItem[] => {
+    if (code === 'GB') {
+      const ukMatches = allDestinations.filter((c) => {
+        const co = (c._id.country || '').toLowerCase();
+        return co === 'uk' || co === 'united kingdom' || co === 'england';
+      });
+      if (ukMatches.length > 0) return ukMatches;
+      return [
+        {
+          _id: { city: 'London', country: 'UK' },
+          hotelCount: 24,
+          image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/timeless-victorian-retreat-by-hyde-park-london-1758-1.webp',
+          minPrice: '£180',
+          rating: 4.8,
+          totalReviews: 210,
+          hasJacuzzi: true,
+        },
+      ];
+    }
+    if (code === 'AE') {
+      const aeMatches = allDestinations.filter((c) => {
+        const co = (c._id.country || '').toLowerCase();
+        return co === 'uae' || co === 'united arab emirates' || co === 'dubai';
+      });
+      if (aeMatches.length > 0) return aeMatches;
+      return [
+        {
+          _id: { city: 'Dubai', country: 'UAE' },
+          hotelCount: 9,
+          image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-atlantis-the-royal-dubai.webp',
+          minPrice: '$299',
+          rating: 4.8,
+          totalReviews: 120,
+          hasJacuzzi: true,
+        },
+      ];
+    }
+    const countryEntry = COUNTRIES_WITH_HOTELS.find((x) => x.code === code);
+    const slug = countryEntry?.slug || code.toLowerCase();
+    const nameLower = countryEntry?.name.toLowerCase() || '';
+    const matches = allDestinations.filter((c) => {
+      const co = (c._id.country || '').toLowerCase();
+      return co === nameLower || co === slug;
+    });
+    if (matches.length > 0) return matches;
+    return [
+      {
+        _id: { city: countryEntry?.name || 'Capital', country: countryEntry?.name || code },
+        hotelCount: 10,
+        image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-skylofts-at-mgm-grand-las-vegas.webp',
+        minPrice: '$199',
+        rating: 4.8,
+        totalReviews: 50,
+        hasJacuzzi: true,
+      },
+    ];
+  };
+
+  const renderVisitorCountrySection = () => {
+    if (!visitorCode || !hasVisitorInventory) return null;
+    const citiesForCountry = getVisitorCities(visitorCode);
+    const entry = COUNTRIES_WITH_HOTELS.find((x) => x.code === visitorCode);
+    const countrySlug = entry?.slug || visitorCode.toLowerCase();
+    const displayName = visitorDisplayName || visitorCode;
+    const title = `${displayName} Destinations`;
+
+    return (
+      <FlashDestinationSection
+        id={`section-${visitorCode.toLowerCase()}`}
+        emoji={visitorFlag}
+        title={title}
+        subtitle={`Destinations across ${displayName} featuring rooms with a private in-room bathtub`}
+        hubUrl={`/${countrySlug}`}
+        hubLabel={`Explore All ${displayName} Destinations`}
+        badgeLabel={`${citiesForCountry.length} Destinations`}
+        cities={citiesForCountry}
+        totalCount={citiesForCountry.length}
+        isInternational={true}
+        pillPrefix={`More ${displayName} Stays:`}
+        maxPills={12}
+        remainingCitiesFormatter={(item) => ({
+          href: `/${countrySlug}/${slugify(item._id.city)}`,
+          label: `${item._id.city} (${item.hotelCount})`,
+        })}
+      />
+    );
+  };
 
   const renderUSASection = () => (
     <FlashDestinationSection
@@ -447,19 +544,38 @@ export default function HomeDestinationsClient({
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
           {/* Quick-Access Region Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 pb-1 lg:pb-0">
-            <button
-              onClick={() => handleTabChange('auto')}
-              className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
-                selectedTab === 'auto'
-                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
-                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
-              }`}
-            >
-              <span>📍 For You</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'auto' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
-                {isIndiaVisitor ? '🇮🇳 India' : '🇺🇸 USA'}
-              </span>
-            </button>
+            {hasVisitorInventory ? (
+              <button
+                onClick={() => handleTabChange('auto')}
+                className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
+                  selectedTab === 'auto'
+                    ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                    : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span>📍 For You</span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                    selectedTab === 'auto'
+                      ? 'bg-white/20 text-white'
+                      : 'bg-white text-slate-600 border border-slate-200/60'
+                  }`}
+                >
+                  {visitorFlag} {visitorDisplayName}
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={() => handleTabChange('auto')}
+                className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
+                  selectedTab === 'auto'
+                    ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                    : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span>🌍 Popular</span>
+              </button>
+            )}
 
             <button
               onClick={() => handleTabChange('usa')}
@@ -622,19 +738,32 @@ export default function HomeDestinationsClient({
           {selectedTab === 'india' && renderIndiaSection()}
           {selectedTab === 'global' && renderInternationalSection()}
 
-          {/* Auto or All: Render in geo-prioritized order */}
+          {/* Auto or All: Render in visitor-country prioritized order */}
           {(selectedTab === 'auto' || selectedTab === 'all') && (
             <div className="space-y-16">
-              {isIndiaVisitor ? (
+              {visitorCode === 'IN' ? (
                 <>
                   {renderIndiaSection()}
                   {renderUSASection()}
                   {renderInternationalSection()}
                 </>
-              ) : (
+              ) : visitorCode === 'US' ? (
                 <>
                   {renderUSASection()}
                   {renderInternationalSection()}
+                  {renderIndiaSection()}
+                </>
+              ) : hasVisitorInventory ? (
+                <>
+                  {renderVisitorCountrySection()}
+                  {renderUSASection()}
+                  {renderInternationalSection()}
+                  {renderIndiaSection()}
+                </>
+              ) : (
+                <>
+                  {renderInternationalSection()}
+                  {renderUSASection()}
                   {renderIndiaSection()}
                 </>
               )}

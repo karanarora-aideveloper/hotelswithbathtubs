@@ -158,7 +158,6 @@ export default async function Home() {
   // Curate top destinations for the homepage initial payload (<120 KB vs previous 1.25 MB)
   // Full regional directories are linked via /india, /usa, and country hubs
   const topUsaCities = usaCities.slice(0, 20);
-  const topInternationalCities = internationalCities.slice(0, 20);
   const topIndiaCities = indiaCities.slice(0, 24);
 
   const getCityCount = (cityName: string) => {
@@ -407,7 +406,7 @@ export default async function Home() {
           >
             <HomeDestinationsClient
               usaCities={topUsaCities}
-              internationalCities={topInternationalCities}
+              internationalCities={internationalCities}
               indiaCities={topIndiaCities}
               totalUsaCount={totalUsaCount}
               totalInternationalCount={totalInternationalCount}
