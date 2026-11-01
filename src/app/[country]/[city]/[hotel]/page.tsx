@@ -12,7 +12,7 @@ import HotelAnalyticsComparison from '@/components/HotelAnalyticsComparison';
 import HotelGallery from '@/components/HotelGallery';
 import { getCityGeoCoordinates } from '@/lib/geoData';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, sanitizeHotelData, buildDataDescription } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, sanitizeHotelData, buildDataDescription, isHotelConfirmed } from '@/lib/evidence';
 import { buildHotelDescription } from '@/lib/hotelText';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
@@ -208,7 +208,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   let pageTitle: string;
   let pageDescription: string;
 
-  if (hotel.bathtubConfirmed !== true) {
+  if (!isHotelConfirmed(hotel)) {
     const reportedTitle = `${hotelName} – Bathtub reported, ${cityName}`;
     const fallbackTitle = `${hotelName}, ${cityName}`;
     if (reportedTitle.length <= 65) {
@@ -381,10 +381,10 @@ export default async function HotelDetailPage({
     ...(schemaPrice ? {
       "makesOffer": {
         "@type": "Offer",
-        "name": hotel.bathtubConfirmed === true
+        "name": isHotelConfirmed(hotel)
           ? `${hotel.roomType || 'Room with Bathtub'} at ${hotel.name}`
           : `${hotel.roomType || 'Room'} at ${hotel.name}`,
-        "description": hotel.bathtubConfirmed === true
+        "description": isHotelConfirmed(hotel)
           ? `Private in-room bathtub${hotel.tubType ? ` (${hotel.tubType})` : ''} in ${cityName}`
           : `Room with a reported bathtub (not yet confirmed) in ${cityName}`,
         "url": `https://www.hotelswithbathtubs.com/${countrySlug}/${citySlug}/${hotelSlug}`,
@@ -513,6 +513,7 @@ export default async function HotelDetailPage({
         roomType={hotel.roomType}
         listedPlatformsText={listedPlatformsText}
         bathtubLabel={getBathtubLabel(hotel)}
+        bathtubConfirmed={isHotelConfirmed(hotel)}
       />
 
       {/* Main Content Layout with 2/3 Content and 1/3 Sticky Booking Sidebar */}
@@ -523,7 +524,7 @@ export default async function HotelDetailPage({
           <div className="mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-2.5 font-jakarta">
               <span className={`border font-semibold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full ${
-                hotel.bathtubConfirmed
+                isHotelConfirmed(hotel)
                   ? 'bg-[#8eaab9]/15 text-[#1f262d] border-[#5b8296]/30'
                   : 'bg-amber-50 text-amber-800 border-amber-200/80'
               }`}>
@@ -569,7 +570,7 @@ export default async function HotelDetailPage({
           <HotelAnalyticsComparison
             hotel={{
               name: hotel.name,
-              bathtubConfirmed: hotel.bathtubConfirmed,
+              bathtubConfirmed: isHotelConfirmed(hotel),
               price: hotel.price || null,
               rating: hotel.rating,
               reviewsCount: hotel.reviewsCount,
@@ -605,7 +606,7 @@ export default async function HotelDetailPage({
               {hotel.roomType && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
-                  {hotel.bathtubConfirmed ? (
+                  {isHotelConfirmed(hotel) ? (
                     <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for an in-room {tubWords}.</span>
                   ) : (
                     <span>Reported room: <strong className="font-semibold text-slate-900">{hotel.roomType}</strong>. Check that &#x27;Bathtub&#x27; is listed in the room details before you pay.</span>
@@ -613,7 +614,7 @@ export default async function HotelDetailPage({
                 </p>
               )}
 
-              {hotel.tubType && hotel.bathtubConfirmed && (
+              {hotel.tubType && isHotelConfirmed(hotel) && (
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
                   <span>Features an in-room <strong className="font-semibold text-slate-900">{hotel.tubType}</strong> inside the private guest accommodation.</span>
@@ -679,7 +680,7 @@ export default async function HotelDetailPage({
                   Which room at {hotel.name} has the bathtub?
                 </h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  {hotel.bathtubConfirmed ? (
+                  {isHotelConfirmed(hotel) ? (
                     <>{hotel.name} features an in-room bathtub in the <strong className="text-[#1f262d]">{hotel.roomType || 'room tier featuring a bathtub'}</strong>. {evidence.fullPlainText} <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link></>
                   ) : (
                     <>A bathtub is reported in the <strong className="text-[#1f262d]">{hotel.roomType || 'room'}</strong>, but we haven&#x27;t confirmed it yet. Check the room details on {linkedPartners[0] || 'the partner'} before booking. <Link href="/how-we-check-bathtubs" className="text-[#1a6fde] hover:underline font-medium">How we check</Link></>
@@ -734,7 +735,7 @@ export default async function HotelDetailPage({
             </span>
           </div>
           <p className="text-[10px] text-emerald-700 font-semibold truncate flex items-center gap-1 mt-0.5">
-            <span>🛁</span> {hotel.roomType || 'Bathtub Room'}
+            <span>🛁</span> {hotel.roomType ? (isHotelConfirmed(hotel) ? hotel.roomType : `Reported room: ${hotel.roomType}`) : 'Bathtub Room'}
           </p>
         </div>
 
@@ -791,7 +792,7 @@ export default async function HotelDetailPage({
                     />
                     <div className="absolute top-2.5 left-2.5">
                       <span className="bg-white/90 backdrop-blur-md text-[#1f262d] border border-white/40 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs font-jakarta">
-                        {sim.bathtubConfirmed && <span className="text-emerald-700 font-bold">✓</span>}
+                        {isHotelConfirmed(sim) && <span className="text-emerald-700 font-bold">✓</span>}
                         {getBathtubLabel(sim)}
                       </span>
                     </div>

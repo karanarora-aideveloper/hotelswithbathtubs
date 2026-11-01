@@ -1476,7 +1476,7 @@ export default function CityHotelsClient({
                     </span>
                     {h.roomType && (
                       <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 text-gray-700 font-medium text-[11px] rounded-md">
-                        <span>🏷️</span> <span className="line-clamp-1">{h.roomType}</span>
+                        <span>🏷️</span> <span className="line-clamp-1">{h.bathtubConfirmed ? h.roomType : `Reported room: ${h.roomType}`}</span>
                       </span>
                     )}
                   </div>
@@ -1567,8 +1567,16 @@ export default function CityHotelsClient({
                     </span>
 
                     {h.roomType && (
-                      <div className="hidden sm:block text-[10px] text-emerald-800 bg-emerald-50/80 border border-emerald-200/70 rounded-lg px-2 py-1 mb-2 truncate font-medium">
-                        🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub
+                      <div className={`hidden sm:block text-[10px] rounded-lg px-2 py-1 mb-2 truncate font-medium border ${
+                        h.bathtubConfirmed
+                          ? 'text-emerald-800 bg-emerald-50/80 border-emerald-200/70'
+                          : 'text-amber-900 bg-amber-50/80 border-amber-200/70'
+                      }`}>
+                        {h.bathtubConfirmed ? (
+                          <>🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub</>
+                        ) : (
+                          <>Reported room: <strong className="font-bold">{h.roomType}</strong></>
+                        )}
                       </div>
                     )}
 

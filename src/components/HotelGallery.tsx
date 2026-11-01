@@ -14,6 +14,7 @@ interface HotelGalleryProps {
   roomType?: string;
   listedPlatformsText: string;
   bathtubLabel?: string;
+  bathtubConfirmed?: boolean;
 }
 
 export default function HotelGallery({
@@ -26,6 +27,7 @@ export default function HotelGallery({
   roomType,
   listedPlatformsText,
   bathtubLabel = 'In-room bathtub',
+  bathtubConfirmed = true,
 }: HotelGalleryProps) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
 
@@ -206,7 +208,7 @@ export default function HotelGallery({
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white z-10 font-jakarta pointer-events-none">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white mb-2 border border-white/30">
-                  <span>🏷️</span> Room Tier: {roomType || 'Suite / Deluxe Room with Bathtub'}
+                  <span>🏷️</span> {bathtubConfirmed ? `Room Tier: ${roomType || 'Suite / Deluxe Room with Bathtub'}` : (roomType ? `Reported room: ${roomType}` : 'Bathtub Room (Reported)')}
                 </div>
                 <p className="text-xs sm:text-sm text-white/85 font-medium">
                   {listedPlatformsText}

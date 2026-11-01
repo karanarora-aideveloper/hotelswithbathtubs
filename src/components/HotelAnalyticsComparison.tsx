@@ -216,7 +216,11 @@ export default function HotelAnalyticsComparison({
           {hotel.bathtubConfirmed ? (
             <>Select the <strong className="text-amber-950 underline">{hotel.roomType || 'Bathtub Suite'}</strong> tier on partner checkout for the private tub.</>
           ) : (
-            <>check the room details on {uniquePartners[0]?.name || 'the booking partner'} for a bathtub before you pay.</>
+            hotel.roomType ? (
+              <>Reported room: <strong className="text-amber-950 underline">{hotel.roomType}</strong>. Check the room details on {uniquePartners[0]?.name || 'the booking partner'} for a bathtub before you pay.</>
+            ) : (
+              <>Check the room details on {uniquePartners[0]?.name || 'the booking partner'} for a bathtub before you pay.</>
+            )
           )}
         </div>
 

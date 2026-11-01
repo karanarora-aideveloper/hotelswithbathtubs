@@ -8,7 +8,7 @@ import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
-import { getBathtubLabel } from '@/lib/evidence';
+import { getBathtubLabel, isHotelConfirmed } from '@/lib/evidence';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -317,7 +317,7 @@ export default async function HostelsHubPage() {
                     />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                       <span className="px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-xs text-white text-[11px] font-bold shadow-xs">
-                        {hostel.bathtubConfirmed ? '🛁' : '⚠️'} {getBathtubLabel(hostel)}
+                        {isHotelConfirmed(hostel) ? '🛁' : '⚠️'} {getBathtubLabel(hostel)}
                       </span>
                       <span className="px-2.5 py-1 rounded-full bg-amber-500 text-white text-[11px] font-bold shadow-xs">
                         🎒 Boutique Hostel
@@ -347,7 +347,7 @@ export default async function HostelsHubPage() {
                     {hostel.roomType && (
                       <div className="mb-3">
                         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
-                          <span>🏷️</span> {hostel.roomType}
+                          <span>🏷️</span> {isHotelConfirmed(hostel) ? hostel.roomType : `Reported room: ${hostel.roomType}`}
                         </span>
                       </div>
                     )}

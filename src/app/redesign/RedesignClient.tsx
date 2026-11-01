@@ -150,7 +150,7 @@ export default function RedesignClient({
         parsedPrice: cleanPrice,
         computedCoords: coords,
         displayNeighborhood: h.neighborhood || 'Central Area',
-        displayRoomType: h.roomType || 'Deluxe Suite with Bathtub',
+        displayRoomType: h.bathtubConfirmed ? (h.roomType || 'Deluxe Suite with Bathtub') : (h.roomType ? `Reported room: ${h.roomType}` : 'Bathtub Room (Reported)'),
         displayTubType: h.tubType || 'Private In-Room Bathtub',
       };
     });

@@ -1,9 +1,17 @@
 import { isJacuzziRoom } from '@/lib/utils';
 import { hasClaimPhrase, dropClaimSentences } from '@/lib/claims';
-import { buildHotelDescription } from '@/lib/hotelText';
+import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
 
-export function getBathtubLabel(hotel?: { bathtubConfirmed?: boolean; tubType?: string; roomType?: string }): string {
-  if (hotel?.bathtubConfirmed === true) {
+export { isHotelConfirmed };
+
+export function getBathtubLabel(hotel?: {
+  bathtubConfirmed?: boolean;
+  tubType?: string;
+  roomType?: string;
+  importBatch?: string | null;
+  bookingTubLabels?: string[] | null;
+}): string {
+  if (isHotelConfirmed(hotel)) {
     return isJacuzziRoom(hotel) ? 'In-room jacuzzi' : 'In-room bathtub';
   }
   return 'Bathtub not yet confirmed';
@@ -132,6 +140,8 @@ export interface EvidenceLineData {
 
 export function getEvidenceLine(hotel: {
   bathtubConfirmed?: boolean;
+  importBatch?: string | null;
+  bookingTubLabels?: string[] | null;
   roomType?: string;
   updatedAt?: string | Date | null;
   bookingUrl?: string | null;
@@ -146,7 +156,7 @@ export function getEvidenceLine(hotel: {
   url?: string | null;
 }): EvidenceLineData {
   const partner = getFirstPartner(hotel);
-  const isConfirmed = hotel.bathtubConfirmed === true;
+  const isConfirmed = isHotelConfirmed(hotel);
   const room = hotel.roomType || 'room';
 
   if (isConfirmed && partner) {
@@ -193,6 +203,7 @@ export function buildDataDescription(h: {
 
 export function sanitizeHotelData(h: any): any {
   if (!h) return h;
+  h.bathtubConfirmed = isHotelConfirmed(h);
   if (!h.importBatch) {
     h.description = buildHotelDescription(h);
     h.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
