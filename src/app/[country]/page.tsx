@@ -6,7 +6,8 @@ import StructuredData from '@/components/StructuredData';
 import CountryCitiesClient from '@/components/CountryCitiesClient';
 import { escapeRegex, titleCase, slugify, resolveCountry } from '@/lib/utils';
 import { getAllStates } from '@/lib/usStates';
-import { dropIntroClaimSentences } from '@/lib/claims';
+import { buildCountryIntro } from '@/lib/countryText';
+import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 
 export const revalidate = false;
 
@@ -40,12 +41,14 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const countrySlug = countryInfo.slug;
 
   // Count active hotels and grab the highest-rated hotel image for a country-specific OG image
-  const [hotelCount, firstHotel, unconfirmedCount] = await Promise.all([
+  const [hotelCount, firstHotel, rawCountryHotels] = await Promise.all([
     Hotel.countDocuments({ country: countryInfo.regex, flagged: { $ne: true } }),
     Hotel.findOne({ country: countryInfo.regex, flagged: { $ne: true }, image: { $exists: true, $ne: '' } })
       .sort({ rating: -1 })
       .select('image'),
-    Hotel.countDocuments({ country: countryInfo.regex, flagged: { $ne: true }, bathtubConfirmed: { $ne: true } }),
+    Hotel.find({ country: countryInfo.regex, flagged: { $ne: true } })
+      .select('city tubType slug')
+      .lean(),
   ]);
 
   if (hotelCount === 0) {
@@ -53,6 +56,9 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       title: 'Country Not Found',
     };
   }
+
+  const countryHotels = (rawCountryHotels as any[] || []).filter(h => !isDuplicateDropSlug(h.slug));
+  const countryIntro = buildCountryIntro(countryName, countryHotels);
 
   // Use best hotel photo as OG image; fallback to a generic bathtub image
   const ogImageUrl = firstHotel?.image
@@ -66,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const baseTitle = `Hotels with a Bathtub in ${countryName} (${currentYear})`;
   const brandedTitle = `${baseTitle} | Hotels with Bathtubs`;
   const pageTitle = brandedTitle.length <= 65 ? brandedTitle : baseTitle;
-  const pageDescription = `Discover ${hotelCount}+ hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}. Ideal for romantic stays.`;
+  const pageDescription = countryIntro || `Hotels with private in-room bathtubs & jacuzzi suites across top cities in ${countryName}.`;
 
   return {
     title: { absolute: pageTitle },
@@ -134,7 +140,15 @@ export default async function CountryHubPage({
     { $sort: { hotelCount: -1 as const } }
   ];
 
-  const rawCities = await Hotel.aggregate<any>(pipeline);
+  const [rawCities, rawCountryHotels] = await Promise.all([
+    Hotel.aggregate<any>(pipeline),
+    Hotel.find({ country: countryInfo.regex, flagged: { $ne: true } })
+      .select('city tubType slug')
+      .lean(),
+  ]);
+
+  const countryHotels = (rawCountryHotels as any[] || []).filter(h => !isDuplicateDropSlug(h.slug));
+  const countryIntro = buildCountryIntro(countryName, countryHotels);
   const cities = rawCities.map((c) => {
     let minP = Infinity;
     let minPriceStr = '';
@@ -329,27 +343,13 @@ export default async function CountryHubPage({
                 <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
                   Hotels with Bathtub in Room in {countryName}
                 </h1>
-                <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-2xl mx-auto leading-relaxed">
-                  Explore romantic destinations in {countryName} offering private in-room bathtubs and jacuzzis.
+                <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
+                  {countryIntro || `Explore destinations in ${countryName} offering private in-room bathtubs.`}
                 </p>
               </div>
             </header>
 
             <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
-              {/* Country Hub Editorial Context */}
-              {(() => {
-                const countryIntro = dropIntroClaimSentences(`Whether you are planning an anniversary, a romantic honeymoon, or a rejuvenating weekend getaway, ${countryName} offers an incredible collection of luxury hotels, heritage villas, and boutique resorts featuring private in-room bathtubs and jacuzzi suites.`);
-                return countryIntro ? (
-                  <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/70 border border-amber-200/80 rounded-2xl p-4 sm:p-8 shadow-xs mb-8 sm:mb-12">
-                    <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mb-3">
-                      Why Book a Bathtub Hotel in {countryName}?
-                    </h2>
-                    <p className="text-gray-700 leading-relaxed text-xs sm:text-sm md:text-base">
-                      {countryIntro}
-                    </p>
-                  </div>
-                ) : null;
-              })()}
 
               {/* Specialty Bathtub Collections Navigation */}
               <div className="mb-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
