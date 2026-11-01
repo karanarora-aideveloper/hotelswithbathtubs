@@ -3,17 +3,20 @@
 /**
  * scripts/data/link-fix1-write.mjs
  *
- * LINK-FIX1 (CEO Sheet T46)
- * Prepare removing 6 Booking.com links that open a different hotel.
+ * LINK-FIX1 / LINK-FIX1B (CEO Sheet T46)
+ * Prepare removing 5 Booking.com links that open a different hotel.
  * DRY RUN by default. Use --write to apply updates and create backup.
  *
- * Target hotels (from NAME-MATCH-AUDIT1):
+ * Target hotels (from NAME-MATCH-AUDIT1, minus NoMad per auditor 1 Nov):
  * - 6aa779b5a1d874eba51c58ad: The Mark Hotel, New York -> HI New York City Hostel
- * - 6ad9fa84ef30327ba9cd3433: NoMad Las Vegas -> The Reserve at Park MGM
  * - 6ad9fa8bef30327ba9cd3438: Fontainebleau Las Vegas -> Flamingo Las Vegas
  * - 6a957a7589968819fb0dc1fc: The Venetian Resort Las Vegas -> Flamingo Las Vegas
  * - 6a957a7589968819fb0dc1fd: Bellagio Las Vegas -> Flamingo Las Vegas
  * - 6aaf7ab8f34b7c7289d7dda2: Embassy Suites by Hilton Waikiki Beach Walk -> Hilton Hawaiian Village
+ *
+ * Note: NoMad Las Vegas (6ad9fa84ef30327ba9cd3433) was removed (LINK-FIX1B):
+ * it links to nomad-las-vegas.html titled "The Reserve at Park MGM" at 3772 South
+ * Las Vegas Blvd (Park MGM address). NoMad was inside Park MGM, so this is a rename.
  */
 
 import fs from 'fs';
@@ -49,18 +52,16 @@ if (!process.env.MONGODB_URI) {
 // 2. Constants & target definitions
 const BACKUP_PATH = path.join(REPO_ROOT, 'data-collect/private/link-fix1-backup.json');
 
+// Target hotels to clean (5 hotels).
+// Note: NoMad Las Vegas (6ad9fa84ef30327ba9cd3433) was removed per auditor review (1 Nov 2026):
+// page title is "The Reserve at Park MGM" at 3772 South Las Vegas Boulevard (Park MGM's address).
+// NoMad was a hotel inside Park MGM, so this is a rename / rebranding, not a wrong hotel.
 const TARGET_HOTELS = [
   {
     id: '6aa779b5a1d874eba51c58ad',
     name: 'The Mark Hotel, New York',
     auditedCleanUrl: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html',
     reason: 'Opens HI New York City Hostel (891 Amsterdam Ave vs Upper East Side)'
-  },
-  {
-    id: '6ad9fa84ef30327ba9cd3433',
-    name: 'NoMad Las Vegas',
-    auditedCleanUrl: 'https://www.booking.com/hotel/us/nomad-las-vegas.html',
-    reason: 'Opens The Reserve at Park MGM (reflagged / different property)'
   },
   {
     id: '6ad9fa8bef30327ba9cd3438',

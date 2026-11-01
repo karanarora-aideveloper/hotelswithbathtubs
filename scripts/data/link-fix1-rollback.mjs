@@ -3,9 +3,9 @@
 /**
  * scripts/data/link-fix1-rollback.mjs
  *
- * LINK-FIX1 (CEO Sheet T46)
+ * LINK-FIX1 / LINK-FIX1B (CEO Sheet T46)
  * Rollback script for link-fix1: restores removed Booking.com URLs from
- * data-collect/private/link-fix1-backup.json.
+ * data-collect/private/link-fix1-backup.json (covers 5 hotels).
  * DRY RUN by default. Use --write to execute restore.
  */
 
@@ -41,19 +41,16 @@ if (!process.env.MONGODB_URI) {
 
 const BACKUP_PATH = path.join(REPO_ROOT, 'data-collect/private/link-fix1-backup.json');
 
-// Fallback planned target data if backup file has not been created yet
+// Fallback planned target data if backup file has not been created yet (5 hotels).
+// Note: NoMad Las Vegas (6ad9fa84ef30327ba9cd3433) was removed per auditor review (1 Nov 2026):
+// page title is "The Reserve at Park MGM" at 3772 South Las Vegas Boulevard (Park MGM's address).
+// NoMad was a hotel inside Park MGM, so this is a rename / rebranding, not a wrong hotel.
 const PLANNED_TARGETS = [
   {
     id: '6aa779b5a1d874eba51c58ad',
     name: 'The Mark Hotel, New York',
     bookingUrl: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html?aid=304142',
     url: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html?aid=304142'
-  },
-  {
-    id: '6ad9fa84ef30327ba9cd3433',
-    name: 'NoMad Las Vegas',
-    bookingUrl: 'https://www.booking.com/hotel/us/nomad-las-vegas.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/nomad-las-vegas.html?aid=304142'
   },
   {
     id: '6ad9fa8bef30327ba9cd3438',
