@@ -465,6 +465,13 @@ export default async function HotelDetailPage({
     : 'Listed on partner platforms';
 
   const linkedPartners = getLinkedPartners(hotel);
+  const tubLower = (hotel.tubType || '').toLowerCase();
+  const tubWords = tubLower.includes('hot tub')
+    ? 'hot tub'
+    : tubLower.includes('jetted') || tubLower.includes('jacuzzi') || tubLower.includes('whirlpool') || tubLower.includes('hydro')
+    ? 'jetted tub'
+    : 'bathtub';
+
   const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners, hotel.roomType);
   const evidence = getEvidenceLine(hotel);
 
@@ -599,7 +606,7 @@ export default async function HotelDetailPage({
                 <p className="flex items-start gap-2.5">
                   <span className="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
                   {hotel.bathtubConfirmed ? (
-                    <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for a private in-room bathtub.</span>
+                    <span>Book the <strong className="font-semibold text-slate-900">{hotel.roomType}</strong> for an in-room {tubWords}.</span>
                   ) : (
                     <span>Reported room: <strong className="font-semibold text-slate-900">{hotel.roomType}</strong>. Check that &#x27;Bathtub&#x27; is listed in the room details before you pay.</span>
                   )}
