@@ -38,6 +38,8 @@ export async function GET(request: NextRequest) {
       'linksredirect.com',
       'clnk.in',
       'bitli.in',
+      'cleartrip.com',
+      'easemytrip.com',
     ];
 
     const isAllowedDomain = ALLOWED_DOMAINS.some(

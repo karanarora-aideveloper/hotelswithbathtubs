@@ -67,11 +67,11 @@ export default function HotelGallery({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-5 pb-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2">
         {hasMultiple ? (
           /* 5-Photo Luxury Bento Grid (Airbnb / Five-Star Style) */
-          <div className="relative rounded-3xl overflow-hidden shadow-sm border border-[#5b8296]/20 bg-[#1f262d]">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 h-[340px] sm:h-[420px] md:h-[480px]">
+          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xs border border-[#e3e7ef] bg-[#14213d]">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 h-[300px] sm:h-[400px] md:h-[480px]">
               {/* Main Hero Photo (Takes 2 Columns) */}
               <div
                 onClick={() => setActiveModalIndex(0)}
@@ -81,16 +81,28 @@ export default function HotelGallery({
                   src={allImages[0]}
                   data-src={allImages[0]}
                   onError={onImgError}
-                  alt={`${hotelName}, ${cityName}`}
+                  alt={countryName ? `${hotelName}, ${cityName}, ${countryName}` : `${hotelName}, ${cityName}`}
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                <span className="hidden md:inline-flex absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                   {bathtubLabel || 'In-room bathtub'}
                 </span>
+
+                {/* Mobile carousel dots matching Style B mockup */}
+                <div className="md:hidden absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 pointer-events-none z-10">
+                  {allImages.slice(0, 4).map((_, idx) => (
+                    <i
+                      key={idx}
+                      className={`inline-block w-[7px] h-[7px] rounded-full bg-white transition-opacity ${
+                        idx === 0 ? 'opacity-100' : 'opacity-60'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Grid 2 & 3 */}
@@ -103,7 +115,7 @@ export default function HotelGallery({
                     src={allImages[1] || allImages[0]}
                   data-src={allImages[1] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName}, ${cityName}`}
+                    alt={countryName ? `${hotelName}, ${cityName}, ${countryName}` : `${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -118,7 +130,7 @@ export default function HotelGallery({
                     src={allImages[2] || allImages[0]}
                   data-src={allImages[2] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName}, ${cityName}`}
+                    alt={countryName ? `${hotelName}, ${cityName}, ${countryName}` : `${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -137,7 +149,7 @@ export default function HotelGallery({
                     src={allImages[3] || allImages[0]}
                   data-src={allImages[3] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName}, ${cityName}`}
+                    alt={countryName ? `${hotelName}, ${cityName}, ${countryName}` : `${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -152,7 +164,7 @@ export default function HotelGallery({
                     src={allImages[4] || allImages[0]}
                   data-src={allImages[4] || allImages[0]}
                   onError={onImgError}
-                    alt={`${hotelName}, ${cityName}`}
+                    alt={countryName ? `${hotelName}, ${cityName}, ${countryName}` : `${hotelName}, ${cityName}`}
                     fill
                     sizes="25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -184,7 +196,7 @@ export default function HotelGallery({
           </div>
         ) : (
           /* Single Image Contained Showcase (Fallback) */
-          <div className="relative aspect-[16/10] sm:aspect-[2.1/1] md:aspect-[2.4/1] max-h-[520px] w-full rounded-3xl overflow-hidden shadow-sm border border-[#5b8296]/20 bg-[#1f262d] group cursor-pointer"
+          <div className="relative aspect-[16/10] sm:aspect-[2.1/1] md:aspect-[2.4/1] max-h-[520px] w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xs border border-[#e3e7ef] bg-[#14213d] group cursor-pointer"
                onClick={() => setActiveModalIndex(0)}>
             <Image
               src={allImages[0]}

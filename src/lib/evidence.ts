@@ -5,7 +5,7 @@ import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
 export { isHotelConfirmed };
 
 export function getBathtubLabel(hotel?: {
-  bathtubConfirmed?: boolean;
+  bathtubConfirmed?: boolean | null;
   tubType?: string;
   roomType?: string;
   importBatch?: string | null;
@@ -22,6 +22,8 @@ export function getFirstPartner(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;
@@ -47,6 +49,18 @@ export function getFirstPartner(hotel: {
     (hotel.url && hotel.url.includes('makemytrip.com') && !hotel.url.includes('hotel-listing'))
   ) {
     return 'MakeMyTrip';
+  }
+  if (
+    (hotel.cleartripUrl && !hotel.cleartripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('cleartrip.com') && !hotel.url.includes('search'))
+  ) {
+    return 'Cleartrip';
+  }
+  if (
+    (hotel.easemytripUrl && !hotel.easemytripUrl.includes('hotel-listing') && !hotel.easemytripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('easemytrip.com') && !hotel.url.includes('hotel-listing') && !hotel.url.includes('search'))
+  ) {
+    return 'EaseMyTrip';
   }
   if (
     (hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) ||
@@ -80,6 +94,8 @@ export function getLinkedPartners(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;
@@ -106,6 +122,18 @@ export function getLinkedPartners(hotel: {
     (hotel.url && hotel.url.includes('makemytrip.com') && !hotel.url.includes('hotel-listing'))
   ) {
     partners.push('MakeMyTrip');
+  }
+  if (
+    (hotel.cleartripUrl && !hotel.cleartripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('cleartrip.com') && !hotel.url.includes('search'))
+  ) {
+    partners.push('Cleartrip');
+  }
+  if (
+    (hotel.easemytripUrl && !hotel.easemytripUrl.includes('hotel-listing') && !hotel.easemytripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('easemytrip.com') && !hotel.url.includes('hotel-listing') && !hotel.url.includes('search'))
+  ) {
+    partners.push('EaseMyTrip');
   }
   if (
     (hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) ||
@@ -148,6 +176,8 @@ export function getEvidenceLine(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;

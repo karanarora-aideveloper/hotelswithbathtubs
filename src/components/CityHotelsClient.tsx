@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { isDirectPropertyUrl } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
-import { isValidNeighborhood } from '@/lib/location';
+import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
@@ -36,6 +36,7 @@ type HotelData = {
   tripUrl?: string;
   airbnbUrl?: string;
   price?: string;
+  streetAddress?: string;
   rating?: number;
   reviewsCount?: number;
   tubType?: string;
@@ -642,16 +643,18 @@ export default function CityHotelsClient({
                     <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
                       {/* Hotel Name */}
                       <Link href={hotelPageUrl} prefetch={false} className="group/link mb-1">
-                        <h3 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] leading-[1.15] line-clamp-1 group-hover/link:text-[#b08d57] transition-colors">
+                        <h3 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] leading-[1.15] line-clamp-2 group-hover/link:text-[#b08d57] transition-colors">
                           {h.name}
                         </h3>
                       </Link>
 
                       {/* Address */}
                       <div className="text-[12px] text-[#5b6478] mt-1 mb-2.5 line-clamp-1">
-                        {h.neighborhood && isValidNeighborhood(h.neighborhood)
-                          ? `${h.neighborhood}, ${h.city || cityName}`
-                          : `${h.city || cityName}, ${countryName}`}
+                        {isValidStreetAddress(h.streetAddress)
+                          ? `${h.streetAddress}, ${h.city || cityName}`
+                          : (h.neighborhood && isValidNeighborhood(h.neighborhood)
+                            ? `${h.neighborhood}, ${h.city || cityName}`
+                            : `${h.city || cityName}, ${countryName}`)}
                       </div>
 
                       {/* Room Box */}

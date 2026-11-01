@@ -363,6 +363,7 @@ export default async function CityHotelsPage({
       tubType: h.tubType,
       bookingTip: cleanTip,
       price: h.price,
+      streetAddress: h.streetAddress,
       neighborhood: isValidNeighborhood(h.neighborhood) ? h.neighborhood : undefined,
       landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
       updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
