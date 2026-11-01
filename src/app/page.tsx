@@ -5,11 +5,8 @@ import Link from 'next/link';
 import type { PipelineStage } from 'mongoose';
 import LuxuryHero from '@/components/luxury/LuxuryHero';
 import LuxuryTrustProof from '@/components/luxury/LuxuryTrustProof';
-import LuxuryBathtubTypologies from '@/components/luxury/LuxuryBathtubTypologies';
-import LuxuryFeaturedSuites from '@/components/luxury/LuxuryFeaturedSuites';
-import LuxuryFAQ from '@/components/luxury/LuxuryFAQ';
+import LuxuryFAQ, { FAQS } from '@/components/luxury/LuxuryFAQ';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
-import HomeMatchmakerSection from '@/components/HomeMatchmakerSection';
 import RecentlyViewedRow from '@/components/RecentlyViewedRow';
 
 interface AggregatedCityRaw {
@@ -245,40 +242,14 @@ export default async function Home() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How do I find a hotel with a private bathtub in room?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Use the destination search or browse our city collections. We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi."
-        }
+    "mainEntity": FAQS.map(({ q, a }) => ({
+      "@type": "Question",
+      "name": q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": a,
       },
-      {
-        "@type": "Question",
-        "name": "What is the difference between a soaking bathtub and a jacuzzi suite?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A soaking bathtub features a deep freestanding marble, stone, or clawfoot bath designed for still, immersive hot baths. A jacuzzi suite includes a hydrotherapy tub equipped with powered massage jets and temperature controls."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What bathtub types are most common across luxury hotels in India?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In India, luxury heritage palaces and modern resorts feature distinct architectural bath typologies: hand-carved sunken Makrana marble baths in Rajasthan, private terrace jacuzzis in Goa, vintage Victorian clawfoot tubs in colonial hill stations like Shimla, and open-air granite stone baths in Kerala backwaters."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are hotel rooms with private bathtubs more expensive?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Not always. While presidential suites and monument-view villas command premium rates, many five-star and boutique hotels feature bathtubs in standard and executive category rooms. Starting rates range from ₹4,500/night in India and $150/night internationally."
-        }
-      }
-    ]
+    })),
   };
 
   const breadcrumbSchema = {
@@ -303,8 +274,13 @@ export default async function Home() {
           {/* Hero & Search matching Style B mockup */}
           <LuxuryHero />
 
+          {/* Recently Viewed */}
+          <section className="max-w-4xl mx-auto px-4 sm:px-6">
+            <RecentlyViewedRow className="my-4 sm:my-6" />
+          </section>
+
           {/* Popular destinations matching Style B mockup */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-2">
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
             <h2 className="font-playfair text-[24px] sm:text-[26px] font-semibold text-[#14213d] mb-1">
               Popular destinations
             </h2>
@@ -335,80 +311,32 @@ export default async function Home() {
           {/* How we check a bathtub matching Style B mockup */}
           <LuxuryTrustProof />
 
-          {/* US Bathtub Destinations - Server rendered plain links */}
-          <section className="bg-white border-y border-[#e3e7ef] py-6 sm:py-8 px-4 sm:px-6 my-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                <div>
-                  <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-[#b08d57] font-manrope">
-                    US Bathtub Destinations
-                  </h2>
-                  <p className="font-playfair text-lg sm:text-xl text-[#14213d] font-semibold mt-0.5">
-                    Popular American cities with in-room tubs &amp; jacuzzi suites
-                  </p>
-                </div>
-                <Link
-                  href="/usa"
-                  prefetch={false}
-                  className="text-xs font-bold text-[#b08d57] hover:underline self-start sm:self-auto inline-flex items-center gap-1 font-manrope"
-                >
-                  <span>Explore all 50 US States</span>
-                  <span>&rarr;</span>
-                </Link>
+          {/* Find your tub in 4 taps teaser card */}
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-5 sm:p-6 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] mb-1">
+                  Find your tub in 4 taps
+                </h2>
+                <p className="text-[13px] text-[#5b6478]">
+                  Pick your destination, tub style, and trip dates to see matching stays.
+                </p>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-manrope">
-                {[
-                  { name: 'New York', href: '/usa/new-york', flag: '🗽' },
-                  { name: 'Las Vegas', href: '/usa/las-vegas', flag: '🎰' },
-                  { name: 'Chicago', href: '/usa/chicago', flag: '🏙️' },
-                  { name: 'Miami', href: '/usa/miami', flag: '🌴' },
-                  { name: 'Los Angeles', href: '/usa/los-angeles', flag: '🎬' },
-                  { name: 'San Francisco', href: '/usa/san-francisco', flag: '🌁' },
-                  { name: 'Seattle', href: '/usa/seattle', flag: '☕' },
-                  { name: 'Austin', href: '/usa/austin', flag: '🎸' },
-                  { name: 'Boston', href: '/usa/boston', flag: '🏛️' },
-                  { name: 'San Diego', href: '/usa/san-diego', flag: '🌊' },
-                  { name: 'Denver', href: '/usa/denver', flag: '🏔️' },
-                  { name: 'Atlanta', href: '/usa/atlanta', flag: '🍑' },
-                ].map((dest) => (
-                  <Link
-                    key={dest.href}
-                    href={dest.href}
-                    prefetch={false}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[99px] bg-[#f5f6f8] hover:bg-[#14213d] text-[#14213d] hover:text-white border border-[#e3e7ef] transition-colors font-medium text-xs shadow-2xs"
-                  >
-                    <span className="text-sm">{dest.flag}</span>
-                    <span>{dest.name}</span>
-                  </Link>
-                ))}
-              </div>
+              <Link
+                href="/matchmaker"
+                prefetch={false}
+                className="bg-[#b08d57] hover:bg-[#9c7b48] text-white rounded-[10px] px-5 py-2.5 font-bold text-[13px] transition-colors whitespace-nowrap self-start sm:self-auto inline-flex items-center gap-1.5 shadow-xs font-manrope"
+              >
+                <span>Start</span>
+                <span>&rarr;</span>
+              </Link>
             </div>
-          </section>
-
-          {/* Recently Viewed */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6">
-            <RecentlyViewedRow className="my-6" />
-          </section>
-
-          {/* Bathtub Typologies */}
-          <LuxuryBathtubTypologies />
-
-          {/* Featured Iconic Bathtub Suites */}
-          <LuxuryFeaturedSuites />
-
-          {/* Interactive Matchmaker Segment */}
-          <section
-            className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
-            style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 650px' }}
-          >
-            <HomeMatchmakerSection />
           </section>
 
           {/* Destination Discovery Hub */}
           <section
             id="destinations"
-            className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-12 scroll-mt-24"
-            style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1200px' }}
+            className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 scroll-mt-24"
           >
             <HomeDestinationsClient
               usaCities={topUsaCities}
@@ -418,10 +346,49 @@ export default async function Home() {
               totalInternationalCount={totalInternationalCount}
               totalIndiaCount={totalIndiaCount}
             />
-
-            {/* FAQ Accordion */}
-            <LuxuryFAQ />
           </section>
+
+          {/* Plain-Language Tub Types Guide */}
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+            <h2 className="font-playfair text-[22px] sm:text-[26px] font-semibold text-[#14213d] mb-1">
+              Tub types
+            </h2>
+            <div className="text-[13px] text-[#5b6478] mb-4">
+              The three styles of tubs you will find in our listings
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+                <span className="text-2xl mb-2 block">🛁</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
+                  Bathtub
+                </h3>
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                  A bathtub is a normal tub to soak in.
+                </p>
+              </div>
+              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+                <span className="text-2xl mb-2 block">🫧</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
+                  Jetted tub
+                </h3>
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                  A jetted tub is a bathtub with powered water jets for massage.
+                </p>
+              </div>
+              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+                <span className="text-2xl mb-2 block">♨️</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
+                  Hot tub
+                </h3>
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                  A hot tub is a heated tub with water jets.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ Accordion */}
+          <LuxuryFAQ />
         </div>
       </StructuredData>
     </StructuredData>
