@@ -6,8 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { trackEvent } from '@/lib/analytics';
 import { sendGA4Event } from '@/lib/gtag';
-import { isHotelConfirmed } from '@/lib/evidence';
-import provenHotelsMap from '@/data/provenHotels.json';
+import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
 
 export interface MatchmakerHotel {
   name: string;
@@ -45,31 +44,31 @@ export const VIBE_OPTIONS = [
   {
     id: 'honeymoon' as const,
     label: 'Honeymoon & anniversary',
-    tagline: 'Balcony views, romantic suites & quiet ambiance',
+    tagline: 'Rooms with a tub for two',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/fragrant-nature-a-five-star-classified-hotel-agra-1.webp',
   },
   {
     id: 'city_break' as const,
     label: 'City break',
-    tagline: 'High-floor urban skyline vistas & central locations',
+    tagline: 'Hotels in cities',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/h-tel-ritz-paris-paris-1.webp',
   },
   {
     id: 'mountains' as const,
     label: 'Mountains',
-    tagline: 'Scenic valleys, mountain air & fireplace retreats',
+    tagline: 'Hotels in mountain regions',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/villa-camellia-balacola-ooty-ooty-5029-1.webp',
   },
   {
     id: 'beach_islands' as const,
     label: 'Beach & islands',
-    tagline: 'Coastal breezes, ocean views & island getaways',
+    tagline: 'Hotels near beaches and islands',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/elegant-2-bhk-apartments-in-peaceful-siolim-9-1.webp',
   },
   {
     id: 'spa_soaking' as const,
     label: 'Spa & soaking',
-    tagline: 'Hydrotherapy, deep soaking tubs & total relaxation',
+    tagline: 'Rooms with a soaking or hydrotherapy tub',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/capella-bangkok-bangkok-1.webp',
   },
 ];
@@ -78,37 +77,37 @@ export const TUB_OPTIONS = [
   {
     id: 'jetted' as const,
     label: 'Jetted tub (jacuzzi & whirlpool)',
-    tagline: 'Hydro-massage jets & bubbling two-person whirlpool tubs',
+    tagline: 'Whirlpool and hydro-massage tubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/matild-palace-budapest-1.webp',
   },
   {
     id: 'soaking' as const,
     label: 'Deep soaking tub',
-    tagline: 'Generous freestanding & stone soaking baths',
+    tagline: 'Deep soaking bathtubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/mandarin-oriental-bangkok-bangkok-1.webp',
   },
   {
     id: 'hot_tub' as const,
-    label: 'Hot tub (outdoor & balcony)',
-    tagline: 'Open-air balcony or terrace hot tubs under open skies',
+    label: 'Hot tub',
+    tagline: 'Open-air and outdoor tubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/indoor-pool-hot-tub-theater-games-views-punta-cana-6730-1.webp',
   },
   {
     id: 'freestanding' as const,
     label: 'Freestanding bathtub',
-    tagline: 'Sculptural centerpiece bathtubs with panoramic views',
+    tagline: 'Stand-alone centerpiece bathtubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/shangri-la-the-shard-london-london-1.webp',
   },
   {
     id: 'clawfoot' as const,
     label: 'Vintage clawfoot tub',
-    tagline: 'Heritage roll-top baths with classic fixtures',
+    tagline: 'Classic cast-iron bathtubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-taj-lake-palace-udaipur.webp',
   },
   {
     id: 'onsen' as const,
     label: 'Japanese Hinoki / Onsen',
-    tagline: 'Natural aromatic cedarwood & onsen soaking baths',
+    tagline: 'Cedarwood and onsen tubs',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/kyoto-the-ritz-carlton-kyoto-1.webp',
   },
 ];
@@ -117,31 +116,31 @@ export const REGION_OPTIONS = [
   {
     id: 'worldwide' as const,
     label: 'Anywhere worldwide',
-    tagline: 'Explore bathtub stays across 118 countries',
+    tagline: 'Bathtub stays across all countries',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-geneva.webp',
   },
   {
     id: 'usa' as const,
     label: 'United States',
-    tagline: 'Stays across American cities and scenic getaways',
+    tagline: 'Hotels across the United States',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/pool-hot-tub-huge-theater-mini-golf-sleeps-19-austin-2164-1.webp',
   },
   {
     id: 'india' as const,
     label: 'India',
-    tagline: 'Heritage retreats, hill stations, and urban stays',
+    tagline: 'Hotels across India',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-raj-palace-jaipur-1.webp',
   },
   {
     id: 'europe' as const,
     label: 'Europe',
-    tagline: 'Paris, Rome, Swiss Alps, London, and beyond',
+    tagline: 'Hotels across European countries',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/le-bristol-paris-paris-1.webp',
   },
   {
     id: 'asia' as const,
     label: 'Asia & Islands',
-    tagline: 'Thailand, Japan, Bali, Maldives, and beyond',
+    tagline: 'Hotels across Asia and island destinations',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-peninsula-bangkok-bangkok-1.webp',
   },
 ];
@@ -150,25 +149,25 @@ export const TRAVELER_OPTIONS = [
   {
     id: 'couple' as const,
     label: 'Couple',
-    tagline: 'Romantic retreats, honeymoon suites & private soaking',
+    tagline: 'Stays for two guests',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-leela-palace-jaipur-1.webp',
   },
   {
     id: 'family' as const,
     label: 'Family',
-    tagline: 'Spacious suites, multi-room apartments & villas',
+    tagline: 'Stays for families',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/four-seasons-hotel-tokyo-at-otemachi-tokyo-1.webp',
   },
   {
     id: 'solo' as const,
     label: 'Solo',
-    tagline: 'Quiet personal retreats & relaxing deep soaks',
+    tagline: 'Stays for solo travelers',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/four-seasons-hotel-george-v-paris-paris-1.webp',
   },
   {
     id: 'friends' as const,
     label: 'Friends',
-    tagline: 'Multi-bed rooms, group suites & weekend getaways',
+    tagline: 'Stays for groups and friends',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-peninsula-tokyo-tokyo-1.webp',
   },
 ];
@@ -198,6 +197,161 @@ const BEACH_CITIES = new Set([
   'maldives', 'bali', 'bora bora', 'phuket', 'goa', 'hawaii', 'cancun',
   'santorini', 'amalfi', 'fiji', 'seychelles', 'koh samui', 'miami',
 ]);
+
+function matchesVibe(allText: string, city: string, vibe: VibeId): boolean {
+  if (vibe === 'honeymoon') {
+    return (
+      allText.includes('honeymoon') ||
+      allText.includes('balcony') ||
+      allText.includes('caldera') ||
+      allText.includes('sunset') ||
+      allText.includes('suite') ||
+      allText.includes('couple')
+    );
+  }
+  if (vibe === 'city_break') {
+    return (
+      CITY_BREAK_CITIES.has(city) ||
+      allText.includes('skyline') ||
+      allText.includes('city view') ||
+      allText.includes('downtown') ||
+      allText.includes('urban')
+    );
+  }
+  if (vibe === 'mountains') {
+    return (
+      MOUNTAIN_CITIES.has(city) ||
+      allText.includes('mountain') ||
+      allText.includes('alpine') ||
+      allText.includes('fireplace') ||
+      allText.includes('valley') ||
+      allText.includes('forest')
+    );
+  }
+  if (vibe === 'beach_islands') {
+    return (
+      BEACH_CITIES.has(city) ||
+      allText.includes('beach') ||
+      allText.includes('ocean') ||
+      allText.includes('sea') ||
+      allText.includes('island') ||
+      allText.includes('lagoon') ||
+      allText.includes('coast')
+    );
+  }
+  if (vibe === 'spa_soaking') {
+    return (
+      allText.includes('spa') ||
+      allText.includes('wellness') ||
+      allText.includes('sauna') ||
+      allText.includes('hydro') ||
+      allText.includes('massage') ||
+      allText.includes('soaking')
+    );
+  }
+  return false;
+}
+
+function matchesTub(allText: string, tub: TubId): boolean {
+  if (tub === 'jetted') {
+    return (
+      allText.includes('jacuzzi') ||
+      allText.includes('whirlpool') ||
+      allText.includes('hydro') ||
+      allText.includes('jetted') ||
+      allText.includes('spa bath')
+    );
+  }
+  if (tub === 'soaking') {
+    return (
+      allText.includes('soaking') ||
+      allText.includes('deep soak') ||
+      allText.includes('stone') ||
+      allText.includes('marble') ||
+      allText.includes('sunken')
+    );
+  }
+  if (tub === 'hot_tub') {
+    return (
+      allText.includes('hot tub') ||
+      allText.includes('outdoor tub') ||
+      allText.includes('balcony tub') ||
+      allText.includes('open-air') ||
+      allText.includes('patio')
+    );
+  }
+  if (tub === 'freestanding') {
+    return (
+      allText.includes('freestanding') ||
+      allText.includes('stand-alone') ||
+      allText.includes('sculptural')
+    );
+  }
+  if (tub === 'clawfoot') {
+    return (
+      allText.includes('clawfoot') ||
+      allText.includes('claw-foot') ||
+      allText.includes('rolltop') ||
+      allText.includes('roll-top') ||
+      allText.includes('vintage tub')
+    );
+  }
+  if (tub === 'onsen') {
+    return (
+      allText.includes('onsen') ||
+      allText.includes('hinoki') ||
+      allText.includes('cedarwood')
+    );
+  }
+  return false;
+}
+
+function matchesRegion(country: string, region: RegionId): boolean {
+  if (region === 'worldwide') return true;
+  if (region === 'usa') return country === 'usa' || country === 'united states';
+  if (region === 'india') return country === 'india';
+  if (region === 'europe') return EUROPE_COUNTRIES.has(country);
+  if (region === 'asia') return ASIA_COUNTRIES.has(country);
+  return false;
+}
+
+function matchesTraveler(allText: string, traveler: TravelerId): boolean {
+  if (traveler === 'couple') {
+    return (
+      allText.includes('couple') ||
+      allText.includes('romantic') ||
+      allText.includes('king') ||
+      allText.includes('honeymoon') ||
+      allText.includes('suite')
+    );
+  }
+  if (traveler === 'family') {
+    return (
+      allText.includes('family') ||
+      allText.includes('suite') ||
+      allText.includes('villa') ||
+      allText.includes('apartment') ||
+      allText.includes('two')
+    );
+  }
+  if (traveler === 'solo') {
+    return (
+      allText.includes('single') ||
+      allText.includes('queen') ||
+      allText.includes('studio') ||
+      allText.includes('cozy')
+    );
+  }
+  if (traveler === 'friends') {
+    return (
+      allText.includes('twin') ||
+      allText.includes('double') ||
+      allText.includes('two') ||
+      allText.includes('suite')
+    );
+  }
+  return false;
+}
 
 interface ScoredHotel {
   hotel: MatchmakerHotel;
@@ -240,21 +394,13 @@ export default function DreamSoakMatchmaker({
         return res.json();
       })
       .then((data: MatchmakerHotel[]) => {
-        const provenDict = provenHotelsMap as Record<
-          string,
-          { importBatch: string; bookingTubLabels: string[] }
-        >;
-        const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => {
-          const key = `${(h.city || '').toLowerCase().trim()}|${(h.name || '').toLowerCase().trim()}`;
-          const prov = provenDict[key];
-          return {
-            ...h,
-            importBatch: prov ? prov.importBatch : h.importBatch,
-            bookingTubLabels: prov ? prov.bookingTubLabels : h.bookingTubLabels,
-            bathtubConfirmed: prov ? true : Boolean(h.bathtubConfirmed),
-            amenities: Array.isArray(h.amenities) ? h.amenities : [],
-          };
-        });
+        const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
+          ...h,
+          importBatch: h.importBatch || '',
+          bookingTubLabels: Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [],
+          bathtubConfirmed: Boolean(h.importBatch && Array.isArray(h.bookingTubLabels) && h.bookingTubLabels.length > 0),
+          amenities: Array.isArray(h.amenities) ? h.amenities : [],
+        }));
         setAllHotels(cleanData);
         setLoading(false);
       })
@@ -304,7 +450,76 @@ export default function DreamSoakMatchmaker({
     return () => observer.disconnect();
   }, [loadData]);
 
-  // Compute matched hotels
+  // Compute option counts and apply the "fewer than 3 hotels" hiding rule
+  // 1. Step 1 (Vibe) visible options
+  const visibleVibes = useMemo(() => {
+    return VIBE_OPTIONS.map((vibe) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesVibe(allText, city, vibe.id)) count++;
+      }
+      return { ...vibe, count };
+    }).filter((vibe) => vibe.count >= 3);
+  }, [allHotels, selectedRegion]);
+
+  // 2. Step 2 (Tub style) visible options: given selectedVibe and selectedRegion if set
+  const visibleTubs = useMemo(() => {
+    return TUB_OPTIONS.map((tub) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesTub(allText, tub.id)) count++;
+      }
+      return { ...tub, count };
+    }).filter((tub) => tub.count >= 3);
+  }, [allHotels, selectedVibe, selectedRegion]);
+
+  // 3. Step 3 (Region) visible options: given selectedVibe and selectedTub if set
+  const visibleRegions = useMemo(() => {
+    return REGION_OPTIONS.map((reg) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedTub && !matchesTub(allText, selectedTub)) continue;
+        if (matchesRegion(country, reg.id)) count++;
+      }
+      return { ...reg, count };
+    }).filter((reg) => reg.count >= 3);
+  }, [allHotels, selectedVibe, selectedTub]);
+
+  // 4. Step 4 (Who's coming) visible options: given selectedVibe, selectedTub, selectedRegion
+  const visibleTravelers = useMemo(() => {
+    return TRAVELER_OPTIONS.map((trav) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedTub && !matchesTub(allText, selectedTub)) continue;
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesTraveler(allText, trav.id)) count++;
+      }
+      return { ...trav, count };
+    }).filter((trav) => trav.count >= 3);
+  }, [allHotels, selectedVibe, selectedTub, selectedRegion]);
+
+  // Compute matched hotels with Problem 4 sort order:
+  // 1. Confirmed first (isHotelConfirmed)
+  // 2. Has booking partners (rentals without booking partners go last)
+  // 3. Partner count descending
+  // 4. Match score descending
   const matchedHotels: ScoredHotel[] = useMemo(() => {
     if (!allHotels.length) return [];
     const vibe = selectedVibe || 'honeymoon';
@@ -320,160 +535,39 @@ export default function DreamSoakMatchmaker({
       const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
 
       // 1. Region filter
-      if (region === 'usa' && country !== 'usa' && country !== 'united states') continue;
-      if (region === 'india' && country !== 'india') continue;
-      if (region === 'europe' && !EUROPE_COUNTRIES.has(country)) continue;
-      if (region === 'asia' && !ASIA_COUNTRIES.has(country)) continue;
+      if (!matchesRegion(country, region)) continue;
 
       // 2. Tub style filter
-      let tubMatched = false;
-      if (tub === 'jetted') {
-        tubMatched =
-          allText.includes('jacuzzi') ||
-          allText.includes('whirlpool') ||
-          allText.includes('hydro') ||
-          allText.includes('jetted') ||
-          allText.includes('spa bath');
-      } else if (tub === 'soaking') {
-        tubMatched =
-          allText.includes('soaking') ||
-          allText.includes('deep soak') ||
-          allText.includes('stone') ||
-          allText.includes('marble') ||
-          allText.includes('sunken');
-      } else if (tub === 'hot_tub') {
-        tubMatched =
-          allText.includes('hot tub') ||
-          allText.includes('outdoor tub') ||
-          allText.includes('balcony tub') ||
-          allText.includes('open-air') ||
-          allText.includes('patio');
-      } else if (tub === 'freestanding') {
-        tubMatched =
-          allText.includes('freestanding') ||
-          allText.includes('stand-alone') ||
-          allText.includes('sculptural');
-      } else if (tub === 'clawfoot') {
-        tubMatched =
-          allText.includes('clawfoot') ||
-          allText.includes('claw-foot') ||
-          allText.includes('rolltop') ||
-          allText.includes('roll-top') ||
-          allText.includes('vintage tub');
-      } else if (tub === 'onsen') {
-        tubMatched =
-          allText.includes('onsen') ||
-          allText.includes('hinoki') ||
-          allText.includes('cedarwood');
-      }
-
-      if (!tubMatched) continue;
+      if (!matchesTub(allText, tub)) continue;
 
       let score = 50;
 
       // 3. Vibe score
-      if (vibe === 'honeymoon') {
-        if (
-          allText.includes('honeymoon') ||
-          allText.includes('balcony') ||
-          allText.includes('caldera') ||
-          allText.includes('sunset') ||
-          allText.includes('suite') ||
-          allText.includes('couple')
-        ) {
-          score += 20;
-        }
-      } else if (vibe === 'city_break') {
-        if (
-          CITY_BREAK_CITIES.has(city) ||
-          allText.includes('skyline') ||
-          allText.includes('city view') ||
-          allText.includes('downtown')
-        ) {
-          score += 20;
-        }
-      } else if (vibe === 'mountains') {
-        if (
-          MOUNTAIN_CITIES.has(city) ||
-          allText.includes('mountain') ||
-          allText.includes('alpine') ||
-          allText.includes('fireplace') ||
-          allText.includes('valley')
-        ) {
-          score += 20;
-        }
-      } else if (vibe === 'beach_islands') {
-        if (
-          BEACH_CITIES.has(city) ||
-          allText.includes('beach') ||
-          allText.includes('ocean') ||
-          allText.includes('sea') ||
-          allText.includes('island') ||
-          allText.includes('lagoon')
-        ) {
-          score += 20;
-        }
-      } else if (vibe === 'spa_soaking') {
-        if (
-          allText.includes('spa') ||
-          allText.includes('wellness') ||
-          allText.includes('sauna') ||
-          allText.includes('hydro') ||
-          allText.includes('massage')
-        ) {
-          score += 20;
-        }
-      }
+      if (matchesVibe(allText, city, vibe)) score += 20;
 
       // 4. Traveler ordering
-      if (traveler === 'couple') {
-        if (
-          allText.includes('couple') ||
-          allText.includes('romantic') ||
-          allText.includes('king') ||
-          allText.includes('honeymoon') ||
-          allText.includes('suite')
-        ) {
-          score += 15;
-        }
-      } else if (traveler === 'family') {
-        if (
-          allText.includes('family') ||
-          allText.includes('suite') ||
-          allText.includes('villa') ||
-          allText.includes('apartment') ||
-          allText.includes('two')
-        ) {
-          score += 15;
-        }
-      } else if (traveler === 'solo') {
-        if (
-          allText.includes('single') ||
-          allText.includes('queen') ||
-          allText.includes('studio') ||
-          allText.includes('cozy')
-        ) {
-          score += 15;
-        }
-      } else if (traveler === 'friends') {
-        if (
-          allText.includes('twin') ||
-          allText.includes('double') ||
-          allText.includes('two') ||
-          allText.includes('suite')
-        ) {
-          score += 15;
-        }
-      }
+      if (matchesTraveler(allText, traveler)) score += 15;
 
       scored.push({ hotel: h, matchScore: score });
     }
 
-    // Sort: Proven hotels first, then score descending, then partner count
+    // Sort: Confirmed first, then has partners (rentals without partners last), then partner count, then score
     scored.sort((a, b) => {
       const confA = isHotelConfirmed(a.hotel) ? 1 : 0;
       const confB = isHotelConfirmed(b.hotel) ? 1 : 0;
       if (confB !== confA) return confB - confA;
+
+      const partnersA = getLinkedPartners(a.hotel);
+      const partnersB = getLinkedPartners(b.hotel);
+
+      const hasPartnersA = partnersA.length > 0 ? 1 : 0;
+      const hasPartnersB = partnersB.length > 0 ? 1 : 0;
+      if (hasPartnersB !== hasPartnersA) return hasPartnersB - hasPartnersA;
+
+      if (partnersB.length !== partnersA.length) {
+        return partnersB.length - partnersA.length;
+      }
+
       return b.matchScore - a.matchScore;
     });
 
@@ -692,7 +786,7 @@ export default function DreamSoakMatchmaker({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-            {VIBE_OPTIONS.map((vibe) => (
+            {visibleVibes.map((vibe) => (
               <button
                 key={vibe.id}
                 type="button"
@@ -714,6 +808,11 @@ export default function DreamSoakMatchmaker({
                     <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
                       {vibe.tagline}
                     </div>
+                    {vibe.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{vibe.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -739,7 +838,7 @@ export default function DreamSoakMatchmaker({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-            {TUB_OPTIONS.map((tub) => (
+            {visibleTubs.map((tub) => (
               <button
                 key={tub.id}
                 type="button"
@@ -761,6 +860,11 @@ export default function DreamSoakMatchmaker({
                     <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
                       {tub.tagline}
                     </div>
+                    {tub.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{tub.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -786,7 +890,7 @@ export default function DreamSoakMatchmaker({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-            {REGION_OPTIONS.map((reg) => (
+            {visibleRegions.map((reg) => (
               <button
                 key={reg.id}
                 type="button"
@@ -808,6 +912,11 @@ export default function DreamSoakMatchmaker({
                     <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
                       {reg.tagline}
                     </div>
+                    {reg.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{reg.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
@@ -833,7 +942,7 @@ export default function DreamSoakMatchmaker({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 max-w-2xl mx-auto">
-            {TRAVELER_OPTIONS.map((trav) => (
+            {visibleTravelers.map((trav) => (
               <button
                 key={trav.id}
                 type="button"
@@ -855,6 +964,11 @@ export default function DreamSoakMatchmaker({
                     <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
                       {trav.tagline}
                     </div>
+                    {trav.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{trav.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>

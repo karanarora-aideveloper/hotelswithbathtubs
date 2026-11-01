@@ -263,6 +263,8 @@ async function generateLocations() {
         airbnbUrl: h.airbnbUrl || '',
         tripUrl: h.tripUrl || '',
         url: h.url || '',
+        importBatch: h.importBatch || '',
+        bookingTubLabels: Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [],
       };
     });
     const matchmakerPath = path.join(publicDir, 'matchmaker-data.json');
