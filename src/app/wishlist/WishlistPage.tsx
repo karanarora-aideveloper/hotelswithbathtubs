@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { imageUrl } from '@/lib/imageUrl';
 import OutboundLink from '@/components/OutboundLink';
+import RecentlyViewedRow from '@/components/RecentlyViewedRow';
 import { useState } from 'react';
 
 export default function WishlistPage() {
@@ -26,7 +27,7 @@ export default function WishlistPage() {
           url: 'https://www.hotelswithbathtubs.com/wishlist',
         });
         return;
-      } catch (_) {}
+      } catch {}
     }
 
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
@@ -168,6 +169,9 @@ export default function WishlistPage() {
           ))}
         </div>
       )}
+
+      {/* Recently Viewed */}
+      <RecentlyViewedRow className="mt-12" />
     </div>
   );
 }

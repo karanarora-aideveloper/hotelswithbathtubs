@@ -187,6 +187,62 @@ export function getLinkedPartners(hotel: {
   return partners;
 }
 
+export function getPartnerUrl(
+  hotel: {
+    bookingUrl?: string | null;
+    agodaUrl?: string | null;
+    mmtUrl?: string | null;
+    makemytripUrl?: string | null;
+    cleartripUrl?: string | null;
+    easemytripUrl?: string | null;
+    airbnbUrl?: string | null;
+    tripUrl?: string | null;
+    expediaUrl?: string | null;
+    hotelsComUrl?: string | null;
+    vrboUrl?: string | null;
+    url?: string | null;
+  },
+  partnerName: string
+): string {
+  switch (partnerName) {
+    case 'Booking.com':
+      return hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+    case 'Agoda':
+      return hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+    case 'MakeMyTrip':
+      return (
+        hotel.mmtUrl ||
+        hotel.makemytripUrl ||
+        (hotel.url && hotel.url.includes('makemytrip.com') ? hotel.url : '')
+      );
+    case 'Cleartrip':
+      return (
+        hotel.cleartripUrl ||
+        (hotel.url && hotel.url.includes('cleartrip.com') ? hotel.url : '')
+      );
+    case 'EaseMyTrip':
+      return (
+        hotel.easemytripUrl ||
+        (hotel.url && hotel.url.includes('easemytrip.com') ? hotel.url : '')
+      );
+    case 'Airbnb':
+      return hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+    case 'Trip.com':
+      return hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+    case 'Expedia':
+      return hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+    case 'Hotels.com':
+      return (
+        hotel.hotelsComUrl ||
+        (hotel.url && hotel.url.includes('hotels.com') ? hotel.url : '')
+      );
+    case 'Vrbo':
+      return hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+    default:
+      return hotel.url || '';
+  }
+}
+
 export interface EvidenceLineData {
   textPrefix: string;
   roomType?: string;

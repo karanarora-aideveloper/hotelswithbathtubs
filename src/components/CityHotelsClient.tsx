@@ -14,7 +14,9 @@ import {
   recordFilterReset,
   recordFilterChange,
 } from '@/lib/gtag';
-import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners, getPartnerUrl } from '@/lib/evidence';
+import { FavoriteButton } from '@/components/Favorites';
+import OutboundLink from '@/components/OutboundLink';
 
 type HotelData = {
   _id?: string;
@@ -632,10 +634,33 @@ export default function CityHotelsClient({
                       )}
 
                       {/* Favorite button */}
-                      <div className="absolute right-3 top-3 z-10 w-[34px] h-[34px] rounded-full bg-white/92 backdrop-blur-xs flex items-center justify-center shadow-xs">
-                        <svg className="w-4 h-4 text-[#5b6478]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
+                      <div
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        className="absolute right-3 top-3 z-10 w-[34px] h-[34px] rounded-full bg-white/92 backdrop-blur-xs flex items-center justify-center shadow-xs"
+                      >
+                        <FavoriteButton
+                          hotel={{
+                            _id: String(h._id || h.slug || `${countrySlug}-${citySlugResolved}-${hotelSlug}`),
+                            name: h.name,
+                            city: h.city || cityName,
+                            country: h.country || countryName,
+                            image: h.image || '',
+                            price: h.price,
+                            rating: h.rating,
+                            tubType: h.tubType || tubWords,
+                            bookingUrl: h.bookingUrl,
+                            agodaUrl: h.agodaUrl,
+                            airbnbUrl: h.airbnbUrl,
+                            tripUrl: h.tripUrl,
+                            url: h.url,
+                            countrySlug,
+                            citySlug: citySlugResolved,
+                          }}
+                          className="w-full h-full flex items-center justify-center cursor-pointer"
+                        />
                       </div>
                     </HotelCardImage>
 
@@ -674,25 +699,32 @@ export default function CityHotelsClient({
                         )}
                       </div>
 
-                      {/* Partners and Compare button */}
-                      <div className="flex justify-between items-center text-[12px] text-[#5b6478] mt-auto pt-1">
+                      {/* Booking partner direct buttons & Compare all link */}
+                      <div className="mt-auto pt-2 flex flex-col gap-2">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          {linkedPartners.map((partner) => (
-                            <span
-                              key={partner}
-                              className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap"
-                            >
-                              {partner}
-                            </span>
-                          ))}
+                          {linkedPartners.slice(0, 3).map((partner) => {
+                            const partnerUrl = getPartnerUrl(h, partner);
+                            if (!partnerUrl) return null;
+                            return (
+                              <OutboundLink
+                                key={partner}
+                                href={partnerUrl}
+                                source={partner}
+                                hotelName={h.name}
+                                cityName={h.city || cityName}
+                                className="inline-flex items-center justify-center border-[1.5px] border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white rounded-[9px] px-2.5 sm:px-3 py-1.5 font-bold text-[11px] sm:text-xs transition-colors whitespace-nowrap text-center"
+                              >
+                                {partner} ›
+                              </OutboundLink>
+                            );
+                          })}
                         </div>
-
                         <Link
                           href={hotelPageUrl}
                           prefetch={false}
-                          className="bg-[#b08d57] hover:bg-[#9c7b48] text-white rounded-[10px] px-3.5 py-2 font-bold text-[13px] transition-colors whitespace-nowrap ml-2"
+                          className="text-[11px] font-semibold text-[#5b6478] hover:text-[#b08d57] transition-colors inline-flex items-center gap-1 self-start pt-0.5"
                         >
-                          Compare
+                          Compare all ›
                         </Link>
                       </div>
                     </div>

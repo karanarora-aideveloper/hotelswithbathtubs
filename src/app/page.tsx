@@ -10,6 +10,7 @@ import LuxuryFeaturedSuites from '@/components/luxury/LuxuryFeaturedSuites';
 import LuxuryFAQ from '@/components/luxury/LuxuryFAQ';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
 import HomeMatchmakerSection from '@/components/HomeMatchmakerSection';
+import RecentlyViewedRow from '@/components/RecentlyViewedRow';
 
 interface AggregatedCityRaw {
   _id: { city: string; country: string };
@@ -382,6 +383,11 @@ export default async function Home() {
                 ))}
               </div>
             </div>
+          </section>
+
+          {/* Recently Viewed */}
+          <section className="max-w-4xl mx-auto px-4 sm:px-6">
+            <RecentlyViewedRow className="my-6" />
           </section>
 
           {/* Bathtub Typologies */}

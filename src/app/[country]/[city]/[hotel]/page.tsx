@@ -9,7 +9,9 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCou
 import WhereToBookRow from '@/components/WhereToBookRow';
 import HotelGallery from '@/components/HotelGallery';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, getTubWord, sanitizeHotelData, buildDataDescription, isHotelConfirmed } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, getPartnerUrl, sanitizeBookingTip, getBathtubLabel, getTubWord, sanitizeHotelData, buildDataDescription, isHotelConfirmed } from '@/lib/evidence';
+import { FavoriteButton } from '@/components/Favorites';
+import RecordHotelView from '@/components/RecordHotelView';
 import { buildHotelDescription } from '@/lib/hotelText';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
@@ -435,48 +437,6 @@ export default async function HotelDetailPage({
     } : {})
   };
 
-  interface PartnerUrlHotel {
-    bookingUrl?: string | null;
-    agodaUrl?: string | null;
-    mmtUrl?: string | null;
-    makemytripUrl?: string | null;
-    cleartripUrl?: string | null;
-    easemytripUrl?: string | null;
-    airbnbUrl?: string | null;
-    tripUrl?: string | null;
-    expediaUrl?: string | null;
-    hotelsComUrl?: string | null;
-    vrboUrl?: string | null;
-    url?: string | null;
-  }
-
-  function getPartnerUrl(h: PartnerUrlHotel, partnerName: string): string {
-    switch (partnerName) {
-      case 'Booking.com':
-        return h.bookingUrl || (h.url && h.url.includes('booking.com') ? h.url : '');
-      case 'Agoda':
-        return h.agodaUrl || (h.url && h.url.includes('agoda.com') ? h.url : '');
-      case 'MakeMyTrip':
-        return h.mmtUrl || h.makemytripUrl || (h.url && h.url.includes('makemytrip.com') ? h.url : '');
-      case 'Cleartrip':
-        return h.cleartripUrl || (h.url && h.url.includes('cleartrip.com') ? h.url : '');
-      case 'EaseMyTrip':
-        return h.easemytripUrl || (h.url && h.url.includes('easemytrip.com') ? h.url : '');
-      case 'Airbnb':
-        return h.airbnbUrl || (h.url && h.url.includes('airbnb.com') ? h.url : '');
-      case 'Trip.com':
-        return h.tripUrl || (h.url && h.url.includes('trip.com') ? h.url : '');
-      case 'Expedia':
-        return h.expediaUrl || (h.url && h.url.includes('expedia.com') ? h.url : '');
-      case 'Hotels.com':
-        return h.hotelsComUrl || (h.url && h.url.includes('hotels.com') ? h.url : '');
-      case 'Vrbo':
-        return h.vrboUrl || (h.url && h.url.includes('vrbo.com') ? h.url : '');
-      default:
-        return h.url || '';
-    }
-  }
-
   const isIndia = countrySlug === 'india';
   const availableSources: string[] = [];
   const cleanBooking = (hotel.bookingUrl && !hotel.bookingUrl.includes('searchresults')) || (hotel.url && hotel.url.includes('booking.com') && !hotel.url.includes('searchresults'));
@@ -511,6 +471,16 @@ export default async function HotelDetailPage({
     <>
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={hotelSchema} />
+      <RecordHotelView
+        hotel={{
+          id: String(hotel._id || hotel.slug),
+          name: hotel.name,
+          city: cityName,
+          country: countryName,
+          image: hotel.image || '',
+          url: `/${countrySlug}/${citySlug}/${hotelSlug}`,
+        }}
+      />
 
       {/* Breadcrumbs Bar */}
       <div className="border-b border-[#e3e7ef] bg-white">
@@ -550,10 +520,34 @@ export default async function HotelDetailPage({
 
       {/* Main Content Layout matching Style B mockup */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-        {/* Hotel Title H1 */}
-        <h1 className="font-playfair text-[28px] sm:text-[34px] md:text-[38px] font-semibold text-[#14213d] leading-[1.1] mb-1.5 tracking-tight">
-          {hotel.name}
-        </h1>
+        {/* Hotel Title H1 & Wishlist Heart */}
+        <div className="flex items-start justify-between gap-4 mb-1.5">
+          <h1 className="font-playfair text-[28px] sm:text-[34px] md:text-[38px] font-semibold text-[#14213d] leading-[1.1] tracking-tight">
+            {hotel.name}
+          </h1>
+          <div className="w-[38px] h-[38px] rounded-full bg-white border border-[#e3e7ef] shadow-xs flex items-center justify-center shrink-0 mt-1">
+            <FavoriteButton
+              hotel={{
+                _id: String(hotel._id || hotel.slug),
+                name: hotel.name,
+                city: cityName,
+                country: countryName,
+                image: hotel.image || '',
+                price: hotel.price,
+                rating: typeof hotel.rating === 'number' ? hotel.rating : typeof hotel.rating === 'string' ? parseFloat(hotel.rating) : undefined,
+                tubType: hotel.tubType || tubWords,
+                bookingUrl: hotel.bookingUrl,
+                agodaUrl: hotel.agodaUrl,
+                airbnbUrl: hotel.airbnbUrl,
+                tripUrl: hotel.tripUrl,
+                url: hotel.url,
+                countrySlug,
+                citySlug,
+              }}
+              className="w-full h-full flex items-center justify-center cursor-pointer"
+            />
+          </div>
+        </div>
 
         {/* Address */}
         <div className="text-xs sm:text-[13px] text-[#5b6478] mb-4">
