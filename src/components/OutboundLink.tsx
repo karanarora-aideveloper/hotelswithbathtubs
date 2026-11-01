@@ -24,6 +24,9 @@ export default function OutboundLink({
   dates?: TripDates;
 }) {
   const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
+  const outHref = href.startsWith('/out?')
+    ? href
+    : `/out?url=${encodeURIComponent(affiliateLink)}`;
 
   // Normalize affiliate provider name
   const getProvider = (url: string, src?: string): string => {
@@ -35,6 +38,8 @@ export default function OutboundLink({
     if (lower.includes('vrbo.com')) return 'vrbo';
     if (lower.includes('agoda.com') || lower.includes('visitretailer/2927')) return 'agoda';
     if (lower.includes('makemytrip.com') || lower.includes('visitretailer/1729') || lower.includes('linkredirect.in') || lower.includes('ekaro.in')) return 'makemytrip';
+    if (lower.includes('cleartrip.com')) return 'cleartrip';
+    if (lower.includes('easemytrip.com')) return 'easemytrip';
     if (lower.includes('trip.com')) return 'trip.com';
     if (lower.includes('airbnb.')) return 'airbnb';
     return 'other';
@@ -42,7 +47,7 @@ export default function OutboundLink({
 
   return (
     <a
-      href={affiliateLink}
+      href={outHref}
       target="_blank"
       rel="noopener noreferrer nofollow sponsored"
       className={className}

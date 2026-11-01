@@ -261,7 +261,7 @@ export function buildHotelDescription(hotel: {
   state?: string;
   roomType?: string;
   tubType?: string;
-  bathtubConfirmed?: boolean;
+  bathtubConfirmed?: boolean | null;
   importBatch?: string | null;
   bookingTubLabels?: string[] | null;
 }): string {

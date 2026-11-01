@@ -46,6 +46,8 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
       'linksredirect.com',
       'clnk.in',
       'bitli.in',
+      'cleartrip.com',
+      'easemytrip.com',
     ];
 
     const isAllowedDomain = ALLOWED_DOMAINS.some(

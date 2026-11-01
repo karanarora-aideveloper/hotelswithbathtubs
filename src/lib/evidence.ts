@@ -1,18 +1,46 @@
-import { isJacuzziRoom } from '@/lib/utils';
-import { hasClaimPhrase, dropClaimSentences } from '@/lib/claims';
+import { hasClaimPhrase } from '@/lib/claims';
 import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
 
 export { isHotelConfirmed };
 
+export function getTubWord(hotel?: {
+  bookingTubLabels?: string[] | null;
+  tubType?: string | null;
+  roomType?: string | null;
+}): string {
+  if (hotel?.bookingTubLabels && hotel.bookingTubLabels.length > 0) {
+    const first = hotel.bookingTubLabels[0].trim();
+    if (/^bath$/i.test(first)) return 'bathtub';
+    if (/^room name$/i.test(first)) {
+      const text = `${hotel.roomType || ''} ${hotel.tubType || ''}`.toLowerCase();
+      if (text.includes('hot tub')) return 'hot tub';
+      if (text.includes('jacuzzi')) return 'jacuzzi';
+      if (text.includes('whirlpool')) return 'whirlpool';
+      if (text.includes('soaking')) return 'soaking tub';
+      if (text.includes('jetted') || text.includes('hydro')) return 'jetted tub';
+      return 'bathtub';
+    }
+    return first.toLowerCase();
+  }
+  const text = `${hotel?.tubType || ''} ${hotel?.roomType || ''}`.toLowerCase();
+  if (text.includes('hot tub')) return 'hot tub';
+  if (text.includes('jacuzzi')) return 'jacuzzi';
+  if (text.includes('whirlpool')) return 'whirlpool';
+  if (text.includes('soaking')) return 'soaking tub';
+  if (text.includes('jetted') || text.includes('hydro')) return 'jetted tub';
+  return 'bathtub';
+}
+
 export function getBathtubLabel(hotel?: {
-  bathtubConfirmed?: boolean;
+  bathtubConfirmed?: boolean | null;
   tubType?: string;
   roomType?: string;
   importBatch?: string | null;
   bookingTubLabels?: string[] | null;
 }): string {
   if (isHotelConfirmed(hotel)) {
-    return isJacuzziRoom(hotel) ? 'In-room jacuzzi' : 'In-room bathtub';
+    const word = getTubWord(hotel);
+    return `In-room ${word}`;
   }
   return 'Bathtub not yet confirmed';
 }
@@ -22,6 +50,8 @@ export function getFirstPartner(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;
@@ -47,6 +77,18 @@ export function getFirstPartner(hotel: {
     (hotel.url && hotel.url.includes('makemytrip.com') && !hotel.url.includes('hotel-listing'))
   ) {
     return 'MakeMyTrip';
+  }
+  if (
+    (hotel.cleartripUrl && !hotel.cleartripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('cleartrip.com') && !hotel.url.includes('search'))
+  ) {
+    return 'Cleartrip';
+  }
+  if (
+    (hotel.easemytripUrl && !hotel.easemytripUrl.includes('hotel-listing') && !hotel.easemytripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('easemytrip.com') && !hotel.url.includes('hotel-listing') && !hotel.url.includes('search'))
+  ) {
+    return 'EaseMyTrip';
   }
   if (
     (hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) ||
@@ -80,6 +122,8 @@ export function getLinkedPartners(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;
@@ -108,6 +152,18 @@ export function getLinkedPartners(hotel: {
     partners.push('MakeMyTrip');
   }
   if (
+    (hotel.cleartripUrl && !hotel.cleartripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('cleartrip.com') && !hotel.url.includes('search'))
+  ) {
+    partners.push('Cleartrip');
+  }
+  if (
+    (hotel.easemytripUrl && !hotel.easemytripUrl.includes('hotel-listing') && !hotel.easemytripUrl.includes('search')) ||
+    (hotel.url && hotel.url.includes('easemytrip.com') && !hotel.url.includes('hotel-listing') && !hotel.url.includes('search'))
+  ) {
+    partners.push('EaseMyTrip');
+  }
+  if (
     (hotel.airbnbUrl && hotel.airbnbUrl.includes('/rooms/')) ||
     (hotel.url && hotel.url.includes('airbnb.com') && hotel.url.includes('/rooms/'))
   ) {
@@ -131,6 +187,62 @@ export function getLinkedPartners(hotel: {
   return partners;
 }
 
+export function getPartnerUrl(
+  hotel: {
+    bookingUrl?: string | null;
+    agodaUrl?: string | null;
+    mmtUrl?: string | null;
+    makemytripUrl?: string | null;
+    cleartripUrl?: string | null;
+    easemytripUrl?: string | null;
+    airbnbUrl?: string | null;
+    tripUrl?: string | null;
+    expediaUrl?: string | null;
+    hotelsComUrl?: string | null;
+    vrboUrl?: string | null;
+    url?: string | null;
+  },
+  partnerName: string
+): string {
+  switch (partnerName) {
+    case 'Booking.com':
+      return hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+    case 'Agoda':
+      return hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+    case 'MakeMyTrip':
+      return (
+        hotel.mmtUrl ||
+        hotel.makemytripUrl ||
+        (hotel.url && hotel.url.includes('makemytrip.com') ? hotel.url : '')
+      );
+    case 'Cleartrip':
+      return (
+        hotel.cleartripUrl ||
+        (hotel.url && hotel.url.includes('cleartrip.com') ? hotel.url : '')
+      );
+    case 'EaseMyTrip':
+      return (
+        hotel.easemytripUrl ||
+        (hotel.url && hotel.url.includes('easemytrip.com') ? hotel.url : '')
+      );
+    case 'Airbnb':
+      return hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+    case 'Trip.com':
+      return hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+    case 'Expedia':
+      return hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+    case 'Hotels.com':
+      return (
+        hotel.hotelsComUrl ||
+        (hotel.url && hotel.url.includes('hotels.com') ? hotel.url : '')
+      );
+    case 'Vrbo':
+      return hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+    default:
+      return hotel.url || '';
+  }
+}
+
 export interface EvidenceLineData {
   textPrefix: string;
   roomType?: string;
@@ -139,7 +251,7 @@ export interface EvidenceLineData {
 }
 
 export function getEvidenceLine(hotel: {
-  bathtubConfirmed?: boolean;
+  bathtubConfirmed?: boolean | null;
   importBatch?: string | null;
   bookingTubLabels?: string[] | null;
   roomType?: string;
@@ -148,6 +260,8 @@ export function getEvidenceLine(hotel: {
   agodaUrl?: string | null;
   mmtUrl?: string | null;
   makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
   airbnbUrl?: string | null;
   tripUrl?: string | null;
   expediaUrl?: string | null;
@@ -183,7 +297,10 @@ export function getEvidenceLine(hotel: {
   };
 }
 
-export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[], roomType?: string | null): string {
+export function sanitizeBookingTip(_tip?: string | null, _linkedPartners?: string[], _roomType?: string | null): string {
+  void _tip;
+  void _linkedPartners;
+  void _roomType;
   return 'Check that the room you pick lists a bathtub before you book.';
 }
 
@@ -201,15 +318,16 @@ export function buildDataDescription(h: {
   return `${h.name} features a ${tub} in the ${room}${loc ? ` ${loc}` : ''}.`;
 }
 
-export function sanitizeHotelData(h: any): any {
+export function sanitizeHotelData<T extends Record<string, unknown>>(h: T): T {
   if (!h) return h;
-  h.bathtubConfirmed = isHotelConfirmed(h);
+  const hotelObj = h as Record<string, unknown>;
+  hotelObj.bathtubConfirmed = isHotelConfirmed(h as Parameters<typeof isHotelConfirmed>[0]);
   if (!h.importBatch) {
-    h.description = buildHotelDescription(h);
-    h.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
+    hotelObj.description = buildHotelDescription(h as Parameters<typeof buildHotelDescription>[0]);
+    hotelObj.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
   }
   if (Array.isArray(h.amenities)) {
-    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
+    hotelObj.amenities = h.amenities.filter((a: unknown) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
   }
   return h;
 }

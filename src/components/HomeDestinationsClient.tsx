@@ -4,7 +4,12 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import CityCard from '@/components/CityCard';
 import { useGeo } from '@/lib/useGeo';
-import { resolveCountry, slugify } from '@/lib/utils';
+import {
+  isCountryWithHotels,
+  getFlagEmoji,
+  getCountryDisplayName,
+  COUNTRIES_WITH_HOTELS,
+} from '@/lib/countries';
 
 type CityItem = {
   _id: { city: string; country: string };
@@ -49,113 +54,50 @@ function FlashDestinationSection({
   subtitle,
   hubUrl,
   hubLabel,
-  badgeLabel,
   cities,
-  totalCount: totalCountProp,
   isInternational = false,
-  comingSoonCard = false,
-  pillPrefix = 'More Destinations:',
-  maxPills,
-  remainingCitiesFormatter,
 }: FlashDestinationSectionProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(12);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  const totalCount = totalCountProp ?? cities.length;
-  const displayedCities = isExpanded ? cities.slice(0, visibleCount) : cities.slice(0, 12);
-  const remainingCities = cities.slice(12);
-  const hasMoreToStream = isExpanded && visibleCount < cities.length;
-
-  // Flash List Progressive Virtual Streaming via IntersectionObserver
-  useEffect(() => {
-    if (!hasMoreToStream) return;
-    const target = sentinelRef.current;
-    if (!target) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          // Stream next batch of 16 cards smoothly at 60fps
-          setVisibleCount((prev) => Math.min(prev + 16, cities.length));
-        }
-      },
-      { rootMargin: '600px 0px' }
-    );
-
-    observer.observe(target);
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasMoreToStream, cities.length]);
-
   if (cities.length === 0) return null;
 
-  const handleExpand = () => {
-    setIsExpanded(true);
-    setVisibleCount(Math.min(24, cities.length));
-  };
-
-  const handleCollapse = () => {
-    setIsExpanded(false);
-    setVisibleCount(12);
-    if (sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const handleLoadAll = () => {
-    setVisibleCount(cities.length);
-  };
-
-  const pillsToRender = maxPills ? remainingCities.slice(0, maxPills) : remainingCities;
-  const overflowPillsCount = totalCount > (12 + pillsToRender.length) ? totalCount - (12 + pillsToRender.length) : 0;
+  // Show at most 6 city cards per region (REDESIGN-B4C)
+  const displayedCities = cities.slice(0, 6);
 
   return (
-    <div id={id} ref={sectionRef} className="scroll-mt-32">
+    <div id={id} className="scroll-mt-32">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-slate-200/80 pb-4 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-5 border-b border-[#e3e7ef] pb-3 gap-2">
         <div>
           {hubUrl ? (
-            <Link href={hubUrl} prefetch={false} className="group inline-flex items-center gap-2.5 hover:text-[#1a6fde] transition-colors">
-              <span className="text-2xl">{emoji}</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-[#1a6fde] transition-colors tracking-tight">
+            <Link href={hubUrl} prefetch={false} className="group inline-flex items-center gap-2 hover:text-[#b08d57] transition-colors">
+              <span className="text-xl">{emoji}</span>
+              <h3 className="font-playfair text-xl sm:text-2xl font-semibold text-[#14213d] group-hover:text-[#b08d57] transition-colors tracking-tight">
                 {title}
-              </h2>
+              </h3>
             </Link>
           ) : (
-            <div className="flex items-center gap-2.5">
-              <span className="text-2xl">{emoji}</span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">{emoji}</span>
+              <h3 className="font-playfair text-xl sm:text-2xl font-semibold text-[#14213d] tracking-tight">
                 {title}
-              </h2>
+              </h3>
             </div>
           )}
-          <p className="text-slate-500 text-xs sm:text-sm mt-1 font-normal leading-relaxed">{subtitle}</p>
+          <p className="text-[#5b6478] text-xs sm:text-[13px] mt-0.5">{subtitle}</p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          {badgeLabel && (
-            <span className="px-3.5 py-1 bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm rounded-full border border-slate-200/80 whitespace-nowrap shadow-2xs">
-              {badgeLabel}
-            </span>
-          )}
-          {hubUrl && hubLabel && (
-            <Link
-              href={hubUrl}
-              prefetch={false}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1a6fde]/10 hover:bg-[#1a6fde] hover:text-white text-[#1a6fde] font-bold text-xs sm:text-sm rounded-full border border-[#1a6fde]/20 whitespace-nowrap transition-all group shadow-2xs"
-            >
-              <span>{hubLabel}</span>
-              <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-            </Link>
-          )}
-        </div>
+        {hubUrl && (
+          <Link
+            href={hubUrl}
+            prefetch={false}
+            className="text-xs font-bold text-[#b08d57] hover:underline self-start sm:self-auto inline-flex items-center gap-1 shrink-0 font-manrope"
+          >
+            <span>{hubLabel || 'View all destinations →'}</span>
+          </Link>
+        )}
       </div>
 
-      {/* Grid of Destination Cards (Lazy loaded & content-visibility optimized) */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+      {/* Grid of at most 6 Destination Cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {displayedCities.map((item) => (
           <CityCard
             key={`${item._id.city}-${item._id.country}`}
@@ -171,128 +113,18 @@ function FlashDestinationSection({
             hasJacuzzi={item.hasJacuzzi}
           />
         ))}
-
-        {/* Coming soon placeholder for Global Escapes */}
-        {comingSoonCard && isExpanded && (
-          <div className="bg-white rounded-2xl border-2 border-dashed border-slate-200 p-6 flex flex-col items-center justify-center text-center shadow-xs">
-            <div className="w-12 h-12 rounded-full bg-[#1a6fde]/10 text-[#1a6fde] flex items-center justify-center mb-3">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-            </div>
-            <p className="font-heading text-base font-bold text-slate-900 mb-1">More Cities Coming Soon</p>
-            <p className="text-xs text-slate-500 leading-relaxed mb-3">Continuously adding boutique stays across Europe &amp; Asia.</p>
-            <span className="text-2xs font-bold text-[#1a6fde] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">Updated Weekly</span>
-          </div>
-        )}
       </div>
 
-      {/* Sentinel for Flash List Infinite Scroll */}
-      {hasMoreToStream && (
-        <div ref={sentinelRef} className="h-10 w-full flex items-center justify-center my-6" aria-hidden="true">
-          <div className="flex items-center gap-2 text-xs text-slate-600 font-medium bg-white px-4 py-2 rounded-full border border-slate-200 shadow-2xs animate-pulse">
-            <div className="w-2 h-2 rounded-full bg-[#1a6fde] animate-ping" />
-            <span>Streaming destinations ({visibleCount} of {totalCount})...</span>
-          </div>
-        </div>
-      )}
-
-      {/* Unexpanded Action Bar & Quick Links */}
-      {!isExpanded && (
-        <div className="mt-8 space-y-4">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            {cities.length > 12 && (
-              <button
-                type="button"
-                onClick={handleExpand}
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer"
-              >
-                <span>Show More Curated Cards ({cities.length})</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            )}
-            {hubUrl && (
-              <Link
-                href={hubUrl}
-                prefetch={false}
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm rounded-xl border border-slate-200 shadow-2xs hover:shadow-sm transition-all"
-              >
-                <span>{hubLabel || `Explore All ${totalCount} Destinations`}</span>
-                <span className="text-[#1a6fde]">→</span>
-              </Link>
-            )}
-          </div>
-
-          {remainingCitiesFormatter && pillsToRender.length > 0 && (
-            <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs">
-              <span className="text-slate-400 font-medium mr-1">{pillPrefix}</span>
-              {pillsToRender.map((item) => {
-                const formatted = remainingCitiesFormatter(item);
-                return (
-                  <Link
-                    key={`${item._id.city}-${item._id.country}`}
-                    href={formatted.href}
-                    prefetch={false}
-                    className="px-2.5 py-1 bg-white hover:bg-[#1a6fde] hover:text-white hover:border-[#1a6fde] border border-slate-200 rounded-lg text-slate-700 transition-colors text-xs font-medium shadow-2xs"
-                  >
-                    {formatted.label}
-                  </Link>
-                );
-              })}
-              {overflowPillsCount > 0 && (
-                hubUrl ? (
-                  <Link
-                    href={hubUrl}
-                    prefetch={false}
-                    className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors"
-                  >
-                    +{overflowPillsCount} more in directory →
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleExpand}
-                    className="px-2.5 py-1 bg-blue-50 text-[#1a6fde] hover:bg-[#1a6fde] hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
-                  >
-                    +{overflowPillsCount} more worldwide →
-                  </button>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Expanded Controls: Show Collapse & Jump Controls */}
-      {isExpanded && (
-        <div className="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
-          <div className="flex items-center gap-2 font-medium">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>
-              Showing {Math.min(visibleCount, cities.length)} of {totalCount} destinations in {title}
-            </span>
-            {hubUrl && (
-              <Link
-                href={hubUrl}
-                prefetch={false}
-                className="ml-2 text-[#1a6fde] font-semibold hover:underline inline-flex items-center gap-1"
-              >
-                Explore all {totalCount} in full directory →
-              </Link>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={handleCollapse}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors cursor-pointer"
+      {/* View All Link below cards */}
+      {hubUrl && (
+        <div className="mt-4 pt-2 flex justify-end">
+          <Link
+            href={hubUrl}
+            prefetch={false}
+            className="text-xs font-bold text-[#b08d57] hover:underline inline-flex items-center gap-1 font-manrope"
           >
-            <span>Collapse to Top 12</span>
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
+            <span>{hubLabel || 'View all destinations →'}</span>
+          </Link>
         </div>
       )}
     </div>
@@ -314,7 +146,8 @@ export default function HomeDestinationsClient({
     try {
       const saved = localStorage.getItem('hwb_region_tab');
       if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
-        setSelectedTab(saved as any);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSelectedTab(saved as 'auto' | 'usa' | 'india' | 'global' | 'all');
       }
     } catch {}
   }, []);
@@ -371,26 +204,101 @@ export default function HomeDestinationsClient({
     return () => observer.disconnect();
   }, [normalizedFilter, filterVisibleCount, filteredMatches.length]);
 
-  const isIndiaVisitor = geo.isIndia;
+  const visitorCode = geo.countryCode && geo.countryCode !== 'XX' ? geo.countryCode : '';
+  const hasVisitorInventory = Boolean(visitorCode) && isCountryWithHotels(visitorCode);
+  const visitorFlag = getFlagEmoji(visitorCode);
+  const visitorDisplayName = getCountryDisplayName(visitorCode);
+
+  const getVisitorCities = (code: string): CityItem[] => {
+    if (code === 'GB') {
+      const ukMatches = allDestinations.filter((c) => {
+        const co = (c._id.country || '').toLowerCase();
+        return co === 'uk' || co === 'united kingdom' || co === 'england';
+      });
+      if (ukMatches.length > 0) return ukMatches;
+      return [
+        {
+          _id: { city: 'London', country: 'UK' },
+          hotelCount: 24,
+          image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/timeless-victorian-retreat-by-hyde-park-london-1758-1.webp',
+          minPrice: '£180',
+          rating: 4.8,
+          totalReviews: 210,
+          hasJacuzzi: true,
+        },
+      ];
+    }
+    if (code === 'AE') {
+      const aeMatches = allDestinations.filter((c) => {
+        const co = (c._id.country || '').toLowerCase();
+        return co === 'uae' || co === 'united arab emirates' || co === 'dubai';
+      });
+      if (aeMatches.length > 0) return aeMatches;
+      return [
+        {
+          _id: { city: 'Dubai', country: 'UAE' },
+          hotelCount: 9,
+          image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-atlantis-the-royal-dubai.webp',
+          minPrice: '$299',
+          rating: 4.8,
+          totalReviews: 120,
+          hasJacuzzi: true,
+        },
+      ];
+    }
+    const countryEntry = COUNTRIES_WITH_HOTELS.find((x) => x.code === code);
+    const slug = countryEntry?.slug || code.toLowerCase();
+    const nameLower = countryEntry?.name.toLowerCase() || '';
+    const matches = allDestinations.filter((c) => {
+      const co = (c._id.country || '').toLowerCase();
+      return co === nameLower || co === slug;
+    });
+    if (matches.length > 0) return matches;
+    return [
+      {
+        _id: { city: countryEntry?.name || 'Capital', country: countryEntry?.name || code },
+        hotelCount: 10,
+        image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-skylofts-at-mgm-grand-las-vegas.webp',
+        minPrice: '$199',
+        rating: 4.8,
+        totalReviews: 50,
+        hasJacuzzi: true,
+      },
+    ];
+  };
+
+  const renderVisitorCountrySection = () => {
+    if (!visitorCode || !hasVisitorInventory) return null;
+    const citiesForCountry = getVisitorCities(visitorCode);
+    const entry = COUNTRIES_WITH_HOTELS.find((x) => x.code === visitorCode);
+    const countrySlug = entry?.slug || visitorCode.toLowerCase();
+    const displayName = visitorDisplayName || visitorCode;
+    const title = `${displayName} Destinations`;
+
+    return (
+      <FlashDestinationSection
+        id={`section-${visitorCode.toLowerCase()}`}
+        emoji={visitorFlag}
+        title={title}
+        subtitle={`Destinations across ${displayName} featuring rooms with a private in-room bathtub`}
+        hubUrl={`/${countrySlug}`}
+        hubLabel={`View all ${displayName} destinations →`}
+        cities={citiesForCountry}
+        isInternational={true}
+      />
+    );
+  };
 
   const renderUSASection = () => (
     <FlashDestinationSection
       id="section-usa"
       emoji="🇺🇸"
-      title="United States Luxury Escapes"
-      subtitle="Premier American city stays and romantic getaways featuring in-room jacuzzis & deep soaking tubs"
+      title="United States Destinations"
+      subtitle="American city stays featuring in-room jacuzzis & deep soaking tubs"
       hubUrl="/usa"
-      hubLabel={`Explore All ${totalUsaCount ?? usaCities.length} US Destinations`}
-      badgeLabel={`${totalUsaCount ?? usaCities.length} Destinations`}
+      hubLabel="View all US destinations →"
       cities={usaCities}
-      totalCount={totalUsaCount}
-      isInternational={true}
-      pillPrefix="More US Destinations:"
-      maxPills={12}
-      remainingCitiesFormatter={(item) => ({
-        href: `/usa/${slugify(item._id.city)}`,
-        label: `${item._id.city} (${item.hotelCount})`,
-      })}
+      isInternational={false}
     />
   );
 
@@ -398,22 +306,12 @@ export default function HomeDestinationsClient({
     <FlashDestinationSection
       id="section-global"
       emoji="🌍"
-      title="Global Romantic Escapes"
-      subtitle="World-class luxury destinations in Europe, Asia & the Middle East with private in-room tubs"
-      badgeLabel={`${totalInternationalCount ?? internationalCities.length} Global Cities`}
+      title="Global Destinations"
+      subtitle="Destinations in Europe, Asia & the Middle East with private in-room tubs"
+      hubUrl="/destinations"
+      hubLabel="View all global destinations →"
       cities={internationalCities}
-      totalCount={totalInternationalCount}
       isInternational={true}
-      comingSoonCard={true}
-      pillPrefix="More Global Escapes:"
-      maxPills={12}
-      remainingCitiesFormatter={(item) => {
-        const countrySlug = resolveCountry(item._id.country).slug;
-        return {
-          href: `/${countrySlug}/${slugify(item._id.city)}`,
-          label: `${item._id.city}, ${item._id.country} (${item.hotelCount})`,
-        };
-      }}
     />
   );
 
@@ -422,19 +320,11 @@ export default function HomeDestinationsClient({
       id="section-india"
       emoji="🇮🇳"
       title="India Getaways"
-      subtitle="Top romantic destinations across India featuring private jacuzzi suites & in-room soaking tubs"
+      subtitle="Destinations across India featuring private jacuzzi suites & in-room soaking tubs"
       hubUrl="/india"
-      hubLabel={`Explore All ${totalIndiaCount ?? indiaCities.length} Indian Cities`}
-      badgeLabel={`${totalIndiaCount ?? indiaCities.length} Indian Cities`}
+      hubLabel="View all India destinations →"
       cities={indiaCities}
-      totalCount={totalIndiaCount}
       isInternational={false}
-      pillPrefix="More India Getaways:"
-      maxPills={14}
-      remainingCitiesFormatter={(item) => ({
-        href: `/india/${slugify(item._id.city)}`,
-        label: `${item._id.city} (${item.hotelCount})`,
-      })}
     />
   );
 
@@ -445,19 +335,38 @@ export default function HomeDestinationsClient({
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
           {/* Quick-Access Region Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full min-w-0 pb-1 lg:pb-0">
-            <button
-              onClick={() => handleTabChange('auto')}
-              className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
-                selectedTab === 'auto'
-                  ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
-                  : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
-              }`}
-            >
-              <span>📍 For You</span>
-              <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${selectedTab === 'auto' ? 'bg-white/20 text-white' : 'bg-white text-slate-600 border border-slate-200/60'}`}>
-                {isIndiaVisitor ? '🇮🇳 India' : '🇺🇸 USA'}
-              </span>
-            </button>
+            {hasVisitorInventory ? (
+              <button
+                onClick={() => handleTabChange('auto')}
+                className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
+                  selectedTab === 'auto'
+                    ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                    : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span>📍 For You</span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                    selectedTab === 'auto'
+                      ? 'bg-white/20 text-white'
+                      : 'bg-white text-slate-600 border border-slate-200/60'
+                  }`}
+                >
+                  {visitorFlag} {visitorDisplayName}
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={() => handleTabChange('auto')}
+                className={`px-4 py-2 min-h-[40px] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer ${
+                  selectedTab === 'auto'
+                    ? 'bg-[#1a6fde] text-white shadow-sm shadow-[#1a6fde]/25'
+                    : 'bg-slate-50 text-slate-700 border border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span>🌍 Popular</span>
+              </button>
+            )}
 
             <button
               onClick={() => handleTabChange('usa')}
@@ -620,19 +529,32 @@ export default function HomeDestinationsClient({
           {selectedTab === 'india' && renderIndiaSection()}
           {selectedTab === 'global' && renderInternationalSection()}
 
-          {/* Auto or All: Render in geo-prioritized order */}
+          {/* Auto or All: Render in visitor-country prioritized order */}
           {(selectedTab === 'auto' || selectedTab === 'all') && (
             <div className="space-y-16">
-              {isIndiaVisitor ? (
+              {visitorCode === 'IN' ? (
                 <>
                   {renderIndiaSection()}
                   {renderUSASection()}
                   {renderInternationalSection()}
                 </>
-              ) : (
+              ) : visitorCode === 'US' ? (
                 <>
                   {renderUSASection()}
                   {renderInternationalSection()}
+                  {renderIndiaSection()}
+                </>
+              ) : hasVisitorInventory ? (
+                <>
+                  {renderVisitorCountrySection()}
+                  {renderUSASection()}
+                  {renderInternationalSection()}
+                  {renderIndiaSection()}
+                </>
+              ) : (
+                <>
+                  {renderInternationalSection()}
+                  {renderUSASection()}
                   {renderIndiaSection()}
                 </>
               )}

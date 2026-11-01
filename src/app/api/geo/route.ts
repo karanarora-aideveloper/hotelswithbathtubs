@@ -4,13 +4,15 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   // Extract headers injected by the edge platform (Cloudflare Pages / legacy Vercel headers)
-  const countryCode = (
-    request.headers.get('x-vercel-ip-country') ||
+  const headerCountry =
     request.headers.get('cf-ipcountry') ||
-    'US'
-  ).toUpperCase();
+    request.headers.get('x-vercel-ip-country') ||
+    '';
+
+  const hasCountry = Boolean(headerCountry && headerCountry.trim() !== '');
+  const countryCode = hasCountry ? headerCountry.trim().toUpperCase() : 'XX';
   
-  let city = request.headers.get('x-vercel-ip-city') || '';
+  let city = request.headers.get('x-vercel-ip-city') || request.headers.get('cf-ipcity') || '';
   if (city) {
     city = decodeURIComponent(city);
   }
@@ -32,11 +34,21 @@ export async function GET(request: Request) {
     'CH': 'Switzerland',
     'CA': 'Canada',
     'AU': 'Australia',
+    'ES': 'Spain',
+    'DE': 'Germany',
+    'MX': 'Mexico',
+    'TR': 'Turkey',
+    'MV': 'Maldives',
+    'ZA': 'South Africa',
+    'PT': 'Portugal',
+    'AT': 'Austria',
+    'IE': 'Ireland',
+    'NZ': 'New Zealand',
   };
 
   const isIndia = countryCode === 'IN';
   const isUS = countryCode === 'US';
-  const fullCountryName = countryMap[countryCode] || (isIndia ? 'India' : 'USA');
+  const fullCountryName = countryCode === 'XX' ? '' : (countryMap[countryCode] || countryCode);
 
   return NextResponse.json({
     countryCode,

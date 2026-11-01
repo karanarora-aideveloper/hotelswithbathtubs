@@ -14,6 +14,8 @@ interface HotelCardImageProps {
   priority?: boolean;
   verifiedSources?: string[];
   crossVerifiedAt?: string;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 export default function HotelCardImage({
@@ -25,8 +27,8 @@ export default function HotelCardImage({
   countryName,
   tubType,
   priority = false,
-  verifiedSources = [],
-  crossVerifiedAt,
+  className,
+  children,
 }: HotelCardImageProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInteractive, setIsInteractive] = useState(false);
@@ -72,11 +74,10 @@ export default function HotelCardImage({
 
   const current = slides[currentIndex] || slides[0];
   const currentSrc = current.src;
-  const isUSOrIntl = countryName?.toLowerCase() !== 'india';
 
   return (
     <div 
-      className="relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image"
+      className={className || "relative h-48 sm:h-44 w-full bg-gray-100 shrink-0 overflow-hidden group/image"}
       onMouseEnter={() => !isInteractive && setIsInteractive(true)}
       onTouchStart={(e) => { if (!isInteractive) setIsInteractive(true); touchX.current = e.touches[0].clientX; }}
       onTouchEnd={(e) => {
@@ -138,19 +139,23 @@ export default function HotelCardImage({
       )}
 
       {/* Pinterest Save Button */}
-      <a
-        href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent((currentSrc))}&description=${encodeURIComponent(`${hotelName} - Hotel with Private Bathtub in ${cityName}, ${countryName}. Private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-3 right-3 bg-red-600/95 hover:bg-red-700 text-white text-[11px] font-bold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full shadow-md flex items-center gap-1 z-10 transition-all opacity-90 sm:opacity-0 group-hover/image:opacity-100"
-        title="Save to Pinterest"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
-        </svg>
-        <span>Save</span>
-      </a>
+      {!children && (
+        <a
+          href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.hotelswithbathtubs.com')}&media=${encodeURIComponent((currentSrc))}&description=${encodeURIComponent(`${hotelName} - Hotel with Private Bathtub in ${cityName}, ${countryName}. Private in-room soaking tub. Plan your stay on HotelsWithBathtubs.com`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-3 right-3 bg-red-600/95 hover:bg-red-700 text-white text-[11px] font-bold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full shadow-md flex items-center gap-1 z-10 transition-all opacity-90 sm:opacity-0 group-hover/image:opacity-100"
+          title="Save to Pinterest"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+          </svg>
+          <span>Save</span>
+        </a>
+      )}
+
+      {children}
     </div>
   );
 }
