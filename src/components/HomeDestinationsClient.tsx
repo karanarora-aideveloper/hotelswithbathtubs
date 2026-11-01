@@ -108,6 +108,7 @@ function FlashDestinationSection({
   const handleLoadAll = () => {
     setVisibleCount(cities.length);
   };
+  void handleLoadAll;
 
   const pillsToRender = maxPills ? remainingCities.slice(0, maxPills) : remainingCities;
   const overflowPillsCount = totalCount > (12 + pillsToRender.length) ? totalCount - (12 + pillsToRender.length) : 0;
@@ -288,7 +289,7 @@ function FlashDestinationSection({
             onClick={handleCollapse}
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors cursor-pointer"
           >
-            <span>Collapse to Top 12</span>
+            <span>Collapse to first 12</span>
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 15l7-7 7 7" />
             </svg>
@@ -314,7 +315,8 @@ export default function HomeDestinationsClient({
     try {
       const saved = localStorage.getItem('hwb_region_tab');
       if (saved && ['auto', 'usa', 'india', 'global', 'all'].includes(saved)) {
-        setSelectedTab(saved as any);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setSelectedTab(saved as 'auto' | 'usa' | 'india' | 'global' | 'all');
       }
     } catch {}
   }, []);
@@ -377,8 +379,8 @@ export default function HomeDestinationsClient({
     <FlashDestinationSection
       id="section-usa"
       emoji="🇺🇸"
-      title="United States Luxury Escapes"
-      subtitle="Premier American city stays and romantic getaways featuring in-room jacuzzis & deep soaking tubs"
+      title="United States Destinations"
+      subtitle="American city stays featuring in-room jacuzzis & deep soaking tubs"
       hubUrl="/usa"
       hubLabel={`Explore All ${totalUsaCount ?? usaCities.length} US Destinations`}
       badgeLabel={`${totalUsaCount ?? usaCities.length} Destinations`}
@@ -398,14 +400,14 @@ export default function HomeDestinationsClient({
     <FlashDestinationSection
       id="section-global"
       emoji="🌍"
-      title="Global Romantic Escapes"
-      subtitle="World-class luxury destinations in Europe, Asia & the Middle East with private in-room tubs"
+      title="Global Destinations"
+      subtitle="Destinations in Europe, Asia & the Middle East with private in-room tubs"
       badgeLabel={`${totalInternationalCount ?? internationalCities.length} Global Cities`}
       cities={internationalCities}
       totalCount={totalInternationalCount}
       isInternational={true}
       comingSoonCard={true}
-      pillPrefix="More Global Escapes:"
+      pillPrefix="More Global Stays:"
       maxPills={12}
       remainingCitiesFormatter={(item) => {
         const countrySlug = resolveCountry(item._id.country).slug;
@@ -422,7 +424,7 @@ export default function HomeDestinationsClient({
       id="section-india"
       emoji="🇮🇳"
       title="India Getaways"
-      subtitle="Top romantic destinations across India featuring private jacuzzi suites & in-room soaking tubs"
+      subtitle="Destinations across India featuring private jacuzzi suites & in-room soaking tubs"
       hubUrl="/india"
       hubLabel={`Explore All ${totalIndiaCount ?? indiaCities.length} Indian Cities`}
       badgeLabel={`${totalIndiaCount ?? indiaCities.length} Indian Cities`}

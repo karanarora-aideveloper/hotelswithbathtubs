@@ -29,6 +29,7 @@ export default function HomeMatchmakerSection() {
         params.has('budget') ||
         window.location.hash === '#matchmaker'
       ) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsOpen(true);
       }
     }
@@ -41,23 +42,23 @@ export default function HomeMatchmakerSection() {
   return (
     <div
       id="dream-soak-matchmaker"
-      className="w-full bg-gradient-to-b from-blue-50/60 via-white to-white rounded-3xl border border-blue-100/80 shadow-xs p-6 sm:p-10 lg:p-12 text-center"
+      className="w-full bg-white rounded-2xl border border-[#e3e7ef] shadow-xs p-6 sm:p-10 text-center"
     >
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/70 text-[#1a6fde] text-xs font-bold tracking-wide uppercase mb-4">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e9eef7] text-[#14213d] text-xs font-bold tracking-wide uppercase mb-3">
         <span>✨</span>
-        <span>Interactive Dream Soak Matchmaker™</span>
+        <span>Bathtub Matchmaker</span>
       </div>
-      <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight max-w-2xl mx-auto">
-        Find Your Perfect Bathtub Stay in 30 Seconds
+      <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d] tracking-tight leading-tight max-w-2xl mx-auto">
+        Find Your Ideal Bathtub Stay in 30 Seconds
       </h2>
-      <p className="mt-3 text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
-        Can&apos;t decide on a destination? Tell us your dream soaking fantasy and we&apos;ll match you with curated luxury suites worldwide.
+      <p className="mt-2.5 text-xs sm:text-sm text-[#5b6478] max-w-xl mx-auto leading-relaxed font-manrope">
+        Can&apos;t decide on a destination? Tell us what you are looking for and we&apos;ll match you with rooms with a private tub.
       </p>
       <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#1a6fde] hover:bg-[#1559b8] text-white text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[10px] bg-[#b08d57] hover:bg-[#9c7b48] text-white text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer font-manrope"
         >
           <span>Start Matchmaker Quiz</span>
           <span>&rarr;</span>

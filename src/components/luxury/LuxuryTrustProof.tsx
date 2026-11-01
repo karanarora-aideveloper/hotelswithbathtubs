@@ -1,73 +1,38 @@
 import React from 'react';
-import Link from 'next/link';
 
 export default function LuxuryTrustProof() {
   return (
-    <section className="border-y border-[#E5E1D8] bg-[#FAF8F5] py-8 sm:py-10 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12">
-        <div className="max-w-xl text-center md:text-left">
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#C5A880] mb-1.5">
-            Private In-Room Tubs
-          </p>
-          <p className="font-playfair text-lg sm:text-xl text-[#121518] leading-snug">
-            We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-6 sm:gap-10 border-t md:border-t-0 md:border-l border-[#E5E1D8] pt-6 md:pt-0 md:pl-12 w-full md:w-auto text-center md:text-left">
-          <div>
-            <span className="block font-playfair text-2xl sm:text-3xl text-[#121518] font-medium">4,400+</span>
-            <span className="text-[11px] font-medium tracking-wider uppercase text-[#6B6964]">Rooms Listed</span>
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+      <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 sm:p-5 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+        <h3 className="font-playfair text-[19px] font-semibold text-[#14213d] mb-3">
+          How we check a bathtub
+        </h3>
+        <div className="space-y-2.5">
+          <div className="flex items-start gap-2.5 text-[13px] text-[#5b6478] leading-relaxed">
+            <b className="w-[22px] h-[22px] rounded-full bg-[#e9eef7] text-[#14213d] flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">
+              1
+            </b>
+            <span>
+              We find the same hotel on Booking.com or Agoda: same name, town and street number.
+            </span>
           </div>
-          <div>
-            <span className="block font-playfair text-2xl sm:text-3xl text-[#121518] font-medium">60+</span>
-            <span className="text-[11px] font-medium tracking-wider uppercase text-[#6B6964]">Global Cities</span>
+          <div className="flex items-start gap-2.5 text-[13px] text-[#5b6478] leading-relaxed">
+            <b className="w-[22px] h-[22px] rounded-full bg-[#e9eef7] text-[#14213d] flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">
+              2
+            </b>
+            <span>
+              We read the room list. A tub word for a named room counts as proof.
+            </span>
+          </div>
+          <div className="flex items-start gap-2.5 text-[13px] text-[#5b6478] leading-relaxed">
+            <b className="w-[22px] h-[22px] rounded-full bg-[#e9eef7] text-[#14213d] flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5">
+              3
+            </b>
+            <span>
+              Proven rooms get a green tick. Others say &apos;not yet confirmed&apos;.
+            </span>
           </div>
         </div>
-      </div>
-
-      {/* High-priority server-rendered HTML links to top US and global destination hubs */}
-      <div className="max-w-6xl mx-auto mt-6 pt-5 border-t border-[#E5E1D8]/70 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-xs text-[#6B6964]">
-        <span className="font-semibold uppercase tracking-wider text-[10px] text-[#121518]">Popular Stays:</span>
-        <Link href="/usa/new-york" prefetch={false} className="text-[#121518] hover:text-[#1a6fde] font-medium underline underline-offset-2">
-          New York
-        </Link>
-        <span>&bull;</span>
-        <Link href="/usa/las-vegas" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Las Vegas
-        </Link>
-        <span>&bull;</span>
-        <Link href="/usa/chicago" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Chicago
-        </Link>
-        <span>&bull;</span>
-        <Link href="/usa/miami" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Miami
-        </Link>
-        <span>&bull;</span>
-        <Link href="/uk/london" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          London
-        </Link>
-        <span>&bull;</span>
-        <Link href="/france/paris" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Paris
-        </Link>
-        <span>&bull;</span>
-        <Link href="/india/delhi" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Delhi
-        </Link>
-        <span>&bull;</span>
-        <Link href="/india/goa" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Goa
-        </Link>
-        <span>&bull;</span>
-        <Link href="/india/mumbai" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
-          Mumbai
-        </Link>
-        <span>&bull;</span>
-        <Link href="/destinations" prefetch={false} className="text-[#1a6fde] font-semibold hover:underline">
-          All Destinations &rarr;
-        </Link>
       </div>
     </section>
   );

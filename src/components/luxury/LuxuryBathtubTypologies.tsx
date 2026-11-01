@@ -100,17 +100,17 @@ export default function LuxuryBathtubTypologies({ initialIsIndia = true }: Luxur
   const typologies = activeRegion === 'india' ? INDIA_TYPOLOGIES : GLOBAL_TYPOLOGIES;
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
       {/* Header & Geo Indicator Switch */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6 border-b border-[#E5E1D8] pb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4 border-b border-[#e3e7ef] pb-6">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#C5A880] mb-2">
-            Architectural Typologies
+          <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#b08d57] mb-1 font-manrope">
+            Room Architecture
           </p>
-          <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-[#121518] font-normal tracking-tight">
-            The Bathtub Typologies
+          <h2 className="font-playfair text-2xl sm:text-3xl text-[#14213d] font-semibold tracking-tight">
+            Bathtub Typologies
           </h2>
-          <p className="text-sm text-[#6B6964] mt-2 max-w-xl">
+          <p className="text-xs sm:text-sm text-[#5b6478] mt-1.5 max-w-xl font-manrope">
             {activeRegion === 'india'
               ? 'Hand-crafted royal marble, private cliffside jacuzzis, and colonial clawfoot baths across India.'
               : 'Skyline view freestanding tubs, private balcony whirlpools, and cedar onsen baths worldwide.'}
@@ -118,14 +118,14 @@ export default function LuxuryBathtubTypologies({ initialIsIndia = true }: Luxur
         </div>
 
         {/* Region Switcher */}
-        <div className="inline-flex items-center p-1 bg-[#F5F2EC] rounded-full border border-[#E5E1D8] self-start md:self-auto">
+        <div className="inline-flex items-center p-1 bg-[#e9eef7] rounded-full border border-[#e3e7ef] self-start sm:self-auto shrink-0 font-manrope">
           <button
             type="button"
             onClick={() => setActiveRegion('india')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
+            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
               activeRegion === 'india'
-                ? 'bg-white text-[#121518] shadow-xs'
-                : 'text-[#6B6964] hover:text-[#121518]'
+                ? 'bg-white text-[#14213d] shadow-xs'
+                : 'text-[#5b6478] hover:text-[#14213d]'
             }`}
           >
             🇮🇳 India Stays
@@ -133,10 +133,10 @@ export default function LuxuryBathtubTypologies({ initialIsIndia = true }: Luxur
           <button
             type="button"
             onClick={() => setActiveRegion('global')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
+            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
               activeRegion === 'global'
-                ? 'bg-white text-[#121518] shadow-xs'
-                : 'text-[#6B6964] hover:text-[#121518]'
+                ? 'bg-white text-[#14213d] shadow-xs'
+                : 'text-[#5b6478] hover:text-[#14213d]'
             }`}
           >
             🌐 Global &amp; USA
@@ -145,44 +145,45 @@ export default function LuxuryBathtubTypologies({ initialIsIndia = true }: Luxur
       </div>
 
       {/* 4 Typology Editorial Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {typologies.map((item) => (
           <Link
             key={item.id}
             href={item.href}
             prefetch={false}
-            className="group flex flex-col bg-[#F5F2EC] rounded-2xl overflow-hidden border border-[#E5E1D8] transition-all duration-300 hover:shadow-lg hover:border-[#C5A880]/60 hover:-translate-y-1"
+            className="group flex flex-col bg-white rounded-[14px] overflow-hidden border border-[#e3e7ef] transition-all duration-300 hover:shadow-md hover:border-[#b08d57]/60"
           >
             {/* Image Box */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EAE6DF]">
-              <img
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#e9eef7]">
+              <Image
                 src={item.image}
                 alt={item.title}
-                loading="lazy"
-                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-xs text-[10px] font-semibold tracking-wider uppercase text-[#121518] border border-white/40 shadow-2xs">
+              <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/95 text-[10px] font-bold tracking-wider uppercase text-[#14213d] border border-white/40 shadow-xs font-manrope z-10">
                 {item.tag}
               </span>
             </div>
 
             {/* Content Details */}
-            <div className="p-6 flex flex-col flex-grow justify-between">
+            <div className="p-4 flex flex-col flex-grow justify-between">
               <div>
-                <p className="text-[10.5px] font-medium tracking-widest uppercase text-[#C5A880] mb-1.5">
+                <p className="text-[10px] font-bold tracking-wider uppercase text-[#b08d57] mb-1 font-manrope">
                   {item.material}
                 </p>
-                <h3 className="font-playfair text-xl text-[#121518] font-normal group-hover:text-[#C5A880] transition-colors leading-snug">
+                <h3 className="font-playfair text-lg text-[#14213d] font-semibold group-hover:text-[#b08d57] transition-colors leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#6B6964] mt-2.5 leading-relaxed">
+                <p className="text-xs text-[#5b6478] mt-2 leading-relaxed font-manrope">
                   {item.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#E5E1D8]/70 flex items-center justify-between text-xs font-medium text-[#121518]">
-                <span className="text-[#6B6964] truncate pr-2">{item.sampleHotel}</span>
-                <span className="text-[#C5A880] group-hover:translate-x-1 transition-transform flex-shrink-0 font-bold">&rarr;</span>
+              <div className="mt-4 pt-3 border-t border-[#e3e7ef] flex items-center justify-between text-xs font-semibold text-[#14213d] font-manrope">
+                <span className="text-[#5b6478] truncate pr-2">{item.sampleHotel}</span>
+                <span className="text-[#b08d57] group-hover:translate-x-1 transition-transform shrink-0 font-bold">&rarr;</span>
               </div>
             </div>
           </Link>

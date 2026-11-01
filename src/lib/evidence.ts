@@ -1,8 +1,35 @@
-import { isJacuzziRoom } from '@/lib/utils';
-import { hasClaimPhrase, dropClaimSentences } from '@/lib/claims';
+import { hasClaimPhrase } from '@/lib/claims';
 import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
 
 export { isHotelConfirmed };
+
+export function getTubWord(hotel?: {
+  bookingTubLabels?: string[] | null;
+  tubType?: string | null;
+  roomType?: string | null;
+}): string {
+  if (hotel?.bookingTubLabels && hotel.bookingTubLabels.length > 0) {
+    const first = hotel.bookingTubLabels[0].trim();
+    if (/^bath$/i.test(first)) return 'bathtub';
+    if (/^room name$/i.test(first)) {
+      const text = `${hotel.roomType || ''} ${hotel.tubType || ''}`.toLowerCase();
+      if (text.includes('hot tub')) return 'hot tub';
+      if (text.includes('jacuzzi')) return 'jacuzzi';
+      if (text.includes('whirlpool')) return 'whirlpool';
+      if (text.includes('soaking')) return 'soaking tub';
+      if (text.includes('jetted') || text.includes('hydro')) return 'jetted tub';
+      return 'bathtub';
+    }
+    return first.toLowerCase();
+  }
+  const text = `${hotel?.tubType || ''} ${hotel?.roomType || ''}`.toLowerCase();
+  if (text.includes('hot tub')) return 'hot tub';
+  if (text.includes('jacuzzi')) return 'jacuzzi';
+  if (text.includes('whirlpool')) return 'whirlpool';
+  if (text.includes('soaking')) return 'soaking tub';
+  if (text.includes('jetted') || text.includes('hydro')) return 'jetted tub';
+  return 'bathtub';
+}
 
 export function getBathtubLabel(hotel?: {
   bathtubConfirmed?: boolean | null;
@@ -12,7 +39,8 @@ export function getBathtubLabel(hotel?: {
   bookingTubLabels?: string[] | null;
 }): string {
   if (isHotelConfirmed(hotel)) {
-    return isJacuzziRoom(hotel) ? 'In-room jacuzzi' : 'In-room bathtub';
+    const word = getTubWord(hotel);
+    return `In-room ${word}`;
   }
   return 'Bathtub not yet confirmed';
 }
@@ -167,7 +195,7 @@ export interface EvidenceLineData {
 }
 
 export function getEvidenceLine(hotel: {
-  bathtubConfirmed?: boolean;
+  bathtubConfirmed?: boolean | null;
   importBatch?: string | null;
   bookingTubLabels?: string[] | null;
   roomType?: string;
@@ -213,7 +241,10 @@ export function getEvidenceLine(hotel: {
   };
 }
 
-export function sanitizeBookingTip(tip?: string | null, linkedPartners?: string[], roomType?: string | null): string {
+export function sanitizeBookingTip(_tip?: string | null, _linkedPartners?: string[], _roomType?: string | null): string {
+  void _tip;
+  void _linkedPartners;
+  void _roomType;
   return 'Check that the room you pick lists a bathtub before you book.';
 }
 
@@ -231,15 +262,16 @@ export function buildDataDescription(h: {
   return `${h.name} features a ${tub} in the ${room}${loc ? ` ${loc}` : ''}.`;
 }
 
-export function sanitizeHotelData(h: any): any {
+export function sanitizeHotelData<T extends Record<string, unknown>>(h: T): T {
   if (!h) return h;
-  h.bathtubConfirmed = isHotelConfirmed(h);
+  const hotelObj = h as Record<string, unknown>;
+  hotelObj.bathtubConfirmed = isHotelConfirmed(h as Parameters<typeof isHotelConfirmed>[0]);
   if (!h.importBatch) {
-    h.description = buildHotelDescription(h);
-    h.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
+    hotelObj.description = buildHotelDescription(h as Parameters<typeof buildHotelDescription>[0]);
+    hotelObj.bookingTip = 'Check that the room you pick lists a bathtub before you book.';
   }
   if (Array.isArray(h.amenities)) {
-    h.amenities = h.amenities.filter((a: any) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
+    hotelObj.amenities = h.amenities.filter((a: unknown) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
   }
   return h;
 }

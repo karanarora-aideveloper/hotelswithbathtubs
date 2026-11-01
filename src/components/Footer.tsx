@@ -62,7 +62,7 @@ export default async function Footer() {
               <div>
                 <p className="font-playfair text-xl font-semibold text-[#14213d] mb-1">Hotels with Bathtubs</p>
                 <p className="text-xs text-[#5b6478] max-w-sm leading-relaxed">
-                  Hotel rooms with a private bathtub or in-room jacuzzi, for romantic and luxury stays. We link to Booking.com, Agoda and other partners to book.
+                  Hotel rooms with a private bathtub or in-room jacuzzi. We link to Booking.com, Agoda and other partners to book.
                 </p>
               </div>
             </div>

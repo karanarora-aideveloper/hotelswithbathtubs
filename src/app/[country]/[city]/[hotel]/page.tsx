@@ -9,7 +9,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCou
 import WhereToBookRow from '@/components/WhereToBookRow';
 import HotelGallery from '@/components/HotelGallery';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, sanitizeHotelData, buildDataDescription, isHotelConfirmed } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, sanitizeBookingTip, getBathtubLabel, getTubWord, sanitizeHotelData, buildDataDescription, isHotelConfirmed } from '@/lib/evidence';
 import { buildHotelDescription } from '@/lib/hotelText';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
@@ -497,15 +497,7 @@ export default async function HotelDetailPage({
   const allLinkedPartners = getLinkedPartners(hotel);
   const linkedPartners = allLinkedPartners.filter(p => isIndia || p !== 'MakeMyTrip');
 
-  const bookingTubLabel = (hotel.bookingTubLabels && hotel.bookingTubLabels[0])
-    ? hotel.bookingTubLabels[0].toLowerCase()
-    : null;
-  const tubLower = (hotel.tubType || '').toLowerCase();
-  const tubWords = bookingTubLabel || (tubLower.includes('hot tub')
-    ? 'hot tub'
-    : tubLower.includes('jetted') || tubLower.includes('jacuzzi') || tubLower.includes('whirlpool') || tubLower.includes('hydro')
-    ? 'jetted tub'
-    : 'bathtub');
+  const tubWords = getTubWord(hotel);
 
   const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners, hotel.roomType);
   const evidence = getEvidenceLine(hotel);
@@ -546,7 +538,7 @@ export default async function HotelDetailPage({
       <HotelGallery
         images={hotel.images}
         partnerImages={hotel.partnerImages}
-        primaryImage={hotel.image}
+        primaryImage={hotel.image || ''}
         hotelName={hotel.name}
         cityName={cityName}
         countryName={countryName}
@@ -558,13 +550,6 @@ export default async function HotelDetailPage({
 
       {/* Main Content Layout matching Style B mockup */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
-        {/* Breadcrumb line from mockup: USA › Sedona */}
-        <div className="text-xs text-[#5b6478] mb-1.5">
-          <Link href={`/${countrySlug}`} prefetch={false} className="hover:text-[#14213d] transition-colors">{countryName}</Link>
-          {' › '}
-          <Link href={`/${countrySlug}/${citySlug}`} prefetch={false} className="hover:text-[#14213d] transition-colors">{cityName}</Link>
-        </div>
-
         {/* Hotel Title H1 */}
         <h1 className="font-playfair text-[28px] sm:text-[34px] md:text-[38px] font-semibold text-[#14213d] leading-[1.1] mb-1.5 tracking-tight">
           {hotel.name}
