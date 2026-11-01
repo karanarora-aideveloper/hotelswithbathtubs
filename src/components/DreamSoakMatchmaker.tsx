@@ -89,7 +89,7 @@ export const TUB_OPTIONS = [
   {
     id: 'hot_tub' as const,
     label: 'Hot tub',
-    tagline: 'Open-air and outdoor tubs',
+    tagline: 'Hot tub in or by the room',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/indoor-pool-hot-tub-theater-games-views-punta-cana-6730-1.webp',
   },
   {
@@ -786,37 +786,54 @@ export default function DreamSoakMatchmaker({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-            {visibleVibes.map((vibe) => (
-              <button
-                key={vibe.id}
-                type="button"
-                onClick={() => handleVibeSelect(vibe.id)}
-                className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
-              >
-                <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
-                  <ProgressiveImage
-                    src={vibe.image}
-                    alt={vibe.label}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
-                      {vibe.label}
-                    </div>
-                    <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
-                      {vibe.tagline}
-                    </div>
-                    {vibe.count > 0 && (
-                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
-                        <span>{vibe.count.toLocaleString()} hotels</span>
-                      </div>
-                    )}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  key={`placeholder-${i}`}
+                  aria-hidden="true"
+                  className="relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-[#eef1f6] animate-pulse aspect-[16/10] w-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-black/5 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4 space-y-2">
+                    <div className="h-4 sm:h-5 bg-gray-300/80 rounded w-2/3" />
+                    <div className="h-3 bg-gray-300/50 rounded w-4/5" />
+                    <div className="h-4 bg-gray-300/60 rounded-[6px] w-20 mt-1" />
                   </div>
                 </div>
-              </button>
-            ))}
+              ))
+            ) : (
+              visibleVibes.map((vibe) => (
+                <button
+                  key={vibe.id}
+                  type="button"
+                  onClick={() => handleVibeSelect(vibe.id)}
+                  className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
+                >
+                  <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
+                    <ProgressiveImage
+                      src={vibe.image}
+                      alt={vibe.label}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4">
+                      <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
+                        {vibe.label}
+                      </div>
+                      <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
+                        {vibe.tagline}
+                      </div>
+                      {vibe.count > 0 && (
+                        <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                          <span>{vibe.count.toLocaleString()} hotels</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              ))
+            )}
           </div>
         </div>
       )}
