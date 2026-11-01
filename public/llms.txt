@@ -9,7 +9,7 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - **Verified Hotel Listings**: 5,286 hand-verified properties
 - **Global Coverage**: 813 cities across 119 countries
 - **In-Room Jacuzzi & Whirlpool Suites**: 2,161 verified listings
-- **Curated Travel Guides**: 140 in-depth destination guides
+- **Curated Travel Guides**: 146 in-depth destination guides
 - **Zero Surprises Guarantee**: Direct canonical booking links targeting verified room tiers
 
 ## Core Sections & Discovery Tools
@@ -31,14 +31,14 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - Japan: https://www.hotelswithbathtubs.com/japan (48 verified stays)
 - Portugal: https://www.hotelswithbathtubs.com/portugal (48 verified stays)
 - Greece: https://www.hotelswithbathtubs.com/greece (41 verified stays)
-- Bosnia and Herzegovina: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina (36 verified stays)
-- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
 - Poland: https://www.hotelswithbathtubs.com/poland (36 verified stays)
-- Oman: https://www.hotelswithbathtubs.com/oman (36 verified stays)
-- South Korea: https://www.hotelswithbathtubs.com/south-korea (36 verified stays)
 - Thailand: https://www.hotelswithbathtubs.com/thailand (36 verified stays)
-- Egypt: https://www.hotelswithbathtubs.com/egypt (35 verified stays)
+- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
+- Bosnia and Herzegovina: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina (36 verified stays)
+- South Korea: https://www.hotelswithbathtubs.com/south-korea (36 verified stays)
+- Oman: https://www.hotelswithbathtubs.com/oman (36 verified stays)
 - Montenegro: https://www.hotelswithbathtubs.com/montenegro (35 verified stays)
+- Egypt: https://www.hotelswithbathtubs.com/egypt (35 verified stays)
 - Austria: https://www.hotelswithbathtubs.com/austria (34 verified stays)
 - Uzbekistan: https://www.hotelswithbathtubs.com/uzbekistan (34 verified stays)
 
@@ -50,31 +50,31 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - San Diego, USA: https://www.hotelswithbathtubs.com/usa/san-diego (33 verified stays)
 - Goa, India: https://www.hotelswithbathtubs.com/india/goa (33 verified stays)
 - New York, USA: https://www.hotelswithbathtubs.com/usa/new-york (32 verified stays)
-- Branson, USA: https://www.hotelswithbathtubs.com/usa/branson (31 verified stays)
 - Scottsdale, USA: https://www.hotelswithbathtubs.com/usa/scottsdale (31 verified stays)
-- Nashville, USA: https://www.hotelswithbathtubs.com/usa/nashville (30 verified stays)
-- Los Angeles, USA: https://www.hotelswithbathtubs.com/usa/los-angeles (30 verified stays)
+- Branson, USA: https://www.hotelswithbathtubs.com/usa/branson (31 verified stays)
 - Rishikesh, India: https://www.hotelswithbathtubs.com/india/rishikesh (30 verified stays)
-- Pigeon Forge, USA: https://www.hotelswithbathtubs.com/usa/pigeon-forge (28 verified stays)
-- Agra, India: https://www.hotelswithbathtubs.com/india/agra (28 verified stays)
+- Los Angeles, USA: https://www.hotelswithbathtubs.com/usa/los-angeles (30 verified stays)
+- Nashville, USA: https://www.hotelswithbathtubs.com/usa/nashville (30 verified stays)
 - Santorini, Greece: https://www.hotelswithbathtubs.com/greece/santorini (28 verified stays)
+- Agra, India: https://www.hotelswithbathtubs.com/india/agra (28 verified stays)
+- Pigeon Forge, USA: https://www.hotelswithbathtubs.com/usa/pigeon-forge (28 verified stays)
 
 ## Editorial Guides & FAQs
-- Top Aspen Luxury Hotels & Chalets with Private Hot Tubs & Soaking Baths (2026): https://www.hotelswithbathtubs.com/blog/aspen-luxury-hotels-with-hot-tubs
-- Best Maui Oceanfront Resorts with Deep Soaking Tubs & Private Hot Tubs (2026): https://www.hotelswithbathtubs.com/blog/maui-oceanfront-resorts-with-soaking-tubs
-- Best Hotels in Rome with In-Room Jacuzzi & Marble Soaking Bathtubs (2026): https://www.hotelswithbathtubs.com/blog/hotels-in-rome-with-jacuzzi-in-room
+- Lake Tahoe hotel rooms with a hot tub or bathtub (2026): https://www.hotelswithbathtubs.com/blog/lake-tahoe-hotels-cabins-with-hot-tub
+- Las Vegas hotels with a jetted tub or bathtub in the room (2026): https://www.hotelswithbathtubs.com/blog/las-vegas-hotels-with-jacuzzi-tub-in-room
+- Gatlinburg & Pigeon Forge stays with a hot tub or bathtub (2026): https://www.hotelswithbathtubs.com/blog/gatlinburg-pigeon-forge-cabins-hot-tub
+- Eureka Springs hotels with an in-room jacuzzi or bathtub (2026): https://www.hotelswithbathtubs.com/blog/eureka-springs-hotels-with-jacuzzi-in-room
+- Branson MO hotels with a jacuzzi or bathtub in the room (2026): https://www.hotelswithbathtubs.com/blog/branson-mo-hotels-with-jacuzzi-in-room
+- Big Bear Lake cabins & hotels with hot tub (2026): https://www.hotelswithbathtubs.com/blog/big-bear-lake-cabins-hotels-with-hot-tub
 - 12 Best Las Vegas Hotels with In-Room Jacuzzi & Jetted Tubs on the Strip (2026): https://www.hotelswithbathtubs.com/blog/hotels-with-jacuzzi-in-room-las-vegas
-- Best Napa Valley Vineyard Resorts with Soaking Tubs & Private Jacuzzis (2026): https://www.hotelswithbathtubs.com/blog/napa-valley-resorts-with-soaking-tubs
 - Best Luxury Hotels with Bathtubs in Abu Dhabi: Corniche & Desert Palaces (2026): https://www.hotelswithbathtubs.com/blog/abu-dhabi-luxury-hotels-with-bathtub
+- Top Aspen Luxury Hotels & Chalets with Private Hot Tubs & Soaking Baths (2026): https://www.hotelswithbathtubs.com/blog/aspen-luxury-hotels-with-hot-tubs
 - Best Hotels with Deep Soaking Tubs in Los Angeles & Beverly Hills (2026 Guide): https://www.hotelswithbathtubs.com/blog/los-angeles-hotels-with-deep-soaking-tubs
 - Best Venice Hotels with Canal-View Bathtubs: Grand Canal Luxury Palazzos (2026): https://www.hotelswithbathtubs.com/blog/venice-hotels-with-canal-view-bathtubs
-- Best Hotels in Key West with Private Hot Tubs & Balcony Jacuzzis (2026 Guide): https://www.hotelswithbathtubs.com/blog/key-west-hotels-with-private-hot-tubs
-- Top Zermatt Alpine Hotels with Private Outdoor Hot Tubs & Matterhorn Views (2026): https://www.hotelswithbathtubs.com/blog/zermatt-hotels-with-matterhorn-view-hot-tubs
+- Best Hotels in Rome with In-Room Jacuzzi & Marble Soaking Bathtubs (2026): https://www.hotelswithbathtubs.com/blog/hotels-in-rome-with-jacuzzi-in-room
+- Best Maui Oceanfront Resorts with Deep Soaking Tubs & Private Hot Tubs (2026): https://www.hotelswithbathtubs.com/blog/maui-oceanfront-resorts-with-soaking-tubs
 - Historic Charleston Hotels with Antique Clawfoot Tubs & Jacuzzi Suites (2026): https://www.hotelswithbathtubs.com/blog/charleston-hotels-with-clawfoot-tubs
-- Top 15 Santorini Hotels with Caldera View Private Hot Tubs & Cave Bathtubs (2026): https://www.hotelswithbathtubs.com/blog/santorini-hotels-with-private-hot-tubs
 - Best San Francisco Hotels with Bathtubs with Bay & City Views (2026 Guide): https://www.hotelswithbathtubs.com/blog/san-francisco-hotels-with-bathtubs-with-view
-- 10 Best Hotels with Soaking Tubs in NYC: Manhattan Skyline Views (2026 Guide): https://www.hotelswithbathtubs.com/blog/hotels-with-soaking-tubs-nyc
-- Best Bora Bora Overwater Bungalows with Bathtubs: Lagoon & Otemanu Views (2026): https://www.hotelswithbathtubs.com/blog/bora-bora-overwater-bungalows-with-bathtub
 
 ## Contact & Partnerships
 Website: https://www.hotelswithbathtubs.com/about
