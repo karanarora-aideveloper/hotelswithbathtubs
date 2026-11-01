@@ -2,8 +2,8 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
-import { imageUrl } from '@/lib/imageUrl';
+import { isDirectPropertyUrl } from '@/lib/affiliate';
+import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
@@ -14,7 +14,7 @@ import {
   recordFilterReset,
   recordFilterChange,
 } from '@/lib/gtag';
-import { isHotelConfirmed } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
 
 type HotelData = {
   _id?: string;
@@ -240,7 +240,11 @@ export default function CityHotelsClient({
         if (pB === 0) return -1;
         return sortBy === 'price_asc' ? pA - pB : pB - pA;
       }
-      // Recommended: hotels first, then vacation rentals; within each group, prioritize direct property URL, then rating
+      // Recommended: confirmed hotels first, then hotels before vacation rentals; within each group, prioritize direct property URL, then rating
+      const confA = isHotelConfirmed(a) ? 1 : 0;
+      const confB = isHotelConfirmed(b) ? 1 : 0;
+      if (confA !== confB) return confB - confA;
+
       const rentalA = isVacationRental(a) ? 1 : 0;
       const rentalB = isVacationRental(b) ? 1 : 0;
       if (rentalA !== rentalB) return rentalA - rentalB;
@@ -391,17 +395,19 @@ export default function CityHotelsClient({
       <div className="bg-[#f5f6f8] border-b border-[#e3e7ef] py-3 px-4 sm:px-6 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
           {/* Pill 1: ✓ Tub proven */}
-          <button
-            type="button"
-            onClick={handleTubProvenToggle}
-            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
-              tubProvenOnly
-                ? 'bg-[#14213d] text-white border-[#14213d]'
-                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
-            }`}
-          >
-            ✓ Tub proven
-          </button>
+          {provenCount > 0 && (
+            <button
+              type="button"
+              onClick={handleTubProvenToggle}
+              className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
+                tubProvenOnly
+                  ? 'bg-[#14213d] text-white border-[#14213d]'
+                  : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+              }`}
+            >
+              ✓ Tub proven ({provenCount})
+            </button>
+          )}
 
           {/* Pill 2: Jetted tub */}
           <button
@@ -562,7 +568,7 @@ export default function CityHotelsClient({
             onChange={(e) => setSortBy(e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews')}
             className="bg-transparent text-[#5b6478] text-[13px] font-medium border-0 focus:ring-0 cursor-pointer pr-2"
           >
-            <option value="recommended">Sort: Recommended ⌄</option>
+            <option value="recommended">Sort: Recommended</option>
             <option value="rating">Sort: Highest Rating</option>
             <option value="reviews">Sort: Most Reviews</option>
             <option value="price_asc">Sort: Price (Low to High)</option>
@@ -584,22 +590,7 @@ export default function CityHotelsClient({
                   ? 'jetted tub'
                   : 'bathtub';
 
-                const hasBooking = Boolean(
-                  (h.bookingUrl && !h.bookingUrl.includes('searchresults')) ||
-                  (h.url && h.url.includes('booking.com') && !h.url.includes('searchresults'))
-                );
-                const hasAgoda = Boolean(
-                  (h.agodaUrl && getUrlDirectnessTier(h.agodaUrl) < 99) ||
-                  (h.url && h.url.includes('agoda') && getUrlDirectnessTier(h.url) < 99)
-                );
-                const hasMmt = Boolean(
-                  (h.mmtUrl && !h.mmtUrl.includes('hotel-listing') && !h.mmtUrl.includes('searchText=')) ||
-                  (h.url && h.url.includes('makemytrip') && !h.url.includes('hotel-listing'))
-                );
-                const hasCleartrip = Boolean(
-                  (h.cleartripUrl && !h.cleartripUrl.includes('search')) ||
-                  (h.url && h.url.includes('cleartrip'))
-                );
+                const linkedPartners = getLinkedPartners(h);
 
                 const countrySlug = slugify(countryName);
                 const citySlugResolved = h.city ? slugify(h.city) : slugify(cityName);
@@ -617,31 +608,35 @@ export default function CityHotelsClient({
                     className="bg-white rounded-2xl border border-[#e3e7ef] shadow-[0_4px_18px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col group transition-all"
                   >
                     {/* Photo with Badge and Favorite icon */}
-                    <div className="relative h-[200px] w-full bg-[#f5f6f8] overflow-hidden">
-                      <img
-                        src={imageUrl(h.image)}
-                        alt={h.name}
-                        loading={i < 2 ? 'eager' : 'lazy'}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
-                      />
+                    <HotelCardImage
+                      primaryImage={h.image || ''}
+                      images={h.images}
+                      partnerImages={h.partnerImages}
+                      hotelName={h.name}
+                      cityName={h.city || cityName}
+                      countryName={h.country || countryName}
+                      tubType={h.tubType}
+                      priority={i < 2}
+                      className="relative h-[200px] w-full bg-[#f5f6f8] shrink-0 overflow-hidden group/image"
+                    >
                       {/* Badge: Green when confirmed, muted grey when reported */}
                       {isHotelConfirmed(h) ? (
-                        <span className="absolute left-3 top-3 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs">
+                        <span className="absolute left-3 top-3 z-10 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">
                           ✓ Tub proven · Booking.com
                         </span>
                       ) : (
-                        <span className="absolute left-3 top-3 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs">
+                        <span className="absolute left-3 top-3 z-10 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">
                           Reported, not yet confirmed
                         </span>
                       )}
 
                       {/* Favorite button */}
-                      <div className="absolute right-3 top-3 w-[34px] h-[34px] rounded-full bg-white/92 backdrop-blur-xs flex items-center justify-center shadow-xs">
+                      <div className="absolute right-3 top-3 z-10 w-[34px] h-[34px] rounded-full bg-white/92 backdrop-blur-xs flex items-center justify-center shadow-xs">
                         <svg className="w-4 h-4 text-[#5b6478]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                       </div>
-                    </div>
+                    </HotelCardImage>
 
                     {/* Card Body */}
                     <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
@@ -679,26 +674,14 @@ export default function CityHotelsClient({
                       {/* Partners and Compare button */}
                       <div className="flex justify-between items-center text-[12px] text-[#5b6478] mt-auto pt-1">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          {hasBooking && (
-                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
-                              Booking.com
+                          {linkedPartners.map((partner) => (
+                            <span
+                              key={partner}
+                              className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap"
+                            >
+                              {partner}
                             </span>
-                          )}
-                          {hasAgoda && (
-                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
-                              Agoda
-                            </span>
-                          )}
-                          {hasMmt && (
-                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
-                              MakeMyTrip
-                            </span>
-                          )}
-                          {hasCleartrip && (
-                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
-                              Cleartrip
-                            </span>
-                          )}
+                          ))}
                         </div>
 
                         <Link
