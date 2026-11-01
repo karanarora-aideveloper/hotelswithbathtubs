@@ -1,13 +1,11 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import OutboundLink from '@/components/OutboundLink';
 import { isDirectPropertyUrl, getUrlDirectnessTier } from '@/lib/affiliate';
-import HotelCardImage from '@/components/HotelCardImage';
 import { imageUrl } from '@/lib/imageUrl';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
-import { isValidNeighborhood, isPlaceholderLandmark } from '@/lib/location';
+import { isValidNeighborhood } from '@/lib/location';
 import { trackEvent } from '@/lib/analytics';
 import { isUserExcluded } from '@/lib/exclusion';
 import {
@@ -16,7 +14,7 @@ import {
   recordFilterReset,
   recordFilterChange,
 } from '@/lib/gtag';
-import { getEvidenceLine, sanitizeBookingTip, getLinkedPartners, getBathtubLabel } from '@/lib/evidence';
+import { isHotelConfirmed } from '@/lib/evidence';
 
 type HotelData = {
   _id?: string;
@@ -28,119 +26,35 @@ type HotelData = {
   images?: string[];
   partnerImages?: string[];
   url?: string;
-  agodaUrl?: string;
   bookingUrl?: string;
+  agodaUrl?: string;
+  mmtUrl?: string;
+  cleartripUrl?: string;
   expediaUrl?: string;
   hotelsComUrl?: string;
   vrboUrl?: string;
-  mmtUrl?: string;
-  airbnbUrl?: string;
   tripUrl?: string;
-  amenities?: string[];
-  description?: string;
+  airbnbUrl?: string;
+  price?: string;
   rating?: number;
   reviewsCount?: number;
-  roomType?: string;
   tubType?: string;
-  bookingTip?: string;
-  price?: string;
+  roomType?: string;
   neighborhood?: string;
   landmarkDistance?: string;
-  crossVerifiedAt?: string;
+  description?: string;
+  bookingTip?: string;
+  amenities?: string[];
+  importBatch?: string;
+  bookingTubLabels?: string[];
   bathtubConfirmed?: boolean;
-  updatedAt?: string | Date | null;
+  crossVerifiedAt?: string;
 };
 
-
-const parsePrice = (p: string) => parseInt(p?.replace(/[^0-9]/g, '') || '0', 10);
-
-export function normalizeTubType(tubType?: string): { category: string; emoji: string; color: string } {
-  if (!tubType) return { category: 'Standard Bathtub', emoji: '🚿', color: 'gray' };
-  const lower = tubType.toLowerCase();
-  if (lower.includes('jacuzzi') || lower.includes('whirlpool') || lower.includes('jet') || lower.includes('hydro')) {
-    return { category: 'Jacuzzi / Whirlpool', emoji: '🌊', color: 'blue' };
-  }
-  if (lower.includes('claw') || lower.includes('clawfoot') || lower.includes('vintage') || lower.includes('victorian') || lower.includes('cast-iron') || lower.includes('cast iron')) {
-    return { category: 'Clawfoot Tub', emoji: '🛁', color: 'amber' };
-  }
-  if (lower.includes('outdoor') || lower.includes('open-air') || lower.includes('balcony') || lower.includes('hot tub') || lower.includes('heated')) {
-    return { category: 'Outdoor Hot Tub', emoji: '♨️', color: 'orange' };
-  }
-  if (lower.includes('roman')) {
-    return { category: 'Roman Tub', emoji: '🏛️', color: 'stone' };
-  }
-  if (lower.includes('onsen') || lower.includes('cedar') || lower.includes('hinoki') || lower.includes('japanese')) {
-    return { category: 'Onsen / Cedarwood', emoji: '🌿', color: 'green' };
-  }
-  if (lower.includes('plunge') || lower.includes('pool')) {
-    return { category: 'Plunge Pool + Tub', emoji: '🏊', color: 'teal' };
-  }
-  if (lower.includes('deep') || lower.includes('soaking') || lower.includes('freestanding') || lower.includes('marble') || lower.includes('stone') || lower.includes('italian')) {
-    return { category: 'Deep Soaking Tub', emoji: '🛁', color: 'indigo' };
-  }
-  return { category: 'Standard Bathtub', emoji: '🚿', color: 'gray' };
-}
-
-const colorStyles: Record<string, string> = {
-  blue: 'bg-blue-100 text-blue-800 border-blue-200',
-  indigo: 'bg-indigo-100 text-indigo-800 border-indigo-200',
-  amber: 'bg-amber-100 text-amber-800 border-amber-200',
-  orange: 'bg-orange-100 text-orange-800 border-orange-200',
-  stone: 'bg-stone-100 text-stone-800 border-stone-200',
-  green: 'bg-green-100 text-green-800 border-green-200',
-  teal: 'bg-teal-100 text-teal-800 border-teal-200',
-  gray: 'bg-gray-100 text-gray-800 border-gray-200',
-};
-
-function getCalculatedDatePills() {
-  const today = new Date();
-  const dayOfWeek = today.getDay(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
-  const fmt = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  const fmtShort = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-  // 1. This Weekend
-  let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
-  if (daysUntilFriday === 0 && today.getHours() >= 18) daysUntilFriday = 7;
-  const thisFri = new Date(today);
-  thisFri.setDate(today.getDate() + daysUntilFriday);
-  const thisSun = new Date(thisFri);
-  thisSun.setDate(thisFri.getDate() + 2);
-
-  // 2. Next Weekend (Popular)
-  const daysUntilNextFriday = daysUntilFriday === 0 ? 7 : daysUntilFriday + 7;
-  const nextFri = new Date(today);
-  nextFri.setDate(today.getDate() + daysUntilNextFriday);
-  const nextSun = new Date(nextFri);
-  nextSun.setDate(nextFri.getDate() + 2);
-
-  // 3. Midweek (Tue–Thu)
-  let daysUntilTuesday = (2 - dayOfWeek + 7) % 7;
-  if (daysUntilTuesday === 0) daysUntilTuesday = 7;
-  const tue = new Date(today);
-  tue.setDate(today.getDate() + daysUntilTuesday);
-  const thu = new Date(tue);
-  thu.setDate(tue.getDate() + 2);
-
-  return {
-    'this-weekend': {
-      checkin: fmt(thisFri),
-      checkout: fmt(thisSun),
-      label: 'This Weekend',
-      range: `${fmtShort(thisFri)}–${fmtShort(thisSun)}`,
-    },
-    'next-weekend': {
-      checkin: fmt(nextFri),
-      checkout: fmt(nextSun),
-      label: 'Next Weekend (Popular)',
-      range: `${fmtShort(nextFri)}–${fmtShort(nextSun)}`,
-    },
-    midweek: {
-      checkin: fmt(tue),
-      checkout: fmt(thu),
-      label: 'Midweek (Tue–Thu)',
-      range: `${fmtShort(tue)}–${fmtShort(thu)}`,
-    },
-  };
+function parsePrice(priceStr?: string): number {
+  if (!priceStr) return 0;
+  const match = priceStr.replace(/,/g, '').match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
 }
 
 export default function CityHotelsClient({
@@ -152,49 +66,20 @@ export default function CityHotelsClient({
   cityName: string;
   countryName: string;
 }) {
+  const [tubProvenOnly, setTubProvenOnly] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'jacuzzi' | 'soaking' | 'tripled'>('all');
+  const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews'>('recommended');
   const [stayStyle, setStayStyle] = useState<'all' | 'luxury' | 'apartment' | 'boutique' | 'hostel'>('all');
-  const [selectedCity, setSelectedCity] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<'all' | 'budget' | 'mid' | 'luxury' | 'ultra'>('all');
-  const [selectedTubCategory, setSelectedTubCategory] = useState<string>('all');
-  const [selectedPerks, setSelectedPerks] = useState<string[]>([]);
-  const [dateOption, setDateOption] = useState<'this-weekend' | 'next-weekend' | 'midweek' | 'custom'>('next-weekend');
-  const [customCheckin, setCustomCheckin] = useState<string>('');
-  const [customCheckout, setCustomCheckout] = useState<string>('');
-  const [minDate, setMinDate] = useState<string>('');
-  const [showCustomPicker, setShowCustomPicker] = useState<boolean>(false);
-  const [weekendDates, setWeekendDates] = useState<{ checkin: string; checkout: string; adults: number } | undefined>(undefined);
-  const [calculatedDatePills, setCalculatedDatePills] = useState<ReturnType<typeof getCalculatedDatePills> | null>(null);
+  const [showFiltersMenu, setShowFiltersMenu] = useState(false);
 
-  useEffect(() => {
-    const pills = getCalculatedDatePills();
-    setCalculatedDatePills(pills);
-    const nextWk = pills['next-weekend'];
-    setWeekendDates({ checkin: nextWk.checkin, checkout: nextWk.checkout, adults: 2 });
-    setCustomCheckin(nextWk.checkin);
-    setCustomCheckout(nextWk.checkout);
-    setMinDate(new Date().toISOString().split('T')[0]);
-  }, []);
+  // Progressive loading / Infinite Scroll State
+  const [visibleCount, setVisibleCount] = useState<number>(24);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
-  const handleSelectDateOption = useCallback((option: 'this-weekend' | 'next-weekend' | 'midweek') => {
-    setDateOption(option);
-    setShowCustomPicker(false);
-    const pills = calculatedDatePills || getCalculatedDatePills();
-    const opt = pills[option];
-    setWeekendDates({ checkin: opt.checkin, checkout: opt.checkout, adults: 2 });
-  }, [calculatedDatePills]);
-
-  const handleApplyCustomDates = useCallback((checkin: string, checkout: string) => {
-    if (!checkin || !checkout) return;
-    setDateOption('custom');
-    setCustomCheckin(checkin);
-    setCustomCheckout(checkout);
-    setWeekendDates({ checkin, checkout, adults: 2 });
-  }, []);
-
-  // Deduplicate hotels by URL signature (same hotel added multiple times to DB)
+  // Deduplicate hotels by URL signature
   const uniqueHotels = useMemo(() => {
     const seen = new Set<string>();
     return hotels.filter((h) => {
@@ -205,30 +90,21 @@ export default function CityHotelsClient({
     });
   }, [hotels]);
 
-  // Dynamically resolve currency symbol and thresholds based on city destination
-  const { currencySymbol, budgetMax, midMax, ultraMin } = useMemo(() => {
-    for (const h of uniqueHotels) {
-      const p = h.price || '';
-      if (p.includes('€')) return { currencySymbol: '€', budgetMax: 120, midMax: 240, ultraMin: 450 };
-      if (p.includes('£')) return { currencySymbol: '£', budgetMax: 100, midMax: 200, ultraMin: 400 };
-      if (p.includes('₹')) return { currencySymbol: '₹', budgetMax: 5000, midMax: 12000, ultraMin: 25000 };
-      if (p.includes('¥')) return { currencySymbol: '¥', budgetMax: 15000, midMax: 35000, ultraMin: 65000 };
-      if (p.includes('฿')) return { currencySymbol: '฿', budgetMax: 2000, midMax: 5000, ultraMin: 10000 };
-      if (p.includes('RM')) return { currencySymbol: 'RM', budgetMax: 250, midMax: 600, ultraMin: 1200 };
-      if (p.includes('CHF')) return { currencySymbol: 'CHF', budgetMax: 150, midMax: 300, ultraMin: 600 };
-      if (p.includes('CA$')) return { currencySymbol: 'CA$', budgetMax: 150, midMax: 300, ultraMin: 550 };
-      if (p.includes('A$')) return { currencySymbol: 'A$', budgetMax: 160, midMax: 320, ultraMin: 600 };
-    }
-    const isIndia = countryName === 'India';
+  // Proven count
+  const provenCount = useMemo(() => {
+    return uniqueHotels.filter(isHotelConfirmed).length;
+  }, [uniqueHotels]);
+
+  // Dynamically resolve currency symbol and thresholds
+  const { budgetMax, midMax, ultraMin } = useMemo(() => {
+    const isIndia = countryName.toLowerCase() === 'india';
     return {
-      currencySymbol: isIndia ? '₹' : '$',
       budgetMax: isIndia ? 5000 : 120,
       midMax: isIndia ? 12000 : 250,
       ultraMin: isIndia ? 25000 : 450,
     };
-  }, [uniqueHotels, countryName]);
+  }, [countryName]);
 
-  // M3: Jacuzzi filter matches on room only (tubType or roomType)
   const isJacuzziHotel = (h: HotelData) => isJacuzziRoom(h);
 
   const isSoakingHotel = (h: HotelData) => {
@@ -247,257 +123,99 @@ export default function CityHotelsClient({
     );
   };
 
-  const isApartmentStay = (h: HotelData) => {
-    if (h.airbnbUrl) return true;
-    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
-    return (
-      text.includes('apartment') ||
-      text.includes('2bhk') ||
-      text.includes('1bhk') ||
-      text.includes('3bhk') ||
-      text.includes('flat') ||
-      text.includes('villa') ||
-      text.includes('bungalow') ||
-      text.includes('homestay') ||
-      text.includes('studio') ||
-      text.includes('entire home') ||
-      text.includes('b&b')
-    );
+  const isHotTubHotel = (h: HotelData) => {
+    const tub = (h.tubType || '').toLowerCase();
+    const room = (h.roomType || '').toLowerCase();
+    return tub.includes('hot tub') || room.includes('hot tub');
   };
 
   const isLuxuryHotelStay = (h: HotelData) => {
     const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
-    const p = parsePrice(h.price || '');
-    if (p >= ultraMin) return true;
     return (
       text.includes('5-star') ||
       text.includes('five star') ||
       text.includes('resort') ||
       text.includes('palace') ||
-      text.includes('grand') ||
-      text.includes('taj') ||
-      text.includes('oberoi') ||
-      text.includes('leela') ||
-      text.includes('itc') ||
-      text.includes('marriott') ||
-      text.includes('hyatt') ||
-      text.includes('radisson') ||
-      text.includes('shangri-la') ||
-      text.includes('sofitel') ||
-      text.includes('hilton') ||
-      text.includes('kempinski') ||
-      text.includes('four seasons') ||
-      text.includes('st. regis') ||
-      text.includes('rosewood') ||
-      text.includes('ritz')
+      (Number(h.rating) >= 9.0 && (h.reviewsCount || 0) > 20)
+    );
+  };
+
+  const isApartmentStay = (h: HotelData) => {
+    if (h.airbnbUrl) return true;
+    const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
+    return (
+      text.includes('apartment') ||
+      text.includes('flat') ||
+      text.includes('villa') ||
+      text.includes('chalet') ||
+      text.includes('condo')
     );
   };
 
   const isBoutiqueStay = (h: HotelData) => {
-    if (isApartmentStay(h)) return false;
     const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
     return (
       text.includes('boutique') ||
-      text.includes('manor') ||
-      text.includes('heritage') ||
       text.includes('inn') ||
-      text.includes('suites') ||
-      text.includes('haveli') ||
-      text.includes('house') ||
-      text.includes('lodge') ||
-      text.includes('chateau') ||
-      text.includes('historic') ||
-      text.includes('villa')
+      text.includes('bed & breakfast') ||
+      text.includes('lodge')
     );
   };
 
   const isHostelStay = (h: HotelData) => {
     const text = `${h.name} ${h.roomType || ''} ${h.description || ''}`.toLowerCase();
-    return (
-      text.includes('hostel') ||
-      text.includes('zostel') ||
-      text.includes('poshtel') ||
-      text.includes('backpacker') ||
-      text.includes('hosteller') ||
-      text.includes('gostops') ||
-      text.includes('madpackers') ||
-      text.includes('moustache') ||
-      text.includes('dorm') ||
-      text.includes('bunk')
-    );
+    return text.includes('hostel') || text.includes('poshtel');
   };
 
-  const matchesPerk = (h: HotelData, perk: string) => {
-    const ams = (h.amenities || []).join(' ').toLowerCase();
-    const desc = (h.description || '').toLowerCase();
-    const name = h.name.toLowerCase();
-    const text = `${name} ${desc} ${ams} ${h.roomType || ''}`.toLowerCase();
-
-    if (perk === 'couple') {
-      return (
-        text.includes('couple') ||
-        text.includes('romantic') ||
-        text.includes('honeymoon') ||
-        text.includes('private') ||
-        isJacuzziHotel(h)
-      );
-    }
-    if (perk === 'pool') {
-      return text.includes('pool') || text.includes('swimming');
-    }
-    if (perk === 'breakfast') {
-      return text.includes('breakfast') || ams.includes('breakfast');
-    }
-    if (perk === 'wifi') {
-      return text.includes('wifi') || text.includes('wi-fi') || text.includes('internet');
-    }
-    if (perk === 'agoda') {
-      return !!h.agodaUrl;
-    }
-    if (perk === 'airbnb') {
-      return !!h.airbnbUrl;
-    }
-    return true;
-  };
-
-  const availableTubCategories = useMemo(() => {
-    const map = new Map<string, { emoji: string; color: string; count: number }>();
-    uniqueHotels.forEach((h) => {
-      if (h.tubType) {
-        const norm = normalizeTubType(h.tubType);
-        const existing = map.get(norm.category);
-        if (existing) {
-          existing.count++;
-        } else {
-          map.set(norm.category, { emoji: norm.emoji, color: norm.color, count: 1 });
-        }
-      }
-    });
-    return Array.from(map.entries()).map(([category, { emoji, color, count }]) => ({ category, emoji, color, count }));
-  }, [uniqueHotels]);
-
-  // Counts for filter badges with zero false-negatives
   const counts = useMemo(() => {
-    const jacuzzi = uniqueHotels.filter(isJacuzziHotel).length;
-    const soaking = uniqueHotels.filter(isSoakingHotel).length;
-    const tripled = uniqueHotels.filter((h) => h.url && (h.agodaUrl || h.bookingUrl)).length;
-
-    return { all: uniqueHotels.length, jacuzzi, soaking, tripled };
-  }, [uniqueHotels]);
-
-  const stayStyleCounts = useMemo(() => {
+    let jacuzzi = 0;
+    let soaking = 0;
+    let tripled = 0;
+    for (const h of uniqueHotels) {
+      if (isJacuzziHotel(h)) jacuzzi++;
+      if (isSoakingHotel(h)) soaking++;
+      if (h.url && (h.agodaUrl || h.bookingUrl)) tripled++;
+    }
     return {
       all: uniqueHotels.length,
-      luxury: uniqueHotels.filter(isLuxuryHotelStay).length,
-      apartment: uniqueHotels.filter(isApartmentStay).length,
-      boutique: uniqueHotels.filter(isBoutiqueStay).length,
-      hostel: uniqueHotels.filter(isHostelStay).length,
-    };
-  }, [uniqueHotels, ultraMin]);
-
-  const priceRangeCounts = useMemo(() => {
-    let budget = 0;
-    let mid = 0;
-    let luxury = 0;
-    let ultra = 0;
-    uniqueHotels.forEach((h) => {
-      const p = parsePrice(h.price || '');
-      if (p > 0) {
-        if (p < budgetMax) budget++;
-        else if (p <= midMax) mid++;
-        else if (p < ultraMin) luxury++;
-        else ultra++;
-      }
-    });
-    return { budget, mid, luxury, ultra };
-  }, [uniqueHotels, budgetMax, midMax, ultraMin]);
-
-  const perkCounts = useMemo(() => {
-    return {
-      couple: uniqueHotels.filter((h) => matchesPerk(h, 'couple')).length,
-      pool: uniqueHotels.filter((h) => matchesPerk(h, 'pool')).length,
-      breakfast: uniqueHotels.filter((h) => matchesPerk(h, 'breakfast')).length,
-      wifi: uniqueHotels.filter((h) => matchesPerk(h, 'wifi')).length,
-      agoda: uniqueHotels.filter((h) => matchesPerk(h, 'agoda')).length,
-      airbnb: uniqueHotels.filter((h) => matchesPerk(h, 'airbnb')).length,
+      jacuzzi,
+      soaking,
+      tripled,
     };
   }, [uniqueHotels]);
 
-  const activeFilterCount = useMemo(() => {
-    let count = 0;
-    if (searchTerm.trim()) count++;
-    if (selectedCity !== 'all') count++;
-    if (stayStyle !== 'all') count++;
-    if (selectedTubCategory !== 'all') count++;
-    if (priceRange !== 'all') count++;
-    if (selectedPerks.length > 0) count += selectedPerks.length;
-    if (sortBy !== 'recommended') count++;
-    return count;
-  }, [searchTerm, selectedCity, stayStyle, selectedTubCategory, priceRange, selectedPerks, sortBy]);
-
-  const togglePerk = (perk: string) => {
-    setSelectedPerks((prev) =>
-      prev.includes(perk) ? prev.filter((p) => p !== perk) : [...prev, perk]
-    );
-  };
-
-  // Filtered hotels list
-  const [visibleCount, setVisibleCount] = useState(24);
-  const observerTarget = useRef<HTMLDivElement>(null);
-
-  const availableCities = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const h of uniqueHotels) {
-      if (h.city) {
-        map.set(h.city, (map.get(h.city) || 0) + 1);
-      }
-    }
-    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
-  }, [uniqueHotels]);
-
-  const filterKey = `${searchTerm}|${selectedFilter}|${selectedTubCategory}|${sortBy}|${priceRange}|${stayStyle}|${selectedPerks.join(',')}|${selectedCity}`;
-  const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
-  if (prevFilterKey !== filterKey) {
-    setPrevFilterKey(filterKey);
-    setVisibleCount(24);
-  }
-
+  // Main filtering & sorting pipeline
   const filteredHotels = useMemo(() => {
     const result = uniqueHotels.filter((h) => {
-      // Destination / City filter (State Hubs with Multiple Cities)
-      if (selectedCity !== 'all' && h.city !== selectedCity) return false;
+      // 1. Proven filter
+      if (tubProvenOnly && !isHotelConfirmed(h)) return false;
 
-      // Text search filter
+      // 2. Search keyword filter
       if (searchTerm.trim()) {
-        const q = searchTerm.trim().toLowerCase();
-        const matchesName = h.name.toLowerCase().includes(q);
-        const matchesCity = (h.city || '').toLowerCase().includes(q);
-        const matchesNeighborhood = (h.neighborhood || '').toLowerCase().includes(q);
-        const matchesAmenity = h.amenities?.some((a) => a.toLowerCase().includes(q));
-        const matchesTub = (h.tubType || '').toLowerCase().includes(q);
-        if (!matchesName && !matchesCity && !matchesNeighborhood && !matchesAmenity && !matchesTub) return false;
+        const term = searchTerm.toLowerCase();
+        const matchesName = h.name.toLowerCase().includes(term);
+        const matchesRoom = (h.roomType || '').toLowerCase().includes(term);
+        const matchesNeigh = (h.neighborhood || '').toLowerCase().includes(term);
+        if (!matchesName && !matchesRoom && !matchesNeigh) return false;
       }
 
-      // Stay Style filter
-      if (stayStyle === 'luxury' && !isLuxuryHotelStay(h)) return false;
-      if (stayStyle === 'apartment' && !isApartmentStay(h)) return false;
-      if (stayStyle === 'boutique' && !isBoutiqueStay(h)) return false;
-      if (stayStyle === 'hostel' && !isHostelStay(h)) return false;
-
-      // Category filter (legacy support)
+      // 3. Category filter
       if (selectedFilter === 'jacuzzi' && !isJacuzziHotel(h)) return false;
       if (selectedFilter === 'soaking' && !isSoakingHotel(h)) return false;
       if (selectedFilter === 'tripled') {
         if (!(h.url && (h.agodaUrl || h.bookingUrl))) return false;
       }
 
-      // Bathtub Category filter
-      if (selectedTubCategory !== 'all') {
-        const norm = normalizeTubType(h.tubType);
-        if (norm.category !== selectedTubCategory) return false;
-      }
+      // 4. Hot tub specific filter
+      if (selectedTubCategory === 'Hot tub' && !isHotTubHotel(h)) return false;
 
-      // Price Range filter
+      // 5. Stay style filter
+      if (stayStyle === 'luxury' && !isLuxuryHotelStay(h)) return false;
+      if (stayStyle === 'apartment' && !isApartmentStay(h)) return false;
+      if (stayStyle === 'boutique' && !isBoutiqueStay(h)) return false;
+      if (stayStyle === 'hostel' && !isHostelStay(h)) return false;
+
+      // 6. Price range filter
       if (priceRange !== 'all' && h.price) {
         const p = parsePrice(h.price);
         if (p > 0) {
@@ -506,12 +224,6 @@ export default function CityHotelsClient({
           if (priceRange === 'luxury' && (p < midMax || p >= ultraMin)) return false;
           if (priceRange === 'ultra' && p < ultraMin) return false;
         }
-      }
-
-      // Perks & Deals multi-select filter
-      if (selectedPerks.length > 0) {
-        const matchesAll = selectedPerks.every((perk) => matchesPerk(h, perk));
-        if (!matchesAll) return false;
       }
 
       return true;
@@ -542,57 +254,50 @@ export default function CityHotelsClient({
     return result;
   }, [
     uniqueHotels,
+    tubProvenOnly,
     searchTerm,
-    selectedCity,
-    stayStyle,
-    selectedTubCategory,
     selectedFilter,
+    selectedTubCategory,
+    stayStyle,
     priceRange,
-    selectedPerks,
     sortBy,
     budgetMax,
     midMax,
     ultraMin,
   ]);
 
+  // Reset pagination on filter change
+  const filterKey = `${tubProvenOnly}|${searchTerm}|${selectedFilter}|${selectedTubCategory}|${sortBy}|${priceRange}|${stayStyle}`;
+  const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
+  if (prevFilterKey !== filterKey) {
+    setPrevFilterKey(filterKey);
+    setVisibleCount(24);
+  }
+
+  // Infinite scroll intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && visibleCount < filteredHotels.length) {
           setVisibleCount((prev) => Math.min(prev + 24, filteredHotels.length));
         }
       },
-      { rootMargin: '400px' }
+      { threshold: 0.1 }
     );
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
+    const currentTarget = observerTarget.current;
+    if (currentTarget) {
+      observer.observe(currentTarget);
     }
 
-    return () => observer.disconnect();
-  }, [filteredHotels.length]);
+    return () => {
+      if (currentTarget) observer.unobserve(currentTarget);
+    };
+  }, [visibleCount, filteredHotels.length]);
 
-  // Track dead-end filter pain point (when filter/search yields 0 hotels)
+  // Track impressions on viewport entry (hotel_card_view)
   useEffect(() => {
-    if (
-      filteredHotels.length === 0 &&
-      (selectedFilter !== 'all' ||
-        searchTerm.trim() ||
-        selectedTubCategory !== 'all' ||
-        priceRange !== 'all' ||
-        stayStyle !== 'all' ||
-        selectedPerks.length > 0)
-    ) {
-      const timer = setTimeout(() => {
-        recordFilterDeadEnd(stayStyle !== 'all' ? stayStyle : selectedTubCategory !== 'all' ? selectedTubCategory : selectedFilter, searchTerm.trim(), cityName);
-      }, 750);
-      return () => clearTimeout(timer);
-    }
-  }, [filteredHotels.length, selectedFilter, searchTerm, cityName, selectedTubCategory, priceRange, stayStyle, selectedPerks]);
-
-  // Track hotel card impressions as cards enter the viewport
-  useEffect(() => {
-    const cards = document.querySelectorAll<HTMLElement>('[data-hotel-card]');
+    const cards = document.querySelectorAll('[data-hotel-card="true"]');
     if (cards.length === 0) return;
 
     const observer = new IntersectionObserver(
@@ -616,6 +321,20 @@ export default function CityHotelsClient({
     return () => observer.disconnect();
   }, [filteredHotels]);
 
+  // Dead-end filter detection
+  useEffect(() => {
+    if (
+      filteredHotels.length === 0 &&
+      (tubProvenOnly || selectedFilter !== 'all' || selectedTubCategory !== 'all' || searchTerm.trim() || stayStyle !== 'all' || priceRange !== 'all')
+    ) {
+      recordFilterDeadEnd(
+        tubProvenOnly ? 'tub_proven' : stayStyle !== 'all' ? stayStyle : selectedTubCategory !== 'all' ? selectedTubCategory : selectedFilter,
+        searchTerm.trim(),
+        cityName
+      );
+    }
+  }, [filteredHotels.length, tubProvenOnly, selectedFilter, selectedTubCategory, searchTerm, stayStyle, priceRange, cityName]);
+
   const handleFilterClick = (filter: 'all' | 'jacuzzi' | 'soaking' | 'tripled') => {
     setSelectedFilter(filter);
     recordFilterChange(filter, counts[filter]);
@@ -629,16 +348,17 @@ export default function CityHotelsClient({
           country: countryName,
         });
       }
-    } catch (_) {}
+    } catch {
+      // ignore
+    }
   };
 
   const handleResetFilters = () => {
+    setTubProvenOnly(false);
     setSelectedFilter('all');
-    setSelectedCity('all');
-    setStayStyle('all');
     setSelectedTubCategory('all');
+    setStayStyle('all');
     setPriceRange('all');
-    setSelectedPerks([]);
     setSearchTerm('');
     setSortBy('recommended');
     recordFilterReset(cityName);
@@ -646,1000 +366,386 @@ export default function CityHotelsClient({
       if (!isUserExcluded()) {
         trackEvent('filter_reset', { city: cityName });
       }
-    } catch (_) {}
+    } catch {
+      // ignore
+    }
   };
 
-  // Detect what kind of URL is stored in any booking field
-  type UrlProvider = 'makemytrip' | 'booking' | 'expedia' | 'hotelscom' | 'vrbo' | 'agoda' | 'trivago' | 'tripadvisor' | 'google' | 'airbnb' | 'trip' | null;
-  function getUrlProvider(url?: string): UrlProvider {
-    if (!url) return null;
-    const lower = url.toLowerCase();
-    if (lower.includes('makemytrip.com')) return 'makemytrip';
-    if (lower.includes('booking.com')) return 'booking';
-    if (lower.includes('expedia.com')) return 'expedia';
-    if (lower.includes('hotels.com')) return 'hotelscom';
-    if (lower.includes('vrbo.com')) return 'vrbo';
-    if (lower.includes('agoda.com')) return 'agoda';
-    if (lower.includes('trip.com')) return 'trip';
-    if (lower.includes('airbnb')) return 'airbnb';
-    if (lower.includes('trivago')) return 'trivago';
-    if (lower.includes('tripadvisor')) return 'tripadvisor';
-    if (lower.includes('google.com')) return 'google';
-    return null;
-  }
+  const handleTubProvenToggle = () => {
+    const next = !tubProvenOnly;
+    setTubProvenOnly(next);
+    recordFilterChange('tub_proven', next ? provenCount : uniqueHotels.length);
+  };
 
-  // Render the right button for any booking URL
-  function BookingButton({ url, hotelName, cityName: city, preferredLabel, isPrimary }: {
-    url: string;
-    hotelName: string;
-    cityName: string;
-    preferredLabel?: string;
-    isPrimary?: boolean;
-  }) {
-    const provider = getUrlProvider(url);
-    const config: Record<NonNullable<UrlProvider>, { label: string; className: string; source: string } | null> = {
-      booking: { 
-        label: 'Check on Booking.com', 
-        source: 'Booking.com', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      expedia: { 
-        label: 'Check on Expedia', 
-        source: 'Expedia', 
-        className: isPrimary 
-          ? 'bg-[#00256c] hover:bg-[#001c54] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-amber-50 hover:bg-amber-100 text-[#00256c] border border-amber-300 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      hotelscom: { 
-        label: 'Check on Hotels.com', 
-        source: 'Hotels.com', 
-        className: isPrimary 
-          ? 'bg-[#d32f2f] hover:bg-[#b71c1c] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-red-50 hover:bg-red-100 text-[#d32f2f] border border-red-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      vrbo: { 
-        label: 'Check on Vrbo', 
-        source: 'Vrbo', 
-        className: isPrimary 
-          ? 'bg-[#1b3b6f] hover:bg-[#12284c] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      makemytrip: { 
-        label: 'Check on MakeMyTrip', 
-        source: 'MakeMyTrip', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      agoda: { 
-        label: 'Check on Agoda', 
-        source: 'Agoda', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      trip: { 
-        label: 'Check on Trip.com', 
-        source: 'Trip.com', 
-        className: isPrimary 
-          ? 'bg-[#2681ff] hover:bg-[#1a6edb] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      airbnb: { 
-        label: 'Check on Airbnb', 
-        source: 'Airbnb', 
-        className: isPrimary 
-          ? 'bg-[#ff5a5f] hover:bg-[#e04c51] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      trivago: { 
-        label: 'Compare on Trivago', 
-        source: 'Trivago', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      tripadvisor: { 
-        label: 'View on TripAdvisor', 
-        source: 'TripAdvisor', 
-        className: isPrimary 
-          ? 'bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full' 
-          : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-center py-1.5 px-3 rounded-lg font-semibold transition-colors text-[11px] flex items-center justify-center gap-1 w-full' 
-      },
-      google: null, // don't show Google search links as booking buttons
-    };
-    if (!provider || !config[provider]) return null;
-    const { label, source, className } = config[provider]!;
-    return (
-      <OutboundLink href={url} hotelName={hotelName} cityName={city} source={source} dates={weekendDates} className={className}>
-        <span className="sm:hidden">{(preferredLabel || label).replace(/^Check on /, '')}</span>
-        <span className="hidden sm:inline">{preferredLabel || label}</span>
-        <span>&rarr;</span>
-      </OutboundLink>
-    );
-  }
+  const isAnyFilterActive =
+    tubProvenOnly ||
+    selectedFilter !== 'all' ||
+    selectedTubCategory !== 'all' ||
+    stayStyle !== 'all' ||
+    priceRange !== 'all' ||
+    Boolean(searchTerm.trim());
 
   return (
-    <div>
-      {/* Comprehensive Multi-Layer Hotel & Bathtub Filters */}
-      <div className="bg-white px-4 py-4 sm:px-5 sm:py-5 rounded-2xl border border-gray-200 shadow-sm mb-6 flex flex-col gap-3.5 w-full">
-        {/* Row 1: Search, Sort & Reset Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 w-full">
-          {/* Quick Hotel Name / Neighborhood Search */}
-          <div className="w-full md:w-72 relative shrink-0">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={`Search ${cityName} hotels, areas...`}
-              className="w-full pl-9 pr-8 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1a6fde] focus:bg-white focus:ring-2 focus:ring-[#1a6fde]/20 transition-all"
-            />
-            <svg className="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-2.5 text-xs text-gray-400 hover:text-gray-700 w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-200 transition-colors"
-                title="Clear search"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+    <div className="w-full">
+      {/* 1. Filter Bar matching mock-up: one row of pills you can scroll sideways */}
+      <div className="bg-[#f5f6f8] border-b border-[#e3e7ef] py-3 px-4 sm:px-6 md:px-8">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+          {/* Pill 1: ✓ Tub proven */}
+          <button
+            type="button"
+            onClick={handleTubProvenToggle}
+            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
+              tubProvenOnly
+                ? 'bg-[#14213d] text-white border-[#14213d]'
+                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+            }`}
+          >
+            ✓ Tub proven
+          </button>
 
-          {/* Sort Buttons + Clear */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden lg:inline mr-1">Sort:</span>
-            <button
-              onClick={() => setSortBy('recommended')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'recommended' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
-            >
-              Recommended
-            </button>
-            <button
-              onClick={() => setSortBy('price_asc')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'price_asc' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
-            >
-              Price ↑
-            </button>
-            <button
-              onClick={() => setSortBy('price_desc')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${sortBy === 'price_desc' ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-transparent'}`}
-            >
-              Price ↓
-            </button>
+          {/* Pill 2: Jetted tub */}
+          <button
+            type="button"
+            onClick={() => handleFilterClick(selectedFilter === 'jacuzzi' ? 'all' : 'jacuzzi')}
+            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
+              selectedFilter === 'jacuzzi'
+                ? 'bg-[#14213d] text-white border-[#14213d]'
+                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+            }`}
+          >
+            Jetted tub
+          </button>
 
-            {activeFilterCount > 0 && (
-              <button
-                onClick={handleResetFilters}
-                className="ml-auto md:ml-2 px-3 py-1.5 rounded-full text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-all flex items-center gap-1 shrink-0"
-                title="Reset all filters"
-              >
-                <span>✕</span>
-                <span>Reset ({activeFilterCount})</span>
-              </button>
-            )}
-          </div>
+          {/* Pill 3: Bathtub */}
+          <button
+            type="button"
+            onClick={() => handleFilterClick(selectedFilter === 'soaking' ? 'all' : 'soaking')}
+            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
+              selectedFilter === 'soaking'
+                ? 'bg-[#14213d] text-white border-[#14213d]'
+                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+            }`}
+          >
+            Bathtub
+          </button>
+
+          {/* Pill 4: Hot tub */}
+          <button
+            type="button"
+            onClick={() => setSelectedTubCategory(selectedTubCategory === 'Hot tub' ? 'all' : 'Hot tub')}
+            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 ${
+              selectedTubCategory === 'Hot tub'
+                ? 'bg-[#14213d] text-white border-[#14213d]'
+                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+            }`}
+          >
+            Hot tub
+          </button>
+
+          {/* Pill 5: Filters ⌄ */}
+          <button
+            type="button"
+            onClick={() => setShowFiltersMenu(!showFiltersMenu)}
+            className={`whitespace-nowrap text-[13px] px-3.5 py-2 rounded-full border transition-all cursor-pointer font-medium shrink-0 flex items-center gap-1 ${
+              showFiltersMenu || (isAnyFilterActive && !tubProvenOnly)
+                ? 'bg-[#14213d] text-white border-[#14213d]'
+                : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+            }`}
+          >
+            <span>Filters</span>
+            <span className="text-[10px]">⌄</span>
+          </button>
+
+          {/* Quick Clear when filters active */}
+          {isAnyFilterActive && (
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="whitespace-nowrap text-[12px] px-3 py-1.5 rounded-full text-[#5b6478] hover:text-[#14213d] underline cursor-pointer shrink-0 ml-1"
+            >
+              Reset
+            </button>
+          )}
         </div>
+      </div>
 
-        {/* Destination Filter (State Hubs with Multiple Cities) */}
-        {availableCities.length > 1 && (
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-              City / Area:
-            </span>
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-              <button
-                onClick={() => setSelectedCity('all')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                  selectedCity === 'all'
-                    ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                All {cityName} ({uniqueHotels.length})
-              </button>
-              {availableCities.map(([city, count]) => (
-                <button
-                  key={city}
-                  onClick={() => setSelectedCity(selectedCity === city ? 'all' : city)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                    selectedCity === city
-                      ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                      : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  {city} ({count})
-                </button>
-              ))}
+      {/* Expandable Advanced Filters Drawer */}
+      {showFiltersMenu && (
+        <div className="bg-white border-b border-[#e3e7ef] px-4 sm:px-6 md:px-8 py-4 animate-in fade-in duration-150">
+          <div className="max-w-7xl mx-auto space-y-4 text-xs sm:text-sm">
+            {/* Search Input */}
+            <div>
+              <label htmlFor="hotel-search" className="block text-[11px] font-bold text-[#5b6478] uppercase tracking-wider mb-1.5">
+                Search Hotels &amp; Neighborhoods
+              </label>
+              <input
+                id="hotel-search"
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={`Search ${uniqueHotels.length} hotels in ${cityName}...`}
+                className="w-full max-w-md px-3.5 py-2 bg-[#f5f6f8] border border-[#e3e7ef] rounded-xl text-[#14213d] placeholder:text-[#5b6478]/60 focus:outline-none focus:border-[#b08d57]"
+              />
             </div>
-          </div>
-        )}
 
-        {/* Row 2: Stay Type Filter */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-            Stay Type:
-          </span>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-            <button
-              onClick={() => setStayStyle('all')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                stayStyle === 'all'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              All Stays ({uniqueHotels.length})
-            </button>
-            <button
-              onClick={() => setStayStyle('luxury')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                stayStyle === 'luxury'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              🏨 5-Star &amp; Luxury ({stayStyleCounts.luxury})
-            </button>
-            <button
-              onClick={() => setStayStyle('apartment')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                stayStyle === 'apartment'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              🏡 Entire Apartments &amp; Villas ({stayStyleCounts.apartment})
-            </button>
-            <button
-              onClick={() => setStayStyle('boutique')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                stayStyle === 'boutique'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              ✨ Boutique Stays ({stayStyleCounts.boutique})
-            </button>
-            {stayStyleCounts.hostel > 0 && (
-              <button
-                onClick={() => setStayStyle('hostel')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 ${
-                  stayStyle === 'hostel'
-                    ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                    : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                🎒 Hostels &amp; Poshtels ({stayStyleCounts.hostel})
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Row 3: Bathtub Category Filter */}
-        {availableTubCategories.length > 0 && (
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-              Bathtub:
-            </span>
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-              <button
-                onClick={() => setSelectedTubCategory('all')}
-                className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                  selectedTubCategory === 'all'
-                    ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                    : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-                }`}
-              >
-                All Tub Types
-              </button>
-              {availableTubCategories.map((cat) => (
-                <button
-                  key={cat.category}
-                  onClick={() => setSelectedTubCategory(cat.category)}
-                  className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
-                    selectedTubCategory === cat.category
-                      ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                      : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-                  }`}
-                >
-                  <span>{cat.emoji}</span>
-                  <span>{cat.category}</span>
-                  <span className="text-[10px] opacity-75">({cat.count})</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Row 4: Price Range Filter */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-            Price:
-          </span>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-            <button
-              onClick={() => setPriceRange('all')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                priceRange === 'all'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              All Prices
-            </button>
-            <button
-              onClick={() => setPriceRange('budget')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                priceRange === 'budget'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              Budget (&lt; {currencySymbol}{budgetMax.toLocaleString()})
-              {priceRangeCounts.budget > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.budget})</span>}
-            </button>
-            <button
-              onClick={() => setPriceRange('mid')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                priceRange === 'mid'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              Mid-range ({currencySymbol}{budgetMax.toLocaleString()} - {currencySymbol}{midMax.toLocaleString()})
-              {priceRangeCounts.mid > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.mid})</span>}
-            </button>
-            <button
-              onClick={() => setPriceRange('luxury')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                priceRange === 'luxury'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              Luxury ({currencySymbol}{midMax.toLocaleString()} - {currencySymbol}{ultraMin.toLocaleString()})
-              {priceRangeCounts.luxury > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.luxury})</span>}
-            </button>
-            <button
-              onClick={() => setPriceRange('ultra')}
-              className={`px-3 py-1.5 rounded-full border text-xs font-bold transition-all shrink-0 ${
-                priceRange === 'ultra'
-                  ? 'bg-gray-900 text-white border-gray-900 shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              Ultra-Luxury ({currencySymbol}{ultraMin.toLocaleString()}+)
-              {priceRangeCounts.ultra > 0 && <span className="ml-1 text-[10px] opacity-75">({priceRangeCounts.ultra})</span>}
-            </button>
-          </div>
-        </div>
-
-        {/* Row 5: Perks & Deals Multi-Select Toggles */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-            Perks &amp; Deals:
-          </span>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-            {[
-              { id: 'couple', label: '💑 Couple Friendly', count: perkCounts.couple },
-              { id: 'pool', label: '🏊 Swimming Pool', count: perkCounts.pool },
-              { id: 'breakfast', label: '🍳 Breakfast Included', count: perkCounts.breakfast },
-              { id: 'wifi', label: '📶 Free WiFi', count: perkCounts.wifi },
-              { id: 'agoda', label: '⚡ Agoda Deals', count: perkCounts.agoda },
-              { id: 'airbnb', label: '🏠 Airbnb Stays', count: perkCounts.airbnb },
-            ]
-              .filter((p) => p.count > 0)
-              .map((p) => {
-                const isSelected = selectedPerks.includes(p.id);
-                return (
+            {/* Stay Style */}
+            <div>
+              <span className="block text-[11px] font-bold text-[#5b6478] uppercase tracking-wider mb-1.5">
+                Stay Style
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { id: 'all' as const, label: 'All Stays' },
+                  { id: 'luxury' as const, label: '5-Star & Resorts' },
+                  { id: 'apartment' as const, label: 'Apartments & Villas' },
+                  { id: 'boutique' as const, label: 'Boutique & Inns' },
+                  { id: 'hostel' as const, label: 'Hostels & Poshtels' },
+                ].map((s) => (
                   <button
-                    key={p.id}
-                    onClick={() => togglePerk(p.id)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 ${
-                      isSelected
-                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-emerald-500 hover:text-emerald-700'
+                    key={s.id}
+                    type="button"
+                    onClick={() => setStayStyle(s.id)}
+                    className={`px-3 py-1.5 rounded-full border text-xs font-semibold cursor-pointer ${
+                      stayStyle === s.id
+                        ? 'bg-[#14213d] text-white border-[#14213d]'
+                        : 'bg-[#f5f6f8] text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
                     }`}
                   >
-                    <span>{p.label}</span>
-                    <span className="text-[10px] opacity-75">({p.count})</span>
-                    {isSelected && <span className="text-white text-[11px] ml-0.5">✓</span>}
+                    {s.label}
                   </button>
-                );
-              })}
-          </div>
-        </div>
-
-        {/* Row 6: Travel Dates & Booking Window */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-3 border-t border-gray-100">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider shrink-0 w-24">
-            Travel Dates:
-          </span>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('this-weekend')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'this-weekend'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>🗓️ This Weekend</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 ${dateOption === 'this-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
-                  ({calculatedDatePills['this-weekend'].range})
-                </span>
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('next-weekend')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'next-weekend'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>🗓️ Next Weekend (Popular)</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 ${dateOption === 'next-weekend' ? 'text-white/80' : 'text-gray-400'}`}>
-                  ({calculatedDatePills['next-weekend'].range})
-                </span>
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('midweek')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'midweek'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>💼 Midweek (Tue–Thu)</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 ${dateOption === 'midweek' ? 'text-white/80' : 'text-gray-400'}`}>
-                  ({calculatedDatePills.midweek.range})
-                </span>
-              )}
-            </button>
-            {weekendDates && (
-              <span className="text-[11px] text-gray-500 font-medium ml-1 hidden md:inline whitespace-nowrap">
-                Selected: {weekendDates.checkin} → {weekendDates.checkout}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Matchmaker Discovery Callout */}
-      <div className="bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-blue-50/80 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-lg shrink-0 shadow-xs">
-            ✨
-          </div>
-          <div>
-            <h3 className="font-bold text-gray-900 text-sm sm:text-base leading-snug">
-              Looking for a specific bathtub style or anniversary getaway?
-            </h3>
-            <p className="text-xs text-gray-600 mt-0.5">
-              Take our 30-second Dream Soak Matchmaker to match by tub experience, romantic vibe, and budget worldwide.
-            </p>
-          </div>
-        </div>
-        <Link
-          href="/matchmaker"
-          prefetch={false}
-          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs hover:shadow-md whitespace-nowrap shrink-0"
-        >
-          Open Matchmaker &rarr;
-        </Link>
-      </div>
-
-      {/* Booking Verification Tip Banner */}
-      <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-3.5 sm:p-5 mb-6 flex items-start gap-3 shadow-2xs">
-        <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
-          <span className="text-base">💡</span>
-        </div>
-        <div className="text-xs sm:text-sm text-amber-900 leading-relaxed">
-          <strong className="font-bold block mb-0.5">Booking Tip for {cityName} Bathtub Suites:</strong>
-          When selecting your room on {countryName.toLowerCase() === 'india' ? 'MakeMyTrip, Agoda, or Booking.com' : 'Booking.com, Expedia, or Agoda'}, ensure your chosen room tier (such as <em>Executive Suite</em> or <em>Deluxe Room with Jacuzzi</em>) explicitly lists the bathtub amenity before confirming.
-        </div>
-      </div>
-
-      {/* Active Filter Chips & Results Count Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 px-1">
-        <div className="text-xs sm:text-sm text-gray-700 font-medium">
-          Showing <strong className="text-gray-900 font-black">{filteredHotels.length}</strong> of{' '}
-          <span className="text-gray-500">{uniqueHotels.length} stays</span> in{' '}
-          <span className="font-semibold text-gray-900">{cityName}</span>
-          {activeFilterCount > 0 && <span className="text-[#1a6fde] font-semibold ml-1.5">(matching filters)</span>}
-        </div>
-
-        {/* Active filter removable pills */}
-        {activeFilterCount > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {stayStyle !== 'all' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
-                <span>{stayStyle === 'luxury' ? '🏨 Luxury' : stayStyle === 'apartment' ? '🏡 Apartments' : '✨ Boutique'}</span>
-                <button onClick={() => setStayStyle('all')} className="hover:text-rose-600 ml-0.5">✕</button>
-              </span>
-            )}
-            {selectedTubCategory !== 'all' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-[#1a6fde]">
-                <span>{selectedTubCategory}</span>
-                <button onClick={() => setSelectedTubCategory('all')} className="hover:text-rose-600 ml-0.5">✕</button>
-              </span>
-            )}
-            {priceRange !== 'all' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800 capitalize">
-                <span>{priceRange} Price</span>
-                <button onClick={() => setPriceRange('all')} className="hover:text-rose-600 ml-0.5">✕</button>
-              </span>
-            )}
-            {selectedPerks.map((perk) => {
-              const labels: Record<string, string> = {
-                couple: '💑 Couple Friendly',
-                pool: '🏊 Swimming Pool',
-                breakfast: '🍳 Breakfast',
-                wifi: '📶 Free WiFi',
-                agoda: '⚡ Agoda Deals',
-                airbnb: '🏠 Airbnb Stays',
-              };
-              return (
-                <span key={perk} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800">
-                  <span>{labels[perk] || perk}</span>
-                  <button onClick={() => togglePerk(perk)} className="hover:text-rose-600 ml-0.5">✕</button>
-                </span>
-              );
-            })}
-            {searchTerm.trim() && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-900">
-                <span>&ldquo;{searchTerm}&rdquo;</span>
-                <button onClick={() => setSearchTerm('')} className="hover:text-rose-600 ml-0.5">✕</button>
-              </span>
-            )}
-            <button
-              onClick={handleResetFilters}
-              className="text-xs font-bold text-gray-500 hover:text-rose-600 underline ml-1 cursor-pointer"
-            >
-              Clear all
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Prominent Travel Dates Selector Bar — Dynamic OTA Link Date Injection */}
-      <div className="bg-gradient-to-r from-blue-50/70 via-white to-sky-50/70 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-6 shadow-2xs">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
-          <div className="flex items-start sm:items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a6fde] to-[#0a4fa8] text-white flex items-center justify-center text-base shrink-0 shadow-xs">
-              🗓️
+                ))}
+              </div>
             </div>
+
+            {/* Price Range */}
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-gray-900 text-sm sm:text-base">Target Travel Dates</span>
-                <span className="text-[10px] font-bold text-[#1a6fde] bg-blue-100/70 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Partner Rates
-                </span>
-              </div>
-              <p className="text-xs text-gray-500 mt-0.5">
-                Pre-fills check-in &amp; check-out dates directly into Booking.com, Agoda &amp; Expedia.
-              </p>
-            </div>
-          </div>
-
-          {/* Quick Date Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('this-weekend')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'this-weekend'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>🗓️ This Weekend</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'this-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                  {calculatedDatePills['this-weekend'].range}
-                </span>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('next-weekend')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'next-weekend'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>🗓️ Next Weekend (Popular)</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'next-weekend' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                  {calculatedDatePills['next-weekend'].range}
-                </span>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleSelectDateOption('midweek')}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'midweek'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>💼 Midweek (Tue–Thu)</span>
-              {calculatedDatePills && (
-                <span className={`text-[10px] ml-0.5 px-1.5 py-0.5 rounded ${dateOption === 'midweek' ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                  {calculatedDatePills.midweek.range}
-                </span>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setShowCustomPicker(!showCustomPicker)}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border shrink-0 flex items-center gap-1.5 cursor-pointer ${
-                dateOption === 'custom'
-                  ? 'bg-[#1a6fde] text-white border-[#1a6fde] shadow-xs'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-[#1a6fde] hover:text-[#1a6fde]'
-              }`}
-            >
-              <span>📅 Custom Dates {showCustomPicker ? '▲' : '▾'}</span>
-              {dateOption === 'custom' && customCheckin && (
-                <span className="text-[10px] ml-0.5 px-1.5 py-0.5 rounded bg-white/20 text-white">
-                  {customCheckin.slice(5)} → {customCheckout.slice(5)}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Custom Date Picker Tray */}
-        {showCustomPicker && (
-          <div className="mt-4 pt-3.5 border-t border-blue-100/80 flex flex-wrap items-center gap-3">
-            <span className="text-xs font-bold text-gray-700">Choose Specific Check-in &amp; Check-out:</span>
-            <div className="flex items-center gap-2">
-              <label className="text-[11px] text-gray-500">In:</label>
-              <input
-                type="date"
-                value={customCheckin}
-                min={minDate || undefined}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setCustomCheckin(val);
-                  if (customCheckout && val < customCheckout) {
-                    handleApplyCustomDates(val, customCheckout);
-                  }
-                }}
-                className="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-semibold text-gray-900 bg-white focus:outline-none focus:border-[#1a6fde]"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-[11px] text-gray-500">Out:</label>
-              <input
-                type="date"
-                value={customCheckout}
-                min={customCheckin || minDate || undefined}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setCustomCheckout(val);
-                  if (customCheckin && val > customCheckin) {
-                    handleApplyCustomDates(customCheckin, val);
-                  }
-                }}
-                className="px-2.5 py-1.5 rounded-lg border border-gray-300 text-xs font-semibold text-gray-900 bg-white focus:outline-none focus:border-[#1a6fde]"
-              />
-            </div>
-            {customCheckin && customCheckout && customCheckout > customCheckin && (
-              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md">
-                ✓ Ready ({customCheckin} → {customCheckout})
+              <span className="block text-[11px] font-bold text-[#5b6478] uppercase tracking-wider mb-1.5">
+                Guide Price Tier
               </span>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Hotel Cards Grid */}
-      {filteredHotels.length > 0 ? (
-        <>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-          {filteredHotels.slice(0, visibleCount).map((h, i) => {
-            const providerLabel: Record<NonNullable<UrlProvider>, string> = {
-              makemytrip: 'MakeMyTrip', booking: 'Booking.com', expedia: 'Expedia', hotelscom: 'Hotels.com', vrbo: 'Vrbo', agoda: 'Agoda', trip: 'Trip.com',
-              trivago: 'Trivago', tripadvisor: 'TripAdvisor', google: '', airbnb: 'Airbnb',
-            };
-            const verifiedSources = [
-              ...(h.bookingUrl ? [providerLabel[getUrlProvider(h.bookingUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.expediaUrl ? [providerLabel[getUrlProvider(h.expediaUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.hotelsComUrl ? [providerLabel[getUrlProvider(h.hotelsComUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.vrboUrl ? [providerLabel[getUrlProvider(h.vrboUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.agodaUrl ? [providerLabel[getUrlProvider(h.agodaUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.tripUrl ? [providerLabel[getUrlProvider(h.tripUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.mmtUrl ? [providerLabel[getUrlProvider(h.mmtUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.airbnbUrl ? [providerLabel[getUrlProvider(h.airbnbUrl) ?? 'google']].filter(Boolean) : []),
-              ...(h.url ? [providerLabel[getUrlProvider(h.url) ?? 'google']].filter(Boolean) : []),
-            ].filter((v, i, a) => a.indexOf(v) === i); // dedupe
-
-            const isIndia = countryName.toLowerCase() === 'india';
-            let rawUrls = [h.bookingUrl, h.expediaUrl, h.hotelsComUrl, h.vrboUrl, h.agodaUrl, h.tripUrl, h.mmtUrl, h.airbnbUrl, h.url]
-              .filter((u): u is string => !!u)
-              .filter((u, idx, arr) => arr.indexOf(u) === idx);
-
-            // For USA & non-India hotels: strictly suppress any MakeMyTrip or Indian reseller links
-            if (!isIndia) {
-              rawUrls = rawUrls.filter(u => !u.toLowerCase().includes('makemytrip.com') && !u.toLowerCase().includes('ekaro') && !u.toLowerCase().includes('linkredirect'));
-            }
-            
-            const sortedUrls = [...rawUrls].sort((a, b) => {
-              const tierA = getUrlDirectnessTier(a);
-              const tierB = getUrlDirectnessTier(b);
-              if (tierA !== tierB) return tierA - tierB;
-
-              const provA = getUrlProvider(a);
-              const provB = getUrlProvider(b);
-              if (h.airbnbUrl && !h.bookingUrl && !h.agodaUrl) {
-                if (provA === 'airbnb') return -1;
-                if (provB === 'airbnb') return 1;
-              }
-              const priority: Record<string, number> = isIndia
-                ? { agoda: 1, booking: 2, makemytrip: 3, expedia: 4, airbnb: 5, trip: 6, trivago: 7, tripadvisor: 8 }
-                : { booking: 1, expedia: 2, hotelscom: 3, vrbo: 4, agoda: 5, trip: 6, airbnb: 7, trivago: 8, tripadvisor: 9, makemytrip: 99 };
-              return (priority[provA || ''] || 99) - (priority[provB || ''] || 99);
-            });
-
-            // Filter out Tier 99 (broken search / generic redirect / fake search) URLs
-            const safeUrls = sortedUrls.filter(u => getUrlDirectnessTier(u) < 99);
-            const displayUrls = safeUrls;
-
-            return (
-              <div
-                key={h._id || i}
-                id={`hotel-${slugify(h.name)}`}
-                data-hotel-card="true"
-                data-hotel-name={h.name}
-                data-hotel-position={i + 1}
-                data-has-price={!!h.price}
-                className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md hover:border-[#1a6fde] hover:shadow-[0_0_0_3px_rgba(26,111,222,0.12)] transition-all flex flex-col group scroll-mt-24 overflow-hidden"
-              >
-                {/* Image & Badges */}
-                <HotelCardImage
-                  primaryImage={h.image || ''}
-                  images={h.images}
-                  partnerImages={h.partnerImages}
-                  hotelName={h.name}
-                  cityName={cityName}
-                  countryName={countryName}
-                  tubType={h.tubType}
-                  priority={i < 2}
-                  verifiedSources={verifiedSources}
-                  crossVerifiedAt={h.crossVerifiedAt}
-                />
-
-                {/* Card Content */}
-                <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
-                  {isVacationRental(h) && (
-                    <div className="mb-1">
-                      <span className="inline-flex items-center text-[10px] font-semibold text-purple-700 bg-purple-50 border border-purple-200/80 px-2 py-0.5 rounded-full">
-                        Vacation rental
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Hotel Title */}
-                  <Link
-                    href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
-                    prefetch={false}
-                    className="group/link mb-1"
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { id: 'all' as const, label: 'All Prices' },
+                  { id: 'budget' as const, label: 'Budget' },
+                  { id: 'mid' as const, label: 'Mid-Range' },
+                  { id: 'luxury' as const, label: 'Luxury' },
+                  { id: 'ultra' as const, label: 'Ultra Luxury' },
+                ].map((p) => (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => setPriceRange(p.id)}
+                    className={`px-3 py-1.5 rounded-full border text-xs font-semibold cursor-pointer capitalize ${
+                      priceRange === p.id
+                        ? 'bg-[#14213d] text-white border-[#14213d]'
+                        : 'bg-[#f5f6f8] text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
+                    }`}
                   >
-                    <h2 className="text-sm sm:text-[15px] font-bold text-gray-900 leading-snug line-clamp-1 group-hover/link:text-[#1a6fde] transition-colors">{h.name}</h2>
-                  </Link>
-
-                  {/* Neighborhood Location & Distance */}
-                  <p className="text-xs text-gray-500 font-medium mb-2 flex items-center gap-1 sm:flex-wrap">
-                    <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    <span className="font-semibold text-gray-700 truncate sm:whitespace-normal">
-                      {h.neighborhood && isValidNeighborhood(h.neighborhood)
-                        ? `${h.neighborhood}, ${h.city || cityName}`
-                        : `${h.city || cityName}, ${countryName}`}
-                    </span>
-                    {h.landmarkDistance && !isPlaceholderLandmark(h.landmarkDistance) && (
-                      <span className="hidden sm:inline text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
-                        {h.landmarkDistance}
-                      </span>
-                    )}
-                  </p>
-
-                  {/* Room Category & Tub Badges */}
-                  <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 font-bold text-[11px] rounded-md border ${
-                      h.bathtubConfirmed
-                        ? 'bg-sky-50 text-sky-800 border-sky-200'
-                        : 'bg-amber-50 text-amber-800 border-amber-200'
-                    }`}>
-                      <span>{isJacuzziRoom(h) ? '🌊' : '🛁'}</span> {getBathtubLabel(h)}
-                    </span>
-                    {h.roomType && (
-                      <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-gray-100 text-gray-700 font-medium text-[11px] rounded-md">
-                        <span>🏷️</span> <span className="line-clamp-1">{h.bathtubConfirmed ? h.roomType : `Reported room: ${h.roomType}`}</span>
-                      </span>
-                    )}
-                  </div>
-
-                  {/* P2 Honest Evidence Line */}
-                  {(() => {
-                    const ev = getEvidenceLine(h);
-                    return (
-                      <p className="text-[11px] text-gray-600 mb-2 leading-relaxed">
-                        <span>{ev.textPrefix}</span>
-                        {ev.roomType && <strong>{ev.roomType}</strong>}
-                        <span>{ev.textSuffix} </span>
-                        <Link href="/how-we-check-bathtubs" prefetch={false} className="text-[#1a6fde] hover:underline whitespace-nowrap">
-                          How we check
-                        </Link>
-                      </p>
-                    );
-                  })()}
-
-                  {/* Description snippet if any */}
-                  {h.description && (
-                    <p className="hidden sm:block text-[11px] sm:text-xs text-gray-500 mb-2 line-clamp-2 leading-relaxed">
-                      {h.description}
-                    </p>
-                  )}
-
-                  {/* Booking Tip (Compact) */}
-                  {(() => {
-                    const tip = sanitizeBookingTip(h.bookingTip, getLinkedPartners(h));
-                    if (!tip) return null;
-                    return (
-                      <div className="hidden sm:flex bg-amber-50/80 border border-amber-200/60 rounded-lg p-2 mb-2.5 text-[11px] text-amber-900 leading-snug items-start gap-1.5">
-                        <span className="shrink-0 text-xs">💡</span>
-                        <span className="line-clamp-2"><strong>Tip:</strong> {tip}</span>
-                      </div>
-                    );
-                  })()}
-
-                  {/* Amenities Chips (Modern compact tags) */}
-                  {(() => {
-                    const displayAmenities = (h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a));
-                    return (
-                      <div className="hidden sm:flex flex-wrap items-center gap-1.5 mb-3 pt-2 border-t border-gray-100">
-                        {displayAmenities.slice(0, 3).map((amenity: string, idx: number) => {
-                          const isJacuzzi = amenity.toLowerCase().includes('jacuzzi') || amenity.toLowerCase().includes('hot tub');
-                          return (
-                            <span
-                              key={idx}
-                              className="inline-flex items-center gap-1 text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md"
-                            >
-                              <span className={isJacuzzi ? "text-[#1a6fde]" : "text-emerald-600"}>
-                                {isJacuzzi ? '🛁' : '✓'}
-                              </span>
-                              <span>{amenity}</span>
-                            </span>
-                          );
-                        })}
-                        {displayAmenities.length > 3 && (
-                          <span className="text-[10px] font-medium text-gray-400">
-                            +{displayAmenities.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    );
-                  })()}
-
-                  <div className="flex-1" />
-
-                  {/* Price & CTA Buttons */}
-                  <div className="pt-2.5 border-t border-gray-100 mt-auto">
-                    <div className="flex items-baseline justify-between mb-1">
-                      <div>
-                        {h.price ? (
-                          <span className="text-base sm:text-[17px] font-black text-gray-900">
-                            About {h.price.replace(/^~\s*/, '')} a night
-                          </span>
-                        ) : (
-                          <span className="text-sm text-gray-500 font-medium">See partner prices</span>
-                        )}
-                      </div>
-                      <Link href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`} prefetch={false} className="hidden sm:inline-block text-[11px] font-bold text-[#1a6fde] hover:underline">
-                        View room &rarr;
-                      </Link>
-                    </div>
-
-                    <span className="hidden sm:block text-[9.5px] text-gray-400 mb-2 leading-tight">
-                      Rates exclude taxes &amp; resort fees — shown at partner checkout
-                    </span>
-
-                    {h.roomType && (
-                      <div className={`hidden sm:block text-[10px] rounded-lg px-2 py-1 mb-2 truncate font-medium border ${
-                        h.bathtubConfirmed
-                          ? 'text-emerald-800 bg-emerald-50/80 border-emerald-200/70'
-                          : 'text-amber-900 bg-amber-50/80 border-amber-200/70'
-                      }`}>
-                        {h.bathtubConfirmed ? (
-                          <>🛁 Select <strong className="font-bold">{h.roomType}</strong> for tub</>
-                        ) : (
-                          <>Reported room: <strong className="font-bold">{h.roomType}</strong></>
-                        )}
-                      </div>
-                    )}
-
-                    <div className="flex flex-col gap-1.5">
-                      {displayUrls.length > 0 ? (
-                        <>
-                          {displayUrls.slice(0, 2).map((u, idx) => (
-                            <BookingButton key={idx} url={u} hotelName={h.name} cityName={h.city || cityName} isPrimary={idx === 0} />
-                          ))}
-                          {displayUrls.length > 2 && (
-                            <Link
-                              href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
-                              prefetch={false}
-                              className="text-center text-[11px] font-semibold text-gray-500 hover:text-[#1a6fde] py-1 transition-colors"
-                            >
-                              Compare all {displayUrls.length} sites &amp; tub guide &rarr;
-                            </Link>
-                          )}
-                        </>
-                      ) : (
-                        <Link
-                          href={`/${slugify(countryName)}/${h.city ? slugify(h.city) : slugify(cityName)}/${h.slug || slugify(h.name)}`}
-                          prefetch={false}
-                          className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs sm:text-[13px] px-3.5 py-2 sm:py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 w-full"
-                        >
-                          <span>View Prices &amp; Availability &rarr;</span>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                    {p.label}
+                  </button>
+                ))}
               </div>
-            );
-          })}
-        </div>
-        <p className="text-xs text-gray-500 text-center mt-8 mb-2">
-          We earn a commission if you book through our links, at no extra cost to you.
-        </p>
-        {visibleCount < filteredHotels.length && (
-          <div ref={observerTarget} className="w-full h-20 flex items-center justify-center mt-8">
-            <div className="w-6 h-6 border-2 border-[#1a6fde] border-t-transparent rounded-full animate-spin"></div>
+            </div>
           </div>
-        )}
-        </>
-      ) : (
-        <div className="bg-white border border-gray-200 rounded-2xl p-10 sm:p-14 text-center max-w-lg mx-auto shadow-sm my-8">
-          <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-blue-50 text-[#1a6fde] flex items-center justify-center text-2xl shadow-xs">
-            🛁
-          </div>
-          <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mb-2">
-            No hotels match your filters
-          </h3>
-          <p className="text-xs sm:text-sm text-gray-500 mb-6 leading-relaxed">
-            We couldn&apos;t find any stays in {cityName} matching all selected filters. Try broadening your criteria or resetting to explore all {uniqueHotels.length} stays.
-          </p>
-          <button
-            onClick={handleResetFilters}
-            className="px-5 py-2.5 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all cursor-pointer"
-          >
-            Reset All Filters {activeFilterCount > 0 ? `(${activeFilterCount})` : ''}
-          </button>
         </div>
       )}
+
+      {/* 2. Count line matching mock-up: "N hotels · Sort: Recommended ⌄" */}
+      <div className="count max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3.5 flex items-center justify-between text-[13px] text-[#5b6478]">
+        <span>
+          <b className="text-[#14213d] font-bold">{filteredHotels.length}</b> hotels
+        </span>
+        <div className="flex items-center gap-1">
+          <label htmlFor="sort-select" className="sr-only">Sort by</label>
+          <select
+            id="sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews')}
+            className="bg-transparent text-[#5b6478] text-[13px] font-medium border-0 focus:ring-0 cursor-pointer pr-2"
+          >
+            <option value="recommended">Sort: Recommended ⌄</option>
+            <option value="rating">Sort: Highest Rating</option>
+            <option value="reviews">Sort: Most Reviews</option>
+            <option value="price_asc">Sort: Price (Low to High)</option>
+            <option value="price_desc">Sort: Price (High to Low)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* 3. Hotel Cards Grid matching mock-up */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-2">
+        {filteredHotels.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {filteredHotels.slice(0, visibleCount).map((h, i) => {
+                const tubLower = (h.tubType || '').toLowerCase();
+                const tubWords = tubLower.includes('hot tub')
+                  ? 'hot tub'
+                  : tubLower.includes('jetted') || tubLower.includes('jacuzzi') || tubLower.includes('whirlpool') || tubLower.includes('hydro')
+                  ? 'jetted tub'
+                  : 'bathtub';
+
+                const hasBooking = Boolean(
+                  (h.bookingUrl && !h.bookingUrl.includes('searchresults')) ||
+                  (h.url && h.url.includes('booking.com') && !h.url.includes('searchresults'))
+                );
+                const hasAgoda = Boolean(
+                  (h.agodaUrl && getUrlDirectnessTier(h.agodaUrl) < 99) ||
+                  (h.url && h.url.includes('agoda') && getUrlDirectnessTier(h.url) < 99)
+                );
+                const hasMmt = Boolean(
+                  (h.mmtUrl && !h.mmtUrl.includes('hotel-listing') && !h.mmtUrl.includes('searchText=')) ||
+                  (h.url && h.url.includes('makemytrip') && !h.url.includes('hotel-listing'))
+                );
+                const hasCleartrip = Boolean(
+                  (h.cleartripUrl && !h.cleartripUrl.includes('search')) ||
+                  (h.url && h.url.includes('cleartrip'))
+                );
+
+                const countrySlug = slugify(countryName);
+                const citySlugResolved = h.city ? slugify(h.city) : slugify(cityName);
+                const hotelSlug = h.slug || slugify(h.name);
+                const hotelPageUrl = `/${countrySlug}/${citySlugResolved}/${hotelSlug}`;
+
+                return (
+                  <div
+                    key={h._id || i}
+                    id={`hotel-${slugify(h.name)}`}
+                    data-hotel-card="true"
+                    data-hotel-name={h.name}
+                    data-hotel-position={i + 1}
+                    data-has-price={false}
+                    className="bg-white rounded-2xl border border-[#e3e7ef] shadow-[0_4px_18px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col group transition-all"
+                  >
+                    {/* Photo with Badge and Favorite icon */}
+                    <div className="relative h-[200px] w-full bg-[#f5f6f8] overflow-hidden">
+                      <img
+                        src={imageUrl(h.image)}
+                        alt={h.name}
+                        loading={i < 2 ? 'eager' : 'lazy'}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
+                      />
+                      {/* Badge: Green when confirmed, muted grey when reported */}
+                      {isHotelConfirmed(h) ? (
+                        <span className="absolute left-3 top-3 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs">
+                          ✓ Tub proven · Booking.com
+                        </span>
+                      ) : (
+                        <span className="absolute left-3 top-3 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs">
+                          Reported, not yet confirmed
+                        </span>
+                      )}
+
+                      {/* Favorite button */}
+                      <div className="absolute right-3 top-3 w-[34px] h-[34px] rounded-full bg-white/92 backdrop-blur-xs flex items-center justify-center shadow-xs">
+                        <svg className="w-4 h-4 text-[#5b6478]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="p-3.5 sm:p-4 flex flex-col flex-grow">
+                      {/* Hotel Name */}
+                      <Link href={hotelPageUrl} prefetch={false} className="group/link mb-1">
+                        <h3 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] leading-[1.15] line-clamp-1 group-hover/link:text-[#b08d57] transition-colors">
+                          {h.name}
+                        </h3>
+                      </Link>
+
+                      {/* Address */}
+                      <div className="text-[12px] text-[#5b6478] mt-1 mb-2.5 line-clamp-1">
+                        {h.neighborhood && isValidNeighborhood(h.neighborhood)
+                          ? `${h.neighborhood}, ${h.city || cityName}`
+                          : `${h.city || cityName}, ${countryName}`}
+                      </div>
+
+                      {/* Room Box */}
+                      <div className="text-[13px] leading-[1.45] bg-[#e9eef7] text-[#14213d] rounded-[10px] p-[9px_11px] mb-3">
+                        {isHotelConfirmed(h) ? (
+                          h.roomType ? (
+                            <>Book the <strong className="font-bold">{h.roomType}</strong> for an in-room {tubWords}</>
+                          ) : (
+                            <>In-room <strong className="font-bold">{tubWords}</strong></>
+                          )
+                        ) : (
+                          h.roomType ? (
+                            <>Reported room: <strong className="font-bold">{h.roomType}</strong>. Check room details before booking.</>
+                          ) : (
+                            <>A bathtub is reported; check room details before booking.</>
+                          )
+                        )}
+                      </div>
+
+                      {/* Partners and Compare button */}
+                      <div className="flex justify-between items-center text-[12px] text-[#5b6478] mt-auto pt-1">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {hasBooking && (
+                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
+                              Booking.com
+                            </span>
+                          )}
+                          {hasAgoda && (
+                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
+                              Agoda
+                            </span>
+                          )}
+                          {hasMmt && (
+                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
+                              MakeMyTrip
+                            </span>
+                          )}
+                          {hasCleartrip && (
+                            <span className="border border-[#e3e7ef] rounded-[6px] px-[7px] py-[4px] font-bold text-[#14213d] text-[11px] whitespace-nowrap">
+                              Cleartrip
+                            </span>
+                          )}
+                        </div>
+
+                        <Link
+                          href={hotelPageUrl}
+                          prefetch={false}
+                          className="bg-[#b08d57] hover:bg-[#9c7b48] text-white rounded-[10px] px-3.5 py-2 font-bold text-[13px] transition-colors whitespace-nowrap ml-2"
+                        >
+                          Compare
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Infinite scroll loader trigger & Show More button */}
+            {visibleCount < filteredHotels.length && (
+              <div ref={observerTarget} className="w-full py-6 flex flex-col items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((prev) => Math.min(prev + 24, filteredHotels.length))}
+                  className="px-5 py-2 rounded-full border border-[#e3e7ef] bg-white text-[#14213d] hover:border-[#14213d] text-xs font-semibold cursor-pointer transition-colors shadow-xs"
+                >
+                  Show more hotels ({filteredHotels.length - visibleCount} remaining)
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="bg-white border border-[#e3e7ef] rounded-2xl p-10 text-center max-w-lg mx-auto shadow-xs my-6">
+            <h3 className="font-playfair text-lg sm:text-xl font-semibold text-[#14213d] mb-2">
+              No hotels match your filters
+            </h3>
+            <p className="text-xs sm:text-sm text-[#5b6478] mb-6 leading-relaxed">
+              We couldn&apos;t find any stays in {cityName} matching all selected filters. Try broadening your criteria or resetting to explore all {uniqueHotels.length} stays.
+            </p>
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="px-5 py-2.5 bg-[#b08d57] hover:bg-[#9c7b48] text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all cursor-pointer"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

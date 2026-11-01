@@ -1,9 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Link from "next/link";
 import AnalyticsExclusionInit from "@/components/AnalyticsExclusionInit";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -19,10 +18,10 @@ const playfair = Playfair_Display({
   variable: "--font-playfair-display",
   display: "swap",
 });
-const plusJakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-plus-jakarta-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -90,7 +89,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
         <link rel="dns-prefetch" href="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev" />
       </head>
-      <body className={`${playfair.variable} ${plusJakarta.variable} font-sans bg-bg-main text-text-main min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
+      <body className={`${playfair.variable} ${manrope.variable} font-sans bg-[#f5f6f8] text-[#14213d] min-h-screen flex flex-col overflow-x-clip w-full min-w-0`}>
         <ChunkErrorRecovery />
         <AnalyticsExclusionInit gaId={gaId} />
           <Suspense fallback={null}>

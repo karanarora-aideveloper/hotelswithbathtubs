@@ -353,6 +353,7 @@ export default async function CityHotelsPage({
       airbnbUrl: h.airbnbUrl,
       tripUrl: h.tripUrl,
       mmtUrl: h.mmtUrl || h.makemytripUrl,
+      cleartripUrl: h.cleartripUrl,
       bathtubConfirmed: isHotelConfirmed(h),
       amenities: (h.amenities || []).slice(0, 6),
       description: cleanDesc,
@@ -366,6 +367,7 @@ export default async function CityHotelsPage({
       landmarkDistance: cleanLandmarkDistance(h.landmarkDistance),
       updatedAt: h.updatedAt ? new Date(h.updatedAt).toISOString() : null,
       importBatch: h.importBatch,
+      bookingTubLabels: h.bookingTubLabels,
     };
   });
 
@@ -696,134 +698,114 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         <link rel="preload" as="image" href={imageUrl(hotels[0].image)} fetchPriority="high" />
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1">
-        <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
-        <span>&rsaquo;</span>
-        <Link href={`/${countrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">{countryName}</Link>
-        {stateConfig ? (
-          <>
+      <div className="top bg-white border-b border-[#e3e7ef] px-4 sm:px-6 md:px-8 py-3.5 sm:py-4">
+        <div className="max-w-7xl mx-auto">
+          <nav aria-label="Breadcrumb" className="crumb text-[12px] text-[#5b6478] mb-1.5 flex items-center flex-wrap gap-1">
+            <Link href="/" prefetch={false} className="hover:underline">Home</Link>
             <span>&rsaquo;</span>
-            <span className="text-text-main font-semibold">Hotels with Bathtubs in {stateConfig.name}</span>
-          </>
-        ) : parentState ? (
-          <>
-            <span>&rsaquo;</span>
-            <Link href={`/usa/${parentState.slug}`} prefetch={false} className="text-accent-secondary hover:underline">{parentState.name}</Link>
-            <span>&rsaquo;</span>
-            <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
-          </>
-        ) : (
-          <>
-            <span>&rsaquo;</span>
-            <span className="text-text-main font-semibold">Hotels with Bathtubs in {cityName}</span>
-          </>
-        )}
-      </div>
-
-      <header className="relative py-12 sm:py-20 md:py-24 px-4 sm:px-8 text-center bg-gradient-to-br from-gray-900 to-accent-secondary text-white overflow-hidden">
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div className="bg-white/20 border border-white/40 backdrop-blur-md px-3.5 sm:px-5 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg mb-4 sm:mb-6 flex items-center gap-2">
-            <span>🏨</span> {hotels.length} Rooms Listed{stateConfig ? ` across ${stateConfig.cities.length} Destinations` : ''}
-          </div>
-          <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
+            <Link href={`/${countrySlug}`} prefetch={false} className="hover:underline">{countryName}</Link>
+            {stateConfig ? (
+              <>
+                <span>&rsaquo;</span>
+                <span className="text-[#14213d] font-medium">{stateConfig.name}</span>
+              </>
+            ) : parentState ? (
+              <>
+                <span>&rsaquo;</span>
+                <Link href={`/usa/${parentState.slug}`} prefetch={false} className="hover:underline">{parentState.name}</Link>
+                <span>&rsaquo;</span>
+                <span className="text-[#14213d] font-medium">{cityName}</span>
+              </>
+            ) : (
+              <>
+                <span>&rsaquo;</span>
+                <span className="text-[#14213d] font-medium">{cityName}</span>
+              </>
+            )}
+          </nav>
+          <h1 className="font-playfair text-[26px] sm:text-[32px] md:text-[36px] font-semibold text-[#14213d] leading-[1.1] tracking-tight">
             {stateConfig
-              ? `Hotels with a Bathtub or Jacuzzi in ${stateConfig.name}`
-              : `Hotels with a Bathtub or Jacuzzi in ${cityName}`}
+              ? `Hotels in ${stateConfig.name} with a tub in the room`
+              : `Hotels in ${cityName} with a tub in the room`}
           </h1>
-          {stateConfig ? (
-            (() => {
-              const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
-              return filteredStateIntro ? (
-                <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
-                  {filteredStateIntro}
+          <p className="text-[13px] text-[#5b6478] mt-1.5">
+            {hotels.length} hotels · {confirmedHotels.length} with the tub proven on Booking.com
+          </p>
+        </div>
+      </div>
+
+      {(() => {
+        const clientHotels = hotels.map(({ partnerImages: _unused, ...cardHotel }) => cardHotel);
+
+        return (
+          <CityHotelsClient
+            hotels={clientHotels}
+            cityName={cityName}
+            countryName={countryName}
+          />
+        );
+      })()}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 space-y-8">
+        {/* Editorial Honest Intro & Commission Disclosure */}
+        <div className="bg-white border border-[#e3e7ef] rounded-2xl p-4 sm:p-6 text-xs sm:text-sm text-[#5b6478] leading-relaxed shadow-xs">
+          <p>
+            {stateConfig ? (
+              (() => {
+                const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
+                return filteredStateIntro || `${introSentence1}${introSentence2 ? ` ${introSentence2}` : ''}`;
+              })()
+            ) : (
+              <>
+                {introSentence1}
+                {introSentence2 ? ` ${introSentence2}` : ''}
+              </>
+            )}
+          </p>
+          <p className="mt-2 text-[11px] text-[#5b6478]/80">
+            We earn a commission if you book through our links, at no extra cost to you.
+          </p>
+        </div>
+
+        {/* Jacuzzi Callout */}
+        {jacuzziCount > 0 && (
+          <div className="p-4 rounded-2xl bg-white border border-[#e3e7ef] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#e9eef7] text-[#14213d] flex items-center justify-center font-bold text-lg shrink-0">
+                🌊
+              </div>
+              <div>
+                <p className="font-playfair font-semibold text-[#14213d] text-sm sm:text-base">
+                  Looking specifically for in-room jacuzzis in {cityName}?
                 </p>
-              ) : null;
-            })()
-          ) : (
-            <p className="text-sm sm:text-base md:text-lg font-medium opacity-90 max-w-3xl mx-auto leading-relaxed">
-              {introSentence1}
-              {introSentence2 ? ` ${introSentence2}` : ''}
-            </p>
-          )}
-
-          {isJacuzziIndexable && (
-            <div className="mt-3 sm:mt-4">
-              <a
-                href={`/${countrySlug}/${citySlug}/jacuzzi`}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold bg-white/15 hover:bg-white/25 border border-white/30 text-white px-3.5 py-1.5 rounded-full transition-colors shadow-xs backdrop-blur-xs"
-              >
-                <span>🌊</span>
-                <span>See the {jacuzziCount} {jacuzziCount === 1 ? 'room' : 'rooms'} with an in-room jacuzzi in {cityName} &rarr;</span>
-              </a>
+                <p className="text-xs text-[#5b6478]">
+                  We list {jacuzziCount} {jacuzziCount === 1 ? 'hotel' : 'hotels'} in {cityName} with a jacuzzi in the room.
+                </p>
+              </div>
             </div>
-          )}
-        </div>
-      </header>
-
-      {/* Trust Banner with SVGs (Responsive 3-column / stacked) */}
-      <div className="trust-banner max-w-4xl mx-3 sm:mx-4 md:mx-auto -mt-6 sm:-mt-8 relative z-20 bg-white rounded-2xl shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-6 p-3.5 sm:p-5 border border-border text-xs sm:text-sm">
-        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-center sm:text-left">Listed on {countrySlug === 'india' ? 'MakeMyTrip, Agoda' : 'Booking.com, Agoda'} &amp; partner networks</span>
-        </div>
-        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-          </svg>
-          <span>Private In-Room Tubs</span>
-        </div>
-        <div className="flex items-center gap-2 font-semibold text-accent-secondary justify-center sm:justify-start">
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-          </svg>
-          <span>Trusted Direct Links</span>
-        </div>
-      </div>
-
-      {/* Editorial & Affiliate Disclosure */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-8 mt-4 mb-2 text-center">
-        <p className="text-2xs sm:text-xs text-text-muted bg-gray-50 border border-gray-200 rounded-xl px-4 py-2">
-          We earn a commission if you book through our links, at no extra cost to you.
-        </p>
-      </div>
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-8">
-        {/* Quick Answer / Featured Snippet Block (Optimized for Google Position 0) */}
-        <div className="bg-gradient-to-r from-blue-50/70 via-sky-50/50 to-indigo-50/50 border border-blue-200/80 rounded-2xl p-4 sm:p-6 mb-6 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-3xl">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-2xs font-bold text-accent uppercase tracking-wider">Quick Answer</span>
-            </div>
-            <h2 className="font-heading text-base sm:text-lg font-bold text-accent-secondary">
-              Which hotels in {cityName} have a bathtub?
-            </h2>
-            <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-              Hotels listed here include{' '}
-              <strong className="text-text-main font-semibold">{hotels.slice(0, 3).map(h => h.name).join(', ')}</strong>.
-            </p>
+            <Link
+              href={stateConfig ? `#directory` : `/${countrySlug}/${citySlug}/jacuzzi`}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#b08d57] hover:bg-[#9c7b48] text-white text-xs sm:text-sm font-bold shadow-xs transition-colors whitespace-nowrap"
+            >
+              <span>View {jacuzziCount} Jacuzzi Suites</span>
+              <span>&rarr;</span>
+            </Link>
           </div>
-          <div className="flex-shrink-0 bg-white border border-blue-100 px-4 py-3 rounded-xl text-center self-stretch sm:self-auto flex sm:flex-col justify-between sm:justify-center items-center shadow-2xs">
-            <span className="text-2xs text-text-muted font-medium">Stays Listed</span>
-            <span className="font-heading text-xl font-extrabold text-accent">{hotels.length}</span>
-          </div>
-        </div>
+        )}
 
         {/* Constituent Destinations (State Hubs) */}
         {stateConfig && (
-          <div className="mb-6 p-4 sm:p-5 bg-white rounded-2xl border border-gray-200 shadow-2xs">
+          <div className="p-4 sm:p-5 bg-white rounded-2xl border border-[#e3e7ef] shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <div>
-                <h3 className="font-heading text-sm sm:text-base font-bold text-gray-900">
+                <h3 className="font-playfair text-sm sm:text-base font-semibold text-[#14213d]">
                   Explore {stateConfig.name} Destinations with In-Room Bathtubs
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-[#5b6478] mt-0.5">
                   Select a destination below to jump directly to detailed city guides and neighborhood listings:
                 </p>
               </div>
-              <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
+              <span className="text-xs font-semibold text-[#14213d] bg-[#e9eef7] px-2.5 py-1 rounded-full w-fit">
                 {stateConfig.cities.length} Top Destinations
               </span>
             </div>
@@ -832,10 +814,10 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                 <Link
                   key={c.slug}
                   href={`/usa/${c.slug}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 hover:bg-blue-50/80 border border-gray-200 hover:border-blue-300 rounded-xl text-xs font-semibold text-gray-800 hover:text-[#1a6fde] transition-all group"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#f5f6f8] hover:bg-[#e9eef7] border border-[#e3e7ef] rounded-xl text-xs font-semibold text-[#14213d] transition-colors group"
                 >
                   <span>🛁 {c.name}</span>
-                  <span className="text-[10px] bg-white border border-gray-200 text-gray-600 group-hover:border-blue-200 group-hover:text-[#1a6fde] px-1.5 py-0.5 rounded-full font-bold">
+                  <span className="text-[10px] bg-white border border-[#e3e7ef] text-[#5b6478] px-1.5 py-0.5 rounded-full font-bold">
                     {c.count} {c.count === 1 ? 'stay' : 'stays'}
                   </span>
                 </Link>
@@ -844,56 +826,19 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </div>
         )}
 
-        {jacuzziCount > 0 && (
-          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border border-blue-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
-                🌊
-              </div>
-              <div>
-                <p className="font-heading font-bold text-gray-900 text-sm sm:text-base">
-                  Looking specifically for In-Room Jacuzzis in {cityName}?
-                </p>
-                <p className="text-xs text-gray-600">
-                  We list {jacuzziCount} {jacuzziCount === 1 ? 'hotel' : 'hotels'} in {cityName} with a jacuzzi in the room.
-                </p>
-              </div>
-            </div>
-            <Link
-              href={stateConfig ? `#directory` : `/${countrySlug}/${citySlug}/jacuzzi`}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs sm:text-sm font-bold shadow-sm transition-all whitespace-nowrap"
-            >
-              <span>View {jacuzziCount} Jacuzzi Suites</span>
-              <span>&rarr;</span>
-            </Link>
-          </div>
-        )}
-
-        {(() => {
-          const clientHotels = hotels.map(({ partnerImages: _unused, ...cardHotel }) => cardHotel);
-
-          return (
-            <CityHotelsClient
-              hotels={clientHotels}
-              cityName={cityName}
-              countryName={countryName}
-            />
-          );
-        })()}
-
         {/* Full City Hotel Directory Index */}
-        <section id="directory" aria-label={`Directory of all hotels with bathtubs in ${cityName}`} className="mt-12 pt-8 border-t border-gray-200">
-          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-200 shadow-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
+        <section id="directory" aria-label={`Directory of all hotels with bathtubs in ${cityName}`} className="pt-6 border-t border-[#e3e7ef]">
+          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#e3e7ef] shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#e3e7ef]">
               <div>
-                <h3 className="font-heading text-lg font-bold text-gray-900">
+                <h3 className="font-playfair text-lg font-semibold text-[#14213d]">
                   All {hotels.length} Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-[#5b6478] mt-0.5">
                   We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.
                 </p>
               </div>
-              <span className="text-xs font-semibold text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full w-fit">
+              <span className="text-xs font-semibold text-[#14213d] bg-[#e9eef7] px-2.5 py-1 rounded-full w-fit">
                 {hotels.length} Properties Listed
               </span>
             </div>
@@ -903,9 +848,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                 <Link
                   key={h._id || h.slug}
                   href={`/${countrySlug}/${slugify(h.city || citySlug)}/${h.slug}`}
-                  className="flex items-center justify-between p-2 rounded-lg hover:bg-blue-50/60 border border-transparent hover:border-blue-100 transition-colors group"
+                  className="flex items-center justify-between p-2 rounded-lg hover:bg-[#f5f6f8] border border-transparent hover:border-[#e3e7ef] transition-colors group"
                 >
-                  <span className="font-medium text-gray-800 group-hover:text-[#1a6fde] line-clamp-1">
+                  <span className="font-medium text-[#14213d] group-hover:text-[#b08d57] line-clamp-1">
                     🛁 {h.name}
                   </span>
                 </Link>
@@ -916,22 +861,22 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
         {/* Nearby US destinations block (6 plain <a> links for crawler discovery across US cities) */}
         {countrySlug === 'usa' && !stateConfig && (
-          <section aria-label="Nearby US destinations with in-room bathtubs" className="my-10 p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 shadow-2xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-gray-100">
+          <section aria-label="Nearby US destinations with in-room bathtubs" className="p-5 sm:p-6 bg-white rounded-2xl border border-[#e3e7ef] shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#e3e7ef]">
               <div>
-                <span className="text-2xs font-bold uppercase tracking-wider text-[#1a6fde] bg-blue-50 px-2.5 py-1 rounded-full">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#14213d] bg-[#e9eef7] px-2.5 py-1 rounded-full">
                   Cross-Country Stays
                 </span>
-                <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-900 mt-2">
+                <h3 className="font-playfair text-lg sm:text-xl font-semibold text-[#14213d] mt-2">
                   Nearby US destinations
                 </h3>
-                <p className="text-text-muted text-xs sm:text-sm mt-0.5">
+                <p className="text-[#5b6478] text-xs sm:text-sm mt-0.5">
                   Explore alternative American cities featuring private in-room bathtubs &amp; jacuzzis
                 </p>
               </div>
               <a
                 href="/usa"
-                className="text-xs font-bold text-[#1a6fde] hover:underline flex items-center gap-1 self-start sm:self-auto"
+                className="text-xs font-bold text-[#b08d57] hover:underline flex items-center gap-1 self-start sm:self-auto"
               >
                 <span>All US Destinations &rarr;</span>
               </a>
@@ -958,11 +903,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   <a
                     key={c.slug}
                     href={`/usa/${c.slug}`}
-                    className="flex flex-col items-center justify-center text-center p-3 rounded-xl bg-slate-50 hover:bg-[#1a6fde] text-slate-800 hover:text-white border border-slate-200/80 transition-colors group shadow-2xs"
+                    className="flex flex-col items-center justify-center text-center p-3 rounded-xl bg-[#f5f6f8] hover:bg-[#14213d] text-[#14213d] hover:text-white border border-[#e3e7ef] transition-colors group shadow-xs"
                   >
                     <span className="text-base mb-1">🛁</span>
                     <span className="text-xs font-bold truncate w-full">{c.name}</span>
-                    <span className="text-[10px] text-slate-500 group-hover:text-white/90 mt-0.5">Explore &rarr;</span>
+                    <span className="text-[10px] text-[#5b6478] group-hover:text-white/80 mt-0.5">Explore &rarr;</span>
                   </a>
                 ))}
             </div>
@@ -970,25 +915,25 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
         )}
 
         {/* Specialty Bathtub Collections Navigation */}
-        <div className="max-w-7xl mx-auto my-10 p-5 sm:p-6 bg-gradient-to-r from-blue-50/80 via-indigo-50/50 to-sky-50/80 rounded-2xl border border-blue-100 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 bg-white rounded-2xl border border-[#e3e7ef] flex flex-col md:flex-row items-center justify-between gap-4 shadow-xs">
           <div>
-            <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900 mb-1">
+            <h3 className="font-playfair text-base sm:text-lg font-semibold text-[#14213d] mb-1">
               Looking for a Specific Bathtub Experience?
             </h3>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl">
+            <p className="text-xs sm:text-sm text-[#5b6478] max-w-2xl">
               Compare our thematic collections featuring private jacuzzi whirlpool suites, outdoor mountain hot tubs, and deep Japanese soaking baths globally.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link
               href="/soaking-tub-hotels"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-blue-50 border border-blue-200 text-[#1a6fde] font-semibold text-xs rounded-xl shadow-2xs transition-all"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f5f6f8] hover:bg-[#e9eef7] border border-[#e3e7ef] text-[#14213d] font-semibold text-xs rounded-xl shadow-xs transition-colors"
             >
               🛁 Top 50 Soaking Tub Hotels
             </Link>
             <Link
               href="/hotels-with-hot-tub-in-room"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#1a6fde] hover:bg-[#1559b8] text-white font-semibold text-xs rounded-xl shadow-2xs transition-all"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#b08d57] hover:bg-[#9c7b48] text-white font-semibold text-xs rounded-xl shadow-xs transition-colors"
             >
               ♨️ Private In-Room Hot Tubs
             </Link>
@@ -1112,76 +1057,76 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
           </section>
         )}
 
-              {/* Frequently Asked Questions Section (SEO & Conversion) */}
-              {faqItems.length > 0 && (
-                <section className="mt-20 pt-12 border-t border-gray-200">
-                  <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-10">
-                      <span className="text-xs font-bold uppercase tracking-wider text-accent-secondary bg-accent-secondary/10 px-3 py-1 rounded-full">
-                        Frequently Asked Questions
-                      </span>
-                      <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mt-3">
-                        Booking Bathtub &amp; Jacuzzi Hotels in {cityName}
-                      </h2>
-                    </div>
+        {/* Frequently Asked Questions Section (SEO & Conversion) */}
+        {faqItems.length > 0 && (
+          <section className="pt-10 border-t border-[#e3e7ef]">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#14213d] bg-[#e9eef7] px-3 py-1 rounded-full">
+                  Frequently Asked Questions
+                </span>
+                <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d] mt-3">
+                  Booking Bathtub &amp; Jacuzzi Hotels in {cityName}
+                </h2>
+              </div>
 
-                    <div className="space-y-6">
-                      {faqItems.map((item, idx) => (
-                        <div key={idx} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                          <h3 className="font-bold text-lg text-gray-900 mb-2">
-                            {item.question}
-                          </h3>
-                          <p className="text-gray-600 leading-relaxed">
-                            {item.answer}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+              <div className="space-y-4">
+                {faqItems.map((item, idx) => (
+                  <div key={idx} className="bg-white rounded-2xl p-5 sm:p-6 border border-[#e3e7ef] shadow-xs">
+                    <h3 className="font-playfair font-semibold text-base sm:text-lg text-[#14213d] mb-2">
+                      {item.question}
+                    </h3>
+                    <p className="text-[#5b6478] leading-relaxed text-xs sm:text-sm">
+                      {item.answer}
+                    </p>
                   </div>
-                </section>
-              )}
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
-              {/* Related Blogs Section */}
-              {relatedBlogs.length > 0 && (
-                <section className="mt-16 pt-12 border-t border-gray-200">
-                  <div className="max-w-7xl mx-auto">
-                    <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mb-6 sm:mb-8 text-center">
-                      Travel Guides &amp; Inspiration for {cityName}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                      {relatedBlogs.map((blog: any) => (
-                        <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
-                          <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-gray-100">
-                            <img
-                              src={imageUrl(blog.image)}
-                              alt={blog.title}
-                              loading="lazy"
-                              decoding="async"
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                            {blog.date && (
-                              <p className="text-accent font-semibold text-xs sm:text-sm mb-2">
-                                {isNaN(new Date(blog.date).getTime())
-                                  ? blog.date
-                                  : new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                              </p>
-                            )}
-                            <h3 className="font-heading text-lg sm:text-xl font-bold text-text-main mb-2 sm:mb-3 group-hover:text-accent transition-colors line-clamp-2">
-                              {blog.title}
-                            </h3>
-                            <p className="text-text-muted text-sm line-clamp-3 mb-4 flex-grow font-serif">
-                              {blog.excerpt}
-                            </p>
-                            <span className="text-accent-secondary font-semibold text-sm group-hover:underline mt-auto inline-block">Read Article &rarr;</span>
-                          </div>
-                        </Link>
-                      ))}
+        {/* Related Blogs Section */}
+        {relatedBlogs.length > 0 && (
+          <section className="pt-10 border-t border-[#e3e7ef]">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d] mb-6 sm:mb-8 text-center">
+                Travel Guides &amp; Inspiration for {cityName}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {relatedBlogs.map((blog: any) => (
+                  <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group bg-white border border-[#e3e7ef] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[#e3e7ef] bg-[#f5f6f8]">
+                      <img
+                        src={imageUrl(blog.image)}
+                        alt={blog.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                      />
                     </div>
-                  </div>
-                </section>
-              )}
+                    <div className="p-5 flex flex-col flex-grow">
+                      {blog.date && (
+                        <p className="text-[#b08d57] font-semibold text-xs mb-2">
+                          {isNaN(new Date(blog.date).getTime())
+                            ? blog.date
+                            : new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </p>
+                      )}
+                      <h3 className="font-playfair text-lg sm:text-xl font-semibold text-[#14213d] mb-2 group-hover:text-[#b08d57] transition-colors line-clamp-2">
+                        {blog.title}
+                      </h3>
+                      <p className="text-[#5b6478] text-xs sm:text-sm line-clamp-3 mb-4 flex-grow">
+                        {blog.excerpt}
+                      </p>
+                      <span className="text-[#b08d57] font-semibold text-xs group-hover:underline mt-auto inline-block">Read Article &rarr;</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
               {/* Regional State Hub Mesh or Sister Cities */}
               {stateConfig ? (
@@ -1349,7 +1294,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   </section>
                 );
               })()}
-            </section>
+            </div>
             <TrendingDestinations currentCity={cityName} />
           </>
   );
