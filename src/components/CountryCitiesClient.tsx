@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import CityCard from '@/components/CityCard';
 import { resolveCountry, slugify } from '@/lib/utils';
+import { sendViewDestination } from '@/lib/events';
 
 export type CountryCityCardItem = {
   _id: { city: string; country: string };
@@ -29,6 +30,12 @@ export default function CountryCitiesClient({ initialCities, remainingCities }: 
   const [isExpanded, setIsExpanded] = useState(false);
   const [remainingVisible, setRemainingVisible] = useState(0);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (initialCities.length > 0 && initialCities[0]?._id?.country) {
+      sendViewDestination({ country: initialCities[0]._id.country });
+    }
+  }, [initialCities]);
 
   const totalCount = initialCities.length + remainingCities.length;
   const displayedRemaining = isExpanded ? remainingCities.slice(0, remainingVisible) : [];

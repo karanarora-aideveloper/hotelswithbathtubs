@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useSyncExternalStore } from 'react';
-import { trackEvent } from '@/lib/analytics';
+import { sendWishlistAdd } from '@/lib/events';
 import { isUserExcluded } from '@/lib/exclusion';
 
 const STORAGE_KEY = 'hwb_favorites';
@@ -78,7 +78,7 @@ function saveFavorites(favs: FavoriteHotel[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
     notify();
-  } catch (_) {}
+  } catch {}
 }
 
 export function useFavorites() {
@@ -94,21 +94,16 @@ export function useFavorites() {
     const next = exists ? favorites.filter((f) => f._id !== hotel._id) : [...favorites, hotel];
     saveFavorites(next);
 
-    // Track analytics (if not excluded)
+    // Track analytics (if not excluded and switching ON)
     try {
-      if (!isUserExcluded()) {
-        trackEvent('wishlist_action', {
-          action: exists ? 'remove' : 'add',
+      if (!exists && !isUserExcluded()) {
+        sendWishlistAdd({
           hotel_name: hotel.name,
           city: hotel.city,
           country: hotel.country,
-          tub_type: hotel.tubType,
-          price: hotel.price,
-          rating: hotel.rating,
-          total_wishlist_count: next.length,
         });
       }
-    } catch (_) {}
+    } catch {}
   }, [favorites]);
 
   const clearAll = useCallback(() => {

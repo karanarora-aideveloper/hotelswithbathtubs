@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { trackEvent } from '@/lib/analytics';
 
 interface EmailCaptureProps {
   destinationName?: string;
@@ -33,21 +32,6 @@ export default function RomanticGetawayEmailCapture({
       try {
         localStorage.removeItem('hwb_subscribers');
       } catch {}
-
-      // Telemetry
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'newsletter_signup', {
-          destination: destinationName || 'global',
-          source: 'romantic_getaway_capture',
-        });
-      }
-
-      if (typeof window !== 'undefined') {
-        trackEvent('newsletter_signup', {
-          destination: destinationName || 'global',
-          source: 'romantic_getaway_capture',
-        });
-      }
 
       setTimeout(() => {
         setStatus('success');

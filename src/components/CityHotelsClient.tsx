@@ -6,14 +6,7 @@ import { isDirectPropertyUrl } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
-import { trackEvent } from '@/lib/analytics';
-import { isUserExcluded } from '@/lib/exclusion';
-import {
-  recordHotelImpression,
-  recordFilterDeadEnd,
-  recordFilterReset,
-  recordFilterChange,
-} from '@/lib/gtag';
+import { sendViewDestination, sendFilterUsed } from '@/lib/events';
 import { isHotelConfirmed, getLinkedPartners, getPartnerUrl } from '@/lib/evidence';
 import { FavoriteButton } from '@/components/Favorites';
 import OutboundLink from '@/components/OutboundLink';
@@ -302,62 +295,19 @@ export default function CityHotelsClient({
     };
   }, [visibleCount, filteredHotels.length]);
 
-  // Track impressions on viewport entry (hotel_card_view)
+  // Track destination page view
   useEffect(() => {
-    const cards = document.querySelectorAll('[data-hotel-card="true"]');
-    if (cards.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const name = el.getAttribute('data-hotel-name');
-            const pos = parseInt(el.getAttribute('data-hotel-position') || '1', 10);
-            const hasPrice = el.getAttribute('data-has-price') === 'true';
-            if (name) {
-              recordHotelImpression(name, pos, hasPrice);
-            }
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [filteredHotels]);
-
-  // Dead-end filter detection
-  useEffect(() => {
-    if (
-      filteredHotels.length === 0 &&
-      (tubProvenOnly || selectedFilter !== 'all' || selectedTubCategory !== 'all' || searchTerm.trim() || stayStyle !== 'all' || priceRange !== 'all')
-    ) {
-      recordFilterDeadEnd(
-        tubProvenOnly ? 'tub_proven' : stayStyle !== 'all' ? stayStyle : selectedTubCategory !== 'all' ? selectedTubCategory : selectedFilter,
-        searchTerm.trim(),
-        cityName
-      );
-    }
-  }, [filteredHotels.length, tubProvenOnly, selectedFilter, selectedTubCategory, searchTerm, stayStyle, priceRange, cityName]);
+    sendViewDestination({ country: countryName, city: cityName });
+  }, [countryName, cityName]);
 
   const handleFilterClick = (filter: 'all' | 'jacuzzi' | 'soaking' | 'tripled') => {
     setSelectedFilter(filter);
-    recordFilterChange(filter, counts[filter]);
-    try {
-      if (!isUserExcluded()) {
-        trackEvent('filter_applied', {
-          filter_type: 'category',
-          filter_value: filter,
-          result_count: counts[filter],
-          city: cityName,
-          country: countryName,
-        });
-      }
-    } catch {
-      // ignore
-    }
+    sendFilterUsed({
+      filter,
+      results_count: counts[filter],
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const handleResetFilters = () => {
@@ -368,20 +318,23 @@ export default function CityHotelsClient({
     setPriceRange('all');
     setSearchTerm('');
     setSortBy('recommended');
-    recordFilterReset(cityName);
-    try {
-      if (!isUserExcluded()) {
-        trackEvent('filter_reset', { city: cityName });
-      }
-    } catch {
-      // ignore
-    }
+    sendFilterUsed({
+      filter: 'reset',
+      results_count: uniqueHotels.length,
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const handleTubProvenToggle = () => {
     const next = !tubProvenOnly;
     setTubProvenOnly(next);
-    recordFilterChange('tub_proven', next ? provenCount : uniqueHotels.length);
+    sendFilterUsed({
+      filter: 'tub_proven',
+      results_count: next ? provenCount : uniqueHotels.length,
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const isAnyFilterActive =
@@ -568,7 +521,16 @@ export default function CityHotelsClient({
           <select
             id="sort-select"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews')}
+            onChange={(e) => {
+              const val = e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews';
+              setSortBy(val);
+              sendFilterUsed({
+                filter: `sort_${val}`,
+                results_count: filteredHotels.length,
+                country: countryName,
+                city: cityName,
+              });
+            }}
             className="bg-transparent text-[#5b6478] text-[13px] font-medium border-0 focus:ring-0 cursor-pointer pr-2"
           >
             <option value="recommended">Sort: Recommended</option>

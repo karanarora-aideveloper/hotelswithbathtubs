@@ -2,11 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  recordSearchZeroResults,
-  recordSearchAbandoned,
-  recordSearchSelection,
-} from '@/lib/gtag';
+import { sendSearch } from '@/lib/events';
 
 export type SearchItem = {
   type: 'city' | 'hotel' | 'country';
@@ -29,7 +25,6 @@ export default function LuxuryHero() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [searchData, setSearchData] = useState<SearchData | null>(null);
-  const [isNavigating, setIsNavigating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isFetchingSearch = useRef(false);
 
@@ -97,15 +92,12 @@ export default function LuxuryHero() {
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        if (isOpen && query.trim().length >= 3 && !isNavigating) {
-          recordSearchAbandoned(query.trim(), query.trim().length);
-        }
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen, query, isNavigating]);
+  }, []);
 
   // Query filtering
   const cleanQuery = query.toLowerCase().replace(/,/g, ' ').replace(/\s+/g, ' ').trim();
@@ -158,9 +150,13 @@ export default function LuxuryHero() {
   }, [cleanQuery, tokens, searchData]);
 
   const navigateToItem = (item: SearchItem) => {
-    recordSearchSelection(item.title, item.subtitle, query.trim());
+    sendSearch({
+      term: query.trim() || item.title,
+      results_count: filtered.length || 1,
+      country: item.subtitle,
+      city: item.title,
+    });
     setIsOpen(false);
-    setIsNavigating(true);
     router.push(item.url);
   };
 
@@ -170,7 +166,7 @@ export default function LuxuryHero() {
       const selected = activeIndex >= 0 && activeIndex < filtered.length ? filtered[activeIndex] : filtered[0];
       navigateToItem(selected);
     } else if (query.trim().length > 0) {
-      recordSearchZeroResults(query.trim(), 'home_search');
+      sendSearch({ term: query.trim(), results_count: 0 });
       setIsOpen(true);
     } else {
       // Default jump to destinations
