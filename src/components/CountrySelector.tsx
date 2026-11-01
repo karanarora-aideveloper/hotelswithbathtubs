@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useGeo } from '@/lib/useGeo';
 import {
   COUNTRIES_WITH_HOTELS,
@@ -10,18 +10,27 @@ import {
 } from '@/lib/countries';
 
 interface CountrySelectorProps {
-  variant?: 'desktop' | 'mobile';
+  variant?: 'desktop' | 'mobile' | 'modal';
   className?: string;
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
   onSelect?: () => void;
 }
 
 export default function CountrySelector({
   variant = 'desktop',
   className = '',
+  isOpen: controlledIsOpen,
+  onOpenChange,
   onSelect,
 }: CountrySelectorProps) {
   const { geo, setCountry } = useGeo();
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const setIsOpen = useCallback((val: boolean) => {
+    setInternalIsOpen(val);
+    onOpenChange?.(val);
+  }, [onOpenChange]);
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -76,7 +85,7 @@ export default function CountrySelector({
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   const handleSelectCountry = (entry: CountryEntry) => {
     setCountry(entry.code);
@@ -92,6 +101,87 @@ export default function CountrySelector({
     setIsOpen(false);
     if (onSelect) onSelect();
   };
+
+  const renderModal = () => (
+    <div className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+      <div
+        ref={dropdownRef}
+        className="bg-white rounded-2xl shadow-2xl border border-[#e3e7ef] w-full max-w-sm max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+      >
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#e3e7ef] bg-[#f5f6f8]">
+          <div className="flex items-center gap-2">
+            <span className="text-base">🌐</span>
+            <span className="font-bold text-sm text-[#14213d]">Select Country</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            className="w-7 h-7 rounded-full bg-white border border-[#e3e7ef] text-[#5b6478] hover:text-[#14213d] flex items-center justify-center transition-colors text-xs"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Search Box */}
+        <div className="p-3 border-b border-[#e3e7ef]">
+          <input
+            ref={searchInputRef}
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search countries..."
+            className="w-full px-3 py-2 text-xs bg-[#f5f6f8] border border-[#e3e7ef] rounded-xl text-[#14213d] placeholder-[#5b6478] focus:outline-none focus:border-[#1a6fde]"
+          />
+        </div>
+
+        {/* Country List */}
+        <div className="flex-1 overflow-y-auto p-2 space-y-1">
+          <button
+            type="button"
+            onClick={handleAutoDetect}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg hover:bg-[#e9eef7] text-left transition-colors text-[#1a6fde]"
+          >
+            <div className="flex items-center gap-2">
+              <span>📡</span>
+              <span>Auto-detect via Location / IP</span>
+            </div>
+            {!currentCode && <span>✓</span>}
+          </button>
+
+          <div className="border-t border-[#e3e7ef]/60 my-1" />
+
+          {filteredCountries.map((c) => {
+            const isSelected = c.code === currentCode;
+            return (
+              <button
+                key={c.code}
+                type="button"
+                onClick={() => handleSelectCountry(c)}
+                className={`w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-left transition-colors cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#1a6fde] text-white font-bold'
+                    : 'hover:bg-[#f5f6f8] text-[#14213d]'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base">{c.flag}</span>
+                  <span>{c.name}</span>
+                </div>
+                <span className={`text-2xs ${isSelected ? 'text-white/80' : 'text-[#5b6478]'}`}>
+                  {c.code}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (variant === 'modal') {
+    return isOpen ? renderModal() : null;
+  }
 
   if (variant === 'mobile') {
     return (
@@ -117,82 +207,7 @@ export default function CountrySelector({
           </button>
         </div>
 
-        {isOpen && (
-          <div className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <div
-              ref={dropdownRef}
-              className="bg-white rounded-2xl shadow-2xl border border-[#e3e7ef] w-full max-w-sm max-h-[85vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150"
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#e3e7ef] bg-[#f5f6f8]">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">🌐</span>
-                  <span className="font-bold text-sm text-[#14213d]">Select Country</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="w-7 h-7 rounded-full bg-white border border-[#e3e7ef] text-[#5b6478] hover:text-[#14213d] flex items-center justify-center transition-colors text-xs"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Search Box */}
-              <div className="p-3 border-b border-[#e3e7ef]">
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search countries..."
-                  className="w-full px-3 py-2 text-xs bg-[#f5f6f8] border border-[#e3e7ef] rounded-xl text-[#14213d] placeholder-[#5b6478] focus:outline-none focus:border-[#1a6fde]"
-                />
-              </div>
-
-              {/* Country List */}
-              <div className="flex-1 overflow-y-auto p-2 space-y-1">
-                <button
-                  type="button"
-                  onClick={handleAutoDetect}
-                  className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg hover:bg-[#e9eef7] text-left transition-colors text-[#1a6fde]"
-                >
-                  <div className="flex items-center gap-2">
-                    <span>📡</span>
-                    <span>Auto-detect via Location / IP</span>
-                  </div>
-                  {!currentCode && <span>✓</span>}
-                </button>
-
-                <div className="border-t border-[#e3e7ef]/60 my-1" />
-
-                {filteredCountries.map((c) => {
-                  const isSelected = c.code === currentCode;
-                  return (
-                    <button
-                      key={c.code}
-                      type="button"
-                      onClick={() => handleSelectCountry(c)}
-                      className={`w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-left transition-colors cursor-pointer ${
-                        isSelected
-                          ? 'bg-[#1a6fde] text-white font-bold'
-                          : 'hover:bg-[#f5f6f8] text-[#14213d]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-base">{c.flag}</span>
-                        <span>{c.name}</span>
-                      </div>
-                      <span className={`text-2xs ${isSelected ? 'text-white/80' : 'text-[#5b6478]'}`}>
-                        {c.code}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
+        {isOpen && renderModal()}
       </div>
     );
   }
