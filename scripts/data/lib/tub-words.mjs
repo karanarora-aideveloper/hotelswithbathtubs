@@ -70,7 +70,7 @@ export function classifyTub({ roomName, facilities } = {}) {
       if (
         fLower === 'separate shower/bathtub' ||
         fLower.includes('grab bar') ||
-        fLower.includes('bathtub seat') ||
+        fLower.includes('seat') ||
         fLower === 'bath or shower' ||
         fLower === 'shower or bath' ||
         fLower === 'private bathroom' ||
@@ -118,6 +118,11 @@ export function classifyTub({ roomName, facilities } = {}) {
         // Owner approved 1 Nov 2026: two-person, double or corner + tub/bath/jacuzzi/whirlpool
         wordsSet.add(cleanFac);
         reasons.push(`Facility "${cleanFac}" matches two-person/double/corner tub (Owner approved 1 Nov 2026)`);
+      } else if (/\b(?:adapted|accessible)\s+(?:tubs?|baths?|bathtubs?)\b/i.test(fLower)) {
+        // Owner approved 1 Nov 2026 (PROMOTE3-RECLASSIFY): adapted tub / accessible tub
+        if (/\badapted/i.test(fLower)) wordsSet.add('Adapted tub');
+        else wordsSet.add('Accessible tub');
+        reasons.push(`Facility "${cleanFac}" matches adapted/accessible tub (Owner approved 1 Nov 2026)`);
       } else if (/\b(?:private|in-?room)\s+onsen\b/i.test(fLower) || /\bofuro\b/i.test(fLower)) {
         // Owner approved 1 Nov 2026: private onsen / ofuro
         wordsSet.add(cleanFac);
@@ -249,6 +254,16 @@ export function classifyTub({ roomName, facilities } = {}) {
     if (/\bjetted\s+(?:tubs?|baths?)?\b/i.test(rLower)) {
       wordsSet.add('Jetted tub');
       reasons.push('Jetted tub in room name');
+    }
+
+    // Check 8: Owner approved 1 Nov 2026 (PROMOTE3-RECLASSIFY): adapted tub or accessible tub
+    // e.g. "Executive King Room with Adapted Tub - Mobility Accessible"
+    if (/\b(?:adapted|accessible)\s+(?:tubs?|baths?|bathtubs?)\b/i.test(rLower)) {
+      if (!/grab\s+bar|seat/i.test(rLower)) {
+        if (/\badapted/i.test(rLower)) wordsSet.add('Adapted tub');
+        else wordsSet.add('Accessible tub');
+        reasons.push('Adapted/accessible tub in room name (Owner approved 1 Nov 2026)');
+      }
     }
   }
 

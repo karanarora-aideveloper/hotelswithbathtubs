@@ -286,6 +286,51 @@ const testCases = [
     name: 'Deluxe Room with Bathtub grab bar and Bathtub (grab bar ignored, bathtub counts)',
     input: { roomName: 'Deluxe Room', facilities: ['Bathtub grab bar', 'Bathtub'] },
     expected: { isProof: true, wordContains: 'Bathtub' }
+  },
+  {
+    name: 'Executive King Room with Adapted Tub - Mobility Accessible (counts, Owner approved 1 Nov)',
+    input: { roomName: 'Executive King Room with Adapted Tub - Mobility Accessible' },
+    expected: { isProof: true, wordContains: 'Adapted tub' }
+  },
+  {
+    name: 'Deluxe Queen Room with Accessible Tub (counts, Owner approved 1 Nov)',
+    input: { roomName: 'Deluxe Queen Room with Accessible Tub' },
+    expected: { isProof: true, wordContains: 'Accessible tub' }
+  },
+  {
+    name: 'Adapted Tub facility (counts, Owner approved 1 Nov)',
+    input: { facilities: ['Adapted tub'] },
+    expected: { isProof: true, wordContains: 'Adapted tub' }
+  },
+  {
+    name: 'Accessible Bathtub facility (counts, Owner approved 1 Nov)',
+    input: { facilities: ['Accessible bathtub'] },
+    expected: { isProof: true, wordContains: 'Accessible tub' }
+  },
+  {
+    name: 'Executive King Room - Mobility Accessible with Roll-in Shower (accessible without tub does not count)',
+    input: { roomName: 'Executive King Room - Mobility Accessible with Roll-in Shower' },
+    expected: { isProof: false }
+  },
+  {
+    name: 'Adapted Room with Roll-in Shower (adapted without tub does not count)',
+    input: { roomName: 'Adapted Room with Roll-in Shower' },
+    expected: { isProof: false }
+  },
+  {
+    name: 'King Room with Accessible Bathroom (accessible bathroom is not a tub)',
+    input: { roomName: 'King Room with Accessible Bathroom' },
+    expected: { isProof: false }
+  },
+  {
+    name: 'Accessible Bathtub Grab Bar facility (grab bar is not a tub)',
+    input: { facilities: ['Accessible Bathtub Grab Bar'] },
+    expected: { isProof: false }
+  },
+  {
+    name: 'Adapted Tub Seat facility (tub seat is not a tub)',
+    input: { facilities: ['Adapted Tub Seat'] },
+    expected: { isProof: false }
   }
 ];
 
