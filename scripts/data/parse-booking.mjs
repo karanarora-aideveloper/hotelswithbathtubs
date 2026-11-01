@@ -8,41 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const worktreeDir = path.resolve(__dirname, '../..');
 
-const ALLOWED_BATH_FACILITIES = [
-  { match: /^bath$/i, canonical: 'Bath' },
-  { match: /^bathtub$/i, canonical: 'Bathtub' },
-  { match: /^(?:spa\s+tub|spa\s+bath)$/i, canonical: 'Spa bath' },
-  { match: /^(?:hot\s+tub|private\s+hot\s+tub)$/i, canonical: 'Hot tub' },
-  { match: /^whirlpool$/i, canonical: 'Whirlpool' },
-  { match: /^jacuzzi$/i, canonical: 'Jacuzzi' }
-];
-
-export function matchBathFacility(facilityTitle) {
-  if (!facilityTitle) return null;
-  const clean = facilityTitle.trim();
-  // "Bath or shower" must never count as a bath. Ignore it completely.
-  if (/^bath\s+or\s+shower$/i.test(clean) || /^shower\s+or\s+bath$/i.test(clean)) {
-    return null;
-  }
-  for (const { match, canonical } of ALLOWED_BATH_FACILITIES) {
-    if (match.test(clean)) return canonical;
-  }
-  return null;
-}
-
-export function extractBathWords(text) {
-  if (!text) return [];
-  // Strip "bath or shower" / "shower or bath" completely so it never triggers a match
-  const sanitized = text.replace(/\b(?:bath\s+or\s+shower|shower\s+or\s+bath)\b/gi, ' ');
-  const found = new Set();
-  if (/\b(?:spa\s+bath|spa\s+tub)\b/i.test(sanitized)) found.add('Spa bath');
-  if (/\b(?:private\s+)?hot\s+tub\b/i.test(sanitized)) found.add('Hot tub');
-  if (/\bjacuzzi\b/i.test(sanitized)) found.add('Jacuzzi');
-  if (/\bwhirlpool\b/i.test(sanitized)) found.add('Whirlpool');
-  if (/\bbathtub\b/i.test(sanitized)) found.add('Bathtub');
-  if (/\bbath\b/i.test(sanitized)) found.add('Bath');
-  return Array.from(found);
-}
+import { classifyTub, matchBathFacility, extractBathWords, ALLOWED_BATH_FACILITIES } from './lib/tub-words.mjs';
+export { matchBathFacility, extractBathWords, ALLOWED_BATH_FACILITIES };
 
 export function parseBookingHtml(html, meta = {}) {
   const $ = cheerio.load(html);
@@ -194,28 +161,26 @@ export function parseBookingHtml(html, meta = {}) {
         const bathWords = new Set();
         const labels = new Set();
 
-        // (b) Room name check
-        const roomNameLower = roomName.toLowerCase();
-        if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+        // (b) Room name check via shared classifyTub
+        const nameRes = classifyTub({ roomName });
+        if (nameRes.isProof) {
           labels.add('room name');
-          if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
-          if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
-          if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
-          if (/spa\s+tub|spa\s+bath/i.test(roomNameLower)) bathWords.add('Spa bath');
-          if (/soak/i.test(roomNameLower)) bathWords.add('Soaking tub');
-          if (/bathtub/i.test(roomNameLower)) bathWords.add('Bathtub');
-          if (/jetted/i.test(roomNameLower)) bathWords.add('Jetted tub');
+          for (const w of nameRes.words) {
+            bathWords.add(w);
+          }
         }
 
         // (a) RTRoomCard.facilities check
         if (Array.isArray(v.facilities)) {
           for (const fid of v.facilities) {
             const title = instances[fid];
-            const matched = matchBathFacility(title);
-            if (matched) {
-              bathWords.add(matched);
-              if (matched === 'Spa bath') labels.add('Spa tub');
-              else labels.add(matched);
+            const facRes = classifyTub({ facilities: [title] });
+            if (facRes.isProof) {
+              for (const w of facRes.words) {
+                bathWords.add(w);
+                if (w === 'Spa bath') labels.add('Spa tub');
+                else labels.add(w);
+              }
             }
           }
         }
@@ -259,25 +224,23 @@ export function parseBookingHtml(html, meta = {}) {
         const bathWords = new Set();
         const labels = new Set();
 
-        const roomNameLower = name.toLowerCase();
-        if (/(?:jacuzzi|whirlpool|hot\s+tub|spa\s+tub|spa\s+bath|soak(?:ing|\-tub|\s+tub)?|bathtub|jetted)/i.test(roomNameLower)) {
+        const nameRes = classifyTub({ roomName: name });
+        if (nameRes.isProof) {
           labels.add('room name');
-          if (/jacuzzi/i.test(roomNameLower)) bathWords.add('Jacuzzi');
-          if (/whirlpool/i.test(roomNameLower)) bathWords.add('Whirlpool');
-          if (/hot\s+tub/i.test(roomNameLower)) bathWords.add('Hot tub');
-          if (/spa\s+tub|spa\s+bath/i.test(roomNameLower)) bathWords.add('Spa bath');
-          if (/soak/i.test(roomNameLower)) bathWords.add('Soaking tub');
-          if (/bathtub/i.test(roomNameLower)) bathWords.add('Bathtub');
-          if (/jetted/i.test(roomNameLower)) bathWords.add('Jetted tub');
+          for (const w of nameRes.words) {
+            bathWords.add(w);
+          }
         }
 
         row.find('.hprt-facilities-facility, .facility-badge, [data-name="facility"], li').each((_, facEl) => {
           const facText = $(facEl).text().trim();
-          const matched = matchBathFacility(facText);
-          if (matched) {
-            bathWords.add(matched);
-            if (matched === 'Spa bath') labels.add('Spa tub');
-            else labels.add(matched);
+          const facRes = classifyTub({ facilities: [facText] });
+          if (facRes.isProof) {
+            for (const w of facRes.words) {
+              bathWords.add(w);
+              if (w === 'Spa bath') labels.add('Spa tub');
+              else labels.add(w);
+            }
           }
         });
         rooms.push({ name, bathWords: Array.from(bathWords), labels: Array.from(labels) });

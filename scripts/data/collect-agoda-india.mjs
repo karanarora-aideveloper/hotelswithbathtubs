@@ -28,6 +28,7 @@ import {
   haversineKm,
   townMatches
 } from './match-utils.mjs';
+import { classifyTub } from './lib/tub-words.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -176,50 +177,22 @@ function extractAgodaPhotos(detailData, maxPhotos = 6) {
   return photos;
 }
 
-// Strict Agoda facility title check (satisfies PROMOTE3-PREP-B and Working Rules)
+// Strict Agoda facility title check (delegates to shared tub-words module)
 export function isAgodaTubFacilityProof(fac) {
   if (!fac) return false;
-  const fLower = fac.trim().toLowerCase();
-  // Disqualify non-proof labels explicitly
-  if (
-    fLower === 'separate shower/bathtub' ||
-    fLower === 'bathtub grab bar' ||
-    fLower === 'bathtub seat' ||
-    fLower.includes('grab bar') ||
-    fLower.includes('bathtub seat')
-  ) {
-    return false;
-  }
-  // Explicit proof labels
-  if (
-    fLower === 'bathtub' ||
-    fLower === 'whirlpool bathtub' ||
-    fLower === 'hot tub' ||
-    fLower === 'spa tub' ||
-    fLower === 'jacuzzi' ||
-    fLower === 'spa bath' ||
-    fLower === 'open-air bath' ||
-    fLower.includes('whirlpool') ||
-    fLower.includes('jacuzzi') ||
-    fLower.includes('hot tub')
-  ) {
-    return true;
-  }
-  if (fLower.includes('bathtub') && !fLower.includes('shower/bathtub')) {
-    return true;
-  }
-  return false;
+  const res = classifyTub({ facilities: [fac] });
+  return res.isProof;
 }
 
-// Analyze room for strict tub evidence
+// Analyze room for strict tub evidence using shared classifyTub
 export function analyzeAgodaRoom(room) {
   const roomName = (room.name || '').trim();
   const allFacilities = (room.facilityGroups || []).flatMap(g => (g.facilities || []).map(f => f.title));
   const tubPhrases = [];
 
   // 1. Room Name check
-  const nameTubMatch = roomName.match(/\b(jacuzzi|whirlpool|hot\s+tub|spa\s+bath|spa\s+tub|bathtub|soaking\s+tub|jetted\s+tub)\b/i);
-  if (nameTubMatch) {
+  const nameRes = classifyTub({ roomName });
+  if (nameRes.isProof) {
     tubPhrases.push(`Room Name: ${roomName}`);
   }
 
