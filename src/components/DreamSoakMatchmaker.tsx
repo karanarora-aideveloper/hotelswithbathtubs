@@ -6,7 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { trackEvent } from '@/lib/analytics';
 import { sendGA4Event } from '@/lib/gtag';
-import { isHotelConfirmed } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
 
 export interface MatchmakerHotel {
   name: string;
@@ -16,13 +16,13 @@ export interface MatchmakerHotel {
   citySlug: string;
   pageUrl: string;
   image: string;
-  price: string;
-  numPrice: number;
-  rating: number;
-  reviewsCount: number;
-  roomType: string;
-  tubType: string;
-  amenities: string[];
+  price?: string;
+  numPrice?: number;
+  rating?: number;
+  reviewsCount?: number;
+  roomType?: string;
+  tubType?: string;
+  amenities?: string[];
   bookingTip?: string;
   bathtubConfirmed?: boolean;
   importBatch?: string;
@@ -31,164 +31,144 @@ export interface MatchmakerHotel {
   agodaUrl?: string;
   airbnbUrl?: string;
   tripUrl?: string;
+  mmtUrl?: string;
   url?: string;
 }
 
-type VibeId = 'romantic' | 'city_escape' | 'alpine_nature' | 'tropical_beach' | 'wellness_detox';
-type TubId = 'jacuzzi' | 'outdoor_hot_tub' | 'deep_soaking' | 'onsen_wood' | 'clawfoot' | 'any_tub';
-type RegionId = 'worldwide' | 'europe' | 'usa' | 'asia_tropics' | 'india';
-type BudgetId = 'any' | 'budget' | 'mid' | 'luxury';
+export type VibeId = 'honeymoon' | 'city_break' | 'mountains' | 'beach_islands' | 'spa_soaking';
+export type TubId = 'jetted' | 'soaking' | 'hot_tub' | 'freestanding' | 'clawfoot' | 'onsen';
+export type RegionId = 'worldwide' | 'usa' | 'india' | 'europe' | 'asia';
+export type TravelerId = 'couple' | 'family' | 'solo' | 'friends';
 
-const VIBE_OPTIONS = [
+export const VIBE_OPTIONS = [
   {
-    id: 'romantic' as VibeId,
-    label: 'Honeymoon & Anniversary',
-    tagline: 'Private balcony jacuzzis, sunset views, couple-friendly ambiance',
-    emoji: '💍',
-    badge: 'Couples Favorite',
-    bg: 'from-rose-50 to-pink-50 border-rose-100',
+    id: 'honeymoon' as const,
+    label: 'Honeymoon & anniversary',
+    tagline: 'Rooms with a tub for two',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/fragrant-nature-a-five-star-classified-hotel-agra-1.webp',
   },
   {
-    id: 'city_escape' as VibeId,
-    label: 'Chic Weekend City Break',
-    tagline: 'Skyline vistas, boutique design, rooftop bars & prime central spots',
-    emoji: '🏙️',
-    badge: 'Urban Stays',
-    bg: 'from-sky-50 to-blue-50 border-sky-100',
+    id: 'city_break' as const,
+    label: 'City break',
+    tagline: 'Hotels in cities',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/h-tel-ritz-paris-paris-1.webp',
   },
   {
-    id: 'alpine_nature' as VibeId,
-    label: 'Alpine Chalet & Mountain Cozy',
-    tagline: 'Snow-capped peaks, fireplaces, cedar tubs & crisp alpine air',
-    emoji: '🏔️',
-    badge: 'Cozy Fireplace',
-    bg: 'from-emerald-50 to-teal-50 border-emerald-100',
+    id: 'mountains' as const,
+    label: 'Mountains',
+    tagline: 'Hotels in mountain regions',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/villa-camellia-balacola-ooty-ooty-5029-1.webp',
   },
   {
-    id: 'tropical_beach' as VibeId,
-    label: 'Tropical Island & Overwater Bliss',
-    tagline: 'Lagoon plunge pools, open-air stone baths & private ocean access',
-    emoji: '🌴',
-    badge: 'Island Escape',
-    bg: 'from-amber-50 to-orange-50 border-amber-100',
+    id: 'beach_islands' as const,
+    label: 'Beach & islands',
+    tagline: 'Hotels near beaches and islands',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/elegant-2-bhk-apartments-in-peaceful-siolim-9-1.webp',
   },
   {
-    id: 'wellness_detox' as VibeId,
-    label: 'Spa Retreat & Deep Soaking Detox',
-    tagline: 'Japanese onsens, mineral hot springs, herbal baths & total tranquility',
-    emoji: '🧘',
-    badge: 'Total Wellness',
-    bg: 'from-indigo-50 to-purple-50 border-indigo-100',
+    id: 'spa_soaking' as const,
+    label: 'Spa & soaking',
+    tagline: 'Rooms with a soaking or hydrotherapy tub',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/capella-bangkok-bangkok-1.webp',
   },
 ];
 
-const TUB_OPTIONS = [
+export const TUB_OPTIONS = [
   {
-    id: 'jacuzzi' as TubId,
-    label: 'In-Room Hydro Jacuzzi & Whirlpool',
-    tagline: 'Therapeutic hydro-massage jets & bubbling two-person tubs',
-    emoji: '🌊',
-    highlight: 'Whirlpool Hydro Jets',
+    id: 'jetted' as const,
+    label: 'Jetted tub (jacuzzi & whirlpool)',
+    tagline: 'Whirlpool and hydro-massage tubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/matild-palace-budapest-1.webp',
   },
   {
-    id: 'outdoor_hot_tub' as TubId,
-    label: 'Private Balcony / Outdoor Hot Tub',
-    tagline: 'Soak under open skies with unobstructed mountain, sea or caldera views',
-    emoji: '♨️',
-    highlight: 'Open-Air View Tub',
+    id: 'soaking' as const,
+    label: 'Deep soaking tub',
+    tagline: 'Deep soaking bathtubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/mandarin-oriental-bangkok-bangkok-1.webp',
   },
   {
-    id: 'deep_soaking' as TubId,
-    label: 'Deep Freestanding Stone / Italian Marble',
-    tagline: 'Sculptural freestanding soaking bath with panoramic floor-to-ceiling vistas',
-    emoji: '🛁',
-    highlight: 'Sculptural Marble Bath',
+    id: 'hot_tub' as const,
+    label: 'Hot tub',
+    tagline: 'Open-air and outdoor tubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/indoor-pool-hot-tub-theater-games-views-punta-cana-6730-1.webp',
   },
   {
-    id: 'onsen_wood' as TubId,
-    label: 'Japanese Hinoki Cedarwood / Onsen',
-    tagline: 'Natural aromatic timber soaking baths inspired by ancient Japanese onsens',
-    emoji: '🪵',
-    highlight: 'Aromatic Cedar Onsen',
+    id: 'freestanding' as const,
+    label: 'Freestanding bathtub',
+    tagline: 'Stand-alone centerpiece bathtubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/shangri-la-the-shard-london-london-1.webp',
   },
   {
-    id: 'clawfoot' as TubId,
-    label: 'Vintage Victorian Clawfoot Bath',
-    tagline: 'Heritage cast-iron rolltop elegance with brass fixtures and timeless warmth',
-    emoji: '👑',
-    highlight: 'Vintage Rolltop Bath',
+    id: 'clawfoot' as const,
+    label: 'Vintage clawfoot tub',
+    tagline: 'Classic cast-iron bathtubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-taj-lake-palace-udaipur.webp',
   },
   {
-    id: 'any_tub' as TubId,
-    label: 'Surprise Me with Any Luxury Tub',
-    tagline: 'Show top-rated bathtub suites across all styles',
-    emoji: '✨',
-    highlight: 'Private Bathtub Suite',
+    id: 'onsen' as const,
+    label: 'Japanese Hinoki / Onsen',
+    tagline: 'Cedarwood and onsen tubs',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/kyoto-the-ritz-carlton-kyoto-1.webp',
   },
 ];
 
-const REGION_OPTIONS = [
+export const REGION_OPTIONS = [
   {
-    id: 'worldwide' as RegionId,
-    label: 'Anywhere Worldwide',
-    tagline: 'Rank the finest bathtub stays across 118 countries',
-    emoji: '🌍',
-    count: '2,600+ Stays',
+    id: 'worldwide' as const,
+    label: 'Anywhere worldwide',
+    tagline: 'Bathtub stays across all countries',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-geneva.webp',
   },
   {
-    id: 'europe' as RegionId,
-    label: 'Europe',
-    tagline: 'Paris, Rome, Swiss Alps, London, Prague, Santorini & beyond',
-    emoji: '🏰',
-    count: '600+ Stays',
-  },
-  {
-    id: 'usa' as RegionId,
+    id: 'usa' as const,
     label: 'United States',
-    tagline: 'NYC, Las Vegas, Miami, Lake Tahoe, Hawaii & romantic getaways',
-    emoji: '🗽',
-    count: '800+ Stays',
+    tagline: 'Hotels across the United States',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/pool-hot-tub-huge-theater-mini-golf-sleeps-19-austin-2164-1.webp',
   },
   {
-    id: 'asia_tropics' as RegionId,
-    label: 'Asia & Tropical Islands',
-    tagline: 'Bali, Maldives, Phuket, Tokyo, Singapore & tropical paradises',
-    emoji: '🏝️',
-    count: '500+ Stays',
+    id: 'india' as const,
+    label: 'India',
+    tagline: 'Hotels across India',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-raj-palace-jaipur-1.webp',
   },
   {
-    id: 'india' as RegionId,
-    label: 'India Royalty & Heritage',
-    tagline: 'Udaipur, Goa, Munnar, Jaipur, Kolkata, Mumbai & palace retreats',
-    emoji: '🇮🇳',
-    count: '400+ Stays',
+    id: 'europe' as const,
+    label: 'Europe',
+    tagline: 'Hotels across European countries',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/le-bristol-paris-paris-1.webp',
+  },
+  {
+    id: 'asia' as const,
+    label: 'Asia & Islands',
+    tagline: 'Hotels across Asia and island destinations',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-peninsula-bangkok-bangkok-1.webp',
   },
 ];
 
-const BUDGET_OPTIONS = [
+export const TRAVELER_OPTIONS = [
   {
-    id: 'any' as BudgetId,
-    label: 'Any Budget',
-    tagline: 'Show bathtub suites across all price tiers',
-    emoji: '✨',
+    id: 'couple' as const,
+    label: 'Couple',
+    tagline: 'Stays for two guests',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-leela-palace-jaipur-1.webp',
   },
   {
-    id: 'budget' as BudgetId,
-    label: 'Affordable Luxury',
-    tagline: 'Under $150 / ₹8,000 per night with private in-room tubs',
-    emoji: '🪙',
+    id: 'family' as const,
+    label: 'Family',
+    tagline: 'Stays for families',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/four-seasons-hotel-tokyo-at-otemachi-tokyo-1.webp',
   },
   {
-    id: 'mid' as BudgetId,
-    label: 'Upscale Romance',
-    tagline: '$150 – $350 / ₹8,000 – ₹25,000 per night for 4 & 5-star elegance',
-    emoji: '💎',
+    id: 'solo' as const,
+    label: 'Solo',
+    tagline: 'Stays for solo travelers',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/four-seasons-hotel-george-v-paris-paris-1.webp',
   },
   {
-    id: 'luxury' as BudgetId,
-    label: 'Ultra-Luxe Bucket List',
-    tagline: '$350+ / ₹25,000+ per night world-class presidential & villa suites',
-    emoji: '👑',
+    id: 'friends' as const,
+    label: 'Friends',
+    tagline: 'Stays for groups and friends',
+    image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/the-peninsula-tokyo-tokyo-1.webp',
   },
 ];
 
@@ -203,177 +183,208 @@ const ASIA_COUNTRIES = new Set([
   'philippines', 'french polynesia', 'taiwan', 'south korea', 'hong kong',
 ]);
 
+const CITY_BREAK_CITIES = new Set([
+  'paris', 'new york', 'london', 'tokyo', 'singapore', 'dubai', 'rome',
+  'barcelona', 'amsterdam', 'berlin', 'mumbai', 'chicago',
+]);
+
+const MOUNTAIN_CITIES = new Set([
+  'aspen', 'banff', 'zermatt', 'lake tahoe', 'swiss alps', 'jackson hole',
+  'manali', 'munnar', 'ooty', 'shimla', 'coorg', 'whistler', 'queenstown',
+]);
+
+const BEACH_CITIES = new Set([
+  'maldives', 'bali', 'bora bora', 'phuket', 'goa', 'hawaii', 'cancun',
+  'santorini', 'amalfi', 'fiji', 'seychelles', 'koh samui', 'miami',
+]);
+
+function matchesVibe(allText: string, city: string, vibe: VibeId): boolean {
+  if (vibe === 'honeymoon') {
+    return (
+      allText.includes('honeymoon') ||
+      allText.includes('balcony') ||
+      allText.includes('caldera') ||
+      allText.includes('sunset') ||
+      allText.includes('suite') ||
+      allText.includes('couple')
+    );
+  }
+  if (vibe === 'city_break') {
+    return (
+      CITY_BREAK_CITIES.has(city) ||
+      allText.includes('skyline') ||
+      allText.includes('city view') ||
+      allText.includes('downtown') ||
+      allText.includes('urban')
+    );
+  }
+  if (vibe === 'mountains') {
+    return (
+      MOUNTAIN_CITIES.has(city) ||
+      allText.includes('mountain') ||
+      allText.includes('alpine') ||
+      allText.includes('fireplace') ||
+      allText.includes('valley') ||
+      allText.includes('forest')
+    );
+  }
+  if (vibe === 'beach_islands') {
+    return (
+      BEACH_CITIES.has(city) ||
+      allText.includes('beach') ||
+      allText.includes('ocean') ||
+      allText.includes('sea') ||
+      allText.includes('island') ||
+      allText.includes('lagoon') ||
+      allText.includes('coast')
+    );
+  }
+  if (vibe === 'spa_soaking') {
+    return (
+      allText.includes('spa') ||
+      allText.includes('wellness') ||
+      allText.includes('sauna') ||
+      allText.includes('hydro') ||
+      allText.includes('massage') ||
+      allText.includes('soaking')
+    );
+  }
+  return false;
+}
+
+function matchesTub(allText: string, tub: TubId): boolean {
+  if (tub === 'jetted') {
+    return (
+      allText.includes('jacuzzi') ||
+      allText.includes('whirlpool') ||
+      allText.includes('hydro') ||
+      allText.includes('jetted') ||
+      allText.includes('spa bath')
+    );
+  }
+  if (tub === 'soaking') {
+    return (
+      allText.includes('soaking') ||
+      allText.includes('deep soak') ||
+      allText.includes('stone') ||
+      allText.includes('marble') ||
+      allText.includes('sunken')
+    );
+  }
+  if (tub === 'hot_tub') {
+    return (
+      allText.includes('hot tub') ||
+      allText.includes('outdoor tub') ||
+      allText.includes('balcony tub') ||
+      allText.includes('open-air') ||
+      allText.includes('patio')
+    );
+  }
+  if (tub === 'freestanding') {
+    return (
+      allText.includes('freestanding') ||
+      allText.includes('stand-alone') ||
+      allText.includes('sculptural')
+    );
+  }
+  if (tub === 'clawfoot') {
+    return (
+      allText.includes('clawfoot') ||
+      allText.includes('claw-foot') ||
+      allText.includes('rolltop') ||
+      allText.includes('roll-top') ||
+      allText.includes('vintage tub')
+    );
+  }
+  if (tub === 'onsen') {
+    return (
+      allText.includes('onsen') ||
+      allText.includes('hinoki') ||
+      allText.includes('cedarwood')
+    );
+  }
+  return false;
+}
+
+function matchesRegion(country: string, region: RegionId): boolean {
+  if (region === 'worldwide') return true;
+  if (region === 'usa') return country === 'usa' || country === 'united states';
+  if (region === 'india') return country === 'india';
+  if (region === 'europe') return EUROPE_COUNTRIES.has(country);
+  if (region === 'asia') return ASIA_COUNTRIES.has(country);
+  return false;
+}
+
+function matchesTraveler(allText: string, traveler: TravelerId): boolean {
+  if (traveler === 'couple') {
+    return (
+      allText.includes('couple') ||
+      allText.includes('romantic') ||
+      allText.includes('king') ||
+      allText.includes('honeymoon') ||
+      allText.includes('suite')
+    );
+  }
+  if (traveler === 'family') {
+    return (
+      allText.includes('family') ||
+      allText.includes('suite') ||
+      allText.includes('villa') ||
+      allText.includes('apartment') ||
+      allText.includes('two')
+    );
+  }
+  if (traveler === 'solo') {
+    return (
+      allText.includes('single') ||
+      allText.includes('queen') ||
+      allText.includes('studio') ||
+      allText.includes('cozy')
+    );
+  }
+  if (traveler === 'friends') {
+    return (
+      allText.includes('twin') ||
+      allText.includes('double') ||
+      allText.includes('two') ||
+      allText.includes('suite')
+    );
+  }
+  return false;
+}
+
 interface ScoredHotel {
   hotel: MatchmakerHotel;
   matchScore: number;
-  highlightReason: string;
-}
-
-function calculateMatchScore(
-  h: MatchmakerHotel,
-  vibe: VibeId,
-  tub: TubId,
-  region: RegionId,
-  budget: BudgetId
-): { score: number; highlightReason: string; tubMatched: boolean } {
-  let score = 85;
-  const country = (h.country || '').toLowerCase().trim();
-  const city = (h.city || '').toLowerCase().trim();
-  const tubType = (h.tubType || '').toLowerCase();
-  const roomType = (h.roomType || '').toLowerCase();
-  const amenities = (h.amenities || []).map((a) => a.toLowerCase()).join(' ');
-  const allText = `${tubType} ${roomType} ${amenities}`;
-
-  // 1. Strict Region Filter
-  if (region === 'usa' && country !== 'usa' && country !== 'united states') {
-    return { score: 0, highlightReason: '', tubMatched: false };
-  }
-  if (region === 'india' && country !== 'india') {
-    return { score: 0, highlightReason: '', tubMatched: false };
-  }
-  if (region === 'europe' && !EUROPE_COUNTRIES.has(country)) {
-    return { score: 0, highlightReason: '', tubMatched: false };
-  }
-  if (region === 'asia_tropics' && !ASIA_COUNTRIES.has(country)) {
-    return { score: 0, highlightReason: '', tubMatched: false };
-  }
-
-  // 2. Budget Scoring
-  const isIndia = country === 'india';
-  const numPrice = h.numPrice || 0;
-  if (numPrice > 0) {
-    if (budget === 'budget') {
-      const max = isIndia ? 8000 : 180;
-      if (numPrice <= max) score += 15;
-      else score -= 30;
-    } else if (budget === 'mid') {
-      const min = isIndia ? 8000 : 180;
-      const max = isIndia ? 25000 : 400;
-      if (numPrice >= min && numPrice <= max) score += 15;
-      else score -= 20;
-    } else if (budget === 'luxury') {
-      const min = isIndia ? 25000 : 400;
-      if (numPrice >= min) score += 15;
-      else score -= 25;
-    }
-  }
-
-  // 3. Tub Type Scoring
-  let tubMatched = false;
-  let tubReason = h.tubType || 'Private Deep Soaking Tub';
-
-  if (tub === 'jacuzzi') {
-    if (allText.includes('jacuzzi') || allText.includes('whirlpool') || allText.includes('hydro') || allText.includes('jet')) {
-      score += 25;
-      tubMatched = true;
-      tubReason = 'In-Room Hydro Jacuzzi & Whirlpool';
-    }
-  } else if (tub === 'outdoor_hot_tub') {
-    if (allText.includes('outdoor') || allText.includes('balcony') || allText.includes('caldera') || allText.includes('open-air') || allText.includes('hot tub') || allText.includes('patio')) {
-      score += 28;
-      tubMatched = true;
-      tubReason = 'Private Balcony / Open-Air View Hot Tub';
-    }
-  } else if (tub === 'deep_soaking') {
-    if (allText.includes('freestanding') || allText.includes('deep soaking') || allText.includes('marble') || allText.includes('stone') || allText.includes('sunken')) {
-      score += 25;
-      tubMatched = true;
-      tubReason = 'Deep Freestanding Stone / Italian Marble Tub';
-    }
-  } else if (tub === 'onsen_wood') {
-    if (allText.includes('onsen') || allText.includes('cedar') || allText.includes('hinoki') || allText.includes('wood') || allText.includes('japanese')) {
-      score += 30;
-      tubMatched = true;
-      tubReason = 'Authentic Hinoki Cedarwood Onsen Bath';
-    }
-  } else if (tub === 'clawfoot') {
-    if (allText.includes('claw') || allText.includes('cast-iron') || allText.includes('roll-top') || allText.includes('copper') || allText.includes('vintage') || allText.includes('victorian')) {
-      score += 30;
-      tubMatched = true;
-      tubReason = 'Heritage Rolltop Clawfoot Bathtub';
-    }
-  } else {
-    // any_tub
-    tubMatched = true;
-    tubReason = h.tubType || 'Private In-Room Bathtub';
-  }
-
-  // 4. Vibe Scoring
-  let vibeReason = '';
-  if (vibe === 'romantic') {
-    if (allText.includes('balcony') || allText.includes('caldera') || allText.includes('sea view') || allText.includes('sunset') || allText.includes('couple') || allText.includes('suite')) {
-      score += 15;
-      vibeReason = 'Romantic suite with panoramic view';
-    }
-  } else if (vibe === 'city_escape') {
-    const cityList = ['paris', 'new york', 'london', 'tokyo', 'singapore', 'dubai', 'rome', 'barcelona', 'amsterdam', 'berlin', 'mumbai', 'chicago'];
-    if (cityList.includes(city) || allText.includes('skyline') || allText.includes('city view')) {
-      score += 18;
-      vibeReason = 'High-floor urban skyline vista';
-    }
-  } else if (vibe === 'alpine_nature') {
-    const alpineList = ['aspen', 'banff', 'zermatt', 'lake tahoe', 'swiss alps', 'jackson hole', 'manali', 'munnar', 'ooty', 'shimla', 'coorg', 'whistler', 'queenstown'];
-    if (alpineList.includes(city) || allText.includes('mountain') || allText.includes('fireplace') || allText.includes('forest') || allText.includes('valley')) {
-      score += 22;
-      vibeReason = 'Scenic alpine fireplace & mountain serenity';
-    }
-  } else if (vibe === 'tropical_beach') {
-    const beachList = ['maldives', 'bali', 'bora bora', 'phuket', 'goa', 'hawaii', 'cancun', 'santorini', 'amalfi', 'fiji', 'seychelles', 'koh samui', 'miami'];
-    if (beachList.includes(city) || allText.includes('beach') || allText.includes('ocean') || allText.includes('lagoon') || allText.includes('plunge pool') || allText.includes('overwater')) {
-      score += 22;
-      vibeReason = 'Oceanfront breeze & tropical lagoon setting';
-    }
-  } else if (vibe === 'wellness_detox') {
-    if (allText.includes('onsen') || allText.includes('spa') || allText.includes('sauna') || allText.includes('cedar') || allText.includes('steam')) {
-      score += 20;
-      vibeReason = 'Private restorative hydrotherapy & wellness';
-    }
-  }
-
-  // 5. Rating & Review Boost
-  const numericRating = typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0;
-  if (numericRating > 0) {
-    score += (numericRating - 4.0) * 12;
-  }
-  if (h.reviewsCount && h.reviewsCount > 200) {
-    score += 5;
-  }
-
-  // Normalize final match percentage to 88% - 99%
-  const normalized = Math.min(99, Math.max(88, Math.round(score / 1.5)));
-  const highlightReason = vibeReason ? `${tubReason} • ${vibeReason}` : tubReason;
-
-  return { score: normalized, highlightReason, tubMatched };
 }
 
 export default function DreamSoakMatchmaker({
   initialVibe,
   initialTub,
   initialRegion,
-  initialBudget,
   embedded = false,
 }: {
   initialVibe?: VibeId;
   initialTub?: TubId;
   initialRegion?: RegionId;
-  initialBudget?: BudgetId;
   embedded?: boolean;
 }) {
   const [selectedVibe, setSelectedVibe] = useState<VibeId | null>(initialVibe || null);
   const [selectedTub, setSelectedTub] = useState<TubId | null>(initialTub || null);
   const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(initialRegion || null);
-  const [selectedBudget, setSelectedBudget] = useState<BudgetId | null>(initialBudget || null);
+  const [selectedTraveler, setSelectedTraveler] = useState<TravelerId | null>(null);
+
   const [currentStep, setCurrentStep] = useState<number>(1);
+  const [animating, setAnimating] = useState<boolean>(false);
+  const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
   const [allHotels, setAllHotels] = useState<MatchmakerHotel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [copiedLink, setCopiedLink] = useState<boolean>(false);
-  const [visibleResultsCount, setVisibleResultsCount] = useState<number>(12);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const hasRequestedData = useRef(false);
 
-  // Lazy-load 4.04 MB matchmaker data on demand or viewport intersection (zero impact on initial page load)
+  // Lazy-load matchmaker data
   const loadData = useCallback(() => {
     if (hasRequestedData.current) return;
     hasRequestedData.current = true;
@@ -385,9 +396,9 @@ export default function DreamSoakMatchmaker({
       .then((data: MatchmakerHotel[]) => {
         const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
           ...h,
-          rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating as any) || 0,
-          reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount as any, 10) || 0,
-          numPrice: typeof h.numPrice === 'number' ? h.numPrice : parseInt(h.numPrice as any, 10) || 0,
+          importBatch: h.importBatch || '',
+          bookingTubLabels: Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [],
+          bathtubConfirmed: Boolean(h.importBatch && Array.isArray(h.bookingTubLabels) && h.bookingTubLabels.length > 0),
           amenities: Array.isArray(h.amenities) ? h.amenities : [],
         }));
         setAllHotels(cleanData);
@@ -399,20 +410,21 @@ export default function DreamSoakMatchmaker({
       });
   }, []);
 
-  // Fetch matchmaker data: trigger on URL query params, viewport intersection, or user hover
+  // Load data immediately or on intersection
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const v = params.get('vibe') as VibeId;
       const t = params.get('tub') as TubId;
       const r = params.get('region') as RegionId;
-      const b = params.get('budget') as BudgetId;
+      const tr = params.get('traveler') as TravelerId;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (v && VIBE_OPTIONS.some((o) => o.id === v)) setSelectedVibe(v);
       if (t && TUB_OPTIONS.some((o) => o.id === t)) setSelectedTub(t);
       if (r && REGION_OPTIONS.some((o) => o.id === r)) setSelectedRegion(r);
-      if (b && BUDGET_OPTIONS.some((o) => o.id === b)) setSelectedBudget(b);
-      if (v && t && r && b) setCurrentStep(5);
-      if (params.has('vibe') || params.has('tub') || params.has('region') || params.has('budget')) {
+      if (tr && TRAVELER_OPTIONS.some((o) => o.id === tr)) setSelectedTraveler(tr);
+      if (v && t && r && tr) setCurrentStep(5);
+      if (params.has('vibe') || params.has('tub') || params.has('region') || params.has('traveler')) {
         loadData();
         return;
       }
@@ -438,33 +450,125 @@ export default function DreamSoakMatchmaker({
     return () => observer.disconnect();
   }, [loadData]);
 
-  // Compute matched hotels
+  // Compute option counts and apply the "fewer than 3 hotels" hiding rule
+  // 1. Step 1 (Vibe) visible options
+  const visibleVibes = useMemo(() => {
+    return VIBE_OPTIONS.map((vibe) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesVibe(allText, city, vibe.id)) count++;
+      }
+      return { ...vibe, count };
+    }).filter((vibe) => vibe.count >= 3);
+  }, [allHotels, selectedRegion]);
+
+  // 2. Step 2 (Tub style) visible options: given selectedVibe and selectedRegion if set
+  const visibleTubs = useMemo(() => {
+    return TUB_OPTIONS.map((tub) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesTub(allText, tub.id)) count++;
+      }
+      return { ...tub, count };
+    }).filter((tub) => tub.count >= 3);
+  }, [allHotels, selectedVibe, selectedRegion]);
+
+  // 3. Step 3 (Region) visible options: given selectedVibe and selectedTub if set
+  const visibleRegions = useMemo(() => {
+    return REGION_OPTIONS.map((reg) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedTub && !matchesTub(allText, selectedTub)) continue;
+        if (matchesRegion(country, reg.id)) count++;
+      }
+      return { ...reg, count };
+    }).filter((reg) => reg.count >= 3);
+  }, [allHotels, selectedVibe, selectedTub]);
+
+  // 4. Step 4 (Who's coming) visible options: given selectedVibe, selectedTub, selectedRegion
+  const visibleTravelers = useMemo(() => {
+    return TRAVELER_OPTIONS.map((trav) => {
+      let count = 0;
+      for (const h of allHotels) {
+        const country = (h.country || '').toLowerCase().trim();
+        const city = (h.city || '').toLowerCase().trim();
+        const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+        if (selectedVibe && !matchesVibe(allText, city, selectedVibe)) continue;
+        if (selectedTub && !matchesTub(allText, selectedTub)) continue;
+        if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
+        if (matchesTraveler(allText, trav.id)) count++;
+      }
+      return { ...trav, count };
+    }).filter((trav) => trav.count >= 3);
+  }, [allHotels, selectedVibe, selectedTub, selectedRegion]);
+
+  // Compute matched hotels with Problem 4 sort order:
+  // 1. Confirmed first (isHotelConfirmed)
+  // 2. Has booking partners (rentals without booking partners go last)
+  // 3. Partner count descending
+  // 4. Match score descending
   const matchedHotels: ScoredHotel[] = useMemo(() => {
     if (!allHotels.length) return [];
-    const vibe = selectedVibe || 'romantic';
-    const tub = selectedTub || 'any_tub';
+    const vibe = selectedVibe || 'honeymoon';
+    const tub = selectedTub || 'jetted';
     const region = selectedRegion || 'worldwide';
-    const budget = selectedBudget || 'any';
+    const traveler = selectedTraveler || 'couple';
 
     const scored: ScoredHotel[] = [];
+
     for (const h of allHotels) {
-      const res = calculateMatchScore(h, vibe, tub, region, budget);
-      if (res.score > 0 && (tub === 'any_tub' || res.tubMatched)) {
-        scored.push({
-          hotel: h,
-          matchScore: res.score,
-          highlightReason: res.highlightReason,
-        });
-      }
+      const country = (h.country || '').toLowerCase().trim();
+      const city = (h.city || '').toLowerCase().trim();
+      const allText = `${h.name || ''} ${h.tubType || ''} ${h.roomType || ''} ${(h.amenities || []).join(' ')}`.toLowerCase();
+
+      // 1. Region filter
+      if (!matchesRegion(country, region)) continue;
+
+      // 2. Tub style filter
+      if (!matchesTub(allText, tub)) continue;
+
+      let score = 50;
+
+      // 3. Vibe score
+      if (matchesVibe(allText, city, vibe)) score += 20;
+
+      // 4. Traveler ordering
+      if (matchesTraveler(allText, traveler)) score += 15;
+
+      scored.push({ hotel: h, matchScore: score });
     }
 
-    // Sort by match score descending, then rating descending
+    // Sort: Confirmed first, then has partners (rentals without partners last), then partner count, then score
     scored.sort((a, b) => {
-      const scoreDiff = b.matchScore - a.matchScore;
-      if (scoreDiff !== 0) return scoreDiff;
-      const rA = typeof a.hotel.rating === 'number' ? a.hotel.rating : parseFloat(a.hotel.rating as any) || 0;
-      const rB = typeof b.hotel.rating === 'number' ? b.hotel.rating : parseFloat(b.hotel.rating as any) || 0;
-      return rB - rA;
+      const confA = isHotelConfirmed(a.hotel) ? 1 : 0;
+      const confB = isHotelConfirmed(b.hotel) ? 1 : 0;
+      if (confB !== confA) return confB - confA;
+
+      const partnersA = getLinkedPartners(a.hotel);
+      const partnersB = getLinkedPartners(b.hotel);
+
+      const hasPartnersA = partnersA.length > 0 ? 1 : 0;
+      const hasPartnersB = partnersB.length > 0 ? 1 : 0;
+      if (hasPartnersB !== hasPartnersA) return hasPartnersB - hasPartnersA;
+
+      if (partnersB.length !== partnersA.length) {
+        return partnersB.length - partnersA.length;
+      }
+
+      return b.matchScore - a.matchScore;
     });
 
     // Deduplicate by name and city
@@ -475,94 +579,120 @@ export default function DreamSoakMatchmaker({
       seen.add(key);
       return true;
     });
-  }, [allHotels, selectedVibe, selectedTub, selectedRegion, selectedBudget]);
+  }, [allHotels, selectedVibe, selectedTub, selectedRegion, selectedTraveler]);
 
-  // Track step transitions
+  // Step transitions
+  const transitionTo = (nextStep: number, callback?: () => void) => {
+    setAnimating(true);
+    setTimeout(() => {
+      if (callback) callback();
+      setCurrentStep(nextStep);
+      setAnimating(false);
+    }, 180);
+  };
+
   const handleVibeSelect = (vibe: VibeId) => {
     loadData();
-    setSelectedVibe(vibe);
-    trackEvent('matchmaker_step_completed', { step: 1, option: vibe });
-    sendGA4Event('matchmaker_step', { step: 1, vibe });
-    setCurrentStep(2);
+    const opt = VIBE_OPTIONS.find((v) => v.id === vibe);
+    const label = opt ? opt.label : vibe;
+    trackEvent('matchmaker_step_completed', { step: 1, option: vibe, answer: label });
+    sendGA4Event('matchmaker_step', { step: 1, vibe, answer: label });
+    transitionTo(2, () => setSelectedVibe(vibe));
   };
 
   const handleTubSelect = (tub: TubId) => {
     loadData();
-    setSelectedTub(tub);
-    trackEvent('matchmaker_step_completed', { step: 2, option: tub });
-    sendGA4Event('matchmaker_step', { step: 2, tub });
-    setCurrentStep(3);
+    const opt = TUB_OPTIONS.find((t) => t.id === tub);
+    const label = opt ? opt.label : tub;
+    trackEvent('matchmaker_step_completed', { step: 2, option: tub, answer: label });
+    sendGA4Event('matchmaker_step', { step: 2, tub, answer: label });
+    transitionTo(3, () => setSelectedTub(tub));
   };
 
   const handleRegionSelect = (region: RegionId) => {
     loadData();
-    setSelectedRegion(region);
-    trackEvent('matchmaker_step_completed', { step: 3, option: region });
-    sendGA4Event('matchmaker_step', { step: 3, region });
-    setCurrentStep(4);
+    const opt = REGION_OPTIONS.find((r) => r.id === region);
+    const label = opt ? opt.label : region;
+    trackEvent('matchmaker_step_completed', { step: 3, option: region, answer: label });
+    sendGA4Event('matchmaker_step', { step: 3, region, answer: label });
+    transitionTo(4, () => setSelectedRegion(region));
   };
 
-  const handleBudgetSelect = (budget: BudgetId) => {
+  const handleTravelerSelect = (traveler: TravelerId) => {
     loadData();
-    setSelectedBudget(budget);
+    const opt = TRAVELER_OPTIONS.find((tr) => tr.id === traveler);
+    const label = opt ? opt.label : traveler;
+
+    trackEvent('matchmaker_step_completed', { step: 4, option: traveler, answer: label });
+    sendGA4Event('matchmaker_step', { step: 4, traveler, answer: label });
+
     trackEvent('matchmaker_completed', {
       vibe: selectedVibe,
       tub: selectedTub,
       region: selectedRegion,
-      budget,
+      traveler,
+      answer: label,
       matches_count: matchedHotels.length,
     });
     sendGA4Event('matchmaker_complete', {
       vibe: selectedVibe,
       tub: selectedTub,
       region: selectedRegion,
-      budget,
+      traveler,
+      answer: label,
     });
 
-    // Update URL query parameters for sharing
     if (typeof window !== 'undefined') {
       const url = new URL(window.location.href);
       if (selectedVibe) url.searchParams.set('vibe', selectedVibe);
       if (selectedTub) url.searchParams.set('tub', selectedTub);
       if (selectedRegion) url.searchParams.set('region', selectedRegion);
-      url.searchParams.set('budget', budget);
+      url.searchParams.set('traveler', traveler);
       window.history.replaceState({}, '', url.toString());
     }
 
-    setCurrentStep(5);
+    transitionTo(5, () => setSelectedTraveler(traveler));
   };
 
-  // Restart Quiz
-  const handleRestart = useCallback(() => {
-    setSelectedVibe(null);
-    setSelectedTub(null);
-    setSelectedRegion(null);
-    setSelectedBudget(null);
-    setCurrentStep(1);
-    setVisibleResultsCount(12);
-
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      url.searchParams.delete('vibe');
-      url.searchParams.delete('tub');
-      url.searchParams.delete('region');
-      url.searchParams.delete('budget');
-      window.history.replaceState({}, '', url.toString());
+  const handleBack = () => {
+    if (currentStep > 1) {
+      transitionTo(currentStep - 1);
     }
+  };
+
+  const handleRestart = useCallback(() => {
+    transitionTo(1, () => {
+      setSelectedVibe(null);
+      setSelectedTub(null);
+      setSelectedRegion(null);
+      setSelectedTraveler(null);
+
+      if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('vibe');
+        url.searchParams.delete('tub');
+        url.searchParams.delete('region');
+        url.searchParams.delete('traveler');
+        window.history.replaceState({}, '', url.toString());
+      }
+    });
   }, []);
 
-  // Share with Partner action
   const handleShare = async () => {
     trackEvent('matchmaker_share_clicked', {
       vibe: selectedVibe,
       tub: selectedTub,
       region: selectedRegion,
-      budget: selectedBudget,
+      traveler: selectedTraveler,
     });
 
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://hotelswithbathtubs.com/matchmaker';
-    const shareTitle = 'Our Dream Bathtub Hotel Matches 💕';
-    const shareText = `Found our dream hotel with a private bathtub & jacuzzi in room! Which one do you like best? 💕`;
+    const shareUrl =
+      typeof window !== 'undefined'
+        ? window.location.href
+        : 'https://hotelswithbathtubs.com/matchmaker';
+    const shareTitle = 'Our Bathtub Hotel Matches';
+    const shareText =
+      'Found hotel rooms with private bathtubs matching our trip! Which one do you prefer?';
 
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
@@ -572,7 +702,7 @@ export default function DreamSoakMatchmaker({
           url: shareUrl,
         });
         return;
-      } catch (err) {
+      } catch {
         // Fallback to clipboard
       }
     }
@@ -584,100 +714,106 @@ export default function DreamSoakMatchmaker({
     }
   };
 
-  // Get active label helpers
   const activeVibe = VIBE_OPTIONS.find((v) => v.id === selectedVibe);
   const activeTub = TUB_OPTIONS.find((t) => t.id === selectedTub);
   const activeRegion = REGION_OPTIONS.find((r) => r.id === selectedRegion);
-  const activeBudget = BUDGET_OPTIONS.find((b) => b.id === selectedBudget);
+  const activeTraveler = TRAVELER_OPTIONS.find((tr) => tr.id === selectedTraveler);
+
+  const getPrimaryBooking = (hotel: MatchmakerHotel) => {
+    if (hotel.bookingUrl) return { name: 'Booking.com', url: hotel.bookingUrl };
+    if (hotel.agodaUrl) return { name: 'Agoda', url: hotel.agodaUrl };
+    if (hotel.mmtUrl) return { name: 'MakeMyTrip', url: hotel.mmtUrl };
+    if (hotel.url) return { name: 'Partner site', url: hotel.url };
+    return null;
+  };
 
   return (
     <div
       id="dream-soak-matchmaker"
       ref={containerRef}
       onMouseEnter={loadData}
-      className={`w-full ${
-        embedded
-          ? 'bg-gradient-to-b from-blue-50/60 via-white to-white rounded-3xl border border-blue-100/80 shadow-sm p-5 sm:p-8 lg:p-10 my-10'
-          : 'bg-white py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'
+      className={`w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 ${
+        embedded ? 'border border-[#e3e7ef] rounded-[16px] bg-white p-6 shadow-xs' : ''
       }`}
     >
-      {/* Header Badge & Title */}
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/70 text-[#1a6fde] text-xs font-bold tracking-wide uppercase mb-3">
-          <span className="animate-spin text-sm">✨</span>
-          <span>Interactive Dream Soak Matchmaker™</span>
-        </div>
-        {embedded ? (
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight">
-            Find Your Perfect Bathtub Stay in 30 Seconds
-          </h2>
-        ) : (
-          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight">
-            Find Your Perfect Bathtub Stay in 30 Seconds
-          </h1>
-        )}
-        <p className="mt-2 text-sm sm:text-base text-gray-600">
-          Can&apos;t decide on a destination? Tell us your dream soaking fantasy and we&apos;ll match you with curated luxury suites worldwide.
-        </p>
-      </div>
-
-      {/* Progress Stepper (Only on Steps 1 to 4) */}
+      {/* Quiz Progress & Navigation Header */}
       {currentStep <= 4 && (
-        <div className="max-w-xl mx-auto mb-8">
-          <div className="flex items-center justify-between text-xs font-semibold text-gray-500 mb-2">
-            <span>Step {currentStep} of 4</span>
-            <span>
-              {currentStep === 1 && 'The Occasion / Vibe'}
-              {currentStep === 2 && 'Dream Bathtub Experience'}
-              {currentStep === 3 && 'Destination Region'}
-              {currentStep === 4 && 'Nightly Budget'}
-            </span>
+        <div className="mb-6">
+          <div className="flex items-center justify-between gap-4 mb-2.5">
+            <div>
+              {currentStep > 1 ? (
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="text-xs font-semibold text-[#5b6478] hover:text-[#14213d] transition-colors inline-flex items-center gap-1.5 py-1 px-2 -ml-2 rounded-[6px] hover:bg-gray-100"
+                >
+                  <span>&larr;</span>
+                  <span>Back</span>
+                </button>
+              ) : (
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#b08d57]">
+                  Interactive Quiz
+                </span>
+              )}
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-[#5b6478]">
+              Question {currentStep} of 4
+            </div>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+          <div className="h-1.5 w-full bg-[#e3e7ef] rounded-full overflow-hidden">
             <div
-              className="bg-gradient-to-r from-[#1a6fde] to-[#0a4fa8] h-full transition-all duration-300 rounded-full"
-              style={{ width: `${(currentStep / 4) * 100}%` }}
+              className="h-full bg-[#b08d57] transition-all duration-300 ease-out rounded-full"
+              style={{ width: `${currentStep * 25}%` }}
             />
           </div>
         </div>
       )}
 
-      {/* STEP 1: VIBE / OCCASION */}
+      {/* Screen 1: Trip Style / Vibe */}
       {currentStep === 1 && (
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <span className="text-3xl mb-1 block">🥂</span>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">What’s the occasion or dream vibe?</h3>
-            <p className="text-sm text-gray-500 mt-1">Select the ambiance you want for this escape</p>
+        <div
+          className={`transition-opacity duration-200 ${
+            animating ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'
+          }`}
+        >
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d]">
+              What kind of trip are you planning?
+            </h1>
+            <p className="text-xs sm:text-sm text-[#5b6478] mt-1.5 font-manrope max-w-md mx-auto">
+              Tap the style that suits your upcoming getaway.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {VIBE_OPTIONS.map((opt) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            {visibleVibes.map((vibe) => (
               <button
-                key={opt.id}
-                onClick={() => handleVibeSelect(opt.id)}
-                className={`p-5 rounded-2xl border text-left transition-all group flex flex-col justify-between hover:shadow-md hover:border-[#1a6fde] hover:scale-[1.01] ${
-                  selectedVibe === opt.id
-                    ? 'border-[#1a6fde] bg-blue-50/50 ring-2 ring-[#1a6fde]/20'
-                    : 'border-gray-200 bg-white hover:bg-gray-50/50'
-                }`}
+                key={vibe.id}
+                type="button"
+                onClick={() => handleVibeSelect(vibe.id)}
+                className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-3xl p-2 rounded-xl bg-gray-100/80 group-hover:scale-110 transition-transform">
-                      {opt.emoji}
-                    </span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
-                      {opt.badge}
-                    </span>
+                <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
+                  <ProgressiveImage
+                    src={vibe.image}
+                    alt={vibe.label}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
+                      {vibe.label}
+                    </div>
+                    <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
+                      {vibe.tagline}
+                    </div>
+                    {vibe.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{vibe.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
-                  <h4 className="font-bold text-gray-900 text-base group-hover:text-[#1a6fde] transition-colors">
-                    {opt.label}
-                  </h4>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">{opt.tagline}</p>
-                </div>
-                <div className="mt-4 flex items-center text-xs font-bold text-[#1a6fde] opacity-0 group-hover:opacity-100 transition-opacity">
-                  Select this vibe &rarr;
                 </div>
               </button>
             ))}
@@ -685,52 +821,51 @@ export default function DreamSoakMatchmaker({
         </div>
       )}
 
-      {/* STEP 2: TUB EXPERIENCE */}
+      {/* Screen 2: Tub Style */}
       {currentStep === 2 && (
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={() => setCurrentStep(1)}
-              className="text-xs font-semibold text-gray-500 hover:text-gray-900 flex items-center gap-1 transition-colors"
-            >
-              &larr; Back to Occasion
-            </button>
-            <span className="text-xs text-gray-400">Step 2 of 4</span>
+        <div
+          className={`transition-opacity duration-200 ${
+            animating ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'
+          }`}
+        >
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d]">
+              Which bathtub style do you prefer?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5b6478] mt-1.5 font-manrope max-w-md mx-auto">
+              Every room featured on our site includes a private in-room or terrace tub.
+            </p>
           </div>
 
-          <div className="text-center mb-6">
-            <span className="text-3xl mb-1 block">🛁</span>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">What’s your dream bathtub style?</h3>
-            <p className="text-sm text-gray-500 mt-1">Pick your preferred bathtub type</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {TUB_OPTIONS.map((opt) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            {visibleTubs.map((tub) => (
               <button
-                key={opt.id}
-                onClick={() => handleTubSelect(opt.id)}
-                className={`p-5 rounded-2xl border text-left transition-all group flex flex-col justify-between hover:shadow-md hover:border-[#1a6fde] hover:scale-[1.01] ${
-                  selectedTub === opt.id
-                    ? 'border-[#1a6fde] bg-blue-50/50 ring-2 ring-[#1a6fde]/20'
-                    : 'border-gray-200 bg-white hover:bg-gray-50/50'
-                }`}
+                key={tub.id}
+                type="button"
+                onClick={() => handleTubSelect(tub.id)}
+                className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-3xl p-2 rounded-xl bg-gray-100/80 group-hover:scale-110 transition-transform">
-                      {opt.emoji}
-                    </span>
-                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                      {opt.highlight}
-                    </span>
+                <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
+                  <ProgressiveImage
+                    src={tub.image}
+                    alt={tub.label}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
+                      {tub.label}
+                    </div>
+                    <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
+                      {tub.tagline}
+                    </div>
+                    {tub.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{tub.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
-                  <h4 className="font-bold text-gray-900 text-base group-hover:text-[#1a6fde] transition-colors">
-                    {opt.label}
-                  </h4>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">{opt.tagline}</p>
-                </div>
-                <div className="mt-4 flex items-center text-xs font-bold text-[#1a6fde] opacity-0 group-hover:opacity-100 transition-opacity">
-                  Choose this tub &rarr;
                 </div>
               </button>
             ))}
@@ -738,52 +873,51 @@ export default function DreamSoakMatchmaker({
         </div>
       )}
 
-      {/* STEP 3: REGION / DESTINATION */}
+      {/* Screen 3: Destination / Region */}
       {currentStep === 3 && (
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={() => setCurrentStep(2)}
-              className="text-xs font-semibold text-gray-500 hover:text-gray-900 flex items-center gap-1 transition-colors"
-            >
-              &larr; Back to Tub Type
-            </button>
-            <span className="text-xs text-gray-400">Step 3 of 4</span>
+        <div
+          className={`transition-opacity duration-200 ${
+            animating ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'
+          }`}
+        >
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d]">
+              Where are you traveling?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5b6478] mt-1.5 font-manrope max-w-md mx-auto">
+              Choose a specific region or discover stays anywhere worldwide.
+            </p>
           </div>
 
-          <div className="text-center mb-6">
-            <span className="text-3xl mb-1 block">✈️</span>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Where in the world are you traveling?</h3>
-            <p className="text-sm text-gray-500 mt-1">Pick a continent or stay open to global inspiration</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {REGION_OPTIONS.map((opt) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            {visibleRegions.map((reg) => (
               <button
-                key={opt.id}
-                onClick={() => handleRegionSelect(opt.id)}
-                className={`p-5 rounded-2xl border text-left transition-all group flex flex-col justify-between hover:shadow-md hover:border-[#1a6fde] hover:scale-[1.01] ${
-                  selectedRegion === opt.id
-                    ? 'border-[#1a6fde] bg-blue-50/50 ring-2 ring-[#1a6fde]/20'
-                    : 'border-gray-200 bg-white hover:bg-gray-50/50'
-                }`}
+                key={reg.id}
+                type="button"
+                onClick={() => handleRegionSelect(reg.id)}
+                className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-3xl p-2 rounded-xl bg-gray-100/80 group-hover:scale-110 transition-transform">
-                      {opt.emoji}
-                    </span>
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#1a6fde]">
-                      {opt.count}
-                    </span>
+                <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
+                  <ProgressiveImage
+                    src={reg.image}
+                    alt={reg.label}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
+                      {reg.label}
+                    </div>
+                    <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
+                      {reg.tagline}
+                    </div>
+                    {reg.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{reg.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
-                  <h4 className="font-bold text-gray-900 text-base group-hover:text-[#1a6fde] transition-colors">
-                    {opt.label}
-                  </h4>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">{opt.tagline}</p>
-                </div>
-                <div className="mt-4 flex items-center text-xs font-bold text-[#1a6fde] opacity-0 group-hover:opacity-100 transition-opacity">
-                  Set this destination &rarr;
                 </div>
               </button>
             ))}
@@ -791,49 +925,51 @@ export default function DreamSoakMatchmaker({
         </div>
       )}
 
-      {/* STEP 4: BUDGET */}
+      {/* Screen 4: Who's coming */}
       {currentStep === 4 && (
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={() => setCurrentStep(3)}
-              className="text-xs font-semibold text-gray-500 hover:text-gray-900 flex items-center gap-1 transition-colors"
-            >
-              &larr; Back to Destination
-            </button>
-            <span className="text-xs text-gray-400">Step 4 of 4</span>
+        <div
+          className={`transition-opacity duration-200 ${
+            animating ? 'opacity-0 scale-[0.99]' : 'opacity-100 scale-100'
+          }`}
+        >
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d]">
+              Who is coming on the trip?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5b6478] mt-1.5 font-manrope max-w-md mx-auto">
+              We tailor room categories and layout recommendations to your party.
+            </p>
           </div>
 
-          <div className="text-center mb-6">
-            <span className="text-3xl mb-1 block">💎</span>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">What’s your nightly budget preference?</h3>
-            <p className="text-sm text-gray-500 mt-1">Value in every price category</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {BUDGET_OPTIONS.map((opt) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 max-w-2xl mx-auto">
+            {visibleTravelers.map((trav) => (
               <button
-                key={opt.id}
-                onClick={() => handleBudgetSelect(opt.id)}
-                className={`p-5 rounded-2xl border text-left transition-all group flex flex-col justify-between hover:shadow-md hover:border-[#1a6fde] hover:scale-[1.01] ${
-                  selectedBudget === opt.id
-                    ? 'border-[#1a6fde] bg-blue-50/50 ring-2 ring-[#1a6fde]/20'
-                    : 'border-gray-200 bg-white hover:bg-gray-50/50'
-                }`}
+                key={trav.id}
+                type="button"
+                onClick={() => handleTravelerSelect(trav.id)}
+                className="group relative overflow-hidden rounded-[14px] border border-[#e3e7ef] bg-white text-left transition-all duration-200 hover:border-[#b08d57] hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#b08d57]"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-3xl p-2 rounded-xl bg-gray-100/80 group-hover:scale-110 transition-transform">
-                      {opt.emoji}
-                    </span>
+                <div className="aspect-[16/10] w-full relative overflow-hidden bg-gray-100">
+                  <ProgressiveImage
+                    src={trav.image}
+                    alt={trav.label}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <div className="font-playfair font-semibold text-base sm:text-lg text-white leading-snug">
+                      {trav.label}
+                    </div>
+                    <div className="text-white/80 font-manrope text-xs mt-1 line-clamp-2 leading-relaxed">
+                      {trav.tagline}
+                    </div>
+                    {trav.count > 0 && (
+                      <div className="text-[11px] font-semibold text-white/90 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-[6px] inline-flex items-center gap-1 mt-1.5 font-manrope">
+                        <span>{trav.count.toLocaleString()} hotels</span>
+                      </div>
+                    )}
                   </div>
-                  <h4 className="font-bold text-gray-900 text-base group-hover:text-[#1a6fde] transition-colors">
-                    {opt.label}
-                  </h4>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">{opt.tagline}</p>
-                </div>
-                <div className="mt-4 flex items-center text-xs font-bold text-[#1a6fde] opacity-0 group-hover:opacity-100 transition-opacity">
-                  Reveal My Matches &rarr;
                 </div>
               </button>
             ))}
@@ -841,270 +977,181 @@ export default function DreamSoakMatchmaker({
         </div>
       )}
 
-      {/* STEP 5: RESULTS SCREEN */}
+      {/* Screen 5: Results Screen */}
       {currentStep === 5 && (
-        <div className="space-y-8 animate-fadeIn">
-          {/* Active Criteria Ribbon & Controls */}
-          <div className="bg-white p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-                  {matchedHotels.length} Soak Matches Found
-                </span>
+        <div className="animate-fade-in">
+          {/* Summary Chips & Action Bar */}
+          <div className="bg-white border border-[#e3e7ef] rounded-[16px] p-5 sm:p-6 mb-6 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#b08d57] mb-1">
+                  Your Matched Stays
+                </div>
+                <h2 className="font-playfair text-xl sm:text-2xl font-semibold text-[#14213d]">
+                  {loading
+                    ? 'Loading your matches...'
+                    : `Showing ${Math.min(6, matchedHotels.length)} hotel rooms tailored to your trip`}
+                </h2>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs">
-                {activeVibe && (
-                  <button
-                    onClick={() => setCurrentStep(1)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition-colors"
-                    title="Click to change vibe"
-                  >
-                    <span>{activeVibe.emoji}</span>
-                    <span>{activeVibe.label}</span>
-                    <span className="text-gray-400">✎</span>
-                  </button>
-                )}
-                {activeTub && (
-                  <button
-                    onClick={() => setCurrentStep(2)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition-colors"
-                    title="Click to change tub style"
-                  >
-                    <span>{activeTub.emoji}</span>
-                    <span>{activeTub.label}</span>
-                    <span className="text-gray-400">✎</span>
-                  </button>
-                )}
-                {activeRegion && (
-                  <button
-                    onClick={() => setCurrentStep(3)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition-colors"
-                    title="Click to change destination"
-                  >
-                    <span>{activeRegion.emoji}</span>
-                    <span>{activeRegion.label}</span>
-                    <span className="text-gray-400">✎</span>
-                  </button>
-                )}
-                {activeBudget && (
-                  <button
-                    onClick={() => setCurrentStep(4)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium transition-colors"
-                    title="Click to change budget"
-                  >
-                    <span>{activeBudget.emoji}</span>
-                    <span>{activeBudget.label}</span>
-                    <span className="text-gray-400">✎</span>
-                  </button>
-                )}
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={handleRestart}
+                  className="px-3.5 py-1.5 text-xs font-semibold text-[#5b6478] bg-[#f5f6f8] hover:bg-gray-200 rounded-[8px] transition-colors"
+                >
+                  ↺ Start over
+                </button>
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="px-3.5 py-1.5 text-xs font-bold text-white bg-[#14213d] hover:bg-[#1f2e4d] rounded-[8px] transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>{copiedLink ? '✓ Copied' : 'Share matches'}</span>
+                  <span>&rarr;</span>
+                </button>
               </div>
             </div>
 
-            {/* Actions: Share with Partner & Retake Quiz */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleShare}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold text-xs shadow-sm transition-all transform hover:-translate-y-0.5"
-              >
-                <span>💌</span>
-                <span>{copiedLink ? 'Link Copied! Send to Partner 💕' : 'Share with Partner'}</span>
-              </button>
-              <button
-                onClick={handleRestart}
-                className="px-3.5 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs transition-colors"
-              >
-                🔄 Reset
-              </button>
+            {/* Answer Pills */}
+            <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-[#eef1f6]">
+              {activeVibe && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#f0f4f8] text-[#14213d] text-xs font-medium">
+                  <span>✨</span> {activeVibe.label}
+                </span>
+              )}
+              {activeTub && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#f0f4f8] text-[#14213d] text-xs font-medium">
+                  <span>🛁</span> {activeTub.label}
+                </span>
+              )}
+              {activeRegion && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#f0f4f8] text-[#14213d] text-xs font-medium">
+                  <span>📍</span> {activeRegion.label}
+                </span>
+              )}
+              {activeTraveler && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#f0f4f8] text-[#14213d] text-xs font-medium">
+                  <span>👥</span> {activeTraveler.label}
+                </span>
+              )}
             </div>
           </div>
 
-          {/* Loading Skeleton */}
-          {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-200 p-4 animate-pulse space-y-4">
-                  <div className="w-full h-48 bg-gray-200 rounded-xl" />
-                  <div className="h-5 bg-gray-200 rounded w-3/4" />
-                  <div className="h-4 bg-gray-200 rounded w-1/2" />
-                  <div className="h-10 bg-gray-200 rounded-xl" />
-                </div>
-              ))}
+          {/* Results Grid */}
+          {loading ? (
+            <div className="min-h-[300px] flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-[#e3e7ef]">
+              <div className="w-8 h-8 rounded-full border-2 border-[#b08d57] border-t-transparent animate-spin mb-3" />
+              <p className="text-xs font-medium text-[#5b6478]">Finding matching rooms with tubs...</p>
             </div>
-          )}
-
-          {/* Hotel Result Cards Grid */}
-          {!loading && matchedHotels.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {matchedHotels.slice(0, visibleResultsCount).map(({ hotel, matchScore, highlightReason }) => {
-                const partnerUrl = hotel.bookingUrl || hotel.agodaUrl || hotel.tripUrl || hotel.airbnbUrl || hotel.url || '';
-                const isBookingCom = partnerUrl.includes('booking.com');
-                const isAgoda = partnerUrl.includes('agoda.com');
-                const isTrip = partnerUrl.includes('trip.com');
-                const isAirbnb = partnerUrl.includes('airbnb');
-                const isMMT = partnerUrl.includes('makemytrip.com');
-                const partnerName = isBookingCom ? 'Booking.com' : isAgoda ? 'Agoda' : isTrip ? 'Trip.com' : isAirbnb ? 'Airbnb' : isMMT ? 'MakeMyTrip' : 'Partner';
-
+          ) : matchedHotels.length === 0 ? (
+            <div className="p-8 text-center bg-white rounded-2xl border border-[#e3e7ef]">
+              <p className="text-sm font-semibold text-[#14213d] mb-2">No exact match found</p>
+              <p className="text-xs text-[#5b6478] mb-4">
+                Try picking a broader region or alternative tub style.
+              </p>
+              <button
+                type="button"
+                onClick={handleRestart}
+                className="px-4 py-2 bg-[#b08d57] text-white text-xs font-bold rounded-[8px]"
+              >
+                Reset selections
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {matchedHotels.slice(0, 6).map(({ hotel }) => {
+                const proven = isHotelConfirmed(hotel);
+                const primaryBooking = getPrimaryBooking(hotel);
                 return (
                   <div
-                    key={`${hotel.name}-${hotel.city}`}
-                    className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden group hover:border-[#1a6fde]"
+                    key={hotel.pageUrl || hotel.name}
+                    className="bg-white border border-[#e3e7ef] rounded-[14px] overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-200 hover:shadow-md hover:border-[#b08d57]"
                   >
                     <div>
-                      {/* Image Container with Match Pill & Tub Badge */}
-                      <div className="relative h-52 w-full overflow-hidden bg-gray-100">
-                        <ProgressiveImage
-                          src={hotel.image}
-                          alt={`${hotel.name} with bathtub in ${hotel.city}`}
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-
-                        {/* Top Ribbon: Match % */}
-                        <div className="absolute top-3 right-3 flex items-center justify-end pointer-events-none">
-                          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs shadow-md flex items-center gap-1">
-                            <span>🔥</span>
-                            <span>{matchScore}% Match</span>
-                          </span>
-                        </div>
-
-                        {/* Bottom Highlight on Image */}
-                        <div className="absolute bottom-2.5 left-3 right-3 pointer-events-none">
-                          <span className="inline-block text-[11px] font-bold text-white bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-lg truncate max-w-full">
-                            🛁 {hotel.tubType || 'Private In-Room Bathtub'}
-                          </span>
+                      {/* Hotel Image with Proof Badge */}
+                      <div className="aspect-[16/10] relative w-full overflow-hidden bg-gray-100">
+                        {hotel.image ? (
+                          <ProgressiveImage
+                            src={hotel.image}
+                            alt={hotel.name}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
+                            🛁
+                          </div>
+                        )}
+                        <div className="absolute top-2.5 left-2.5">
+                          {proven ? (
+                            <span className="bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs font-manrope">
+                              <span>✓</span> Tub proven · Booking.com
+                            </span>
+                          ) : (
+                            <span className="bg-[#f5f6f8] text-[#5b6478] text-[11px] font-medium px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs font-manrope">
+                              <span>🏷️</span> Reported, not yet confirmed
+                            </span>
+                          )}
                         </div>
                       </div>
 
-                      {/* Content Body */}
-                      <div className="p-4 sm:p-5">
-                        {/* City & Country */}
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                          📍 {hotel.city}, {hotel.country}
-                        </p>
-
-                        {/* Hotel Name */}
+                      {/* Hotel Information */}
+                      <div className="p-4">
                         <Link
                           href={hotel.pageUrl}
                           prefetch={false}
-                          className="font-heading font-bold text-gray-900 text-lg hover:text-[#1a6fde] transition-colors line-clamp-1 block mb-2"
+                          className="font-playfair text-base sm:text-lg font-semibold text-[#14213d] hover:text-[#b08d57] transition-colors line-clamp-1 block"
                         >
                           {hotel.name}
                         </Link>
+                        <div className="text-xs text-[#5b6478] font-manrope mt-0.5">
+                          {hotel.city}, {hotel.country}
+                        </div>
 
-                        {/* Room Type */}
-                        {hotel.roomType && (
-                          <div className={`mb-3 px-2.5 py-1.5 rounded-lg border text-xs font-medium flex items-center gap-1.5 ${
-                            isHotelConfirmed(hotel)
-                              ? 'bg-blue-50/70 border-blue-100 text-blue-900'
-                              : 'bg-amber-50/70 border-amber-100 text-amber-900'
-                          }`}>
-                            <span className={isHotelConfirmed(hotel) ? 'text-[#1a6fde] font-bold' : 'text-amber-800 font-bold'}>
-                              {isHotelConfirmed(hotel) ? '✓ Room Tier:' : '🏷️'}
-                            </span>
-                            <span className="truncate">
-                              {isHotelConfirmed(hotel) ? hotel.roomType : `Reported room: ${hotel.roomType}`}
-                            </span>
-                          </div>
-                        )}
-
-                        {/* Match Reason Tagline */}
-                        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed mb-3">
-                          {highlightReason}
-                        </p>
-
-                        {/* Amenities Chips */}
-                        {hotel.amenities && hotel.amenities.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mb-4">
-                            {hotel.amenities.filter((a) => !/couple[- ]?friendly/i.test(a)).slice(0, 3).map((amenity) => (
-                              <span
-                                key={amenity}
-                                className="px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 text-[11px] font-medium"
-                              >
-                                {amenity}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                        {/* Room Details Box */}
+                        <div className="mt-3 p-2.5 rounded-[10px] bg-[#f9fafc] border border-[#eef1f6] text-xs font-manrope text-[#3d4554]">
+                          <span className="font-semibold text-[#14213d]">
+                            {proven ? 'Room: ' : 'Reported room: '}
+                          </span>
+                          <span className="text-[#5b6478]">
+                            {hotel.roomType || 'Room with private bathtub'}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Card Footer: Price & Direct Outbound Link */}
-                    <div className="p-4 sm:p-5 pt-0 border-t border-gray-100 mt-2 flex items-center justify-between gap-3">
-                      <div>
-                        <span className="text-xs text-gray-400 block font-medium">From</span>
-                        <span className="font-heading font-black text-lg sm:text-xl text-gray-900">
-                          {hotel.price || 'Check Rates'}
-                        </span>
-                        {hotel.price && <span className="text-[10px] text-gray-400 ml-1">/ night</span>}
-                      </div>
-
-                      <div className="flex items-center gap-2">
+                    {/* Action Links */}
+                    <div className="p-4 pt-0 flex items-center justify-between gap-2 border-t border-[#f0f2f5] mt-2">
+                      {primaryBooking ? (
+                        <OutboundLink
+                          href={primaryBooking.url}
+                          hotelName={hotel.name}
+                          cityName={hotel.city}
+                          source="matchmaker_cta"
+                          className="flex-1 bg-[#14213d] hover:bg-[#1f2e4d] text-white text-xs font-bold py-2 px-3 rounded-[8px] text-center transition-colors font-manrope"
+                        >
+                          Check {primaryBooking.name}
+                        </OutboundLink>
+                      ) : (
                         <Link
                           href={hotel.pageUrl}
                           prefetch={false}
-                          className="px-3 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-semibold transition-colors"
-                          title="View hotel photos and room details"
+                          className="flex-1 bg-[#14213d] hover:bg-[#1f2e4d] text-white text-xs font-bold py-2 px-3 rounded-[8px] text-center transition-colors font-manrope"
                         >
-                          Details
+                          View Hotel
                         </Link>
-
-                        {partnerUrl ? (
-                          <OutboundLink
-                            href={partnerUrl}
-                            hotelName={hotel.name}
-                            cityName={hotel.city}
-                            source="matchmaker_cta"
-                            className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5 flex items-center gap-1.5 whitespace-nowrap"
-                          >
-                            <span>Book on {partnerName}</span>
-                            <span className="text-[10px]">&rarr;</span>
-                          </OutboundLink>
-                        ) : (
-                          <Link
-                            href={hotel.pageUrl}
-                            prefetch={false}
-                            className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1"
-                          >
-                            <span>Check Rates</span>
-                            <span>&rarr;</span>
-                          </Link>
-                        )}
-                      </div>
+                      )}
+                      <Link
+                        href={hotel.pageUrl}
+                        prefetch={false}
+                        className="text-xs font-semibold text-[#b08d57] hover:underline px-2 py-2 whitespace-nowrap font-manrope"
+                      >
+                        Compare all &rsaquo;
+                      </Link>
                     </div>
                   </div>
                 );
               })}
-            </div>
-          )}
-
-          {/* No Matches Fallback */}
-          {!loading && matchedHotels.length === 0 && (
-            <div className="text-center py-12 px-4 bg-white rounded-2xl border border-gray-200 max-w-lg mx-auto">
-              <span className="text-4xl mb-3 block">🔍</span>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">No exact matches for this specific combination</h3>
-              <p className="text-sm text-gray-500 mb-6">
-                Try widening your budget or selecting &quot;Surprise Me with Any Luxury Tub&quot; to see bathtub stays.
-              </p>
-              <button
-                onClick={handleRestart}
-                className="bg-[#1a6fde] hover:bg-[#1559b8] text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all"
-              >
-                Reset Preferences
-              </button>
-            </div>
-          )}
-
-          {/* Load More Button */}
-          {!loading && matchedHotels.length > visibleResultsCount && (
-            <div className="text-center pt-4">
-              <button
-                onClick={() => setVisibleResultsCount((prev) => prev + 12)}
-                className="px-6 py-3 rounded-xl border border-gray-300 hover:border-gray-400 bg-white text-gray-800 font-bold text-xs shadow-2xs hover:shadow-sm transition-all"
-              >
-                Show More Soak Matches ({matchedHotels.length - visibleResultsCount} remaining) &darr;
-              </button>
             </div>
           )}
         </div>

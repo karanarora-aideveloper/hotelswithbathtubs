@@ -1,69 +1,40 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-
-const DreamSoakMatchmaker = dynamic(
-  () => import('@/components/DreamSoakMatchmaker'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="min-h-[460px] flex flex-col items-center justify-center p-8 text-center bg-white rounded-3xl border border-[#E5E1D8]">
-        <div className="w-10 h-10 rounded-full border-2 border-[#1a6fde] border-t-transparent animate-spin mb-4" />
-        <p className="text-sm font-medium text-slate-600">Loading Dream Soak Matchmaker™...</p>
-      </div>
-    ),
-  }
-);
+import Link from 'next/link';
+import ProgressiveImage from '@/components/ProgressiveImage';
 
 export default function HomeMatchmakerSection() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      if (
-        params.has('vibe') ||
-        params.has('tub') ||
-        params.has('region') ||
-        params.has('budget') ||
-        window.location.hash === '#matchmaker'
-      ) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsOpen(true);
-      }
-    }
-  }, []);
-
-  if (isOpen) {
-    return <DreamSoakMatchmaker embedded={true} />;
-  }
-
   return (
-    <div
-      id="dream-soak-matchmaker"
-      className="w-full bg-white rounded-2xl border border-[#e3e7ef] shadow-xs p-6 sm:p-10 text-center"
-    >
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e9eef7] text-[#14213d] text-xs font-bold tracking-wide uppercase mb-3">
-        <span>✨</span>
-        <span>Bathtub Matchmaker</span>
-      </div>
-      <h2 className="font-playfair text-2xl sm:text-3xl font-semibold text-[#14213d] tracking-tight leading-tight max-w-2xl mx-auto">
-        Find Your Ideal Bathtub Stay in 30 Seconds
-      </h2>
-      <p className="mt-2.5 text-xs sm:text-sm text-[#5b6478] max-w-xl mx-auto leading-relaxed font-manrope">
-        Can&apos;t decide on a destination? Tell us what you are looking for and we&apos;ll match you with rooms with a private tub.
-      </p>
-      <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[10px] bg-[#b08d57] hover:bg-[#9c7b48] text-white text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer font-manrope"
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <div className="bg-white border border-[#e3e7ef] rounded-[16px] overflow-hidden shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="w-full sm:w-40 h-28 relative rounded-[10px] overflow-hidden shrink-0 bg-gray-100">
+            <ProgressiveImage
+              src="https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/fragrant-nature-a-five-star-classified-hotel-agra-1.webp"
+              alt="Hotel room with private bathtub"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-[#b08d57] mb-1 font-manrope">
+              Interactive Quiz
+            </div>
+            <h2 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] mb-1">
+              Find your tub in 4 taps
+            </h2>
+            <p className="text-[13px] text-[#5b6478] font-manrope max-w-md">
+              Take our 30-second matchmaker quiz to discover hotel rooms with private tubs tailored to your trip.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/matchmaker"
+          prefetch={false}
+          className="bg-[#b08d57] hover:bg-[#9c7b48] text-white rounded-[10px] px-5 py-2.5 font-bold text-[13px] transition-colors whitespace-nowrap self-start sm:self-auto inline-flex items-center gap-1.5 shadow-xs font-manrope shrink-0"
         >
-          <span>Start Matchmaker Quiz</span>
+          <span>Start</span>
           <span>&rarr;</span>
-        </button>
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }

@@ -52,7 +52,7 @@ export default function MatchmakerPage() {
     applicationCategory: 'TravelApplication',
     operatingSystem: 'All',
     description:
-      'Interactive hotel finder matching travelers to hotel rooms with private bathtubs and jacuzzi suites based on romantic vibe, style, and budget.',
+      'Interactive hotel finder matching travelers to hotel rooms with private bathtubs and jacuzzi suites based on trip style, tub type, and destination.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -82,15 +82,15 @@ export default function MatchmakerPage() {
   return (
     <StructuredData data={applicationSchema}>
       <StructuredData data={breadcrumbSchema}>
-        <main className="min-h-screen bg-gray-50/50 py-8 sm:py-12">
+        <main className="min-h-screen bg-[#fafbfc] py-6 sm:py-10">
           {/* Breadcrumb Navigation */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-gray-500">
-              <Link href="/" prefetch={false} className="hover:text-[#1a6fde] transition-colors">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 mb-4">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#5b6478] font-manrope">
+              <Link href="/" prefetch={false} className="hover:text-[#14213d] transition-colors">
                 Home
               </Link>
               <span>/</span>
-              <span className="text-gray-900 font-semibold">Dream Soak Matchmaker</span>
+              <span className="text-[#14213d] font-semibold">Dream Soak Matchmaker</span>
             </nav>
           </div>
 
@@ -98,66 +98,66 @@ export default function MatchmakerPage() {
           <DreamSoakMatchmaker embedded={false} />
 
           {/* Why Use the Matchmaker Section */}
-          <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-8 border-t border-gray-200">
-            <h2 className="font-heading text-2xl sm:text-3xl font-black text-gray-900 text-center mb-8">
-              Why Couples Love the Dream Soak Matchmaker
+          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-10 mt-8 border-t border-[#e3e7ef]">
+            <h2 className="font-playfair text-xl sm:text-2xl font-semibold text-[#14213d] text-center mb-6">
+              Why Travelers Use the Bathtub Matchmaker
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                <span className="text-3xl mb-3 block">🎯</span>
-                <h3 className="font-bold text-gray-900 text-base mb-2">Zero Guesswork</h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  We don’t just show hotels that have a tub somewhere on the property. Every match features a bathtub or jacuzzi inside the private room.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+              <div className="bg-white p-5 rounded-[14px] border border-[#e3e7ef] shadow-xs">
+                <span className="text-2xl mb-2.5 block">🎯</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1.5">Direct Room Matching</h3>
+                <p className="text-xs text-[#5b6478] font-manrope leading-relaxed">
+                  We focus exclusively on private tubs. Every match corresponds to a hotel room with an in-room or private terrace bathtub.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                <span className="text-3xl mb-3 block">💌</span>
-                <h3 className="font-bold text-gray-900 text-base mb-2">Share Directly with Partner</h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Found top contenders? Tap &quot;Share with Partner&quot; to send a pre-filled WhatsApp or iMessage link with your exact matched choices.
+              <div className="bg-white p-5 rounded-[14px] border border-[#e3e7ef] shadow-xs">
+                <span className="text-2xl mb-2.5 block">💌</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1.5">Share with Travel Partner</h3>
+                <p className="text-xs text-[#5b6478] font-manrope leading-relaxed">
+                  Found matching stays? Tap &quot;Share matches&quot; to copy a shareable link with your exact matched choices.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                <span className="text-3xl mb-3 block">🛡️</span>
-                <h3 className="font-bold text-gray-900 text-base mb-2">Partner Room Details</h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Matched against room details on booking partner listings so you can easily find rooms with private tubs.
+              <div className="bg-white p-5 rounded-[14px] border border-[#e3e7ef] shadow-xs">
+                <span className="text-2xl mb-2.5 block">🛡️</span>
+                <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1.5">Partner Room Details</h3>
+                <p className="text-xs text-[#5b6478] font-manrope leading-relaxed">
+                  Matched against room details on booking partner listings so you can review tub descriptions before you book.
                 </p>
               </div>
             </div>
           </section>
 
           {/* Long-tail SEO FAQs */}
-          <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-12">
-            <h3 className="font-heading text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">
+          <section className="max-w-3xl mx-auto px-4 sm:px-6 py-6 mb-10">
+            <h3 className="font-playfair text-lg sm:text-xl font-semibold text-[#14213d] mb-5 text-center">
               Frequently Asked Questions
             </h3>
-            <div className="space-y-4">
-              <div className="bg-white p-5 rounded-xl border border-gray-200">
-                <h4 className="font-bold text-gray-900 text-sm mb-1">
+            <div className="space-y-3">
+              <div className="bg-white p-4 sm:p-5 rounded-[12px] border border-[#e3e7ef]">
+                <h4 className="font-semibold text-[#14213d] text-sm mb-1 font-manrope">
                   How does the Dream Soak Matchmaker score hotels?
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Our algorithm analyzes room-level bathtub metadata (hydro whirlpools, clawfoot tubs, deep soaking baths, cedar onsens), room tiers, traveler review sentiment, and location ambiance to return the highest-scoring properties for your specific fantasy.
+                <p className="text-xs text-[#5b6478] leading-relaxed font-manrope">
+                  Our algorithm analyzes room-level bathtub metadata (hydro whirlpools, clawfoot tubs, deep soaking baths, cedar onsens), room tiers, and destination to return matching properties for your specific trip.
                 </p>
               </div>
 
-              <div className="bg-white p-5 rounded-xl border border-gray-200">
-                <h4 className="font-bold text-gray-900 text-sm mb-1">
+              <div className="bg-white p-4 sm:p-5 rounded-[12px] border border-[#e3e7ef]">
+                <h4 className="font-semibold text-[#14213d] text-sm mb-1 font-manrope">
                   Can I book directly through the matchmaker?
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Yes. Each matched card includes direct links to official booking partners (Booking.com, Agoda, MakeMyTrip) pre-filtered to the hotel listing, or you can explore the hotel’s full photo gallery and room tier guide right here.
+                <p className="text-xs text-[#5b6478] leading-relaxed font-manrope">
+                  Each matched card includes direct links to official booking partners (Booking.com, Agoda, MakeMyTrip) pre-filtered to the hotel listing, or you can explore the hotel details and room tier guide right here.
                 </p>
               </div>
 
-              <div className="bg-white p-5 rounded-xl border border-gray-200">
-                <h4 className="font-bold text-gray-900 text-sm mb-1">
+              <div className="bg-white p-4 sm:p-5 rounded-[12px] border border-[#e3e7ef]">
+                <h4 className="font-semibold text-[#14213d] text-sm mb-1 font-manrope">
                   Are the bathtubs private to the room?
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs text-[#5b6478] leading-relaxed font-manrope">
                   We focus on private bathtubs. We exclude shared spas, communal swimming pools, and public hotel wellness centers. Only hotels with private in-room bathtubs or private balcony tubs are included in our directory.
                 </p>
               </div>

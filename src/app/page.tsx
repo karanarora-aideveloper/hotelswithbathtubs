@@ -8,6 +8,7 @@ import LuxuryTrustProof from '@/components/luxury/LuxuryTrustProof';
 import LuxuryFAQ, { FAQS } from '@/components/luxury/LuxuryFAQ';
 import HomeDestinationsClient from '@/components/HomeDestinationsClient';
 import RecentlyViewedRow from '@/components/RecentlyViewedRow';
+import HomeMatchmakerSection from '@/components/HomeMatchmakerSection';
 
 interface AggregatedCityRaw {
   _id: { city: string; country: string };
@@ -312,26 +313,7 @@ export default async function Home() {
           <LuxuryTrustProof />
 
           {/* Find your tub in 4 taps teaser card */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-            <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-5 sm:p-6 shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="font-playfair text-[20px] sm:text-[22px] font-semibold text-[#14213d] mb-1">
-                  Find your tub in 4 taps
-                </h2>
-                <p className="text-[13px] text-[#5b6478]">
-                  Pick your destination, tub style, and trip dates to see matching stays.
-                </p>
-              </div>
-              <Link
-                href="/matchmaker"
-                prefetch={false}
-                className="bg-[#b08d57] hover:bg-[#9c7b48] text-white rounded-[10px] px-5 py-2.5 font-bold text-[13px] transition-colors whitespace-nowrap self-start sm:self-auto inline-flex items-center gap-1.5 shadow-xs font-manrope"
-              >
-                <span>Start</span>
-                <span>&rarr;</span>
-              </Link>
-            </div>
-          </section>
+          <HomeMatchmakerSection />
 
           {/* Destination Discovery Hub */}
           <section
