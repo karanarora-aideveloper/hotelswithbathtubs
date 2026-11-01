@@ -7,16 +7,11 @@ import Blog from '@/models/Blog';
 import StructuredData from '@/components/StructuredData';
 import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { slugify, titleCase } from '@/lib/utils';
-import dynamic from 'next/dynamic';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { getBathtubLabel } from '@/lib/evidence';
 import OutboundLink from '@/components/OutboundLink';
 import TrendingDestinations from '@/components/TrendingDestinations';
-
-const RomanticGetawayEmailCapture = dynamic(
-  () => import('@/components/RomanticGetawayEmailCapture'),
-  { ssr: false }
-);
+import LazyEmailCapture from '@/components/LazyEmailCapture';
 
 export const revalidate = 86400; // Daily revalidation
 
@@ -488,7 +483,7 @@ export default async function CoupleFriendlyPage() {
 
         {/* Romantic Getaway Secret Drop Email Capture */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-4 pb-10">
-          <RomanticGetawayEmailCapture destinationName="Top Romantic Getaways" />
+          <LazyEmailCapture destinationName="Top Romantic Getaways" />
         </div>
 
         {/* Global Catalog Footer / Trending Destinations */}

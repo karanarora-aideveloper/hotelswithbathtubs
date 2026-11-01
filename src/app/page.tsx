@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
 import StructuredData from '@/components/StructuredData';
