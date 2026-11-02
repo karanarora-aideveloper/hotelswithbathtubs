@@ -1,6 +1,6 @@
 'use client';
 
-import { sendBookingClick } from '@/lib/events';
+import { sendBookingClick, getRouteContext, normalizePlacement, type BookingPlacement } from '@/lib/events';
 import { wrapOutboundAffiliateLink, type TripDates } from '@/lib/affiliate';
 
 export default function OutboundLink({
@@ -9,7 +9,9 @@ export default function OutboundLink({
   className,
   hotelName,
   cityName,
+  countryName,
   source,
+  placement,
   dates,
 }: {
   href: string;
@@ -17,7 +19,9 @@ export default function OutboundLink({
   className?: string;
   hotelName?: string;
   cityName?: string;
+  countryName?: string;
   source?: string;
+  placement?: BookingPlacement | string;
   dates?: TripDates;
 }) {
   const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
@@ -32,11 +36,31 @@ export default function OutboundLink({
       rel="noopener noreferrer nofollow sponsored"
       className={className}
       onClick={() => {
+        // Resolve placement: explicit prop first, then route-inferred fallback, then source
+        let resolvedPlacement: BookingPlacement = 'other';
+        if (placement) {
+          resolvedPlacement = normalizePlacement(placement);
+        } else {
+          const route = getRouteContext();
+          if (route.page_type === 'hotel') {
+            resolvedPlacement = 'hotel_page';
+          } else if (route.page_type === 'destination') {
+            resolvedPlacement = 'city_card';
+          } else if (route.page_type === 'matchmaker') {
+            resolvedPlacement = 'matchmaker';
+          } else if (route.page_type === 'blog') {
+            resolvedPlacement = 'blog';
+          } else {
+            resolvedPlacement = normalizePlacement(source);
+          }
+        }
+
         // Fire GA4 booking_click key conversion event
         sendBookingClick({
           partner: source || affiliateLink,
-          placement: source || 'other',
+          placement: resolvedPlacement,
           hotel_name: hotelName,
+          country: countryName,
           city: cityName,
         });
 

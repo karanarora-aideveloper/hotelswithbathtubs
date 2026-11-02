@@ -195,7 +195,9 @@ export default function HotelAnalyticsComparison({
                 key={partner.name}
                 href={partner.url}
                 source={partner.source}
+                placement="hotel_page"
                 cityName={cityName}
+                countryName={countryName}
                 hotelName={hotel.name}
                 className={`inline-flex items-center justify-between gap-3 px-5 py-3 rounded-xl font-bold text-sm transition-all shadow-xs hover:shadow-md ${partner.bgClass}`}
               >

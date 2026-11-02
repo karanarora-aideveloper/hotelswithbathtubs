@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, Suspense } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { applyGAExclusion, setRuntimeGAId } from '@/lib/gtag';
 import { sendPageView } from '@/lib/events';
 
 function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   // Check exclusion on mount and when gaId changes
   useEffect(() => {
@@ -28,7 +27,7 @@ function GoogleAnalyticsTracker({ gaId }: { gaId?: string }) {
       page_path: pathname,
       page_title: document.title,
     });
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }

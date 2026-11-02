@@ -63,10 +63,56 @@ export function normalizePlacement(sourceOrPlacement?: string): BookingPlacement
   if (!sourceOrPlacement) return 'other';
   const lower = sourceOrPlacement.toLowerCase();
   if (lower.includes('matchmaker')) return 'matchmaker';
-  if (lower.includes('city') || lower.includes('card')) return 'city_card';
-  if (lower.includes('hotel') || lower.includes('detail')) return 'hotel_page';
-  if (lower.includes('blog')) return 'blog';
+  if (
+    lower.includes('city') ||
+    lower.includes('card') ||
+    lower.includes('hub') ||
+    lower.includes('wishlist') ||
+    lower.includes('featured')
+  ) {
+    return 'city_card';
+  }
+  if (
+    lower.includes('hotel') ||
+    lower.includes('detail') ||
+    lower.includes('wheretobook') ||
+    lower.includes('analytics')
+  ) {
+    return 'hotel_page';
+  }
+  if (lower.includes('blog') || lower.includes('guide')) return 'blog';
   return 'other';
+}
+
+/**
+ * Normalizes country strings/slugs to display names matching hotel data ("USA", "India", etc.).
+ * Returns empty string if no country.
+ */
+export function formatCountryName(raw?: string): string {
+  if (!raw || !raw.trim()) return '';
+  const clean = raw.trim();
+  const lower = clean.toLowerCase().replace(/[\s_]+/g, '-');
+  if (lower === 'usa' || lower === 'united-states' || lower === 'us') return 'USA';
+  if (lower === 'uk' || lower === 'united-kingdom' || lower === 'great-britain' || lower === 'gb') return 'UK';
+  if (lower === 'uae' || lower === 'united-arab-emirates') return 'UAE';
+  if (lower === 'india' || lower === 'in') return 'India';
+  return clean
+    .split(/[- ]+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
+
+/**
+ * Normalizes city strings/slugs to display names matching hotel data ("Sedona", "Las Vegas", etc.).
+ * Returns empty string if no city.
+ */
+export function formatCityName(raw?: string): string {
+  if (!raw || !raw.trim()) return '';
+  const clean = raw.trim();
+  return clean
+    .split(/[- ]+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
 }
 
 /**
@@ -94,17 +140,25 @@ export function getRouteContext(pathname?: string): {
 
   // e.g. /usa or /india
   if (segments.length === 1) {
-    return { page_type: 'destination', country: segments[0], city: '' };
+    return { page_type: 'destination', country: formatCountryName(segments[0]), city: '' };
   }
 
   // e.g. /usa/sedona or /usa/sedona/jacuzzi
   if (segments.length === 2 || (segments.length === 3 && segments[2] === 'jacuzzi')) {
-    return { page_type: 'destination', country: segments[0], city: segments[1] };
+    return {
+      page_type: 'destination',
+      country: formatCountryName(segments[0]),
+      city: formatCityName(segments[1]),
+    };
   }
 
   // e.g. /usa/sedona/the-joy-sedona
   if (segments.length >= 3) {
-    return { page_type: 'hotel', country: segments[0], city: segments[1] };
+    return {
+      page_type: 'hotel',
+      country: formatCountryName(segments[0]),
+      city: formatCityName(segments[1]),
+    };
   }
 
   return { page_type: 'other', country: '', city: '' };
@@ -124,16 +178,24 @@ export function getVisitorCountry(): string {
 
 /**
  * Combines core parameters for all GA4 events:
- * page_type, country, city, hotel_name (when present), and visitor_country
+ * page_type, country, city, hotel_name (when present), and visitor_country.
+ * Country and city are always normalized to display names ("USA", "India", "Sedona")
+ * or empty string when absent.
  */
 function buildCoreParams(params?: Partial<CoreEventParams>): CoreEventParams {
   const route = getRouteContext();
   const visitor_country = params?.visitor_country ?? getVisitorCountry();
 
+  const rawCountry = params?.country !== undefined ? params.country : route.country;
+  const rawCity = params?.city !== undefined ? params.city : route.city;
+
+  const country = formatCountryName(rawCountry);
+  const city = formatCityName(rawCity);
+
   return {
     page_type: params?.page_type || route.page_type,
-    country: params?.country ?? route.country,
-    city: params?.city ?? route.city,
+    country,
+    city,
     ...(params?.hotel_name ? { hotel_name: params.hotel_name } : {}),
     ...(visitor_country ? { visitor_country } : {}),
   };
@@ -305,12 +367,13 @@ export function sendWishlistAdd(params: {
  */
 export function sendMatchmakerStart(params?: Partial<CoreEventParams>) {
   if (!shouldSendEvent()) return;
-  const core = buildCoreParams({ ...params, page_type: 'matchmaker' });
+  const core = buildCoreParams({ ...params, page_type: 'matchmaker', country: '', city: '' });
   sendGA4Event('matchmaker_start', core);
 }
 
 /**
- * 9. matchmaker_complete - Matchmaker results screen is shown with tailored matches
+ * 9. matchmaker_complete - Matchmaker results screen is shown with tailored matches.
+ * Per spec, region is recorded in answers, and country is left empty.
  */
 export function sendMatchmakerComplete(params: {
   answers: string;
@@ -320,8 +383,8 @@ export function sendMatchmakerComplete(params: {
   if (!shouldSendEvent()) return;
   const core = buildCoreParams({
     page_type: 'matchmaker',
-    country: params.country,
-    city: params.city,
+    country: '',
+    city: '',
   });
   const payload = {
     ...core,

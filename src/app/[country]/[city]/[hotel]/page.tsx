@@ -601,6 +601,7 @@ export default async function HotelDetailPage({
                   url={partnerUrl}
                   hotelName={hotel.name}
                   cityName={cityName}
+                  countryName={countryName}
                   isConfirmedBooking={isConfirmedBooking}
                 />
               );

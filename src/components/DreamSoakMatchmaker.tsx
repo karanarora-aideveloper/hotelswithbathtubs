@@ -617,14 +617,7 @@ export default function DreamSoakMatchmaker({
       .filter(Boolean)
       .join(' / ');
 
-    const country =
-      selectedRegion === 'usa'
-        ? 'United States'
-        : selectedRegion === 'india'
-        ? 'India'
-        : undefined;
-
-    sendMatchmakerComplete({ answers, country });
+    sendMatchmakerComplete({ answers });
 
     if (typeof window !== 'undefined') {
       const url = new URL(window.location.href);
@@ -1122,6 +1115,7 @@ export default function DreamSoakMatchmaker({
                           hotelName={hotel.name}
                           cityName={hotel.city}
                           source="matchmaker_cta"
+                          placement="matchmaker"
                           className="flex-1 bg-[#14213d] hover:bg-[#1f2e4d] text-white text-xs font-bold py-2 px-3 rounded-[8px] text-center transition-colors font-manrope"
                         >
                           Check {primaryBooking.name}

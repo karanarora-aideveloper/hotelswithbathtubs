@@ -39,6 +39,8 @@ Every event carries uniform core parameters (`page_type`, `country`, `city`, and
 
 ### Configuration
 - **Measurement ID Location**: `.env.local` -> `NEXT_PUBLIC_GA_MEASUREMENT_ID` (or MongoDB `Settings.googleAnalyticsId` managed in `/admin/seo`).
+- **Initialization & Deduplication**: Initialized with `send_page_view: false` in `src/app/layout.tsx` (`gtag('config', gaId, { page_path, send_page_view: false })`), ensuring GA4 does not send an automatic duplicate `page_view`. Centralized `GoogleAnalyticsProvider` fires exactly one `page_view` per route on path change (query parameter changes do not refire).
+- **Uniform Country & City Display Names**: Across all 10 events, `country` and `city` always use display names matching hotel data ("USA", "India", "Sedona") via `formatCountryName` and `formatCityName`, and empty string `""` on pages without a country. For the matchmaker, the region answer is stored in `answers`, leaving `country: ""` empty.
 - **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin` or `/opt-out`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
 - **Privacy & Consent**: In UK, EEA, and Switzerland, analytics events are blocked unless consent has been granted (`hasAnalyticsConsent()`). Never collects or passes PII.
 

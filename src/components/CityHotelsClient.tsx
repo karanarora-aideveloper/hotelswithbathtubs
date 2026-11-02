@@ -692,8 +692,10 @@ export default function CityHotelsClient({
                                 key={partner}
                                 href={partnerUrl}
                                 source={partner}
+                                placement="city_card"
                                 hotelName={h.name}
                                 cityName={h.city || cityName}
+                                countryName={h.country || countryName}
                                 className="inline-flex items-center justify-center border-[1.5px] border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white rounded-[9px] px-2.5 sm:px-3 py-1.5 font-bold text-[11px] sm:text-xs transition-colors whitespace-nowrap text-center"
                               >
                                 {partner} ›
