@@ -1,6 +1,7 @@
 import { hasClaimPhrase } from '@/lib/claims';
 import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
 import { cleanOutboundUrl } from '@/lib/affiliate';
+import { tubWord } from '@/lib/tubWords';
 
 export { isHotelConfirmed };
 
@@ -44,18 +45,24 @@ export function getTubWord(hotel?: {
   return 'bathtub';
 }
 
-export function getBathtubLabel(hotel?: {
-  bathtubConfirmed?: boolean | null;
-  tubType?: string;
-  roomType?: string;
-  importBatch?: string | null;
-  bookingTubLabels?: string[] | null;
-}): string {
+export function getBathtubLabel(
+  hotel?: {
+    bathtubConfirmed?: boolean | null;
+    tubType?: string;
+    roomType?: string;
+    importBatch?: string | null;
+    bookingTubLabels?: string[] | null;
+    country?: string | null;
+  },
+  country?: string | null
+): string {
   if (isHotelConfirmed(hotel)) {
     const word = getTubWord(hotel);
     return `In-room ${word}`;
   }
-  return 'Bathtub not yet confirmed';
+  const targetCountry = country || hotel?.country;
+  const word = tubWord(hotel?.tubType || '', targetCountry);
+  return `${word} not yet confirmed`;
 }
 
 export function getFirstPartner(hotel: {

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { sendSearch } from '@/lib/events';
 import { useGeo } from '@/lib/useGeo';
 import { getCountryDisplayName } from '@/lib/countries';
+import { tubWord } from '@/lib/tubWords';
 
 export type SearchItem = {
   type: 'city' | 'hotel' | 'country';
@@ -348,10 +349,10 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
                       className="w-full text-[15px] font-medium text-[#14213d] bg-transparent border-0 p-0 focus:outline-none cursor-pointer appearance-none pr-5 font-manrope"
                     >
                       <option value="all">Any tub</option>
-                      <option value="bathtub">Bathtub</option>
-                      <option value="jetted">Jetted tub</option>
-                      <option value="hot">Hot tub</option>
-                      <option value="soaking">Soaking tub</option>
+                      <option value="bathtub">{tubWord('bathtub', geo.countryCode)}</option>
+                      <option value="jetted">{tubWord('jetted', geo.countryCode)}</option>
+                      <option value="hot">{tubWord('hot', geo.countryCode)}</option>
+                      <option value="soaking">{tubWord('soaking', geo.countryCode)}</option>
                     </select>
                     <span className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-[#5b6478] pointer-events-none">
                       ▾

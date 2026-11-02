@@ -8,6 +8,7 @@ import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
 import { sendViewDestination, sendFilterUsed } from '@/lib/events';
 import { isHotelConfirmed, getLinkedPartners, getPartnerUrl, formatProofDate } from '@/lib/evidence';
+import { tubWord } from '@/lib/tubWords';
 import { FavoriteButton } from '@/components/Favorites';
 import OutboundLink from '@/components/OutboundLink';
 
@@ -385,7 +386,7 @@ export default function CityHotelsClient({
             </button>
           )}
 
-          {/* Pill 2: Jetted tub */}
+          {/* Pill 2: Jetted tub (localized) */}
           <button
             type="button"
             onClick={() => handleFilterClick(selectedFilter === 'jacuzzi' ? 'all' : 'jacuzzi')}
@@ -395,10 +396,10 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Jetted tub
+            {tubWord('jetted', countryName)}
           </button>
 
-          {/* Pill 3: Bathtub */}
+          {/* Pill 3: Bathtub (localized) */}
           <button
             type="button"
             onClick={() => handleFilterClick(selectedFilter === 'soaking' ? 'all' : 'soaking')}
@@ -408,10 +409,10 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Bathtub
+            {tubWord('bathtub', countryName)}
           </button>
 
-          {/* Pill 4: Hot tub */}
+          {/* Pill 4: Hot tub (localized) */}
           <button
             type="button"
             onClick={() => setSelectedTubCategory(selectedTubCategory === 'Hot tub' ? 'all' : 'Hot tub')}
@@ -421,7 +422,7 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Hot tub
+            {tubWord('hot', countryName)}
           </button>
 
           {/* Pill 5: Filters ⌄ */}
@@ -569,11 +570,8 @@ export default function CityHotelsClient({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredHotels.slice(0, visibleCount).map((h, i) => {
                 const tubLower = (h.tubType || '').toLowerCase();
-                const tubWords = tubLower.includes('hot tub')
-                  ? 'hot tub'
-                  : tubLower.includes('jetted') || tubLower.includes('jacuzzi') || tubLower.includes('whirlpool') || tubLower.includes('hydro')
-                  ? 'jetted tub'
-                  : 'bathtub';
+                const hotelCountry = h.country || countryName;
+                const cardTubWord = tubWord(tubLower, hotelCountry).toLowerCase();
 
                 const linkedPartners = getLinkedPartners(h);
 
@@ -632,7 +630,7 @@ export default function CityHotelsClient({
                             image: h.image || '',
                             price: h.price,
                             rating: h.rating,
-                            tubType: h.tubType || tubWords,
+                            tubType: h.tubType || cardTubWord,
                             bookingUrl: h.bookingUrl,
                             agodaUrl: h.agodaUrl,
                             airbnbUrl: h.airbnbUrl,
@@ -668,15 +666,15 @@ export default function CityHotelsClient({
                       <div className="text-[13px] leading-[1.45] bg-[#e9eef7] text-[#14213d] rounded-[10px] p-[9px_11px] mb-3">
                         {isHotelConfirmed(h) ? (
                           h.roomType ? (
-                            <>Book the <strong className="font-bold">{h.roomType}</strong> for an in-room {tubWords}</>
+                            <>Book the <strong className="font-bold">{h.roomType}</strong> for an in-room {cardTubWord}</>
                           ) : (
-                            <>In-room <strong className="font-bold">{tubWords}</strong></>
+                            <>In-room <strong className="font-bold">{cardTubWord}</strong></>
                           )
                         ) : (
                           h.roomType ? (
                             <>Reported room: <strong className="font-bold">{h.roomType}</strong>. Check room details before booking.</>
                           ) : (
-                            <>A bathtub is reported; check room details before booking.</>
+                            <>A {cardTubWord} is reported; check room details before booking.</>
                           )
                         )}
                         {isHotelConfirmed(h) && formatProofDate(h.importBatch) && (

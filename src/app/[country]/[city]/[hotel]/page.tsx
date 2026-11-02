@@ -538,7 +538,7 @@ export default async function HotelDetailPage({
         countryName={countryName}
         roomType={hotel.roomType}
         listedPlatformsText={listedPlatformsText}
-        bathtubLabel={getBathtubLabel(hotel)}
+        bathtubLabel={getBathtubLabel(hotel, countryName)}
         bathtubConfirmed={isHotelConfirmed(hotel)}
       />
 
@@ -814,7 +814,7 @@ export default async function HotelDetailPage({
                             : 'bg-[#e3e7ef] text-[#5b6478]'
                         }`}>
                           {isHotelConfirmed(sim) && <span>✓</span>}
-                          {getBathtubLabel(sim)}
+                          {getBathtubLabel(sim, countryName)}
                         </span>
                       </div>
                     </Link>

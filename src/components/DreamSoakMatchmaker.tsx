@@ -7,6 +7,8 @@ import { cleanOutboundUrl } from '@/lib/affiliate';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { sendMatchmakerStart, sendMatchmakerComplete } from '@/lib/events';
 import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
+import { useGeo } from '@/lib/useGeo';
+import { tubWord } from '@/lib/tubWords';
 
 export interface MatchmakerHotel {
   name: string;
@@ -111,6 +113,35 @@ export const TUB_OPTIONS = [
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/kyoto-the-ritz-carlton-kyoto-1.webp',
   },
 ];
+
+export function getLocalizedTubLabel(id: TubId, country?: string | null): string {
+  const jettedW = tubWord('jetted', country);
+  const bathW = tubWord('bathtub', country);
+  const soakW = tubWord('soaking', country);
+  const hotW = tubWord('hot', country);
+
+  if (id === 'jetted') {
+    if (jettedW === 'Spa bath') return 'Spa bath (whirlpool & jacuzzi)';
+    if (jettedW === 'Whirlpool') return 'Whirlpool (hydro-massage)';
+    return `${jettedW} (whirlpool & hydro)`;
+  }
+  if (id === 'soaking') {
+    return soakW === 'Soaking bath' ? 'Deep soaking bath' : 'Deep soaking tub';
+  }
+  if (id === 'hot_tub') {
+    return hotW;
+  }
+  if (id === 'freestanding') {
+    return bathW === 'Bath' ? 'Freestanding bath' : 'Freestanding bathtub';
+  }
+  if (id === 'clawfoot') {
+    return bathW === 'Bath' ? 'Vintage clawfoot bath' : 'Vintage clawfoot tub';
+  }
+  if (id === 'onsen') {
+    return 'Japanese Hinoki / Onsen';
+  }
+  return id;
+}
 
 export const REGION_OPTIONS = [
   {
@@ -374,6 +405,8 @@ export default function DreamSoakMatchmaker({
   const [selectedRegion, setSelectedRegion] = useState<RegionId | null>(initialRegion || null);
   const [selectedTraveler, setSelectedTraveler] = useState<TravelerId | null>(null);
 
+  const { geo } = useGeo();
+
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [animating, setAnimating] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
@@ -478,9 +511,13 @@ export default function DreamSoakMatchmaker({
         if (selectedRegion && !matchesRegion(country, selectedRegion)) continue;
         if (matchesTub(allText, tub.id)) count++;
       }
-      return { ...tub, count };
+      return {
+        ...tub,
+        label: getLocalizedTubLabel(tub.id, geo.countryCode),
+        count,
+      };
     }).filter((tub) => tub.count >= 3);
-  }, [allHotels, selectedVibe, selectedRegion]);
+  }, [allHotels, selectedVibe, selectedRegion, geo.countryCode]);
 
   // 3. Step 3 (Region) visible options: given selectedVibe and selectedTub if set
   const visibleRegions = useMemo(() => {
@@ -686,7 +723,14 @@ export default function DreamSoakMatchmaker({
   };
 
   const activeVibe = VIBE_OPTIONS.find((v) => v.id === selectedVibe);
-  const activeTub = TUB_OPTIONS.find((t) => t.id === selectedTub);
+  const activeTub = useMemo(() => {
+    const found = TUB_OPTIONS.find((t) => t.id === selectedTub);
+    if (!found) return undefined;
+    return {
+      ...found,
+      label: getLocalizedTubLabel(found.id, geo.countryCode),
+    };
+  }, [selectedTub, geo.countryCode]);
   const activeRegion = REGION_OPTIONS.find((r) => r.id === selectedRegion);
   const activeTraveler = TRAVELER_OPTIONS.find((tr) => tr.id === selectedTraveler);
 
