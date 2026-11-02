@@ -52,8 +52,9 @@ function isJacuzziRoom(h) {
   if (!h) return false;
   const tub = typeof h.tubType === 'string' ? h.tubType : '';
   const room = typeof h.roomType === 'string' ? h.roomType : '';
+  const amenities = Array.isArray(h.amenities) ? h.amenities.join(' ') : (typeof h.amenities === 'string' ? h.amenities : '');
   const pattern = /jacuzzi|whirlpool|hot tub|jetted|hydro/i;
-  return pattern.test(tub) || pattern.test(room);
+  return pattern.test(tub) || pattern.test(room) || pattern.test(amenities);
 }
 
 function resolveCountry(country) {
@@ -92,7 +93,7 @@ const neighborhoodCanonicalMap = {
   'paharganj': 'delhi',
 };
 
-const MIN_HOTELS_TO_INDEX = 2;
+const MIN_HOTELS_TO_INDEX = 1;
 
 function shouldIndexDestination(hotelCount) {
   return (hotelCount || 0) >= MIN_HOTELS_TO_INDEX;
@@ -158,8 +159,9 @@ export function generateSplitSitemaps() {
 
     const hotelSlug = slugify(h.slug || h.name);
     if (hotelSlug) {
-      const hotelUrl = `${baseUrl}/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
-      if (!seenHotelUrls.has(hotelUrl)) {
+      const hotelPath = `/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
+      const hotelUrl = `${baseUrl}${hotelPath}`;
+      if (!seenHotelUrls.has(hotelUrl) && !redirectSet.has(hotelPath)) {
         seenHotelUrls.add(hotelUrl);
         const item = {
           url: hotelUrl,
@@ -197,21 +199,25 @@ export function generateSplitSitemaps() {
     { url: `${baseUrl}/cookies`, lastModified: new Date('2026-08-01T00:00:00.000Z'), priority: 0.3 },
   ];
 
-  const countryRoutes = Array.from(countryLastMod.keys()).map((countrySlug) => ({
-    url: `${baseUrl}/${countrySlug}`,
-    lastModified: countryLastMod.get(countrySlug),
-    priority: 0.85,
-  }));
+  const countryRoutes = Array.from(countryLastMod.keys())
+    .filter((countrySlug) => !redirectSet.has(`/${countrySlug}`))
+    .map((countrySlug) => ({
+      url: `${baseUrl}/${countrySlug}`,
+      lastModified: countryLastMod.get(countrySlug),
+      priority: 0.85,
+    }));
 
   const usaLastMod = countryLastMod.get('usa');
-  const stateRoutes = US_STATES.map((slug) => ({
-    url: `${baseUrl}/usa/${slug}`,
-    lastModified: usaLastMod,
-    priority: 0.85,
-  }));
+  const stateRoutes = US_STATES
+    .filter((slug) => !redirectSet.has(`/usa/${slug}`))
+    .map((slug) => ({
+      url: `${baseUrl}/usa/${slug}`,
+      lastModified: usaLastMod,
+      priority: 0.85,
+    }));
 
   const locationRoutes = Array.from(locationLastMod.keys())
-    .filter((loc) => shouldIndexDestination(locationHotelCount.get(loc)))
+    .filter((loc) => shouldIndexDestination(locationHotelCount.get(loc)) && !redirectSet.has(`/${loc}`))
     .map((loc) => ({
       url: `${baseUrl}/${loc}`,
       lastModified: locationLastMod.get(loc),
@@ -219,7 +225,7 @@ export function generateSplitSitemaps() {
     }));
 
   const jacuzziRoutes = Array.from(locationJacuzziCount.keys())
-    .filter((loc) => shouldIndexDestination(locationJacuzziCount.get(loc)))
+    .filter((loc) => shouldIndexDestination(locationJacuzziCount.get(loc)) && !redirectSet.has(`/${loc}/jacuzzi`))
     .map((loc) => ({
       url: `${baseUrl}/${loc}/jacuzzi`,
       lastModified: locationLastMod.get(loc),

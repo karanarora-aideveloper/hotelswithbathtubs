@@ -20,7 +20,8 @@ const JACUZZI_FILTER = {
   flagged: { $ne: true },
   $or: [
     { tubType: /jacuzzi|whirlpool|hot tub|jetted|hydro/i },
-    { roomType: /jacuzzi|whirlpool|hot tub|jetted|hydro/i }
+    { roomType: /jacuzzi|whirlpool|hot tub|jetted|hydro/i },
+    { amenities: /jacuzzi|hot tub|whirlpool/i }
   ]
 };
 

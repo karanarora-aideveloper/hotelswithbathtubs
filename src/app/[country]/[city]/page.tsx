@@ -540,14 +540,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   if (allConfirmed) {
     introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
   } else {
-    const baseSentence = `${countLead} where a bathtub is listed or reported: ${confirmedCount} confirmed on a booking site, ${unconfirmedCount} reported but not yet confirmed.`;
     if (confirmedCount > 0 && tubPhrase) {
       const confirmedNoun = confirmedCount === 1
         ? (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed rental includes' : 'The confirmed hotel includes')
         : (confirmedHotels.every((h) => isVacationRental(h)) ? 'The confirmed vacation rentals include' : (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed stays include' : 'The confirmed hotels include'));
-      introSentence1 = `${baseSentence} ${confirmedNoun} ${tubPhrase}.`;
-    } else {
-      introSentence1 = baseSentence;
+      introSentence1 = `${confirmedNoun} ${tubPhrase}.`;
     }
   }
 
@@ -731,7 +728,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               : `Hotels in ${cityName} with a tub in the room`}
           </h1>
           <p className="text-[13px] text-[#5b6478] mt-1.5">
-            {hotels.length} hotels · {confirmedHotels.length} with the tub proven on Booking.com
+            {confirmedHotels.length > 0
+              ? `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. ${confirmedHotels.length} are proven on a booking site so far.`
+              : `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. None are proven on a booking site yet.`}
           </p>
         </div>
       </div>
@@ -751,20 +750,23 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 space-y-8">
         {/* Editorial Honest Intro & Booking Links Notice */}
         <div className="bg-white border border-[#e3e7ef] rounded-2xl p-4 sm:p-6 text-xs sm:text-sm text-[#5b6478] leading-relaxed shadow-xs">
-          <p>
-            {stateConfig ? (
-              (() => {
-                const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
-                return filteredStateIntro || `${introSentence1}${introSentence2 ? ` ${introSentence2}` : ''}`;
-              })()
-            ) : (
-              <>
-                {introSentence1}
-                {introSentence2 ? ` ${introSentence2}` : ''}
-              </>
-            )}
-          </p>
-          <p className="mt-2 text-[11px] text-[#5b6478]/80">
+          {(stateConfig || introSentence1 || introSentence2) && (
+            <p>
+              {stateConfig ? (
+                (() => {
+                  const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
+                  return filteredStateIntro || `${introSentence1}${introSentence2 ? ` ${introSentence2}` : ''}`;
+                })()
+              ) : (
+                <>
+                  {introSentence1}
+                  {introSentence1 && introSentence2 ? ` ` : ''}
+                  {introSentence2}
+                </>
+              )}
+            </p>
+          )}
+          <p className={(stateConfig || introSentence1 || introSentence2) ? "mt-2 text-[11px] text-[#5b6478]/80" : "text-[11px] text-[#5b6478]/80"}>
             Links go straight to the booking site. We don&apos;t earn a commission from them today.
           </p>
         </div>
@@ -834,7 +836,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#e3e7ef]">
               <div>
                 <h3 className="font-playfair text-lg font-semibold text-[#14213d]">
-                  All {hotels.length} Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
+                  All {hotels.length} hotels in {cityName}
                 </h3>
                 <p className="text-xs text-[#5b6478] mt-0.5">
                   We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.

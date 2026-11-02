@@ -7,7 +7,7 @@ import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
 import { sendViewDestination, sendFilterUsed } from '@/lib/events';
-import { isHotelConfirmed, getLinkedPartners, getPartnerUrl } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners, getPartnerUrl, formatProofDate } from '@/lib/evidence';
 import { FavoriteButton } from '@/components/Favorites';
 import OutboundLink from '@/components/OutboundLink';
 
@@ -678,6 +678,11 @@ export default function CityHotelsClient({
                           ) : (
                             <>A bathtub is reported; check room details before booking.</>
                           )
+                        )}
+                        {isHotelConfirmed(h) && formatProofDate(h.importBatch) && (
+                          <div className="text-[11px] text-[#1f6f5c] mt-1 font-medium font-manrope">
+                            Proof saved {formatProofDate(h.importBatch)}
+                          </div>
                         )}
                       </div>
 

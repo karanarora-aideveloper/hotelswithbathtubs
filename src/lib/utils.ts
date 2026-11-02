@@ -72,8 +72,9 @@ export function isJacuzziRoom(hotel?: any): boolean {
   if (!hotel) return false;
   const tub = typeof hotel.tubType === 'string' ? hotel.tubType : '';
   const room = typeof hotel.roomType === 'string' ? hotel.roomType : '';
+  const amenities = Array.isArray(hotel.amenities) ? hotel.amenities.join(' ') : (typeof hotel.amenities === 'string' ? hotel.amenities : '');
   const pattern = /jacuzzi|whirlpool|hot tub|jetted|hydro/i;
-  return pattern.test(tub) || pattern.test(room);
+  return pattern.test(tub) || pattern.test(room) || pattern.test(amenities);
 }
 
 /**

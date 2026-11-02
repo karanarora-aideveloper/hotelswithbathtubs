@@ -4,6 +4,18 @@ import { cleanOutboundUrl } from '@/lib/affiliate';
 
 export { isHotelConfirmed };
 
+export function formatProofDate(importBatch?: string | null): string | null {
+  if (!importBatch) return null;
+  const match = importBatch.match(/\b(\d{4})-(\d{2})-(\d{2})\b/);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const monthIdx = parseInt(month, 10) - 1;
+  if (monthIdx < 0 || monthIdx > 11) return null;
+  const dayNum = parseInt(day, 10);
+  return `${dayNum} ${months[monthIdx]} ${year}`;
+}
+
 export function getTubWord(hotel?: {
   bookingTubLabels?: string[] | null;
   tubType?: string | null;
