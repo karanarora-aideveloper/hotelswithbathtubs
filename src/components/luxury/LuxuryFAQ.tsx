@@ -30,7 +30,7 @@ export const FAQS = [
 export default function LuxuryFAQ() {
   return (
     <section id="faq" aria-label="Frequently Asked Questions" className="bg-[#f5f6f8] py-8 sm:py-12 border-t border-[#e3e7ef]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#b08d57] mb-1.5 font-manrope">
             Common Questions

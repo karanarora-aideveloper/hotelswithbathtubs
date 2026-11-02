@@ -135,8 +135,36 @@ async function getCities() {
   });
 }
 
+async function getHomeStats() {
+  try {
+    await connectToDatabase();
+    const totalHotels = await Hotel.countDocuments({ flagged: { $ne: true } });
+    const countries = await Hotel.distinct('country', { flagged: { $ne: true } });
+    const provenCount = await Hotel.countDocuments({
+      flagged: { $ne: true },
+      importBatch: { $ne: null },
+      bookingTubLabels: { $exists: true, $not: { $size: 0 } },
+    });
+    return {
+      totalHotels: totalHotels || 5286,
+      totalCountries: countries.length || 119,
+      provenCount: provenCount || 497,
+    };
+  } catch (err) {
+    console.warn('Failed to fetch home stats, using fallbacks:', err);
+    return {
+      totalHotels: 5286,
+      totalCountries: 119,
+      provenCount: 497,
+    };
+  }
+}
+
 export default async function Home() {
-  const cities = await getCities();
+  const [cities, stats] = await Promise.all([
+    getCities(),
+    getHomeStats(),
+  ]);
 
   // Separate into United States, Global, and India destinations
   const usaCities = cities.filter((c) => {
@@ -191,7 +219,70 @@ export default async function Home() {
       hotelCount: getCityCount('London'),
       image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/timeless-victorian-retreat-by-hyde-park-london-1758-1.webp',
     },
+    {
+      name: 'Goa',
+      href: '/india/goa',
+      hotelCount: getCityCount('Goa'),
+      image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/elegant-2-bhk-apartments-in-peaceful-siolim-9-1.webp',
+    },
+    {
+      name: 'Branson',
+      href: '/usa/branson',
+      hotelCount: getCityCount('Branson'),
+      image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/all-american-inn-suites-branson-1.webp',
+    },
   ];
+
+  // Precompute top 5 cities per country for the hero pills
+  const popularCitiesMap: Record<string, { city: string; countrySlug: string }[]> = {
+    IN: [
+      { city: 'Delhi', countrySlug: 'india' },
+      { city: 'Goa', countrySlug: 'india' },
+      { city: 'Rishikesh', countrySlug: 'india' },
+      { city: 'Agra', countrySlug: 'india' },
+      { city: 'Mumbai', countrySlug: 'india' },
+    ],
+    US: [
+      { city: 'Las Vegas', countrySlug: 'usa' },
+      { city: 'Orlando', countrySlug: 'usa' },
+      { city: 'Houston', countrySlug: 'usa' },
+      { city: 'San Diego', countrySlug: 'usa' },
+      { city: 'New York', countrySlug: 'usa' },
+    ],
+    GB: [
+      { city: 'London', countrySlug: 'uk' },
+      { city: 'Edinburgh', countrySlug: 'uk' },
+      { city: 'Manchester', countrySlug: 'uk' },
+      { city: 'Bristol', countrySlug: 'uk' },
+      { city: 'Bath', countrySlug: 'uk' },
+    ],
+    GLOBAL: [
+      { city: 'Las Vegas', countrySlug: 'usa' },
+      { city: 'Delhi', countrySlug: 'india' },
+      { city: 'Orlando', countrySlug: 'usa' },
+      { city: 'Houston', countrySlug: 'usa' },
+      { city: 'San Diego', countrySlug: 'usa' },
+    ],
+  };
+
+  for (const c of cities) {
+    const rawCountry = (c._id.country || '').toLowerCase().trim();
+    let code = '';
+    let cSlug = '';
+    if (rawCountry === 'india') { code = 'IN'; cSlug = 'india'; }
+    else if (rawCountry === 'usa' || rawCountry === 'united states') { code = 'US'; cSlug = 'usa'; }
+    else if (rawCountry === 'uk' || rawCountry === 'united kingdom') { code = 'GB'; cSlug = 'uk'; }
+    else {
+      code = rawCountry.toUpperCase();
+      cSlug = rawCountry.replace(/\s+/g, '-');
+    }
+    if (code && !popularCitiesMap[code]) popularCitiesMap[code] = [];
+    if (code && popularCitiesMap[code].length < 5) {
+      if (!popularCitiesMap[code].some((item) => item.city === c._id.city)) {
+        popularCitiesMap[code].push({ city: c._id.city, countrySlug: cSlug });
+      }
+    }
+  }
 
   const schema = {
     "@context": "https://schema.org",
@@ -272,35 +363,35 @@ export default async function Home() {
       <StructuredData data={breadcrumbSchema} />
       <StructuredData data={faqSchema}>
         <div className="min-h-screen bg-[#f5f6f8] text-[#14213d]">
-          {/* Hero & Search matching Style B mockup */}
-          <LuxuryHero />
+          {/* Hero & Search matching Option A mockup */}
+          <LuxuryHero stats={stats} popularCitiesMap={popularCitiesMap} />
 
           {/* Recently Viewed */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6">
+          <section className="max-w-[1200px] mx-auto px-4 sm:px-8">
             <RecentlyViewedRow className="my-4 sm:my-6" />
           </section>
 
-          {/* Popular destinations matching Style B mockup */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-            <h2 className="font-playfair text-[24px] sm:text-[26px] font-semibold text-[#14213d] mb-1">
+          {/* Popular destinations matching Option A mockup */}
+          <section className="max-w-[1200px] mx-auto px-4 sm:px-8 py-6 sm:py-8">
+            <h2 className="font-playfair text-[24px] sm:text-[26px] md:text-[34px] font-semibold text-[#14213d] mb-1">
               Popular destinations
             </h2>
-            <div className="text-[13px] text-[#5b6478] mb-4 font-manrope">
+            <div className="text-[13px] text-[#5b6478] mb-4 sm:mb-6 font-manrope">
               Hotels with a tub in the room
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               {popularDestinations.map((dest) => (
                 <Link
                   key={dest.name}
                   href={dest.href}
                   prefetch={false}
-                  className="relative h-[150px] rounded-[14px] bg-center bg-cover overflow-hidden group block shadow-xs"
+                  className="relative h-[150px] lg:h-[220px] rounded-[16px] bg-center bg-cover overflow-hidden group block shadow-xs"
                   style={{ backgroundImage: `url(${dest.image})` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent group-hover:from-black/85 transition-colors" />
-                  <span className="absolute left-3 bottom-2.5 text-white font-playfair text-[20px] font-semibold leading-tight drop-shadow-sm">
+                  <span className="absolute left-3.5 bottom-3 text-white font-playfair text-[20px] lg:text-[21px] font-semibold leading-tight drop-shadow-sm">
                     {dest.name}
-                    <small className="block font-manrope text-[11px] font-normal text-white/90">
+                    <small className="block font-manrope text-[12px] font-normal text-white/90">
                       {dest.hotelCount} hotels
                     </small>
                   </span>
@@ -309,7 +400,7 @@ export default async function Home() {
             </div>
           </section>
 
-          {/* How we check a bathtub matching Style B mockup */}
+          {/* How we check a bathtub matching Option A mockup */}
           <LuxuryTrustProof />
 
           {/* Find your tub in 4 taps teaser card */}
@@ -318,7 +409,7 @@ export default async function Home() {
           {/* Destination Discovery Hub */}
           <section
             id="destinations"
-            className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 scroll-mt-24"
+            className="max-w-[1200px] mx-auto px-4 sm:px-8 py-6 sm:py-8 space-y-8 scroll-mt-24"
           >
             <HomeDestinationsClient
               usaCities={topUsaCities}
@@ -331,38 +422,38 @@ export default async function Home() {
           </section>
 
           {/* Plain-Language Tub Types Guide */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-            <h2 className="font-playfair text-[22px] sm:text-[26px] font-semibold text-[#14213d] mb-1">
+          <section className="max-w-[1200px] mx-auto px-4 sm:px-8 py-6 sm:py-8">
+            <h2 className="font-playfair text-[24px] sm:text-[26px] md:text-[34px] font-semibold text-[#14213d] mb-1">
               Tub types
             </h2>
-            <div className="text-[13px] text-[#5b6478] mb-4">
+            <div className="text-[13px] text-[#5b6478] mb-4 sm:mb-6">
               The three styles of tubs you will find in our listings
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+              <div className="bg-white border border-[#e3e7ef] rounded-[16px] p-5 shadow-xs">
                 <span className="text-2xl mb-2 block">🛁</span>
                 <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
                   Bathtub
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed font-manrope">
                   A bathtub is a normal tub to soak in.
                 </p>
               </div>
-              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+              <div className="bg-white border border-[#e3e7ef] rounded-[16px] p-5 shadow-xs">
                 <span className="text-2xl mb-2 block">🫧</span>
                 <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
                   Jetted tub
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed font-manrope">
                   A jetted tub is a bathtub with powered water jets for massage.
                 </p>
               </div>
-              <div className="bg-white border border-[#e3e7ef] rounded-[14px] p-4 shadow-xs">
+              <div className="bg-white border border-[#e3e7ef] rounded-[16px] p-5 shadow-xs">
                 <span className="text-2xl mb-2 block">♨️</span>
                 <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1">
                   Hot tub
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed font-manrope">
                   A hot tub is a heated tub with water jets.
                 </p>
               </div>

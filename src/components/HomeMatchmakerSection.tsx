@@ -3,7 +3,7 @@ import ProgressiveImage from '@/components/ProgressiveImage';
 
 export default function HomeMatchmakerSection() {
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
+    <section className="max-w-[1200px] mx-auto px-4 sm:px-8 py-4 sm:py-6">
       <div className="bg-white border border-[#e3e7ef] rounded-[16px] overflow-hidden shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           <div className="w-full sm:w-40 h-28 relative rounded-[10px] overflow-hidden shrink-0 bg-gray-100">

@@ -300,6 +300,26 @@ export default function CityHotelsClient({
     sendViewDestination({ country: countryName, city: cityName });
   }, [countryName, cityName]);
 
+  // Handle ?tub= query parameter on load / URL changes
+  useEffect(() => {
+    function applyTubParam() {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const tub = params.get('tub')?.toLowerCase();
+      if (!tub) return;
+      if (tub === 'jetted') {
+        setSelectedFilter('jacuzzi');
+      } else if (tub === 'bathtub' || tub === 'soaking') {
+        setSelectedFilter('soaking');
+      } else if (tub === 'hot') {
+        setSelectedTubCategory('Hot tub');
+      }
+    }
+    applyTubParam();
+    window.addEventListener('popstate', applyTubParam);
+    return () => window.removeEventListener('popstate', applyTubParam);
+  }, []);
+
   const handleFilterClick = (filter: 'all' | 'jacuzzi' | 'soaking' | 'tripled') => {
     setSelectedFilter(filter);
     sendFilterUsed({
