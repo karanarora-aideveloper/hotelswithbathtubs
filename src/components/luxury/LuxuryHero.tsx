@@ -23,21 +23,15 @@ type SearchData = {
 };
 
 export interface LuxuryHeroStats {
-  totalHotels: number;
-  totalCountries: number;
-  provenCount: number;
+  totalHotels?: number;
+  totalCountries?: number;
+  provenCount?: number;
 }
 
 interface LuxuryHeroProps {
-  stats?: LuxuryHeroStats;
+  stats?: LuxuryHeroStats | null;
   popularCitiesMap?: Record<string, { city: string; countrySlug: string }[]>;
 }
-
-const DEFAULT_STATS: LuxuryHeroStats = {
-  totalHotels: 5286,
-  totalCountries: 119,
-  provenCount: 497,
-};
 
 const DEFAULT_GLOBAL_CITIES = [
   { city: 'Las Vegas', countrySlug: 'usa' },
@@ -59,7 +53,8 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
   const containerRef = useRef<HTMLDivElement>(null);
   const isFetchingSearch = useRef(false);
 
-  const heroStats = stats || DEFAULT_STATS;
+  const hasStats = Boolean(stats && (stats.totalHotels ?? 0) > 0 && (stats.totalCountries ?? 0) > 0);
+  const hasProven = Boolean(stats && (stats.provenCount ?? 0) > 0);
 
   // Track localStorage hwb_country directly for instant response to test changes
   const [storedCountry, setStoredCountry] = useState<string | null>(null);
@@ -285,9 +280,11 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-8 text-center text-white flex flex-col items-center justify-center">
           <div className="w-full">
             {/* Eyebrow: computed from data */}
-            <div className="text-[12px] tracking-[0.24em] uppercase text-white/90 mb-3 font-semibold font-manrope">
-              {heroStats.totalHotels.toLocaleString()} hotels · {heroStats.totalCountries} countries
-            </div>
+            {hasStats && (
+              <div className="text-[12px] tracking-[0.24em] uppercase text-white/90 mb-3 font-semibold font-manrope">
+                {stats!.totalHotels!.toLocaleString()} hotels · {stats!.totalCountries} countries
+              </div>
+            )}
 
             {/* Title H1 */}
             <h1 className="w-full font-playfair text-white text-[38px] sm:text-[54px] md:text-[64px] leading-[1.05] font-semibold mb-3 tracking-tight">
@@ -303,11 +300,11 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
             <div
               ref={containerRef}
               onMouseEnter={loadSearchData}
-              className="relative w-full max-w-xl mx-auto bg-white rounded-[16px] p-2 flex flex-col sm:flex-row items-stretch shadow-[0_18px_50px_rgba(10,20,45,0.25)] text-left gap-0 text-[#14213d]"
+              className="relative w-full max-w-[850px] mx-auto bg-white rounded-[16px] p-2 flex flex-col sm:flex-row items-stretch shadow-[0_18px_50px_rgba(10,20,45,0.25)] text-left gap-0 text-[#14213d]"
             >
               <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-stretch w-full gap-0">
                 {/* Where input */}
-                <div className="flex-1 px-4 py-2 sm:py-2.5 sm:border-r border-[#e3e7ef] border-b sm:border-b-0">
+                <div className="flex-[1.4] px-4 py-2 sm:py-2.5 sm:border-r border-[#e3e7ef] border-b sm:border-b-0">
                   <label
                     htmlFor="destination-hotel-search"
                     className="block text-[11px] tracking-[0.12em] uppercase text-[#14213d] mb-1 font-bold font-manrope"
@@ -422,10 +419,12 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
             </div>
 
             {/* Proof line: computed from data */}
-            <div className="inline-flex items-center justify-center gap-2 text-[14px] text-white/95 mt-5 sm:mt-6 font-manrope">
-              <span className="w-2 h-2 rounded-full bg-[#3ccf8e] shrink-0 inline-block" />
-              <span>{heroStats.provenCount.toLocaleString()} hotels have the tub proven on a booking site</span>
-            </div>
+            {hasProven && (
+              <div className="inline-flex items-center justify-center gap-2 text-[14px] text-white/95 mt-5 sm:mt-6 font-manrope">
+                <span className="w-2 h-2 rounded-full bg-[#3ccf8e] shrink-0 inline-block" />
+                <span>{stats!.provenCount!.toLocaleString()} hotels have the tub proven on a booking site</span>
+              </div>
+            )}
           </div>
         </div>
 

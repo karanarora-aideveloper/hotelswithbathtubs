@@ -1,5 +1,6 @@
 import connectToDatabase from '@/lib/mongodb';
 import Hotel from '@/models/Hotel';
+import { DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import StructuredData from '@/components/StructuredData';
 import Link from 'next/link';
 import type { PipelineStage } from 'mongoose';
@@ -31,13 +32,13 @@ export const metadata = {
   title: {
     absolute: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
-  description: 'Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.',
+  description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com',
   },
   openGraph: {
     title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
-    description: 'Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.',
+    description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -53,7 +54,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
-    description: 'Find 4,400+ hotels with private bathtubs in room & jacuzzi suites across 119 countries. Private tubs, checked per hotel.',
+    description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -135,28 +136,30 @@ async function getCities() {
   });
 }
 
-async function getHomeStats() {
+async function getHomeStats(): Promise<{ totalHotels: number; totalCountries: number; provenCount: number } | null> {
   try {
     await connectToDatabase();
-    const totalHotels = await Hotel.countDocuments({ flagged: { $ne: true } });
-    const countries = await Hotel.distinct('country', { flagged: { $ne: true } });
-    const provenCount = await Hotel.countDocuments({
+    const dropSlugs = Array.from(DUPLICATE_DROP_SLUGS);
+    const filter = {
       flagged: { $ne: true },
+      slug: { $nin: dropSlugs },
+    };
+    const totalHotels = await Hotel.countDocuments(filter);
+    const countries = await Hotel.distinct('country', filter);
+    const provenCount = await Hotel.countDocuments({
+      ...filter,
       importBatch: { $ne: null },
       bookingTubLabels: { $exists: true, $not: { $size: 0 } },
     });
+    if (!totalHotels || totalHotels <= 0) return null;
     return {
-      totalHotels: totalHotels || 5286,
-      totalCountries: countries.length || 119,
-      provenCount: provenCount || 497,
+      totalHotels,
+      totalCountries: countries.length,
+      provenCount,
     };
   } catch (err) {
-    console.warn('Failed to fetch home stats, using fallbacks:', err);
-    return {
-      totalHotels: 5286,
-      totalCountries: 119,
-      provenCount: 497,
-    };
+    console.warn('Failed to fetch home stats:', err);
+    return null;
   }
 }
 
