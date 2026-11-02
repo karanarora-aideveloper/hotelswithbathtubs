@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
-import { getUrlDirectnessTier } from '@/lib/affiliate';
+import { getUrlDirectnessTier, cleanOutboundUrl } from '@/lib/affiliate';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import WhereToBookRow from '@/components/WhereToBookRow';
 import HotelGallery from '@/components/HotelGallery';
@@ -366,12 +366,35 @@ export default async function HotelDetailPage({
     notFound();
   }
 
+  if (hotel.bookingUrl) hotel.bookingUrl = cleanOutboundUrl(hotel.bookingUrl);
+  if (hotel.url) hotel.url = cleanOutboundUrl(hotel.url);
+  if (hotel.agodaUrl) hotel.agodaUrl = cleanOutboundUrl(hotel.agodaUrl);
+  if (hotel.mmtUrl) hotel.mmtUrl = cleanOutboundUrl(hotel.mmtUrl);
+  if (hotel.makemytripUrl) hotel.makemytripUrl = cleanOutboundUrl(hotel.makemytripUrl);
+  if (hotel.tripUrl) hotel.tripUrl = cleanOutboundUrl(hotel.tripUrl);
+  if (hotel.expediaUrl) hotel.expediaUrl = cleanOutboundUrl(hotel.expediaUrl);
+  if (hotel.hotelsComUrl) hotel.hotelsComUrl = cleanOutboundUrl(hotel.hotelsComUrl);
+  if (hotel.airbnbUrl) hotel.airbnbUrl = cleanOutboundUrl(hotel.airbnbUrl);
+  if (hotel.vrboUrl) hotel.vrboUrl = cleanOutboundUrl(hotel.vrboUrl);
+
   const cityName = titleCase(rawCity);
   const countryName = countryInfo.displayName;
   const countrySlug = countryInfo.slug;
   const citySlug = slugify(rawCity);
   const hotelSlug = slugify(hotel.slug || hotel.name);
   const similarHotels = await getSimilarHotels(resolvedParams.country, resolvedParams.city, hotelSlug);
+
+  for (const s of similarHotels) {
+    if (s.bookingUrl) s.bookingUrl = cleanOutboundUrl(s.bookingUrl);
+    if (s.url) s.url = cleanOutboundUrl(s.url);
+    if (s.agodaUrl) s.agodaUrl = cleanOutboundUrl(s.agodaUrl);
+    if (s.mmtUrl) s.mmtUrl = cleanOutboundUrl(s.mmtUrl);
+    if (s.tripUrl) s.tripUrl = cleanOutboundUrl(s.tripUrl);
+    if (s.expediaUrl) s.expediaUrl = cleanOutboundUrl(s.expediaUrl);
+    if (s.hotelsComUrl) s.hotelsComUrl = cleanOutboundUrl(s.hotelsComUrl);
+    if (s.airbnbUrl) s.airbnbUrl = cleanOutboundUrl(s.airbnbUrl);
+    if (s.vrboUrl) s.vrboUrl = cleanOutboundUrl(s.vrboUrl);
+  }
 
   // Breadcrumb Schema
   const breadcrumbSchema = {
@@ -819,7 +842,7 @@ export default async function HotelDetailPage({
 
         {/* Disclaimer footer matching Style B mockup */}
         <div className="pt-8 pb-4 text-[11px] text-[#5b6478] leading-relaxed text-center">
-          Prices change by date and are shown on each booking site. We may earn a commission when you book, at no extra cost to you.
+          Prices change by date and are shown on each booking site. Links go straight to the booking site. We don&apos;t earn a commission from them today.
         </div>
       </div>
     </>

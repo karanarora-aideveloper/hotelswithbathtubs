@@ -11,6 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import { dropIntroClaimSentences } from '@/lib/claims';
 import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -347,13 +348,13 @@ export default async function CityHotelsPage({
       image: h.image,
       images: Array.isArray(h.images) && h.images.length > 0 ? h.images.slice(0, 3) : (h.image ? [h.image] : []),
       partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
-      url: h.url,
-      agodaUrl: h.agodaUrl,
-      bookingUrl: h.bookingUrl,
-      airbnbUrl: h.airbnbUrl,
-      tripUrl: h.tripUrl,
-      mmtUrl: h.mmtUrl || h.makemytripUrl,
-      cleartripUrl: h.cleartripUrl,
+      url: h.url ? cleanOutboundUrl(h.url) : h.url,
+      agodaUrl: h.agodaUrl ? cleanOutboundUrl(h.agodaUrl) : h.agodaUrl,
+      bookingUrl: h.bookingUrl ? cleanOutboundUrl(h.bookingUrl) : h.bookingUrl,
+      airbnbUrl: h.airbnbUrl ? cleanOutboundUrl(h.airbnbUrl) : h.airbnbUrl,
+      tripUrl: h.tripUrl ? cleanOutboundUrl(h.tripUrl) : h.tripUrl,
+      mmtUrl: (h.mmtUrl || h.makemytripUrl) ? cleanOutboundUrl(h.mmtUrl || h.makemytripUrl) : (h.mmtUrl || h.makemytripUrl),
+      cleartripUrl: h.cleartripUrl ? cleanOutboundUrl(h.cleartripUrl) : h.cleartripUrl,
       bathtubConfirmed: isHotelConfirmed(h),
       amenities: (h.amenities || []).slice(0, 6),
       description: cleanDesc,
@@ -748,7 +749,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       })()}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 space-y-8">
-        {/* Editorial Honest Intro & Commission Disclosure */}
+        {/* Editorial Honest Intro & Booking Links Notice */}
         <div className="bg-white border border-[#e3e7ef] rounded-2xl p-4 sm:p-6 text-xs sm:text-sm text-[#5b6478] leading-relaxed shadow-xs">
           <p>
             {stateConfig ? (
@@ -764,7 +765,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             )}
           </p>
           <p className="mt-2 text-[11px] text-[#5b6478]/80">
-            We earn a commission if you book through our links, at no extra cost to you.
+            Links go straight to the booking site. We don&apos;t earn a commission from them today.
           </p>
         </div>
 

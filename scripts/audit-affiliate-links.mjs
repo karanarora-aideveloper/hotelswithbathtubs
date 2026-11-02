@@ -40,7 +40,7 @@ function classifyUrl(platform, initialUrl, finalUrl = '', title = '', status = 2
 
   // 2. Booking.com
   if (platform === 'booking') {
-    if (!initialUrl.includes('aid=304142')) return 'wrong-params';
+    if (initialUrl.includes('aid=') && !initialUrl.includes('aid=304142')) return 'wrong-params';
     // Dead slug redirects to city page or closed_msg in title/URL
     if (
       fin.includes('/city/') ||

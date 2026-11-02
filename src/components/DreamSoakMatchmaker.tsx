@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import OutboundLink from '@/components/OutboundLink';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { sendMatchmakerStart, sendMatchmakerComplete } from '@/lib/events';
 import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
@@ -690,10 +691,10 @@ export default function DreamSoakMatchmaker({
   const activeTraveler = TRAVELER_OPTIONS.find((tr) => tr.id === selectedTraveler);
 
   const getPrimaryBooking = (hotel: MatchmakerHotel) => {
-    if (hotel.bookingUrl) return { name: 'Booking.com', url: hotel.bookingUrl };
-    if (hotel.agodaUrl) return { name: 'Agoda', url: hotel.agodaUrl };
-    if (hotel.mmtUrl) return { name: 'MakeMyTrip', url: hotel.mmtUrl };
-    if (hotel.url) return { name: 'Partner site', url: hotel.url };
+    if (hotel.bookingUrl) return { name: 'Booking.com', url: cleanOutboundUrl(hotel.bookingUrl) };
+    if (hotel.agodaUrl) return { name: 'Agoda', url: cleanOutboundUrl(hotel.agodaUrl) };
+    if (hotel.mmtUrl) return { name: 'MakeMyTrip', url: cleanOutboundUrl(hotel.mmtUrl) };
+    if (hotel.url) return { name: 'Partner site', url: cleanOutboundUrl(hotel.url) };
     return null;
   };
 

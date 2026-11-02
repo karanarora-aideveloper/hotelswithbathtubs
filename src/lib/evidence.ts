@@ -1,5 +1,6 @@
 import { hasClaimPhrase } from '@/lib/claims';
 import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 
 export { isHotelConfirmed };
 
@@ -204,43 +205,56 @@ export function getPartnerUrl(
   },
   partnerName: string
 ): string {
+  let target = '';
   switch (partnerName) {
     case 'Booking.com':
-      return hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+      target = hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+      break;
     case 'Agoda':
-      return hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+      target = hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+      break;
     case 'MakeMyTrip':
-      return (
+      target = (
         hotel.mmtUrl ||
         hotel.makemytripUrl ||
         (hotel.url && hotel.url.includes('makemytrip.com') ? hotel.url : '')
       );
+      break;
     case 'Cleartrip':
-      return (
+      target = (
         hotel.cleartripUrl ||
         (hotel.url && hotel.url.includes('cleartrip.com') ? hotel.url : '')
       );
+      break;
     case 'EaseMyTrip':
-      return (
+      target = (
         hotel.easemytripUrl ||
         (hotel.url && hotel.url.includes('easemytrip.com') ? hotel.url : '')
       );
+      break;
     case 'Airbnb':
-      return hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+      target = hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+      break;
     case 'Trip.com':
-      return hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+      target = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+      break;
     case 'Expedia':
-      return hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+      target = hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+      break;
     case 'Hotels.com':
-      return (
+      target = (
         hotel.hotelsComUrl ||
         (hotel.url && hotel.url.includes('hotels.com') ? hotel.url : '')
       );
+      break;
     case 'Vrbo':
-      return hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+      target = hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+      break;
     default:
-      return hotel.url || '';
+      target = hotel.url || '';
+      break;
   }
+  return target ? cleanOutboundUrl(target) : '';
 }
 
 export interface EvidenceLineData {

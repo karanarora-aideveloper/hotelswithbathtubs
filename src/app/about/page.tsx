@@ -46,7 +46,7 @@ export default function AboutUs() {
 
           <h2>Editorial Independence &amp; Integrity</h2>
           <p>
-            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. While we participate in affiliate programs with major OTAs (Booking.com, Expedia, Agoda, Trip.com) to maintain our research platform free for readers, our editorial rankings remain editorially independent.
+            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Links go straight to the booking site. We don&apos;t earn a commission from them today. Rankings and proof labels never depend on commercial relationships, and our editorial curation remains independent.
           </p>
 
           <h2>Contact &amp; Editorial Feedback</h2>

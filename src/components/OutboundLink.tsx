@@ -25,15 +25,13 @@ export default function OutboundLink({
   dates?: TripDates;
 }) {
   const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
-  const outHref = href.startsWith('/out?')
-    ? href
-    : `/out?url=${encodeURIComponent(affiliateLink)}`;
+  const outHref = `/out?url=${encodeURIComponent(affiliateLink)}`;
 
   return (
     <a
       href={outHref}
       target="_blank"
-      rel="noopener noreferrer nofollow sponsored"
+      rel="nofollow noopener noreferrer"
       className={className}
       onClick={() => {
         // Resolve placement: explicit prop first, then route-inferred fallback, then source

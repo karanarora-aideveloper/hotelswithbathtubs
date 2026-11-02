@@ -10,6 +10,7 @@ import Blog from '@/models/Blog';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, isValidNeighborhood } from '@/lib/utils';
 import { sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import TrendingDestinations from '@/components/TrendingDestinations';
 
@@ -162,11 +163,11 @@ export default async function CityJacuzziHotelsPage({
       image: h.image,
       images: Array.isArray(h.images) && h.images.length > 0 ? h.images : (h.image ? [h.image] : []),
       partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
-      url: h.url,
-      agodaUrl: h.agodaUrl,
-      bookingUrl: h.bookingUrl,
-      airbnbUrl: h.airbnbUrl,
-      tripUrl: h.tripUrl,
+      url: h.url ? cleanOutboundUrl(h.url) : h.url,
+      agodaUrl: h.agodaUrl ? cleanOutboundUrl(h.agodaUrl) : h.agodaUrl,
+      bookingUrl: h.bookingUrl ? cleanOutboundUrl(h.bookingUrl) : h.bookingUrl,
+      airbnbUrl: h.airbnbUrl ? cleanOutboundUrl(h.airbnbUrl) : h.airbnbUrl,
+      tripUrl: h.tripUrl ? cleanOutboundUrl(h.tripUrl) : h.tripUrl,
       bathtubConfirmed: isHotelConfirmed(h),
       amenities: h.amenities || [],
       description: h.description || '',

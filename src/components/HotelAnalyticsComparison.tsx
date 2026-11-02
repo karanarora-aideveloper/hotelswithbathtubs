@@ -226,9 +226,9 @@ export default function HotelAnalyticsComparison({
           )}
         </div>
 
-        {/* FTC / ASA Reader Disclosure */}
+        {/* Booking Links Notice */}
         <div className="mt-4 pt-3.5 border-t border-[#5b8296]/15 text-[11px] text-slate-500 leading-relaxed font-jakarta">
-          <span className="font-semibold text-slate-700">Reader Disclosure:</span> When you book through our partner links, we may earn an affiliate commission at no extra cost to you. This supports our research and maintenance of this guide.
+          Links go straight to the booking site. We don&apos;t earn a commission from them today.
         </div>
       </section>
     </div>

@@ -331,7 +331,7 @@ export default async function HotelsWithHotTubInRoomPage() {
 
           {/* Reader Disclosure & E-E-A-T Assurance */}
           <div className="p-4 bg-slate-50 border border-gray-200 rounded-2xl text-xs text-gray-500 mb-12">
-            <strong>Affiliate Disclosure:</strong> When you book through our partner links on Booking.com, Agoda, MakeMyTrip, or partner networks, HotelsWithBathtubs may earn an affiliate commission at zero additional charge to you. Learn more in our{' '}
+            Links go straight to the booking site. We don&apos;t earn a commission from them today. Learn more in our{' '}
             <Link href="/editorial-policy" className="text-[#1a6fde] underline">Editorial Policy</Link>.
           </div>
 
