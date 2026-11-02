@@ -21,36 +21,43 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Analytics Tracking — Google Analytics 4 (GA4) & Outbound Click Logging
 
-This project uses **Google Analytics 4 (GA4)** and an edge-intercepted **Outbound Click Log** (`/out` -> `functions/out.ts`) for product analytics, outbound affiliate conversion measurement, and specialized user churn / pain point tracking.
+This project uses **Google Analytics 4 (GA4)** and an edge-intercepted **Outbound Click Log** (`/out` -> `functions/out.ts`) for product analytics, outbound affiliate conversion measurement, and visitor funnel tracking.
 
 ---
 
-## Google Analytics 4 (GA4) Integration & Churn Telemetry
+## Google Analytics 4 (GA4) Integration & 4-Step Funnel
 
-Google Analytics 4 is integrated via `next/script` (lazyOnload) and our custom telemetry layer (`src/lib/gtag.ts` and `src/components/GoogleAnalyticsProvider.tsx`).
+Google Analytics 4 is integrated via `next/script` (lazyOnload) and our centralized telemetry module (`src/lib/events.ts` and `src/lib/gtag.ts`).
+
+### The 4-Step Core Funnel
+1. **Arrive** (`page_view`): Visitor enters any page on the site.
+2. **Pick a place** (`view_destination` or `search`): Visitor explores a city, country, or destination collection.
+3. **Look at a hotel** (`view_hotel`): Visitor inspects a specific hotel and its bathtub proof.
+4. **Booking click** (`booking_click`): Visitor taps an outbound booking button (Booking.com, Agoda, MakeMyTrip, Cleartrip, EaseMyTrip, Expedia, or other partner).
+
+Every event carries uniform core parameters (`page_type`, `country`, `city`, and `hotel_name` where present, plus `visitor_country` via `useGeo()`), allowing the funnel and drop-offs to be cleanly segmented by destination and visitor origin.
 
 ### Configuration
 - **Measurement ID Location**: `.env.local` -> `NEXT_PUBLIC_GA_MEASUREMENT_ID` (or MongoDB `Settings.googleAnalyticsId` managed in `/admin/seo`).
+- **Initialization & Deduplication**: Initialized with `send_page_view: false` in `src/app/layout.tsx` (`gtag('config', gaId, { page_path, send_page_view: false })`), ensuring GA4 does not send an automatic duplicate `page_view`. Centralized `GoogleAnalyticsProvider` fires exactly one `page_view` per route on path change (query parameter changes do not refire).
+- **Uniform Country & City Display Names**: Across all 10 events, `country` and `city` always use display names matching hotel data ("USA", "India", "Sedona") via `formatCountryName` and `formatCityName`, and empty string `""` on pages without a country. For the matchmaker, the region answer is stored in `answers`, leaving `country: ""` empty.
 - **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin` or `/opt-out`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
+- **Privacy & Consent**: In UK, EEA, and Switzerland, analytics events are blocked unless consent has been granted (`hasAnalyticsConsent()`). Never collects or passes PII.
 
-### GA4 Events & Churn / Pain Point Tracking Plan
+### Approved 10 GA4 Events
 
-| GA4 Event | Trigger / Condition | Key Parameters | Purpose / Pain Point Identified |
+| Event | Trigger / Condition | Parameters | Funnel Stage / Purpose |
 |---|---|---|---|
-| `page_view` | User loads or transitions to a route | `page_location`, `page_path`, `page_title`, `page_type`, `country`, `city` | Baseline navigation & funnel entry |
-| `user_churn` | Page unmount, visibility hidden, or tab close without conversion | `churn_type`, `page_path`, `page_type`, `country`, `city`, `time_spent_seconds`, `max_scroll_depth`, `last_visible_section`, `hotels_viewed_count`, `has_converted`, `failed_search`, `failed_filter` | **Primary Churn Metric**. Pinpoints where and why user exited (`quick_bounce`, `shallow_browse`, `engaged_no_click`, `search_abandoned`, `filter_dead_end`, `rage_click_churn`, `converted_exit`) |
-| `search_zero_results` | User searches for a destination that returns 0 matches | `search_term`, `search_source`, `page_path`, `page_type` | **Pain Point**: Missing city / destination inventory demand |
-| `search_abandoned` | User types query (>= 3 chars) but dismisses dropdown without selection | `search_term`, `chars_count`, `page_path` | **Pain Point**: Search UX or incomplete autocomplete matches |
-| `search_selection` | User clicks or selects a city from search | `selected_city`, `selected_country`, `search_term`, `page_path` | Search success & destination intent |
-| `filter_dead_end` | Bathtub filter or hotel keyword returns 0 hotels | `filter_type`, `filter_query`, `city_name`, `page_path` | **Pain Point**: City lacks specific tub type (e.g. Jacuzzi) or hotel |
-| `filter_reset` | User clicks "Reset Filters" after a dead end | `city_name`, `page_path` | Recovery from dead-end filter |
-| `filter_applied` | User toggles bathtub filter pill | `filter_type`, `result_count`, `city_name`, `page_path` | Filter usage & preference trends |
-| `hotel_card_view` | Hotel card enters viewport (>= 30% visibility) | `hotel_name`, `hotel_position`, `has_price`, `city`, `country`, `page_path` | Exact hotels seen before drop-off |
-| `scroll_depth` | User reaches scroll milestones (25%, 50%, 75%, 90%, 100%) | `percent`, `page_path`, `page_type`, `country`, `city` | Drop-off curve & engagement cliff |
-| `exit_intent` | Desktop cursor rapidly moves to browser top bar | `time_spent_seconds`, `max_scroll_depth`, `last_visible_section`, `page_path`, `city`, `country` | Pre-churn hesitation signal |
-| `rage_click` | User clicks 3+ times within 1200ms in a 40px radius | `element_tag`, `element_text`, `element_class`, `page_path`, `page_type` | **Pain Point**: Unresponsive elements, broken buttons, misleading UI |
-| `page_not_found` | User hits a 404 page | `missing_path`, `referrer` | **Pain Point**: Broken internal links or dead backlinks |
-| `hotel_booking_click` | User clicks outbound affiliate link (MakeMyTrip, Booking.com, Agoda) | `hotel_name`, `city_name`, `country_name`, `booking_source`, `destination_url`, `time_to_click_seconds`, `hotels_viewed_count` | **Primary Conversion Event** (marks session as `converted_exit`) |
+| `page_view` | GA4 built-in page view on initial load or route transition | Core parameters (`page_type`, `country`, `city`, `hotel_name`, `visitor_country`), `page_location`, `page_path`, `page_title` | Step 1: Arrive |
+| `view_destination` | Destination city or country page loads | Core parameters (`page_type: 'destination'`, `country`, `city`, `visitor_country`) | Step 2: Pick a place |
+| `view_hotel` | Hotel detail page loads | Core parameters (`page_type: 'hotel'`, `country`, `city`, `hotel_name`, `visitor_country`) | Step 3: Look at a hotel |
+| `booking_click` | Visitor taps an outbound partner booking link (via `OutboundLink`) | Core parameters, `partner` (booking, agoda, makemytrip, cleartrip, easemytrip, expedia, other), `placement` (city_card, hotel_page, matchmaker, blog, other) | Step 4: Booking click (Conversion) |
+| `search` | Destination search term selected or returns 0 results | Core parameters, `term`, `results_count` | Discovery & inventory demand |
+| `filter_used` | Bathtub filter pill or sort order toggled | Core parameters, `filter`, `results_count` | Preference & inventory refinement |
+| `wishlist_add` | Hotel saved to wishlist (heart toggled ON) | Core parameters (`hotel_name`, `country`, `city`) | High intent / consideration save |
+| `matchmaker_start` | First question answered in Dream Soak Matchmaker | Core parameters (`page_type: 'matchmaker'`) | Interactive discovery start |
+| `matchmaker_complete` | Matchmaker results revealed | Core parameters (`page_type: 'matchmaker'`, `country`), `answers` (all 4 options joined by " / ") | Interactive discovery completion |
+| `page_not_found` | Visitor reaches 404 error page | Core parameters, `path`, `referrer` | Broken links & missing routes |
 
 ---
 

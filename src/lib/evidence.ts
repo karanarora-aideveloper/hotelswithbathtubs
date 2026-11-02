@@ -1,7 +1,21 @@
 import { hasClaimPhrase } from '@/lib/claims';
 import { buildHotelDescription, isHotelConfirmed } from '@/lib/hotelText';
+import { cleanOutboundUrl } from '@/lib/affiliate';
+import { tubWord } from '@/lib/tubWords';
 
 export { isHotelConfirmed };
+
+export function formatProofDate(importBatch?: string | null): string | null {
+  if (!importBatch) return null;
+  const match = importBatch.match(/\b(\d{4})-(\d{2})-(\d{2})\b/);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const monthIdx = parseInt(month, 10) - 1;
+  if (monthIdx < 0 || monthIdx > 11) return null;
+  const dayNum = parseInt(day, 10);
+  return `${dayNum} ${months[monthIdx]} ${year}`;
+}
 
 export function getTubWord(hotel?: {
   bookingTubLabels?: string[] | null;
@@ -31,18 +45,24 @@ export function getTubWord(hotel?: {
   return 'bathtub';
 }
 
-export function getBathtubLabel(hotel?: {
-  bathtubConfirmed?: boolean | null;
-  tubType?: string;
-  roomType?: string;
-  importBatch?: string | null;
-  bookingTubLabels?: string[] | null;
-}): string {
+export function getBathtubLabel(
+  hotel?: {
+    bathtubConfirmed?: boolean | null;
+    tubType?: string;
+    roomType?: string;
+    importBatch?: string | null;
+    bookingTubLabels?: string[] | null;
+    country?: string | null;
+  },
+  country?: string | null
+): string {
   if (isHotelConfirmed(hotel)) {
     const word = getTubWord(hotel);
     return `In-room ${word}`;
   }
-  return 'Bathtub not yet confirmed';
+  const targetCountry = country || hotel?.country;
+  const word = tubWord(hotel?.tubType || '', targetCountry);
+  return `${word} not yet confirmed`;
 }
 
 export function getFirstPartner(hotel: {
@@ -204,43 +224,56 @@ export function getPartnerUrl(
   },
   partnerName: string
 ): string {
+  let target = '';
   switch (partnerName) {
     case 'Booking.com':
-      return hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+      target = hotel.bookingUrl || (hotel.url && hotel.url.includes('booking.com') ? hotel.url : '');
+      break;
     case 'Agoda':
-      return hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+      target = hotel.agodaUrl || (hotel.url && hotel.url.includes('agoda.com') ? hotel.url : '');
+      break;
     case 'MakeMyTrip':
-      return (
+      target = (
         hotel.mmtUrl ||
         hotel.makemytripUrl ||
         (hotel.url && hotel.url.includes('makemytrip.com') ? hotel.url : '')
       );
+      break;
     case 'Cleartrip':
-      return (
+      target = (
         hotel.cleartripUrl ||
         (hotel.url && hotel.url.includes('cleartrip.com') ? hotel.url : '')
       );
+      break;
     case 'EaseMyTrip':
-      return (
+      target = (
         hotel.easemytripUrl ||
         (hotel.url && hotel.url.includes('easemytrip.com') ? hotel.url : '')
       );
+      break;
     case 'Airbnb':
-      return hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+      target = hotel.airbnbUrl || (hotel.url && hotel.url.includes('airbnb.com') ? hotel.url : '');
+      break;
     case 'Trip.com':
-      return hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+      target = hotel.tripUrl || (hotel.url && hotel.url.includes('trip.com') ? hotel.url : '');
+      break;
     case 'Expedia':
-      return hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+      target = hotel.expediaUrl || (hotel.url && hotel.url.includes('expedia.com') ? hotel.url : '');
+      break;
     case 'Hotels.com':
-      return (
+      target = (
         hotel.hotelsComUrl ||
         (hotel.url && hotel.url.includes('hotels.com') ? hotel.url : '')
       );
+      break;
     case 'Vrbo':
-      return hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+      target = hotel.vrboUrl || (hotel.url && hotel.url.includes('vrbo.com') ? hotel.url : '');
+      break;
     default:
-      return hotel.url || '';
+      target = hotel.url || '';
+      break;
   }
+  return target ? cleanOutboundUrl(target) : '';
 }
 
 export interface EvidenceLineData {

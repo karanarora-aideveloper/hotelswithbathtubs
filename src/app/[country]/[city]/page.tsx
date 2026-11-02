@@ -11,6 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import { dropIntroClaimSentences } from '@/lib/claims';
 import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -347,13 +348,13 @@ export default async function CityHotelsPage({
       image: h.image,
       images: Array.isArray(h.images) && h.images.length > 0 ? h.images.slice(0, 3) : (h.image ? [h.image] : []),
       partnerImages: Array.isArray(h.partnerImages) ? h.partnerImages.slice(0, 5) : [],
-      url: h.url,
-      agodaUrl: h.agodaUrl,
-      bookingUrl: h.bookingUrl,
-      airbnbUrl: h.airbnbUrl,
-      tripUrl: h.tripUrl,
-      mmtUrl: h.mmtUrl || h.makemytripUrl,
-      cleartripUrl: h.cleartripUrl,
+      url: h.url ? cleanOutboundUrl(h.url) : h.url,
+      agodaUrl: h.agodaUrl ? cleanOutboundUrl(h.agodaUrl) : h.agodaUrl,
+      bookingUrl: h.bookingUrl ? cleanOutboundUrl(h.bookingUrl) : h.bookingUrl,
+      airbnbUrl: h.airbnbUrl ? cleanOutboundUrl(h.airbnbUrl) : h.airbnbUrl,
+      tripUrl: h.tripUrl ? cleanOutboundUrl(h.tripUrl) : h.tripUrl,
+      mmtUrl: (h.mmtUrl || h.makemytripUrl) ? cleanOutboundUrl(h.mmtUrl || h.makemytripUrl) : (h.mmtUrl || h.makemytripUrl),
+      cleartripUrl: h.cleartripUrl ? cleanOutboundUrl(h.cleartripUrl) : h.cleartripUrl,
       bathtubConfirmed: isHotelConfirmed(h),
       amenities: (h.amenities || []).slice(0, 6),
       description: cleanDesc,
@@ -539,14 +540,11 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   if (allConfirmed) {
     introSentence1 = countPhrase ? `${countPhrase}: ${tubPhrase}.` : '';
   } else {
-    const baseSentence = `${countLead} where a bathtub is listed or reported: ${confirmedCount} confirmed on a booking site, ${unconfirmedCount} reported but not yet confirmed.`;
     if (confirmedCount > 0 && tubPhrase) {
       const confirmedNoun = confirmedCount === 1
         ? (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed rental includes' : 'The confirmed hotel includes')
         : (confirmedHotels.every((h) => isVacationRental(h)) ? 'The confirmed vacation rentals include' : (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed stays include' : 'The confirmed hotels include'));
-      introSentence1 = `${baseSentence} ${confirmedNoun} ${tubPhrase}.`;
-    } else {
-      introSentence1 = baseSentence;
+      introSentence1 = `${confirmedNoun} ${tubPhrase}.`;
     }
   }
 
@@ -730,7 +728,9 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               : `Hotels in ${cityName} with a tub in the room`}
           </h1>
           <p className="text-[13px] text-[#5b6478] mt-1.5">
-            {hotels.length} hotels · {confirmedHotels.length} with the tub proven on Booking.com
+            {confirmedHotels.length > 0
+              ? `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. ${confirmedHotels.length} are proven on a booking site so far.`
+              : `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. None are proven on a booking site yet.`}
           </p>
         </div>
       </div>
@@ -748,23 +748,26 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
       })()}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 space-y-8">
-        {/* Editorial Honest Intro & Commission Disclosure */}
+        {/* Editorial Honest Intro & Booking Links Notice */}
         <div className="bg-white border border-[#e3e7ef] rounded-2xl p-4 sm:p-6 text-xs sm:text-sm text-[#5b6478] leading-relaxed shadow-xs">
-          <p>
-            {stateConfig ? (
-              (() => {
-                const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
-                return filteredStateIntro || `${introSentence1}${introSentence2 ? ` ${introSentence2}` : ''}`;
-              })()
-            ) : (
-              <>
-                {introSentence1}
-                {introSentence2 ? ` ${introSentence2}` : ''}
-              </>
-            )}
-          </p>
-          <p className="mt-2 text-[11px] text-[#5b6478]/80">
-            We earn a commission if you book through our links, at no extra cost to you.
+          {(stateConfig || introSentence1 || introSentence2) && (
+            <p>
+              {stateConfig ? (
+                (() => {
+                  const filteredStateIntro = dropIntroClaimSentences(stateConfig.intro);
+                  return filteredStateIntro || `${introSentence1}${introSentence2 ? ` ${introSentence2}` : ''}`;
+                })()
+              ) : (
+                <>
+                  {introSentence1}
+                  {introSentence1 && introSentence2 ? ` ` : ''}
+                  {introSentence2}
+                </>
+              )}
+            </p>
+          )}
+          <p className={(stateConfig || introSentence1 || introSentence2) ? "mt-2 text-[11px] text-[#5b6478]/80" : "text-[11px] text-[#5b6478]/80"}>
+            Links go straight to the booking site. We don&apos;t earn a commission from them today.
           </p>
         </div>
 
@@ -833,7 +836,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#e3e7ef]">
               <div>
                 <h3 className="font-playfair text-lg font-semibold text-[#14213d]">
-                  All {hotels.length} Bathtub Hotels &amp; Jacuzzi Suites in {cityName}
+                  All {hotels.length} hotels in {cityName}
                 </h3>
                 <p className="text-xs text-[#5b6478] mt-0.5">
                   We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.

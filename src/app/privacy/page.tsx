@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'Read the Privacy Policy for Hotels With Bathtubs. Understand how we handle data, our partner-click log, affiliate links, and our commitment to user privacy.',
+  description: 'Read the Privacy Policy for Hotels With Bathtubs. Understand how we handle data, our partner-click log, booking links, and our commitment to user privacy.',
   alternates: {
     canonical: '/privacy',
   },
@@ -43,15 +43,12 @@ export default function PrivacyPolicy() {
             <li><strong>Target Hotel URL &amp; Timestamp:</strong> The partner property link requested and the exact time of the click.</li>
           </ul>
           <p>
-            <strong>Why we record this:</strong> This log helps us identify broken or dead partner links, understand which destinations have active booking demand, and verify affiliate referral activity. We do not record names, emails, payment details, or booking confirmation data.
+            <strong>Why we record this:</strong> This log helps us identify broken or dead partner links and understand which destinations have active booking demand. We do not record names, emails, payment details, or booking confirmation data.
           </p>
 
-          <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Affiliate Links Disclosure</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Outbound Booking Links</h2>
           <p>
-            HotelsWithBathtubs.com is a reader-supported travel resource. We partner with travel affiliate programs, including Booking.com, Agoda, Expedia, and affiliate networks (such as EarnKaro and Cuelinks).
-          </p>
-          <p>
-            When you click through our partner links and complete a booking, we may earn an affiliate commission at no extra cost to you. We recommend rooms based on independently compiled bathtub facts, photos, and room descriptions.
+            Links go straight to the booking site. We don&apos;t earn a commission from them today. We do not use active affiliate links at this time. All booking buttons direct you straight to the partner booking platform without affiliate tracking codes. If affiliate programs are introduced in the future, this policy will be updated with full disclosure. Rankings and proof labels never depend on commercial relationships.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">4. Analytics and Cookies</h2>

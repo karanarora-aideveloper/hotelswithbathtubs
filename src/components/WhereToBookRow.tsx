@@ -8,6 +8,7 @@ export interface WhereToBookRowProps {
   url: string;
   hotelName: string;
   cityName: string;
+  countryName?: string;
   isConfirmedBooking?: boolean;
   price?: string | null;
 }
@@ -17,6 +18,7 @@ export default function WhereToBookRow({
   url,
   hotelName,
   cityName,
+  countryName,
   isConfirmedBooking = false,
   price,
 }: WhereToBookRowProps) {
@@ -40,8 +42,10 @@ export default function WhereToBookRow({
       <OutboundLink
         href={url}
         source={partnerName}
+        placement="hotel_page"
         hotelName={hotelName}
         cityName={cityName}
+        countryName={countryName}
         className="inline-flex items-center justify-center border-[1.5px] border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white rounded-[9px] px-3 py-2 font-bold text-xs transition-colors shrink-0 whitespace-nowrap"
       >
         {buttonText}

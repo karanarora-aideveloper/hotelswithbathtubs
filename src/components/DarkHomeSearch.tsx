@@ -4,11 +4,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useGeo } from '@/lib/useGeo';
-import {
-  recordSearchZeroResults,
-  recordSearchAbandoned,
-  recordSearchSelection,
-} from '@/lib/gtag';
+import { sendSearch } from '@/lib/events';
 import { SearchItem } from './HomeSearch';
 
 type SearchData = {
@@ -58,15 +54,12 @@ export default function DarkHomeSearch() {
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        if (isOpen && query.trim().length >= 3 && !isNavigating) {
-          recordSearchAbandoned(query.trim(), query.trim().length);
-        }
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen, query, isNavigating]);
+  }, []);
 
   const cleanQuery = query.toLowerCase().replace(/,/g, ' ').replace(/\s+/g, ' ').trim();
   const tokens = useMemo(() => cleanQuery.split(' ').filter(Boolean), [cleanQuery]);
@@ -142,14 +135,19 @@ export default function DarkHomeSearch() {
       (searchData.cities?.length || 0) > 0
     ) {
       const timer = setTimeout(() => {
-        recordSearchZeroResults(query.trim(), 'dark_search_empty');
+        sendSearch({ term: query.trim(), results_count: 0 });
       }, 750);
       return () => clearTimeout(timer);
     }
   }, [isOpen, cleanQuery, filtered.length, searchData, query]);
 
   function navigateToItem(item: SearchItem) {
-    recordSearchSelection(item.title, item.subtitle, query.trim());
+    sendSearch({
+      term: query.trim() || item.title,
+      results_count: filtered.length || 1,
+      country: item.subtitle,
+      city: item.title,
+    });
     setIsOpen(false);
     setIsNavigating(true);
     router.push(item.url);
@@ -160,7 +158,7 @@ export default function DarkHomeSearch() {
       const selected = activeIndex >= 0 && activeIndex < filtered.length ? filtered[activeIndex] : filtered[0];
       navigateToItem(selected);
     } else if (query.trim().length > 0) {
-      recordSearchZeroResults(query.trim(), 'dark_search_submit');
+      sendSearch({ term: query.trim(), results_count: 0 });
       setIsOpen(true);
     }
   }
@@ -172,7 +170,7 @@ export default function DarkHomeSearch() {
         if (filtered.length > 0) {
           navigateToItem(filtered[0]);
         } else if (query.trim().length > 0) {
-          recordSearchZeroResults(query.trim(), 'dark_search_enter');
+          sendSearch({ term: query.trim(), results_count: 0 });
           setIsOpen(true);
         }
       }
@@ -279,7 +277,12 @@ export default function DarkHomeSearch() {
                     onClick={() => {
                       setIsOpen(false);
                       setIsNavigating(true);
-                      recordSearchSelection(item.title, item.subtitle, query.trim());
+                      sendSearch({
+                        term: query.trim() || item.title,
+                        results_count: filtered.length || 1,
+                        country: item.subtitle,
+                        city: item.title,
+                      });
                     }}
                     onMouseEnter={() => setActiveIndex(i)}
                     className={`w-full text-left px-4 py-3.5 text-sm transition-colors flex items-center justify-between group ${

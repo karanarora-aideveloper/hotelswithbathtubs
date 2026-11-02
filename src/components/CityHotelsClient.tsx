@@ -6,15 +6,9 @@ import { isDirectPropertyUrl } from '@/lib/affiliate';
 import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
-import { trackEvent } from '@/lib/analytics';
-import { isUserExcluded } from '@/lib/exclusion';
-import {
-  recordHotelImpression,
-  recordFilterDeadEnd,
-  recordFilterReset,
-  recordFilterChange,
-} from '@/lib/gtag';
-import { isHotelConfirmed, getLinkedPartners, getPartnerUrl } from '@/lib/evidence';
+import { sendViewDestination, sendFilterUsed } from '@/lib/events';
+import { isHotelConfirmed, getLinkedPartners, getPartnerUrl, formatProofDate } from '@/lib/evidence';
+import { tubWord } from '@/lib/tubWords';
 import { FavoriteButton } from '@/components/Favorites';
 import OutboundLink from '@/components/OutboundLink';
 
@@ -302,62 +296,39 @@ export default function CityHotelsClient({
     };
   }, [visibleCount, filteredHotels.length]);
 
-  // Track impressions on viewport entry (hotel_card_view)
+  // Track destination page view
   useEffect(() => {
-    const cards = document.querySelectorAll('[data-hotel-card="true"]');
-    if (cards.length === 0) return;
+    sendViewDestination({ country: countryName, city: cityName });
+  }, [countryName, cityName]);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            const name = el.getAttribute('data-hotel-name');
-            const pos = parseInt(el.getAttribute('data-hotel-position') || '1', 10);
-            const hasPrice = el.getAttribute('data-has-price') === 'true';
-            if (name) {
-              recordHotelImpression(name, pos, hasPrice);
-            }
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [filteredHotels]);
-
-  // Dead-end filter detection
+  // Handle ?tub= query parameter on load / URL changes
   useEffect(() => {
-    if (
-      filteredHotels.length === 0 &&
-      (tubProvenOnly || selectedFilter !== 'all' || selectedTubCategory !== 'all' || searchTerm.trim() || stayStyle !== 'all' || priceRange !== 'all')
-    ) {
-      recordFilterDeadEnd(
-        tubProvenOnly ? 'tub_proven' : stayStyle !== 'all' ? stayStyle : selectedTubCategory !== 'all' ? selectedTubCategory : selectedFilter,
-        searchTerm.trim(),
-        cityName
-      );
+    function applyTubParam() {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const tub = params.get('tub')?.toLowerCase();
+      if (!tub) return;
+      if (tub === 'jetted') {
+        setSelectedFilter('jacuzzi');
+      } else if (tub === 'bathtub' || tub === 'soaking') {
+        setSelectedFilter('soaking');
+      } else if (tub === 'hot') {
+        setSelectedTubCategory('Hot tub');
+      }
     }
-  }, [filteredHotels.length, tubProvenOnly, selectedFilter, selectedTubCategory, searchTerm, stayStyle, priceRange, cityName]);
+    applyTubParam();
+    window.addEventListener('popstate', applyTubParam);
+    return () => window.removeEventListener('popstate', applyTubParam);
+  }, []);
 
   const handleFilterClick = (filter: 'all' | 'jacuzzi' | 'soaking' | 'tripled') => {
     setSelectedFilter(filter);
-    recordFilterChange(filter, counts[filter]);
-    try {
-      if (!isUserExcluded()) {
-        trackEvent('filter_applied', {
-          filter_type: 'category',
-          filter_value: filter,
-          result_count: counts[filter],
-          city: cityName,
-          country: countryName,
-        });
-      }
-    } catch {
-      // ignore
-    }
+    sendFilterUsed({
+      filter,
+      results_count: counts[filter],
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const handleResetFilters = () => {
@@ -368,20 +339,23 @@ export default function CityHotelsClient({
     setPriceRange('all');
     setSearchTerm('');
     setSortBy('recommended');
-    recordFilterReset(cityName);
-    try {
-      if (!isUserExcluded()) {
-        trackEvent('filter_reset', { city: cityName });
-      }
-    } catch {
-      // ignore
-    }
+    sendFilterUsed({
+      filter: 'reset',
+      results_count: uniqueHotels.length,
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const handleTubProvenToggle = () => {
     const next = !tubProvenOnly;
     setTubProvenOnly(next);
-    recordFilterChange('tub_proven', next ? provenCount : uniqueHotels.length);
+    sendFilterUsed({
+      filter: 'tub_proven',
+      results_count: next ? provenCount : uniqueHotels.length,
+      country: countryName,
+      city: cityName,
+    });
   };
 
   const isAnyFilterActive =
@@ -412,7 +386,7 @@ export default function CityHotelsClient({
             </button>
           )}
 
-          {/* Pill 2: Jetted tub */}
+          {/* Pill 2: Jetted tub (localized) */}
           <button
             type="button"
             onClick={() => handleFilterClick(selectedFilter === 'jacuzzi' ? 'all' : 'jacuzzi')}
@@ -422,10 +396,10 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Jetted tub
+            {tubWord('jetted', countryName)}
           </button>
 
-          {/* Pill 3: Bathtub */}
+          {/* Pill 3: Bathtub (localized) */}
           <button
             type="button"
             onClick={() => handleFilterClick(selectedFilter === 'soaking' ? 'all' : 'soaking')}
@@ -435,10 +409,10 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Bathtub
+            {tubWord('bathtub', countryName)}
           </button>
 
-          {/* Pill 4: Hot tub */}
+          {/* Pill 4: Hot tub (localized) */}
           <button
             type="button"
             onClick={() => setSelectedTubCategory(selectedTubCategory === 'Hot tub' ? 'all' : 'Hot tub')}
@@ -448,7 +422,7 @@ export default function CityHotelsClient({
                 : 'bg-white text-[#14213d] border-[#e3e7ef] hover:border-[#14213d]'
             }`}
           >
-            Hot tub
+            {tubWord('hot', countryName)}
           </button>
 
           {/* Pill 5: Filters ⌄ */}
@@ -568,7 +542,16 @@ export default function CityHotelsClient({
           <select
             id="sort-select"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews')}
+            onChange={(e) => {
+              const val = e.target.value as 'recommended' | 'rating' | 'price_asc' | 'price_desc' | 'reviews';
+              setSortBy(val);
+              sendFilterUsed({
+                filter: `sort_${val}`,
+                results_count: filteredHotels.length,
+                country: countryName,
+                city: cityName,
+              });
+            }}
             className="bg-transparent text-[#5b6478] text-[13px] font-medium border-0 focus:ring-0 cursor-pointer pr-2"
           >
             <option value="recommended">Sort: Recommended</option>
@@ -587,11 +570,8 @@ export default function CityHotelsClient({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredHotels.slice(0, visibleCount).map((h, i) => {
                 const tubLower = (h.tubType || '').toLowerCase();
-                const tubWords = tubLower.includes('hot tub')
-                  ? 'hot tub'
-                  : tubLower.includes('jetted') || tubLower.includes('jacuzzi') || tubLower.includes('whirlpool') || tubLower.includes('hydro')
-                  ? 'jetted tub'
-                  : 'bathtub';
+                const hotelCountry = h.country || countryName;
+                const cardTubWord = tubWord(tubLower, hotelCountry).toLowerCase();
 
                 const linkedPartners = getLinkedPartners(h);
 
@@ -650,7 +630,7 @@ export default function CityHotelsClient({
                             image: h.image || '',
                             price: h.price,
                             rating: h.rating,
-                            tubType: h.tubType || tubWords,
+                            tubType: h.tubType || cardTubWord,
                             bookingUrl: h.bookingUrl,
                             agodaUrl: h.agodaUrl,
                             airbnbUrl: h.airbnbUrl,
@@ -686,16 +666,21 @@ export default function CityHotelsClient({
                       <div className="text-[13px] leading-[1.45] bg-[#e9eef7] text-[#14213d] rounded-[10px] p-[9px_11px] mb-3">
                         {isHotelConfirmed(h) ? (
                           h.roomType ? (
-                            <>Book the <strong className="font-bold">{h.roomType}</strong> for an in-room {tubWords}</>
+                            <>Book the <strong className="font-bold">{h.roomType}</strong> for an in-room {cardTubWord}</>
                           ) : (
-                            <>In-room <strong className="font-bold">{tubWords}</strong></>
+                            <>In-room <strong className="font-bold">{cardTubWord}</strong></>
                           )
                         ) : (
                           h.roomType ? (
                             <>Reported room: <strong className="font-bold">{h.roomType}</strong>. Check room details before booking.</>
                           ) : (
-                            <>A bathtub is reported; check room details before booking.</>
+                            <>A {cardTubWord} is reported; check room details before booking.</>
                           )
+                        )}
+                        {isHotelConfirmed(h) && formatProofDate(h.importBatch) && (
+                          <div className="text-[11px] text-[#1f6f5c] mt-1 font-medium font-manrope">
+                            Proof saved {formatProofDate(h.importBatch)}
+                          </div>
                         )}
                       </div>
 
@@ -710,8 +695,10 @@ export default function CityHotelsClient({
                                 key={partner}
                                 href={partnerUrl}
                                 source={partner}
+                                placement="city_card"
                                 hotelName={h.name}
                                 cityName={h.city || cityName}
+                                countryName={h.country || countryName}
                                 className="inline-flex items-center justify-center border-[1.5px] border-[#b08d57] text-[#b08d57] hover:bg-[#b08d57] hover:text-white rounded-[9px] px-2.5 sm:px-3 py-1.5 font-bold text-[11px] sm:text-xs transition-colors whitespace-nowrap text-center"
                               >
                                 {partner} ›

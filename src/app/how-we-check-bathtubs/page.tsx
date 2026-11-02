@@ -101,10 +101,10 @@ export default function HowWeCheckBathtubsPage() {
 
           <section>
             <h2 className="font-playfair text-lg sm:text-xl font-normal text-[#1f262d] mb-2">
-              How we earn money
+              Booking links
             </h2>
             <p>
-              We may earn a commission when you book through our links. This comes at no extra cost to you. These affiliate partnerships help support our website.
+              Links go straight to the booking site. We don&apos;t earn a commission from them today.
             </p>
           </section>
 

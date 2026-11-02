@@ -36,7 +36,7 @@ export default function EditorialPolicyPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "name": "Editorial Policy & Standards",
-    "description": "Our editorial standards, research methodology, and affiliate disclosure policies.",
+    "description": "Our editorial standards, research methodology, and booking link transparency policies.",
     "url": "https://www.hotelswithbathtubs.com/editorial-policy",
     "publisher": {
       "@type": "Organization",
@@ -165,13 +165,13 @@ export default function EditorialPolicyPage() {
 
             <section>
               <h2 className="font-heading text-xl sm:text-2xl font-bold text-gray-900 mb-3">
-                4. Affiliate Transparency &amp; Compensation
+                4. Booking Links &amp; Transparency
               </h2>
               <p>
-                HotelsWithBathtubs is free for readers. To support our extensive research and database infrastructure, we participate in affiliate marketing programs with online travel agencies, including Booking.com, Agoda, MakeMyTrip, and trusted global partner networks.
+                HotelsWithBathtubs is free for readers. Links go straight to the booking site. We don&apos;t earn a commission from them today.
               </p>
               <p className="mt-2">
-                When you click through our partner links and complete a booking, we may earn an affiliate commission at <strong>zero additional cost to you</strong>. Our editorial curation remains entirely impartial: we recommend the best stay regardless of partner commission rates.
+                We do not use active affiliate links at this time. All outbound booking buttons open direct hotel pages on the respective booking platforms without commission tracking. If commercial programs are introduced in the future, this policy will be updated with full disclosure. Rankings and proof labels never depend on commissions.
               </p>
             </section>
 

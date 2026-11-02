@@ -11,6 +11,117 @@ export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID |
 export const DEFAULT_TRIP_SID = process.env.NEXT_PUBLIC_TRIP_SID || '';
 
 /**
+ * Universal toggle for affiliate link wrapping (CEO Sheet T46).
+ * Off by default: process.env.NEXT_PUBLIC_AFFILIATES_ENABLED === 'true'.
+ * When false, all outbound links are cleaned and unwrapped to point directly
+ * to the plain booking-site URL with 0 affiliate tracking parameters.
+ */
+export const AFFILIATES_ENABLED = process.env.NEXT_PUBLIC_AFFILIATES_ENABLED === 'true';
+
+export const REDIRECT_HOSTS = [
+  'linkredirect.in',
+  'linksredirect.com',
+  'ekaro.in',
+  'earnkaro.com',
+  'cuelinks.com',
+  'clnk.in',
+  'bitli.in',
+];
+
+export function isRedirectHost(hostname: string): boolean {
+  if (!hostname) return false;
+  const host = hostname.toLowerCase();
+  return REDIRECT_HOSTS.some((d) => host === d || host.endsWith('.' + d));
+}
+
+/**
+ * Recursively unwraps redirect wrapper URLs (EarnKaro, Cuelinks, Linkredirect, /out)
+ * to extract the authentic destination URL.
+ */
+export function unwrapRedirectUrl(urlStr: string): string {
+  if (!urlStr || typeof urlStr !== 'string') return urlStr;
+  let current = urlStr.trim();
+  for (let i = 0; i < 5; i++) {
+    try {
+      const parsed = current.startsWith('/')
+        ? new URL(current, 'https://www.hotelswithbathtubs.com')
+        : new URL(current);
+      if (isRedirectHost(parsed.hostname) || parsed.pathname === '/out') {
+        const target =
+          parsed.searchParams.get('dl') ||
+          parsed.searchParams.get('url') ||
+          parsed.searchParams.get('murl') ||
+          parsed.searchParams.get('target') ||
+          parsed.searchParams.get('destination') ||
+          parsed.searchParams.get('redirect_url');
+        if (target) {
+          let decoded = target;
+          try {
+            decoded = decodeURIComponent(target);
+          } catch {
+            // Keep original target if decode fails
+          }
+          if (decoded.startsWith('http://') || decoded.startsWith('https://')) {
+            current = decoded;
+            continue;
+          }
+        }
+      }
+      break;
+    } catch {
+      break;
+    }
+  }
+  return current;
+}
+
+export const STRIP_PARAM_REGEX = /^(aid|label|cid|camref|cref|allianceid|sid|tag|ouid|ascsubtag|subid|sub_id|pub_id|affid|affiliateid|affiliate_id|aff_id|affcid|gclid|fbclid|msclkid|dclid|zanpid|ref|utm_.*|affil_.*)$/i;
+
+/**
+ * Strips affiliate, advertising, and analytics tracking query parameters
+ * from an outbound URL, while strictly preserving legitimate destination
+ * and property identifiers (e.g. hotelId, hid, city, country, etc.).
+ */
+export function stripTrackingParams(urlStr: string): string {
+  if (!urlStr || typeof urlStr !== 'string') return urlStr;
+  try {
+    const isRelative = urlStr.startsWith('/');
+    const parsed = isRelative
+      ? new URL(urlStr, 'https://www.hotelswithbathtubs.com')
+      : new URL(urlStr);
+
+    const keysToDelete: string[] = [];
+    for (const key of parsed.searchParams.keys()) {
+      if (STRIP_PARAM_REGEX.test(key)) {
+        keysToDelete.push(key);
+      }
+    }
+    for (const key of keysToDelete) {
+      parsed.searchParams.delete(key);
+    }
+
+    if (isRelative) {
+      const qs = parsed.searchParams.toString();
+      return `${parsed.pathname}${qs ? `?${qs}` : ''}${parsed.hash}`;
+    }
+    return parsed.toString();
+  } catch {
+    return urlStr;
+  }
+}
+
+/**
+ * Produces a completely clean outbound URL:
+ * unwraps redirects, strips all affiliate & tracking params, and optionally appends trip dates.
+ */
+export function cleanOutboundUrl(url: string, dates?: TripDates): string {
+  if (!url || typeof url !== 'string') return url;
+  const unwrapped = unwrapRedirectUrl(url);
+  const stripped = stripTrackingParams(unwrapped);
+  return dates ? appendTripDates(stripped, dates) : stripped;
+}
+
+/**
  * Robust domain checker that prevents subdomain/domain overlap bugs
  * (e.g. 'makemytrip.com' or 'cleartrip.com' erroneously matching 'trip.com').
  */
@@ -331,6 +442,11 @@ export function wrapOutboundAffiliateLink(
   dates?: TripDates
 ): string {
   if (!url) return url;
+
+  // When affiliate wrapping is disabled (default off), return the clean un-wrapped URL
+  if (!AFFILIATES_ENABLED) {
+    return cleanOutboundUrl(url, dates);
+  }
 
   // Append travel dates if provided
   const targetUrl = dates ? appendTripDates(url, dates) : url;

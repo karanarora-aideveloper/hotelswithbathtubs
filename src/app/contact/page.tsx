@@ -147,7 +147,7 @@ export default function ContactPage() {
                 <span>&bull;</span>
                 <Link href="/editorial-policy" className="hover:underline">Editorial Policy</Link>
                 <span>&bull;</span>
-                <Link href="/affiliate-policy" className="hover:underline">Affiliate Disclosure</Link>
+                <Link href="/affiliate-policy" className="hover:underline">Affiliate Policy</Link>
               </div>
             </div>
           </div>

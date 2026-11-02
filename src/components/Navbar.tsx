@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#f5f6f8] border-b border-[#e3e7ef]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="flex items-center justify-between h-[64px]">
           {/* Brand Logo & Name: single line, no top clipping */}
           <Link

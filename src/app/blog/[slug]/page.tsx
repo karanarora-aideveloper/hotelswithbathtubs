@@ -14,6 +14,7 @@ import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } fr
 import { isHotelConfirmed } from '@/lib/evidence';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import LazyEmailCapture from '@/components/LazyEmailCapture';
 
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
@@ -590,7 +591,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-8">
                   {featuredHotels.map((h: any) => {
                     const hotelUrl = `/${matchedCountrySlug}/${slugify(matchedCity)}/${h.slug || slugify(h.name)}`;
-                    const primaryBookingUrl = h.bookingUrl || h.agodaUrl || h.url;
+                    const rawBookingUrl = h.bookingUrl || h.agodaUrl || h.url;
+                    const primaryBookingUrl = rawBookingUrl ? cleanOutboundUrl(rawBookingUrl) : '';
                     const bookingProvider = h.bookingUrl ? 'Booking.com' : h.agodaUrl ? 'Agoda' : 'Partner';
 
                     return (
@@ -675,7 +677,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </Link>
                 </div>
                 <p className="text-xs text-text-muted text-center mt-6">
-                  We earn a commission if you book through our links, at no extra cost to you.
+                  Links go straight to the booking site. We don&apos;t earn a commission from them today.
                 </p>
               </div>
             )}
