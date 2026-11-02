@@ -69,9 +69,12 @@ export const sendGA4Event = (eventName: string, params?: Record<string, unknown>
   const eventParams: Record<string, unknown> = { ...params, transport_type: 'beacon' };
   const win = window as unknown as ExtendedWindow;
 
-  if (typeof win.gtag === 'function') {
-    win.gtag('event', eventName, eventParams);
-  } else if (Array.isArray(win.dataLayer)) {
-    win.dataLayer.push(['event', eventName, eventParams]);
+  if (typeof win.gtag !== 'function') {
+    win.dataLayer = win.dataLayer || [];
+    win.gtag = function () {
+      // eslint-disable-next-line prefer-rest-params
+      (win.dataLayer as unknown[]).push(arguments);
+    };
   }
+  win.gtag('event', eventName, eventParams);
 };
