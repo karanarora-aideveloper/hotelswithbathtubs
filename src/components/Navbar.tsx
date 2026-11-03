@@ -101,34 +101,8 @@ export default function Navbar() {
               Couple Stays
             </Link>
 
-            {/* How we check: visible at xl (1280px+), under More at 1024-1279px */}
-            <Link
-              href="/how-we-check-bathtubs"
-              prefetch={false}
-              className="hidden xl:inline-flex hover:text-[#b08d57] transition-colors whitespace-nowrap shrink-0"
-            >
-              How we check
-            </Link>
-
-            {/* Hostels & FAQs: visible at >= 1400px, under More at 1024-1399px */}
-            <Link
-              href="/hostels"
-              prefetch={false}
-              className="hidden nav-wide-show hover:text-[#b08d57] transition-colors items-center gap-1 whitespace-nowrap shrink-0"
-            >
-              <span>Hostels</span>
-              <span className="text-[9px] font-bold px-1.5 py-0.2 bg-[#e9eef7] text-[#14213d] rounded-full">New</span>
-            </Link>
-            <Link
-              href="/#faq"
-              prefetch={false}
-              className="hidden nav-wide-show hover:text-[#b08d57] transition-colors whitespace-nowrap shrink-0"
-            >
-              FAQs
-            </Link>
-
-            {/* Progressive Disclosure "More ⌄" dropdown: visible at 1024-1399px, hidden at >= 1400px */}
-            <div className="relative hidden lg:flex nav-wide-hide shrink-0" ref={moreDropdownRef}>
+            {/* Progressive Disclosure "More ⌄" dropdown */}
+            <div className="relative hidden lg:flex shrink-0" ref={moreDropdownRef}>
               <button
                 type="button"
                 onClick={() => setMoreOpen(!moreOpen)}
@@ -140,16 +114,16 @@ export default function Navbar() {
               </button>
               {moreOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-[#e3e7ef] py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                  {/* How we check (in More at 1024-1279px, moves to main nav at >= 1280px) */}
+                  {/* How we check */}
                   <Link
                     href="/how-we-check-bathtubs"
                     prefetch={false}
                     onClick={() => setMoreOpen(false)}
-                    className="xl:hidden flex items-center px-4 py-2 text-xs font-semibold text-[#14213d] hover:bg-[#f5f6f8] hover:text-[#b08d57] transition-colors"
+                    className="flex items-center px-4 py-2 text-xs font-semibold text-[#14213d] hover:bg-[#f5f6f8] hover:text-[#b08d57] transition-colors"
                   >
                     How we check
                   </Link>
-                  {/* Hostels (in More below 1400px) */}
+                  {/* Hostels */}
                   <Link
                     href="/hostels"
                     prefetch={false}
@@ -159,7 +133,7 @@ export default function Navbar() {
                     <span>Hostels</span>
                     <span className="text-[9px] font-bold px-1.5 py-0.2 bg-[#e9eef7] text-[#14213d] rounded-full">New</span>
                   </Link>
-                  {/* FAQs (in More below 1400px) */}
+                  {/* FAQs */}
                   <Link
                     href="/#faq"
                     prefetch={false}

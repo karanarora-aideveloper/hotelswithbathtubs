@@ -1,6 +1,7 @@
 // SEO content generation for city pages
 import { titleCase } from './utils';
 import { dropIntroClaimSentences } from './claims';
+import { tubWord } from './tubWords';
 
 export const cityIntroContent: Record<string, { intro: string; amenities: string[]; whyChoose: string[] }> = {
   // India - Goa
@@ -5977,17 +5978,22 @@ export function generateCityPageContent(
       <li>Agoda</li>
     `;
 
+  const jettedWord = tubWord('jetted', country);
+  const soakingWord = tubWord('soaking', country);
+  const hotWord = tubWord('hot', country);
+  const bathWord = tubWord('bathtub', country);
+
   // US-specific section: targets "soaking tub", "jacuzzi suite", "hot tub in room" queries
   const usaSection = isUSA ? `
-    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Soaking Tubs, Jacuzzi Suites &amp; Hot Tubs in ${formattedCity}</h3>
+    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">${soakingWord}s, ${jettedWord} Suites &amp; ${hotWord}s in ${formattedCity}</h3>
     <p class="text-gray-700 leading-relaxed mb-3">US travelers search for several types of in-room tub experiences. Here's what to expect in ${formattedCity}:</p>
     <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-5">
-      <li><strong>Deep soaking tubs</strong> — Japanese-style or freestanding baths that fill 20–24 inches deep. No jets. The most common type in boutique hotels.</li>
-      <li><strong>Jacuzzi suites / whirlpool suites</strong> — Jetted tubs with hydrotherapy massage jets. Found in premium room tiers at luxury properties.</li>
-      <li><strong>Hot tubs in room</strong> — Found at select resort properties.</li>
+      <li><strong>Deep ${soakingWord.toLowerCase()}s</strong> — Japanese-style or freestanding baths that fill 20–24 inches deep. No jets.</li>
+      <li><strong>${jettedWord} suites / whirlpool suites</strong> — Jetted tubs with hydrotherapy massage jets.</li>
+      <li><strong>${hotWord}s in room</strong> — Found at select resort properties.</li>
       <li><strong>Roman soaking tubs</strong> — Oversized, wide, shallow marble tubs. The classic Vegas-style resort tub.</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-4">We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.</p>
+    <p class="text-gray-700 leading-relaxed mb-4">We list rooms whose partner or rental listing mentions a private ${bathWord.toLowerCase()}, ${soakingWord.toLowerCase()}, ${hotWord.toLowerCase()} or ${jettedWord.toLowerCase()}.</p>
   ` : '';
 
   const h2 = isUSA

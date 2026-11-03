@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { clearAnalyticsStorage } from '@/lib/consent';
 import { getUserRecurrenceData, resetRecurrenceCache } from '@/lib/userRecurrence';
+import { fetchSharedGeo } from '@/lib/useGeo';
 
 export const CONSENT_REGIONS = new Set([
   'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
@@ -32,19 +33,10 @@ export default function CookieConsentBanner() {
     }
 
     if (!savedConsent) {
-      // Check region via /api/geo
-      fetch('/api/geo')
-        .then((res) => {
-          if (!res.ok) return null;
-          return res.json();
-        })
+      // Check region via shared geo lookup
+      fetchSharedGeo()
         .then((data) => {
           const code = (data?.countryCode || '').toUpperCase();
-          if (data) {
-            try {
-              sessionStorage.setItem('hwb_geo', JSON.stringify(data));
-            } catch {}
-          }
           if (CONSENT_REGIONS.has(code)) {
             setIsOpen(true);
             if (savedConsent !== 'granted') {

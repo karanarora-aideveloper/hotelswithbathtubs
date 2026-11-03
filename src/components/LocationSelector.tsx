@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { titleCase } from '@/lib/utils';
+import { fetchSharedGeo } from '@/lib/useGeo';
 
 // Static top-level routes that are NOT /{country}/{city} pages — the
 // selector shouldn't try to read a location out of these.
@@ -60,15 +61,9 @@ export default function LocationSelector() {
       })
       .catch(console.error);
 
-    // Not on a city page — fall back to IP-based geo guess.
-    fetch('/api/geo')
-      .then(res => res.json())
+    // Not on a city page — fall back to shared IP-based geo guess.
+    fetchSharedGeo()
       .then(data => {
-        try {
-          if (typeof window !== 'undefined') {
-            sessionStorage.setItem('hwb_geo', JSON.stringify(data));
-          }
-        } catch {}
         if (data.country) setSelectedCountry(data.country);
         if (data.city) setSelectedCity(data.city);
         setLoading(false);
