@@ -30,7 +30,13 @@ const claimsModulePath = path.resolve(process.cwd(), '../hotelswithbathtubs/src/
 const { hasClaimPhrase } = await import(claimsModulePath);
 
 // 3. Connect to MongoDB (read-only)
-const client = new MongoClient(process.env.MONGODB_URI);
+const client = new MongoClient(process.env.MONGODB_URI, {
+  maxPoolSize: 1,
+  minPoolSize: 1,
+  connectTimeoutMS: 30000,
+  serverSelectionTimeoutMS: 30000,
+  readPreference: 'secondaryPreferred'
+});
 await client.connect();
 const db = client.db();
 
@@ -83,8 +89,27 @@ function cleanHotelUrl(url) {
 }
 
 const liveSlugs = new Set(liveHotels.map(h => h.slug));
-const liveNameTown = new Set(liveHotels.map(h => `${normalizeText(h.name)}|${normalizeText(h.city)}`));
-const liveStreetTown = new Set(liveHotels.filter(h => h.streetAddress).map(h => `${normalizeText(h.streetAddress)}|${normalizeText(h.city)}`));
+const liveNameTown = new Set();
+const liveStreetTown = new Set();
+
+for (const h of liveHotels) {
+  const normN = normalizeText(h.name);
+  const normC = normalizeText(h.city);
+  liveNameTown.add(`${normN}|${normC}`);
+
+  const strippedCity = (h.city || '').replace(/\s+[A-Za-z]{2}$/, '').trim();
+  if (strippedCity && strippedCity !== h.city) {
+    liveNameTown.add(`${normN}|${normalizeText(strippedCity)}`);
+  }
+
+  if (h.streetAddress) {
+    const normS = normalizeText(h.streetAddress);
+    liveStreetTown.add(`${normS}|${normC}`);
+    if (strippedCity && strippedCity !== h.city) {
+      liveStreetTown.add(`${normS}|${normalizeText(strippedCity)}`);
+    }
+  }
+}
 
 // Distinct existing USA cities in live collection
 const existingLiveCities = new Set(
@@ -113,14 +138,24 @@ const allResults = agodaData.results || [];
 console.log(`Loaded ${allResults.length} total collector results from agoda1-results.json\n`);
 
 // 7. Load candidates for metadata lookup
-const candidateIds = allResults.map(r => {
-  try { return new ObjectId(r.hotelId); } catch { return null; }
-}).filter(Boolean);
-
-const candidateDocs = await db.collection('hotel_candidates').find({
-  _id: { $in: candidateIds }
+console.log('Fetching hotel_candidates for metadata lookup...');
+const candidateDocs = await db.collection('hotel_candidates').find({}, {
+  projection: {
+    _id: 1,
+    name: 1,
+    city: 1,
+    citySlug: 1,
+    state: 1,
+    address: 1,
+    roomName: 1,
+    tubPlacement: 1,
+    geo: 1,
+    factSource: 1,
+    platformChecks: 1
+  }
 }).toArray();
 const candidateMap = new Map(candidateDocs.map(c => [c._id.toString(), c]));
+console.log(`Loaded ${candidateMap.size} candidates into memory.\n`);
 
 // 8. Classify all results into Safe vs Hold
 const holdByReason = {
@@ -358,8 +393,12 @@ for (const r of allResults) {
   const normName = normalizeText(candName);
   const normTown = normalizeText(candTown);
   const normStreet = normalizeText(candStreet);
+  const normTownWithState = normalizeText(`${candTown} ${candState}`);
 
-  if (liveNameTown.has(`${normName}|${normTown}`)) {
+  if (
+    liveNameTown.has(`${normName}|${normTown}`) ||
+    (candState && liveNameTown.has(`${normName}|${normTownWithState}`))
+  ) {
     holdByReason.already_live_name_town.push({
       hotelId: r.hotelId,
       name: candName,
@@ -369,7 +408,11 @@ for (const r of allResults) {
     continue;
   }
 
-  if (normStreet && liveStreetTown.has(`${normStreet}|${normTown}`)) {
+  if (
+    normStreet &&
+    (liveStreetTown.has(`${normStreet}|${normTown}`) ||
+     (candState && liveStreetTown.has(`${normStreet}|${normTownWithState}`)))
+  ) {
     holdByReason.already_live_street_town.push({
       hotelId: r.hotelId,
       name: candName,
@@ -408,6 +451,28 @@ for (const r of allResults) {
       displayCity = candTown;
       citySlug = tSlug;
     }
+  }
+
+  // Check if already live with displayCity
+  const normDisplayCity = normalizeText(displayCity);
+  if (liveNameTown.has(`${normName}|${normDisplayCity}`)) {
+    holdByReason.already_live_name_town.push({
+      hotelId: r.hotelId,
+      name: candName,
+      town: displayCity,
+      reason: 'already_live_name_and_town'
+    });
+    continue;
+  }
+  if (normStreet && liveStreetTown.has(`${normStreet}|${normDisplayCity}`)) {
+    holdByReason.already_live_street_town.push({
+      hotelId: r.hotelId,
+      name: candName,
+      town: displayCity,
+      street: candStreet,
+      reason: 'already_live_street_and_town'
+    });
+    continue;
   }
 
   // Slug generation and clash resolution
