@@ -313,7 +313,7 @@ export default async function CoupleFriendlyPage() {
         name: 'Can local couples check into these hotels?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Most luxury and boutique hotels welcome local residents for staycations, weekend getaways, and celebrations. A few budget chains may restrict local IDs, but partner hotels featured in our directory generally welcome local guests with valid ID.',
+          text: 'Most hotels welcome local residents for staycations and weekend getaways with valid ID.',
         },
       },
       {
@@ -486,7 +486,7 @@ export default async function CoupleFriendlyPage() {
                 <div className="p-4 rounded-xl bg-[#e3f2ee]/60 border border-[#e3e7ef]">
                   <h3 className="font-bold text-[#14213d] text-sm mb-1">🛁 Confirm the Room Tier</h3>
                   <p className="text-xs text-[#5b6478]">
-                    Standard rooms often only offer walk-in showers. Always reserve the room category explicitly named &ldquo;Suite with Bathtub&rdquo; or &ldquo;Jacuzzi King&rdquo; to secure your tub.
+                    Standard rooms often only have showers. Always reserve the room explicitly named with a bathtub.
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-white border border-[#e3e7ef]">
@@ -563,7 +563,7 @@ export default async function CoupleFriendlyPage() {
                 Can local couples book a stay in the same city?
               </h3>
               <p className="text-xs sm:text-sm text-[#5b6478] leading-relaxed">
-                Yes. Luxury and boutique properties regularly host local couples for weekend staycations, birthdays, and anniversaries with valid identification.
+                Yes. Most hotels welcome local couples for weekend staycations with valid identification.
               </p>
             </div>
             <div className="bg-white p-5 rounded-2xl border border-[#e3e7ef]">

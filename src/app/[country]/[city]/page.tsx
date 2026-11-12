@@ -16,6 +16,7 @@ import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
+import { getSpecialCityTitle } from '@/lib/cityTitles';
 
 export const revalidate = false;
 
@@ -210,7 +211,8 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
     : DEFAULT_HOTEL_IMAGE;
 
   // SERP-Optimized Title (45-60 chars): Front-load exact high-volume search query
-  const pageTitle = getCityPageTitle(cityName, countrySlug, citySlug, hotelCount, allConfirmed);
+  const pageTitle = getSpecialCityTitle(countrySlug, citySlug, hotelCount)
+    || getCityPageTitle(cityName, countrySlug, citySlug, hotelCount, allConfirmed);
 
   const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
@@ -484,7 +486,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   const currentYear = new Date().getFullYear();
   const pageTitle = stateConfig
     ? `Hotels with Bathtub in ${stateConfig.name}: Top ${hotels.length} Stays (${currentYear})`
-    : getCityPageTitle(cityName, countrySlug, citySlug, hotels.length, allConfirmed);
+    : (getSpecialCityTitle(countrySlug, citySlug, hotels.length) || getCityPageTitle(cityName, countrySlug, citySlug, hotels.length, allConfirmed));
 
   const lowestPriceResult = findLowestPriceHotel(hotels);
   const minPrice = lowestPriceResult?.price;
@@ -542,8 +544,8 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
   } else {
     if (confirmedCount > 0 && tubPhrase) {
       const confirmedNoun = confirmedCount === 1
-        ? (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed rental includes' : 'The confirmed hotel includes')
-        : (confirmedHotels.every((h) => isVacationRental(h)) ? 'The confirmed vacation rentals include' : (confirmedHotels.some((h) => isVacationRental(h)) ? 'The confirmed stays include' : 'The confirmed hotels include'));
+        ? (confirmedHotels.some((h) => isVacationRental(h)) ? 'Rentals with recorded proof include' : 'Hotels with recorded proof include')
+        : (confirmedHotels.every((h) => isVacationRental(h)) ? 'Rentals with recorded proof include' : (confirmedHotels.some((h) => isVacationRental(h)) ? 'Hotels with recorded proof include' : 'Hotels with recorded proof include'));
       introSentence1 = `${confirmedNoun} ${tubPhrase}.`;
     }
   }
@@ -623,7 +625,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
     : 'valid government-issued photo ID (Passport or national ID card)';
 
   const tubTypes = Array.from(new Set(hotels.map(h => h.tubType).filter(Boolean))) as string[];
-  const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and partner networks';
+  const otas = countrySlug === 'india' ? 'MakeMyTrip, Agoda, and Booking.com' : 'Booking.com, Agoda, and other booking sites';
 
   // M6 Data-driven FAQs (confirmed properties only)
   const confirmedJacuzzis = hotels.filter((h) => isHotelConfirmed(h) && isJacuzziRoom(h));
@@ -839,7 +841,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
                   All {hotels.length} hotels in {cityName}
                 </h3>
                 <p className="text-xs text-[#5b6478] mt-0.5">
-                  We list rooms whose partner or rental listing mentions a private bathtub, soaking tub, hot tub or jacuzzi.
+                  We list rooms whose booking site listing mentions a private bathtub.
                 </p>
               </div>
               <span className="text-xs font-semibold text-[#14213d] bg-[#e9eef7] px-2.5 py-1 rounded-full w-fit">
@@ -869,7 +871,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-[#e3e7ef]">
               <div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#14213d] bg-[#e9eef7] px-2.5 py-1 rounded-full">
-                  Cross-Country Stays
+                  Nearby Hotels
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl font-semibold text-[#14213d] mt-2">
                   Nearby US destinations

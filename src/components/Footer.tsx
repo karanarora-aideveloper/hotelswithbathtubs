@@ -6,7 +6,7 @@ import CookieSettingsButton from './CookieSettingsButton';
 // live on the /destinations hub page.
 const GUIDES = [
   { href: '/blog', label: 'Travel guides' },
-  { href: '/couple-friendly', label: 'Couple-friendly stays' },
+  { href: '/couple-friendly', label: 'Couple-friendly hotels' },
   { href: '/hotels-with-hot-tub-in-room', label: 'Hot tub suites' },
   { href: '/soaking-tub-hotels', label: 'Soaking tub hotels' },
   { href: '/matchmaker', label: 'Bathtub matchmaker' },
@@ -44,8 +44,8 @@ export default async function Footer() {
     <footer id="global-site-footer" className="mt-16 bg-white text-[#14213d] border-t border-[#e3e7ef]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-          <Column title="Top US destinations" links={[...top('usa', 7), { href: '/usa', label: 'All US destinations' }]} />
-          <Column title="Top India destinations" links={[...top('india', 7), { href: '/india', label: 'All India destinations' }]} />
+          <Column title="Popular US destinations" links={[...top('usa', 7), { href: '/usa', label: 'All US destinations' }]} />
+          <Column title="Popular India destinations" links={[...top('india', 7), { href: '/india', label: 'All India destinations' }]} />
           <Column title="Guides" links={GUIDES} />
           <Column title="Company" links={COMPANY} />
         </div>
@@ -62,7 +62,7 @@ export default async function Footer() {
               <div>
                 <p className="font-playfair text-xl font-semibold text-[#14213d] mb-1">Hotels with Bathtubs</p>
                 <p className="text-xs text-[#5b6478] max-w-sm leading-relaxed">
-                  Hotel rooms with a private bathtub or in-room jacuzzi. We link to Booking.com, Agoda and other partners to book.
+                  Hotel rooms with private bathtubs. We link to Booking.com, Agoda and other booking sites.
                 </p>
               </div>
             </div>

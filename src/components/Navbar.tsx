@@ -98,7 +98,7 @@ export default function Navbar() {
               Travel Guides
             </Link>
             <Link href="/couple-friendly" prefetch={false} className="hover:text-[#b08d57] transition-colors whitespace-nowrap shrink-0">
-              Couple Stays
+              Couple Hotels
             </Link>
 
             {/* Progressive Disclosure "More ⌄" dropdown */}
@@ -128,10 +128,9 @@ export default function Navbar() {
                     href="/hostels"
                     prefetch={false}
                     onClick={() => setMoreOpen(false)}
-                    className="flex items-center justify-between px-4 py-2 text-xs font-semibold text-[#14213d] hover:bg-[#f5f6f8] hover:text-[#b08d57] transition-colors"
+                    className="flex items-center px-4 py-2 text-xs font-semibold text-[#14213d] hover:bg-[#f5f6f8] hover:text-[#b08d57] transition-colors"
                   >
-                    <span>Hostels</span>
-                    <span className="text-[9px] font-bold px-1.5 py-0.2 bg-[#e9eef7] text-[#14213d] rounded-full">New</span>
+                    Hostels
                   </Link>
                   {/* FAQs */}
                   <Link
@@ -339,7 +338,7 @@ export default function Navbar() {
                       <span className="text-base">📖</span>
                       <div>
                         <span className="block">Travel Guides &amp; Blog</span>
-                        <span className="block text-2xs text-[#5b6478] font-normal">Curated itineraries &amp; reviews</span>
+                        <span className="block text-2xs text-[#5b6478] font-normal">Travel guides and reviews</span>
                       </div>
                     </div>
                     <span className="text-[#5b6478] text-xs">&rarr;</span>
@@ -354,7 +353,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-3">
                       <span className="text-base">💖</span>
                       <div>
-                        <span className="block">Couple-Friendly Stays</span>
+                        <span className="block">Couple-Friendly Hotels</span>
                         <span className="block text-2xs text-[#5b6478] font-normal">Private tubs &amp; romantic suites</span>
                       </div>
                     </div>
@@ -464,8 +463,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="w-full bg-[#b08d57] hover:bg-[#9c7b48] text-white text-sm font-bold py-3 px-4 rounded-xl transition-all shadow-xs flex items-center justify-center gap-2"
               >
-                <span>Explore 150+ Destinations</span>
-                <span>&rarr;</span>
+                <span>Browse destinations →</span>
               </Link>
               <p className="text-[10px] text-center text-[#5b6478]">
                 Listings across Booking.com &amp; Agoda · Private in-room tubs

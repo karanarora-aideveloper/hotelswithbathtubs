@@ -33,7 +33,7 @@ const INDIA_TYPOLOGIES = [
     id: 'victorian-clawfoot',
     title: 'Heritage Victorian Clawfoot Tubs',
     material: 'Enameled Cast-Iron & Polished Brass',
-    description: 'Restored roll-top clawfoot soaking baths in British colonial-era estates across Shimla and Darjeeling.',
+    description: 'Clawfoot soaking baths in historic estates across Shimla and Darjeeling.',
     image: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-the-taj-west-end-bengaluru.webp',
     sampleHotel: 'The Taj West End & Oberoi Cecil',
     href: '/india/shimla',

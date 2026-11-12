@@ -123,7 +123,7 @@ export default function LuxuryFeaturedSuites({ initialIsIndia = true }: LuxuryFe
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4 border-b border-[#e3e7ef] pb-6">
           <div>
             <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#b08d57] mb-1 font-manrope">
-              Curated Stays
+              Featured Hotels
             </p>
             <h2 className="font-playfair text-2xl sm:text-3xl text-[#14213d] font-semibold tracking-tight">
               Iconic Bathtub Suites

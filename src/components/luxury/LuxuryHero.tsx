@@ -372,7 +372,7 @@ export default function LuxuryHero({ stats, popularCitiesMap }: LuxuryHeroProps)
               {/* Autocomplete Dropdown */}
               {isOpen && cleanQuery && !searchData && (
                 <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-[14px] shadow-2xl border border-[#e3e7ef] p-3 text-center text-xs text-[#5b6478] z-50 font-manrope">
-                  Searching stays...
+                  Searching hotels...
                 </div>
               )}
               {isOpen && filtered.length > 0 && (

@@ -6,13 +6,13 @@ import BlogIndexClient, { BlogPostItem } from '@/components/BlogIndexClient';
 
 export const metadata = {
   title: 'Bathtub Hotel Travel Guides & Tips',
-  description: 'Explore curated travel guides, honeymoon tips, and reviews of luxury hotels with private in-room bathtubs and jacuzzis across the globe.',
+  description: 'Explore travel guides, tips, and reviews of hotel rooms with private bathtubs worldwide.',
   alternates: {
     canonical: '/blog',
   },
   openGraph: {
     title: 'Bathtub Hotel Travel Guides & Tips',
-    description: 'Explore curated travel guides, honeymoon tips, and reviews of luxury hotels with private in-room bathtubs and jacuzzis across the globe.',
+    description: 'Explore travel guides, tips, and reviews of hotel rooms with private bathtubs worldwide.',
     url: 'https://www.hotelswithbathtubs.com/blog',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -28,7 +28,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Bathtub Hotel Travel Guides & Tips',
-    description: 'Explore curated travel guides, honeymoon tips, and reviews of luxury hotels with private in-room bathtubs.',
+    description: 'Explore travel guides, tips, and reviews of hotel rooms with private bathtubs worldwide.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -83,7 +83,7 @@ export default async function BlogIndex() {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     name: 'Hotels With Bathtubs — Travel Guides & Jacuzzi Hotel Tips',
-    description: 'Curated guides, tips, and reviews for romantic hotel suites with private bathtubs and jacuzzis.',
+    description: 'Guides, tips, and reviews for romantic hotel suites with private bathtubs.',
     url: 'https://www.hotelswithbathtubs.com/blog',
     publisher: {
       '@type': 'Organization',
@@ -124,7 +124,7 @@ export default async function BlogIndex() {
               Travel Blog &amp; Inspiration
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-[#5b6478] font-normal max-w-2xl mx-auto leading-relaxed">
-              Curated destination guides, romance tips, and recommendations for hotel suites with private in-room bathtubs and jacuzzis across the globe.
+              Guides and tips for hotel rooms with private bathtubs and jacuzzis.
             </p>
           </div>
         </header>

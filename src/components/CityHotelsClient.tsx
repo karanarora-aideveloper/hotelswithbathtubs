@@ -471,14 +471,14 @@ export default function CityHotelsClient({
               />
             </div>
 
-            {/* Stay Style */}
+            {/* Hotel Type */}
             <div>
               <span className="block text-[11px] font-bold text-[#5b6478] uppercase tracking-wider mb-1.5">
-                Stay Style
+                Hotel Type
               </span>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { id: 'all' as const, label: 'All Stays' },
+                  { id: 'all' as const, label: 'All Hotels' },
                   { id: 'luxury' as const, label: '5-Star & Resorts' },
                   { id: 'apartment' as const, label: 'Apartments & Villas' },
                   { id: 'boutique' as const, label: 'Boutique & Inns' },
@@ -510,8 +510,8 @@ export default function CityHotelsClient({
                   { id: 'all' as const, label: 'All Prices' },
                   { id: 'budget' as const, label: 'Budget' },
                   { id: 'mid' as const, label: 'Mid-Range' },
-                  { id: 'luxury' as const, label: 'Luxury' },
-                  { id: 'ultra' as const, label: 'Ultra Luxury' },
+                  { id: 'luxury' as const, label: 'High End' },
+                  { id: 'ultra' as const, label: 'Highest price' },
                 ].map((p) => (
                   <button
                     key={p.id}

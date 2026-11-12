@@ -510,7 +510,7 @@ export default function HomeDestinationsClient({
               <span className="text-3xl mb-2 block">🔍</span>
               <h4 className="font-heading font-bold text-slate-900 text-base mb-1">No destinations found</h4>
               <p className="text-xs text-slate-500 mb-4 leading-relaxed">
-                No bathtub stays match &ldquo;{filterQuery}&rdquo;. Try searching for popular hubs like Paris, New York, Goa, London, or Tokyo.
+                No bathtub hotels match your search. Try searching for Paris, New York, or Tokyo.
               </p>
               <button
                 type="button"

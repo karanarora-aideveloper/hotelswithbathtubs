@@ -47,7 +47,7 @@ export const metadata = {
         url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
-        alt: 'Hotels with Bathtubs in Room - Luxury Suites',
+        alt: 'Hotels with Bathtubs in the Room',
       },
     ],
     type: 'website',
@@ -323,7 +323,7 @@ export default async function Home() {
     "founder": {
       "@type": "Person",
       "name": "Karan Arora",
-      "jobTitle": "Founder & Luxury Hotel Scout"
+      "jobTitle": "Founder & Hotel Scout"
     },
     "areaServed": "Worldwide",
     "sameAs": [

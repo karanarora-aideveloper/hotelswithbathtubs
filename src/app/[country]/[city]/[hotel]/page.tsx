@@ -664,14 +664,14 @@ export default async function HotelDetailPage({
             {hotel.tubType && isHotelConfirmed(hotel) && (
               <p className="flex items-start gap-2.5">
                 <span className="text-[#1f6f5c] font-bold shrink-0 mt-0.5">✓</span>
-                <span>Features an in-room <strong className="font-semibold text-[#14213d]">{hotel.tubType}</strong> inside the private guest accommodation.</span>
+                <span>Features an in-room <strong className="font-semibold text-[#14213d]">{hotel.tubType}</strong> inside the private guest room.</span>
               </p>
             )}
 
             {isValidNeighborhood(hotel.neighborhood) && (
               <p className="flex items-start gap-2.5">
                 <span className="text-[#1f6f5c] font-bold shrink-0 mt-0.5">✓</span>
-                <span>Situated in the <strong className="font-semibold text-[#14213d]">{hotel.neighborhood}</strong> area of {cityName}, {countryName}.</span>
+                <span>Located in the <strong className="font-semibold text-[#14213d]">{hotel.neighborhood}</strong> area of {cityName}, {countryName}.</span>
               </p>
             )}
 
@@ -696,10 +696,10 @@ export default async function HotelDetailPage({
           </div>
         )}
 
-        {/* In-Room & Property Amenities card */}
+        {/* Room and Hotel Features card */}
         <div className="mb-6 bg-white rounded-2xl border border-[#e3e7ef] p-5 sm:p-6 shadow-[0_4px_18px_rgba(0,0,0,0.03)]">
           <h2 className="font-playfair text-xl sm:text-2xl font-semibold text-[#14213d] mb-4">
-            In-Room &amp; Property Amenities
+            Room and Hotel Features
           </h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
             {(hotel.amenities || []).filter((amenity: string) => !/couple[- ]?friendly/i.test(amenity)).map((amenity: string, idx: number) => {

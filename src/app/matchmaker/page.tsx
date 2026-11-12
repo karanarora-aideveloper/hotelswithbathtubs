@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         url: 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp',
         width: 1200,
         height: 630,
-        alt: 'Dream Soak Matchmaker - Interactive Bathtub Hotel Finder',
+        alt: 'Bathtub Matchmaker - Find Hotel Rooms with Tubs',
       },
     ],
     type: 'website',
@@ -47,7 +47,7 @@ export default function MatchmakerPage() {
   const applicationSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Dream Soak Matchmaker',
+    name: 'Bathtub Matchmaker',
     url: 'https://www.hotelswithbathtubs.com/matchmaker',
     applicationCategory: 'TravelApplication',
     operatingSystem: 'All',
@@ -73,7 +73,7 @@ export default function MatchmakerPage() {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Dream Soak Matchmaker',
+        name: 'Bathtub Matchmaker',
         item: 'https://www.hotelswithbathtubs.com/matchmaker',
       },
     ],
@@ -90,7 +90,7 @@ export default function MatchmakerPage() {
                 Home
               </Link>
               <span>/</span>
-              <span className="text-[#14213d] font-semibold">Dream Soak Matchmaker</span>
+              <span className="text-[#14213d] font-semibold">Bathtub Matchmaker</span>
             </nav>
           </div>
 
@@ -107,7 +107,7 @@ export default function MatchmakerPage() {
                 <span className="text-2xl mb-2.5 block">🎯</span>
                 <h3 className="font-playfair font-semibold text-[#14213d] text-base mb-1.5">Direct Room Matching</h3>
                 <p className="text-xs text-[#5b6478] font-manrope leading-relaxed">
-                  We focus exclusively on private tubs. Every match corresponds to a hotel room with an in-room or private terrace bathtub.
+                  We focus on private tubs. Every match is a hotel room with a private bathtub.
                 </p>
               </div>
 
@@ -137,7 +137,7 @@ export default function MatchmakerPage() {
             <div className="space-y-3">
               <div className="bg-white p-4 sm:p-5 rounded-[12px] border border-[#e3e7ef]">
                 <h4 className="font-semibold text-[#14213d] text-sm mb-1 font-manrope">
-                  How does the Dream Soak Matchmaker score hotels?
+                  How does the matchmaker choose hotels?
                 </h4>
                 <p className="text-xs text-[#5b6478] leading-relaxed font-manrope">
                   Our algorithm analyzes room-level bathtub metadata (hydro whirlpools, clawfoot tubs, deep soaking baths, cedar onsens), room tiers, and destination to return matching properties for your specific trip.
