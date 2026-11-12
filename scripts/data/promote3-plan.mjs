@@ -115,6 +115,9 @@ for (const h of liveHotels) {
 const existingLiveCities = new Set(
   (await db.collection('hotels').distinct('city', { country: 'USA' })).filter(Boolean)
 );
+const liveCitiesWithSuffix = new Set(
+  Array.from(existingLiveCities).filter(c => /\s+[A-Za-z]{2}$/.test(c))
+);
 
 // Slugs from public redirects
 const redirectsPath = path.resolve(process.cwd(), '../hotelswithbathtubs/scripts/redirects.mjs');
@@ -436,19 +439,23 @@ for (const r of allResults) {
     continue;
   }
 
-  // City & Town Name Mapping
+  // City & Town Name Mapping (T48 / PROMOTE3-NAMES)
   let displayCity = '';
   let citySlug = '';
-  if (cand?.citySlug) {
-    citySlug = cand.citySlug;
-    displayCity = candTown || cand.citySlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const tSlug = slugify(candTown);
+  const townWithState = `${candTown} ${candState}`.trim();
+
+  if (liveCitiesWithSuffix.has(townWithState)) {
+    // Existing live cities with state suffix in DB (e.g. Newport RI, Columbus OH, Springfield MO)
+    displayCity = townWithState;
+    citySlug = `${tSlug}-${slugify(candState)}`;
   } else {
-    const tSlug = slugify(candTown);
+    // Plain city name (Augusta, Duluth, Charlotte, Columbia, Albany, Des Moines, etc.)
+    displayCity = candTown;
     if (clashingTownSlugs.has(tSlug)) {
-      displayCity = `${candTown} ${candState}`;
+      // 2+ states share this town name: keep state in URL slug only (/usa/augusta-ga)
       citySlug = `${tSlug}-${slugify(candState)}`;
     } else {
-      displayCity = candTown;
       citySlug = tSlug;
     }
   }
@@ -609,6 +616,8 @@ for (const r of allResults) {
     name: candName,
     slug: finalSlug,
     city: displayCity,
+    citySlug,
+    state: candState,
     country: 'USA',
     url: agodaUrl,
     agodaUrl: agodaUrl,
@@ -686,6 +695,55 @@ for (const t of newTowns) {
   if (cnt === 1) newTownsCounts.size1++;
   else if (cnt >= 2 && cnt <= 4) newTownsCounts.size2to4++;
   else newTownsCounts.size5plus++;
+}
+
+// 9b. Stages assignment (CEO Sheet T48 / PROMOTE3-NAMES)
+const destGroups = new Map();
+for (const r of safeRecords) {
+  const destKey = r.citySlug;
+  if (!destGroups.has(destKey)) destGroups.set(destKey, []);
+  destGroups.get(destKey).push(r);
+}
+
+let stage1Hotels = 0;
+let stage2Hotels = 0;
+let holdHotels = 0;
+let stage1Cities = 0;
+let stage2Cities = 0;
+let holdCities = 0;
+
+for (const [destKey, records] of destGroups.entries()) {
+  const sample = records[0];
+  const hotelsToAdd = records.length;
+  // Is it an existing live city?
+  const isExistingLive = existingLiveCities.has(sample.city) ||
+    liveHotels.some(h => slugify(h.city) === sample.citySlug);
+
+  let stage = 'hold';
+  if (isExistingLive) {
+    stage = 'stage 1';
+  } else if (hotelsToAdd >= 5) {
+    stage = 'stage 1';
+  } else if (hotelsToAdd >= 3) {
+    stage = 'stage 2';
+  } else {
+    stage = 'hold';
+  }
+
+  if (stage === 'stage 1') {
+    stage1Cities++;
+    stage1Hotels += hotelsToAdd;
+  } else if (stage === 'stage 2') {
+    stage2Cities++;
+    stage2Hotels += hotelsToAdd;
+  } else {
+    holdCities++;
+    holdHotels += hotelsToAdd;
+  }
+
+  for (const r of records) {
+    r.stage = stage;
+  }
 }
 
 // 10. Write promote3-planned.json
@@ -939,5 +997,13 @@ console.log(`Saved planned records: ${sanitizedPlanned.length} -> ${plannedPath}
 console.log(`Saved reclassify CSV:  ${reclassRows.length} rows -> ${reclassCsvPath}`);
 console.log(`Saved not-found log:   ${notFoundRows.length - 1} lookups -> ${notFoundCsvPath}`);
 console.log('-------------------------------------------------------------\n');
+
+console.log('\n=============================================================');
+console.log('>>> STAGES SUMMARY (T48 / PROMOTE3-NAMES)');
+console.log('=============================================================');
+console.log(`Stage 1: ${stage1Hotels} hotels across ${stage1Cities} cities`);
+console.log(`Stage 2: ${stage2Hotels} hotels across ${stage2Cities} cities`);
+console.log(`Hold:    ${holdHotels} hotels across ${holdCities} cities`);
+console.log(`Total:   ${stage1Hotels + stage2Hotels + holdHotels} hotels across ${stage1Cities + stage2Cities + holdCities} cities`);
 
 await client.close();
