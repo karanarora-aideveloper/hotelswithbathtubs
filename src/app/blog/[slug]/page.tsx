@@ -11,17 +11,57 @@ import { DEFAULT_HOTEL_IMAGE, imageUrl } from '@/lib/imageUrl';
 import { slugify, escapeRegex, resolveCountry } from '@/lib/utils';
 import { sanitizePlaceholderText } from '@/lib/location';
 import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } from '@/lib/claims';
-import { isHotelConfirmed } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
+import { tubWord } from '@/lib/tubWords';
+import HotelCardImage from '@/components/HotelCardImage';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
 import { cleanOutboundUrl } from '@/lib/affiliate';
 import LazyEmailCapture from '@/components/LazyEmailCapture';
 
+const MONTH_NAMES: Record<string, number> = {
+  january: 0, feb: 1, february: 1, mar: 2, march: 2, apr: 3, april: 3,
+  may: 4, jun: 5, june: 5, jul: 6, july: 6, aug: 7, august: 7,
+  sep: 8, september: 8, oct: 9, october: 9, nov: 10, november: 10, dec: 11, december: 11
+};
+
+function parseBlogDate(val: string | Date | undefined | null): Date | null {
+  if (!val) return null;
+  if (val instanceof Date) return isNaN(val.getTime()) ? null : val;
+  if (typeof val !== 'string') return null;
+  const s = val.trim();
+  if (!s) return null;
+  const ymd = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (ymd) {
+    if (s.length === 10) return new Date(Date.UTC(+ymd[1], +ymd[2] - 1, +ymd[3]));
+    const parsed = new Date(s);
+    return isNaN(parsed.getTime()) ? null : parsed;
+  }
+  const mdy = s.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+  if (mdy) {
+    const m = MONTH_NAMES[mdy[1].toLowerCase()];
+    if (m !== undefined) return new Date(Date.UTC(+mdy[3], m, +mdy[2]));
+  }
+  const my = s.match(/^([A-Za-z]+)\s+(\d{4})/);
+  if (my) {
+    const m = MONTH_NAMES[my[1].toLowerCase()];
+    if (m !== undefined) return new Date(Date.UTC(+my[2], m, 1));
+  }
+  const parsed = new Date(s);
+  return isNaN(parsed.getTime()) ? null : parsed;
+}
+
+const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function formatDisplayDate(d: Date | null): string {
+  if (!d) return '';
+  return `${d.getUTCDate()} ${MONTHS_SHORT[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+}
+
 // Safely normalize blog date strings ("August 1, 2026", "2026-08-19", etc.) to ISO 8601
 function toISO(dateStr: string | undefined): string {
   if (!dateStr) return new Date().toISOString();
-  const parsed = new Date(dateStr);
-  return isNaN(parsed.getTime()) ? dateStr : parsed.toISOString();
+  const parsed = parseBlogDate(dateStr);
+  return parsed ? parsed.toISOString() : dateStr;
 }
 
 export async function generateStaticParams() {
@@ -269,7 +309,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     } else {
       matchedCountrySlug = inferCountry(matchedCity);
     }
-    const [cityCount, topHotels] = await Promise.all([
+    const [cityCount, cityHotels] = await Promise.all([
       Hotel.countDocuments({
         city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
         flagged: { $ne: true }
@@ -277,10 +317,51 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       Hotel.find({
         city: new RegExp(`^${escapeRegex(matchedCity)}$`, 'i'),
         flagged: { $ne: true }
-      }).sort({ rating: -1 }).limit(3).lean()
+      }).lean()
     ]);
     matchedCityCount = cityCount;
-    featuredHotels = topHotels;
+
+    // Show up to 6 hotels: proven first (isHotelConfirmed), then most booking sites (getLinkedPartners), then rating
+    const sortedHotels = [...cityHotels].sort((a: any, b: any) => {
+      const aConf = isHotelConfirmed(a) ? 1 : 0;
+      const bConf = isHotelConfirmed(b) ? 1 : 0;
+      if (bConf !== aConf) return bConf - aConf;
+
+      const aPartners = getLinkedPartners(a).length;
+      const bPartners = getLinkedPartners(b).length;
+      if (bPartners !== aPartners) return bPartners - aPartners;
+
+      const aRating = Number(a.rating) || 0;
+      const bRating = Number(b.rating) || 0;
+      return bRating - aRating;
+    });
+    featuredHotels = sortedHotels.slice(0, 6);
+  }
+
+  // True date calculation for visible text, JSON-LD, and sitemap synchronization
+  const pubDate = parseBlogDate(blog.date);
+  const upDate = parseBlogDate(blog.updatedAt);
+  const isUpdatedLater = Boolean(
+    pubDate &&
+    upDate &&
+    upDate.getTime() > pubDate.getTime() &&
+    formatDisplayDate(upDate) !== formatDisplayDate(pubDate)
+  );
+
+  const visibleDateText = isUpdatedLater
+    ? `Published ${formatDisplayDate(pubDate)} · Updated ${formatDisplayDate(upDate)}`
+    : (pubDate ? `Published ${formatDisplayDate(pubDate)}` : (upDate ? `Published ${formatDisplayDate(upDate)}` : ''));
+
+  const jsonLdPublished = pubDate ? pubDate.toISOString() : (upDate ? upDate.toISOString() : '');
+  const jsonLdModified = isUpdatedLater && upDate ? upDate.toISOString() : jsonLdPublished;
+
+  // Split markdown content so hotel photo block can sit right after the first paragraph
+  const firstPEnd = htmlContent.indexOf('</p>');
+  let introHtml = htmlContent;
+  let bodyHtml = '';
+  if (firstPEnd !== -1 && featuredHotels.length > 0 && matchedCity) {
+    introHtml = htmlContent.slice(0, firstPEnd + 4);
+    bodyHtml = htmlContent.slice(firstPEnd + 4);
   }
 
   // Structured Data Schemas
@@ -301,8 +382,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "headline": blog.title,
     "description": sanitizePlaceholderText(blog.excerpt) || blog.excerpt,
     "image": blog.image ? imageUrl(blog.image) : DEFAULT_HOTEL_IMAGE,
-    "datePublished": toISO(blog.date),
-    "dateModified": toISO(blog.updatedAt?.toString() || blog.date),
+    "datePublished": jsonLdPublished,
+    "dateModified": jsonLdModified,
     "author": {
       "@type": "Person",
       "name": "Karan Arora",
@@ -445,284 +526,281 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
           />
         )}
-        <div className="bg-bg-main py-6 sm:py-10 md:py-16">
-          <nav aria-label="Breadcrumbs" className="max-w-4xl mx-auto px-4 sm:px-8 mb-4 text-xs sm:text-sm font-medium text-text-muted flex items-center flex-wrap gap-1.5">
-            <Link href="/" prefetch={false} className="text-accent-secondary hover:underline">Home</Link>
+        <div className="bg-[#f5f6f8] min-h-screen py-6 sm:py-10">
+          <nav aria-label="Breadcrumbs" className="max-w-[720px] mx-auto px-4 mb-4 text-xs font-medium text-[#5b6478] flex items-center flex-wrap gap-1.5">
+            <Link href="/" prefetch={false} className="hover:text-[#14213d] hover:underline">Home</Link>
             <span>&rsaquo;</span>
-            <Link href="/blog" prefetch={false} className="text-accent-secondary hover:underline">Guides</Link>
+            <Link href="/blog" prefetch={false} className="hover:text-[#14213d] hover:underline">Guides</Link>
             {matchedCity && (
               <>
                 <span>&rsaquo;</span>
-                <Link href={`/${matchedCountrySlug}`} prefetch={false} className="text-accent-secondary hover:underline">
+                <Link href={`/${matchedCountrySlug}`} prefetch={false} className="hover:text-[#14213d] hover:underline">
                   {matchedCountryName}
                 </Link>
                 <span>&rsaquo;</span>
-                <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} prefetch={false} className="text-accent-secondary hover:underline">
+                <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} prefetch={false} className="hover:text-[#14213d] hover:underline">
                   {matchedCity}
                 </Link>
               </>
             )}
             <span>&rsaquo;</span>
-            <span className="text-text-main line-clamp-1 inline font-semibold">{blog.title}</span>
+            <span className="text-[#14213d] line-clamp-1 font-semibold">{blog.title}</span>
           </nav>
 
-          <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-12 bg-white sm:rounded-2xl md:rounded-3xl shadow-sm border-y sm:border-x border-border pb-12 pt-8 sm:pb-16 sm:pt-10 mb-12 sm:mb-20">
-            <header className="mb-8 sm:mb-12 text-center border-b border-border pb-6 sm:pb-8">
-              <div className="text-accent font-semibold text-xs sm:text-sm mb-3 sm:mb-4 tracking-wider uppercase">
-                {blog.date ? `Published on ${blog.date} by ` : 'Curated by '}Karan Arora (Founder &amp; Curator)
-              </div>
-              <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4 sm:mb-6">
-                {blog.title}
-              </h1>
-              <div className="flex justify-center gap-4 text-xl sm:text-2xl">
-                <span>🛁</span> <span>✨</span> <span>🍾</span>
-              </div>
-            </header>
-
-            {(() => {
-              let displayImage = blog.image;
-              if (displayImage && displayImage.includes('leela-palace-new-delhi') && matchedCity && !/delhi/i.test(matchedCity)) {
-                if (featuredHotels.length > 0 && featuredHotels[0].image) {
-                  displayImage = featuredHotels[0].image;
-                }
-              }
-              return displayImage ? (
-                <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-2xl border border-border shadow-xs group">
-                  <FallbackImg
-                    src={imageUrl(displayImage)}
-                    alt={blog.title}
-                    loading="eager"
-                    decoding="async"
-                    fetchPriority="high"
-                    className="object-cover w-full h-full"
-                    />
-                  <a
-                    href={`https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(`https://www.hotelswithbathtubs.com/blog/${resolvedParams.slug}`)}&media=${encodeURIComponent(imageUrl(displayImage))}&description=${encodeURIComponent(`${blog.title} - Read our curated guide on HotelsWithBathtubs.com`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute top-4 right-4 bg-red-600/95 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 z-10 transition-all opacity-90 sm:opacity-0 group-hover:opacity-100"
-                    title="Save to Pinterest"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.546.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
-                    </svg>
-                    <span>Save to Pinterest</span>
-                  </a>
-                </div>
-              ) : null;
-            })()}
-
-            {/* Contextual Directory Authority Bridge Card (Resolves Cannibalization & Boosts City Rankings) */}
-            {matchedCity && matchedCityCount > 0 && (
-              <div className="bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl mt-0.5">🛁</span>
-                  <div>
-                    <span className="text-2xs font-bold text-accent uppercase tracking-wider">Live Inventory</span>
-                    <h2 className="font-heading text-sm sm:text-base font-bold text-accent-secondary mt-0.5">
-                      Explore All {matchedCityCount}+ Hotels with Bathtubs in {matchedCity}
-                    </h2>
-                    <p className="text-xs text-text-muted mt-0.5">
-                      Looking for in-room jacuzzi suites?
-                    </p>
+          <main className="max-w-[720px] mx-auto px-4">
+            <div className="bg-white rounded-2xl border border-[#e3e7ef] p-6 sm:p-10 mb-10 shadow-xs">
+              <header className="mb-6 pb-6 border-b border-[#e3e7ef]">
+                {visibleDateText && (
+                  <div className="text-xs sm:text-sm text-[#5b6478] mb-2 font-medium">
+                    {visibleDateText} · By Karan Arora
                   </div>
+                )}
+                <h1 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-[#14213d] leading-tight mb-3">
+                  {blog.title}
+                </h1>
+                {matchedCity && matchedCityCount > 0 && (
+                  <p className="text-sm font-medium text-[#b08d57]">
+                    <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} className="hover:underline">
+                      See all {matchedCityCount} hotels in {matchedCity} &rarr;
+                    </Link>
+                  </p>
+                )}
+              </header>
+
+              {(() => {
+                let displayImage = blog.image;
+                if (displayImage && displayImage.includes('leela-palace-new-delhi') && matchedCity && !/delhi/i.test(matchedCity)) {
+                  if (featuredHotels.length > 0 && featuredHotels[0].image) {
+                    displayImage = featuredHotels[0].image;
+                  }
+                }
+                return displayImage ? (
+                  <div className="relative aspect-[16/9] w-full mb-8 overflow-hidden rounded-xl border border-[#e3e7ef]">
+                    <FallbackImg
+                      src={imageUrl(displayImage)}
+                      alt={blog.title}
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                ) : null;
+              })()}
+
+              {/* First paragraph / intro prose */}
+              <div
+                className="prose prose-base sm:prose-lg max-w-none text-[#14213d] prose-headings:font-playfair prose-headings:text-[#14213d] prose-a:text-[#b08d57] hover:prose-a:underline leading-relaxed mb-6"
+                dangerouslySetInnerHTML={{ __html: introHtml }}
+              />
+
+              {/* Hotels with a tub in {City} block */}
+              {featuredHotels.length > 0 && matchedCity && (
+                <section aria-label={`Hotels with a tub in ${matchedCity}`} className="my-8 pt-6 pb-6 border-t border-b border-[#e3e7ef]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                    <h2 className="font-playfair text-xl sm:text-2xl font-bold text-[#14213d]">
+                      Hotels with a tub in {matchedCity}
+                    </h2>
+                    <Link
+                      href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                      prefetch={false}
+                      className="text-xs font-semibold text-[#b08d57] hover:underline flex items-center gap-1"
+                    >
+                      <span>See all {matchedCityCount} hotels &rarr;</span>
+                    </Link>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {featuredHotels.map((h: any, idx: number) => {
+                      const hotelUrl = `/${matchedCountrySlug}/${slugify(matchedCity)}/${h.slug || slugify(h.name)}`;
+                      const tubLower = (h.tubType || '').toLowerCase();
+                      const hotelCountry = h.country || matchedCountryName;
+                      const cardTubWord = tubWord(tubLower, hotelCountry);
+                      const confirmed = isHotelConfirmed(h);
+
+                      return (
+                        <div
+                          key={h._id?.toString() || h.slug || idx}
+                          className="bg-white rounded-xl border border-[#e3e7ef] shadow-xs overflow-hidden flex flex-col justify-between"
+                        >
+                          <div>
+                            <HotelCardImage
+                              primaryImage={h.image || ''}
+                              images={h.images}
+                              partnerImages={h.partnerImages}
+                              hotelName={h.name}
+                              cityName={h.city || matchedCity}
+                              countryName={h.country || matchedCountryName}
+                              tubType={h.tubType}
+                              priority={idx === 0}
+                              className="relative aspect-[16/10] w-full bg-[#f5f6f8] shrink-0 overflow-hidden group/image"
+                            >
+                              {confirmed ? (
+                                <span className="absolute left-2.5 top-2.5 z-10 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs pointer-events-none">
+                                  ✓ Tub proven
+                                </span>
+                              ) : (
+                                <span className="absolute left-2.5 top-2.5 z-10 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-xs pointer-events-none">
+                                  Reported, not yet confirmed
+                                </span>
+                              )}
+                            </HotelCardImage>
+
+                            <div className="p-3.5">
+                              <Link href={hotelUrl} prefetch={false} className="block group mb-1">
+                                <h3 className="font-playfair text-base font-semibold text-[#14213d] group-hover:text-[#b08d57] transition-colors line-clamp-1">
+                                  {h.name}
+                                </h3>
+                              </Link>
+
+                              <div className="text-[12px] leading-[1.4] bg-[#f5f6f8] text-[#14213d] rounded-lg p-2 mb-2">
+                                {confirmed ? (
+                                  h.roomType ? (
+                                    <span>Book the <strong className="font-bold text-[#14213d]">{h.roomType}</strong> for an in-room {cardTubWord}</span>
+                                  ) : (
+                                    <span>In-room <strong className="font-bold text-[#14213d]">{cardTubWord}</strong></span>
+                                  )
+                                ) : (
+                                  h.roomType ? (
+                                    <span>Reported room: <strong className="font-bold text-[#14213d]">{h.roomType}</strong></span>
+                                  ) : (
+                                    <span>A {cardTubWord} is reported; check room details before booking</span>
+                                  )
+                                )}
+                              </div>
+
+                              {h.price && (
+                                <div className="text-xs font-bold text-[#14213d] mb-1">
+                                  {h.price} <span className="text-[#5b6478] font-normal text-[11px]">/ night</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="p-3.5 pt-0">
+                            <Link
+                              href={hotelUrl}
+                              prefetch={false}
+                              className="inline-block text-xs font-semibold text-[#b08d57] hover:underline"
+                            >
+                              View hotel &rarr;
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
+
+              {/* Remaining body prose */}
+              {bodyHtml && (
+                <div
+                  className="prose prose-base sm:prose-lg max-w-none text-[#14213d] prose-headings:font-playfair prose-headings:text-[#14213d] prose-a:text-[#b08d57] hover:prose-a:underline leading-relaxed mb-8"
+                  dangerouslySetInnerHTML={{ __html: bodyHtml }}
+                />
+              )}
+
+              {/* FAQ Section */}
+              {!hasMarkdownFaq && effectiveFaqs.length > 0 && (
+                <section className="mt-10 pt-8 border-t border-[#e3e7ef]">
+                  <h2 className="font-playfair text-xl sm:text-2xl font-bold text-[#14213d] mb-6">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-3.5">
+                    {effectiveFaqs.map(({ q, a }) => (
+                      <details key={q} className="group border border-[#e3e7ef] rounded-xl overflow-hidden bg-[#f5f6f8]">
+                        <summary className="flex items-center justify-between gap-3 p-4 cursor-pointer font-semibold text-sm sm:text-base text-[#14213d] list-none hover:bg-black/5 transition-colors">
+                          <span>{q}</span>
+                          <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180 text-[#b08d57]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </summary>
+                        <p className="px-4 pb-4 text-sm text-[#5b6478] leading-relaxed border-t border-[#e3e7ef] pt-3">
+                          {a}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Author Bio */}
+              <div className="mt-10 pt-8 border-t border-[#e3e7ef]">
+                <AuthorBio />
+              </div>
+
+              {/* Ready to book stay / city CTA */}
+              {matchedCity && matchedCityCount > 0 && (
+                <div className="mt-10 bg-[#f5f6f8] border border-[#e3e7ef] rounded-2xl p-6 sm:p-8 text-center">
+                  <h2 className="font-playfair text-xl sm:text-2xl font-bold text-[#14213d] mb-2">
+                    Ready to book your stay in {matchedCity}?
+                  </h2>
+                  <p className="text-sm text-[#5b6478] mb-5 max-w-xl mx-auto">
+                    We list {matchedCityCount} hotels in {matchedCity} with a private bathtub or jacuzzi in the room.
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <Link
+                      href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
+                      className="inline-block bg-[#14213d] hover:bg-[#1f262d] text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition-colors"
+                    >
+                      View Bathtub Hotels in {matchedCity} &rarr;
+                    </Link>
+                    <Link
+                      href={`/${matchedCountrySlug}`}
+                      className="inline-block bg-white hover:bg-gray-50 text-[#14213d] border border-[#e3e7ef] px-6 py-2.5 rounded-xl font-semibold text-sm transition-colors"
+                    >
+                      All {matchedCountryName} Stays &rarr;
+                    </Link>
+                  </div>
+                  <p className="text-xs text-[#5b6478] text-center mt-5">
+                    Links go straight to the booking site. We don&apos;t earn a commission from them today.
+                  </p>
                 </div>
-                <Link
-                  href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
-                  prefetch={false}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs sm:text-sm font-bold rounded-xl whitespace-nowrap shadow-xs transition-all flex-shrink-0"
-                >
-                  <span>Browse {matchedCity} Directory</span>
-                  <span>&rarr;</span>
+              )}
+
+              {/* Email Capture */}
+              <div className="mt-8 mb-4">
+                <LazyEmailCapture destinationName={matchedCity || undefined} />
+              </div>
+
+              {/* Back to all articles */}
+              <div className="mt-8 pt-6 border-t border-[#e3e7ef] text-center">
+                <Link href="/blog" className="inline-block bg-[#f5f6f8] hover:bg-[#e3e7ef] text-[#14213d] px-5 py-2.5 rounded-xl font-semibold transition-colors text-sm">
+                  &larr; Back to all articles
                 </Link>
               </div>
-            )}
-
-            <article
-              className="prose prose-base sm:prose-lg md:prose-xl max-w-none break-words overflow-hidden prose-headings:font-heading prose-headings:font-bold prose-headings:text-accent-secondary prose-a:text-accent hover:prose-a:text-accent-hover prose-img:rounded-xl prose-img:shadow-md prose-p:font-serif prose-p:text-gray-800 prose-li:font-serif prose-li:text-gray-800 prose-blockquote:font-serif prose-strong:text-accent-secondary leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
-            />
-
-            {!hasMarkdownFaq && effectiveFaqs.length > 0 && (
-              <section className="mt-12 pt-8 border-t border-border">
-                <h2 className="font-heading text-2xl font-bold text-accent-secondary mb-6">
-                  Frequently Asked Questions
-                </h2>
-                <div className="space-y-3.5">
-                  {effectiveFaqs.map(({ q, a }) => (
-                    <details key={q} className="group border border-border rounded-xl overflow-hidden bg-bg-main shadow-2xs">
-                      <summary className="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer font-semibold text-sm sm:text-base text-accent-secondary list-none hover:bg-accent/5 transition-colors">
-                        <span>{q}</span>
-                        <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </summary>
-                      <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm text-text-muted leading-relaxed border-t border-border pt-3 font-serif">
-                        {a}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Top 3 Hotel Direct Booking Cards */}
-            {featuredHotels.length > 0 && matchedCity && (
-              <section aria-label={`Featured hotels in ${matchedCity}`} className="mt-12 pt-8 border-t border-border">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
-                  <div>
-                    <span className="text-2xs font-bold uppercase tracking-wider text-accent bg-accent/10 px-2.5 py-1 rounded-full">
-                      Featured Rooms
-                    </span>
-                    <h2 className="font-heading text-xl sm:text-2xl font-bold text-accent-secondary mt-2">
-                      Featured Bathtub Hotels in {matchedCity}
-                    </h2>
-                  </div>
-                  <Link
-                    href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
-                    prefetch={false}
-                    className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
-                  >
-                    <span>View all {matchedCityCount}+ stays</span>
-                    <span>&rarr;</span>
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-8">
-                  {featuredHotels.map((h: any) => {
-                    const hotelUrl = `/${matchedCountrySlug}/${slugify(matchedCity)}/${h.slug || slugify(h.name)}`;
-                    const rawBookingUrl = h.bookingUrl || h.agodaUrl || h.url;
-                    const primaryBookingUrl = rawBookingUrl ? cleanOutboundUrl(rawBookingUrl) : '';
-                    const bookingProvider = h.bookingUrl ? 'Booking.com' : h.agodaUrl ? 'Agoda' : 'Partner';
-
-                    return (
-                      <div key={h._id || h.slug} className="bg-white rounded-2xl border border-gray-200 shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col justify-between">
-                        <div>
-                          <div className="relative aspect-[16/10] w-full bg-gray-100 overflow-hidden">
-                            <FallbackImg
-                              src={imageUrl(h.image || DEFAULT_HOTEL_IMAGE)}
-                              alt={h.name}
-                              loading="lazy"
-                              decoding="async"
-                              className="object-cover w-full h-full"
-                              />
-                          </div>
-
-                          <div className="p-3.5">
-                            <Link href={hotelUrl} className="block group">
-                              <h3 className="font-heading text-sm font-bold text-gray-900 group-hover:text-accent transition-colors line-clamp-1">
-                                {h.name}
-                              </h3>
-                            </Link>
-                            <p className="text-2xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-1 font-semibold border border-emerald-100">
-                              🛁 {h.roomType ? (isHotelConfirmed(h) ? h.roomType : `Reported room: ${h.roomType}`) : (isHotelConfirmed(h) ? 'Private In-Room Bathtub' : 'Reported Bathtub')}
-                            </p>
-                            {h.price && (
-                              <div className="mt-2 text-xs font-bold text-gray-900">
-                                {h.price} <span className="text-gray-400 font-normal text-2xs">/ night</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="p-3.5 pt-0 flex flex-col gap-1.5">
-                          {primaryBookingUrl && (
-                            <OutboundLink
-                              href={primaryBookingUrl}
-                              hotelName={h.name}
-                              cityName={matchedCity || ''}
-                              source="blog_guide"
-                              className="w-full text-center py-2 px-3 bg-[#1a6fde] hover:bg-[#1559b8] text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5"
-                            >
-                              <span>Book on {bookingProvider}</span>
-                              <span>&rarr;</span>
-                            </OutboundLink>
-                          )}
-                          <Link
-                            href={hotelUrl}
-                            className="w-full text-center py-1.5 px-3 bg-gray-50 hover:bg-gray-100 text-gray-600 text-2xs font-semibold rounded-lg transition-colors border border-gray-200"
-                          >
-                            View Photos &amp; Room Details
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
-
-            <AuthorBio />
-
-            {matchedCity && matchedCityCount > 0 && (
-              <div className="mt-12 sm:mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-6 sm:p-10 text-center shadow-sm">
-                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-accent-secondary mb-4">
-                  Ready to book your stay in {matchedCity}?
-                </h2>
-                <p className="text-gray-700 font-serif text-lg mb-6 max-w-2xl mx-auto">
-                  We list {matchedCityCount}+ luxury hotels and boutique resorts in {matchedCity} that feature a private, in-room bathtub or jacuzzi for your romantic getaway.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
-                  <Link 
-                    href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
-                    className="inline-block bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-xl font-bold text-base sm:text-lg transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5"
-                  >
-                    View Bathtub Hotels in {matchedCity} &rarr;
-                  </Link>
-                  <Link 
-                    href={`/${matchedCountrySlug}`}
-                    className="inline-block bg-white hover:bg-gray-50 text-accent-secondary border border-accent/25 px-6 py-3.5 rounded-xl font-semibold text-base transition-all shadow-2xs"
-                  >
-                    All {matchedCountryName} Stays &rarr;
-                  </Link>
-                </div>
-                <p className="text-xs text-text-muted text-center mt-6">
-                  Links go straight to the booking site. We don&apos;t earn a commission from them today.
-                </p>
-              </div>
-            )}
-
-            {/* Romantic Getaway & Secret Drop Email Capture */}
-            <div className="mt-10 mb-6">
-              <LazyEmailCapture destinationName={matchedCity || undefined} />
             </div>
-
-            <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border text-center">
-              <Link href="/blog" className="inline-block bg-gray-100 hover:bg-gray-200 text-text-main px-6 py-3 rounded-xl font-semibold transition-colors text-sm sm:text-base">
-                &larr; Back to all articles
-              </Link>
-            </div>
-          </div>
+          </main>
 
           {/* Explore Blogs Section */}
           {relatedBlogs.length > 0 && (
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-accent-secondary mb-6 sm:mb-8 text-center">
-                Explore More Guides &amp; Inspiration
+            <section className="max-w-[720px] mx-auto px-4 mt-8 mb-12">
+              <h2 className="font-playfair text-xl sm:text-2xl font-bold text-[#14213d] mb-6 text-center">
+                Explore More Guides
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {relatedBlogs.map((relatedBlog: any) => (
-                  <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`} className="group bg-white border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
+                  <Link key={relatedBlog.slug} href={`/blog/${relatedBlog.slug}`} className="group bg-white border border-[#e3e7ef] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
                     {relatedBlog.image && (
-                      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border">
+                      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[#e3e7ef] bg-[#f5f6f8]">
                         <FallbackImg
                           src={imageUrl(relatedBlog.image)}
                           alt={relatedBlog.title}
                           loading="lazy"
                           decoding="async"
-                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-                          />
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
                     )}
-                    <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                      <p className="text-accent font-semibold text-xs sm:text-sm mb-2">{relatedBlog.date}</p>
-                      <h3 className="font-heading text-lg sm:text-xl font-bold text-text-main mb-2 sm:mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                    <div className="p-4 flex flex-col flex-grow">
+                      <p className="text-[#b08d57] font-medium text-xs mb-1">
+                        {formatDisplayDate(parseBlogDate(relatedBlog.date))}
+                      </p>
+                      <h3 className="font-playfair text-sm font-bold text-[#14213d] mb-2 group-hover:text-[#b08d57] transition-colors line-clamp-2">
                         {relatedBlog.title}
                       </h3>
-                      <p className="text-text-muted text-sm line-clamp-3 mb-4 flex-grow font-serif">
-                        {relatedBlog.excerpt}
-                      </p>
-                      <span className="text-accent-secondary font-semibold text-sm group-hover:underline mt-auto inline-block">Read Article &rarr;</span>
+                      <span className="text-xs font-semibold text-[#14213d] group-hover:underline mt-auto inline-block">Read guide &rarr;</span>
                     </div>
                   </Link>
                 ))}

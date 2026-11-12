@@ -241,14 +241,50 @@ export function generateSplitSitemaps() {
   ];
 
   // 2. Blog Routes
+  const MONTH_NAMES = {
+    january: 0, feb: 1, february: 1, mar: 2, march: 2, apr: 3, april: 3,
+    may: 4, jun: 5, june: 5, jul: 6, july: 6, aug: 7, august: 7,
+    sep: 8, september: 8, oct: 9, october: 9, nov: 10, november: 10, dec: 11, december: 11
+  };
+  function parseBlogDate(val) {
+    if (!val) return null;
+    if (val instanceof Date) return isNaN(val.getTime()) ? null : val;
+    if (typeof val !== 'string') return null;
+    const s = val.trim();
+    if (!s) return null;
+    const ymd = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (ymd) {
+      if (s.length === 10) return new Date(Date.UTC(+ymd[1], +ymd[2] - 1, +ymd[3]));
+      const parsed = new Date(s);
+      return isNaN(parsed.getTime()) ? null : parsed;
+    }
+    const mdy = s.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+    if (mdy) {
+      const m = MONTH_NAMES[mdy[1].toLowerCase()];
+      if (m !== undefined) return new Date(Date.UTC(+mdy[3], m, +mdy[2]));
+    }
+    const my = s.match(/^([A-Za-z]+)\s+(\d{4})/);
+    if (my) {
+      const m = MONTH_NAMES[my[1].toLowerCase()];
+      if (m !== undefined) return new Date(Date.UTC(+my[2], m, 1));
+    }
+    const parsed = new Date(s);
+    return isNaN(parsed.getTime()) ? null : parsed;
+  }
+
   const blogRoutes = blogs
     .filter((b) => b.published !== false && b.slug && b.slug.trim() !== '' && b.slug !== 'kolkata-hotels-with-bathtub-couples-guide')
     .filter((b) => !redirectSet.has(`/blog/${slugify(b.slug)}`))
-    .map((b) => ({
-      url: `${baseUrl}/blog/${slugify(b.slug)}`,
-      lastModified: b.updatedAt ? new Date(b.updatedAt) : null,
-      priority: 0.7,
-    }));
+    .map((b) => {
+      const pub = parseBlogDate(b.date);
+      const up = parseBlogDate(b.updatedAt);
+      const hasUp = Boolean(up && pub && up.getTime() > pub.getTime());
+      return {
+        url: `${baseUrl}/blog/${slugify(b.slug)}`,
+        lastModified: hasUp ? up : (pub || up),
+        priority: 0.7,
+      };
+    });
 
   function buildUrlsetXml(routes) {
     const lines = [

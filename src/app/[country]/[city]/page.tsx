@@ -412,6 +412,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
 
   const relatedBlogs = await Blog.find({
     $or: blogOrConditions,
+    slug: { $ne: 'kolkata-hotels-with-bathtub-couples-guide' },
     published: true
   }).limit(3).sort({ createdAt: -1 });
 
@@ -734,6 +735,13 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
               ? `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. ${confirmedHotels.length} are proven on a booking site so far.`
               : `We list ${hotels.length} hotels in ${cityName} where a bathtub is listed or reported. None are proven on a booking site yet.`}
           </p>
+          {relatedBlogs.length > 0 && (
+            <p className="text-[13px] text-[#b08d57] font-medium mt-1">
+              <Link href={`/blog/${relatedBlogs[0].slug}`} className="hover:underline">
+                Read our {cityName} guide &rarr;
+              </Link>
+            </p>
+          )}
         </div>
       </div>
 
