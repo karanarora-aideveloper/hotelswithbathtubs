@@ -13,6 +13,7 @@ import { sanitizePlaceholderText } from '@/lib/location';
 import { dropClaimSentences, dropClaimSentencesFromMarkdown, hasClaimPhrase } from '@/lib/claims';
 import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
 import { tubWord } from '@/lib/tubWords';
+import { isHotelSlugMatch } from '@/lib/hotelSlugMatch';
 import HotelCardImage from '@/components/HotelCardImage';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
@@ -322,7 +323,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     matchedCityCount = cityCount;
 
     // Show up to 6 hotels: proven first (isHotelConfirmed), then most booking sites (getLinkedPartners), then rating
-    const sortedHotels = [...cityHotels].sort((a: any, b: any) => {
+    // Leave out hotels whose slug names a different hotel
+    const validCityHotels = cityHotels.filter((h: any) =>
+      isHotelSlugMatch(h, matchedCity, hotel?.country || matchedCountryName)
+    );
+
+    const sortedHotels = [...validCityHotels].sort((a: any, b: any) => {
       const aConf = isHotelConfirmed(a) ? 1 : 0;
       const bConf = isHotelConfirmed(b) ? 1 : 0;
       if (bConf !== aConf) return bConf - aConf;
@@ -668,12 +674,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                   )
                                 )}
                               </div>
-
-                              {h.price && (
-                                <div className="text-xs font-bold text-[#14213d] mb-1">
-                                  {h.price} <span className="text-[#5b6478] font-normal text-[11px]">/ night</span>
-                                </div>
-                              )}
                             </div>
                           </div>
 
