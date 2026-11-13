@@ -32,7 +32,7 @@ export default function HowWeCheckBathtubsPage() {
               What &#x27;confirmed&#x27; means
             </h2>
             <p>
-              A room isn&apos;t confirmed unless Booking.com details list a tub for that room. The room must be named, with Bath, Spa tub, Hot tub, or Whirlpool. We record the exact tub label and the date we saw it. A room isn&apos;t confirmed if the partner listing only says Bath or shower. Our Agoda check counts Bathtub or Whirlpool bathtub in room details. A room name with a tub word also counts on Agoda. Separate shower or bathtub does not count on its own. Hotels found on Agoda are not live on our site yet.
+              A room isn&apos;t confirmed unless Booking.com or Agoda details list a tub for that room. The room must be named. On Booking.com, the listing must include Bath, Spa tub, Hot tub, or Whirlpool. A room isn&apos;t confirmed if the listing only says Bath or shower. On Agoda, room details must list Bathtub or Whirlpool bathtub, or the room name must contain a tub word. Separate shower or bathtub does not count on its own. We record the exact tub label and the date we saw it, and each hotel shows which site holds its proof.
             </p>
           </section>
 
