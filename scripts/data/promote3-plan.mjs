@@ -717,7 +717,7 @@ for (const [destKey, records] of destGroups.entries()) {
   const hotelsToAdd = records.length;
   // Is it an existing live city?
   const isExistingLive = existingLiveCities.has(sample.city) ||
-    liveHotels.some(h => slugify(h.city) === sample.citySlug);
+    liveHotels.some(h => h.country === 'USA' && slugify(h.city) === sample.citySlug);
 
   let stage = 'hold';
   if (isExistingLive) {

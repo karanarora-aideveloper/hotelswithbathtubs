@@ -1,5 +1,5 @@
 // scripts/data/promote3-rollback.mjs
-// Rollback script for PROMOTE3-2026-10-31.
+// Rollback script for PROMOTE3-2026-11-12.
 // Dry run by default. Use --write to delete promoted hotels and revert candidate statuses.
 
 import path from 'path';
@@ -26,24 +26,31 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 
-const client = new MongoClient(process.env.MONGODB_URI);
+const client = new MongoClient(process.env.MONGODB_URI, {
+  maxPoolSize: 1,
+  minPoolSize: 1,
+  connectTimeoutMS: 30000,
+  serverSelectionTimeoutMS: 30000,
+  readPreference: 'secondaryPreferred'
+});
 await client.connect();
 const db = client.db();
 
+const BATCH_ID = 'PROMOTE3-2026-11-12';
 console.log(`[PROMOTE3 Rollback] Connected to MongoDB (Mode: ${isWrite ? 'WRITE (ROLLBACK)' : 'DRY RUN'})`);
 
 const countHotelsBefore = await db.collection('hotels').countDocuments();
 const countUsBefore = await db.collection('hotels').countDocuments({ country: 'USA' });
 
-// Find hotels with importBatch: 'PROMOTE3-2026-10-31'
-const batchHotels = await db.collection('hotels').find({ importBatch: 'PROMOTE3-2026-10-31' }).toArray();
+// Find hotels with importBatch: 'PROMOTE3-2026-11-12'
+const batchHotels = await db.collection('hotels').find({ importBatch: BATCH_ID }).toArray();
 const N = batchHotels.length;
 
-console.log(`\nFound ${N} hotels with importBatch: 'PROMOTE3-2026-10-31'`);
+console.log(`\nFound ${N} hotels with importBatch: '${BATCH_ID}'`);
 console.log(`Current hotels total: ${countHotelsBefore} (USA: ${countUsBefore})`);
 
 if (N === 0) {
-  console.log(`\nNo records found with importBatch: 'PROMOTE3-2026-10-31'. Nothing to roll back.`);
+  console.log(`\nNo records found with importBatch: '${BATCH_ID}'. Nothing to roll back.`);
   await client.close();
   process.exit(0);
 }
@@ -67,7 +74,7 @@ console.log(`\nExecuting rollback of ${N} records...`);
 const hotelIds = batchHotels.map(h => h._id);
 
 // 1. Delete from hotels
-const deleteResult = await db.collection('hotels').deleteMany({ importBatch: 'PROMOTE3-2026-10-31' });
+const deleteResult = await db.collection('hotels').deleteMany({ importBatch: BATCH_ID });
 console.log(`Deleted ${deleteResult.deletedCount} hotels from 'hotels' collection.`);
 
 // 2. Revert candidates in hotel_candidates
