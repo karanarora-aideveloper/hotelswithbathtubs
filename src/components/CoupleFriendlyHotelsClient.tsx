@@ -169,7 +169,7 @@ export default function CoupleFriendlyHotelsClient({
                 {/* Badge: Green when confirmed, muted grey when reported */}
                 {h.confirmed ? (
                   <span className="absolute left-3 top-3 z-10 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">
-                    ✓ Tub proven · Booking.com
+                    {h.partners && h.partners[0]?.partner ? `✓ Tub proven · ${h.partners[0].partner}` : '✓ Tub proven'}
                   </span>
                 ) : (
                   <span className="absolute left-3 top-3 z-10 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">

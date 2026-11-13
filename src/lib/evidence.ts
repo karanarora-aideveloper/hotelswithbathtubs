@@ -137,6 +137,65 @@ export function getFirstPartner(hotel: {
   return null;
 }
 
+export function getProofBadgeText(hotel: {
+  bookingUrl?: string | null;
+  agodaUrl?: string | null;
+  mmtUrl?: string | null;
+  makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
+  airbnbUrl?: string | null;
+  tripUrl?: string | null;
+  expediaUrl?: string | null;
+  hotelsComUrl?: string | null;
+  vrboUrl?: string | null;
+  url?: string | null;
+}): string {
+  const partner = getFirstPartner(hotel);
+  return partner ? `✓ Tub proven · ${partner}` : '✓ Tub proven';
+}
+
+export function getProofBoxTitle(hotel: {
+  bookingUrl?: string | null;
+  agodaUrl?: string | null;
+  mmtUrl?: string | null;
+  makemytripUrl?: string | null;
+  cleartripUrl?: string | null;
+  easemytripUrl?: string | null;
+  airbnbUrl?: string | null;
+  tripUrl?: string | null;
+  expediaUrl?: string | null;
+  hotelsComUrl?: string | null;
+  vrboUrl?: string | null;
+  url?: string | null;
+}): string {
+  const partner = getFirstPartner(hotel);
+  return partner ? `Tub proven on ${partner}` : 'Tub proven';
+}
+
+export function getProofBoxText(
+  hotel: {
+    bookingUrl?: string | null;
+    agodaUrl?: string | null;
+    mmtUrl?: string | null;
+    makemytripUrl?: string | null;
+    cleartripUrl?: string | null;
+    easemytripUrl?: string | null;
+    airbnbUrl?: string | null;
+    tripUrl?: string | null;
+    expediaUrl?: string | null;
+    hotelsComUrl?: string | null;
+    vrboUrl?: string | null;
+    url?: string | null;
+    roomType?: string | null;
+  },
+  tubWords: string
+): string {
+  const partner = getFirstPartner(hotel) || 'A booking site';
+  const room = hotel.roomType || 'room';
+  return `${partner} lists a ${tubWords} for the ${room}. Pick this exact room when you book.`;
+}
+
 export function getLinkedPartners(hotel: {
   bookingUrl?: string | null;
   agodaUrl?: string | null;

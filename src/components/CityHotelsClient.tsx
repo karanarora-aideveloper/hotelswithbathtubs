@@ -7,7 +7,7 @@ import HotelCardImage from '@/components/HotelCardImage';
 import { slugify, isVacationRental, isJacuzziRoom } from '@/lib/utils';
 import { isValidNeighborhood, isValidStreetAddress } from '@/lib/location';
 import { sendViewDestination, sendFilterUsed } from '@/lib/events';
-import { isHotelConfirmed, getLinkedPartners, getPartnerUrl, formatProofDate } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners, getPartnerUrl, formatProofDate, getFirstPartner } from '@/lib/evidence';
 import { tubWord } from '@/lib/tubWords';
 import { FavoriteButton } from '@/components/Favorites';
 import OutboundLink from '@/components/OutboundLink';
@@ -605,7 +605,7 @@ export default function CityHotelsClient({
                       {/* Badge: Green when confirmed, muted grey when reported */}
                       {isHotelConfirmed(h) ? (
                         <span className="absolute left-3 top-3 z-10 bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">
-                          ✓ Tub proven · Booking.com
+                          {getFirstPartner(h) ? `✓ Tub proven · ${getFirstPartner(h)}` : '✓ Tub proven'}
                         </span>
                       ) : (
                         <span className="absolute left-3 top-3 z-10 bg-[#e3e7ef] text-[#5b6478] text-[11px] font-bold px-2.5 py-1.5 rounded-full shadow-xs pointer-events-none">

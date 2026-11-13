@@ -9,7 +9,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCou
 import WhereToBookRow from '@/components/WhereToBookRow';
 import HotelGallery from '@/components/HotelGallery';
 import { isValidNeighborhood, isValidStreetAddress, sanitizePlaceholderText, cleanLandmarkDistance, isPlaceholderLandmark } from '@/lib/location';
-import { getEvidenceLine, getLinkedPartners, getPartnerUrl, sanitizeBookingTip, getBathtubLabel, getTubWord, sanitizeHotelData, buildDataDescription, isHotelConfirmed, formatProofDate } from '@/lib/evidence';
+import { getEvidenceLine, getLinkedPartners, getPartnerUrl, sanitizeBookingTip, getBathtubLabel, getTubWord, sanitizeHotelData, buildDataDescription, isHotelConfirmed, formatProofDate, getFirstPartner } from '@/lib/evidence';
 import { FavoriteButton } from '@/components/Favorites';
 import RecordHotelView from '@/components/RecordHotelView';
 import { buildHotelDescription } from '@/lib/hotelText';
@@ -485,6 +485,7 @@ export default async function HotelDetailPage({
   const cleanTip = sanitizeBookingTip(hotel.bookingTip, linkedPartners, hotel.roomType);
   const evidence = getEvidenceLine(hotel);
   const proofDate = isHotelConfirmed(hotel) ? formatProofDate(hotel.importBatch) : null;
+  const proofPartner = getFirstPartner(hotel);
   const hotelAddress = isValidStreetAddress(hotel.streetAddress)
     ? `${hotel.streetAddress}, ${cityName}, ${countryName}`
     : (hotel.neighborhood && isValidNeighborhood(hotel.neighborhood)
@@ -585,7 +586,7 @@ export default async function HotelDetailPage({
               <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
                 <div className="flex items-center gap-2 font-bold text-[#1f6f5c] text-sm">
                   <span className="w-[22px] h-[22px] rounded-full bg-[#e3f2ee] text-[#1f6f5c] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
-                  <span>Tub proven on Booking.com</span>
+                  <span>{proofPartner ? `Tub proven on ${proofPartner}` : 'Tub proven'}</span>
                 </div>
                 {proofDate && (
                   <span className="text-[11px] sm:text-xs text-[#5b6478] font-medium font-manrope">
@@ -594,7 +595,7 @@ export default async function HotelDetailPage({
                 )}
               </div>
               <p className="text-xs sm:text-[13px] text-[#5b6478] leading-relaxed m-0">
-                Booking.com lists a <strong className="font-semibold text-[#14213d]">{tubWords}</strong> for the <strong className="font-semibold text-[#14213d]">{hotel.roomType || 'room'}</strong>. Pick this exact room when you book.{' '}
+                {proofPartner || 'A booking site'} lists a <strong className="font-semibold text-[#14213d]">{tubWords}</strong> for the <strong className="font-semibold text-[#14213d]">{hotel.roomType || 'room'}</strong>. Pick this exact room when you book.{' '}
                 <Link href="/how-we-check-bathtubs" prefetch={false} className="text-[#b08d57] hover:underline font-semibold ml-1">
                   How we check
                 </Link>
@@ -624,7 +625,7 @@ export default async function HotelDetailPage({
           {linkedPartners.length > 0 ? (
             linkedPartners.map((partnerName) => {
               const partnerUrl = getPartnerUrl(hotel, partnerName);
-              const isConfirmedBooking = partnerName === 'Booking.com' && isHotelConfirmed(hotel);
+              const isConfirmedBooking = isHotelConfirmed(hotel) && partnerName === proofPartner;
               return (
                 <WhereToBookRow
                   key={partnerName}

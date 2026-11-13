@@ -6,7 +6,7 @@ import OutboundLink from '@/components/OutboundLink';
 import { cleanOutboundUrl } from '@/lib/affiliate';
 import ProgressiveImage from '@/components/ProgressiveImage';
 import { sendMatchmakerStart, sendMatchmakerComplete } from '@/lib/events';
-import { isHotelConfirmed, getLinkedPartners } from '@/lib/evidence';
+import { isHotelConfirmed, getLinkedPartners, getFirstPartner } from '@/lib/evidence';
 import { useGeo } from '@/lib/useGeo';
 import { tubWord } from '@/lib/tubWords';
 
@@ -1117,7 +1117,7 @@ export default function DreamSoakMatchmaker({
                         <div className="absolute top-2.5 left-2.5">
                           {proven ? (
                             <span className="bg-[#e3f2ee] text-[#1f6f5c] text-[11px] font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs font-manrope">
-                              <span>✓</span> Tub proven · Booking.com
+                              <span>✓</span> {getFirstPartner(hotel) ? `Tub proven · ${getFirstPartner(hotel)}` : 'Tub proven'}
                             </span>
                           ) : (
                             <span className="bg-[#f5f6f8] text-[#5b6478] text-[11px] font-medium px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs font-manrope">
