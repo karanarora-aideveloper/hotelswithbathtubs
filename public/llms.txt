@@ -6,8 +6,8 @@
 Every property in the directory is triple-checked across Booking.com and Agoda room categories. We strictly index rooms where the bathtub or whirlpool jacuzzi is private and inside the guest quarters — explicitly eliminating shared hotel spa tubs or misleading descriptions.
 
 ## Catalog Overview
-- **Verified Hotel Listings**: 5,286 hand-verified properties
-- **Global Coverage**: 813 cities across 119 countries
+- **Verified Hotel Listings**: 6,358 hand-verified properties
+- **Global Coverage**: 924 cities across 119 countries
 - **In-Room Jacuzzi & Whirlpool Suites**: 2,161 verified listings
 - **Curated Travel Guides**: 146 in-depth destination guides
 - **Zero Surprises Guarantee**: Direct canonical booking links targeting verified room tiers
@@ -21,8 +21,8 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - Complete XML Sitemap: https://www.hotelswithbathtubs.com/sitemap.xml
 
 ## Top Regional Hubs
+- USA: https://www.hotelswithbathtubs.com/usa (2451 verified stays)
 - India: https://www.hotelswithbathtubs.com/india (1548 verified stays)
-- USA: https://www.hotelswithbathtubs.com/usa (1379 verified stays)
 - UK: https://www.hotelswithbathtubs.com/uk (79 verified stays)
 - Spain: https://www.hotelswithbathtubs.com/spain (75 verified stays)
 - Italy: https://www.hotelswithbathtubs.com/italy (74 verified stays)
@@ -31,38 +31,38 @@ Every property in the directory is triple-checked across Booking.com and Agoda r
 - Portugal: https://www.hotelswithbathtubs.com/portugal (48 verified stays)
 - Japan: https://www.hotelswithbathtubs.com/japan (48 verified stays)
 - Greece: https://www.hotelswithbathtubs.com/greece (41 verified stays)
-- South Korea: https://www.hotelswithbathtubs.com/south-korea (36 verified stays)
-- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
 - Oman: https://www.hotelswithbathtubs.com/oman (36 verified stays)
 - Thailand: https://www.hotelswithbathtubs.com/thailand (36 verified stays)
-- Poland: https://www.hotelswithbathtubs.com/poland (36 verified stays)
+- South Korea: https://www.hotelswithbathtubs.com/south-korea (36 verified stays)
 - Bosnia and Herzegovina: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina (36 verified stays)
-- Montenegro: https://www.hotelswithbathtubs.com/montenegro (35 verified stays)
+- Poland: https://www.hotelswithbathtubs.com/poland (36 verified stays)
+- Argentina: https://www.hotelswithbathtubs.com/argentina (36 verified stays)
 - Egypt: https://www.hotelswithbathtubs.com/egypt (35 verified stays)
-- Austria: https://www.hotelswithbathtubs.com/austria (34 verified stays)
+- Montenegro: https://www.hotelswithbathtubs.com/montenegro (35 verified stays)
 - Uzbekistan: https://www.hotelswithbathtubs.com/uzbekistan (34 verified stays)
+- Austria: https://www.hotelswithbathtubs.com/austria (34 verified stays)
 
 ## Popular High-Intent City Directories
-- Las Vegas, USA: https://www.hotelswithbathtubs.com/usa/las-vegas (49 verified stays)
+- Las Vegas, USA: https://www.hotelswithbathtubs.com/usa/las-vegas (60 verified stays)
+- Houston, USA: https://www.hotelswithbathtubs.com/usa/houston (39 verified stays)
+- Orlando, USA: https://www.hotelswithbathtubs.com/usa/orlando (39 verified stays)
 - Delhi, India: https://www.hotelswithbathtubs.com/india/delhi (38 verified stays)
-- Orlando, USA: https://www.hotelswithbathtubs.com/usa/orlando (37 verified stays)
-- Houston, USA: https://www.hotelswithbathtubs.com/usa/houston (35 verified stays)
-- San Diego, USA: https://www.hotelswithbathtubs.com/usa/san-diego (33 verified stays)
+- Pigeon Forge, USA: https://www.hotelswithbathtubs.com/usa/pigeon-forge (36 verified stays)
+- San Diego, USA: https://www.hotelswithbathtubs.com/usa/san-diego (35 verified stays)
 - Goa, India: https://www.hotelswithbathtubs.com/india/goa (33 verified stays)
+- Branson, USA: https://www.hotelswithbathtubs.com/usa/branson (33 verified stays)
 - New York, USA: https://www.hotelswithbathtubs.com/usa/new-york (32 verified stays)
-- Branson, USA: https://www.hotelswithbathtubs.com/usa/branson (31 verified stays)
+- Los Angeles, USA: https://www.hotelswithbathtubs.com/usa/los-angeles (32 verified stays)
+- Nashville, USA: https://www.hotelswithbathtubs.com/usa/nashville (32 verified stays)
 - Scottsdale, USA: https://www.hotelswithbathtubs.com/usa/scottsdale (31 verified stays)
-- Los Angeles, USA: https://www.hotelswithbathtubs.com/usa/los-angeles (30 verified stays)
-- Nashville, USA: https://www.hotelswithbathtubs.com/usa/nashville (30 verified stays)
 - Rishikesh, India: https://www.hotelswithbathtubs.com/india/rishikesh (30 verified stays)
-- Pigeon Forge, USA: https://www.hotelswithbathtubs.com/usa/pigeon-forge (28 verified stays)
-- Agra, India: https://www.hotelswithbathtubs.com/india/agra (28 verified stays)
-- Santorini, Greece: https://www.hotelswithbathtubs.com/greece/santorini (28 verified stays)
+- Eureka Springs, USA: https://www.hotelswithbathtubs.com/usa/eureka-springs (30 verified stays)
+- Portland, USA: https://www.hotelswithbathtubs.com/usa/portland (29 verified stays)
 
 ## Editorial Guides & FAQs
 - Lake Tahoe hotel rooms with a hot tub or bathtub (2026): https://www.hotelswithbathtubs.com/blog/lake-tahoe-hotels-cabins-with-hot-tub
-- Las Vegas hotels with a jetted tub or bathtub in the room (2026): https://www.hotelswithbathtubs.com/blog/las-vegas-hotels-with-jacuzzi-tub-in-room
 - Gatlinburg & Pigeon Forge stays with a hot tub or bathtub (2026): https://www.hotelswithbathtubs.com/blog/gatlinburg-pigeon-forge-cabins-hot-tub
+- Las Vegas hotels with a jetted tub or bathtub in the room (2026): https://www.hotelswithbathtubs.com/blog/las-vegas-hotels-with-jacuzzi-tub-in-room
 - Eureka Springs hotels with an in-room jacuzzi or bathtub (2026): https://www.hotelswithbathtubs.com/blog/eureka-springs-hotels-with-jacuzzi-in-room
 - Branson MO hotels with a jacuzzi or bathtub in the room (2026): https://www.hotelswithbathtubs.com/blog/branson-mo-hotels-with-jacuzzi-in-room
 - Big Bear Lake cabins & hotels with hot tub (2026): https://www.hotelswithbathtubs.com/blog/big-bear-lake-cabins-hotels-with-hot-tub
