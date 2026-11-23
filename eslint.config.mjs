@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Founder OS task worktrees (nested copies of this repo)
+    ".worktrees/**",
   ]),
 ]);
 
