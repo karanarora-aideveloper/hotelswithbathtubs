@@ -12,7 +12,7 @@ const isWriteMode = process.argv.includes('--write');
 function getMongoUri() {
   if (process.env.MONGODB_URI) return process.env.MONGODB_URI;
   const candidatePaths = [
-    '/Users/karanarora/mystartups/hotelswithbathtubs/.env.local',
+    '/Users/karanarora/my_brain/01_startups/hotelswithbathtubs/.env.local',
     path.resolve(__dirname, '../../../../hotelswithbathtubs/.env.local'),
     path.resolve(process.cwd(), '../hotelswithbathtubs/.env.local'),
     path.resolve(process.cwd(), '.env.local')

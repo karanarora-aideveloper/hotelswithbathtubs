@@ -2,10 +2,11 @@
 import fs from 'fs';
 import path from 'path';
 
-// Input paths
-const TUBHOTELS_PATH = '/Users/karanarora/mystartups/hotelswithbathtubs/web_pages/tubhotels/all-extracted-hotels.json';
-const OUR_HOTELS_PATH = '/Users/karanarora/mystartups/hotelswithbathtubs/.cache/all-hotels.json';
-const BASE_DIR = '/Users/karanarora/mystartups/hotelswithbathtubs-data';
+// Input paths: everything lives in the main repo checkout (data-collect/ is gitignored there)
+const REPO_ROOT = process.env.HWB_REPO_ROOT || '/Users/karanarora/my_brain/01_startups/hotelswithbathtubs';
+const TUBHOTELS_PATH = path.join(REPO_ROOT, 'web_pages/tubhotels/all-extracted-hotels.json');
+const OUR_HOTELS_PATH = path.join(REPO_ROOT, '.cache/all-hotels.json');
+const BASE_DIR = REPO_ROOT;
 const PRIVATE_DIR = path.join(BASE_DIR, 'data-collect/private');
 const REPORT_PATH = path.join(BASE_DIR, 'data-collect/import1-report.md');
 
