@@ -1,0 +1,14 @@
+[
+  {
+    "city": "Delhi",
+    "country": "India",
+    "platform": "Trip.com",
+    "reason": "No public city list page linked from directory pages (returns 404 for static list URLs; Trip.com uses client-side search). Owner can save search page by hand to web_pages/trip/delhi.html.",
+    "attemptedUrls": [
+      "https://www.trip.com/hotels/delhi-hotels-list-704/",
+      "https://www.trip.com/hotels/new-delhi-hotels-list-1004/",
+      "https://www.trip.com/hotels/delhi-hotels-list-c2423/"
+    ],
+    "ourListingsCount": 38
+  }
+]

@@ -1,0 +1,2581 @@
+[
+  {
+    "hotelId": "6a957a7489968819fb0dc1f6",
+    "slug": "the-greenwich-hotel-new-york",
+    "sourceUrl": "https://www.booking.com/hotel/us/the-greenwich.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:06:37.326Z",
+    "lat": 40.71994695111297,
+    "lng": -74.00996066629887,
+    "address": "377 Greenwich Street, Tribeca, New York, NY 10013, United States",
+    "district": "Tribeca",
+    "score10": 9.2,
+    "reviewCount": 58,
+    "rooms": [
+      {
+        "name": "King Room with Roll-In Shower - Disability Access",
+        "bathWords": []
+      },
+      {
+        "name": "Queen Room",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Superior King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Suite",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6aa779b5a1d874eba51c58ad",
+    "slug": "new-york-the-mark-hotel",
+    "sourceUrl": "https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:06:42.352Z",
+    "lat": 40.79883276399386,
+    "lng": -73.96665841341019,
+    "address": "891 Amsterdam Avenue, Upper West Side, New York, NY 10025, United States",
+    "district": "Upper West Side",
+    "score10": 8.7,
+    "reviewCount": 15303,
+    "rooms": [
+      {
+        "name": "Bed in All-Gender 8-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in All-Gender 12-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 8-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Women's 8-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 12-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Women's 12-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 6-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in All-Gender 6-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 10-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Women's 10-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in All-Gender 10-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in All-Gender 4-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 4-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Women's 4-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Women's 6-Bed Dormitory",
+        "bathWords": []
+      },
+      {
+        "name": "Bed in Men's 14-Bed Dormitory",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6aa779b5a1d874eba51c58af",
+    "slug": "new-york-fouquets-new-york",
+    "sourceUrl": "https://www.booking.com/hotel/us/barriere-fouquet.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:06:52.112Z",
+    "lat": 40.723617,
+    "lng": -74.009753,
+    "address": "456 Greenwich Street, Tribeca, New York, NY 10013, United States",
+    "district": "Tribeca",
+    "score10": 8.4,
+    "reviewCount": 42,
+    "rooms": [
+      {
+        "name": "Deluxe King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Prestige Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Prestige Junior Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Tribeca Corner Suite ",
+        "bathWords": []
+      },
+      {
+        "name": "Hudson View Corner Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "ADA Deluxe King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Classic King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957a7489968819fb0dc1f9",
+    "slug": "baccarat-hotel-and-residences-new-york-new-york",
+    "sourceUrl": "https://www.booking.com/hotel/us/baccarat-and-residences-new-york.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:02.087Z",
+    "lat": 40.760825,
+    "lng": -73.9772461,
+    "address": "28 West 53rd Street, New York, NY 10019, United States",
+    "district": "New York",
+    "score10": 9.3,
+    "reviewCount": 242,
+    "rooms": [
+      {
+        "name": "Classic King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Classic Double Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Classic King",
+        "bathWords": []
+      },
+      {
+        "name": "Classic Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Prestige Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Atelier King",
+        "bathWords": []
+      },
+      {
+        "name": "Double Room",
+        "bathWords": []
+      },
+      {
+        "name": " Double Room",
+        "bathWords": []
+      },
+      {
+        "name": "Triple Room",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957a7489968819fb0dc1fa",
+    "slug": "the-carlyle-a-rosewood-hotel-new-york",
+    "sourceUrl": "https://www.booking.com/hotel/us/the-carlyle-a-rosewood.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:12.076Z",
+    "lat": 40.77422772461944,
+    "lng": -73.96308705210691,
+    "address": "35 East 76th Street, Upper East Side, New York, NY 10021, United States",
+    "district": "Upper East Side",
+    "score10": 7.2,
+    "reviewCount": 27,
+    "rooms": [
+      {
+        "name": "Executive King",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe Twins ",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King ",
+        "bathWords": []
+      },
+      {
+        "name": "Superior King ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier King",
+        "bathWords": []
+      },
+      {
+        "name": "Accessible Deluxe King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Carlyle Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Rosewood Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Accessible Deluxe Twins",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Madison King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Upper East Side Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Accessible Premier Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Two-Bedroom Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Accessible Superior Two-Bedroom Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Central Park Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Accessible Central Park Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Two-Bedroom Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Suite",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957f74f90a245c8aaa2a3a",
+    "slug": "chicago-the-langham-chicago",
+    "sourceUrl": "https://www.booking.com/hotel/us/the-langham-chicago.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:22.270Z",
+    "lat": 41.8885649,
+    "lng": -87.62725820000003,
+    "address": "330 North Wabash Avenue, River North, Chicago, IL 60611, United States",
+    "district": "River North",
+    "score10": 9.4,
+    "reviewCount": 340,
+    "rooms": [
+      {
+        "name": "Premier King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Double Room with Two Double Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club Executive Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Club Double Room with Two Double Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Double Room with Two Double Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Double Room with Two Double Beds - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Room Selected at Check In",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier King Room - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Club King Room - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier River View Room ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club One-Bedroom River View Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club One Bedroom River View Suite - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club One-Bedroom Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club One-Bedroom Suite - Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Club One Bedroom Lake View Suite",
+        "bathWords": [
+          "Spa bath",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior Suite - Accessible ",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957f75f90a245c8aaa2a3b",
+    "slug": "chicago-the-peninsula-chicago",
+    "sourceUrl": "https://www.booking.com/hotel/us/the-peninsula-chicago.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:32.734Z",
+    "lat": 41.896000277415716,
+    "lng": -87.62508630752563,
+    "address": "108 East Superior, River North, Chicago, IL 60611, United States",
+    "district": "River North",
+    "score10": 9.2,
+    "reviewCount": 222,
+    "rooms": [
+      {
+        "name": "Superior King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Deluxe Room",
+        "bathWords": []
+      },
+      {
+        "name": "Executive Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Junior Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Deluxe Double Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Premier King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Premier Double Room",
+        "bathWords": []
+      },
+      {
+        "name": " Double Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": " Triple Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Double Room",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957f75f90a245c8aaa2a3c",
+    "slug": "chicago-waldorf-astoria-chicago",
+    "sourceUrl": "https://www.booking.com/hotel/us/chicago-11-walton.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:43.111Z",
+    "lat": 41.89968874932052,
+    "lng": -87.62775376439089,
+    "address": "11 East Walton, Chicago, IL 60611, United States",
+    "district": "Chicago",
+    "score10": 9.3,
+    "reviewCount": 140,
+    "rooms": [
+      {
+        "name": "Superior King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Queen Room with Two Queen Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room with Fireplace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior Suite with Fireplace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Corner One-Bedroom Corner Terrace Suite with Fireplace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Gold Coast Terrace King Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "One-Bedroom Suite with Fireplace and Terrace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior Suite with Fireplace and Roll-in Shower - Mobility Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "One-Bedroom Terrace Suite with Fireplace and Roll-in Shower - Disability Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "One-Bedroom Corner Terrace Suite with Roll-in Shower",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Terrace and Fireplace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Three-Bedroom Presidential Suite with Fireplace",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Two-Bedroom King Suite with Two Fireplaces",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957f75f90a245c8aaa2a3e",
+    "slug": "chicago-trump-international-hotel-tower-chicago",
+    "sourceUrl": "https://www.booking.com/hotel/us/trump-international-tower-chicago.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:07:52.679Z",
+    "lat": 41.88899708493635,
+    "lng": -87.62658163905144,
+    "address": "401 North Wabash Avenue, River North, Chicago, IL 60611, United States",
+    "district": "River North",
+    "score10": 9.4,
+    "reviewCount": 1136,
+    "rooms": [
+      {
+        "name": "Deluxe Spa King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room with City View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Suite with City View",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room with River View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Queen Room with Two Queen Beds and City View",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe Queen Room with Two Queen Beds and River View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Spa Queen Room with Two Queen Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Spa Grand Deluxe King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive King Room with Lake View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Spa King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Suite with River View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Suite With Lake View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Two-Bedroom Suite with Lake View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Suite with River View ",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ad9fa6bef30327ba9cd3425",
+    "slug": "the-ritz-carlton-chicago",
+    "sourceUrl": "https://www.booking.com/hotel/us/ritz-carlton-chicago.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:02.163Z",
+    "lat": 41.8977771592167,
+    "lng": -87.6223987340928,
+    "address": "160 East Pearson Street, Streeterville, Chicago, IL 60611, United States",
+    "district": "Streeterville",
+    "score10": 8.6,
+    "reviewCount": 53,
+    "rooms": [
+      {
+        "name": "King Room with City View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Lake View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Double Room with Two Double Beds",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive King Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe One-Bedroom Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Suite - Lakeside",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Double Guest Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with City View - Lounge Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Guest Room with Lake View and Lounge Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive King Suite with Lounge Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "One-Bedroom Lakeside Suite with Lounge Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room with City View - Hearing Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room with City View and Adapted Tub - Mobility Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Room with City View and Roll-in Shower - Mobility Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Lake View and Adapted Tub - Mobility Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Lake View - Hearing Accessible",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ad9fa86ef30327ba9cd3435",
+    "slug": "skylofts-at-mgm-grand-las-vegas",
+    "sourceUrl": "https://www.booking.com/hotel/us/the-skylofts-of-mgm.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:12.032Z",
+    "lat": 36.101301543811694,
+    "lng": -115.17234921455383,
+    "address": "3799 Las Vegas Boulevard South, Las Vegas Strip, Las Vegas, NV 89109, United States",
+    "district": "Las Vegas Strip",
+    "score10": 7.1,
+    "reviewCount": 10,
+    "rooms": [
+      {
+        "name": "Skylofts One Bedroom Loft",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Skylofts Two Bedroom Loft",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957a7589968819fb0dc1ff",
+    "slug": "waldorf-astoria-las-vegas-las-vegas",
+    "sourceUrl": "https://www.booking.com/hotel/us/waldorf-astoria-las-vegas.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:22.129Z",
+    "lat": 36.1063898750547,
+    "lng": -115.17444133758545,
+    "address": "3752 Las Vegas Boulevard South, Las Vegas Strip, Las Vegas, NV 89158, United States",
+    "district": "Las Vegas Strip",
+    "score10": 8.5,
+    "reviewCount": 190,
+    "rooms": [
+      {
+        "name": "Room with Two Double Beds and Strip View",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe Room with Two Double Beds",
+        "bathWords": []
+      },
+      {
+        "name": "King Room with One King Bed and Strip View",
+        "bathWords": []
+      },
+      {
+        "name": "King Room with View and Roll-in Shower - Mobility and Hearing Access",
+        "bathWords": []
+      },
+      {
+        "name": "Penthouse King Suite with Panorama View",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room - Mobility and Hearing Access",
+        "bathWords": []
+      },
+      {
+        "name": "Junior King Suite",
+        "bathWords": []
+      },
+      {
+        "name": "One-Bedroom Strip View Suite with King Bed",
+        "bathWords": []
+      },
+      {
+        "name": "One-Bedroom Villa Suite with King Bed",
+        "bathWords": []
+      },
+      {
+        "name": "Waldorf One-Bedroom Suite with One King Bed",
+        "bathWords": []
+      },
+      {
+        "name": "Directors Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Three-Bedroom Grand Presidential Suite with Two King Beds and Two Double Beds",
+        "bathWords": []
+      },
+      {
+        "name": "Astoria One-Bedroom Suite with One King Bed",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a957a7589968819fb0dc200",
+    "slug": "wynn-las-vegas-las-vegas",
+    "sourceUrl": "https://www.booking.com/hotel/us/wynn-las-vegas-boulevard.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:32.196Z",
+    "lat": 36.1256913304492,
+    "lng": -115.16642689704895,
+    "address": "3131 Las Vegas Boulevard, Las Vegas Strip, Las Vegas, NV 89109, United States",
+    "district": "Las Vegas Strip",
+    "score10": 9,
+    "reviewCount": 1779,
+    "rooms": [
+      {
+        "name": "Wynn Tower Suite King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Tower Suite Parlor",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Tower Suite Salon",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Panoramic View King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Panoramic Two Queens",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Wynn Resort King - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Wynn Resort Queens - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Resort King - Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Panoramic View King - Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Resort Two Queens Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Panoramic View Two Queens - Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Wynn Panoramic View King - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Wynn Resort Panoramic Two Queens - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King (Check-in at Encore)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort Two Queens (Check-in at Encore)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King (Check-in at Encore) Special Offer - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Panoramic View Two Queens - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King - Enjoy Daily Brunch for Two at the Buffet (Check-in at Encore)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort Two Queens - Enjoy Daily Brunch for Two at the Buffet (Check-in at Encore)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Panoramic View King - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King – Legends Package: Icons Dinner, VIP Feast & Grand Brunch",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort 2 Queens-Legends Package: Icons Dinner, VIP Feast & Grand Brunch",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King - $75 Daily Beverage Credit + Panoramic View Upgrade",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens - $75 Daily Beverage Credit + Panoramic  View Upgrade",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King - $75 Daily Beverage Credit + Panoramic View Upgrade (Check-in at Encore)",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ad9fa84ef30327ba9cd3433",
+    "slug": "nomad-las-vegas",
+    "sourceUrl": "https://www.booking.com/hotel/us/nomad-las-vegas.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:42.092Z",
+    "lat": 36.104245,
+    "lng": -115.173171,
+    "address": "3772 South Las Vegas Boulevard, Las Vegas Strip, Las Vegas, NV 89109, United States",
+    "district": "Las Vegas Strip",
+    "score10": 8.9,
+    "reviewCount": 335,
+    "rooms": [
+      {
+        "name": "The Reserve Classic Two Queen",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": " The Reserve Classic King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Atelier Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Grande Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Salon Double Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Classic Accessible King",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ad9fa84ef30327ba9cd3434",
+    "slug": "encore-at-wynn-las-vegas",
+    "sourceUrl": "https://www.booking.com/hotel/us/encore-las-vegas.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:08:52.275Z",
+    "lat": 36.12706681800652,
+    "lng": -115.16673266887659,
+    "address": "3121 Las Vegas Boulevard, Las Vegas Strip, Las Vegas, NV 89109, United States",
+    "district": "Las Vegas Strip",
+    "score10": 9,
+    "reviewCount": 946,
+    "rooms": [
+      {
+        "name": "Encore Resort King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Panoramic View King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Tower Suite King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Tower Suite Parlor",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Tower Suite Salon ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort Two Queens",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Encore Resort King - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Encore Resort Two Queens - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Encore Resort King - Two (2) Complimentary Awakening Sapphire Show Tickets Offer\t",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Encore Resort Two Queens Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "SPECIAL OFFER – Encore Panoramic View King - Two (2) Complimentary Awakening Sapphire Show Tickets Offer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Special Offer - Encore Panoramic View King - Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King (Check-in at Wynn) Special Offer-Resort Credit",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Panoramic View King - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort Two Queens - Enjoy Daily Brunch for Two at the Buffet",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King - Enjoy Daily Brunch for Two at the Buffet (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens - Enjoy Daily Brunch for Two at the Buffet (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King – Legends Package: Icons Dinner, VIP Feast & Grand Brunch",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort 2 Queens-Legends Package: Icons Dinner, VIP Feast & Grand Brunch",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Encore Resort King - $75 Daily Beverage Credit + Panoramic View Upgrade",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort King - $75 Daily Beverage Credit + Panoramic View Upgrade (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Wynn Resort Two Queens - $75 Daily Beverage Credit + Panoramic View Upgrade (Check-in at Wynn)",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f36",
+    "slug": "the-prime-delhi",
+    "sourceUrl": "https://www.booking.com/hotel/in/the-prime-delhi.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:02.133Z",
+    "lat": 28.640671,
+    "lng": 77.211396,
+    "address": "2352-54 Chuna Mandi, Paharganj, 110055 New Delhi, India",
+    "district": "Paharganj",
+    "score10": 8.9,
+    "reviewCount": 127,
+    "rooms": [
+      {
+        "name": "Superior Double or Twin Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Studio with airport pickup",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Suite with Hot Tub",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room with Local Delhi Sightseeing Package (3-4 location included with private sedan car)",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f47",
+    "slug": "the-imperial-new-delhi",
+    "sourceUrl": "https://www.booking.com/hotel/in/imperial-new-delhi.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:12.543Z",
+    "lat": 28.624509131429928,
+    "lng": 77.2172462940216,
+    "address": "Janpath Ln, Janpath, Connaught Place, New Delhi, Delhi 110001, Connaught Place, 110001 New Delhi, India",
+    "district": "Janpath",
+    "score10": 9.6,
+    "reviewCount": 1763,
+    "rooms": [
+      {
+        "name": "Imperial Room",
+        "bathWords": []
+      },
+      {
+        "name": "Deco Room",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Heritage Room",
+        "bathWords": []
+      },
+      {
+        "name": "Grand Heritage Room",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Heritage Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Deco Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room",
+        "bathWords": []
+      },
+      {
+        "name": "Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ac488b781f9e2d8880e5050",
+    "slug": "roseate-house-new-delhi-aerocity",
+    "sourceUrl": "https://www.booking.com/hotel/in/roseate-new-delhi.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:22.194Z",
+    "lat": 28.5509441915831,
+    "lng": 77.12064117193222,
+    "address": "Plot number 10, GMR Hospitality District, Indira Gandhi International Airport, Aerocity, 110037 New Delhi, India",
+    "district": "GMR Hospitality District",
+    "score10": 8,
+    "reviewCount": 1102,
+    "rooms": [
+      {
+        "name": "Deluxe Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Room with Hi-Tea",
+        "bathWords": []
+      },
+      {
+        "name": "Club Room with Hi-Tea & Club Lounge Access, 2 way Airport Transfer, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Executive Suite with Hi-Tea & Club Lounge Access, 2 way Airport Transfer, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Panoramic Suite with Hi-Tea & Club Lounge Access, 15% Dis on Laundry, 2 way Airport Transfer, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Corporate Suite with Hi-Tea & Club Lounge Access, 15% Dis on Laundry & 20% Dis on Spa, 2 way Airport Transfer, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Junior Suite with Hi-Tea & Club Lounge Access, 15% Dis on Laundry & 20% Dis on Spa, 2 way Airport Transfer, Late Check-out till 1 PM, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Terrace Suite with Hi-Tea & Club Lounge Access, 15% Dis on Laundry & 20% Dis on Spa, 2 way Airport Transfer, Late Check-out till 1 PM, 30 minute Spa, Floor Butler Service",
+        "bathWords": []
+      },
+      {
+        "name": "Roseate Suite with Hi-Tea & Club Lounge Access, 15% Dis on Laundry & 20% Dis on Spa, 2 way Airport Transfer, Late Check-out till 1 PM, 30 minute Spa, 4 pc Laundry per room per day, Comp Extra Bed, Personalized Butler Service 24 hours",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9ff363ebd8ede3e5718f3d",
+    "slug": "taj-palace-new-delhi",
+    "sourceUrl": "https://www.booking.com/hotel/in/taj-palace-new-delhi.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:32.347Z",
+    "lat": 28.595703997083167,
+    "lng": 77.1711203455925,
+    "address": "Sardar Patel Marg, Chanakyapuri, 110021 New Delhi, India",
+    "district": "Chanakyapuri",
+    "score10": 8.8,
+    "reviewCount": 1997,
+    "rooms": [
+      {
+        "name": "Deluxe Room King Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room King Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room King Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Room Twin Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room Twin Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Suite King Bed Diplomatic Enclave View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club King Bed Junior Suite",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Suite King Bed Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Garden Luxury Suite King Bed Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Garden Presidential 2 Bed Suite Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Presidential Suite King Bed Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room Twin Bed Diplomatic Enclave View",
+        "bathWords": []
+      },
+      {
+        "name": "Tata Suite 2 Bed King/ Twin Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Room King Bed Forest and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room King Bed Forest and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Suite King Bed Forest and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room King Bed Forest and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6ac488b781f9e2d8880e5051",
+    "slug": "crowne-plaza-new-delhi-okhla-ihg",
+    "sourceUrl": "https://www.booking.com/hotel/in/crowne-plaza-new-delhi-okhla.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:42.244Z",
+    "lat": 28.528616063302994,
+    "lng": 77.2720330953598,
+    "address": "Plot No 1, Community Centre Okhla, Phase-1, 110020 New Delhi, India",
+    "district": "Community Centre Okhla",
+    "score10": 8.2,
+    "reviewCount": 698,
+    "rooms": [
+      {
+        "name": "Standard Room Offers Buy1Get1 on Premium beverages between 11amto7pm and 15% discount on Food and Soft beverages, SPA and Laundry",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "1 King Standard Top Floor Lounge Access",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Standard King Room",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Standard King Room - Accessible",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Junior King Suite - Lounge Access",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Room with Two Single Beds with Lounge Access",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Standard Twin Room - Top Floor/Lounge Access",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Standard Twin Room - Non-Smoking Offers Buy1Get1 on Premium beverages between 11amto7pm and 15% discount on Food and Soft beverages, SPA and Laundry",
+        "bathWords": []
+      },
+      {
+        "name": "Standard King Room - Smoking",
+        "bathWords": []
+      },
+      {
+        "name": "Standard Twin Room - Smoking Offers Buy1Get1 on Premium beverages between 11amto7pm and 15% discount on Food and Soft beverages, SPA and Laundry",
+        "bathWords": []
+      },
+      {
+        "name": "One-Bedroom Suite Lounge Access",
+        "bathWords": []
+      },
+      {
+        "name": "One-Bedroom Suite - Lounge Access/Smoking",
+        "bathWords": []
+      },
+      {
+        "name": "One-Bedroom Suite with Lounge Access - Top Floor",
+        "bathWords": []
+      },
+      {
+        "name": "Premium Room",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Standard King Room with Lounge Access",
+        "bathWords": [
+          "Hot tub"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9045838566320ebd9fcb0b",
+    "slug": "hilton-international-airport-hotel-mumbai",
+    "sourceUrl": "https://www.booking.com/hotel/in/taj-lands-end.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:09:52.501Z",
+    "lat": 19.043706746103087,
+    "lng": 72.81903773546219,
+    "address": "Bandstand, Bandra West, Maharashtra, Bandra, 400050 Mumbai, India",
+    "district": "Bandra West",
+    "score10": 8.1,
+    "reviewCount": 2555,
+    "rooms": [
+      {
+        "name": "Deluxe Pool View King Bed",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Pool View Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Room Twin Bed",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room King Bed - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Suite Pool View - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Suite - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Grand Luxury Suite - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Grand Luxury Room Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Grand Luxury Room King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Serene Infinity Sea View Room Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Serene Infinity Sea View Room King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Sea Link Suite King Bed - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room Twin Bed - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": " Luxury Room King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Taj Club Room Sea View King Bed - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Signature Suite King Bed - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Presidential Suite King Bed Sea View - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Royal Suite King Bed Sea View - High tea, evening cocktails, butler service, Complimentary 1 way airport transfer",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Sea Link View Room King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Sea Link View Room Twin Bed",
+        "bathWords": []
+      },
+      {
+        "name": "Bay View Room Twin Bed",
+        "bathWords": []
+      },
+      {
+        "name": "Bay View Room King Bed",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9045838566320ebd9fcb12",
+    "slug": "romantic-bathtub-holiday-inn-international-airport-an-ihg-hotel-mumbai",
+    "sourceUrl": "https://www.booking.com/hotel/in/the-oberoi-mumbai.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:02.381Z",
+    "lat": 18.92710287757788,
+    "lng": 72.82027959823608,
+    "address": "Nariman Point , 400021 Mumbai, India",
+    "district": "Mumbai",
+    "score10": 9.3,
+    "reviewCount": 1550,
+    "rooms": [
+      {
+        "name": "Ocean View ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Room King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Ocean View Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Deluxe Ocean View Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Premier Ocean View Suite ",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Bay View Suite",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Bay View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Bay View Residential Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Residential Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Ocean View Room - Twin",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Bay View Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Room Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Bay View Room",
+        "bathWords": []
+      },
+      {
+        "name": "Premier Ocean View Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Suite Queen’s Necklace View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Quadruple Room",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9045838566320ebd9fcb13",
+    "slug": "taj-santacruz-mumbai",
+    "sourceUrl": "https://www.booking.com/hotel/in/the-taj-mahal-palace-mumbai.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:12.438Z",
+    "lat": 18.9216373548013,
+    "lng": 72.8331752172471,
+    "address": "Apollo Bunder Road The Taj Mahal Palace, Colaba, 400001 Mumbai, India",
+    "district": "Colaba",
+    "score10": 9.2,
+    "reviewCount": 2368,
+    "rooms": [
+      {
+        "name": "Luxury Grande Room City View",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Luxury Grande Room Sea View",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Taj Club Room City View King Bed with Complimentary One Way Airport Transfer",
+        "bathWords": []
+      },
+      {
+        "name": "Taj Club Room Sea View King Bed with Complimentary One Way Airport Transfer",
+        "bathWords": []
+      },
+      {
+        "name": "Executive Suite City View with Complimentary One Way Airport Transfer",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Suite 1 Bedroom City View - 2 Way Airport Transfer",
+        "bathWords": []
+      },
+      {
+        "name": "Grande Luxury Suite 1 Bedroom Sea View - 2 Way Airport Transfer",
+        "bathWords": []
+      },
+      {
+        "name": "Suite",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Room Palace wing",
+        "bathWords": []
+      },
+      {
+        "name": "Twin Room",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9045838566320ebd9fcb10",
+    "slug": "hotel-ramee-techome-mumbai",
+    "sourceUrl": "https://www.booking.com/hotel/in/four-seasons-mumbai.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:22.562Z",
+    "lat": 18.993939305440783,
+    "lng": 72.82018303871155,
+    "address": "114 Dr E Moses Road, Worli, Worli, 400018 Mumbai, India",
+    "district": "Worli",
+    "score10": 8.7,
+    "reviewCount": 610,
+    "rooms": [
+      {
+        "name": "Superior King Room",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room with Sea View",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe Twin Room with Sea View",
+        "bathWords": []
+      },
+      {
+        "name": "Premier City View Room King",
+        "bathWords": []
+      },
+      {
+        "name": "Executive Suite King",
+        "bathWords": []
+      },
+      {
+        "name": "Deluxe King Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Sea View Suite King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Presidential Suite King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Twin Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Sea View Room King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Sea View Room Two Queens",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe Room Sea View King",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Suite",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a9045838566320ebd9fcb11",
+    "slug": "ramee-techome-mumbai",
+    "sourceUrl": "https://www.booking.com/hotel/in/j-w-marriott-mumbai-india.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:32.813Z",
+    "lat": 19.101957735127186,
+    "lng": 72.82656133174896,
+    "address": "Juhu Tara Road, Juhu, 400049 Mumbai, India",
+    "district": "Juhu",
+    "score10": 8.5,
+    "reviewCount": 1122,
+    "rooms": [
+      {
+        "name": "Guest room, 1 King, City view (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Lounge Access, Guest room, 1 King (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Guest room, 1 King, Ocean view (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "1 King Bed, Executive Lounge Access, Large Room (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "1 King Bed, Ocean View, Executive Lounge Access, Beach Suite (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "1 King Bed, Ocean View, Executive Lounge Access, Sunset Suite (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Royal Beach Suite, Executive lounge access, 1 King (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Room, Guest room, 1 King , Partial Sea View (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Guest room, 2 Twins, City view (Enjoy 10% off on Food & Soft Beverages and Laundry)                  ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Lounge Access, Guest room, 2 Twins (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Executive Lounge Access, Guest room, 2 Twins , Partial Sea View (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Guest room, 2 Twins, Ocean View (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "2 Twin/Single Beds, Executive Lounge Access, Large Room (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "1 King Bed, Executive Lounge Access, 1-Bedroom Apartment (Enjoy 10% off on Food & Soft Beverages and Laundry)",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a95d0c546f738bf49f63ba6",
+    "slug": "the-postcard-saligao-goa",
+    "sourceUrl": "https://www.booking.com/hotel/in/the-postcard-saligaon.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:42.195Z",
+    "lat": 15.546187,
+    "lng": 73.789106,
+    "address": "5/46, Danvaddo, Saligao, 403511 Calangute, India",
+    "district": "Danvaddo",
+    "score10": 9.8,
+    "reviewCount": 47,
+    "rooms": [
+      {
+        "name": "Premier Room",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premier Family Suite",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Room ",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a95d0c546f738bf49f63ba2",
+    "slug": "taj-holiday-village-resort-spa-goa",
+    "sourceUrl": "https://www.booking.com/hotel/in/taj-holiday-village.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:10:53.019Z",
+    "lat": 15.499687158915002,
+    "lng": 73.76909494400024,
+    "address": "Dando, Bardez, 403515 Candolim, India",
+    "district": "Bardez",
+    "score10": 8.2,
+    "reviewCount": 648,
+    "rooms": [
+      {
+        "name": "Superior Room Garden View with Balcony – King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room Garden View with Sitout – King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Cottage Sea View – King Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Room Garden View with Balcony - Twin Bed",
+        "bathWords": []
+      },
+      {
+        "name": "Superior Room Garden View with Sitout – Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Cottage Sea View – Twin Bed",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Cottage Garden View – King Bed",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Premium Cottage Garden View – Twin Bed",
+        "bathWords": [
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Luxury Goan Villa Sea View - King Bed Complimentary cocktail Hours from 6pm-8pm at Designated Venue",
+        "bathWords": [
+          "Bathtub"
+        ]
+      },
+      {
+        "name": "Goan Villa Garden View - King Bed Complimentary cocktail Hours from 6pm-8pm at Designated Venue",
+        "bathWords": []
+      },
+      {
+        "name": "Goan Villa Sea View - King Bed Complimentary cocktail Hours from 6pm-8pm at Designated Venue",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Garden Balcony King",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Garden Balcony Twin",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Garden Sitout King",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury Garden Sitout Twin",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury sea view With Balcony - King",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury sea view With Balcony - Twin",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury sea view With Sitout  - King",
+        "bathWords": []
+      },
+      {
+        "name": "Luxury sea view With Sitout  - Twin",
+        "bathWords": []
+      },
+      {
+        "name": "Premium Cottage Sea View with Soak-tub - King",
+        "bathWords": []
+      },
+      {
+        "name": "Premium Cottage Sea View with Soak-tub - Twin",
+        "bathWords": []
+      },
+      {
+        "name": "Premium Cottage Sea View with Jacuzzi - King",
+        "bathWords": [
+          "Jacuzzi"
+        ]
+      },
+      {
+        "name": "Premium Cottage Sea View with Jacuzzi - Twin",
+        "bathWords": [
+          "Jacuzzi"
+        ]
+      },
+      {
+        "name": "Villa with Garden View",
+        "bathWords": []
+      },
+      {
+        "name": "Triple Room",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a95d0c546f738bf49f63ba3",
+    "slug": "grand-hyatt-goa",
+    "sourceUrl": "https://www.booking.com/hotel/in/grand-hyatt-goa.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:11:02.283Z",
+    "lat": 15.451806436187843,
+    "lng": 73.85190278291702,
+    "address": "P.O.Goa University, 403206 Panaji, India",
+    "district": "Panaji",
+    "score10": 8.8,
+    "reviewCount": 779,
+    "rooms": [
+      {
+        "name": "King Bed with Balcony Garden View Club Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Bed with Balcony Bay View Club Access ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Balcony and Bay View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Balcony and Garden View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Room with Balcony and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Bed with Balcony Garden View Club Access ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Beds with Balcony Bay View Club Access",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room with Balcony and Bay View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room with Balcony and Garden View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room with Balcony and Pool View",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Grand Executive Suite with Balcony - Complimentary Airport transfers from Dabolim and Mopa Airport",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Grand Suite with Balcony - Complimentary Airport transfers from Dabolim and Mopa Airport",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Bed with Balcony Pool View Club Access ",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Beds with Balcony Pool View Club Access ",
+        "bathWords": [
+          "Bath"
+        ]
+      }
+    ]
+  },
+  {
+    "hotelId": "6a95d0c546f738bf49f63ba5",
+    "slug": "alila-diwa-goa-a-hyatt-brand",
+    "sourceUrl": "https://www.booking.com/hotel/in/alila-diwa-goa.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:11:12.603Z",
+    "lat": 15.306253961021767,
+    "lng": 73.91174018383026,
+    "address": "Adao Waddo, 403713 Majorda, India",
+    "district": "Majorda",
+    "score10": 9.1,
+    "reviewCount": 487,
+    "rooms": [
+      {
+        "name": "King Room with Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room with Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Family Room with Terrace - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "King Loft Room with Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Room Loft with Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Family Suite with Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Diwa Club Room with Balcony and Pool View - Airport transfers to/from Goa Dabolim Airport/Madgaon Railway Station - .All-day breakfast at Bistro 07 am.to 07 pm.- Complimentary Gonsua beach shuttle -  Comp Sundowner from 4:30 to 6:30 pm",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Diwa Premium Club Room with Balcony and Pool View -  Airport transfers to/from Goa Dabolim Airport/Madgaon Railway Station - .All-day breakfast at Bistro 07 am.to 07 pm.- Complimentary Gonsua beach shuttle - Comp Sundowner from 4:30 to 6:30 pm",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "One-Bedroom-Diwa Club Suite with Balcony and Pool View -  Airport transfers to/from Goa Dabolim Airport/Madgaon Railway Station - .All-day breakfast at Bistro 07 am.to 07 pm.- Complimentary Gonsua beach shuttle - Comp Sundowner from 4:30 to 6:30 pm",
+        "bathWords": [
+          "Bath"
+        ]
+      },
+      {
+        "name": "Twin Bed Family Terrace Room - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": []
+      },
+      {
+        "name": "Diwa Club 2 Bedroom Suite with Balcony -  Airport transfers to/from Goa Dabolim Airport/Madgaon Railway Station - .All-day breakfast at Bistro 07 am.to 07 pm.- Complimentary Gonsua beach shuttle - Comp Sundowner from 4:30 to 6:30 pm",
+        "bathWords": []
+      },
+      {
+        "name": "Alila Suite with Pool View and Balcony - Complimentary Gonsua beach shuttle service - 15% Discount on Food and Soft Beverages and SPA",
+        "bathWords": []
+      }
+    ]
+  },
+  {
+    "hotelId": "6a95d0c546f738bf49f63ba7",
+    "slug": "storii-by-itc-hotels-shanti-morada-goa",
+    "sourceUrl": "https://www.booking.com/hotel/in/shanti-morada.html?aid=304142",
+    "fetchedAt": "2026-10-26T23:11:22.603Z",
+    "lat": 15.541840719414457,
+    "lng": 73.7822755873367,
+    "address": "8/123, Bairo Alto, Saligao, 403511 Calangute, India",
+    "district": "Bairo Alto",
+    "score10": 9.4,
+    "reviewCount": 577,
+    "rooms": [
+      {
+        "name": "Deluxe Twin Pool View with Balcony - Happy Hours (5:00 PM to 7:00 PM) | Buy 2 Get 1 Free on Drinks | 15% Discount on Spa and Laundry | Complimentary Beer on Arrival",
+        "bathWords": [
+          "Hot tub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Deluxe King Pool View with Balcony - Happy Hours (5:00 PM to 7:00 PM) | Buy 2 Get 1 Free on Drinks | 15% Discount on Spa and Laundry | Complimentary Beer on Arrival",
+        "bathWords": [
+          "Hot tub"
+        ]
+      },
+      {
+        "name": "Superior King Pool View with Balcony or Patio | Select Rooms Feature a Copper Bathtub - Happy Hours (5:00 PM to 7:00 PM) | Buy 2 Get 1 Free on Drinks | 15% Discount on Spa and Laundry | Complimentary Beer on Arrival",
+        "bathWords": [
+          "Hot tub",
+          "Bathtub",
+          "Bath"
+        ]
+      },
+      {
+        "name": "Superior Twin Pool View with Balcony or Patio | Select Rooms Feature a Copper Bathtub - Happy Hours (5:00 PM to 7:00 PM) | Buy 2 Get 1 Free on Drinks | 15% Discount on Spa and Laundry | Complimentary Beer on Arrival",
+        "bathWords": [
+          "Hot tub",
+          "Bathtub",
+          "Bath"
+        ]
+      }
+    ]
+  }
+]

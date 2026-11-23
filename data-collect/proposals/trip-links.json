@@ -1,0 +1,32 @@
+[
+  {
+    "hotelId": "6a957a7489968819fb0dc1fb",
+    "slug": "mandarin-oriental-new-york-new-york",
+    "ourName": "Mandarin Oriental New York",
+    "theirName": "Mandarin Oriental New York",
+    "tripUrl": "https://www.trip.com/hotels/new-york-hotel-detail-2199144/mandarin-oriental-new-york/",
+    "tripHotelId": "2199144",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/trip/new-york-hotels-list-633.html.gz"
+  },
+  {
+    "hotelId": "6a957a7489968819fb0dc1f8",
+    "slug": "1-hotel-brooklyn-bridge-new-york",
+    "ourName": "1 Hotel Brooklyn Bridge",
+    "theirName": "1 Hotel Brooklyn Bridge",
+    "tripUrl": "https://www.trip.com/hotels/new-york-hotel-detail-7618961/1-hotel-brooklyn-bridge/",
+    "tripHotelId": "7618961",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/trip/new-york-hotels-list-633.html.gz"
+  },
+  {
+    "hotelId": "6ad9fa2def30327ba9cd3400",
+    "slug": "the-dominick-new-york",
+    "ourName": "The Dominick",
+    "theirName": "The Dominick Hotel (price from US$494)",
+    "tripUrl": "https://www.trip.com/hotels/new-york-hotel-detail-737553/the-dominick-hotel/",
+    "tripHotelId": "737553",
+    "confidence": "high",
+    "evidenceFile": "data-collect/pages/trip/new-york-hotels-list-633.html.gz"
+  }
+]

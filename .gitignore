@@ -56,3 +56,5 @@ web_pages/
 
 # Founder OS task worktrees
 .worktrees/
+data-collect/pages/
+data-collect/private/
