@@ -6,7 +6,7 @@ import { buildCountryIntro } from '../../src/lib/countryText.ts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '../..');
-const mainRepoDir = '/Users/karanarora/mystartups/hotelswithbathtubs';
+const mainRepoDir = '/Users/karanarora/my_brain/01_startups/hotelswithbathtubs';
 
 // Duplicate drop slugs in live codebase
 const DUPLICATE_DROP_SLUGS = new Set([

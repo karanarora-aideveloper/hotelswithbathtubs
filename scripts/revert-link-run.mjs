@@ -1,8 +1,8 @@
 import fs from 'fs';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-dotenv.config({ path: '/Users/karanarora/mystartups/hotelswithbathtubs/.env.local', quiet: true });
-const root = '/Users/karanarora/mystartups/hotelswithbathtubs/.cache/';
+dotenv.config({ path: '/Users/karanarora/my_brain/01_startups/hotelswithbathtubs/.env.local', quiet: true });
+const root = '/Users/karanarora/my_brain/01_startups/hotelswithbathtubs/.cache/';
 const rows = fs.readFileSync(root + 'link-repair-backup-all.jsonl', 'utf8').trim().split('\n').map((l) => JSON.parse(l));
 await mongoose.connect(process.env.MONGODB_URI);
 const col = mongoose.connection.collection('hotels');
