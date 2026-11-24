@@ -29,7 +29,24 @@ export default function OutboundLink({
   // sid page type comes from the route (same on server and client, so no hydration mismatch);
   // the visitor country is filled in by the /out edge function.
   const affiliateLink = wrapOutboundAffiliateLink(href, { pageType: getRouteContext(pathname || '').page_type }, dates);
-  const outHref = `/out?url=${encodeURIComponent(affiliateLink)}`;
+  // Placement: explicit prop first, then the page type, then `source`
+  let resolvedPlacement: BookingPlacement = 'other';
+  if (placement) {
+    resolvedPlacement = normalizePlacement(placement);
+  } else {
+    const pageType = getRouteContext(pathname || '').page_type;
+    if (pageType === 'hotel') resolvedPlacement = 'hotel_page';
+    else if (pageType === 'destination') resolvedPlacement = 'city_card';
+    else if (pageType === 'matchmaker') resolvedPlacement = 'matchmaker';
+    else if (pageType === 'blog') resolvedPlacement = 'blog';
+    else resolvedPlacement = normalizePlacement(source);
+  }
+  // `from`, `pl` and `h` are only for the /out click log (page path, placement, hotel). Nothing personal.
+  const outParams = new URLSearchParams({ url: affiliateLink });
+  if (pathname) outParams.set('from', pathname);
+  outParams.set('pl', resolvedPlacement);
+  if (hotelName) outParams.set('h', hotelName.slice(0, 120));
+  const outHref = `/out?${outParams.toString()}`;
 
   return (
     <a
@@ -38,25 +55,6 @@ export default function OutboundLink({
       rel="sponsored nofollow noopener noreferrer"
       className={className}
       onClick={() => {
-        // Resolve placement: explicit prop first, then route-inferred fallback, then source
-        let resolvedPlacement: BookingPlacement = 'other';
-        if (placement) {
-          resolvedPlacement = normalizePlacement(placement);
-        } else {
-          const route = getRouteContext();
-          if (route.page_type === 'hotel') {
-            resolvedPlacement = 'hotel_page';
-          } else if (route.page_type === 'destination') {
-            resolvedPlacement = 'city_card';
-          } else if (route.page_type === 'matchmaker') {
-            resolvedPlacement = 'matchmaker';
-          } else if (route.page_type === 'blog') {
-            resolvedPlacement = 'blog';
-          } else {
-            resolvedPlacement = normalizePlacement(source);
-          }
-        }
-
         // Fire GA4 booking_click key conversion event
         // Partner comes from the destination address; `source` is only a fallback
         // (many callers pass a placement name like "matchmaker_cta" there).

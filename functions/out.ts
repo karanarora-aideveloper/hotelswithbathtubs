@@ -33,6 +33,75 @@ function fillCjSidCountry(targetUrl: string, countryCode: string | null): string
   }
 }
 
+/** Partner name from the final destination (inside a CJ wrapper when there is one). */
+function partnerOf(parsed: URL): string {
+  let host = parsed.hostname.toLowerCase();
+  if (CJ_DOMAINS.some((d) => host === d || host.endsWith('.' + d))) {
+    try {
+      let inner = parsed.searchParams.get('url') || '';
+      if (!inner) {
+        const m = parsed.pathname.match(/\/type\/dlg\/(?:sid\/[^/]+\/)?(https?:\/\/?.+)$/i);
+        inner = m ? m[1].replace(/^(https?:)\/(?!\/)/i, '$1//') : '';
+      }
+      host = new URL(inner).hostname.toLowerCase();
+    } catch {
+      /* keep CJ host */
+    }
+  }
+  const map: [RegExp, string][] = [
+    [/(^|\.)booking\.com$/, 'booking'], [/(^|\.)agoda\.(com|net)$/, 'agoda'], [/(^|\.)makemytrip\.com$/, 'makemytrip'],
+    [/(^|\.)cleartrip\.com$/, 'cleartrip'], [/(^|\.)easemytrip\.com$/, 'easemytrip'], [/(^|\.)expedia\./, 'expedia'],
+    [/(^|\.)trip\.com$/, 'trip'], [/(^|\.)airbnb\./, 'airbnb'], [/(^|\.)hotels\.com$/, 'hotels_com'], [/(^|\.)vrbo\.com$/, 'vrbo'],
+  ];
+  for (const [re, name] of map) if (re.test(host)) return name;
+  return 'other';
+}
+
+/** Page type from our own path (same buckets as src/lib/events getRouteContext). */
+function pageTypeOf(path: string): string {
+  const seg = path.split('/').filter(Boolean);
+  if (seg.length === 0) return 'home';
+  if (seg[0] === 'matchmaker') return 'matchmaker';
+  if (seg[0] === 'blog') return 'blog';
+  if (seg.length <= 2 || (seg.length === 3 && seg[2] === 'jacuzzi')) return 'destination';
+  return 'hotel';
+}
+
+const clip = (v: string | null, n: number) => (v || '').slice(0, n);
+
+/**
+ * One row per booking click in D1 table out_clicks (binding DB). No IP, no user agent,
+ * no referrer, nothing personal: only what the link itself carries plus the visitor's country.
+ * Runs after the redirect is sent (waitUntil); a failed write never blocks the visitor.
+ */
+async function logClick(context: EventContext, parsed: URL, isCj: boolean): Promise<void> {
+  const db = context.env?.DB;
+  if (!db) return;
+  const q = new URL(context.request.url).searchParams;
+  const from = clip(q.get('from'), 200);
+  const path = from.startsWith('/') ? from.split('?')[0] : '';
+  const cc = (context.request.headers.get('CF-IPCountry') || '').toUpperCase();
+  try {
+    await db
+      .prepare(
+        'INSERT INTO out_clicks (ts, partner, link_type, page_type, page_path, placement, hotel_name, visitor_country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+      )
+      .bind(
+        new Date().toISOString(),
+        partnerOf(parsed),
+        isCj ? 'affiliate' : 'direct',
+        path ? pageTypeOf(path) : '',
+        path,
+        clip(q.get('pl'), 30),
+        clip(q.get('h'), 120),
+        /^[A-Z]{2}$/.test(cc) ? cc : ''
+      )
+      .run();
+  } catch {
+    /* logging must never affect the redirect */
+  }
+}
+
 /** For CJ links, the partner URL inside must be booking.com or trip.com (no open redirect via CJ). */
 function isAllowedCjDestination(parsed: URL): boolean {
   let inner = parsed.searchParams.get('url') || '';
@@ -100,6 +169,9 @@ export async function onRequestGet(context: EventContext): Promise<Response> {
     if (!isAllowedDomain || (isCjHost && !isAllowedCjDestination(parsed))) {
       return new Response('Invalid redirect destination', { status: 400 });
     }
+
+    // HEAD requests and bots that prefetch are not clicks; log GET only
+    if (request.method === 'GET') context.waitUntil(logClick(context, parsed, isCjHost));
 
     // Use 307 temporary redirect with X-Robots-Tag to ensure search bots never index redirect URLs
     return new Response(null, {

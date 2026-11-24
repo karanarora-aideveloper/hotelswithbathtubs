@@ -65,8 +65,8 @@ Every event carries uniform core parameters (`page_type`, `country`, `city`, and
 
 ## Outbound Click Log Architecture
 
-Affiliate redirects pass through `/out?id={hotelId}&url={encodedUrl}&source={source}&city={city}&country={country}`.
-The edge worker `functions/out.ts` logs conversion clicks directly to database/analytics storage before 302 redirecting to the partner OTA.
+Affiliate redirects pass through `/out?url={encodedUrl}&from={pagePath}&pl={placement}&h={hotelName}`.
+The edge worker `functions/out.ts` 307-redirects to the partner and, after the redirect, writes one row per click to the D1 table `out_clicks` (database `hotelswithbathtubs-clicks`, binding `DB`): partner, link type, page type, page path, placement, hotel name, visitor country. No IP, user agent or referrer. `OutboundLink` adds `from`, `pl` and `h` to the `/out` link for this. Report: `node scripts/out-clicks-report.mjs [days]`. Table: `scripts/d1/out_clicks.sql`.
 
 ---
 

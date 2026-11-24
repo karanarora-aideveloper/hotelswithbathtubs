@@ -26,7 +26,7 @@ What was missing:
 2. **No tap tracking** outside booking buttons, search and filters: hotel cards, city and country links, guide links, header, footer, breadcrumbs, gallery, outbound links, other buttons.
 3. **No scroll depth** on hotel pages.
 4. **`booking_click` is not marked as a key event** in GA4, so GA shows 0 conversions.
-5. **No server-side click log.** `functions/out.ts` only redirects. The page's beacon to `/api/track-click` has no edge function, so it returns 404 on the live site.
+5. **Click log only from the page.** `functions/api/track-click.ts` writes each booking tap to the D1 table `hotel_clicks` (database `hotelswithbathtubs-clicks`, binding `DB`; 665 rows since 20 Oct). It depends on a beacon sent by the page, and it stores user agent, visitor city and the full referrer. `functions/out.ts` itself logged nothing. (An earlier version of this plan wrongly said the beacon returned 404.)
 6. The site has **no map**, so there is nothing to track for "map opens".
 
 ## 2. The scheme: 12 events
@@ -131,19 +131,18 @@ Open **Explore → Blank exploration**, pick the date range, then:
 
 CJ reports the bookings and commission per `sid` (`{visitor country}-{page type}`, for example `in-hotel`). GA4 shows clicks; CJ shows what they earned.
 
-## 5. Click logging on `/out` — proposal, not built
+## 5. Click logging on `/out` — built 24 Nov 2026 (ANALYTICS-OUTLOG1)
 
 Why: GA4 misses visitors with ad blockers, visitors in the UK/EEA who have not consented, and taps where the page closes before the event is sent. `/out` sees every click.
 
-| Option | What it is | Cost | Effort | Verdict |
-|---|---|---|---|---|
-| **A. Cloudflare D1 table** | One SQL table `out_clicks`; `functions/out.ts` inserts one row per click with `waitUntil`, so the redirect is not slowed | Free tier: 100,000 writes a day and 5 GB. We have about 15–30 clicks a day. ₹0 | About half a day: create the database, bind it to the Pages project, about 30 lines in `out.ts`, one query script | **Recommended.** Kept forever, plain SQL, easy to export |
-| B. Workers Analytics Engine | Time-series store; `writeDataPoint` in `out.ts` | Free tier: 100,000 data points a day. ₹0 | About half a day, plus an API token to query it | Data kept only 3 months; queries need a token and its own SQL dialect |
-| C. Workers KV counters | One counter per day and partner | Free tier: 1,000 writes a day | 2–3 hours | Counters can lose clicks when two arrive together; no per-click detail |
+- **Where:** new table `out_clicks` in the existing D1 database `hotelswithbathtubs-clicks`, already bound to the Pages project as `DB`. No new Cloudflare setup. Table definition: `scripts/d1/out_clicks.sql` (created in the live database 24 Nov).
+- **How:** `functions/out.ts` inserts one row per GET with `waitUntil`, after the redirect is sent; a failed write never affects the visitor. HEAD requests, invalid links and blocked destinations are not logged.
+- **Row:** `ts`, `partner`, `link_type` (`affiliate` = CJ, else `direct`), `page_type`, `page_path` (no query string), `placement`, `hotel_name`, `visitor_country` (from `CF-IPCountry`). No IP, no user agent, no referrer.
+- **Where the fields come from:** `OutboundLink` adds `from` (page path), `pl` (placement) and `h` (hotel name) to the `/out` link. Partner and link type are read from the destination; country from Cloudflare.
+- **Cost:** D1 free tier is 100,000 writes a day and 5 GB; we have about 15–30 clicks a day. ₹0.
+- **Report:** `node scripts/out-clicks-report.mjs [days]` prints clicks per day, partner, page type and placement, visitor country and top pages.
 
-Row for option A, with no IP address, no user agent and nothing personal: `ts`, `partner`, `link_type`, `page_type`, `page_path`, `visitor_country` (from `CF-IPCountry`), `hotel_id`.
-
-Needs from the founder: OK to create a D1 database in the Cloudflare account and bind it to the `hotelswithbathtubs` Pages project. The dead `/api/track-click` beacon in `OutboundLink` would be removed in the same change.
+The older beacon log (`/api/track-click` → `hotel_clicks`) still runs unchanged. Once `out_clicks` has a couple of weeks of data, the founder can decide whether to switch the beacon off, since it stores more than we need (user agent, city, referrer).
 
 ## 6. Still to decide
 
