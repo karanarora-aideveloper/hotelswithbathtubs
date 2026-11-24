@@ -24,11 +24,11 @@ function runLinkAudit() {
   let searchInPrimaryUrl = 0;
 
   for (const h of hotels) {
-    // 1. Booking.com audit (clean URLs per Rule 7.3 / PROMOTE1, or legacy with aid=304142)
+    // 1. Booking.com audit: stored URLs must be clean (no aid); CJ tracking is added at click time
     if (h.bookingUrl) {
       if (!h.bookingUrl.includes('/hotel/')) {
         violations++;
-      } else if (h.bookingUrl.includes('aid=') && !h.bookingUrl.includes('aid=304142') && !h.importBatch?.startsWith('PROMOTE')) {
+      } else if (/[?&]aid=/.test(h.bookingUrl)) {
         missingBookingAid++;
         violations++;
       }
@@ -80,7 +80,7 @@ function runLinkAudit() {
   }
 
   console.log(`Audited ${hotels.length} hotels across all inventory:`);
-  console.log(`  - Booking.com missing aid=304142: ${missingBookingAid}`);
+  console.log(`  - Booking.com URLs still carrying an aid: ${missingBookingAid}`);
   console.log(`  - Booking.com generic searchresults: ${genericBookingSearch}`);
   console.log(`  - Airbnb fake search / non-rooms URLs: ${fakeAirbnbSearch}`);
   console.log(`  - Agoda rogue CID (1951559): ${rogueAgodaCid}`);

@@ -24,7 +24,7 @@
     "description": "Perched atop the historic Meier & Frank Building on Pioneer Square, The Nines features modern rooftop Asian dining at Departure and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-nines-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-nines-a-luxury-collection-hotel-portland.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-nines-a-luxury-collection-hotel-portland.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-The-Nines.h14325.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14325"
   },
@@ -53,7 +53,7 @@
     "description": "A historic landmark crafted from two heritage downtown buildings, Sentinel honors visionaries with portrait galleries, Jake's Grill, and Terrace rooms with private outdoor whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-sentinel-hotel-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/sentinel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/sentinel.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-Sentinel.h14326.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14326"
   },
@@ -82,7 +82,7 @@
     "description": "The crown jewel of Oregon Wine Country just outside Portland, The Allison Inn provides vineyard panoramas, JORY restaurant, a world-class spa, and rooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-allison-inn-and-spa-oregon.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-allison-inn-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-allison-inn-spa.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-The-Allison-Inn-Spa.h14327.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14327"
   },
@@ -111,7 +111,7 @@
     "description": "An intimate riverfront lodge on the banks of the Willamette River, Kimpton RiverPlace combines cozy Pacific Northwest hospitality with suites featuring deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-riverplace-hotel-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-riverplace.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-riverplace.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-Kimpton-RiverPlace-Hotel.h14328.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14328"
   },
@@ -140,7 +140,7 @@
     "description": "Forged from two historic downtown buildings, Woodlark radiates lush botanical elegance with Doug Adams' Bullard Tavern and romantic suites with freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-woodlark-hotel-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/woodlark.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/woodlark.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-Woodlark.h28190412.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28190412"
   },
@@ -169,7 +169,7 @@
     "description": "Portland's iconic cultural hotel since 1927, The Heathman is celebrated for its historic signed author library, afternoon tea traditions, and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-heathman-hotel-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-heathman-hotel-portland.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-heathman-hotel-portland.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-The-Heathman-Hotel.h14329.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14329"
   },
@@ -198,7 +198,7 @@
     "description": "Paying tribute to Hollywood's Golden Age of cinema, Hotel deLuxe delights with vintage black-and-white portraits, the legendary Driftwood Room, and clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-deluxe-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-deluxe.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-deluxe.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-Hotel-DeLuxe.h14330.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14330"
   },
@@ -227,7 +227,7 @@
     "description": "Founded by lumber baron Simon Benson in 1912, this grand hotel boasts Circassian walnut paneling, an Italian marble lobby, El Gaucho dining, and suites with marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-benson-hotel-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-benson-a-coast-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-benson-a-coast-hotel.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-The-Benson.h14331.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14331"
   },
@@ -256,7 +256,7 @@
     "description": "Inspiring creativity in the Cultural District, Hotel Vance offers music listening stations, gaming parlors, and modern suites with deep relaxing soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-vance-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-vance-portland.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-vance-portland.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-Hotel-Vance.h6291048.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=6291048"
   },
@@ -285,7 +285,7 @@
     "description": "A whimsical 1915 historic elementary school transformed into a wonderland with movie theaters, multiple bars, a ceramic saltwater soaking pool, and suites with clawfoot tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-mcmenamins-kennedy-school-portland.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/mcmenamins-kennedy-school.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/mcmenamins-kennedy-school.html",
     "expediaUrl": "https://www.expedia.com/Portland-Hotels-McMenamins-Kennedy-School.h14332.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14332"
   },
@@ -314,7 +314,7 @@
     "description": "Built in 1913 from massive granite boulders, this legendary Blue Ridge Mountain resort features a 43,000-sq-ft subterranean rock spa and suites with scenic soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-omni-grove-park-inn-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-omni-grove-park-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-omni-grove-park-inn.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-The-Omni-Grove-Park-Inn.h14333.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14333"
   },
@@ -343,7 +343,7 @@
     "description": "Offering Vanderbilt-style gracious hospitality on George Vanderbilt's historic 8,000-acre estate, featuring heated outdoor pools, private winery access, and marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-inn-on-biltmore-estate-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-inn-on-biltmore-estate.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-inn-on-biltmore-estate.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-The-Inn-On-Biltmore-Estate.h14334.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14334"
   },
@@ -372,7 +372,7 @@
     "description": "An opulent Tudor-style European hunting lodge in Biltmore Village, featuring curated original art, game dining at Red Stag Grill, and suites with hand-carved stone soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-grand-bohemian-hotel-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/grand-bohemian-hotel-asheville-autograph-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/grand-bohemian-hotel-asheville-autograph-collection.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Grand-Bohemian-Hotel-Asheville.h14335.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14335"
   },
@@ -401,7 +401,7 @@
     "description": "Crafted from a restored 19th-century steel foundry that forged the steel for Biltmore Estate, featuring modern Appalachian cuisine at Benne on Eagle and freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-foundry-hotel-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-foundry-hotel-asheville-curio-collection-by-hilton.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-foundry-hotel-asheville-curio-collection-by-hilton.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-The-Foundry-Hotel-Asheville.h28190415.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28190415"
   },
@@ -430,7 +430,7 @@
     "description": "Set on vibrant Pack Square in Downtown Asheville, Kimpton Hotel Arras showcases artisan metalworks, Mediterranean dining at Bargello, and suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-hotel-arras-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-hotel-arras.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-hotel-arras.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Kimpton-Hotel-Arras.h38190418.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=38190418"
   },
@@ -459,7 +459,7 @@
     "description": "A premier romantic Arts and Crafts mansion in the Montford Historic District, famous for three-course breakfasts, evening live porch music, and suites with two-person jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-1900-inn-on-montford-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/1900-inn-on-montford.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/1900-inn-on-montford.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-1900-Inn-On-Montford.h14336.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14336"
   },
@@ -488,7 +488,7 @@
     "description": "Built in 1899 by Biltmore supervising architect Richard Sharp Smith, this historic gem provides daily afternoon wine and tea, romantic gardens, and suites with jetted spa tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-black-walnut-inn-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/black-walnut-bed-and-breakfast-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/black-walnut-bed-and-breakfast-inn.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Black-Walnut-Bed-And-Breakfast-Inn.h14337.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14337"
   },
@@ -517,7 +517,7 @@
     "description": "An intimate romantic boutique hotel spread across three restored Victorian houses in South Slope, celebrating Zelda Fitzgerald's bohemian spirit with clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-zelda-dearest-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/zelda-dearest.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/zelda-dearest.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Zelda-Dearest.h92918401.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=92918401"
   },
@@ -546,7 +546,7 @@
     "description": "A magnificent 1909 Greek Revival mansion with fluted Corinthian columns and sweeping verandas, famous for hosting composer Béla Bartók and offering suites with whirlpool jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-albemarle-inn-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/albemarle-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/albemarle-inn.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Albemarle-Inn.h14338.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14338"
   },
@@ -575,7 +575,7 @@
     "description": "Asheville's first urban river-access cabin lodge, featuring standalone sustainable A-frame cabins, access to French Broad River paddling, and deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-wrong-way-river-lodge-asheville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/wrong-way-river-lodge-cabins.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/wrong-way-river-lodge-cabins.html",
     "expediaUrl": "https://www.expedia.com/Asheville-Hotels-Wrong-Way-River-Lodge-Cabins.h8291048.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=8291048"
   },
@@ -604,7 +604,7 @@
     "description": "Savannah's standard of modern Southern luxury, Perry Lane features the buzzing Peregrin Rooftop Lounge, museum-grade art collections, and suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-perry-lane-hotel-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/perry-lane-hotel-a-luxury-collection-hotel-savannah.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/perry-lane-hotel-a-luxury-collection-hotel-savannah.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-Perry-Lane-Hotel.h1829104.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1829104"
   },
@@ -633,7 +633,7 @@
     "description": "An exquisite 1892 Queen Anne mansion on Columbia Square, Kehoe House is an adults-only sanctuary featuring gourmet breakfasts, evening wine receptions, and whirlpool jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-kehoe-house-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-kehoe-house.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-kehoe-house.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-The-Kehoe-House.h14339.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14339"
   },
@@ -662,7 +662,7 @@
     "description": "Comprising two 1868 Regency-Italianate mansions two blocks from Forsyth Park, The Gastonian offers silver-service breakfast, romantic gardens, and two-person whirlpool jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-gastonian-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-gastonian.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-gastonian.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-The-Gastonian.h14340.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14340"
   },
@@ -691,7 +691,7 @@
     "description": "A terracotta Victorian masterpiece directly on Forsyth Park, this iconic hotel features the Poseidon Spa, a cooking school, 700 Drayton dining, and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-mansion-on-forsyth-park-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/mansion-on-forsyth-park.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/mansion-on-forsyth-park.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-Mansion-On-Forsyth-Park.h14341.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14341"
   },
@@ -720,7 +720,7 @@
     "description": "An impeccably restored 1876 historic townhouse off Forsyth Park, Bellwether House provides daily champagne afternoon tea, yoga sessions, and suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-bellwether-house-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/bellwether-house.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/bellwether-house.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-Bellwether-House.h78291041.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=78291041"
   },
@@ -749,7 +749,7 @@
     "description": "Featured in 'Midnight in the Garden of Good and Evil', this 1873 French Second Empire mansion on Lafayette Square offers parlor wine receptions and suites with antique clawfoot tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hamilton-turner-inn-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hamilton-turner-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hamilton-turner-inn.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-Hamilton-Turner-Inn.h14342.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14342"
   },
@@ -778,7 +778,7 @@
     "description": "Set along Savannah's bustling waterfront, The Alida celebrates timeless Southern craftsmanship with The Lost Square rooftop lounge, pool cabanas, and river-view soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-alida-hotel-savannah.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-alida-savannah-a-tribute-portfolio-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-alida-savannah-a-tribute-portfolio-hotel.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-The-Alida.h21904128.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=21904128"
   },
@@ -807,7 +807,7 @@
     "description": "Savannah's most ambitious historic restoration, this 1912 power plant along River Street boasts a 135-foot chrome dinosaur, dozens of restaurants, and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-jw-marriott-savannah-plant-riverside.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-savannah-plant-riverside-district.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-savannah-plant-riverside-district.html",
     "expediaUrl": "https://www.expedia.com/Savannah-Hotels-JW-Marriott-Savannah-Plant-Riverside-District.h42910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=42910481"
   }

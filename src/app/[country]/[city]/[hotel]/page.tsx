@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { imageUrl } from '@/lib/imageUrl';
 import StructuredData from '@/components/StructuredData';
-import { getUrlDirectnessTier, cleanOutboundUrl } from '@/lib/affiliate';
+import { getUrlDirectnessTier, cleanOutboundUrl, BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, getCountryCurrency } from '@/lib/utils';
 import WhereToBookRow from '@/components/WhereToBookRow';
 import HotelGallery from '@/components/HotelGallery';
@@ -851,7 +851,7 @@ export default async function HotelDetailPage({
 
         {/* Disclaimer footer matching Style B mockup */}
         <div className="pt-8 pb-4 text-[11px] text-[#5b6478] leading-relaxed text-center">
-          Prices change by date and are shown on each booking site. Links go straight to the booking site. We don&apos;t earn a commission from them today.
+          Prices change by date and are shown on each booking site. {BOOKING_LINK_DISCLOSURE}
         </div>
       </div>
     </>

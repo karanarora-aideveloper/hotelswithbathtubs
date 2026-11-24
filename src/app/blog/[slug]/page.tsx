@@ -17,7 +17,7 @@ import { isHotelSlugMatch } from '@/lib/hotelSlugMatch';
 import HotelCardImage from '@/components/HotelCardImage';
 import AuthorBio from '@/components/AuthorBio';
 import OutboundLink from '@/components/OutboundLink';
-import { cleanOutboundUrl } from '@/lib/affiliate';
+import { cleanOutboundUrl, BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import LazyEmailCapture from '@/components/LazyEmailCapture';
 
 const MONTH_NAMES: Record<string, number> = {
@@ -754,7 +754,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </Link>
                   </div>
                   <p className="text-xs text-[#5b6478] text-center mt-5">
-                    Links go straight to the booking site. We don&apos;t earn a commission from them today.
+                    {BOOKING_LINK_DISCLOSURE}
                   </p>
                 </div>
               )}

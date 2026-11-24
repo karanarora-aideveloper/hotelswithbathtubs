@@ -49,32 +49,32 @@ const PLANNED_TARGETS = [
   {
     id: '6aa779b5a1d874eba51c58ad',
     name: 'The Mark Hotel, New York',
-    bookingUrl: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html?aid=304142'
+    bookingUrl: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html',
+    url: 'https://www.booking.com/hotel/us/hi-new-york-hostel-nyc.html'
   },
   {
     id: '6ad9fa8bef30327ba9cd3438',
     name: 'Fontainebleau Las Vegas',
-    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142'
+    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html',
+    url: 'https://www.booking.com/hotel/us/flamingo-casino.html'
   },
   {
     id: '6a957a7589968819fb0dc1fc',
     name: 'The Venetian Resort Las Vegas',
-    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142'
+    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html',
+    url: 'https://www.booking.com/hotel/us/flamingo-casino.html'
   },
   {
     id: '6a957a7589968819fb0dc1fd',
     name: 'Bellagio Las Vegas',
-    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/flamingo-casino.html?aid=304142'
+    bookingUrl: 'https://www.booking.com/hotel/us/flamingo-casino.html',
+    url: 'https://www.booking.com/hotel/us/flamingo-casino.html'
   },
   {
     id: '6aaf7ab8f34b7c7289d7dda2',
     name: 'Embassy Suites by Hilton Waikiki Beach Walk',
-    bookingUrl: 'https://www.booking.com/hotel/us/hilton-hawaiian-village.html?aid=304142',
-    url: 'https://www.booking.com/hotel/us/hilton-hawaiian-village.html?aid=304142'
+    bookingUrl: 'https://www.booking.com/hotel/us/hilton-hawaiian-village.html',
+    url: 'https://www.booking.com/hotel/us/hilton-hawaiian-village.html'
   }
 ];
 

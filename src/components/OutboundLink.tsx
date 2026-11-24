@@ -1,6 +1,7 @@
 'use client';
 
 import { sendBookingClick, getRouteContext, normalizePlacement, type BookingPlacement } from '@/lib/events';
+import { usePathname } from 'next/navigation';
 import { wrapOutboundAffiliateLink, type TripDates } from '@/lib/affiliate';
 
 export default function OutboundLink({
@@ -24,7 +25,10 @@ export default function OutboundLink({
   placement?: BookingPlacement | string;
   dates?: TripDates;
 }) {
-  const affiliateLink = wrapOutboundAffiliateLink(href, undefined, dates);
+  const pathname = usePathname();
+  // sid page type comes from the route (same on server and client, so no hydration mismatch);
+  // the visitor country is filled in by the /out edge function.
+  const affiliateLink = wrapOutboundAffiliateLink(href, { pageType: getRouteContext(pathname || '').page_type }, dates);
   const outHref = `/out?url=${encodeURIComponent(affiliateLink)}`;
 
   return (

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { cleanOutboundUrl } from '@/lib/affiliate';
 import Link from 'next/link';
 import Image from 'next/image';
 import connectToDatabase from '@/lib/mongodb';
@@ -299,7 +300,7 @@ export default async function HostelsHubPage() {
               const countrySlug = slugify(hostel.country || 'india');
               const citySlug = slugify(hostel.city);
               const hotelSlug = hostel.slug;
-              const bookingTarget = hostel.bookingUrl || hostel.agodaUrl || hostel.url;
+              const bookingTarget = cleanOutboundUrl(hostel.bookingUrl || hostel.agodaUrl || hostel.url || '');
 
               return (
                 <div

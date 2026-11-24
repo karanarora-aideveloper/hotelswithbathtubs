@@ -40,7 +40,8 @@ function classifyUrl(platform, initialUrl, finalUrl = '', title = '', status = 2
 
   // 2. Booking.com
   if (platform === 'booking') {
-    if (initialUrl.includes('aid=') && !initialUrl.includes('aid=304142')) return 'wrong-params';
+    // Stored Booking URLs must be clean: tracking is added at click time via CJ (24 Nov 2026)
+    if (/[?&]aid=/.test(initialUrl)) return 'wrong-params';
     // Dead slug redirects to city page or closed_msg in title/URL
     if (
       fin.includes('/city/') ||

@@ -24,7 +24,7 @@
     "description": "Philadelphia's premier Five-Diamond address on historic Rittenhouse Square, offering award-winning fine dining at Lacroix, an indoor saltwater pool, and palatial marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-rittenhouse-hotel-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-rittenhouse.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-rittenhouse.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-The-Rittenhouse-Hotel.h14311.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14311"
   },
@@ -53,7 +53,7 @@
     "description": "Perched on the 48th to 60th floors of Philadelphia's tallest tower, Four Seasons boasts Jean-Georges dining, a 57th-floor infinity pool, and cloud-high freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-four-seasons-hotel-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-philadelphia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-philadelphia.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-Four-Seasons-Hotel-Philadelphia.h32910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=32910481"
   },
@@ -82,7 +82,7 @@
     "description": "Known as the 'Grande Dame of Broad Street' since 1904, The Bellevue pairs magnificent French Renaissance architecture with 19th-floor dining at XIX and deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-bellevue-hotel-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-bellevue-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-bellevue-hotel.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-The-Bellevue-Hotel.h14312.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14312"
   },
@@ -111,7 +111,7 @@
     "description": "Philadelphia's cultural epicenter on Logan Square, featuring the acclaimed Assembly Rooftop Lounge, local art collections, and suites with deep modern soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-logan-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-logan-philadelphia-curio-collection-by-hilton.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-logan-philadelphia-curio-collection-by-hilton.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-The-Logan-Philadelphia.h14313.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14313"
   },
@@ -140,7 +140,7 @@
     "description": "Housed in a 1907 historic beaux-arts landmark across from Independence Hall, Kimpton Monaco delivers vibrant style, the Stratus Rooftop Lounge, and suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-hotel-monaco-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-monaco-philadelphia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-monaco-philadelphia.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-Kimpton-Hotel-Monaco-Philadelphia.h4391041.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=4391041"
   },
@@ -169,7 +169,7 @@
     "description": "An eco-certified Art Deco boutique gem from 1929 near Rittenhouse Square, featuring vibrant pop portraits, Square 1682 restaurant, and suites with deep Fuji soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-hotel-palomar-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-palomar-philadelphia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-palomar-philadelphia.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-Kimpton-Hotel-Palomar-Philadelphia.h14314.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14314"
   },
@@ -198,7 +198,7 @@
     "description": "Set inside an imposing 1908 neoclassical bank rotunda modeled after the Pantheon, The Ritz-Carlton offers Richard Sandoval dining at Aqimero and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-ritz-carlton-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-philadelphia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-philadelphia.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-The-Ritz-Carlton-Philadelphia.h14315.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14315"
   },
@@ -227,7 +227,7 @@
     "description": "An intimate National Historic Landmark hotel housed in an 1851 Victorian row house that served as headquarters for the New Century Guild, featuring suites with restored clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-guild-house-hotel-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/guild-house-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/guild-house-hotel.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-Guild-House-Hotel.h72910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=72910481"
   },
@@ -256,7 +256,7 @@
     "description": "Pioneering 'invisible service' boutique hospitality in historic Old City, Lokal provides apartment-style lofts with custom kitchenettes and matte clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-lokal-hotel-old-city-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/lokal-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/lokal-hotel.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-Lokal-Hotel-Old-City.h17291048.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=17291048"
   },
@@ -285,7 +285,7 @@
     "description": "Energizing Center City, W Philadelphia features a heated year-round rooftop WET deck pool, AWAY Spa, and design-led Marvelous suites with freestanding deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-philadelphia.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-philadelphia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-philadelphia.html",
     "expediaUrl": "https://www.expedia.com/Philadelphia-Hotels-W-Philadelphia.h42910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=42910481"
   },
@@ -314,7 +314,7 @@
     "description": "Consistently ranked among America's finest hotels, Hotel Emma breathes romance into the 1894 Pearl Brewery with a 3,700-volume library, bespoke cocktails, and custom clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-emma-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-emma.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-emma.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Hotel-Emma.h10291841.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=10291841"
   },
@@ -343,7 +343,7 @@
     "description": "A 1909 historic gem designated a national historic landmark, The St. Anthony dazzles with Peacock Alley corridors, a rooftop pool bar, and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-st-anthony-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-st-anthony-a-luxury-collection-hotel-san-antonio.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-st-anthony-a-luxury-collection-hotel-san-antonio.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-The-St-Anthony.h14316.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14316"
   },
@@ -372,7 +372,7 @@
     "description": "San Antonio's only Forbes Four-Star hotel and spa on the River Walk, Mokara offers peaceful waterside luxury, seafood dining at Ostra, and private suites with jetted whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-mokara-hotel-spa-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/mokara-hotel-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/mokara-hotel-and-spa.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Mokara-Hotel-Spa.h14317.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14317"
   },
@@ -401,7 +401,7 @@
     "description": "Blending 19th-century Spanish colonial architecture with European grace, Omni La Mansión features tranquil courtyard pools and romantic hacienda suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-omni-la-mansion-del-rio-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/omni-la-mansion-del-rio.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/omni-la-mansion-del-rio.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Omni-La-Mansion-Del-Rio.h14318.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14318"
   },
@@ -430,7 +430,7 @@
     "description": "A stylish boutique escape along the River Walk infused with Argentine and Spanish sensibilities, featuring Dorrego's grill and riverfront suites with whirlpool spa tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-valencia-riverwalk-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-valencia-riverwalk.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-valencia-riverwalk.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Hotel-Valencia-Riverwalk.h14319.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14319"
   },
@@ -459,7 +459,7 @@
     "description": "San Antonio's only all-suite hotel directly on the River Walk, Hotel Contessa features a rooftop heated pool, Woodhouse Day Spa, and all-suite layouts with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-contessa-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-contessa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-contessa.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Hotel-Contessa.h14320.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14320"
   },
@@ -488,7 +488,7 @@
     "description": "Perched atop scenic Texas Hill Country foothills, La Cantera offers five resort pools, the Loma de Vida holistic spa, and secluded luxury villas with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-la-cantera-resort-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/la-cantera-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/la-cantera-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-La-Cantera-Resort-Spa.h14321.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14321"
   },
@@ -517,7 +517,7 @@
     "description": "A magnetic modern retreat along the North River Walk, Thompson San Antonio shines with rooftop nightlife at The Moon's Daughters and stylish suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-thompson-san-antonio-riverwalk.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/thompson-san-antonio-riverwalk.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/thompson-san-antonio-riverwalk.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-Thompson-San-Antonio-Riverwalk.h52918401.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=52918401"
   },
@@ -546,7 +546,7 @@
     "description": "Famous for being physically moved six blocks through city streets in 1985 to set a Guinness World Record, this 1906 boutique Victorian offers suites with jetted whirlpool jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-fairmount-hotel-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-fairmount-hotel-san-antonio.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-fairmount-hotel-san-antonio.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-The-Fairmount-Hotel.h14322.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14322"
   },
@@ -575,7 +575,7 @@
     "description": "Nestled along a tranquil, cypress-lined bend of the River Walk, The Westin Riverwalk provides Italian cuisine at Zocca, an outdoor heated pool, and suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-westin-riverwalk-san-antonio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-westin-riverwalk-san-antonio.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-westin-riverwalk-san-antonio.html",
     "expediaUrl": "https://www.expedia.com/San-Antonio-Hotels-The-Westin-Riverwalk-San-Antonio.h14323.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14323"
   }

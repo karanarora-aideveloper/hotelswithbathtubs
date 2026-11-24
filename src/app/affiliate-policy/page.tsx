@@ -26,17 +26,18 @@ export default function AffiliatePolicy() {
           </p>
 
           <p className="font-medium text-slate-800">
-            Links go straight to the booking site. We don&apos;t earn a commission from them today.
+            Some booking links are affiliate links. If you book through them, we may earn a commission at no extra cost to you.
           </p>
 
-          <h2>Current Status: Direct Links</h2>
+          <h2>Which Links Are Affiliate Links</h2>
           <p>
-            We do not use affiliate links at the moment. When you click a button to view rates or reserve a room, the link directs you straight to the corresponding hotel page on the partner booking platform (such as Booking.com, Agoda, MakeMyTrip, or Expedia) without commercial tracking codes.
+            Since November 2026, our <strong>Booking.com</strong> and <strong>Trip.com</strong> buttons are affiliate links through the CJ (Commission Junction) network. When you click one, you pass briefly through a CJ tracking address and then land on the same hotel page on Booking.com or Trip.com. The price you see is the price the booking site offers; it is not raised because you came from us.
           </p>
-
-          <h2>Future Affiliate Programs</h2>
           <p>
-            We may introduce affiliate programs in the future to help support our research and operations. If and when we activate affiliate links, this page will be updated immediately to explain how those programs work.
+            Links to other booking sites (such as Agoda, MakeMyTrip, Cleartrip or Expedia) go straight to the hotel page on that site, with no affiliate tracking. If we add another affiliate program, we will list it here.
+          </p>
+          <p>
+            To measure which pages lead to bookings, an affiliate link carries a short code with your country and the type of page you clicked from (for example &ldquo;in-hotel&rdquo;). It contains no names, emails or other personal details.
           </p>
 
           <h2>Editorial Integrity &amp; Proof Standards</h2>

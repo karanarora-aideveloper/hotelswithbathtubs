@@ -24,7 +24,7 @@
     "description": "Rising above Buffalo Bayou Park, Thompson Houston blends mid-century bespoke design with striking floor-to-ceiling city views and serene spa bathrooms with deep freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-thompson-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/thompson-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/thompson-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Thompson-Houston.h9823412.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=9823412"
   },
@@ -53,7 +53,7 @@
     "description": "Nestled near the quiet residential mansions of River Oaks, The St. Regis offers legendary Southern hospitality, white-glove service, and palatial marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-st-regis-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-st-regis-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-st-regis-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-The-St-Regis-Houston.h14283.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14283"
   },
@@ -82,7 +82,7 @@
     "description": "A tranquil sanctuary blending lunar design motifs and lunar-inspired tranquility, featuring serene bathrooms equipped with freestanding soaking tubs and Dyson supersonic amenities.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-blossom-hotel-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/blossom-hotel-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/blossom-hotel-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Blossom-Hotel-Houston.h7382914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=7382914"
   },
@@ -111,7 +111,7 @@
     "description": "Theatrical boutique glamour in West Houston, delivering lavish themed suites, high-energy pool parties, and oversized jetted whirlpool tubs built for indulgent couples' retreats.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-zaza-houston-memorial-city.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-houston-memorial-city.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-houston-memorial-city.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Hotel-ZaZa-Houston-Memorial-City.h20394812.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=20394812"
   },
@@ -140,7 +140,7 @@
     "description": "Named after Charlotte Baldwin Allen, the 'Mother of Houston', this chic Downtown property boasts tailored mid-century interiors and sunlit suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-c-baldwin-curio-collection-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/c-baldwin-curio-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/c-baldwin-curio-collection.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-C-Baldwin-Curio-Collection.h14285.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14285"
   },
@@ -169,7 +169,7 @@
     "description": "Housed in the historic 1926 former headquarters of the Houston Post-Dispatch, Magnolia Hotel pairs timeless architectural charm with rooftop dip pools and deep garden soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-magnolia-hotel-houston-tribute-portfolio.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/magnolia-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/magnolia-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Magnolia-Hotel-Houston.h482914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=482914"
   },
@@ -198,7 +198,7 @@
     "description": "An artful Downtown boutique hotel inspired by the steamship Laura that founded Houston, offering refined hospitality, rooftop pool cabanas, and lavish soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-laura-hotel-autograph-collection-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-laura-hotel-autograph-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-laura-hotel-autograph-collection.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-The-Laura-Hotel-Autograph-Collection.h829104.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=829104"
   },
@@ -227,7 +227,7 @@
     "description": "World-famous for its rooftop lazy river shaped like the state of Texas, this vibrant downtown resort offers premium luxury suites with panoramic skyline views and deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-marriott-marquis-houston.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/marriott-marquis-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/marriott-marquis-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Marriott-Marquis-Houston.h12938491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=12938491"
   },
@@ -256,7 +256,7 @@
     "description": "Set amid a lush green oasis in Uptown Houston, the newly reimagined Omni Houston features the prestigious Mokara Spa, two outdoor pools, and suites with deep whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-omni-houston-hotel.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/omni-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/omni-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-Omni-Houston-Hotel.h14281.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14281"
   },
@@ -285,7 +285,7 @@
     "description": "Sophisticated contemporary luxury near Houston's museum district, providing immaculate service, elevated dining at Safina, and suites appointed with freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-intercontinental-houston-ihg.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/intercontinental-houston.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/intercontinental-houston.html",
     "expediaUrl": "https://www.expedia.com/Houston-Hotels-InterContinental-Houston.h28194012.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28194012"
   },
@@ -314,7 +314,7 @@
     "description": "Anchoring the historic $460M restoration of The National skyscraper, Thompson Dallas is an urban architectural triumph featuring luxury corner suites with sculptural freestanding tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-thompson-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/thompson-dallas.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/thompson-dallas.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Thompson-Dallas.h49281938.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=49281938"
   },
@@ -343,7 +343,7 @@
     "description": "Designed by master architect Kengo Kuma, Hôtel Swexan fuses Swiss hospitality with Texas generosity, boasting rooftop infinity pools and hand-crafted marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-swexan-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-swexan.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-swexan.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Hotel-Swexan.h89230182.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=89230182"
   },
@@ -372,7 +372,7 @@
     "description": "The quintessential Uptown Dallas luxury hotspot, ZaZa captivates with opulent themed suites, celebrity-favorite poolside dining, and lavish jetted whirlpool jacuzzi tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-zaza-dallas-uptown.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-dallas.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-dallas.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Hotel-ZaZa-Dallas.h14264.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14264"
   },
@@ -401,7 +401,7 @@
     "description": "Originally designed in 1916 by African-American architect William Sidney Pittman, this soulful Deep Ellum boutique hotel blends historic brickwork with modern soaking tub suites.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-pittman-hotel-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-pittman-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-pittman-hotel.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-The-Kimpton-Pittman-Hotel.h42918401.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=42918401"
   },
@@ -430,7 +430,7 @@
     "description": "High-octane urban energy right in Victory Park, featuring dramatic glass architecture, the 16th-floor Wet Deck infinity pool, and Marvelous Suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-dallas-victory.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-dallas-victory.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-dallas-victory.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-W-Dallas-Victory.h139281.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=139281"
   },
@@ -459,7 +459,7 @@
     "description": "A 1923 Uptown Dallas landmark restored with mid-century European flair, featuring opulent Dorothy Draper interiors and vintage marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-le-meridien-dallas-the-stoneleigh.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/le-meridien-dallas-the-stoneleigh.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/le-meridien-dallas-the-stoneleigh.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Le-Meridien-Dallas-The-Stoneleigh.h14259.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14259"
   },
@@ -488,7 +488,7 @@
     "description": "An officially designated Dallas Historical Landmark opened in 1924, known for its legendary Library Bar, red brick exterior, and romantic suites with private jetted whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-warwick-melrose-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/warwick-melrose-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/warwick-melrose-hotel.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Warwick-Melrose-Dallas.h14258.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14258"
   },
@@ -517,7 +517,7 @@
     "description": "Famous for its vibrant LED exterior facade illuminating the night sky, Omni Dallas offers a heated rooftop infinity pool and expansive suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-omni-dallas-hotel.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/omni-dallas-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/omni-dallas-hotel.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Omni-Dallas-Hotel.h4382914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=4382914"
   },
@@ -546,7 +546,7 @@
     "description": "An eclectic boutique hotel infused with bold contemporary pop art, featuring an outdoor pool with an iconic underwater Albert Einstein portrait and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-lorenzo-hotel-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/lorenzo-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/lorenzo-hotel.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Lorenzo-Hotel.h1729104.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1729104"
   },
@@ -575,7 +575,7 @@
     "description": "Located in the heart of the downtown Dallas Arts District, Fairmont Dallas provides classic luxury, an Olympic-sized junior rooftop pool, and Fairmont Gold suites with marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-fairmont-dallas.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-dallas.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-dallas.html",
     "expediaUrl": "https://www.expedia.com/Dallas-Hotels-Fairmont-Dallas.h14257.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14257"
   }

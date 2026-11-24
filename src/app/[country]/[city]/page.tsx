@@ -11,7 +11,7 @@ import { escapeRegex, buildCityRegex, titleCase, slugify, resolveCountry, findLo
 import { generateCityPageContent } from '@/lib/seo';
 import { dropIntroClaimSentences } from '@/lib/claims';
 import { sanitizeHotelData, isHotelConfirmed } from '@/lib/evidence';
-import { cleanOutboundUrl } from '@/lib/affiliate';
+import { cleanOutboundUrl, BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import TrendingDestinations from '@/components/TrendingDestinations';
 import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateForCity } from '@/lib/usStates';
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
@@ -777,7 +777,7 @@ const CITY_ALIASES_MAP: Record<string, string[]> = {
             </p>
           )}
           <p className={(stateConfig || introSentence1 || introSentence2) ? "mt-2 text-[11px] text-[#5b6478]/80" : "text-[11px] text-[#5b6478]/80"}>
-            Links go straight to the booking site. We don&apos;t earn a commission from them today.
+            {BOOKING_LINK_DISCLOSURE}
           </p>
         </div>
 

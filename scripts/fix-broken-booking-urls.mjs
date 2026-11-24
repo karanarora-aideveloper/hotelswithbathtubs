@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
-const BOOKING_AID = '304142';
 
 const COUNTRY_ISO = {
   'india': 'in', 'usa': 'us', 'united states': 'us', 'uk': 'gb', 'united kingdom': 'gb',
@@ -159,11 +158,11 @@ async function main() {
     if (h.bookingUrl && h.bookingUrl.includes('searchresults.html')) {
       let targetUrl = '';
       if (curatedMap.has(hotelLower)) {
-        targetUrl = `${curatedMap.get(hotelLower)}?aid=${BOOKING_AID}`;
+        targetUrl = `${curatedMap.get(hotelLower)}`;
         bookingCuratedUsed++;
       } else {
         const slug = buildBookingSlug(h.name, h.city);
-        targetUrl = `https://www.booking.com/hotel/${countryCode}/${slug}.html?aid=${BOOKING_AID}`;
+        targetUrl = `https://www.booking.com/hotel/${countryCode}/${slug}.html`;
       }
 
       h.bookingUrl = targetUrl;

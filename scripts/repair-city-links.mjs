@@ -22,7 +22,6 @@ const countryArg = (opt('--country') || '').toLowerCase();
 const apply = args.includes('--apply');
 if (!cityArg) { console.error('--city is required'); process.exit(1); }
 
-const AID = '304142';
 const STOP = new Set(['the', 'hotel', 'hotels', 'by', 'and', 'a', 'of', 'in', 'at', 'resort', 'spa', 'suites', 'suite', 'a', 'collection']);
 const norm = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const tokens = (s) => new Set(norm(s).match(/[a-z0-9]+/g)?.filter((t) => !STOP.has(t)) || []);
@@ -77,7 +76,7 @@ async function inspectBooking(url, hotel) {
 // Finds candidate property links on Booking.com's own search results for "<name> <city>".
 async function searchBooking(hotel) {
   const q = encodeURIComponent(`${hotel.name} ${hotel.city}`);
-  await open(`https://www.booking.com/searchresults.html?ss=${q}&aid=${AID}&lang=en-us&group_adults=2&no_rooms=1`);
+  await open(`https://www.booking.com/searchresults.html?ss=${q}&lang=en-us&group_adults=2&no_rooms=1`);
   await page.waitForTimeout(2500);
   const cands = await ev(() => {
     const out = []; const seen = new Set();
@@ -107,7 +106,7 @@ for (const h of hotels) {
     console.log(`  current: ${cur.ok ? 'OK' : 'DEAD'} status=${cur.status} score=${cur.nameScore} → ${cur.finalUrl.slice(0, 90)}`);
     if (cur.ok) {
       // Booking redirected an old slug to the live one: store the canonical address.
-      const canon = cur.finalUrl.split('?')[0] + `?aid=${AID}`;
+      const canon = cur.finalUrl.split('?')[0];
       const same = new URL(canon).pathname === new URL(h.bookingUrl).pathname;
       row.action = same ? 'keep' : 'replace';
       if (!same) { row.newBookingUrl = canon; row.verify = cur; }
@@ -141,7 +140,7 @@ for (const h of hotels) {
   let fixed = null;
   for (const c of ranked.slice(0, 2)) {
     await sleep(3000);
-    const url = `${c.href}?aid=${AID}`;
+    const url = `${c.href}`;
     const v = await inspectBooking(url, h);
     console.log(`  try ${c.name} (${c.s.toFixed(2)}): ${v.ok ? 'VERIFIED' : 'rejected'} status=${v.status} score=${v.nameScore}`);
     if (v.ok) { fixed = { url, verify: v }; break; }

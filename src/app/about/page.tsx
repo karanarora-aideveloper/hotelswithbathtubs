@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -46,7 +47,7 @@ export default function AboutUs() {
 
           <h2>Editorial Independence &amp; Integrity</h2>
           <p>
-            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. Links go straight to the booking site. We don&apos;t earn a commission from them today. Rankings and proof labels never depend on commercial relationships, and our editorial curation remains independent.
+            Hotels cannot pay to be listed or favorably ranked on Hotels With Bathtubs. {BOOKING_LINK_DISCLOSURE} Rankings and proof labels never depend on commercial relationships, and our editorial curation remains independent.
           </p>
 
           <h2>Contact &amp; Editorial Feedback</h2>

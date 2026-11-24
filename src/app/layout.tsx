@@ -72,6 +72,8 @@ export const metadata: Metadata = {
   },
   other: {
     'p:domain_verify': '4ed9df0b1a0e78a628fd7d03f7592100',
+    // Impact.com site verification (media property 8982118), 24 Nov 2026
+    'impact-site-verification': 'a396dc79-7541-4450-92d9-dc0cd86743f8',
   },
 };
 

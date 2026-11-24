@@ -122,8 +122,7 @@ function compressUrl(u?: string | null): string {
     .replace('https://www.makemytrip.com', '^m')
     .replace('https://www.airbnb.com/rooms/', '^ar/')
     .replace('https://www.airbnb.com', '^r')
-    .replace('https://www.trip.com', '^t')
-    .replace('?aid=304142', '^aid');
+    .replace('https://www.trip.com', '^t');
 }
 
 function toCompactHotel(h: RawHotel): CompactHotel {

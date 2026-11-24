@@ -168,10 +168,10 @@ export default function EditorialPolicyPage() {
                 4. Booking Links &amp; Transparency
               </h2>
               <p>
-                HotelsWithBathtubs is free for readers. Links go straight to the booking site. We don&apos;t earn a commission from them today.
+                HotelsWithBathtubs is free for readers. Some booking links (Booking.com and Trip.com) are affiliate links: if you book, we may earn a commission at no extra cost to you.
               </p>
               <p className="mt-2">
-                We do not use active affiliate links at this time. All outbound booking buttons open direct hotel pages on the respective booking platforms without commission tracking. If commercial programs are introduced in the future, this policy will be updated with full disclosure. Rankings and proof labels never depend on commissions.
+                Commissions never decide which hotels we list, how we rank them or how we label their bathtubs. See our <Link href="/affiliate-policy" className="text-accent hover:underline font-semibold">affiliate policy</Link> for which links are affiliate links.
               </p>
             </section>
 

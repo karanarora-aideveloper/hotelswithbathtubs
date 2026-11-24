@@ -15,14 +15,43 @@ const {
 } = await import('../src/lib/affiliate.ts');
 
 console.log('====================================================');
-console.log('🧪 AFFILIATES-OFF TEST SUITE (CEO Sheet T46)');
+console.log('🧪 OUTBOUND LINK TEST SUITE (clean links; CJ wrap for Booking.com + Trip.com when affiliates are on)');
 console.log('====================================================');
-console.log(`AFFILIATES_ENABLED: ${AFFILIATES_ENABLED} (expected: false)\n`);
+console.log(`AFFILIATES_ENABLED: ${AFFILIATES_ENABLED}\n`);
+
+// When affiliates are on, Booking.com and Trip.com come back wrapped in CJ links.
+// Return the partner URL inside, so the clean-link checks still apply to it.
+function unwrapCj(u) {
+  try {
+    const p = new URL(u);
+    if (p.hostname === 'www.jdoqocy.com') return p.searchParams.get('url') || u;
+    if (p.hostname === 'www.anrdoezrs.net') {
+      const m = u.match(/\/type\/dlg\/(?:sid\/[^/]+\/)?(https?:\/\/.+)$/);
+      return m ? m[1] : u;
+    }
+  } catch {}
+  return u;
+}
+
+let cjPass = true;
+if (AFFILIATES_ENABLED) {
+  console.log('--- 0. CJ wrapping ---');
+  const b = wrapOutboundAffiliateLink('https://www.booking.com/hotel/in/xyz.html?aid=123&label=x', { pageType: 'hotel' });
+  const t = wrapOutboundAffiliateLink('https://www.trip.com/hotels/detail/?hotelId=1', { pageType: 'destination' });
+  const a = wrapOutboundAffiliateLink('https://www.agoda.com/xyz/hotel/goa-in.html?cid=1', { pageType: 'hotel' });
+  const bOk = b === 'https://www.jdoqocy.com/click-101861781-17293139?url=' + encodeURIComponent('https://www.booking.com/hotel/in/xyz.html') + '&sid=xx-hotel';
+  const tOk = t === 'https://www.anrdoezrs.net/links/101861781/type/dlg/sid/xx-destination/https://www.trip.com/hotels/detail/?hotelId=1';
+  const aOk = a === 'https://www.agoda.com/xyz/hotel/goa-in.html';
+  cjPass = bOk && tOk && aOk;
+  console.log(`  Booking: ${b} [${bOk ? 'PASS' : 'FAIL'}]`);
+  console.log(`  Trip:    ${t} [${tOk ? 'PASS' : 'FAIL'}]`);
+  console.log(`  Agoda (not approved, stays clean): ${a} [${aOk ? 'PASS' : 'FAIL'}]\n`);
+}
 
 const testCases = [
   {
     name: 'Booking.com aid & label',
-    input: 'https://www.booking.com/hotel/us/the-joy-sedona.html?aid=304142&label=gen173nr-1FCAEoggI46AdIM1gEaGyIAQGYATG4ARfIAQzYAQHoAQH4AQuIAgGoAgO4Ap_Eub0GwAIB0gIkYWEzYTcwNjEtYzVlNi00MGViLWI1OWMtZTVkODIzYTYwODlk2AIG4AIB',
+    input: 'https://www.booking.com/hotel/us/the-joy-sedona.html?aid=999999&label=gen173nr-1FCAEoggI46AdIM1gEaGyIAQGYATG4ARfIAQzYAQHoAQH4AQuIAgGoAgO4Ap_Eub0GwAIB0gIkYWEzYTcwNjEtYzVlNi00MGViLWI1OWMtZTVkODIzYTYwODlk2AIG4AIB',
   },
   {
     name: 'Agoda cid & tag',
@@ -54,7 +83,7 @@ const testCases = [
   },
   {
     name: 'Internal /out wrapped URL',
-    input: '/out?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fus%2Fthe-joy.html%3Faid%3D304142%26label%3Dtest',
+    input: '/out?url=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fus%2Fthe-joy.html%3Faid%3D999999%26label%3Dtest',
   },
 ];
 
@@ -78,7 +107,7 @@ for (const tc of testCases) {
     hasAffiliate = true;
   }
 
-  const pass = !hasAffiliate && after === wrapped;
+  const pass = !hasAffiliate && after === unwrapCj(wrapped);
   if (!pass) idTestsPassed = false;
 
   console.log(`[${pass ? 'PASS' : 'FAIL'}] ${tc.name}:`);
@@ -88,7 +117,7 @@ for (const tc of testCases) {
 }
 
 console.log('--- 2. Legitimate Parameters & Dates Preservation ---');
-const datesPreservationTest = 'https://www.booking.com/hotel/us/the-joy-sedona.html?aid=304142&hotelId=98765';
+const datesPreservationTest = 'https://www.booking.com/hotel/us/the-joy-sedona.html?aid=999999&hotelId=98765';
 const cleanedWithDates = wrapOutboundAffiliateLink(datesPreservationTest, undefined, {
   checkin: '2026-11-20',
   checkout: '2026-11-22',
@@ -97,7 +126,7 @@ const cleanedWithDates = wrapOutboundAffiliateLink(datesPreservationTest, undefi
 console.log('Preservation Test:');
 console.log('  Input:  ' + datesPreservationTest);
 console.log('  Output: ' + cleanedWithDates);
-const parsedDates = new URL(cleanedWithDates);
+const parsedDates = new URL(unwrapCj(cleanedWithDates));
 const hasCheckin = parsedDates.searchParams.get('checkin') === '2026-11-20';
 const hasCheckout = parsedDates.searchParams.get('checkout') === '2026-11-22';
 const hasHotelId = parsedDates.searchParams.get('hotelId') === '98765';
@@ -125,7 +154,7 @@ for (const h of hotels) {
     const raw = h[f];
     if (raw && typeof raw === 'string' && raw.trim().startsWith('http')) {
       totalChecked++;
-      const cleaned = wrapOutboundAffiliateLink(raw);
+      const cleaned = unwrapCj(wrapOutboundAffiliateLink(raw));
       try {
         const parsed = new URL(cleaned);
         for (const [k] of parsed.searchParams.entries()) {
@@ -144,8 +173,8 @@ console.log(`Total URLs checked across inventory: ${totalChecked}`);
 console.log(`Remaining affiliate parameters:      ${remainingAffiliateParams}`);
 console.log(`Invalid URLs produced:               ${invalidUrls}`);
 
-if (remainingAffiliateParams === 0 && invalidUrls === 0 && idTestsPassed && datesPass) {
-  console.log('\n✅ ALL AFFILIATE-OFF TESTS PASSED (100% CLEAN DIRECT LINKS)!');
+if (remainingAffiliateParams === 0 && invalidUrls === 0 && idTestsPassed && datesPass && cjPass) {
+  console.log('\n✅ ALL OUTBOUND LINK TESTS PASSED!');
 } else {
   console.error('\n❌ SOME CHECKS FAILED!');
   process.exit(1);

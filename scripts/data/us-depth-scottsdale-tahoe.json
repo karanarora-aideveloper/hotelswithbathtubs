@@ -24,7 +24,7 @@
     "description": "Iconic mid-century modern desert oasis in Paradise Valley celebrated for sleek architecture and custom freestanding tubs with views of Camelback Mountain.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-mountain-shadows-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/mountain-shadows-resort-scottsdale.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/mountain-shadows-resort-scottsdale.html",
     "expediaUrl": "https://www.expedia.com/Paradise-Valley-Hotels-Mountain-Shadows-Resort-Scottsdale.h152918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=152918"
   },
@@ -53,7 +53,7 @@
     "description": "Spanish Andalusian-inspired village nestled against Camelback Mountain featuring Moorish arches, fragrant citrus groves, and luxurious soaking baths.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-omni-montelucia-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/omni-scottsdale-resort-spa-at-montelucia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/omni-scottsdale-resort-spa-at-montelucia.html",
     "expediaUrl": "https://www.expedia.com/Paradise-Valley-Hotels-Omni-Scottsdale-Resort-Spa-At-Montelucia.h21948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=21948"
   },
@@ -82,7 +82,7 @@
     "description": "Artist-inspired Sonoran Desert compound set across 23 acres of giant saguaros, offering mid-century bungalows with private outdoor courtyard hot tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-andaz-scottsdale-resort.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/andaz-scottsdale-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/andaz-scottsdale-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/Scottsdale-Hotels-Andaz-Scottsdale-Resort-Bungalows.h142948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=142948"
   },
@@ -111,7 +111,7 @@
     "description": "Legendary desert sanctuary built into dramatic 12-million-year-old rock formations, featuring adobe casitas with kiva fireplaces and deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-boulders-resort-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-boulders-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-boulders-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/Carefree-Hotels-Boulders-Resort-Spa-Scottsdale.h1829.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1829"
   },
@@ -140,7 +140,7 @@
     "description": "1929 Spanish Colonial estate framed by towering Mexican fan palms, featuring cobblestone paths, romantic fountains, and villas with deep clawfoot tubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-royal-palms-resort-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/royal-palms-resort-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/royal-palms-resort-and-spa.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Royal-Palms-Resort-And-Spa.h2914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=2914"
   },
@@ -169,7 +169,7 @@
     "description": "AAA Five Diamond Sonoran desert icon boasting six resort pools, award-winning dining by Michael Mina, and casita suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-fairmont-scottsdale-princess.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-scottsdale-princess.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-scottsdale-princess.html",
     "expediaUrl": "https://www.expedia.com/Scottsdale-Hotels-Fairmont-Scottsdale-Princess.h1948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1948"
   },
@@ -198,7 +198,7 @@
     "description": "Old Town Scottsdale’s premier design boutique hotel, offering rooftop pool views over Camelback, Mediterranean dining at CALA, and sculptural soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-senna-house-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/senna-house-scottsdale.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/senna-house-scottsdale.html",
     "expediaUrl": "https://www.expedia.com/Scottsdale-Hotels-Senna-House-Scottsdale.h74819245.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=74819245"
   },
@@ -227,7 +227,7 @@
     "description": "High-energy luxury hotel in the heart of Scottsdale's entertainment district, featuring private cabanas, sushi dining, and suites with jetted whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-scottsdale.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-scottsdale.html",
     "expediaUrl": "https://www.expedia.com/Scottsdale-Hotels-W-Scottsdale.h28194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28194"
   },
@@ -256,7 +256,7 @@
     "description": "Spectacular 27-acre resort featuring a 2.5-acre water playground, sand beach pool, and suites with deep soaking tubs framed by McDowell Mountain vistas.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hyatt-regency-scottsdale-gainey.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-regency-scottsdale-resort-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-regency-scottsdale-resort-and-spa.html",
     "expediaUrl": "https://www.expedia.com/Scottsdale-Hotels-Hyatt-Regency-Scottsdale-Resort-And-Spa.h1928.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1928"
   },
@@ -285,7 +285,7 @@
     "description": "Mindfulness and wellness sanctuary in Carefree offering daily yoga, restorative hydrotherapy circuits, and spa suites equipped with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-civana-wellness-scottsdale.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/civana-carefree.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/civana-carefree.html",
     "expediaUrl": "https://www.expedia.com/Carefree-Hotels-CIVANA-Wellness-Resort-Spa.h28194819.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28194819"
   },
@@ -314,7 +314,7 @@
     "description": "Micro-resort in South Lake Tahoe pairing Scandinavian design with rugged alpine beauty, featuring private outdoor soaking tubs on secluded balconies.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-desolation-hotel-lake-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/desolation-south-lake-tahoe.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/desolation-south-lake-tahoe.html",
     "expediaUrl": "https://www.expedia.com/South-Lake-Tahoe-Hotels-Desolation-Hotel.h8291845.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=8291845"
   },
@@ -343,7 +343,7 @@
     "description": "5-star boutique resort right on the shore of Lake Tahoe, boasting stone fireplaces, heated marble bathroom floors, and jetted whirlpool spa tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-landing-resort-lake-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-landing-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-landing-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/South-Lake-Tahoe-Hotels-The-Landing-Resort-Spa.h64129.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=64129"
   },
@@ -372,7 +372,7 @@
     "description": "Boutique basecamp for outdoor explorers built with a community beer garden, rooftop hot tubs, fire pits, and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-basecamp-south-lake-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/basecamp-south-lake-tahoe.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/basecamp-south-lake-tahoe.html",
     "expediaUrl": "https://www.expedia.com/South-Lake-Tahoe-Hotels-Basecamp-South-Lake-Tahoe.h49214.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=49214"
   },
@@ -401,7 +401,7 @@
     "description": "Full-service luxury mountain resort in Olympic Valley with ski-in/ski-out lift access, heated year-round pools, and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-everline-resort-lake-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/resort-at-squaw-creek.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/resort-at-squaw-creek.html",
     "expediaUrl": "https://www.expedia.com/Olympic-Valley-Hotels-Everline-Resort-Spa.h1829.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1829"
   },
@@ -430,7 +430,7 @@
     "description": "Exclusive alpine timber chalets on Tahoe's prestigious North Shore, featuring stone fireplaces, fully equipped kitchens, and jetted whirlpool tubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-high-sierra-lodge-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-high-sierra-lodge.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-high-sierra-lodge.html",
     "expediaUrl": "https://www.expedia.com/Incline-Village-Hotels-Hyatt-Vacation-Club-At-High-Sierra-Lodge.h18491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18491"
   },
@@ -459,7 +459,7 @@
     "description": "Renovated 1960s motel converted into a trendy boutique lodge near Heavenly Mountain, featuring communal fire pits and suites with freestanding tubs.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-coachman-hotel-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-coachman.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-coachman.html",
     "expediaUrl": "https://www.expedia.com/South-Lake-Tahoe-Hotels-The-Coachman-Hotel.h129481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=129481"
   },
@@ -488,7 +488,7 @@
     "description": "Prime Heavenly Village ski-in lodge featuring rustic timber architecture, courtyard fire pits, and alpine villas equipped with master whirlpool bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-marriotts-timber-lodge-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/marriott-s-timber-lodge.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/marriott-s-timber-lodge.html",
     "expediaUrl": "https://www.expedia.com/South-Lake-Tahoe-Hotels-Marriotts-Timber-Lodge.h38194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=38194"
   },
@@ -517,7 +517,7 @@
     "description": "Historic 74-acre mountain retreat nestled in a secluded valley on Tahoe's West Shore, featuring quiet forest chalets with cedar-style soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-granlibakken-tahoe.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/granlibakken-resort-conference-center.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/granlibakken-resort-conference-center.html",
     "expediaUrl": "https://www.expedia.com/Tahoe-City-Hotels-Granlibakken-Tahoe.h1824.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1824"
   }

@@ -24,7 +24,7 @@
     "description": "Secluded Victorian rock-and-roll estate in South Congress shaded by historic live oaks, boasting private suites with clawfoot soaking tubs and lush courtyard patios.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-saint-cecilia-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/saint-cecilia.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/saint-cecilia.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-Hotel-Saint-Cecilia.h419481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=419481"
   },
@@ -53,7 +53,7 @@
     "description": "Mid-century modernist haven where Town Lake meets downtown, offering lakefront suites with freestanding soaking tubs positioned against expansive glass windows.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-line-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-line-austin.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-line-austin.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-The-LINE-Austin.h192841.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=192841"
   },
@@ -82,7 +82,7 @@
     "description": "Boutique anchor of South Congress featuring warm terracotta brickwork, minimalist Scandinavian furniture, and deep soaking tubs in sunlit master bathrooms.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-south-congress-hotel-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/south-congress.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/south-congress.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-South-Congress-Hotel.h1029481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1029481"
   },
@@ -111,7 +111,7 @@
     "description": "Historic 1886 Romanesque hotel built by cattle baron Jesse Driskill, featuring grand columns, stained glass domes, and Texas-sized suites with vintage clawfoot bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-driskill-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-driskill-a-hyatt.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-driskill-a-hyatt.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-The-Driskill.h2914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=2914"
   },
@@ -140,7 +140,7 @@
     "description": "All-inclusive lakeside wellness retreat in the Hill Country, offering secluded private cottages with garden hot tubs and world-renowned hydrotherapy treatments.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-lake-austin-spa-resort.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/lake-austin-spa-resort.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/lake-austin-spa-resort.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-Lake-Austin-Spa-Resort.h39124.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=39124"
   },
@@ -169,7 +169,7 @@
     "description": "Electrifying downtown hotel adjacent to ACL Live, featuring sleek rooms with red accents, vinyl record art, and expansive terrazzo soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-austin.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-austin.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-W-Austin.h38194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=38194"
   },
@@ -198,7 +198,7 @@
     "description": "Sensual luxury hotel in the Warehouse District celebrated for theatrical concept suites, custom artwork, and oversized jetted whirlpool bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-zaza-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-austin.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-zaza-austin.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-Hotel-ZaZa-Austin.h38194124.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=38194124"
   },
@@ -227,7 +227,7 @@
     "description": "Boutique retreat on the southern shore of Lady Bird Lake featuring floor-to-ceiling green park views, rooftop dining, and marble freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-loren-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-loren-at-lady-bird-lake.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-loren-at-lady-bird-lake.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-The-Loren-At-Lady-Bird-Lake.h849182.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=849182"
   },
@@ -256,7 +256,7 @@
     "description": "Texas-chic luxury in Domain Northside showcasing rustic stone accents, private balconies with fireplaces, and deep freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-archer-hotel-austin.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/archer-austin.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/archer-austin.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-Archer-Hotel-Austin.h1294819.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1294819"
   },
@@ -285,7 +285,7 @@
     "description": "Transformative all-inclusive wellness sanctuary perched in the Hill Country above Lake Travis, featuring secluded casitas with private outdoor hot tubs.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-miraval-austin-resort.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/miraval-austin.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/miraval-austin.html",
     "expediaUrl": "https://www.expedia.com/Austin-Hotels-Miraval-Austin-Resort-Spa.h39128.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=39128"
   },
@@ -314,7 +314,7 @@
     "description": "Pioneering luxury hotel in downtown Seattle famous for its signature ceiling-fill bathtubs, full-service spa, and refined residential suites.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-1000-lxr-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-1000.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-1000.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Hotel-1000.h152914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=152914"
   },
@@ -343,7 +343,7 @@
     "description": "Architectural glass gem steps from Pike Place Market with sleek mid-century rooms and panoramic water-view suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-thompson-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/thompson-seattle.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/thompson-seattle.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Thompson-Seattle.h1429481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1429481"
   },
@@ -372,7 +372,7 @@
     "description": "Seattle’s premier historic landmark since 1924, combining Italian Renaissance grandeur with modern sophistication and deep marble soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-fairmont-olympic-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-olympic.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/fairmont-olympic.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-The-Fairmont-Olympic-Hotel.h1824.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1824"
   },
@@ -401,7 +401,7 @@
     "description": "Serene Asian-inspired sanctuary in South Lake Union offering minimalist elegance, Space Needle views, and deep Japanese-style ofuro soaking baths.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-pan-pacific-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/pan-pacific-seattle.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/pan-pacific-seattle.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Pan-Pacific-Seattle.h142984.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=142984"
   },
@@ -430,7 +430,7 @@
     "description": "Intimate Pacific Northwest sanctuary located inside historic Pike Place Market, featuring floor-to-ceiling bay windows and deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-inn-at-the-market-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/inn-at-the-market.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/inn-at-the-market.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Inn-At-The-Market.h18491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18491"
   },
@@ -459,7 +459,7 @@
     "description": "Refined urban hotel in the center of downtown Seattle renowned for honey onyx bathrooms equipped with deep soaking tubs and city vistas.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-grand-hyatt-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/grand-hyatt-seattle.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/grand-hyatt-seattle.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Grand-Hyatt-Seattle.h3912.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3912"
   },
@@ -488,7 +488,7 @@
     "description": "1910 Belltown landmark blending historic brick architecture with hipster wit, featuring clawfoot soaking tubs and evening complimentary wine hours.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-palladian-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-palladian.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-palladian.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Kimpton-Palladian-Hotel.h891241.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=891241"
   },
@@ -517,7 +517,7 @@
     "description": "Vibrant 1904 landmark transformed into a stylish boutique hotel with custom local art, a rooftop terrace overlooking Puget Sound, and deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-state-hotel-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-state-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-state-hotel.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-The-State-Hotel.h3194819.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3194819"
   },
@@ -546,7 +546,7 @@
     "description": "Downtown high-rise vibrating with Seattle’s music heritage, featuring modern suites with oversized soaking tubs and lively social spaces.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-seattle.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-seattle.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-W-Seattle.h3941.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3941"
   },
@@ -575,7 +575,7 @@
     "description": "Art Deco boutique honoring Seattle’s history of innovation, featuring residential-style suites with deep soaking tubs and artisan coffee setups.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-theodore-seattle.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-theodore.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-theodore.html",
     "expediaUrl": "https://www.expedia.com/Seattle-Hotels-Hotel-Theodore.h3812.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3812"
   }

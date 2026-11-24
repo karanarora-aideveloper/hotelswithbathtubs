@@ -48,8 +48,7 @@ function expandUrl(u: string): string {
     .replace('^m', 'https://www.makemytrip.com')
     .replace('^ar/', 'https://www.airbnb.com/rooms/')
     .replace('^r', 'https://www.airbnb.com')
-    .replace('^t', 'https://www.trip.com')
-    .replace('^aid', '?aid=304142');
+    .replace('^t', 'https://www.trip.com');
 }
 
 function expandHotel(ch: CompactHotel): CoupleHotel {

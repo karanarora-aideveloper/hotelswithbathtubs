@@ -13,7 +13,6 @@ dotenv.config({ path: path.join(rootDir, '.env.local') });
 dotenv.config({ path: path.join(rootDir, '.env') });
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const BOOKING_AID = '304142';
 const AGODA_CID = '1972736';
 
 if (!MONGODB_URI) {
@@ -49,7 +48,7 @@ function parseBookingHtml(html) {
         if (cleanUrl.includes('/hotel/')) {
           results.push({
             name,
-            cleanUrl: `${cleanUrl}?aid=${BOOKING_AID}`,
+            cleanUrl: `${cleanUrl}`,
             slug: u.pathname.split('/').pop() || '',
           });
         }

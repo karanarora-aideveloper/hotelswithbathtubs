@@ -33,10 +33,11 @@ async function cleanAndAudit() {
     const update = {};
     const unsets = {};
 
-    // 1. Booking.com: ensure aid=304142 is present
-    if (h.bookingUrl && !h.bookingUrl.includes('aid=')) {
-      const sep = h.bookingUrl.includes('?') ? '&' : '?';
-      const fixedBooking = `${h.bookingUrl}${sep}aid=304142`;
+    // 1. Booking.com: store clean URLs with no aid (CJ tracking is added at click time, 24 Nov 2026)
+    if (h.bookingUrl && /[?&]aid=/.test(h.bookingUrl)) {
+      const u = new URL(h.bookingUrl);
+      u.searchParams.delete('aid');
+      const fixedBooking = u.toString();
       h.bookingUrl = fixedBooking;
       update.bookingUrl = fixedBooking;
       bookingAidFixed++;
@@ -119,7 +120,7 @@ async function cleanAndAudit() {
   }
 
   console.log('Cleanup Statistics:');
-  console.log(`  - Booking.com AID (aid=304142) appended: ${bookingAidFixed}`);
+  console.log(`  - Booking.com aid removed: ${bookingAidFixed}`);
   console.log(`  - Airbnb fake search URLs purged: ${airbnbSearchPurged}`);
   console.log(`  - Agoda rogue CIDs (1951559 -> 1972736) fixed: ${agodaCidFixed}`);
   console.log(`  - Agoda /en-in/ locales converted to /en-us/: ${agodaEnInFixed}`);

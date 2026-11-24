@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -104,7 +105,7 @@ export default function HowWeCheckBathtubsPage() {
               Booking links
             </h2>
             <p>
-              Links go straight to the booking site. We don&apos;t earn a commission from them today.
+              {BOOKING_LINK_DISCLOSURE}
             </p>
           </section>
 

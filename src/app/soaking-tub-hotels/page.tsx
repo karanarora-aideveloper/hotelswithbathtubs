@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { cleanOutboundUrl, BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import FallbackImg from '@/components/FallbackImg';
 import Link from 'next/link';
 import connectToDatabase from '@/lib/mongodb';
@@ -206,7 +207,7 @@ export default async function SoakingTubHotelsPage() {
                 const citySlug = slugify(h.city || '');
                 const hotelSlug = h.slug || slugify(h.name);
                 const hotelUrl = `/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
-                const bookingUrl = h.bookingUrl || h.agodaUrl || h.airbnbUrl || h.tripUrl || h.url;
+                const bookingUrl = cleanOutboundUrl(h.bookingUrl || h.agodaUrl || h.airbnbUrl || h.tripUrl || h.url || '');
 
                 return (
                   <div
@@ -325,7 +326,7 @@ export default async function SoakingTubHotelsPage() {
 
           {/* Reader Disclosure & E-E-A-T Assurance */}
           <div className="p-4 bg-slate-50 border border-gray-200 rounded-2xl text-xs text-gray-500 mb-12">
-            Links go straight to the booking site. We don&apos;t earn a commission from them today. Learn more in our{' '}
+            {BOOKING_LINK_DISCLOSURE} Learn more in our{' '}
             <Link href="/editorial-policy" className="text-[#1a6fde] underline">Editorial Policy</Link>.
           </div>
 

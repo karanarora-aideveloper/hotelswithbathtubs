@@ -24,7 +24,7 @@
     "description": "An intimate sanctuary of art and design in SoBro featuring over 1,000 museum-quality artworks, a rooftop pool, and freestanding marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-joseph-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-joseph-a-luxury-collection-hotel-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-joseph-a-luxury-collection-hotel-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-The-Joseph.h4928194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=4928194"
   },
@@ -53,7 +53,7 @@
     "description": "Upscale mid-century boutique in the heart of The Gulch, offering the celebrated L.A. Jackson rooftop lounge and suites with floor-to-ceiling soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-thompson-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/thompson-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/thompson-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Thompson-Nashville.h152918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=152918"
   },
@@ -82,7 +82,7 @@
     "description": "Vibrant lifestyle hotel steps from Printers Alley, known for its rooftop 1956 Scenicruiser bus bar and industrial-chic lofts with freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-bobby-hotel-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/bobby.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/bobby.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Bobby-Hotel.h1948192.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1948192"
   },
@@ -111,7 +111,7 @@
     "description": "Impeccably restored 1930 art deco landmark featuring curated works from local makers, a hidden subterranean speakeasy, and deep terrazzo soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-noelle-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/noelle-a-tribute-portfolio-hotel-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/noelle-a-tribute-portfolio-hotel-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Noelle-Nashville.h1849182.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1849182"
   },
@@ -140,7 +140,7 @@
     "description": "Soaring 25-story tower anchoring Nashville Yards on Broadway, offering a rooftop deck pool, multi-level spa, and suites with skyline soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-grand-hyatt-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/grand-hyatt-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/grand-hyatt-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Grand-Hyatt-Nashville.h48291845.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=48291845"
   },
@@ -169,7 +169,7 @@
     "description": "Music Row boutique pairing contemporary southern hospitality with cheeky Virgin energy, featuring dressing room suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-virgin-hotels-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/virgin-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/virgin-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Virgin-Hotels-Nashville.h4382918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=4382918"
   },
@@ -198,7 +198,7 @@
     "description": "Sophisticated Midtown sanctuary across from Vanderbilt with industrial-chic wood-and-concrete interiors and deep soaking bathtubs in spa-inspired bathrooms.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-aertson-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-aertson.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/kimpton-aertson.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Kimpton-Aertson-Hotel.h1829481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1829481"
   },
@@ -227,7 +227,7 @@
     "description": "Historic 1900 Victorian Romanesque terminal station featuring a 65-foot barrel-vaulted stained-glass ceiling and atmospheric suites with deep bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-union-station-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/union-station-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/union-station-hotel.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-Union-Station-Nashville-Yards.h1824.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1824"
   },
@@ -256,7 +256,7 @@
     "description": "Modern urban resort in The Gulch with the city's largest hotel pool deck, dining by Andrew Carmellini, and sleek open-concept suites with soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-w-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/w-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/w-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-W-Nashville.h58291845.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=58291845"
   },
@@ -285,7 +285,7 @@
     "description": "Multi-venue contemporary art museum combined with a boutique hotel in the historic Gray & Dudley building, featuring artistic suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-21c-museum-hotel-nashville.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/21c-museum-nashville.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/21c-museum-nashville.html",
     "expediaUrl": "https://www.expedia.com/Nashville-Hotels-21c-Museum-Hotel-Nashville.h1829412.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1829412"
   },
@@ -314,7 +314,7 @@
     "description": "Sprawling 500-acre resort featuring a lazy river, championship golf, full-service spa, and suites with deep soaking bathtubs overlooking private lakes.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-jw-marriott-grande-lakes-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-orlando-grande-lakes.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-orlando-grande-lakes.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-JW-Marriott-Orlando-Grande-Lakes.h12948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=12948"
   },
@@ -343,7 +343,7 @@
     "description": "Surrounded by Disney conservation land, featuring a lazy river lagoon, championship golf, and suites equipped with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-signia-bonnet-creek-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hilton-orlando-bonnet-creek.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hilton-orlando-bonnet-creek.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-Signia-By-Hilton-Orlando-Bonnet-Creek.h291841.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=291841"
   },
@@ -372,7 +372,7 @@
     "description": "Victorian elegance at the flagship Walt Disney World resort, offering monorail access, award-winning dining, and suites with jetted whirlpool bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-grand-floridian-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/disney-s-grand-floridian-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/disney-s-grand-floridian-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-Disneys-Grand-Floridian-Resort-Spa.h2918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=2918"
   },
@@ -401,7 +401,7 @@
     "description": "Boutique philanthropic hotel in historic Winter Park showcasing an extraordinary contemporary art collection, rooftop pool, and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-alfond-inn-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-alfond-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-alfond-inn.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-The-Alfond-Inn.h682918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=682918"
   },
@@ -430,7 +430,7 @@
     "description": "Massive 1,500-acre resort centered on a private lake with lagoon pools, cave grottos, rope bridges, and private suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hyatt-regency-grand-cypress.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-regency-grand-cypress.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hyatt-regency-grand-cypress.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-Hyatt-Regency-Grand-Cypress.h1824.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1824"
   },
@@ -459,7 +459,7 @@
     "description": "Recreation of the seaside village of Portofino, Italy with picturesque harborfront views, cobblestone piazzas, and suites equipped with whirlpool jacuzzis.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-loews-portofino-bay-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/loews-portofino-bay.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/loews-portofino-bay.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-Loews-Portofino-Bay-Hotel.h18491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18491"
   },
@@ -488,7 +488,7 @@
     "description": "Ultra-exclusive private residential villas offering the pinnacle of Grande Lakes luxury, with master spa baths featuring freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-ritz-carlton-residences-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-orlando-grande-lakes.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-orlando-grande-lakes.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-The-Ritz-Carlton-Orlando-Grande-Lakes.h18294.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18294"
   },
@@ -517,7 +517,7 @@
     "description": "Stunning resort boasting a soaring 10-story atrium, on-site water park, and spacious executive suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-renaissance-orlando-seaworld.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/renaissance-orlando-resort.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/renaissance-orlando-resort.html",
     "expediaUrl": "https://www.expedia.com/Orlando-Hotels-Renaissance-Orlando-At-SeaWorld.h2914.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=2914"
   },
@@ -546,7 +546,7 @@
     "description": "One-of-a-kind resort featuring a 4.5-acre glass atrium recreating Florida ecosystems, an on-site water park, and luxury suites with soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-gaylord-palms-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/gaylord-palms-resort.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/gaylord-palms-resort.html",
     "expediaUrl": "https://www.expedia.com/Kissimmee-Hotels-Gaylord-Palms-Resort-Convention-Center.h18491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18491"
   },
@@ -575,7 +575,7 @@
     "description": "Tropical paradise featuring private island-style cottages with personal patio hot tubs, lagoon swimming pools, and access to Island H2O Water Park.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-margaritaville-resort-orlando.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/margaritaville-resort-orlando.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/margaritaville-resort-orlando.html",
     "expediaUrl": "https://www.expedia.com/Kissimmee-Hotels-Margaritaville-Resort-Orlando.h28194819.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=28194819"
   }

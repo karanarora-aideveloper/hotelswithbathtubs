@@ -24,7 +24,7 @@
     "description": "San Francisco's only five-star Victorian mansion hotel, showcasing hand-curated art, period fireplaces, and palatial marble bathrooms with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-mansion-on-sutter-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/mansion-on-sutter.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/mansion-on-sutter.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Mansion-On-Sutter.h34891254.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=34891254"
   },
@@ -53,7 +53,7 @@
     "description": "Sustainable urban oasis along the Embarcadero with reclaimed timber accents, custom native greenery, and stone bathrooms featuring deep freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-1-hotel-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/1-hotel-san-francisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/1-hotel-san-francisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-1-Hotel-San-Francisco.h125492.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=125492"
   },
@@ -82,7 +82,7 @@
     "description": "Perched high above the city, offering some of San Francisco's most dramatic vantage points with freestanding soaking tubs framing views of the Transamerica Pyramid.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-four-seasons-embarcadero-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-san-francisco-at-embarcadero.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-san-francisco-at-embarcadero.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Four-Seasons-Hotel-San-Francisco-At-Embarcadero.h54129.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=54129"
   },
@@ -111,7 +111,7 @@
     "description": "Asian-inspired hospitality near Union Square with sleek contemporary design, a glass-enclosed indoor atrium pool, and deep Japanese-style soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-nikko-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-nikko-san-francisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-nikko-san-francisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Hotel-Nikko-San-Francisco.h3912.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3912"
   },
@@ -140,7 +140,7 @@
     "description": "Legendary 1875 landmark famous for its crystal-chandeliered Garden Court, featuring soaring 14-foot guest room ceilings and opulent marble soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-palace-hotel-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/palace-a-luxury-collection-hotel-san-francisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/palace-a-luxury-collection-hotel-san-francisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Palace-Hotel-A-Luxury-Collection-Hotel-San-Francisco.h8912.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=8912"
   },
@@ -169,7 +169,7 @@
     "description": "Historic European-style sanctuary on Union Square renowned for personalized butler hospitality and quiet limestone bathrooms with deep soaking baths.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-taj-campton-place-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/campton-place.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/campton-place.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Taj-Campton-Place.h1194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1194"
   },
@@ -198,7 +198,7 @@
     "description": "1903 Edwardian boutique hotel set atop prestigious Pacific Heights, offering evening wine tastings, gourmet breakfasts, and luxurious bathroom sanctuaries.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-drisco-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-drisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-drisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Hotel-Drisco.h22194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=22194"
   },
@@ -227,7 +227,7 @@
     "description": "Vibrant design hotel in South of Market celebrating the neighborhood's creative spirit with bold art installations and sleek contemporary soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-clancy-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-clancy-autograph-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-clancy-autograph-collection.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-The-Clancy.h49214.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=49214"
   },
@@ -256,7 +256,7 @@
     "description": "Eclectic Beat Generation-inspired boutique featuring a writer's alcove, cocktail lounge, and stylish guest bathrooms equipped with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-emblem-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-emblem-san-francisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-emblem-san-francisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-Hotel-Emblem-San-Francisco.h3812.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=3812"
   },
@@ -285,7 +285,7 @@
     "description": "Striking faceted glass building in Mid-Market with modern rooms featuring exposed concrete ceilings, minimalist wood elements, and deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-line-san-francisco.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-line-san-francisco.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-line-san-francisco.html",
     "expediaUrl": "https://www.expedia.com/San-Francisco-Hotels-The-LINE-San-Francisco.h84291845.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=84291845"
   },
@@ -314,7 +314,7 @@
     "description": "Exquisite California Craftsman resort overlooking Torrey Pines Golf Course and the Pacific Ocean, offering granite bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-lodge-at-torrey-pines-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-lodge-at-torrey-pines.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-lodge-at-torrey-pines.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-The-Lodge-At-Torrey-Pines.h89124.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=89124"
   },
@@ -343,7 +343,7 @@
     "description": "Relais & Châteaux Mediterranean sanctuary set on 45 lush acres of olive groves, boasting private hacienda casitas with private garden whirlpool spas.",
     "rawImage": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-rancho-valencia-resort-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/rancho-valencia-resort-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/rancho-valencia-resort-and-spa.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Rancho-Valencia-Resort-Spa.h2941.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=2941"
   },
@@ -372,7 +372,7 @@
     "description": "Charming coastal estate in the historic seaside village of Del Mar, offering ocean-view verandas and tranquil marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-lauberge-del-mar-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/l-auberge-del-mar.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/l-auberge-del-mar.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-LAuberge-Del-Mar.h18491.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=18491"
   },
@@ -401,7 +401,7 @@
     "description": "Mediterranean palace nestled in the canyons of coastal North County, featuring Addison (3-star Michelin) and palatial marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-fairmont-grand-del-mar-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-grand-del-mar.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-grand-del-mar.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Fairmont-Grand-Del-Mar.h15291.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=15291"
   },
@@ -430,7 +430,7 @@
     "description": "Adobe-style hacienda surrounded by ten acres of botanical gardens, trickling fountains, and romantic suites with Spanish-tiled deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-estancia-la-jolla-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/estancia-la-jolla-hotel-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/estancia-la-jolla-hotel-spa.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Estancia-La-Jolla-Hotel-Spa.h78912.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=78912"
   },
@@ -459,7 +459,7 @@
     "description": "Contemporary glass-and-steel beachfront hotel directly on the Pacific Beach boardwalk, boasting suites with chromatherapy jetted spa tubs.",
     "rawImage": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-tower23-hotel-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/tower23.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/tower23.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Tower23-Hotel.h12948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=12948"
   },
@@ -488,7 +488,7 @@
     "description": "Waterfront luxury high-rise overlooking the bay, featuring sunlit contemporary suites with freestanding soaking tubs positioned against the skyline.",
     "rawImage": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-intercontinental-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/intercontinental-san-diego.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/intercontinental-san-diego.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-InterContinental-San-Diego.h21948194.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=21948194"
   },
@@ -517,7 +517,7 @@
     "description": "Premier Gaslamp hotel connected to Petco Park by pedestrian skybridge, offering spacious contemporary suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-omni-san-diego-hotel.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/omni-san-diego.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/omni-san-diego.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Omni-San-Diego-Hotel.h10294.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=10294"
   },
@@ -546,7 +546,7 @@
     "description": "Vibrant music-infused playground in the Gaslamp Quarter featuring high-energy suites with private jetted whirlpool tubs and vinyl record players.",
     "rawImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hard-rock-hotel-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hard-rock-san-diego.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hard-rock-san-diego.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Hard-Rock-Hotel-San-Diego.h184912.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=184912"
   },
@@ -575,7 +575,7 @@
     "description": "Serene 16-acre resort on Coronado Island with postcard panoramas of the San Diego skyline and private cottages equipped with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-coronado-island-marriott-san-diego.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/coronado-island-marriott-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/coronado-island-marriott-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/San-Diego-Hotels-Coronado-Island-Marriott-Resort-Spa.h5891.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=5891"
   }

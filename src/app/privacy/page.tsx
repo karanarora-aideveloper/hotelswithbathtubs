@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Outbound Booking Links</h2>
           <p>
-            Links go straight to the booking site. We don&apos;t earn a commission from them today. We do not use active affiliate links at this time. All booking buttons direct you straight to the partner booking platform without affiliate tracking codes. If affiliate programs are introduced in the future, this policy will be updated with full disclosure. Rankings and proof labels never depend on commercial relationships.
+            Our Booking.com and Trip.com buttons are affiliate links through the CJ (Commission Junction) network: if you book, we may earn a commission at no extra cost to you. When you click one, CJ and the booking site may set their own cookies to credit the booking; their privacy policies apply on their sites. The link carries only your country and the type of page you clicked from, never personal details. Links to other booking sites go straight to the hotel page without affiliate tracking. Rankings and proof labels never depend on commercial relationships. Details are in our <Link href="/affiliate-policy" className="text-accent hover:underline font-semibold">affiliate policy</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">4. Analytics and Cookies</h2>

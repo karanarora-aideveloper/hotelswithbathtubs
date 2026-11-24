@@ -24,7 +24,7 @@
     "description": "Perched inside the meticulously restored 1881 Denver Union Station, The Crawford delivers Victorian glamour, craft cocktails in the Great Hall, and suites with deep freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-crawford-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-crawford.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-crawford.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Crawford-Hotel.h8291041.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=8291041"
   },
@@ -53,7 +53,7 @@
     "description": "Operating continuously since 1891, Denver's oldest historic boutique hotel charms with the legendary art deco Cruise Room cocktail lounge and antique clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-oxford-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-oxford-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-oxford-hotel.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Oxford-Hotel.h14295.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14295"
   },
@@ -82,7 +82,7 @@
     "description": "Set inside the 1911 historic Denver Tramway building, Hotel Teatro offers cultural refinement, farm-to-table cuisine at The Nickel, and suites with deep sandstone soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-hotel-teatro-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-teatro.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-teatro.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-Hotel-Teatro.h14296.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14296"
   },
@@ -111,7 +111,7 @@
     "description": "Welcoming presidents and rock icons since 1892, this Italian Renaissance icon features an 8-story stained-glass atrium lobby and soothing baths fed by its own natural artesian well.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-brown-palace-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-brown-palace-hotel-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-brown-palace-hotel-and-spa.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Brown-Palace-Hotel.h14297.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14297"
   },
@@ -140,7 +140,7 @@
     "description": "An effortlessly chic residence in upscale Cherry Creek, Halcyon pairs a heated rooftop pool and complimentary outdoor gear lending with suites featuring freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-halcyon-hotel-cherry-creek-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/halcyon-a-hotel-in-cherry-creek.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/halcyon-a-hotel-in-cherry-creek.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-Halcyon-A-Hotel-In-Cherry-Creek.h142918.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=142918"
   },
@@ -169,7 +169,7 @@
     "description": "Denver's most acclaimed boutique hideaway in RiNo, The Ramble features the legendary Death & Co cocktail bar, rich velvet fabrics, and romantic suites with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-ramble-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-ramble.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-ramble.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Ramble-Hotel.h1928401.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1928401"
   },
@@ -198,7 +198,7 @@
     "description": "A stylish micro-community and boutique hotel in Cherry Creek, Clayton grants guests access to private rooftop lounges, curated art, and suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-clayton-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/clayton-hotel-members-club.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/clayton-hotel-members-club.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-Clayton-Hotel-Members-Club.h62910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=62910481"
   },
@@ -227,7 +227,7 @@
     "description": "Sophisticated fashion-district elegance in Cherry Creek, The Jacquard boasts a 75-foot rooftop pool with Rocky Mountain vistas and suites appointed with freestanding soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-jacquard-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-jacquard-autograph-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-jacquard-autograph-collection.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Jacquard-Autograph-Collection.h23910481.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=23910481"
   },
@@ -256,7 +256,7 @@
     "description": "Positioned right at Denver's central transit gateway, Limelight Hotel Denver blends mountain lodge warmth with urban sophistication, featuring suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-limelight-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/limelight-hotel-denver.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/limelight-hotel-denver.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-Limelight-Hotel-Denver.h14298.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14298"
   },
@@ -285,7 +285,7 @@
     "description": "An architectural and artistic sanctuary in the Golden Triangle, The ART Hotel features a 22,000-LED light ceiling installation, terrace dining at FIRE, and suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-art-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-art-a-hotel.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-art-a-hotel.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-ART-Hotel-Denver.h1029184.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=1029184"
   },
@@ -314,7 +314,7 @@
     "description": "The gold standard of Mile High luxury, Four Seasons Hotel Denver features a heated rooftop pool terrace, steakhouse dining at EDGE, and palatial marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-four-seasons-hotel-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-denver.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/four-seasons-denver.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-Four-Seasons-Hotel-Denver.h381920.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=381920"
   },
@@ -343,7 +343,7 @@
     "description": "Boasting the city's most expansive guest rooms, The Ritz-Carlton Denver provides fine dining at ELWAY'S, an award-winning spa, and oversized five-fixture marble bathrooms with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-ritz-carlton-denver.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-denver.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-ritz-carlton-denver.html",
     "expediaUrl": "https://www.expedia.com/Denver-Hotels-The-Ritz-Carlton-Denver.h14299.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14299"
   },
@@ -372,7 +372,7 @@
     "description": "An enchanting 1929 Spanish Colonial estate nestled under Camelback Mountain, Royal Palms enchants with Mediterranean courtyards, fountain gardens, and private patio soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-royal-palms-resort-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/royal-palms-resort-and-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/royal-palms-resort-and-spa.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Royal-Palms-Resort-And-Spa.h14301.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14301"
   },
@@ -401,7 +401,7 @@
     "description": "Known as the 'Jewel of the Desert' since 1929, Arizona Biltmore showcases iconic Frank Lloyd Wright architectural blocks, 7 pools, and luxury villa suites with deep marble soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-arizona-biltmore-resort-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/arizona-biltmore-a-waldorf-astoria-resort.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/arizona-biltmore-a-waldorf-astoria-resort.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Arizona-Biltmore.h14302.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14302"
   },
@@ -430,7 +430,7 @@
     "description": "A lavish desert oasis perched on the sun-drenched foothills of Camelback Mountain, featuring multi-tiered pools, championship golf, and palatial suites with deep Roman soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-phoenician-resort-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-phoenician-scottsdale.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-phoenician-scottsdale.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-The-Phoenician.h14303.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14303"
   },
@@ -459,7 +459,7 @@
     "description": "A premier Sonoran desert playground spanning 316 acres, offering an 89-foot waterslide, lazy river, Revive Spa, and expansive luxury suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-jw-marriott-desert-ridge-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-phoenix-desert-ridge-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/jw-marriott-phoenix-desert-ridge-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-JW-Marriott-Phoenix-Desert-Ridge-Resort-Spa.h14304.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14304"
   },
@@ -488,7 +488,7 @@
     "description": "Originally hand-crafted in the 1930s by cowboy artist Alonzo 'Lon' Megargee, this intimate adobe sanctuary offers acclaimed dining at LON's and casitas with clawfoot soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-hermosa-inn-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-hermosa-inn.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-hermosa-inn.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-The-Hermosa-Inn.h14305.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14305"
   },
@@ -517,7 +517,7 @@
     "description": "Created by hospitality visionary Sam Fox, The Global Ambassador delivers European grand hotel glamour, five distinct culinary venues, and bespoke suites with freestanding soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-global-ambassador-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-global-ambassador.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-global-ambassador.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-The-Global-Ambassador.h98201948.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=98201948"
   },
@@ -546,7 +546,7 @@
     "description": "Vibrant urban sophistication in the heart of CityScape, featuring the buzzing Lustre Rooftop Bar, complimentary evening wine hours, and spacious Spa Suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-kimpton-hotel-palomar-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/hotel-palomar-phoenix.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/hotel-palomar-phoenix.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Kimpton-Hotel-Palomar-Phoenix.h4391048.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=4391048"
   },
@@ -575,7 +575,7 @@
     "description": "An arts-infused boutique powerhouse in Roosevelt Row, showcasing rotating local art galleries, industrial loft finishes, and bold open suites with deep soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-found-re-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/found-re-phoenix.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/found-re-phoenix.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-FOUNDRE-Phoenix.h14829104.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14829104"
   },
@@ -604,7 +604,7 @@
     "description": "Urban chic meets Southwestern spirit in Downtown Phoenix, offering the spirited Dust Cutter saloon, a rooftop heated pool, and modern corner suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-renaissance-phoenix-downtown-hotel.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/renaissance-phoenix-downtown.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/renaissance-phoenix-downtown.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Renaissance-Phoenix-Downtown-Hotel.h14306.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14306"
   },
@@ -633,7 +633,7 @@
     "description": "Playful elegance in Phoenix's prestigious Biltmore district, The Camby pairs copper and turquoise Southwestern flair with a rooftop pool and suites with deep soaking tubs.",
     "rawImage": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-the-camby-autograph-collection-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/the-camby-autograph-collection.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/the-camby-autograph-collection.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-The-Camby-Autograph-Collection.h14307.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14307"
   },
@@ -662,7 +662,7 @@
     "description": "Flanked by the rugged South Mountain Preserve, this expansive all-suite resort features the 7-acre Oasis Water Park, 18-hole championship golf, and suites with deep garden soaking bathtubs.",
     "rawImage": "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-arizona-grand-resort-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/arizona-grand-resort-spa.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/arizona-grand-resort-spa.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Arizona-Grand-Resort-Spa.h14308.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14308"
   },
@@ -691,7 +691,7 @@
     "description": "Terraced into the north slope of Camelback Mountain, Sanctuary offers dramatic desert views, an infinity-edge pool, and secluded casitas with stone soaking tubs on private terraces.",
     "rawImage": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80",
     "imageKey": "bathtub-sanctuary-camelback-mountain-phoenix.webp",
-    "bookingUrl": "https://www.booking.com/hotel/us/sanctuary-camelback-mountain.html?aid=304142",
+    "bookingUrl": "https://www.booking.com/hotel/us/sanctuary-camelback-mountain.html",
     "expediaUrl": "https://www.expedia.com/Phoenix-Hotels-Sanctuary-Camelback-Mountain.h14309.Hotel-Information",
     "tripUrl": "https://www.trip.com/hotels/detail/?hotelId=14309"
   }

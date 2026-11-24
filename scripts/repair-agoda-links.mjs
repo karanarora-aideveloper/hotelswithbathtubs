@@ -38,7 +38,6 @@ const SKIP_AGODA = args.includes('--skip-agoda'); // Agoda throttles automated c
 const ONLY = (opt('--only', '') || '').toLowerCase().split('|').filter(Boolean);
 const SKIP_CITIES = new Set((opt('--skip-cities', 'surat,tirupati')).split(',').map((s) => s.trim()));
 const BATCH = 40;
-const AID = '304142';
 
 const STOP = new Set(['the', 'hotel', 'hotels', 'by', 'and', 'a', 'of', 'in', 'at', 'resort', 'spa', 'suites', 'suite', 'collection']);
 const norm = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -152,7 +151,7 @@ class Tab {
     const plain = norm(core);
     const withCity = norm(hotel.city) && plain.includes(norm(hotel.city)) ? plain : `${plain} ${norm(hotel.city)}`;
     for (const q of [withCity, plain]) {
-      await this.open(`https://www.booking.com/searchresults.html?ss=${encodeURIComponent(q)}&aid=${AID}&lang=en-us&group_adults=2&no_rooms=1`);
+      await this.open(`https://www.booking.com/searchresults.html?ss=${encodeURIComponent(q)}&lang=en-us&group_adults=2&no_rooms=1`);
       await this.page.waitForSelector('[data-testid="property-card"]', { timeout: 7000 }).catch(() => {});
       const cands = await this.ev(() => {
         const out = []; const seen = new Set();

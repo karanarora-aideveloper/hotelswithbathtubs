@@ -1,5 +1,6 @@
 export const DEFAULT_AGODA_CID = '1972736';
-export const DEFAULT_BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID || '304142';
+// No fallback: the old hard-coded Booking aid was never ours (it came with scraped links). Booking.com now runs via CJ (below).
+export const DEFAULT_BOOKING_AID = process.env.NEXT_PUBLIC_BOOKING_AID || '';
 export const DEFAULT_EXPEDIA_CAMREF = process.env.NEXT_PUBLIC_EXPEDIA_CAMREF || '';
 export const DEFAULT_CUELINKS_CID = '325472';
 // Cuelinks is OFF by default: its campaign was not tracking or paying. Set NEXT_PUBLIC_USE_CUELINKS=true to re-enable.
@@ -11,12 +12,55 @@ export const DEFAULT_TRIP_ALLIANCEID = process.env.NEXT_PUBLIC_TRIP_ALLIANCEID |
 export const DEFAULT_TRIP_SID = process.env.NEXT_PUBLIC_TRIP_SID || '';
 
 /**
- * Universal toggle for affiliate link wrapping (CEO Sheet T46).
- * Off by default: process.env.NEXT_PUBLIC_AFFILIATES_ENABLED === 'true'.
- * When false, all outbound links are cleaned and unwrapped to point directly
- * to the plain booking-site URL with 0 affiliate tracking parameters.
+ * Universal toggle for affiliate link wrapping.
+ * ON since 24 Nov 2026 (founder): Booking.com and Trip.com via CJ.
+ * Kill switch: set NEXT_PUBLIC_AFFILIATES_ENABLED=false at build time and every
+ * outbound link goes back to the clean, unwrapped partner URL.
  */
-export const AFFILIATES_ENABLED = process.env.NEXT_PUBLIC_AFFILIATES_ENABLED === 'true';
+export const AFFILIATES_ENABLED = process.env.NEXT_PUBLIC_AFFILIATES_ENABLED !== 'false';
+
+/**
+ * One-line reader disclosure shown next to booking links. Follows the switch above,
+ * so the site never says "no commission" while affiliate links are live.
+ */
+export const BOOKING_LINK_DISCLOSURE = AFFILIATES_ENABLED
+  ? 'Some booking links (Booking.com and Trip.com) are affiliate links: if you book, we may earn a commission at no extra cost to you. It never changes which hotels we list or how we label them.'
+  : "Links go straight to the booking site. We don't earn a commission from them today.";
+
+/**
+ * CJ (Commission Junction) publisher website ID for hotelswithbathtubs.com, plus the
+ * Booking.com link ID. Both are public by design: they appear in every tracking link.
+ */
+export const CJ_PID = process.env.NEXT_PUBLIC_CJ_PID || '101861781';
+export const CJ_BOOKING_LINK_ID = process.env.NEXT_PUBLIC_CJ_BOOKING_LINK_ID || '17293139';
+
+/**
+ * Placeholder for the visitor country inside a CJ `sid`. The /out edge function
+ * (functions/out.ts) swaps it for the visitor's CF-IPCountry; elsewhere it stays "xx".
+ */
+export const CJ_SID_COUNTRY_PLACEHOLDER = 'xx';
+
+/** Builds a CJ sid like "xx-hotel": letters, digits and dashes only, no personal data. */
+export function buildCjSid(pageType?: string, country: string = CJ_SID_COUNTRY_PLACEHOLDER): string {
+  const clean = (v: string) => (v || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
+  const parts = [clean(country) || CJ_SID_COUNTRY_PLACEHOLDER, clean(pageType || '') || 'other'];
+  return parts.join('-').slice(0, 64);
+}
+
+/** Booking.com via CJ: https://www.jdoqocy.com/click-{PID}-{LINK_ID}?url={encoded booking URL}&sid={sid} */
+export function getBookingCjLink(url: string, sid: string = buildCjSid()): string {
+  const clean = stripTrackingParams(url);
+  return `https://www.jdoqocy.com/click-${CJ_PID}-${CJ_BOOKING_LINK_ID}?url=${encodeURIComponent(clean)}&sid=${encodeURIComponent(sid)}`;
+}
+
+/** Trip.com via CJ deep link (tested 24 Nov): https://www.anrdoezrs.net/links/{PID}/type/dlg/sid/{sid}/{trip.com URL} */
+export function getTripCjLink(url: string, sid: string = buildCjSid()): string {
+  const clean = stripTrackingParams(url);
+  return `https://www.anrdoezrs.net/links/${CJ_PID}/type/dlg/sid/${encodeURIComponent(sid)}/${clean}`;
+}
+
+/** CJ click domains. They must also be in the functions/out.ts allowlist. */
+export const CJ_DOMAINS = ['jdoqocy.com', 'anrdoezrs.net', 'dpbolvw.net', 'kqzyfj.com', 'tkqlhce.com'];
 
 export const REDIRECT_HOSTS = [
   'linkredirect.in',
@@ -235,7 +279,8 @@ export function getAgodaAffiliateLink(
 }
 
 /**
- * Transforms a Booking.com hotel URL to include the affiliate AID
+ * Transforms a Booking.com hotel URL to include a direct Booking affiliate AID.
+ * Only used if NEXT_PUBLIC_BOOKING_AID is set; the live site uses getBookingCjLink instead.
  */
 export function getBookingAffiliateLink(url: string, aid: string = DEFAULT_BOOKING_AID): string {
   if (!url || (!url.startsWith('http://') && !url.startsWith('https://'))) {
@@ -244,10 +289,9 @@ export function getBookingAffiliateLink(url: string, aid: string = DEFAULT_BOOKI
 
   try {
     const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.includes('booking.com')) {
-      const targetAid = (aid && aid !== '304144') ? aid : DEFAULT_BOOKING_AID;
-      if (targetAid && targetAid !== '304144') {
-        parsedUrl.searchParams.set('aid', targetAid);
+    if (matchesDomain(parsedUrl.hostname, 'booking.com')) {
+      if (aid) {
+        parsedUrl.searchParams.set('aid', aid);
       } else {
         parsedUrl.searchParams.delete('aid');
       }
@@ -425,76 +469,38 @@ export function appendTripDates(url: string, dates?: TripDates): string {
 }
 
 /**
- * Universal Outbound Link Wrapper
- * Automatically detects the provider (MakeMyTrip, Agoda, Booking.com, Retail)
- * and appends appropriate affiliate tags or EarnKaro routing.
+ * Universal Outbound Link Wrapper.
+ * Affiliates ON: Booking.com and Trip.com are wrapped in their approved CJ links
+ * (sid = "{country placeholder}-{page type}"); every other partner gets the clean,
+ * unwrapped URL, because no other programme is approved yet (founder, 24 Nov 2026).
+ * Affiliates OFF: every link is the clean, unwrapped URL.
  */
 export function wrapOutboundAffiliateLink(
-  url: string, 
-  customAffiliateIds?: {
-    agoda?: string;
-    booking?: string;
-    makemytrip?: string;
-    earnkaro?: string;
-    tripAllianceId?: string;
-    tripSid?: string;
-  },
+  url: string,
+  options?: { pageType?: string },
   dates?: TripDates
 ): string {
   if (!url) return url;
 
-  // When affiliate wrapping is disabled (default off), return the clean un-wrapped URL
-  if (!AFFILIATES_ENABLED) {
-    return cleanOutboundUrl(url, dates);
-  }
-
-  // Append travel dates if provided
-  const targetUrl = dates ? appendTripDates(url, dates) : url;
-
-  const agodaCid = customAffiliateIds?.agoda || DEFAULT_AGODA_CID;
-  const bookingAid = customAffiliateIds?.booking || DEFAULT_BOOKING_AID;
-  const earnkaroId = customAffiliateIds?.earnkaro || DEFAULT_EARNKARO_ID;
-  const tripAllianceId = customAffiliateIds?.tripAllianceId || DEFAULT_TRIP_ALLIANCEID;
-  const tripSid = customAffiliateIds?.tripSid || DEFAULT_TRIP_SID;
+  const clean = cleanOutboundUrl(url, dates);
+  if (!AFFILIATES_ENABLED) return clean;
 
   try {
-    const parsedUrl = new URL(targetUrl);
-    const host = parsedUrl.hostname.toLowerCase();
-
-    if (matchesDomain(host, 'agoda.com')) {
-      return getAgodaAffiliateLink(targetUrl, agodaCid, earnkaroId);
-    }
+    const host = new URL(clean).hostname.toLowerCase();
+    const sid = buildCjSid(options?.pageType);
 
     if (matchesDomain(host, 'booking.com')) {
-      // Direct Booking.com affiliate link to ensure direct hotel room landing page
-      return getBookingAffiliateLink(targetUrl, bookingAid);
-    }
-
-    if (matchesDomain(host, 'makemytrip.com')) {
-      return getMakeMyTripAffiliateLink(targetUrl, earnkaroId, customAffiliateIds?.makemytrip);
+      return getBookingCjLink(clean, sid);
     }
 
     if (matchesDomain(host, 'trip.com')) {
-      return getTripAffiliateLink(targetUrl, tripAllianceId, tripSid);
-    }
-
-    if (matchesDomain(host, 'expedia.com')) {
-      return getExpediaAffiliateLink(targetUrl);
-    }
-
-    if (matchesDomain(host, 'hotels.com')) {
-      return getHotelsComAffiliateLink(targetUrl);
-    }
-
-    // General EarnKaro retail routing (Amazon, Nykaa, etc.)
-    if (earnkaroId && (host.includes('amazon.in') || host.includes('nykaa.com'))) {
-      return getEarnkaroAffiliateLink(targetUrl, earnkaroId);
+      return getTripCjLink(clean, sid);
     }
   } catch {
-    // Return unmodified on parse failure
+    // Return the clean URL on parse failure
   }
 
-  return targetUrl;
+  return clean;
 }
 
 /**

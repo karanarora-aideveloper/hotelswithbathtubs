@@ -2,7 +2,7 @@
 
 import React from 'react';
 import OutboundLink from './OutboundLink';
-import { getUrlDirectnessTier } from '@/lib/affiliate';
+import { getUrlDirectnessTier, BOOKING_LINK_DISCLOSURE } from '@/lib/affiliate';
 import { normalizePrice } from '@/lib/utils';
 
 interface HotelAnalyticsProps {
@@ -228,7 +228,7 @@ export default function HotelAnalyticsComparison({
 
         {/* Booking Links Notice */}
         <div className="mt-4 pt-3.5 border-t border-[#5b8296]/15 text-[11px] text-slate-500 leading-relaxed font-jakarta">
-          Links go straight to the booking site. We don&apos;t earn a commission from them today.
+          {BOOKING_LINK_DISCLOSURE}
         </div>
       </section>
     </div>

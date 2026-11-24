@@ -72,6 +72,20 @@ async function generateLocations() {
     }
 
     allHotels = allHotels.filter((h) => !DUPLICATE_DROP_SLUGS.has(h.slug));
+    // Stored Booking.com links must be clean: drop any `aid` (affiliate tracking is added at click time via CJ).
+    const URL_FIELDS = ['bookingUrl', 'url', 'agodaUrl', 'tripUrl', 'mmtUrl', 'makemytripUrl', 'cleartripUrl', 'easemytripUrl', 'expediaUrl', 'hotelsComUrl', 'airbnbUrl', 'vrboUrl'];
+    for (const h of allHotels) {
+      for (const f of URL_FIELDS) {
+        if (typeof h[f] !== 'string' || !h[f].includes('booking.com') || !/[?&]aid=/.test(h[f])) continue;
+        try {
+          const u = new URL(h[f]);
+          u.searchParams.delete('aid');
+          h[f] = u.toString();
+        } catch {
+          // keep the original value if it isn't a valid URL
+        }
+      }
+    }
     allHotels.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0));
 
     // 1. Generate standard locations.json (for backward compatibility)
