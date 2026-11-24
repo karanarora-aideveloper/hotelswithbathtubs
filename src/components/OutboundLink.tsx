@@ -1,6 +1,6 @@
 'use client';
 
-import { sendBookingClick, getRouteContext, normalizePlacement, type BookingPlacement } from '@/lib/events';
+import { sendBookingClick, getRouteContext, normalizePlacement, normalizePartner, type BookingPlacement } from '@/lib/events';
 import { usePathname } from 'next/navigation';
 import { wrapOutboundAffiliateLink, type TripDates } from '@/lib/affiliate';
 
@@ -58,8 +58,12 @@ export default function OutboundLink({
         }
 
         // Fire GA4 booking_click key conversion event
+        // Partner comes from the destination address; `source` is only a fallback
+        // (many callers pass a placement name like "matchmaker_cta" there).
+        const partnerFromUrl = normalizePartner(href);
         sendBookingClick({
-          partner: source || affiliateLink,
+          partner: partnerFromUrl !== 'other' ? partnerFromUrl : source || href,
+          link_type: affiliateLink !== href && /jdoqocy\.com|anrdoezrs\.net/.test(affiliateLink) ? 'affiliate' : 'direct',
           placement: resolvedPlacement,
           hotel_name: hotelName,
           country: countryName,

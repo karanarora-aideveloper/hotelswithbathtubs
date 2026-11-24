@@ -68,7 +68,7 @@ export default function HotelGallery({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2">
+      <div data-track="gallery" data-track-label="open" className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2">
         {hasMultiple ? (
           /* 5-Photo Luxury Bento Grid (Airbnb / Five-Star Style) */
           <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xs border border-[#e3e7ef] bg-[#14213d]">
@@ -234,7 +234,7 @@ export default function HotelGallery({
 
       {/* Fullscreen Photo Lightbox Modal */}
       {activeModalIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4">
+        <div data-track="gallery" data-track-label="viewer" className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4">
           {/* Top Bar */}
           <div className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex items-center justify-between text-white z-10">
             <div>

@@ -44,20 +44,22 @@ Every event carries uniform core parameters (`page_type`, `country`, `city`, and
 - **Internal Traffic Exclusion**: Respects `localStorage.getItem('ignore_ga') === 'true'`. When toggled in `/admin` or `/opt-out`, `window['ga-disable-' + GA_ID] = true` is set, blocking tracking for developers and admins.
 - **Privacy & Consent**: In UK, EEA, and Switzerland, analytics events are blocked unless consent has been granted (`hasAnalyticsConsent()`). Never collects or passes PII.
 
-### Approved 10 GA4 Events
+### Approved 12 GA4 Events
 
 | Event | Trigger / Condition | Parameters | Funnel Stage / Purpose |
 |---|---|---|---|
 | `page_view` | GA4 built-in page view on initial load or route transition | Core parameters (`page_type`, `country`, `city`, `hotel_name`, `visitor_country`), `page_location`, `page_path`, `page_title` | Step 1: Arrive |
 | `view_destination` | Destination city or country page loads | Core parameters (`page_type: 'destination'`, `country`, `city`, `visitor_country`) | Step 2: Pick a place |
 | `view_hotel` | Hotel detail page loads | Core parameters (`page_type: 'hotel'`, `country`, `city`, `hotel_name`, `visitor_country`) | Step 3: Look at a hotel |
-| `booking_click` | Visitor taps an outbound partner booking link (via `OutboundLink`) | Core parameters, `partner` (booking, agoda, makemytrip, cleartrip, easemytrip, expedia, other), `placement` (city_card, hotel_page, matchmaker, blog, other) | Step 4: Booking click (Conversion) |
+| `booking_click` | Visitor taps an outbound partner booking link (via `OutboundLink`) | Core parameters, `partner` (booking, agoda, makemytrip, cleartrip, easemytrip, expedia, trip, airbnb, hotels_com, vrbo, other; taken from the destination URL), `placement` (city_card, hotel_page, matchmaker, blog, other), `link_type` (affiliate, direct) | Step 4: Booking click (Conversion) |
 | `search` | Destination search term selected or returns 0 results | Core parameters, `term`, `results_count` | Discovery & inventory demand |
 | `filter_used` | Bathtub filter pill or sort order toggled | Core parameters, `filter`, `results_count` | Preference & inventory refinement |
 | `wishlist_add` | Hotel saved to wishlist (heart toggled ON) | Core parameters (`hotel_name`, `country`, `city`) | High intent / consideration save |
 | `matchmaker_start` | First question answered in Dream Soak Matchmaker | Core parameters (`page_type: 'matchmaker'`) | Interactive discovery start |
 | `matchmaker_complete` | Matchmaker results revealed | Core parameters (`page_type: 'matchmaker'`, `country`), `answers` (all 4 options joined by " / ") | Interactive discovery completion |
 | `page_not_found` | Visitor reaches 404 error page | Core parameters, `path`, `referrer` | Broken links & missing routes |
+| `ui_click` | Any other meaningful tap, caught by one site-wide listener in `GoogleAnalyticsProvider` (`classifyClick`) | Core parameters, `element` (hotel_card, destination_link, guide_link, matchmaker_link, internal_link, outbound_link, contact_link, gallery, button), `section` (header, footer, breadcrumb, main), `label` (visible text, max 60 chars), `target` (internal path or outbound host) | Tap map: what visitors press |
+| `scroll_depth` | Hotel page scrolled to 25 / 50 / 75 / 90% (once each per page) | Core parameters, `percent` | Read depth on hotel pages |
 
 ---
 
@@ -72,6 +74,7 @@ The edge worker `functions/out.ts` logs conversion clicks directly to database/a
 
 - **Do not track PII as properties** — no emails, full names, phone numbers, or payment details.
 - **Do not fire analytics events inside loops** — each event call is a network request.
+- **Do not add one-off event names for taps** — new links and buttons are tracked by `ui_click` automatically; name a non-link area with `data-track="name"`, exclude one with `data-track="off"`. Full scheme, GA4 custom dimensions and report recipes: `docs/ANALYTICS_PLAN_2026-11-24.md`.
 - **Do not hardcode tokens or measurement IDs** — read them from environment config or database settings.
 
 ---

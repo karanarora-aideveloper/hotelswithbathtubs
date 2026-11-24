@@ -13,6 +13,10 @@ export type BookingPartner =
   | 'cleartrip'
   | 'easemytrip'
   | 'expedia'
+  | 'trip'
+  | 'airbnb'
+  | 'hotels_com'
+  | 'vrbo'
   | 'other';
 
 export type BookingPlacement =
@@ -32,8 +36,9 @@ export interface CoreEventParams {
 }
 
 /**
- * Normalizes partner URLs/strings into one of the 7 allowed partners:
- * 'booking' | 'agoda' | 'makemytrip' | 'cleartrip' | 'easemytrip' | 'expedia' | 'other'
+ * Normalizes partner URLs/strings into one of the allowed partners:
+ * 'booking' | 'agoda' | 'makemytrip' | 'cleartrip' | 'easemytrip' | 'expedia' | 'trip' | 'airbnb' | 'hotels_com' | 'vrbo' | 'other'.
+ * Order matters: makemytrip/cleartrip/easemytrip contain "trip.com", so they are checked before Trip.com.
  */
 export function normalizePartner(urlOrName?: string): BookingPartner {
   if (!urlOrName) return 'other';
@@ -51,7 +56,11 @@ export function normalizePartner(urlOrName?: string): BookingPartner {
   }
   if (lower.includes('cleartrip.com') || lower === 'cleartrip') return 'cleartrip';
   if (lower.includes('easemytrip.com') || lower === 'easemytrip' || lower === 'emt') return 'easemytrip';
-  if (lower.includes('expedia.com') || lower === 'expedia') return 'expedia';
+  if (lower.includes('expedia.') || lower === 'expedia') return 'expedia';
+  if (lower.includes('trip.com') || lower === 'trip') return 'trip';
+  if (lower.includes('airbnb.') || lower === 'airbnb') return 'airbnb';
+  if (lower.includes('hotels.com')) return 'hotels_com';
+  if (lower.includes('vrbo.com') || lower === 'vrbo') return 'vrbo';
   return 'other';
 }
 
@@ -212,7 +221,7 @@ function shouldSendEvent(): boolean {
 }
 
 // ==========================================
-// THE 10 GA4 STREAMLINED EVENTS
+// THE GA4 EVENTS (10 funnel events + ui_click + scroll_depth)
 // ==========================================
 
 let lastPageViewPath = '';
@@ -285,6 +294,8 @@ export function sendBookingClick(params: {
   country?: string;
   city?: string;
   visitor_country?: string;
+  /** 'affiliate' when the link is wrapped in an affiliate network link, else 'direct' */
+  link_type?: 'affiliate' | 'direct';
 }) {
   if (!shouldSendEvent()) return;
   const core = buildCoreParams({
@@ -297,6 +308,7 @@ export function sendBookingClick(params: {
     ...core,
     partner: normalizePartner(params.partner),
     placement: normalizePlacement(params.placement),
+    link_type: params.link_type || 'direct',
   };
   sendGA4Event('booking_click', payload);
 }
@@ -408,4 +420,132 @@ export function sendPageNotFound(params: {
     referrer: params.referrer || '',
   };
   sendGA4Event('page_not_found', payload);
+}
+
+
+// ==========================================
+// TAP TRACKING: one event for every meaningful tap (ANALYTICS-TAPS1, 24 Nov 2026)
+// ==========================================
+
+export type UiElement =
+  | 'hotel_card'
+  | 'destination_link'
+  | 'guide_link'
+  | 'matchmaker_link'
+  | 'internal_link'
+  | 'outbound_link'
+  | 'contact_link'
+  | 'gallery'
+  | 'button'
+  | string;
+
+export type UiSection = 'header' | 'footer' | 'breadcrumb' | 'main';
+
+export interface UiClick {
+  element: UiElement;
+  section: UiSection;
+  label: string;
+  target: string;
+}
+
+function cleanLabel(raw: string | null | undefined): string {
+  return (raw || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+}
+
+/**
+ * Works out what was tapped from the DOM. Returns null for taps we don't record:
+ * empty space, form fields, and booking buttons (those send booking_click instead).
+ * Reads only link addresses and visible labels, never anything a visitor typed.
+ */
+export function classifyClick(start: Element | null): UiClick | null {
+  if (!start || typeof start.closest !== 'function') return null;
+  if (start.closest('[data-track="off"]')) return null;
+
+  const link = start.closest('a[href]') as HTMLAnchorElement | null;
+  const tracked = start.closest('[data-track]') as HTMLElement | null;
+  const button = start.closest('button, [role="button"], summary') as HTMLElement | null;
+  if (!link && !tracked && !button) return null;
+
+  const section: UiSection = start.closest('footer')
+    ? 'footer'
+    : start.closest('[aria-label*="readcrumb"]')
+    ? 'breadcrumb'
+    : start.closest('header')
+    ? 'header'
+    : 'main';
+
+  if (link) {
+    const href = link.getAttribute('href') || '';
+    // Booking buttons go through /out and already send booking_click
+    if (href.startsWith('/out?') || href.includes('/out?url=')) return null;
+    const label = cleanLabel(link.getAttribute('aria-label') || link.textContent || link.getAttribute('title'));
+    if (/^(mailto:|tel:)/i.test(href)) {
+      return { element: 'contact_link', section, label, target: href.split(':')[0].toLowerCase() };
+    }
+    let url: URL;
+    try {
+      url = new URL(href, window.location.origin);
+    } catch {
+      return null;
+    }
+    if (url.origin !== window.location.origin) {
+      return { element: 'outbound_link', section, label, target: url.hostname.replace(/^www\./, '') };
+    }
+    const path = url.pathname.replace(/\/+$/, '') || '/';
+    const type = getRouteContext(path).page_type;
+    const element: UiElement =
+      type === 'hotel'
+        ? 'hotel_card'
+        : type === 'destination'
+        ? 'destination_link'
+        : type === 'blog'
+        ? 'guide_link'
+        : type === 'matchmaker'
+        ? 'matchmaker_link'
+        : 'internal_link';
+    return { element, section, label, target: path };
+  }
+
+  if (tracked) {
+    return {
+      element: tracked.dataset.track || 'button',
+      section,
+      label: cleanLabel(tracked.dataset.trackLabel || button?.getAttribute('aria-label') || ''),
+      target: '',
+    };
+  }
+
+  const el = button as HTMLElement;
+  // Skip buttons that only submit a form field the visitor typed into: the label is still safe, so keep them
+  return {
+    element: 'button',
+    section,
+    label: cleanLabel(el.getAttribute('aria-label') || el.getAttribute('title') || el.textContent),
+    target: '',
+  };
+}
+
+let lastUiKey = '';
+let lastUiTime = 0;
+
+/**
+ * 11. ui_click - any meaningful tap that is not a booking button:
+ * hotel cards, city/country links, guide links, header/footer links, outbound links, gallery, buttons.
+ */
+export function sendUiClick(click: UiClick) {
+  if (!shouldSendEvent()) return;
+  const key = `${click.element}|${click.section}|${click.target}|${click.label}`;
+  const now = Date.now();
+  if (key === lastUiKey && now - lastUiTime < 500) return;
+  lastUiKey = key;
+  lastUiTime = now;
+  sendGA4Event('ui_click', { ...buildCoreParams(), ...click });
+}
+
+/**
+ * 12. scroll_depth - how far a visitor scrolls on a hotel page (25, 50, 75, 90 percent; once each per page).
+ */
+export function sendScrollDepth(percent: number) {
+  if (!shouldSendEvent()) return;
+  sendGA4Event('scroll_depth', { ...buildCoreParams(), percent });
 }
