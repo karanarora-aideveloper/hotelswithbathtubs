@@ -35,7 +35,7 @@ export default function OutboundLink({
     <a
       href={outHref}
       target="_blank"
-      rel="nofollow noopener noreferrer"
+      rel="sponsored nofollow noopener noreferrer"
       className={className}
       onClick={() => {
         // Resolve placement: explicit prop first, then route-inferred fallback, then source
