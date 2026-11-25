@@ -732,6 +732,32 @@ export default function CityHotelsClient({
                 </button>
               </div>
             )}
+
+            {/* Plain links to the hotels not yet shown as cards, so every hotel on this page is
+                reachable from the HTML (search engines don't press "Show more"). GROWTH-FIX1. */}
+            {visibleCount < filteredHotels.length && (
+              <div className="mt-2 pt-4 border-t border-[#e3e7ef] text-xs">
+                <p className="text-[#5b6478] font-medium mb-2">More hotels in {cityName}:</p>
+                <ul className="flex flex-wrap gap-x-3 gap-y-1.5">
+                  {filteredHotels.slice(visibleCount).map((h, i) => {
+                    const countrySlug = slugify(countryName);
+                    const citySlugResolved = h.city ? slugify(h.city) : slugify(cityName);
+                    const hotelSlug = h.slug || slugify(h.name);
+                    return (
+                      <li key={h._id || `more-${i}`}>
+                        <Link
+                          href={`/${countrySlug}/${citySlugResolved}/${hotelSlug}`}
+                          prefetch={false}
+                          className="text-[#14213d] hover:text-[#b08d57] underline-offset-2 hover:underline"
+                        >
+                          {h.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
           </>
         ) : (
           <div className="bg-white border border-[#e3e7ef] rounded-2xl p-10 text-center max-w-lg mx-auto shadow-xs my-6">

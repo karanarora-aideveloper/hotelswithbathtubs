@@ -17,6 +17,7 @@ import { isStateSlug, getStateBySlug, getAllStateSlugs, getAllStates, getStateFo
 import { isValidNeighborhood, cleanNeighborhood, primaryNeighborhood, sanitizePlaceholderText, cleanLandmarkDistance } from '@/lib/location';
 import { isDuplicateDropSlug, DUPLICATE_DROP_SLUGS } from '@/data/duplicateHotels';
 import { getSpecialCityTitle } from '@/lib/cityTitles';
+import { cityStats, buildCityTitle, buildCityDescription, CITY_META_FIELDS } from '@/lib/cityMeta';
 
 export const revalidate = false;
 
@@ -191,6 +192,12 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       bathtubConfirmed: { $ne: true }
     }),
   ]);
+  const metaHotels = await Hotel.find({
+    city: cityRegex,
+    country: countryInfo.regex,
+    flagged: { $ne: true }
+  }).select(CITY_META_FIELDS).lean();
+  const stats = cityStats(metaHotels as never[], cityName);
 
   const lowestPriceInfo = findLowestPriceHotel(cityHotelPrices);
   const minPrice = lowestPriceInfo?.price;
@@ -212,9 +219,11 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
 
   // SERP-Optimized Title (45-60 chars): Front-load exact high-volume search query
   const pageTitle = getSpecialCityTitle(countrySlug, citySlug, hotelCount)
-    || getCityPageTitle(cityName, countrySlug, citySlug, hotelCount, allConfirmed);
+    || buildCityTitle(cityName, countrySlug, stats, new Date().getFullYear());
 
-  const pageDescription = getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
+  const pageDescription = stats.count > 0
+    ? buildCityDescription(cityName, countrySlug, stats)
+    : getCityMetaDescription(cityName, countryName, countrySlug, hotelCount, minPrice);
 
 
   return {

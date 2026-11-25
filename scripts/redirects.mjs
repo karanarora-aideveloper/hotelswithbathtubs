@@ -309,6 +309,17 @@ export const redirects = [
   { source: '/faroe-islands/torshavn/broncks-lonin/', destination: '/faroe-islands/torshavn/torshavn-broncks-lonin', permanent: true },
 
   // Blog slug aliases & historical redirects
+  // GROWTH-FIX1 (25 Nov 2026): one post per city; duplicates point to the post Google ranks best.
+  { source: '/blog/barcelona-hotels-with-private-hot-tub-and-balcony-bathtubs', destination: '/blog/barcelona-hotels-with-terrace-jacuzzis', permanent: true },
+  { source: '/blog/barcelona-hotels-with-private-hot-tub-and-balcony-bathtubs/', destination: '/blog/barcelona-hotels-with-terrace-jacuzzis', permanent: true },
+  { source: '/blog/hotels-with-private-jacuzzi-in-room-dubai', destination: '/blog/dubai-hotels-with-private-jacuzzi', permanent: true },
+  { source: '/blog/hotels-with-private-jacuzzi-in-room-dubai/', destination: '/blog/dubai-hotels-with-private-jacuzzi', permanent: true },
+  { source: '/blog/top-5-luxury-hotels-with-private-hot-tubs-in-dubai', destination: '/blog/dubai-hotels-with-private-jacuzzi', permanent: true },
+  { source: '/blog/top-5-luxury-hotels-with-private-hot-tubs-in-dubai/', destination: '/blog/dubai-hotels-with-private-jacuzzi', permanent: true },
+  { source: '/blog/las-vegas-hotels-with-jacuzzi-in-room', destination: '/blog/las-vegas-hotels-with-jacuzzi-tub-in-room', permanent: true },
+  { source: '/blog/las-vegas-hotels-with-jacuzzi-in-room/', destination: '/blog/las-vegas-hotels-with-jacuzzi-tub-in-room', permanent: true },
+  { source: '/blog/hotels-with-jacuzzi-in-room-las-vegas', destination: '/blog/las-vegas-hotels-with-jacuzzi-tub-in-room', permanent: true },
+  { source: '/blog/hotels-with-jacuzzi-in-room-las-vegas/', destination: '/blog/las-vegas-hotels-with-jacuzzi-tub-in-room', permanent: true },
   { source: '/blog/kolkata-hotels-with-bathtub-couples-guide', destination: '/blog/kolkata-jacuzzi-hotels-romantic-staycation', permanent: true },
   { source: '/blog/kolkata-hotels-with-bathtub-couples-guide/', destination: '/blog/kolkata-jacuzzi-hotels-romantic-staycation', permanent: true },
   { source: '/blog/hotel-with-bathtub-in-kolkata', destination: '/blog/kolkata-jacuzzi-hotels-romantic-staycation', permanent: true },

@@ -33,13 +33,13 @@ export const metadata = {
   title: {
     absolute: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
   },
-  description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
+  description: '6,000+ hotels with a private bathtub or jacuzzi in the room, in 900+ cities across India, the USA, the UK and Europe. See the exact room to book, city by city.',
   alternates: {
     canonical: 'https://www.hotelswithbathtubs.com',
   },
   openGraph: {
     title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
-    description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
+    description: '6,000+ hotels with a private bathtub or jacuzzi in the room, in 900+ cities across India, the USA, the UK and Europe. See the exact room to book, city by city.',
     url: 'https://www.hotelswithbathtubs.com',
     siteName: 'Hotels with Bathtubs',
     images: [
@@ -55,7 +55,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `Hotels with Bathtub in Room & Jacuzzi Suites (${currentYear})`,
-    description: 'Find hotel rooms with private bathtubs and jacuzzi suites across worldwide destinations. Detailed tub and room notes per hotel.',
+    description: '6,000+ hotels with a private bathtub or jacuzzi in the room, in 900+ cities across India, the USA, the UK and Europe. See the exact room to book, city by city.',
     images: ['https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp'],
   },
 };
@@ -292,17 +292,9 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Hotels with Bathtubs",
-    "description": "Discover hotel rooms with private in-room bathtubs and jacuzzi suites across 60+ global destinations.",
+    "description": "Hotel rooms with a private in-room bathtub or jacuzzi in 900+ cities worldwide.",
     "url": "https://www.hotelswithbathtubs.com",
     "image": "https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/bathtub-hotel-the-oberoi-bengaluru-bangalore.webp",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.hotelswithbathtubs.com/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    },
     "sameAs": [
       "https://www.facebook.com/hotelswithbathtubs",
       "https://www.instagram.com/hotelswithbathtubs",

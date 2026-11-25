@@ -567,7 +567,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {matchedCity && matchedCityCount > 0 && (
                   <p className="text-sm font-medium text-[#b08d57]">
                     <Link href={`/${matchedCountrySlug}/${slugify(matchedCity)}`} className="hover:underline">
-                      See all {matchedCityCount} hotels in {matchedCity} &rarr;
+                      See all {matchedCityCount} hotels with a bathtub in {matchedCity} &rarr;
                     </Link>
                   </p>
                 )}
@@ -744,7 +744,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       href={`/${matchedCountrySlug}/${slugify(matchedCity)}`}
                       className="inline-block bg-[#14213d] hover:bg-[#1f262d] text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition-colors"
                     >
-                      View Bathtub Hotels in {matchedCity} &rarr;
+                      All hotels with a bathtub in {matchedCity} &rarr;
                     </Link>
                     <Link
                       href={`/${matchedCountrySlug}`}

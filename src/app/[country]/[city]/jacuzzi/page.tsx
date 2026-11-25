@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
   const pageTitle = standardTitle.length <= 60
     ? standardTitle
     : `Jacuzzi Suites in ${cityName} (${currentYear})`;
-  const pageDescription = `Looking for romantic hotels with private jacuzzi in room in ${cityName}? Discover ${hotelCount === 1 ? '1 suite' : `${hotelCount}+ suites`} with in-room whirlpool tubs, balcony hot tubs, and deep jetted spas in ${cityName}, ${countryName}.`;
+  const pageDescription = `${hotelCount === 1 ? '1 hotel' : `${hotelCount} hotels`} in ${cityName}, ${countryName} with a private jacuzzi, whirlpool or hot tub in the room. See the exact jacuzzi suite to book for couples and families.`;
 
   return {
     title: {
