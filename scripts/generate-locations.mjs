@@ -16,7 +16,11 @@ dotenv.config({ path: path.join(rootDir, '.env') });
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URI) {
+// Snapshot mode (cloud build): the hotel data is the R2 snapshot already downloaded to
+// .cache/all-hotels.json, so generate everything from it. GROWTH-FIX1, 25 Nov 2026.
+const SNAPSHOT_MODE = process.env.DATA_SNAPSHOT === '1';
+
+if (!MONGODB_URI && !SNAPSHOT_MODE) {
   const publicLocations = path.join(rootDir, 'public', 'locations.json');
   if (fs.existsSync(publicLocations)) {
     console.log('⚠️ MONGODB_URI is not set. Using existing public/locations.json.');
@@ -57,8 +61,10 @@ async function generateLocations() {
   let allHotels = [];
 
   try {
-    if (fs.existsSync(cachePath)) {
-      console.log('📍 Reading hotel dataset from authoritative .cache/all-hotels.json...');
+    // Read the cache only in snapshot mode. Locally, MongoDB is the source: a leftover
+    // .cache/all-hotels.json shipped 5,272 of 6,344 hotels on 15 Nov 2026.
+    if (SNAPSHOT_MODE && fs.existsSync(cachePath)) {
+      console.log('📍 Snapshot mode: reading hotel dataset from .cache/all-hotels.json...');
       allHotels = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
     } else if (MONGODB_URI) {
       console.log('📍 Connecting to MongoDB to generate locations.json and search-data.json...');
@@ -71,7 +77,7 @@ async function generateLocations() {
       process.exit(1);
     }
 
-    allHotels = allHotels.filter((h) => !DUPLICATE_DROP_SLUGS.has(h.slug));
+    allHotels = allHotels.filter((h) => h.flagged !== true && !DUPLICATE_DROP_SLUGS.has(h.slug));
     // Stored Booking.com links must be clean: drop any `aid` (affiliate tracking is added at click time via CJ).
     const URL_FIELDS = ['bookingUrl', 'url', 'agodaUrl', 'tripUrl', 'mmtUrl', 'makemytripUrl', 'cleartripUrl', 'easemytripUrl', 'expediaUrl', 'hotelsComUrl', 'airbnbUrl', 'vrboUrl'];
     for (const h of allHotels) {
@@ -236,12 +242,13 @@ async function generateLocations() {
     // 3. Save full hotel cache for static export page rendering (never overwrite existing)
     const cacheDir = path.join(rootDir, '.cache');
     const allHotelsCachePath = path.join(cacheDir, 'all-hotels.json');
-    if (!fs.existsSync(allHotelsCachePath)) {
+    if (SNAPSHOT_MODE) {
+      console.log(`ℹ️ Snapshot mode: kept .cache/all-hotels.json (${allHotels.length} hotels).`);
+    } else {
+      // Fresh from MongoDB: always replace the cache, so data:refresh uploads current data.
       if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
       fs.writeFileSync(allHotelsCachePath, JSON.stringify(allHotels, null, 2), 'utf-8');
-      console.log(`✅ .cache/all-hotels.json generated for static SSG workers (${allHotels.length} hotels).`);
-    } else {
-      console.log(`ℹ️ Preserved existing .cache/all-hotels.json.`);
+      console.log(`✅ .cache/all-hotels.json written from MongoDB (${allHotels.length} hotels).`);
     }
 
     // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker

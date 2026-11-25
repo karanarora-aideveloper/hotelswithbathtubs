@@ -71,7 +71,10 @@ async function build() {
     execSync('node scripts/generate-locations.mjs', { cwd: rootDir, stdio: 'inherit' });
     execSync('node scripts/generate-blogs-cache.mjs', { cwd: rootDir, stdio: 'inherit' });
   } else {
-    console.log('\n[1/4] Using committed public/locations.json, search-data.json and matchmaker-data.json.');
+    // Build locations.json, search-data.json and matchmaker-data.json from the downloaded snapshot,
+    // so search and the matchmaker only link to pages this build creates (GROWTH-FIX1).
+    console.log('\n[1/4] Generating locations.json, search-data.json and matchmaker-data.json from the snapshot...');
+    execSync('node scripts/generate-locations.mjs', { cwd: rootDir, stdio: 'inherit' });
   }
   execSync('node scripts/audit-hotel-links.mjs', { cwd: rootDir, stdio: 'inherit' });
 
@@ -85,7 +88,10 @@ async function build() {
   try {
     execSync('node scripts/generate-split-sitemaps.mjs', { cwd: rootDir, stdio: 'inherit' });
     if (snapshotMode) {
-      console.log('   Using committed image sitemap, llms & rss.');
+      // Image sitemap and RSS read the snapshot files; llms.txt needs MongoDB, so it stays committed.
+      execSync('node scripts/generate-image-sitemap.mjs', { cwd: rootDir, stdio: 'inherit' });
+      execSync('node scripts/generate-rss.mjs', { cwd: rootDir, stdio: 'inherit' });
+      console.log('   Using committed llms.txt.');
     } else {
       execSync('node scripts/generate-image-sitemap.mjs', { cwd: rootDir, stdio: 'inherit' });
       execSync('node scripts/generate-llms-txt.mjs', { cwd: rootDir, stdio: 'inherit' });

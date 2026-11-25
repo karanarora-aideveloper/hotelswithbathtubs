@@ -63,6 +63,19 @@ function resolveCountrySlug(country) {
   return slugify(country);
 }
 
+// Keep in step with src/lib/indexing.ts and src/lib/evidence.ts (GROWTH-FIX1, 25 Nov 2026).
+function isHotelConfirmed(h) {
+  return Boolean(h.importBatch && Array.isArray(h.bookingTubLabels) && h.bookingTubLabels.length > 0);
+}
+function shouldIndexHotel(h, countrySlug) {
+  if (isHotelConfirmed(h)) return true;
+  if (h.importBatch) return false;
+  return countrySlug === 'usa' || countrySlug === 'india';
+}
+const isExternalImage = (u) => /^https?:\/\//i.test(u) && !(u.includes('.r2.dev') || u.includes('r2.cloudflarestorage.com'));
+const imageKey = (u) => u.trim().split('?')[0].split('/').pop().toLowerCase();
+const normName = (n) => String(n || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
 async function generateImageSitemap() {
   console.log('🚀 Generating Google Image Sitemap for all verified hotels...');
   let hotels = [];
@@ -104,8 +117,21 @@ async function generateImageSitemap() {
   const baseUrl = 'https://www.hotelswithbathtubs.com';
   let imageCount = 0;
 
+  // Photos used by more than one differently named hotel belong to another hotel somewhere: skip them.
+  const owners = new Map();
+  for (const h of hotels) {
+    for (const u of [h.image, ...(Array.isArray(h.images) ? h.images : [])]) {
+      if (typeof u !== 'string' || !u) continue;
+      const k = imageKey(u);
+      if (!owners.has(k)) owners.set(k, new Set());
+      owners.get(k).add(normName(h.name));
+    }
+  }
+  const sharedKeys = new Set([...owners].filter(([, n]) => n.size > 1).map(([k]) => k));
+
   for (const h of hotels) {
     if (!h.city || !h.country || !h.image) continue;
+    if (!shouldIndexHotel(h, resolveCountrySlug(h.country))) continue;
 
     const countrySlug = resolveCountrySlug(h.country);
     const citySlug = slugify(h.city);
@@ -125,7 +151,10 @@ async function generateImageSitemap() {
           : img
       )
       .filter((img, idx, arr) => img && typeof img === 'string' && arr.indexOf(img) === idx)
+      .filter((img) => !isExternalImage(img) && !sharedKeys.has(imageKey(img)) && !/default-hotel\.jpg$/.test(img))
       .slice(0, 3); // Max 3 images per hotel
+    if (photoUrls.length === 0) continue;
+    const confirmed = isHotelConfirmed(h);
 
     xml += `  <url>\n`;
     xml += `    <loc>${xmlEscape(pageUrl)}</loc>\n`;
@@ -137,8 +166,11 @@ async function generateImageSitemap() {
 
       xml += `    <image:image>\n`;
       xml += `      <image:loc>${xmlEscape(fullImgUrl)}</image:loc>\n`;
-      xml += `      <image:title>${xmlEscape(`${h.name} — ${tub}`)}</image:title>\n`;
-      xml += `      <image:caption>${xmlEscape(`Verified ${tub} in ${room} at ${h.name}, ${h.city}, ${h.country}`)}</image:caption>\n`;
+      xml += `      <image:title>${xmlEscape(confirmed ? `${h.name} — ${tub}` : h.name)}</image:title>\n`;
+      const caption = confirmed
+        ? `${tub} in ${room} at ${h.name}, ${h.city}, ${h.country}`
+        : `${h.name}, ${h.city}, ${h.country}`;
+      xml += `      <image:caption>${xmlEscape(caption)}</image:caption>\n`;
       xml += `    </image:image>\n`;
       imageCount++;
     }

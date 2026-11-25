@@ -93,7 +93,18 @@ const neighborhoodCanonicalMap = {
   'paharganj': 'delhi',
 };
 
-const MIN_HOTELS_TO_INDEX = 1;
+// Keep in step with src/lib/indexing.ts (GROWTH-FIX1, 25 Nov 2026).
+const MIN_HOTELS_TO_INDEX = 3;
+
+function isHotelConfirmed(h) {
+  return Boolean(h.importBatch && Array.isArray(h.bookingTubLabels) && h.bookingTubLabels.length > 0);
+}
+
+function shouldIndexHotel(h, countrySlug) {
+  if (isHotelConfirmed(h)) return true;
+  if (h.importBatch) return false;
+  return countrySlug === 'usa' || countrySlug === 'india';
+}
 
 function shouldIndexDestination(hotelCount) {
   return (hotelCount || 0) >= MIN_HOTELS_TO_INDEX;
@@ -161,11 +172,12 @@ export function generateSplitSitemaps() {
     if (hotelSlug) {
       const hotelPath = `/${countryInfo.slug}/${citySlug}/${hotelSlug}`;
       const hotelUrl = `${baseUrl}${hotelPath}`;
-      if (!seenHotelUrls.has(hotelUrl) && !redirectSet.has(hotelPath)) {
+      if (!seenHotelUrls.has(hotelUrl) && !redirectSet.has(hotelPath) && shouldIndexHotel(h, countryInfo.slug)) {
         seenHotelUrls.add(hotelUrl);
         const item = {
           url: hotelUrl,
-          lastModified: hotelUpdated,
+          // No lastmod: updatedAt is the last bulk data write, not a real page change (GROWTH-FIX1).
+          lastModified: null,
           priority: 0.65,
         };
         if (countryInfo.slug === 'usa') {
@@ -199,11 +211,13 @@ export function generateSplitSitemaps() {
     { url: `${baseUrl}/cookies`, lastModified: new Date('2026-08-01T00:00:00.000Z'), priority: 0.3 },
   ];
 
-  const countryRoutes = Array.from(countryLastMod.keys())
+  // Every country and city with hotels, whether or not its hotels carry an updatedAt date.
+  const countrySlugs = new Set(Array.from(locationHotelCount.keys()).map((k) => k.split('/')[0]));
+  const countryRoutes = Array.from(countrySlugs)
     .filter((countrySlug) => !redirectSet.has(`/${countrySlug}`))
     .map((countrySlug) => ({
       url: `${baseUrl}/${countrySlug}`,
-      lastModified: countryLastMod.get(countrySlug),
+      lastModified: null,
       priority: 0.85,
     }));
 
@@ -212,15 +226,15 @@ export function generateSplitSitemaps() {
     .filter((slug) => !redirectSet.has(`/usa/${slug}`))
     .map((slug) => ({
       url: `${baseUrl}/usa/${slug}`,
-      lastModified: usaLastMod,
+      lastModified: null,
       priority: 0.85,
     }));
 
-  const locationRoutes = Array.from(locationLastMod.keys())
+  const locationRoutes = Array.from(locationHotelCount.keys())
     .filter((loc) => shouldIndexDestination(locationHotelCount.get(loc)) && !redirectSet.has(`/${loc}`))
     .map((loc) => ({
       url: `${baseUrl}/${loc}`,
-      lastModified: locationLastMod.get(loc),
+      lastModified: null,
       priority: 0.8,
     }));
 
@@ -228,7 +242,7 @@ export function generateSplitSitemaps() {
     .filter((loc) => shouldIndexDestination(locationJacuzziCount.get(loc)) && !redirectSet.has(`/${loc}/jacuzzi`))
     .map((loc) => ({
       url: `${baseUrl}/${loc}/jacuzzi`,
-      lastModified: locationLastMod.get(loc),
+      lastModified: null,
       priority: 0.8,
     }));
 

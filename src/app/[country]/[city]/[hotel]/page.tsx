@@ -13,6 +13,7 @@ import { getEvidenceLine, getLinkedPartners, getPartnerUrl, sanitizeBookingTip, 
 import { FavoriteButton } from '@/components/Favorites';
 import RecordHotelView from '@/components/RecordHotelView';
 import { buildHotelDescription } from '@/lib/hotelText';
+import { shouldIndexHotel } from '@/lib/indexing';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -325,7 +326,7 @@ export async function generateMetadata({ params }: { params: Promise<{ country: 
       absolute: pageTitle,
     },
     description: pageDescription,
-    robots: { index: true, follow: true },
+    robots: { index: shouldIndexHotel(hotel, countryInfo.slug), follow: true },
     alternates: {
       canonical: `https://www.hotelswithbathtubs.com/${countryInfo.slug}/${slugify(rawCity)}/${hotelSlug}`,
     },
