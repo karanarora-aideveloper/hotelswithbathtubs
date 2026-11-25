@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import * as cheerio from 'cheerio';
-import { getAgodaAffiliateLink } from './affiliate';
+import { wrapOutboundAffiliateLink, cleanOutboundUrl } from './affiliate';
 
 const md = new MarkdownIt({
   html: true,
@@ -32,6 +32,8 @@ function sanitizeHtml(html: string): string {
 /**
  * Convert markdown to HTML, sanitize, and inject affiliate parameters
  */
+const BOOKING_SITE_RE = /(^|\.)(booking\.com|agoda\.com|agoda\.net|trip\.com|expedia\.[a-z.]+|hotels\.com|vrbo\.com|makemytrip\.com|cleartrip\.com|easemytrip\.com|goibibo\.com|airbnb\.[a-z.]+|tripadvisor\.[a-z.]+|linkredirect\.in|earnkaro\.com|ekaro\.in)$/;
+
 export function markdownToHtml(markdown: string): string {
   // Strip leading whitespace from each line. 
   // This prevents MarkdownIt from interpreting indented HTML (from the WYSIWYG editor) as <pre><code> blocks.
@@ -47,11 +49,26 @@ export function markdownToHtml(markdown: string): string {
   // Inject affiliate parameters into links and rewrite images
   const $ = cheerio.load(sanitizedHtml, null, false); // false to not wrap in html/head/body tags
   
+  // Booking-site links in blog text follow the same rules as booking buttons (GROWTH-FIX1):
+  // Booking.com and Trip.com go through CJ via /out, others are clean direct links, and all are
+  // marked rel="sponsored nofollow". No other affiliate rewrites (the affiliate policy names CJ only).
   $('a').each((_, el) => {
-    const href = $(el).attr('href');
-    if (href) {
-      $(el).attr('href', getAgodaAffiliateLink(href));
+    let href = $(el).attr('href');
+    if (!href || !/^https?:\/\//i.test(href)) return;
+    let host = '';
+    try { host = new URL(href).hostname.toLowerCase(); } catch { return; }
+    if (!BOOKING_SITE_RE.test(host)) return;
+    // Unwrap stored EarnKaro redirects to the partner page they point at.
+    if (/(^|\.)(linkredirect\.in|earnkaro\.com|ekaro\.in)$/.test(host)) {
+      const inner = new URL(href).searchParams.get('dl');
+      if (!inner || !/^https?:\/\//i.test(inner)) return;
+      href = inner;
     }
+    const wrapped = wrapOutboundAffiliateLink(href, { pageType: 'blog' });
+    const isCj = wrapped !== href && /jdoqocy\.com|anrdoezrs\.net/.test(wrapped);
+    $(el).attr('href', isCj ? `/out?${new URLSearchParams({ url: wrapped, pl: 'blog' }).toString()}` : cleanOutboundUrl(href));
+    $(el).attr('rel', 'sponsored nofollow noopener noreferrer');
+    $(el).attr('target', '_blank');
   });
 
   // Rewrite /assets/ image URLs to Cloudflare R2 in production

@@ -421,6 +421,15 @@ export function sanitizeHotelData<T extends Record<string, unknown>>(h: T): T {
   if (Array.isArray(h.amenities)) {
     hotelObj.amenities = h.amenities.filter((a: unknown) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
   }
+  // Listing-style names ("3BHK Near Taj Mahal | Luxury Family Stay | Parking"): show the part
+  // before the first "|". Every such hotel has its own slug, so URLs don't change.
+  if (typeof hotelObj.name === 'string' && hotelObj.name.includes('|') && hotelObj.slug) {
+    const first = hotelObj.name.split('|')[0].trim();
+    if (first.length >= 4) {
+      hotelObj.listingName = hotelObj.name;
+      hotelObj.name = first;
+    }
+  }
   // GROWTH-FIX1 (25 Nov 2026): ratings, review counts and prices on hotel records have no
   // recorded source (legacy data), so they are never shown or put in structured data.
   delete hotelObj.rating;

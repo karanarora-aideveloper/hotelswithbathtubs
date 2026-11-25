@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     title: "Hotels with Bathtubs & Jacuzzi Suites",
     description: "Hotel rooms with a private bathtub or in-room jacuzzi.",
-    url: 'https://www.hotelswithbathtubs.com',
+    // No site-wide og:url: pages without their own would all claim the home page's URL.
     siteName: 'Hotels with Bathtubs',
     images: [
       {

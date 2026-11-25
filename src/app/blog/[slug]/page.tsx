@@ -234,7 +234,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           },
         ],
         type: 'article',
-        publishedTime: toISO(blog.date),
+        ...(blog.date ? { publishedTime: toISO(blog.date) } : {}),
         authors: ['Karan Arora'],
       },
       twitter: {
