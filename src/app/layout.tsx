@@ -128,6 +128,8 @@ export default function RootLayout({
                   var saved = localStorage.getItem('hwb_consent');
                   if (saved === 'granted' || saved === 'denied') {
                     gtag('consent', 'update', { analytics_storage: saved });
+                  } else if (navigator.globalPrivacyControl === true) {
+                    gtag('consent', 'update', { analytics_storage: 'denied' });
                   }
                 } catch (e) {}
                 ${gaId ? `

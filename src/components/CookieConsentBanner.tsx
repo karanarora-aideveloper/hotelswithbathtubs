@@ -2,23 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { clearAnalyticsStorage } from '@/lib/consent';
+import { clearAnalyticsStorage, CONSENT_REGIONS, NOTICE_REGIONS, hasGlobalPrivacyControl } from '@/lib/consent';
 import { getUserRecurrenceData, resetRecurrenceCache } from '@/lib/userRecurrence';
-import { fetchSharedGeo } from '@/lib/useGeo';
-
-export const CONSENT_REGIONS = new Set([
-  'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES',
-  'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LI',
-  'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE',
-  'SI', 'SK',
-]);
+import { fetchSharedGeo, getCachedGeo } from '@/lib/useGeo';
 
 export default function CookieConsentBanner() {
   const [isOpen, setIsOpen] = useState(false);
+  // optin: UK/EEA/CH, nothing runs until Accept. notice: US, analytics runs until Opt out.
+  const [mode, setMode] = useState<'optin' | 'notice'>('optin');
 
   useEffect(() => {
     // Reopen when user clicks "Cookie settings" in footer
     const handleOpenSettings = () => {
+      const code = (getCachedGeo()?.countryCode || '').toUpperCase();
+      setMode(NOTICE_REGIONS.has(code) ? 'notice' : 'optin');
       setIsOpen(true);
     };
 
@@ -38,10 +35,16 @@ export default function CookieConsentBanner() {
         .then((data) => {
           const code = (data?.countryCode || '').toUpperCase();
           if (CONSENT_REGIONS.has(code)) {
+            setMode('optin');
             setIsOpen(true);
             if (savedConsent !== 'granted') {
               clearAnalyticsStorage();
             }
+          } else if (NOTICE_REGIONS.has(code)) {
+            setMode('notice');
+            setIsOpen(true);
+            // Global Privacy Control already opts the visitor out; make sure nothing is stored.
+            if (hasGlobalPrivacyControl()) clearAnalyticsStorage();
           }
         })
         .catch(() => {
@@ -85,6 +88,7 @@ export default function CookieConsentBanner() {
   };
 
   if (!isOpen) return null;
+  const gpc = hasGlobalPrivacyControl();
 
   return (
     <div
@@ -94,26 +98,42 @@ export default function CookieConsentBanner() {
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-slate-700">
         <p className="text-center sm:text-left leading-normal font-jakarta">
-          We use cookies to analyze site traffic and improve your browsing experience. Read our{' '}
-          <Link href="/cookies" className="text-accent underline font-semibold hover:text-accent-hover">
-            Cookie Policy
-          </Link>
-          .
+          {mode === 'notice' ? (
+            <>
+              We use Google Analytics cookies to see which pages help travellers. We don&apos;t sell or share your personal information.
+              {gpc ? ' Your browser\'s Global Privacy Control is on, so analytics is off.' : ' You can opt out at any time.'} Read our{' '}
+              <Link href="/privacy#your-rights" className="text-accent underline font-semibold hover:text-accent-hover">
+                Privacy Policy
+              </Link>
+              .
+            </>
+          ) : (
+            <>
+              We use cookies to analyze site traffic and improve your browsing experience. Read our{' '}
+              <Link href="/cookies" className="text-accent underline font-semibold hover:text-accent-hover">
+                Cookie Policy
+              </Link>
+              .
+            </>
+          )}
         </p>
         <div className="flex items-center gap-2.5 w-full sm:w-auto shrink-0 font-jakarta">
+          {!(mode === 'notice' && gpc) && (
+            <button
+              type="button"
+              onClick={handleReject}
+              className="flex-1 sm:flex-none px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer text-center"
+            >
+              {mode === 'notice' ? 'Opt out' : 'Reject'}
+            </button>
+          )}
           <button
             type="button"
-            onClick={handleReject}
-            className="flex-1 sm:flex-none px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer text-center"
-          >
-            Reject
-          </button>
-          <button
-            type="button"
-            onClick={handleAccept}
+            // With Global Privacy Control on, "OK" only closes the notice and keeps analytics off.
+            onClick={mode === 'notice' && gpc ? handleReject : handleAccept}
             className="flex-1 sm:flex-none px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer text-center"
           >
-            Accept
+            {mode === 'notice' ? (gpc ? 'OK' : 'Allow cookies') : 'Accept'}
           </button>
         </div>
       </div>

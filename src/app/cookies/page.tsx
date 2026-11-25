@@ -17,7 +17,7 @@ export default function CookiePolicy() {
           <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-accent-secondary leading-tight mb-4">
             Cookie Policy
           </h1>
-          <p className="text-text-muted text-sm">Last updated: October 2026</p>
+          <p className="text-text-muted text-sm">Last updated: 25 November 2026</p>
         </header>
 
         <div className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-accent-secondary prose-p:text-text-main font-jakarta text-slate-700 leading-relaxed space-y-6">
@@ -110,18 +110,14 @@ export default function CookiePolicy() {
             <strong>No personal data stored:</strong> We do not keep subscriber emails, names, or payment details in browser storage (localStorage or cookies).
           </p>
 
-          <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Outbound Partner-Click Log</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-3">3. Booking-Click Log</h2>
           <p>
             When you click an outbound link to check rates or book a room on a partner site (such as Booking.com, Agoda, or Expedia), your request passes through our redirect edge handler (<code>/out</code>).
           </p>
           <p>
-            Our edge handler logs the following technical attributes:
+            The redirect itself sets no cookies. It records the time, the booking site, the page and hotel you clicked from, where the button was on the page, and your country (from Cloudflare&apos;s <code>cf-ipcountry</code> header), with no IP address, browser details or referring page. The page also sends a click record with the same details plus your approximate city, browser and device type, and the referring page. Full details are in our{' '}
+            <Link href="/privacy" className="text-accent underline font-medium hover:text-accent-hover">Privacy Policy</Link>.
           </p>
-          <ul className="list-disc pl-6 space-y-1 text-slate-700">
-            <li><strong>Country and City:</strong> Determined from Cloudflare edge headers (e.g. <code>cf-ipcountry</code> and <code>cf-ipcity</code>).</li>
-            <li><strong>Browser &amp; Device Type:</strong> From the standard HTTP User-Agent header (to know if you are on mobile, tablet, or desktop).</li>
-            <li><strong>Destination URL &amp; Timestamp:</strong> Which hotel link was clicked and when.</li>
-          </ul>
           <p>
             <strong>What we never record:</strong> We do NOT collect or store your name, email address, payment details, physical address, or phone number in our click log.
           </p>
@@ -133,6 +129,12 @@ export default function CookiePolicy() {
           <ul className="list-disc pl-6 space-y-2 text-slate-700">
             <li>
               <strong>Consent Banner (UK, EU, and Switzerland):</strong> If you visit from the UK, European Economic Area, or Switzerland, analytics cookies are denied by default under Google Consent Mode v2 until you explicitly choose &ldquo;Accept&rdquo;. If you choose &ldquo;Reject&rdquo;, analytics cookies remain blocked.
+            </li>
+            <li>
+              <strong>Notice with Opt out (United States):</strong> US visitors see a short notice. Analytics cookies run unless you choose &ldquo;Opt out&rdquo;, which turns them off and deletes the Google Analytics cookies already set. We do not sell or share personal information or use advertising cookies.
+            </li>
+            <li>
+              <strong>Global Privacy Control:</strong> If your browser sends the Global Privacy Control signal and you have not made a choice on our banner, analytics cookies stay off.
             </li>
             <li>
               <strong>Reopen Cookie Settings:</strong> You can review or change your choice at any time by clicking the &ldquo;Cookie settings&rdquo; button in our website footer.
