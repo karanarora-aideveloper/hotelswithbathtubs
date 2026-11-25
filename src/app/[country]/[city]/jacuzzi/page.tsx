@@ -229,8 +229,6 @@ export default async function CityJacuzziHotelsPage({
     "description": `Curated list of hotel suites featuring private in-room whirlpool tubs, jacuzzis, and hot tubs in ${cityName}, ${countryName}.`,
     "numberOfItems": hotels.length,
     "itemListElement": hotels.map((h, idx) => {
-      const hasRealRating = h.rating && Number(h.rating) > 0;
-      const hasRealReviews = h.reviewsCount && Number(h.reviewsCount) > 0;
 
       return {
         "@type": "ListItem",
@@ -252,19 +250,11 @@ export default async function CityJacuzziHotelsPage({
             "addressLocality": cityName,
             "addressCountry": countryName
           },
-          ...(h.price ? { "priceRange": `${h.price}` } : {}),
-          ...(hasRealReviews ? {
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              ...(hasRealRating ? { "ratingValue": Number(h.rating).toFixed(1) } : {}),
-              "reviewCount": Number(h.reviewsCount),
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          } : {}),
           "amenityFeature": [
-            { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
-            { "@type": "LocationFeatureSpecification", "name": "Jetted Tub or Jacuzzi", "value": true },
+            ...(isHotelConfirmed(h) ? [
+              { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
+              { "@type": "LocationFeatureSpecification", "name": "Jetted Tub or Jacuzzi", "value": true },
+            ] : []),
             ...(h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({
               "@type": "LocationFeatureSpecification",
               "name": a,

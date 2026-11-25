@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { imageUrl } from '@/lib/imageUrl';
+import { imageUrl, DEFAULT_HOTEL_IMAGE } from '@/lib/imageUrl';
 import { tubWord } from '@/lib/tubWords';
 
 interface HotelGalleryProps {
@@ -89,9 +89,15 @@ export default function HotelGallery({
                   className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+{allImages[0] === DEFAULT_HOTEL_IMAGE ? (
+                  <span className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
+                    Illustrative photo: we don&apos;t have a photo of this hotel yet
+                  </span>
+                ) : (
                 <span className="hidden md:inline-flex absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">
                   {bathtubLabel || 'In-room bathtub'}
                 </span>
+                )}
 
                 {/* Mobile carousel dots matching Style B mockup */}
                 <div className="md:hidden absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 pointer-events-none z-10">

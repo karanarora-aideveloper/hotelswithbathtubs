@@ -104,6 +104,12 @@ export default function HotelCardImage({
       />
 
 
+      {slides.length === 1 && current.src === DEFAULT_HOTEL_IMAGE && (
+        <span className="absolute bottom-2 left-2 z-20 rounded-md bg-black/60 px-2 py-0.5 text-[10px] font-medium text-white pointer-events-none">
+          Illustrative photo
+        </span>
+      )}
+
       {/* Multi-Image Hover Navigation (Lazy initialized on first hover/touch to save INP) */}
       {allImages.length > 1 && (
         <>

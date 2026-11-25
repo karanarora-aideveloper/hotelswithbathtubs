@@ -437,7 +437,8 @@ export default async function HotelDetailPage({
     // No aggregateRating: scores come from third-party booking partners, which Google's
     // review-snippet policy disallows marking up as the site's own ratings.
     "amenityFeature": [
-      { "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true },
+      // Only claim the bathtub in structured data when it is confirmed with recorded proof.
+      ...(isHotelConfirmed(hotel) ? [{ "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true }] : []),
       ...(hotel.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
     ],
     ...(schemaPrice ? {

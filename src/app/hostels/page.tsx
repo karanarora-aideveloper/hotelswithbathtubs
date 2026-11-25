@@ -175,19 +175,11 @@ export default async function HostelsHubPage() {
         "description": sanitizePlaceholderText(h.description) || `Boutique hostel in ${h.city} with private ${h.tubType || 'bathtub'}.`,
         "url": `https://www.hotelswithbathtubs.com/${slugify(h.country || 'india')}/${slugify(h.city)}/${h.slug}`,
         "image": imageUrl(h.image || (h.images && h.images[0])),
-        ...(h.price ? { "priceRange": h.price } : {}),
         "address": {
           "@type": "PostalAddress",
           "addressLocality": h.city,
           "addressCountry": h.country || 'India'
         },
-        ...(h.rating && Number(h.rating) > 0 && h.reviewsCount && Number(h.reviewsCount) > 0 ? {
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": h.rating,
-            "reviewCount": Number(h.reviewsCount)
-          }
-        } : {})
       }
     }))
   };

@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { isDuplicateDropSlug } from '@/data/duplicateHotels';
 import { sanitizePlaceholderText } from '@/lib/location';
-import { sanitizeHotelData } from '@/lib/evidence';
+import { sanitizeHotelData, dropSharedHotelImages } from '@/lib/evidence';
 import { dropClaimSentences, dropClaimSentencesFromHtml, dropClaimSentencesFromMarkdown } from '@/lib/claims';
 
 type Doc = Record<string, any>;
@@ -22,6 +22,7 @@ function load(file: string): Doc[] {
     if (file === 'all-hotels.json') {
       raw = raw.filter((d) => !isDuplicateDropSlug(d.slug));
       for (const d of raw) sanitizeHotelData(d);
+      dropSharedHotelImages(raw);
     }
     if (file === 'all-blogs.json') {
       for (const d of raw) {

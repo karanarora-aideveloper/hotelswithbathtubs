@@ -421,5 +421,76 @@ export function sanitizeHotelData<T extends Record<string, unknown>>(h: T): T {
   if (Array.isArray(h.amenities)) {
     hotelObj.amenities = h.amenities.filter((a: unknown) => typeof a !== 'string' || (!hasClaimPhrase(a) && !/couple[- ]?friendly/i.test(a)));
   }
+  // GROWTH-FIX1 (25 Nov 2026): ratings, review counts and prices on hotel records have no
+  // recorded source (legacy data), so they are never shown or put in structured data.
+  delete hotelObj.rating;
+  delete hotelObj.reviewsCount;
+  delete hotelObj.price;
+  // Placeholder coordinates (the centre of the USA, used as a default for ~3,100 hotels).
+  if (isPlaceholderCoordinate(hotelObj.latitude, hotelObj.longitude)) {
+    delete hotelObj.latitude;
+    delete hotelObj.longitude;
+  }
+  // Only our own R2 images: partner-hosted photos (bstatic.com, agoda.net, muscache.com)
+  // are not ours to republish and break the R2-only image rule.
+  if (typeof hotelObj.image === 'string' && isExternalImage(hotelObj.image)) hotelObj.image = '';
+  if (Array.isArray(hotelObj.images)) {
+    hotelObj.images = (hotelObj.images as unknown[]).filter((u) => typeof u === 'string' && u.trim() !== '' && !isExternalImage(u));
+  }
+  if (!hotelObj.image && Array.isArray(hotelObj.images) && hotelObj.images.length > 0) {
+    hotelObj.image = hotelObj.images[0];
+  }
   return h;
+}
+
+/** True for an absolute image URL that is not on our R2 bucket. Bare file names resolve to R2. */
+export function isExternalImage(u: string): boolean {
+  const t = u.trim();
+  if (!/^https?:\/\//i.test(t)) return false;
+  return !(t.includes('.r2.dev') || t.includes('r2.cloudflarestorage.com'));
+}
+
+/** The default "centre of the USA" point (37.09, -95.71) and the jitter around it. */
+export function isPlaceholderCoordinate(lat: unknown, lng: unknown): boolean {
+  const a = Number(lat);
+  const b = Number(lng);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return false;
+  if (a === 0 && b === 0) return true;
+  return Math.abs(a - 37.09) < 0.25 && Math.abs(b + 95.71) < 0.25;
+}
+
+/** Key for an image regardless of how its URL is written (full R2 URL or bare file name). */
+export function imageKey(u: string): string {
+  return u.trim().split('?')[0].split('/').pop()!.toLowerCase();
+}
+
+/**
+ * Photos used by more than one differently named hotel are another hotel's photo on at
+ * least one of them, and we can't tell which, so they are dropped everywhere.
+ */
+export function dropSharedHotelImages(hotels: Record<string, unknown>[]): number {
+  const owners = new Map<string, Set<string>>();
+  const norm = (n: unknown) => String(n || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const h of hotels) {
+    const urls = new Set<string>();
+    if (typeof h.image === 'string' && h.image) urls.add(imageKey(h.image));
+    if (Array.isArray(h.images)) for (const u of h.images) if (typeof u === 'string' && u) urls.add(imageKey(u));
+    for (const k of urls) {
+      if (!owners.has(k)) owners.set(k, new Set());
+      owners.get(k)!.add(norm(h.name));
+    }
+  }
+  const shared = new Set([...owners].filter(([, names]) => names.size > 1).map(([k]) => k));
+  let touched = 0;
+  for (const h of hotels) {
+    let changed = false;
+    if (typeof h.image === 'string' && h.image && shared.has(imageKey(h.image))) { h.image = ''; changed = true; }
+    if (Array.isArray(h.images)) {
+      const kept = (h.images as string[]).filter((u) => !(typeof u === 'string' && shared.has(imageKey(u))));
+      if (kept.length !== h.images.length) { h.images = kept; changed = true; }
+    }
+    if (!h.image && Array.isArray(h.images) && h.images.length > 0) h.image = h.images[0];
+    if (changed) touched++;
+  }
+  return touched;
 }
