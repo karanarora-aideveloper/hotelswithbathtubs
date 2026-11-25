@@ -6007,20 +6007,8 @@ export function generateCityPageContent(
     ${introParagraph}
     <p class="text-gray-700 leading-relaxed mb-6">${introLine2}</p>
     ${usaSection}
-    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">${isUSA ? 'Suite Amenities &amp; Features' : `Popular Bathtub Amenities in ${formattedCity}`}</h3>
-    <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-6">
-      ${amenitiesList}
-    </ul>
-
-    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Why Choose a Bathtub Hotel in ${formattedCity}?</h3>
-    <ul class="list-disc pl-5 space-y-1.5 text-gray-700 mb-6">
-      ${whyChooseList}
-    </ul>
-
-    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">How to Book Your Stay in ${formattedCity}</h3>
-    <p class="text-gray-700 leading-relaxed mb-2">Book through these partners:</p>
-    <ul class="list-disc pl-5 space-y-1 text-gray-700">
-      ${bookingPartners}
-    </ul>
+    <!-- GROWTH-FIX1 (25 Nov 2026): the per-city "amenities" and "why choose" lists and the fixed
+         partner list were unsourced marketing copy repeated across cities, so they are not shown.
+         Each hotel card shows its own reported or confirmed tub and its real booking links. -->
   `;
 }

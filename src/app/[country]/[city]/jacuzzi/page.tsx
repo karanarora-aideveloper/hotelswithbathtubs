@@ -255,7 +255,8 @@ export default async function CityJacuzziHotelsPage({
               { "@type": "LocationFeatureSpecification", "name": "Private Jacuzzi in Room", "value": true },
               { "@type": "LocationFeatureSpecification", "name": "Jetted Tub or Jacuzzi", "value": true },
             ] : []),
-            ...(h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({
+            ...(h.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a))
+              .filter((a: string) => isHotelConfirmed(h) || !/tub|bath|jacuzzi|whirlpool|jetted|soak/i.test(a)).map((a: string) => ({
               "@type": "LocationFeatureSpecification",
               "name": a,
               "value": true

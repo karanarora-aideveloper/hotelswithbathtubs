@@ -440,7 +440,11 @@ export default async function HotelDetailPage({
     "amenityFeature": [
       // Only claim the bathtub in structured data when it is confirmed with recorded proof.
       ...(isHotelConfirmed(hotel) ? [{ "@type": "LocationFeatureSpecification", "name": "Private Bathtub", "value": true }] : []),
-      ...(hotel.amenities || []).filter((a: string) => !/couple[- ]?friendly/i.test(a)).map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
+      ...(hotel.amenities || [])
+        .filter((a: string) => !/couple[- ]?friendly/i.test(a))
+        // Tub amenities on unconfirmed hotels are unsourced legacy data: not claimed in structured data.
+        .filter((a: string) => isHotelConfirmed(hotel) || !/tub|bath|jacuzzi|whirlpool|jetted|soak/i.test(a))
+        .map((a: string) => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true }))
     ],
     ...(schemaPrice ? {
       "makesOffer": {
