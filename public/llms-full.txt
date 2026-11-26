@@ -6,8 +6,8 @@
 - Name: Hotels With Bathtubs
 - Canonical URL: https://www.hotelswithbathtubs.com
 - Primary Focus: Private In-Room Bathtubs, Jacuzzi Suites, Whirlpools, Soaking Tubs
-- Total Active Stays: 6,358
-- Total Cities: 924
+- Total Active Stays: 6,987
+- Total Cities: 1111
 - Total Countries: 119
 - Jacuzzi / Hot Tub Stays: 2,161
 - Verification Methodology: Triple-platform room audit (confirming in-suite private plumbing vs shared spa facilities)
@@ -17,7 +17,7 @@
 ## All Destination Hubs by Country
 ### USA
 - URL: https://www.hotelswithbathtubs.com/usa
-- Total Verified Stays: 2451
+- Total Verified Stays: 3080
 
 ### India
 - URL: https://www.hotelswithbathtubs.com/india
@@ -55,6 +55,22 @@
 - URL: https://www.hotelswithbathtubs.com/greece
 - Total Verified Stays: 41
 
+### Bosnia and Herzegovina
+- URL: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina
+- Total Verified Stays: 36
+
+### Argentina
+- URL: https://www.hotelswithbathtubs.com/argentina
+- Total Verified Stays: 36
+
+### Poland
+- URL: https://www.hotelswithbathtubs.com/poland
+- Total Verified Stays: 36
+
+### South Korea
+- URL: https://www.hotelswithbathtubs.com/south-korea
+- Total Verified Stays: 36
+
 ### Oman
 - URL: https://www.hotelswithbathtubs.com/oman
 - Total Verified Stays: 36
@@ -63,28 +79,12 @@
 - URL: https://www.hotelswithbathtubs.com/thailand
 - Total Verified Stays: 36
 
-### South Korea
-- URL: https://www.hotelswithbathtubs.com/south-korea
-- Total Verified Stays: 36
-
-### Bosnia and Herzegovina
-- URL: https://www.hotelswithbathtubs.com/bosnia-and-herzegovina
-- Total Verified Stays: 36
-
-### Poland
-- URL: https://www.hotelswithbathtubs.com/poland
-- Total Verified Stays: 36
-
-### Argentina
-- URL: https://www.hotelswithbathtubs.com/argentina
-- Total Verified Stays: 36
+### Montenegro
+- URL: https://www.hotelswithbathtubs.com/montenegro
+- Total Verified Stays: 35
 
 ### Egypt
 - URL: https://www.hotelswithbathtubs.com/egypt
-- Total Verified Stays: 35
-
-### Montenegro
-- URL: https://www.hotelswithbathtubs.com/montenegro
 - Total Verified Stays: 35
 
 ### Uzbekistan
@@ -143,15 +143,15 @@
 - Verified Bathtub Stays: 32
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/new-york#hotels
 
-### Los Angeles, USA
-- Directory URL: https://www.hotelswithbathtubs.com/usa/los-angeles
-- Verified Bathtub Stays: 32
-- Direct Anchor: https://www.hotelswithbathtubs.com/usa/los-angeles#hotels
-
 ### Nashville, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/nashville
 - Verified Bathtub Stays: 32
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/nashville#hotels
+
+### Los Angeles, USA
+- Directory URL: https://www.hotelswithbathtubs.com/usa/los-angeles
+- Verified Bathtub Stays: 32
+- Direct Anchor: https://www.hotelswithbathtubs.com/usa/los-angeles#hotels
 
 ### Scottsdale, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/scottsdale
@@ -173,25 +173,15 @@
 - Verified Bathtub Stays: 29
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/portland#hotels
 
-### Santorini, Greece
-- Directory URL: https://www.hotelswithbathtubs.com/greece/santorini
-- Verified Bathtub Stays: 28
-- Direct Anchor: https://www.hotelswithbathtubs.com/greece/santorini#hotels
-
 ### Charleston, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/charleston
 - Verified Bathtub Stays: 28
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/charleston#hotels
 
-### San Antonio, USA
-- Directory URL: https://www.hotelswithbathtubs.com/usa/san-antonio
+### Santorini, Greece
+- Directory URL: https://www.hotelswithbathtubs.com/greece/santorini
 - Verified Bathtub Stays: 28
-- Direct Anchor: https://www.hotelswithbathtubs.com/usa/san-antonio#hotels
-
-### Agra, India
-- Directory URL: https://www.hotelswithbathtubs.com/india/agra
-- Verified Bathtub Stays: 28
-- Direct Anchor: https://www.hotelswithbathtubs.com/india/agra#hotels
+- Direct Anchor: https://www.hotelswithbathtubs.com/greece/santorini#hotels
 
 ### Sedona, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/sedona
@@ -202,6 +192,16 @@
 - Directory URL: https://www.hotelswithbathtubs.com/usa/st-augustine
 - Verified Bathtub Stays: 28
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/st-augustine#hotels
+
+### San Antonio, USA
+- Directory URL: https://www.hotelswithbathtubs.com/usa/san-antonio
+- Verified Bathtub Stays: 28
+- Direct Anchor: https://www.hotelswithbathtubs.com/usa/san-antonio#hotels
+
+### Agra, India
+- Directory URL: https://www.hotelswithbathtubs.com/india/agra
+- Verified Bathtub Stays: 28
+- Direct Anchor: https://www.hotelswithbathtubs.com/india/agra#hotels
 
 ### Seattle, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/seattle
@@ -218,6 +218,11 @@
 - Verified Bathtub Stays: 27
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/chicago#hotels
 
+### Asheville, USA
+- Directory URL: https://www.hotelswithbathtubs.com/usa/asheville
+- Verified Bathtub Stays: 26
+- Direct Anchor: https://www.hotelswithbathtubs.com/usa/asheville#hotels
+
 ### Gatlinburg, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/gatlinburg
 - Verified Bathtub Stays: 26
@@ -228,10 +233,10 @@
 - Verified Bathtub Stays: 26
 - Direct Anchor: https://www.hotelswithbathtubs.com/usa/miami#hotels
 
-### Asheville, USA
-- Directory URL: https://www.hotelswithbathtubs.com/usa/asheville
-- Verified Bathtub Stays: 26
-- Direct Anchor: https://www.hotelswithbathtubs.com/usa/asheville#hotels
+### Udaipur, India
+- Directory URL: https://www.hotelswithbathtubs.com/india/udaipur
+- Verified Bathtub Stays: 25
+- Direct Anchor: https://www.hotelswithbathtubs.com/india/udaipur#hotels
 
 ### Dallas, USA
 - Directory URL: https://www.hotelswithbathtubs.com/usa/dallas
@@ -243,25 +248,20 @@
 - Verified Bathtub Stays: 25
 - Direct Anchor: https://www.hotelswithbathtubs.com/india/bangalore#hotels
 
-### Udaipur, India
-- Directory URL: https://www.hotelswithbathtubs.com/india/udaipur
-- Verified Bathtub Stays: 25
-- Direct Anchor: https://www.hotelswithbathtubs.com/india/udaipur#hotels
-
 ---
 
-## Complete Published Travel & Bathtub Guides (146 Total)
+## Complete Published Travel & Bathtub Guides (132 Total)
 ### Lake Tahoe hotel rooms with a hot tub or bathtub (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/lake-tahoe-hotels-cabins-with-hot-tub
 - Focus Destination: South Lake Tahoe, USA
 
-### Gatlinburg & Pigeon Forge stays with a hot tub or bathtub (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/gatlinburg-pigeon-forge-cabins-hot-tub
-- Focus Destination: Gatlinburg, USA
-
 ### Las Vegas hotels with a jetted tub or bathtub in the room (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/las-vegas-hotels-with-jacuzzi-tub-in-room
 - Focus Destination: Las Vegas, USA
+
+### Gatlinburg & Pigeon Forge stays with a hot tub or bathtub (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/gatlinburg-pigeon-forge-cabins-hot-tub
+- Focus Destination: Gatlinburg, USA
 
 ### Eureka Springs hotels with an in-room jacuzzi or bathtub (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/eureka-springs-hotels-with-jacuzzi-in-room
@@ -275,81 +275,81 @@
 - URL: https://www.hotelswithbathtubs.com/blog/big-bear-lake-cabins-hotels-with-hot-tub
 - Focus Destination: Big Bear Lake, USA
 
-### 12 Best Las Vegas Hotels with In-Room Jacuzzi & Jetted Tubs on the Strip (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/hotels-with-jacuzzi-in-room-las-vegas
-- Focus Destination: Las Vegas, USA
+### Best Edinburgh Hotels with Roll-Top Bathtubs: Castle & Old Town Views (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/edinburgh-hotels-with-roll-top-bathtubs
+- Focus Destination: Edinburgh, UK
 
 ### Best Luxury Hotels with Bathtubs in Abu Dhabi: Corniche & Desert Palaces (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/abu-dhabi-luxury-hotels-with-bathtub
 - Focus Destination: Abu Dhabi, UAE
 
-### Top Aspen Luxury Hotels & Chalets with Private Hot Tubs & Soaking Baths (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/aspen-luxury-hotels-with-hot-tubs
-- Focus Destination: Aspen, USA
-
-### Best Hotels with Deep Soaking Tubs in Los Angeles & Beverly Hills (2026 Guide)
-- URL: https://www.hotelswithbathtubs.com/blog/los-angeles-hotels-with-deep-soaking-tubs
-- Focus Destination: Los Angeles, USA
+### Top Miami Beach Hotels with In-Room Jacuzzis & Ocean View Soaking Tubs (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/miami-beach-hotels-with-jacuzzi-in-room
+- Focus Destination: Miami, USA
 
 ### Best Venice Hotels with Canal-View Bathtubs: Grand Canal Luxury Palazzos (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/venice-hotels-with-canal-view-bathtubs
 - Focus Destination: Venice, Italy
 
+### Top Zermatt Alpine Hotels with Private Outdoor Hot Tubs & Matterhorn Views (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/zermatt-hotels-with-matterhorn-view-hot-tubs
+- Focus Destination: Zermatt, Switzerland
+
 ### Best Hotels in Rome with In-Room Jacuzzi & Marble Soaking Bathtubs (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/hotels-in-rome-with-jacuzzi-in-room
 - Focus Destination: Rome, Italy
 
-### Best Maui Oceanfront Resorts with Deep Soaking Tubs & Private Hot Tubs (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/maui-oceanfront-resorts-with-soaking-tubs
-- Focus Destination: Maui, USA
+### Best Hotels with Deep Soaking Tubs in Los Angeles & Beverly Hills (2026 Guide)
+- URL: https://www.hotelswithbathtubs.com/blog/los-angeles-hotels-with-deep-soaking-tubs
+- Focus Destination: Los Angeles, USA
 
 ### Historic Charleston Hotels with Antique Clawfoot Tubs & Jacuzzi Suites (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/charleston-hotels-with-clawfoot-tubs
 - Focus Destination: Charleston, USA
 
-### Best San Francisco Hotels with Bathtubs with Bay & City Views (2026 Guide)
-- URL: https://www.hotelswithbathtubs.com/blog/san-francisco-hotels-with-bathtubs-with-view
-- Focus Destination: San Francisco, USA
-
-### 10 Best Hotels with Soaking Tubs in NYC: Manhattan Skyline Views (2026 Guide)
-- URL: https://www.hotelswithbathtubs.com/blog/hotels-with-soaking-tubs-nyc
-- Focus Destination: New York, USA
-
 ### Best Bora Bora Overwater Bungalows with Bathtubs: Lagoon & Otemanu Views (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/bora-bora-overwater-bungalows-with-bathtub
 - Focus Destination: Bora Bora, French Polynesia
 
-### Top Miami Beach Hotels with In-Room Jacuzzis & Ocean View Soaking Tubs (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/miami-beach-hotels-with-jacuzzi-in-room
-- Focus Destination: Miami, USA
-
-### Top Chicago Hotels with Bathtubs with a View: Michigan Ave & River Views (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/chicago-hotels-with-bathtubs-with-view
-- Focus Destination: Chicago, USA
-
-### 15 Best Hotels with Bath in Bedroom in London: Luxury Romantic Suites (2026)
+### Where to Stay in London: Areas and Hotels with Bathtubs (2026)
 - URL: https://www.hotelswithbathtubs.com/blog/hotels-with-bath-in-bedroom-london
 - Focus Destination: London, UK
 
-### Best Boutique Hotels in Florence with Bathtubs: Duomo & Arno River Views (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/florence-boutique-hotels-with-bathtubs
-- Focus Destination: Florence, Italy
-
-### Best Edinburgh Hotels with Roll-Top Bathtubs: Castle & Old Town Views (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/edinburgh-hotels-with-roll-top-bathtubs
-- Focus Destination: Edinburgh, UK
+### Best Tokyo Luxury Hotels with Deep Onsen Soaking Tubs & Skyline Views (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/tokyo-luxury-hotels-with-deep-soaking-tubs
+- Focus Destination: Tokyo, Japan
 
 ### Best Hotels in Key West with Private Hot Tubs & Balcony Jacuzzis (2026 Guide)
 - URL: https://www.hotelswithbathtubs.com/blog/key-west-hotels-with-private-hot-tubs
 - Focus Destination: Key West, USA
 
-### Top Zermatt Alpine Hotels with Private Outdoor Hot Tubs & Matterhorn Views (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/zermatt-hotels-with-matterhorn-view-hot-tubs
-- Focus Destination: Zermatt, Switzerland
+### Best Boutique Hotels in Florence with Bathtubs: Duomo & Arno River Views (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/florence-boutique-hotels-with-bathtubs
+- Focus Destination: Florence, Italy
 
-### Best Napa Valley Vineyard Resorts with Soaking Tubs & Private Jacuzzis (2026)
-- URL: https://www.hotelswithbathtubs.com/blog/napa-valley-resorts-with-soaking-tubs
-- Focus Destination: Napa, USA
+### Best Hotels in Nice with Sea-View Bathtubs: French Riviera Romance (2026 Guide)
+- URL: https://www.hotelswithbathtubs.com/blog/nice-france-hotels-with-sea-view-bathtubs
+- Focus Destination: Nice, France
+
+### Best Boutique Hotels in Madrid with Bathtubs: Gran Vía & Historic Suites (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/madrid-boutique-hotels-with-bathtubs
+- Focus Destination: Madrid, Spain
+
+### Top 15 Santorini Hotels with Caldera View Private Hot Tubs & Cave Bathtubs (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/santorini-hotels-with-private-hot-tubs
+- Focus Destination: Santorini, Greece
+
+### Top Chicago Hotels with Bathtubs with a View: Michigan Ave & River Views (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/chicago-hotels-with-bathtubs-with-view
+- Focus Destination: Chicago, USA
+
+### Top Barcelona Hotels with Terrace Jacuzzis & Luxury Bathtubs (2026 Guide)
+- URL: https://www.hotelswithbathtubs.com/blog/barcelona-hotels-with-terrace-jacuzzis
+- Focus Destination: Barcelona, Spain
+
+### Top Aspen Luxury Hotels & Chalets with Private Hot Tubs & Soaking Baths (2026)
+- URL: https://www.hotelswithbathtubs.com/blog/aspen-luxury-hotels-with-hot-tubs
+- Focus Destination: Aspen, USA
 
 ---
 
