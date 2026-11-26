@@ -98,6 +98,62 @@ export const DUPLICATE_HOTELS: DuplicateHotelPair[] = [
     keepSlug: 'san-francisco-palace-hotel-a-luxury-collection-hotel-san-francisco',
     dropSlug: 'palace-hotel-san-francisco',
   },
+  // DUP-BOOKING1 (26 Nov 2026): the same property listed twice, found because both copies share one
+  // Booking.com page. citySlug is the kept copy's town; the dropped copy may sit in a neighbouring town.
+  {
+    city: 'Scottsdale',
+    citySlug: 'scottsdale',
+    keepSlug: 'the-phoenician-a-luxury-collection-resort-scottsdale-scottsdale',
+    dropSlug: 'the-phoenician-resort-phoenix',
+  },
+  {
+    city: 'South Lake Tahoe',
+    citySlug: 'south-lake-tahoe',
+    keepSlug: 'desolation-hotel-south-lake-tahoe',
+    dropSlug: 'desolation-hotel-south-lake-tahoe-lake-tahoe',
+  },
+  {
+    city: 'South Lake Tahoe',
+    citySlug: 'south-lake-tahoe',
+    keepSlug: 'marriotts-timber-lodge-south-lake-tahoe',
+    dropSlug: 'marriotts-timber-lodge-lake-tahoe',
+  },
+  {
+    city: 'Dharamshala',
+    citySlug: 'dharamshala',
+    keepSlug: 'fortune-park-moksha-dharamshala',
+    dropSlug: 'fortune-park-moksha-mcleodganj',
+  },
+  {
+    city: 'Dharamshala',
+    citySlug: 'dharamshala',
+    keepSlug: 'norbu-the-montanna-ihcl-seleqtions-dharamshala',
+    dropSlug: 'norbu-the-montanna-mcleodganj-ihcl-seleqtions-mcleodganj',
+  },
+  {
+    city: 'Ajmer',
+    citySlug: 'ajmer',
+    keepSlug: 'pratap-mahal-ajmer-ihcl-seleqtions-ajmer',
+    dropSlug: 'pratap-mahal-pushkar-ihcl-seleqtions-pushkar',
+  },
+  {
+    city: 'Jagdalpur',
+    citySlug: 'jagdalpur',
+    keepSlug: 'bastar-jungle-resort-jagdalpur',
+    dropSlug: 'bastar-jungle-resort-chitrakote',
+  },
+  {
+    city: 'Ilulissat',
+    citySlug: 'ilulissat',
+    keepSlug: 'ilulissat-ilulissat-harbour-stay',
+    dropSlug: 'ilulissat-ilulissat-stay',
+  },
+  {
+    city: 'Lonavala',
+    citySlug: 'lonavala',
+    keepSlug: 'juvana-resort-spa-aamby-valley-city-lonavala',
+    dropSlug: 'aamby-valley-city-lonavala',
+  },
 ];
 
 export const DUPLICATE_DROP_SLUGS = new Set(DUPLICATE_HOTELS.map((p) => p.dropSlug));

@@ -276,7 +276,7 @@ export const redirects = [
   { source: '/usa/austin/the-driskill-austin', destination: '/usa/austin/austin-the-driskill-in-the-unbound-collection-by-hyatt-austin', permanent: true },
   { source: '/usa/san-diego/fairmont-grand-del-mar-san-diego', destination: '/usa/san-diego/san-diego-fairmont-grand-del-mar', permanent: true },
   { source: '/usa/san-diego/san-diego-rancho-valencia-resort-spa', destination: '/usa/san-diego/rancho-valencia-resort-san-diego', permanent: true },
-  { source: '/usa/lake-tahoe/desolation-hotel-lake-tahoe', destination: '/usa/lake-tahoe/desolation-hotel-south-lake-tahoe-lake-tahoe', permanent: true },
+  { source: '/usa/lake-tahoe/desolation-hotel-lake-tahoe', destination: '/usa/south-lake-tahoe/desolation-hotel-south-lake-tahoe', permanent: true },
   { source: '/usa/lake-tahoe/the-landing-resort-spa-lake-tahoe', destination: '/usa/lake-tahoe/the-landing-resort-spa-south-lake-tahoe-lake-tahoe', permanent: true },
   { source: '/usa/seattle/inn-at-the-market-seattle', destination: '/usa/seattle/seattle-inn-at-the-market-seattle', permanent: true },
   { source: '/usa/seattle/thompson-seattle', destination: '/usa/seattle/seattle-thompson-seattle', permanent: true },
@@ -286,6 +286,17 @@ export const redirects = [
   { source: '/usa/scottsdale/omni-scottsdale-resort-montelucia', destination: '/usa/scottsdale/omni-scottsdale-resort-spa-at-montelucia-scottsdale', permanent: true },
   { source: '/usa/san-francisco/1-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-1-hotel-san-francisco', permanent: true },
   { source: '/usa/san-francisco/palace-hotel-san-francisco', destination: '/usa/san-francisco/san-francisco-palace-hotel-a-luxury-collection-hotel-san-francisco', permanent: true },
+
+  // DUP-BOOKING1 (26 Nov 2026): 9 properties listed twice; the dropped copy points to the kept one.
+  { source: '/usa/phoenix/the-phoenician-resort-phoenix', destination: '/usa/scottsdale/the-phoenician-a-luxury-collection-resort-scottsdale-scottsdale', permanent: true },
+  { source: '/usa/lake-tahoe/desolation-hotel-south-lake-tahoe-lake-tahoe', destination: '/usa/south-lake-tahoe/desolation-hotel-south-lake-tahoe', permanent: true },
+  { source: '/usa/lake-tahoe/marriotts-timber-lodge-lake-tahoe', destination: '/usa/south-lake-tahoe/marriotts-timber-lodge-south-lake-tahoe', permanent: true },
+  { source: '/india/mcleodganj/fortune-park-moksha-mcleodganj', destination: '/india/dharamshala/fortune-park-moksha-dharamshala', permanent: true },
+  { source: '/india/mcleodganj/norbu-the-montanna-mcleodganj-ihcl-seleqtions-mcleodganj', destination: '/india/dharamshala/norbu-the-montanna-ihcl-seleqtions-dharamshala', permanent: true },
+  { source: '/india/pushkar/pratap-mahal-pushkar-ihcl-seleqtions-pushkar', destination: '/india/ajmer/pratap-mahal-ajmer-ihcl-seleqtions-ajmer', permanent: true },
+  { source: '/india/chitrakote/bastar-jungle-resort-chitrakote', destination: '/india/jagdalpur/bastar-jungle-resort-jagdalpur', permanent: true },
+  { source: '/greenland/ilulissat/ilulissat-ilulissat-stay', destination: '/greenland/ilulissat/ilulissat-ilulissat-harbour-stay', permanent: true },
+  { source: '/india/lonavala/aamby-valley-city-lonavala', destination: '/india/lonavala/juvana-resort-spa-aamby-valley-city-lonavala', permanent: true },
 
   // Round 9: duplicate Inn at Playa del Rey redirect
   { source: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles-2', destination: '/usa/los-angeles/inn-at-playa-del-rey-los-angeles', permanent: true },
