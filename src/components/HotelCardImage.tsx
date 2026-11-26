@@ -49,7 +49,11 @@ export default function HotelCardImage({
   // Decision D8: our tub photo always leads; Booking.com's CDN photos (faster) fill the carousel,
   // resized to 500px for cards. Each partner photo falls back to one of our copies if it fails.
   const slides = useMemo(() => {
-    const first = { src: imageUrl(ownImages[0] || primaryImage), fallback: DEFAULT_HOTEL_IMAGE };
+    // Some imported hotels have no own photo on R2 yet: fall back to the first partner photo.
+    const first = {
+      src: imageUrl(ownImages[0] || primaryImage),
+      fallback: partnerImages[0] ? partnerImages[0].replace(/\/max\d+(x\d+)?\//, '/max500/') : DEFAULT_HOTEL_IMAGE,
+    };
     const partner = partnerImages.slice(0, 5).map((u, i) => ({
       src: u.replace(/\/max\d+(x\d+)?\//, '/max500/'),
       fallback: imageUrl(ownImages[i + 1] || ownImages[0] || primaryImage),

@@ -38,6 +38,9 @@ export default function HotelGallery({
   const allImages = partner.length ? [ownImages[0], ...partner] : ownImages;
   const fallbackFor = (src: string) => {
     const i = allImages.indexOf(src);
+    // Our own first photo is missing on R2 for some imported hotels: show the first partner photo
+    // instead of an empty dark box.
+    if (i === 0 && partner.length) return partner[0];
     return i > 0 && partner.length ? ownImages[i] || ownImages[0] : ownImages[0];
   };
   const onImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
