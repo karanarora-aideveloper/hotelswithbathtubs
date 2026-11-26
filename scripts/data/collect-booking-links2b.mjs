@@ -414,6 +414,17 @@ export async function runCollector(options = {}) {
     throw new Error('No candidate queue provided or DB connection available.');
   }
 
+  // Resume (BOOKING-CHECK2): drop hotels already checked on an earlier day before taking the limit.
+  if (fs.existsSync(resultsFilePath)) {
+    try {
+      const saved = JSON.parse(fs.readFileSync(resultsFilePath, 'utf8'));
+      const done = new Set((Array.isArray(saved) ? saved : (saved.results || [])).filter((r) => r.status).map((r) => r.key));
+      const before = queue.length;
+      queue = queue.filter((h) => !done.has(h.key));
+      console.log(`Already checked on earlier runs:               ${before - queue.length} (left: ${queue.length})`);
+    } catch {}
+  }
+
   if (limit && limit > 0) {
     queue = queue.slice(0, limit);
   }
@@ -473,6 +484,11 @@ export async function runCollector(options = {}) {
     if (currentTodayCount >= DAILY_CAP) {
       console.log(`\n🚨 STOPPING: Daily limit of ${DAILY_CAP} hotels reached for IST date ${todayIst}.`);
       break;
+    }
+
+    // Resume: a hotel already checked on an earlier day keeps its saved result (BOOKING-CHECK2).
+    if (resultsMap[hotel.key]?.status) {
+      continue;
     }
 
     console.log(`\n[${idx + 1}/${queue.length}] Hotel: "${hotel.name}" (${hotel.town}, ${hotel.state}) key: ${hotel.key}`);
@@ -663,6 +679,8 @@ export async function runCollector(options = {}) {
 async function main() {
   const args = process.argv.slice(2);
   const isDryRun = args.includes('--dry-run');
+  const limitArg = args.find((a) => a.startsWith('--limit='));
+  const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : null;
 
   console.log('=============================================================');
   console.log('>>> LINKS2B: Booking.com Collection Restart under Hard Limits');
@@ -682,7 +700,8 @@ async function main() {
     await runCollector({
       db,
       isDryRun,
-      isWrite: false
+      isWrite: false,
+      limit
     });
   } catch (err) {
     if (err.isCooldownActive || err.isBlockHalt) {
@@ -691,6 +710,7 @@ async function main() {
     console.error('Collector execution error:', err);
     process.exit(1);
   } finally {
+    await closeBrowser(); // without this, headless Chrome keeps Node running after the last hotel
     await client.close();
   }
 }
