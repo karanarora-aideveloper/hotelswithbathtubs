@@ -34,7 +34,62 @@ export interface MatchmakerHotel {
   airbnbUrl?: string;
   tripUrl?: string;
   mmtUrl?: string;
+  cleartripUrl?: string;
   url?: string;
+}
+
+interface CompactMatchmakerData {
+  v: 2;
+  imageBase: string;
+  keys: string[];
+  /** [country, countrySlug, city, citySlug]; rows point here with `place`. */
+  places: string[][];
+  rows: unknown[][];
+}
+
+/** Reads matchmaker-data.json: the compact column format (v2), or the older array of objects. */
+export function decodeMatchmakerData(data: unknown): MatchmakerHotel[] {
+  if (Array.isArray(data)) return data as MatchmakerHotel[];
+  const d = data as CompactMatchmakerData | null;
+  if (!d || d.v !== 2 || !Array.isArray(d.keys) || !Array.isArray(d.rows)) return [];
+  const idx = (k: string) => d.keys.indexOf(k);
+  const str = (row: unknown[], k: string) => {
+    const i = idx(k);
+    return i >= 0 && typeof row[i] === 'string' ? (row[i] as string) : '';
+  };
+  const arr = (row: unknown[], k: string) => {
+    const i = idx(k);
+    return i >= 0 && Array.isArray(row[i]) ? (row[i] as string[]) : [];
+  };
+  const batchIdx = idx('importBatch');
+  const placeIdx = idx('place');
+  const places = Array.isArray(d.places) ? d.places : [];
+  return d.rows.map((row) => {
+    const place = places[Number(row[placeIdx])] || ['', '', '', ''];
+    const [country, countrySlug, city, citySlug] = place;
+    const image = str(row, 'image');
+    return {
+      name: str(row, 'name'),
+      city,
+      country,
+      countrySlug,
+      citySlug,
+      pageUrl: `/${countrySlug}/${citySlug}/${str(row, 'slug')}`,
+      image: image && !/^https?:\/\//i.test(image) ? `${d.imageBase}${image}` : image,
+      roomType: str(row, 'roomType'),
+      tubType: str(row, 'tubType'),
+      amenities: arr(row, 'amenities'),
+      bookingUrl: str(row, 'bookingUrl'),
+      agodaUrl: str(row, 'agodaUrl'),
+      mmtUrl: str(row, 'mmtUrl'),
+      cleartripUrl: str(row, 'cleartripUrl'),
+      airbnbUrl: str(row, 'airbnbUrl'),
+      tripUrl: str(row, 'tripUrl'),
+      url: str(row, 'url'),
+      importBatch: batchIdx >= 0 && row[batchIdx] ? '1' : '',
+      bookingTubLabels: arr(row, 'bookingTubLabels'),
+    };
+  });
 }
 
 export type VibeId = 'honeymoon' | 'city_break' | 'mountains' | 'beach_islands' | 'spa_soaking';
@@ -426,8 +481,8 @@ export default function DreamSoakMatchmaker({
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data: MatchmakerHotel[]) => {
-        const cleanData: MatchmakerHotel[] = (Array.isArray(data) ? data : []).map((h) => ({
+      .then((data: unknown) => {
+        const cleanData: MatchmakerHotel[] = decodeMatchmakerData(data).map((h) => ({
           ...h,
           importBatch: h.importBatch || '',
           bookingTubLabels: Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [],
@@ -738,6 +793,7 @@ export default function DreamSoakMatchmaker({
     if (hotel.bookingUrl) return { name: 'Booking.com', url: cleanOutboundUrl(hotel.bookingUrl) };
     if (hotel.agodaUrl) return { name: 'Agoda', url: cleanOutboundUrl(hotel.agodaUrl) };
     if (hotel.mmtUrl) return { name: 'MakeMyTrip', url: cleanOutboundUrl(hotel.mmtUrl) };
+    if (hotel.cleartripUrl) return { name: 'Cleartrip', url: cleanOutboundUrl(hotel.cleartripUrl) };
     if (hotel.url) return { name: 'Partner site', url: cleanOutboundUrl(hotel.url) };
     return null;
   };

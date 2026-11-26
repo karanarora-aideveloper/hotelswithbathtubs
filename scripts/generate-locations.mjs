@@ -251,47 +251,73 @@ async function generateLocations() {
       console.log(`✅ .cache/all-hotels.json written from MongoDB (${allHotels.length} hotels).`);
     }
 
-    // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker
-    const matchmakerHotels = allHotels.map((h) => {
+    // 4. Generate client-side matchmaker-data.json for Dream Soak Matchmaker.
+    // Compact column format (MATCHMAKER-SLIM1): only the fields the matchmaker reads, one key list
+    // instead of 26 keys per hotel, R2 image prefix stripped, and no unsourced ratings or prices.
+    const R2_IMAGE_PREFIX = 'https://pub-c12991664bbf475e918cb03e3ac5b910.r2.dev/hotelswithbathtubs/images/';
+    const imageKey = (u) => (u || '').trim().split('?')[0].split('/').pop().toLowerCase();
+    const isExternal = (u) => /^https?:\/\//i.test(u) && !(u.includes('.r2.dev') || u.includes('r2.cloudflarestorage.com'));
+    // Photos used by more than one differently named hotel show the wrong hotel (GROWTH-FIX1): skip them.
+    const namesByImage = new Map();
+    for (const h of allHotels) {
+      const k = imageKey(h.image);
+      if (!k) continue;
+      if (!namesByImage.has(k)) namesByImage.set(k, new Set());
+      namesByImage.get(k).add((h.name || '').trim().toLowerCase());
+    }
+    const MM_KEYS = [
+      'name', 'place', 'slug', 'image', 'roomType', 'tubType',
+      'amenities', 'bookingUrl', 'agodaUrl', 'mmtUrl', 'cleartripUrl', 'airbnbUrl', 'tripUrl', 'url',
+      'importBatch', 'bookingTubLabels',
+    ];
+    // Each city is written once in `places`; rows point to it by index.
+    const places = [];
+    const placeIndex = new Map();
+    const matchmakerRows = allHotels.map((h) => {
       const country = (h.country || '').trim();
       const city = (h.city || '').trim();
       const countrySlug = countrySlugMap[country.toLowerCase()] || slugify(country);
       const citySlug = slugify(city);
       const hotelSlug = h.slug || `${slugify(h.name)}-${citySlug}`;
-      const numPrice = parseInt((h.price || '').replace(/[^0-9]/g, '') || '0', 10);
-      return {
-        name: (h.name || '').trim(),
-        city,
-        country,
-        countrySlug,
-        citySlug,
-        pageUrl: `/${countrySlug}/${citySlug}/${hotelSlug}`,
-        image: h.image || '',
-        price: h.price || '',
-        numPrice,
-        rating: typeof h.rating === 'number' ? h.rating : parseFloat(h.rating) || 4.5,
-        reviewsCount: typeof h.reviewsCount === 'number' ? h.reviewsCount : parseInt(h.reviewsCount, 10) || 100,
-        roomType: h.roomType || '',
-        tubType: h.tubType || '',
-        amenities: (h.amenities || []).slice(0, 5),
-        bookingTip: h.bookingTip || '',
-        bookingUrl: h.bookingUrl || '',
-        expediaUrl: h.expediaUrl || '',
-        hotelsComUrl: h.hotelsComUrl || '',
-        vrboUrl: h.vrboUrl || '',
-        agodaUrl: h.agodaUrl || '',
-        mmtUrl: h.mmtUrl || '',
-        airbnbUrl: h.airbnbUrl || '',
-        tripUrl: h.tripUrl || '',
-        url: h.url || '',
-        importBatch: h.importBatch || '',
-        bookingTubLabels: Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [],
-      };
+      const rawName = (h.name || '').trim();
+      const name = h.slug && rawName.includes('|') ? rawName.split('|')[0].trim() : rawName;
+      let image = (h.image || '').trim();
+      if (isExternal(image) || (namesByImage.get(imageKey(image))?.size || 0) > 1) image = '';
+      if (image.startsWith(R2_IMAGE_PREFIX)) image = image.slice(R2_IMAGE_PREFIX.length);
+      const bookingUrl = h.bookingUrl || '';
+      const url = h.url && h.url !== bookingUrl ? h.url : '';
+      const labels = Array.isArray(h.bookingTubLabels) ? h.bookingTubLabels : [];
+      const placeKey = `${country}|${countrySlug}|${city}|${citySlug}`;
+      if (!placeIndex.has(placeKey)) {
+        placeIndex.set(placeKey, places.length);
+        places.push([country, countrySlug, city, citySlug]);
+      }
+      return [
+        name, placeIndex.get(placeKey),
+        hotelSlug, // the browser rebuilds pageUrl as /country/city/slug
+        image,
+        h.roomType || '',
+        h.tubType || '',
+        (h.amenities || []).slice(0, 5),
+        bookingUrl,
+        h.agodaUrl || '',
+        h.mmtUrl || h.makemytripUrl || '',
+        h.cleartripUrl || '',
+        h.airbnbUrl || '',
+        h.tripUrl || '',
+        url,
+        h.importBatch ? 1 : 0,
+        labels,
+      ];
     });
     const matchmakerPath = path.join(publicDir, 'matchmaker-data.json');
-    fs.writeFileSync(matchmakerPath, JSON.stringify(matchmakerHotels), 'utf-8');
+    fs.writeFileSync(
+      matchmakerPath,
+      JSON.stringify({ v: 2, imageBase: R2_IMAGE_PREFIX, keys: MM_KEYS, places, rows: matchmakerRows }),
+      'utf-8',
+    );
     const matchmakerSize = (fs.statSync(matchmakerPath).size / 1024).toFixed(1);
-    console.log(`✅ matchmaker-data.json generated successfully (${matchmakerSize} KB, ${matchmakerHotels.length} hotels).`);
+    console.log(`✅ matchmaker-data.json generated successfully (${matchmakerSize} KB, ${matchmakerRows.length} hotels).`);
   } catch (err) {
     console.error('❌ Error generating search data:', err);
     process.exit(1);
