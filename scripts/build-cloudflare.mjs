@@ -145,6 +145,12 @@ async function build() {
       fs.copyFileSync(publicMatchmaker, outMatchmaker);
     }
 
+    // Edge functions skip built scripts and data files (HUBS-1); pages still pass the middleware.
+    const publicRoutes = path.join(rootDir, 'public/_routes.json');
+    if (fs.existsSync(publicRoutes)) {
+      fs.copyFileSync(publicRoutes, path.join(rootDir, 'out/_routes.json'));
+    }
+
     const publicHeaders = path.join(rootDir, 'public/_headers');
     const outHeaders = path.join(rootDir, 'out/_headers');
     if (fs.existsSync(publicHeaders)) {
