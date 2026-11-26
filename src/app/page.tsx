@@ -394,6 +394,14 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[14px] font-manrope font-semibold">
+              <Link href="/hotels-with-bathtub" prefetch={false} className="text-[#b08d57] hover:underline">
+                All hotels with a bathtub →
+              </Link>
+              <Link href="/hotels-with-bathtub-near-me" prefetch={false} className="text-[#b08d57] hover:underline">
+                Hotels with a bathtub near me →
+              </Link>
+            </div>
           </section>
 
           {/* How we check a bathtub matching Option A mockup */}

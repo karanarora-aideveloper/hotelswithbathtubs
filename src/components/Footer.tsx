@@ -5,6 +5,8 @@ import CookieSettingsButton from './CookieSettingsButton';
 // Slim footer (decision D7): about 30 links instead of 226. The full city and country lists
 // live on the /destinations hub page.
 const GUIDES = [
+  { href: '/hotels-with-bathtub', label: 'Hotels with a bathtub' },
+  { href: '/hotels-with-bathtub-near-me', label: 'Bathtub hotels near me' },
   { href: '/blog', label: 'Travel guides' },
   { href: '/couple-friendly', label: 'Couple-friendly hotels' },
   { href: '/hotels-with-hot-tub-in-room', label: 'Hot tub suites' },

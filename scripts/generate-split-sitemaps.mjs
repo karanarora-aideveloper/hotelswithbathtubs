@@ -194,6 +194,8 @@ export function generateSplitSitemaps() {
   // 1. Pages Sitemap
   const staticRoutes = [
     { url: `${baseUrl}`, lastModified: new Date('2026-09-08T00:00:00.000Z'), priority: 1.0 },
+    { url: `${baseUrl}/hotels-with-bathtub`, lastModified: new Date('2026-11-26T00:00:00.000Z'), priority: 0.95 },
+    { url: `${baseUrl}/hotels-with-bathtub-near-me`, lastModified: new Date('2026-11-26T00:00:00.000Z'), priority: 0.9 },
     { url: `${baseUrl}/matchmaker`, lastModified: new Date('2026-10-07T00:00:00.000Z'), priority: 0.95 },
     { url: `${baseUrl}/couple-friendly`, lastModified: new Date('2026-10-19T00:00:00.000Z'), priority: 0.9 },
     { url: `${baseUrl}/soaking-tub-hotels`, lastModified: new Date('2026-10-22T00:00:00.000Z'), priority: 0.9 },
