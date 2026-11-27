@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { redirects } from './redirects.mjs';
-import { DUPLICATE_DROP_SLUGS } from '../src/data/duplicateHotels.ts';
+// Plain JSON so the cloud build (Node 20, no .ts loading) can read it.
+import { readFileSync as readDupFile } from 'node:fs';
+const DUPLICATE_DROP_SLUGS = new Set(JSON.parse(readDupFile(new URL('../src/data/duplicateHotels.json', import.meta.url), 'utf8')).map((p) => p.dropSlug));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
