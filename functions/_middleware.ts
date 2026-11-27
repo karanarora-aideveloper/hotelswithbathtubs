@@ -97,6 +97,16 @@ export async function onRequest(context: EventContext): Promise<Response> {
 
   const response = await context.next();
 
+  // Page-data .txt copies are removed from the build (A2). A missing one gets a bare 404, never the
+  // slug fallback below; Next.js then does a normal page load. Real .txt files (robots, llms) return 200.
+  if (response.status === 404 && url.pathname.endsWith('.txt')) {
+    return new Response(null, {
+      status: 404,
+      statusText: 'Not Found',
+      headers: { 'content-type': 'text/plain', 'cache-control': 'public, max-age=86400' },
+    });
+  }
+
   // On 404: check legacy naked city URLs, aliases, and 3-part hotel slugs
   if (response.status === 404) {
     const segments = url.pathname.split('/').filter(Boolean);

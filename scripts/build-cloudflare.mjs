@@ -194,6 +194,23 @@ async function build() {
     console.log('\n[Clean] Pruning internal __next.* segment prefetch files to comply with Cloudflare 20,000 file limit...');
     try {
       execSync('find out -name "__next.*" -delete', { cwd: rootDir });
+      // Each page also gets a hidden page-data copy (page.txt next to page.html) that Next.js only uses
+      // for in-site link clicks; Google reads the HTML. Without it a click is a normal page load.
+      // Delete it ONLY where a same-name .html sits beside it, so robots.txt / llms.txt stay.
+      // This halves the file count (A2, 27 Nov 2026). The edge middleware answers these with a bare 404.
+      let rscRemoved = 0;
+      const walk = (dir) => {
+        for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+          const p = path.join(dir, e.name);
+          if (e.isDirectory()) walk(p);
+          else if (e.name.endsWith('.txt') && fs.existsSync(p.slice(0, -4) + '.html')) {
+            fs.rmSync(p);
+            rscRemoved++;
+          }
+        }
+      };
+      walk(path.join(rootDir, 'out'));
+      console.log(`   Removed ${rscRemoved} page-data .txt files.`);
       execSync('find out -type d -empty -delete', { cwd: rootDir });
       const remainingFiles = execSync('find out -type f | wc -l', { cwd: rootDir }).toString().trim();
       console.log(`✅ Output directory optimized: ${remainingFiles} total files (well under Cloudflare 20,000 limit).`);
